@@ -1,0 +1,326 @@
+---
+title: "Dispersion"
+subtitle: ": Lecture 4"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "⬡⬢⬡⬢"
+format: 
+  revealjs:
+    theme: custom.scss
+    incremental: true   
+    touch: true
+    scrollable: true
+    chalkboard: true
+---
+
+## Descriptive Statistics
+
+X = refers to the value for 1 person (1 datapoint) in the sample
+
+$\bar{x}$ = refers to the mean or average value of X in the sample
+
+$\sum(x)$ = refers to the sum of all x values (sum of all the datapoints)
+
+$x^2$ = refers to the squared value of x (x multiplied by x)
+
+## Descriptive Statistics
+
+### Describe the characteristics of a sample in terms of:
+
+-   Central tendency and
+
+-   Dispersion (aka Variability aka Variance)
+
+## Central tendency
+
+### What is it, when should we use it, and how do we calculate it?
+
+-   Mean
+
+-   Median
+
+-   Mode
+
+## Central tendency
+
+### What do measures of Central Tendency tell you?
+
+Central tendency
+
+What do measures of Central Tendency tell you?
+
+-   The mid-point in the data
+
+-   The answer most of the participants gave.
+
+## Measures of Dispersion
+
+### What does dispersion mean?
+
+-   Spread-out-ness
+
+-   How much the participants' responses differ from one another
+
+-   Variance
+
+## Measures of Dispersion
+
+### Measures of dispersion tell us about the spread-out-ness of the data, but what does that *actually* mean?
+
+## Measures of Dispersion
+
+### Measures of dispersion tell us about the spread-out-ness of the data, but what does that *actually* mean?
+
+-   If I am measuring HYPE, what would low dispersion tell me?
+
+-   If I am measuring HYPE, what would high dispersion tell me?
+
+## Measures of Dispersion
+
+### Measures of dispersion tell us about consensus.
+
+-   Did participants give similar answers?
+
+-   Did participants give wildly different answers?
+
+## Dispersion
+
+-   Data should have natural dispersion.
+
+-   If everyone gives a similar answer, it's harder to analyze difference.
+
+## Calculating Dispersion
+
+### How do you think we should calculate dispersion?
+
+-   ON AVERAGE, how far is each X-VALUE from the MIDPOINT.
+
+    -   Calculate how far each X-VALUE is from the MIDPOINT.
+
+    -   Take the AVERAGE of those distances.
+
+## Calculating Dispersion
+
+In psychology, the mid-point we use will be the [***mean***]{.underline}.
+
+## Calculating Dispersion
+
+### How do you think we should calculate dispersion?
+
+-   ON AVERAGE, how far is each X-VALUE from the MEAN.
+
+    -   **Calculate how far each X-VALUE is from the MIDPOINT.** [^1]
+
+    -   Take the AVERAGE of those distances.
+
+[^1]: Deviation Score
+
+## Deviation Scores
+
+### Calculate how far each X-VALUE is from the MEAN.
+
+$$
+x - \bar{x}
+$$
+
+## Calculating Dispersion
+
+### Step 1: Calculate the mean.
+
+```{r}
+library(huxtable)
+
+data.frame(
+  ParticipantID = 1:10,
+  X = c(1,3,2,2,3,2,1,3,1,2)
+) |> hux() |> 
+  theme_article()
+```
+
+$$
+\frac{\sum(x)}{n}
+$$
+
+$$X = 20 / 10 = 2$$
+
+## Calculating Dispersion
+
+### Step 2: Subtract the mean from each X-value.
+
+```{r}
+library(dplyr)
+tibble(
+  ParticipantID = 1:10,
+  X = c(1,3,2,2,3,2,1,3,1,2),
+  `x-M` = X-mean(X)
+) |> hux() |> 
+  theme_article()
+
+```
+
+-   The average of the deviation scores will always = 0.
+
+-   On average, the x-values = x.
+
+-   So the average distance of x from x is 0.
+
+## Calculating Dispersion
+
+### How do you think we should calculate dispersion?
+
+1.  Calculate the mean.
+2.  Calculate the deviation scores.
+3.  What can we do to the deviation scores to prevent them from adding up to 0?
+    1.  \[Make this pop out\]
+4.  Take the AVERAGE
+
+## What is the Mean of the Deviation Scores?
+
+-   The problem is the negative numbers!
+
+-   How do we get rid of negative numbers?
+
+```{r}
+tibble(
+  ParticipantID = 1:10,
+  X = c(1,3,2,2,3,2,1,3,1,2),
+  `x-M` = X-mean(X),
+  `(x-M)^2` = `x-M`^2
+  ) |> 
+  # Bold Last Column
+  hux() |> 
+  theme_article()
+```
+
+## Calculating Dispersion
+
+-   Step 1: Calculate the mean.
+
+-   
+
+    ```         
+      X = 20 / 10 = 2
+    ```
+
+-   Step 2: Subtract the mean from each X-value.
+
+-   Step 3: Square each deviation score.
+
+## Calculating Dispersion
+
+### Now what: Calculate the average squared deviation.
+
+-   Step 4: Add up the Squared Deviations.
+
+```{r}
+le4 <- 
+  tibble(
+  ParticipantID = 1:10,
+  X = c(1,3,2,2,3,2,1,3,1,2),
+  `x-M` = X-mean(X),
+  `(x-M)^2` = `x-M`^2
+  ) 
+
+le4
+
+
+le4$`(x-M)^2` |> sum()
+```
+
+## Calculating Dispersion
+
+-   Step 5: Divide by (n-1).
+
+\[insert Cat? GIF\]
+
+-   (n-1) refers to the degrees of freedom... don't worry about it for now.
+
+```{r}
+le4 <- 
+  tibble(
+  ParticipantID = 1:10,
+  X = c(1,3,2,2,3,2,1,3,1,2),
+  `x-M` = X-mean(X),
+  `(x-M)^2` = `x-M`^2
+  ) 
+
+sum(le4$`(x-M)^2`)/
+  length((le4$`(x-M)^2`)-1)
+```
+
+### Variance \^
+
+## Calculating Dispersion
+
+### How do you think we should calculate dispersion?
+
+-   ON AVERAGE, how far is each X-VALUE from the MEAN.
+
+-   **Calculate how far each X-VALUE is from the MIDPOINT.**
+
+    -   \[Make pop-out we did it!...right?\]
+
+-   Take the AVERAGE of those distances.
+
+## Calculating Dispersion
+
+### How do think we should calculate dispersion?
+
+-   When we squared the deviation scores in Step 3, we inflated the deviation.
+
+    -   We have to undo that inflation.
+
+    -   How do you undo squaring?
+
+    -   We take the square root.
+
+## Calculating Dispersion
+
+-   Step 6: Take the square root.
+
+$$
+\sqrt{.667} = .816
+$$
+
+## Calculating standard deviation
+
+1.  Mean: Calculate the mean.
+2.  Deviation scores: Subtract the mean from each x-value.
+3.  Squared deviations: Square each deviation score.
+4.  Sum of squares: Add up the squared deviations.
+5.  Variance: Divide the sum of squares by (n-1).
+6.  Standard Deviation: Take the square root of the variance.
+
+## Formulas for Dispersion
+
+### Variance
+
+$$
+s^2 = \frac{\sum(x-\bar{x})^2}{N-1}
+$$
+
+## Formulas for Dispersion
+
+### Standard Deviation
+
+$$
+s = \sqrt{\frac{\sum(x-\bar{x})^2}{N-1}}
+$$
+
+-   Variance is a measure of dispersion.
+
+    -   It's not helpful, because it's inflated (from squaring the deviation scores).
+
+-   Standard deviation is a better measure of dispersion, because it is standardized.
+
+    -   This means that a standard deviation of 1 means a distance of 1 on the scale used to measure x.
+
+    -   HYPE scale: 1 to 10: standard deviation of 1 means the distance from one rating to the next, from 1 to 2.
+
+    -   If the mean = 5, SD = 1, most scores fall between 4 and 6.
+
+## Variance & Standard deviation
+
+-   The Variance is the standard deviation squared: s²
+
+-   The Standard Deviation is the square root of the variance: s

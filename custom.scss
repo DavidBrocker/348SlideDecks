@@ -1,0 +1,83 @@
+/*-- scss:defaults --*/
+
+// variable colors
+$body-color: #222;
+$text-muted: lighten($body-color, 50%);
+$body-bg: #F5F5F5;
+$jet: #131516;
+$accent: #107895;
+$accent2: #9a2515;
+$accent3: #2CA02C;
+$accent3: #333333;
+$fsc: #004636;
+$hex: "\2B22";
+$link-color: $accent !default;
+
+$presentation-title-slide-text-align: left;
+
+/* scss rules */
+
+#title-slide {
+
+  .title {
+    color: $accent;
+    font-size: 1.4em;
+    // font-weight: 350;
+    font-weight: lighter;
+  }
+
+  .subtitle {
+    color: $jet;
+    font-style: italic;
+    margin-top: 0em;
+    font-weight: lighter;
+  }
+
+  .institute,
+  .author,
+  .quarto-title-affiliation,
+  .quarto-title-author-name,
+  .quarto-title-author-email {
+    font-style: italic;
+    color: $fsc;
+  }
+
+}
+
+.reveal .slide h2 {
+  color: $accent2;
+}
+
+.reveal .slide h3 {
+  color: $accent3;
+}
+
+.profile{
+  position: relative;
+  width: 400px;
+  height: 400px;
+  box-shadow: 0 12px 12px 0 rgba(120,20,30,0.5)
+}
+
+.highlight-last  {
+  color: grey;
+  .current-fragment {
+    color: #2CA02C;
+  }
+}
+
+.bg {
+  background-color: var(--col, #fff);
+  color: white;
+  padding: 0.1em;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.reveal .slide blockquote {
+  font-style:italic;
+  color: #555555;
+  border-left:8px solid #78C0A8 ;
+  position: relative;
+  background:#EDEDED;
+}
