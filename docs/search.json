@@ -1,0 +1,1521 @@
+[
+  {
+    "objectID": "lec8.html#standard-normal-distribution",
+    "href": "lec8.html#standard-normal-distribution",
+    "title": "Sampling Theory",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nThe 4 properties of a standard normal distribution are:"
+  },
+  {
+    "objectID": "lec8.html#standard-normal-distribution-1",
+    "href": "lec8.html#standard-normal-distribution-1",
+    "title": "Sampling Theory",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nThe 4 properties of a standard normal distribution are:\n\n• They are shaped like a bell (“bell curve”).\n• They are symmetric.\n• They are unimodal.\n• The mean = median = mode."
+  },
+  {
+    "objectID": "lec8.html#statistics",
+    "href": "lec8.html#statistics",
+    "title": "Sampling Theory",
+    "section": "Statistics",
+    "text": "Statistics\n\nDescriptive Statistics:\n\nGoal: Describe the sample\nExamples: Mean, Standard Deviation\n\nInferential Statistics:\n\nGoal: Use the sample to make inferences about the population\nExamples: t-test, ANOVA, Regression"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory",
+    "href": "lec8.html#sampling-theory",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nProfessor Brocker still wants to know how much adults in the US enjoy the Netflix Original, Dark. She has unlimited funds to study this very important research question. She hires her 24 students from to collect the data.\n\n\nEach student has to collect 500 responses to the following question:"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-1",
+    "href": "lec8.html#sampling-theory-1",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nOn a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?\n\n ## Sampling Theory\n\nSo each one of you asks 500 people how much they enjoy the Netflix Original Dark.\nThis is you on the street asking people:\n\n[Insert Other Pictures]"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-2",
+    "href": "lec8.html#sampling-theory-2",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\nHow many people did each of you ask?[Make Big text]"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-3",
+    "href": "lec8.html#sampling-theory-3",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nOnce each of you collect 500 responses, I ask you to calculate the average answer. SO you calculate the mean (you add up all 500 responses, and then divide that number by 500)."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-4",
+    "href": "lec8.html#sampling-theory-4",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\n\n# A tibble: 7 × 2\n  Sample  Mean\n  &lt;chr&gt;  &lt;dbl&gt;\n1 Dave   10   \n2 Gaby    3.30\n3 Evan    2.94\n4 Mike    1.46\n5 Jeff    5.88\n6 Paul    1.41\n7 Sean    7.06"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-5",
+    "href": "lec8.html#sampling-theory-5",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nThey are the means from each of your samples.\nThese are called Sample Means"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-6",
+    "href": "lec8.html#sampling-theory-6",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nWe can do lots of cool things with Sample Means. We could calculate the Mean of the Sample Means. We could calculate the standard deviation of the Sample Means."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-7",
+    "href": "lec8.html#sampling-theory-7",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nIt’s theoretical. It doesn’t really exist, but we imagine it’s existence for the sake of Sampling Theory."
+  },
+  {
+    "objectID": "lec8.html#sampling-distribution",
+    "href": "lec8.html#sampling-distribution",
+    "title": "Sampling Theory",
+    "section": "Sampling distribution",
+    "text": "Sampling distribution\nA Sampling Distributionis the theoretical distribution of means across every single possible sample.\n\nLike all the Dark samples.\nIf we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-8",
+    "href": "lec8.html#sampling-theory-8",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-9",
+    "href": "lec8.html#sampling-theory-9",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n[Column Width] - Except now each value in this distribution no longer represents 1 person/participant.\n\nEach value in this distribution represents the average of 1 sample, a Sample Mean."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-10",
+    "href": "lec8.html#sampling-theory-10",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nExcept now each value in this distribution no longer represents 1 person/participant.\nEach value in this distribution represents the average of 1 sample, a Sample Mean."
+  },
+  {
+    "objectID": "lec8.html#what-does-the-stats-cat-saywhat-does-the-stats-cat-say",
+    "href": "lec8.html#what-does-the-stats-cat-saywhat-does-the-stats-cat-say",
+    "title": "Sampling Theory",
+    "section": "What does the Stats Cat say?What does the Stats Cat say?",
+    "text": "What does the Stats Cat say?What does the Stats Cat say?\n \\(\\mu\\)"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-11",
+    "href": "lec8.html#sampling-theory-11",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nExcept now each value in this distribution no longer represents 1 person/participant.\nEach value in this distribution represents the average of 1 sample, a Sample Mean.\n\n [include \\(\\mu\\) and \\(\\sigma\\)]"
+  },
+  {
+    "objectID": "lec8.html#review",
+    "href": "lec8.html#review",
+    "title": "Sampling Theory",
+    "section": "Review",
+    "text": "Review\n\nWhat is a sample distribution?\nWhat does each X value in a sample distribution represent?\nWhat does \\(\\mu\\) represent?\nWhat does \\(\\sigma\\) represent?"
+  },
+  {
+    "objectID": "lec8.html#probability",
+    "href": "lec8.html#probability",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\n\nWhat percentage of participants rated Dark with a z-score of 2 or HIGHER?"
+  },
+  {
+    "objectID": "lec8.html#probability-1",
+    "href": "lec8.html#probability-1",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\n\nThis is the distribution of sample means from adults in the US.\nWhat is the probability of any sample having a mean that is a z-score of 2 or HIGHER?"
+  },
+  {
+    "objectID": "lec8.html#this-is-the-key-point",
+    "href": "lec8.html#this-is-the-key-point",
+    "title": "Sampling Theory",
+    "section": "THIS IS the key point",
+    "text": "THIS IS the key point\n\nWe assume that the distribution of sample means is normal.\nWe use that assumption to gauge the probability of getting a particular mean from a single sample.\nWe can literally find that probability, the same way we did with x-values in a normal distribution."
+  },
+  {
+    "objectID": "lec8.html#example",
+    "href": "lec8.html#example",
+    "title": "Sampling Theory",
+    "section": "Example",
+    "text": "Example\nWe want to know how much people like pizza.\n\nThere are 12,500 people in our population.\nEach of the 25 of us collects a sample of 500.\n(500 x 25 = 12,500)\n\\(500 \\times 25 = 12,500\\)\nEach of us calculates the mean response from our sample of 500 people.\nWe plot those means and it gives us a normal distribution.\nWhat do we call those means?"
+  },
+  {
+    "objectID": "lec8.html#pizza-plot",
+    "href": "lec8.html#pizza-plot",
+    "title": "Sampling Theory",
+    "section": "Pizza Plot",
+    "text": "Pizza Plot\nVisual Example"
+  },
+  {
+    "objectID": "lec8.html#example-1",
+    "href": "lec8.html#example-1",
+    "title": "Sampling Theory",
+    "section": "Example",
+    "text": "Example\nI randomlyu choose a mean from our distirutin of samoe means, about how much people like pizza.\nWhat is the probability of picking a mean with a z-score of -1 or less?\n\nSampling theory\n\nSampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-as-the-basis-for-inferential-statistics",
+    "href": "lec8.html#sampling-theory-as-the-basis-for-inferential-statistics",
+    "title": "Sampling Theory",
+    "section": "Sampling theory as the basis for inferential statistics",
+    "text": "Sampling theory as the basis for inferential statistics\n\nIndependent variable:\n\nExperimental Group: Super secret limitless drug\n\nControl Group: Placebo\n\nDependent variable: IQ"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-as-the-basis-for-inferential-statistics-1",
+    "href": "lec8.html#sampling-theory-as-the-basis-for-inferential-statistics-1",
+    "title": "Sampling Theory",
+    "section": "Sampling theory as the basis for inferential statistics",
+    "text": "Sampling theory as the basis for inferential statistics\n[Insert picture from slideset with two peaks]"
+  },
+  {
+    "objectID": "lec8.html#review-1",
+    "href": "lec8.html#review-1",
+    "title": "Sampling Theory",
+    "section": "Review",
+    "text": "Review\n\nSampling distribution:\nSample mean:"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-13",
+    "href": "lec8.html#sampling-theory-13",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nSampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.\n\n\nAnd because they’d create a normal distribution, we can make guesses about the probability of getting a specific mean.\nWe will use this probability to gauge significance of our inferential statistics."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-14",
+    "href": "lec8.html#sampling-theory-14",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nThe mean of a sample is notated as M.\nThe mean of a population is notated as (\\(\\mu\\))."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-15",
+    "href": "lec8.html#sampling-theory-15",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nThe dispersion of a sample is known as the standard deviation, or SD, or sometimes just s.\nThe dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma)."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-but-candy",
+    "href": "lec8.html#sampling-theory-but-candy",
+    "title": "Sampling Theory",
+    "section": "Sampling theory, but candy",
+    "text": "Sampling theory, but candy\n\nThis is a jar of 600 pieces of candy.\n\n[Insert Candy Pic]\n\nIf I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?\nI have a scoop of 25 pieces of candy, and 6 of them are orange."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-but-candy-1",
+    "href": "lec8.html#sampling-theory-but-candy-1",
+    "title": "Sampling Theory",
+    "section": "Sampling theory, but candy",
+    "text": "Sampling theory, but candy\n[Insert two peaks with MM]\n\nDid this scoop come from the jar of m&ms?\n\nProbably!\n\nI have a scoop of 25 pieces of candy, and all 25 of them are orange.\nDid this scoop come from the jar of m&ms?\n\nProbably not"
+  },
+  {
+    "objectID": "lec8.html#p-values",
+    "href": "lec8.html#p-values",
+    "title": "Sampling Theory",
+    "section": "P-values",
+    "text": "P-values\n[Make Big Text!] ### Hypothesis testing, Pt 1"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-16",
+    "href": "lec8.html#sampling-theory-16",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\n\nThere are about 10,000 students at Farmingdale State College.\nEach of the 25 of us recruits a sample of 400 students.\n\nWe ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (I don’t belong at all) to 10 (I belong completely).\nWe each calculate the average response from our own sample of 400."
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-17",
+    "href": "lec8.html#sampling-theory-17",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-18",
+    "href": "lec8.html#sampling-theory-18",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\nNow we have 25 samples of 400 FSC students each, which equals the full student population of 10,000.\nWe take 25 samples of 400 students each from another college…John Jacob Jinglehymer Smith University. JJJSMU also has 10,000 students.\nWe ask the JJJSMU students the same question about sense of belonging.\nWe find the mean of each of the 25 samples from JJJSMU"
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-as-the-basis-for-inferential-statistics-2",
+    "href": "lec8.html#sampling-theory-as-the-basis-for-inferential-statistics-2",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory as The Basis for Inferential Statistics",
+    "text": "Sampling Theory as The Basis for Inferential Statistics\n[Two Peaks with FSC students and JJJSMU Students]"
+  },
+  {
+    "objectID": "lec8.html#what-is-a-hypothesis",
+    "href": "lec8.html#what-is-a-hypothesis",
+    "title": "Sampling Theory",
+    "section": "What is a hypothesis?",
+    "text": "What is a hypothesis?\nA hypothesis is a testable prediction of what will happen in our experiment that:\n\nNames of the variables (independent and dependent)\nClearly contrasts the groups"
+  },
+  {
+    "objectID": "lec8.html#hypothesis",
+    "href": "lec8.html#hypothesis",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nProfessor Brocker wants to know if Millennials enjoy the Netflix Original, Dark significantly more than Gen Z. She recruits 500 Millennials and 500 Zoomers and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).\n\n\nHypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers."
+  },
+  {
+    "objectID": "lec8.html#hypothesis-1",
+    "href": "lec8.html#hypothesis-1",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nHypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers."
+  },
+  {
+    "objectID": "lec8.html#what-is-a-hypothesis-1",
+    "href": "lec8.html#what-is-a-hypothesis-1",
+    "title": "Sampling Theory",
+    "section": "What is a Hypothesis?",
+    "text": "What is a Hypothesis?\nAn Alternative Hypothesis is a testable prediction of what will happen in our experiment that:\n\nNames of the variables (independent and dependent)\nClearly contrasts the groups."
+  },
+  {
+    "objectID": "lec8.html#alternative-hypothesis",
+    "href": "lec8.html#alternative-hypothesis",
+    "title": "Sampling Theory",
+    "section": "Alternative hypothesis",
+    "text": "Alternative hypothesis\nAn Alternative Hypothesis is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.\n\nThe Alternative Hypothesis is written as \\(H_1\\)"
+  },
+  {
+    "objectID": "lec8.html#null-hypothesis",
+    "href": "lec8.html#null-hypothesis",
+    "title": "Sampling Theory",
+    "section": "Null Hypothesis",
+    "text": "Null Hypothesis\nThe Null Hypothesis states that nothing will happen. \\(H_0\\)\nBecause Null means zero, nothing, nada.\nThe Null Hypothesis states that nothing will happen while also:\n\nNaming of the variables (independent and dependent)"
+  },
+  {
+    "objectID": "lec8.html#alternative-null-hypotheses",
+    "href": "lec8.html#alternative-null-hypotheses",
+    "title": "Sampling Theory",
+    "section": "Alternative & Null Hypotheses:",
+    "text": "Alternative & Null Hypotheses:\nExample\nProfessor Brocker’s Dark Experiment:\n\nAlternative Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.\nNull Hypothesis: Millennials and Gen Z will not differ in their rating of enjoyment of the Eric Andre Show."
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing",
+    "href": "lec8.html#hypothesis-testing",
+    "title": "Sampling Theory",
+    "section": "Hypothesis testing",
+    "text": "Hypothesis testing\n\nNull Hypothesis: These is no difference in the DV between the IV groups.\nAlternative Hypothesis: The experimental group is significantly different from the control group on the DV."
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-1",
+    "href": "lec8.html#hypothesis-testing-1",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample 1\n\nDr. Apriceno wants to know if giving her students coffee will improve their exam scores. She randomly assigns 13 of her 26 students to drink a doubleshot; she calls this the experimental group. The other 13 students drink decaf (a placebo); she calls this the control group.\n\n\\(H_0\\):\n\\(H_1\\):"
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-2",
+    "href": "lec8.html#hypothesis-testing-2",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample 2\n\nEsmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.\n\n\\(H_0\\):\n\\(H_1\\):"
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-3",
+    "href": "lec8.html#hypothesis-testing-3",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nPractice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\\(H_0\\):\n\\(H_1\\):\n[Make big text] ## Better to be a reject than a failure"
+  },
+  {
+    "objectID": "lec8.html#rejects-and-failures",
+    "href": "lec8.html#rejects-and-failures",
+    "title": "Sampling Theory",
+    "section": "Rejects and Failures",
+    "text": "Rejects and Failures\n\nIn science, we do not say that we proved anything.\nNothing is ever really proven.\nOur findings will be stated in terms of the Null Hypothesis.\nThe Null Hypothesis is that there are no differences between the groups."
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-practice",
+    "href": "lec8.html#hypothesis-testing-practice",
+    "title": "Sampling Theory",
+    "section": "Hypothesis testing practice",
+    "text": "Hypothesis testing practice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\\(H_0\\): There are no differences in working memory capacity between the experimental and control groups."
+  },
+  {
+    "objectID": "lec8.html#rejects-and-failures-1",
+    "href": "lec8.html#rejects-and-failures-1",
+    "title": "Sampling Theory",
+    "section": "Rejects and Failures",
+    "text": "Rejects and Failures\n\nIn science, we do not say that we proved anything.\nOur findings will be stated in terms of the Null Hypothesis.\nIf there are significant differences between the groups, we Reject the \\(H_0\\).\n\nRejecting is good.\n\nIf there are NO differences between the groups, we Fail to Reject the \\(H_0\\)."
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-4",
+    "href": "lec8.html#hypothesis-testing-4",
+    "title": "Sampling Theory",
+    "section": "Hypothesis testing",
+    "text": "Hypothesis testing\n[Include YODA picture or something similar]"
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-5",
+    "href": "lec8.html#hypothesis-testing-5",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nWhen reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.\n\nIf the groups differ, we reject the null hypothesis: Reject \\(H_0\\).\nIf the groups do NOT differ, we fail: Fail to Reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lec8.html#practice-1",
+    "href": "lec8.html#practice-1",
+    "title": "Sampling Theory",
+    "section": "Practice",
+    "text": "Practice\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity. His test is not significant.\n\nState Claudio’s findings in terms of the null hypothesis:"
+  },
+  {
+    "objectID": "lec8.html#hypothesis-practice",
+    "href": "lec8.html#hypothesis-practice",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Practice",
+    "text": "Hypothesis Practice\nPractice\n\nBrendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look old using an aging filter (experimental condition). Pedro then measures all participants’ anxiety about dying and runs a t-test, which is statistically significant.\n\nState Brendan’s findings in terms of the null hypothesis:"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "348slides",
+    "section": "",
+    "text": "Slides 2\nSlides 3\nSlides\nSlides\nSlides\nSlides"
+  },
+  {
+    "objectID": "lec6.html#review",
+    "href": "lec6.html#review",
+    "title": "Z-scores & Probability",
+    "section": "Review",
+    "text": "Review\n\n68.3% of the datapoints (the X’s) will fall within 1 SD of the mean.\n95.4% of the datapoints (the X’s) will fall within 2 SD of the mean.\n99.7% of the datapoints (the X’s) will fall within 3 SD of the mean.\n\nZ-scores are expressed in Standard Deviation units."
+  },
+  {
+    "objectID": "lec6.html#z-scores",
+    "href": "lec6.html#z-scores",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores",
+    "text": "Z-scores\nZ-scores re-express the original data points (the X’s) in a way that intuitively lets us know:\n\nHow close the X is to the mean\nWhere it falls in the dispersion of the distribution\nhow much this participant is like the other person in the sample\nWhere it falls in the dispersion of the distribution\nhow different this participant is from the majority of people in the sample"
+  },
+  {
+    "objectID": "lec6.html#z-scores-1",
+    "href": "lec6.html#z-scores-1",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores",
+    "text": "Z-scores\nZ-scores are expressed in Standard Deviation units.\n\nz = 1\nz = -2\nz = 0.5"
+  },
+  {
+    "objectID": "lec6.html#calculating-a-z-score",
+    "href": "lec6.html#calculating-a-z-score",
+    "title": "Z-scores & Probability",
+    "section": "Calculating A Z-score",
+    "text": "Calculating A Z-score\n\nMean-center the X values —&gt; X — X —&gt; Makes the Mean = 0.\nDividing by the standard deviation —&gt; Makes the SD = 1.\n\nHow do we calculate the probability of an outcome, using the normal distribution?\n\nUse a z-score:\nMean center the X values.\nDivide them by the SD."
+  },
+  {
+    "objectID": "lec6.html#how-do-we-calculate-the-probability-of-an-outcome-using-the-normal-distribution",
+    "href": "lec6.html#how-do-we-calculate-the-probability-of-an-outcome-using-the-normal-distribution",
+    "title": "Z-scores & Probability",
+    "section": "How do we calculate the probability of an outcome, using the normal distribution?",
+    "text": "How do we calculate the probability of an outcome, using the normal distribution?\n\nThe average grade on the exam was an 86 with a standard deviation of 4.\nWhat is the probability of scoring a 94 or higher on the exam?\n\n\\(z = \\frac{x-\\bar{x}}{s}\\)\n\\(z = \\frac{94-86}{4} = \\frac{8}{4}=2\\)\n\\(z = 2\\)\n\nZ = 2 corresponds with 2.1% and 0.1% of the curve 2.2% chance."
+  },
+  {
+    "objectID": "lec6.html#example-2",
+    "href": "lec6.html#example-2",
+    "title": "Z-scores & Probability",
+    "section": "Example 2",
+    "text": "Example 2\nThe mean exam score was 86 with a standard deviation of 4.\nWhat is the probability of scoring between an 82 and a 90?\n\\(z = \\frac{82-86}{4} = \\frac{-4}{4} = -1\\)\n\\(z = \\frac{90-86}{4} = \\frac{4}{4} = 1\\)\n\n68.3% chance of scoring between 82 and 90."
+  },
+  {
+    "objectID": "lec6.html#example-3",
+    "href": "lec6.html#example-3",
+    "title": "Z-scores & Probability",
+    "section": "Example 3",
+    "text": "Example 3\n\nEsmeralda’s stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal.\n\nEsmeralda wants to calculate the probability that she scored below 60\n\\(\\frac{60-72}{6} = \\frac{-12}{6} = -2\\)\n\n2.2% chance that she failed.\nWhat’s the chance she passed?"
+  },
+  {
+    "objectID": "lec6.html#z-scores-and-probability",
+    "href": "lec6.html#z-scores-and-probability",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores and Probability",
+    "text": "Z-scores and Probability\nIn real life, we are often working with numbers with long decimal points rather than nice whole numbers.\n\nBecause the standard normal curve is STANDARD and NORMAL, we can calculate the exact probability of a z-score with a decimal point.\nCalculate the z-score.\nLocate the whole number and first decimal point along the left side of the table.\nLocate the second decimal point along the top of the table."
+  },
+  {
+    "objectID": "lec6.html#z-scores-and-probability-1",
+    "href": "lec6.html#z-scores-and-probability-1",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores and Probability",
+    "text": "Z-scores and Probability\nThe Z-score Probability Table gives you the probability of that z-score or LESS.\n\n\nIf you need that z-score or higher, you have to subtract the decimal from 1."
+  },
+  {
+    "objectID": "lec6.html#z-scores-and-probability-2",
+    "href": "lec6.html#z-scores-and-probability-2",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores and Probability:",
+    "text": "Z-scores and Probability:\nSome examples\n\nIn a recent study on world happiness, participants were asked to evaluate their current lives on a scale from 0 to 10, where 0 represents the worst possible life and 10 represents the best possible life. The responses were normally distributed, with a mean of 5.4 and a standard deviation of 2.2. Find the probability that a randomly selected study participant’s response was:\n\n\nLess than 4\nMore than 8"
+  },
+  {
+    "objectID": "lec6.html#z-scores-and-probability-3",
+    "href": "lec6.html#z-scores-and-probability-3",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores and Probability:",
+    "text": "Z-scores and Probability:\nSome examples\n\nIn a recent study on world happiness, participants were asked to evaluate their current lives on a scale from 0 to 10, where 0 represents the worst possible life and 10 represents the best possible life. The responses were normally distributed, with a mean of 5.4 and a standard deviation of 2.2. Find the probability that a randomly selected study participant’s response was:\n\n\nLess than 4\nMore than 8\n\n\\(z = \\frac{x-\\bar{x}}{s}\\)\n\\(z = \\frac{4-5.4}{2.2} = \\frac{-1.4}{2.2} = -.63\\)"
+  },
+  {
+    "objectID": "lec6.html#z-scores-and-probability-4",
+    "href": "lec6.html#z-scores-and-probability-4",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores and Probability",
+    "text": "Z-scores and Probability\nExample 1"
+  },
+  {
+    "objectID": "lec6.html#example-1-1",
+    "href": "lec6.html#example-1-1",
+    "title": "Z-scores & Probability",
+    "section": "Example 1",
+    "text": "Example 1\nStep by Step"
+  },
+  {
+    "objectID": "lec6.html#z-scores-and-probability-5",
+    "href": "lec6.html#z-scores-and-probability-5",
+    "title": "Z-scores & Probability",
+    "section": "Z-scores and Probability:",
+    "text": "Z-scores and Probability:\nExample 2\n\nThe scale of scores for an IQ test are approximately normal with mean 100 and standard deviation 15. The organization MENSA, which calls itself the “high IQ society”, requires a score of 130 or higher.\n\nWhat percent of adults would qualify for membership?\nExample 2\n\nThe scale of scores for an IQ test are approximately normal with mean 100 and standard deviation 15. The organization MENSA, which calls itself the “high IQ society”, requires a score of 130 or higher.\n\nWhat percent of adults would qualify for membership?\n\\(z = \\frac{x-\\bar{x}}{s}\\)\n\\(z = \\frac{130-100}{15}=\\frac{30}{15} = 2\\)"
+  },
+  {
+    "objectID": "lec6.html#example-2-3",
+    "href": "lec6.html#example-2-3",
+    "title": "Z-scores & Probability",
+    "section": "Example 2",
+    "text": "Example 2\nMENSA"
+  },
+  {
+    "objectID": "lec3.html#review",
+    "href": "lec3.html#review",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nScales of Measurement\n\nWhat are the 4 scales of measurement\nWhat are the only scales of measurement that matter for us?"
+  },
+  {
+    "objectID": "lec3.html#review-1",
+    "href": "lec3.html#review-1",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nScales of Measurement\n\nNominal\nOrdinal\nInterval\nRatio"
+  },
+  {
+    "objectID": "lec3.html#review-2",
+    "href": "lec3.html#review-2",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nStatistical Terms\n\nn = ?\nx = ?"
+  },
+  {
+    "objectID": "lec3.html#review-3",
+    "href": "lec3.html#review-3",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nStatistical Terms\nn = the number of people in the sample\nx = one participant’s score"
+  },
+  {
+    "objectID": "lec3.html#review-4",
+    "href": "lec3.html#review-4",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nStatistical Terms\n\nWhat is a parameter?\n\nInformation that describes the population.\n\nWhat is a statistic?\n\nInformation that describes the sample.\nInferences about the population based on information from the sample."
+  },
+  {
+    "objectID": "lec3.html#descriptive-statistics",
+    "href": "lec3.html#descriptive-statistics",
+    "title": "Measures of Central Tendency",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nDescribe the characteristics of the sample.\n\nThink about our HYPE data.\nHow could we describe it?\n\nAverage\nMin & Max"
+  },
+  {
+    "objectID": "lec3.html#descriptive-statistics-1",
+    "href": "lec3.html#descriptive-statistics-1",
+    "title": "Measures of Central Tendency",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nThink about our HYPE data.\nHow could we describe it?\n\nAverage: The number most of us rated the HYPE of the song\nMin & Max: The lowest and highest we rated the HYPE of the song"
+  },
+  {
+    "objectID": "lec3.html#descriptive-statistics-2",
+    "href": "lec3.html#descriptive-statistics-2",
+    "title": "Measures of Central Tendency",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nDescribe the characteristics of a sample in terms of:\n\nCentral tendency: What most people said\nDispersion: How spread out the data are"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency",
+    "href": "lec3.html#measures-of-central-tendency",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\n\nTell us about the mid-point (center) of a distribution.\nTell us about the mid-point (center) of a distribution.\nTell us most participants’ answer."
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-1",
+    "href": "lec3.html#measures-of-central-tendency-1",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\n\nMean\n\nthe average; obtained by summing all values and dividing by the number of values.\n\\(\\sum^{n}_{i=1} = x_1 + x_2...\\)\n\nMedian\n\nThe middle number; obtained by ordering all values from lowest to highest and taking the middle (if n is odd or the average of the 2 middle if n is even)\n\nMode\n\nthe most frequent answer; obtained by counting how many times each answer is given and taking the value that occurs most often"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-2",
+    "href": "lec3.html#measures-of-central-tendency-2",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nStandard Normal Distribution\nAdd geom_annotate for mean, median, mode"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-3",
+    "href": "lec3.html#measures-of-central-tendency-3",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nIn a normal distribution, the mean, median, and mode are equal to one another.\nMean = Median = Mode"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-4",
+    "href": "lec3.html#measures-of-central-tendency-4",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nThe Mean is good for use in normal distrbutions"
+  },
+  {
+    "objectID": "lec3.html#the-mean",
+    "href": "lec3.html#the-mean",
+    "title": "Measures of Central Tendency",
+    "section": "The mean",
+    "text": "The mean\n\nThe mean is only helpful in a normal distribution, which you may have heard called a normal curve or bell curve.\nWe overwhelmingly use the mean, because in the social and behavioral sciences, we nearly always assume the distribution is normal."
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-5",
+    "href": "lec3.html#measures-of-central-tendency-5",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nWhen should we use the median…\nA skewed distribution occurs when one side of the date gets cut off due to measurement limitation."
+  },
+  {
+    "objectID": "lec3.html#the-median",
+    "href": "lec3.html#the-median",
+    "title": "Measures of Central Tendency",
+    "section": "The Median",
+    "text": "The Median\n\nIn a skewed distribution, the mean gets pulled out toward the tail, and the mode gets pulled to the cluster.\nThe median is the best measure of central tendency for skewed distributions because it tells us how most people answered."
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-6",
+    "href": "lec3.html#measures-of-central-tendency-6",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nThe Mode\n\nThe mode is good for bi-or-tri-modal distributions.\nWhen might you have a bi-modal distribution?"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-7",
+    "href": "lec3.html#measures-of-central-tendency-7",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nThe Mode"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-8",
+    "href": "lec3.html#measures-of-central-tendency-8",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency",
+    "text": "Measures of Central tendency\nThe Mode"
+  },
+  {
+    "objectID": "lec3.html#when-should-we-use",
+    "href": "lec3.html#when-should-we-use",
+    "title": "Measures of Central Tendency",
+    "section": "When should we use…",
+    "text": "When should we use…\n\nMean\n\ngood for normal distributions\n\nMedian\n\ngood for skewed distributions\n\nMode\n\ngood for bimodal distributions"
+  },
+  {
+    "objectID": "lec3.html#central-tendency-which-should-we-use",
+    "href": "lec3.html#central-tendency-which-should-we-use",
+    "title": "Measures of Central Tendency",
+    "section": "Central tendency: Which should we use?",
+    "text": "Central tendency: Which should we use?\nTwo or More Peaks\n[Insert Bimodal]"
+  },
+  {
+    "objectID": "lec3.html#central-tendency-which-should-we-use-1",
+    "href": "lec3.html#central-tendency-which-should-we-use-1",
+    "title": "Measures of Central Tendency",
+    "section": "Central tendency: Which should we use?",
+    "text": "Central tendency: Which should we use?\nSlide to the Left!\n[Insert Skewed]"
+  },
+  {
+    "objectID": "lec3.html#central-tendency-which-should-we-use-2",
+    "href": "lec3.html#central-tendency-which-should-we-use-2",
+    "title": "Measures of Central Tendency",
+    "section": "Central tendency: Which should we use?",
+    "text": "Central tendency: Which should we use?\nLooks Normal to Me\n[Insert Normal]"
+  },
+  {
+    "objectID": "lec3.html#measures-of-central-tendency-9",
+    "href": "lec3.html#measures-of-central-tendency-9",
+    "title": "Measures of Central Tendency",
+    "section": "Measures of Central tendency:",
+    "text": "Measures of Central tendency:\nThe mean\n\nWe use the mean most often in social science, because many of our statistical tests can only be used on normal distributions.\nWe assume normality of the distribution, and use the mean."
+  },
+  {
+    "objectID": "lec3.html#calculating-measures-of-central-tendency",
+    "href": "lec3.html#calculating-measures-of-central-tendency",
+    "title": "Measures of Central Tendency",
+    "section": "Calculating measures of central tendency",
+    "text": "Calculating measures of central tendency\nCalculating The mean\n\nSum all x values\nDivide by the number of x values (n).\n\nx = 4,2,5,6\n\\(\\frac{\\Sigma(x)}{n}\\)\n\\(\\Sigma(x) = 4 + 2 + 5 + 6 = 17\\)\n\\(\\frac{17}{4} = 4.25\\)"
+  },
+  {
+    "objectID": "lec3.html#calculating-measures-of-central-tendency-1",
+    "href": "lec3.html#calculating-measures-of-central-tendency-1",
+    "title": "Measures of Central Tendency",
+    "section": "Calculating measures of central tendency",
+    "text": "Calculating measures of central tendency"
+  },
+  {
+    "objectID": "lec3.html#calculating-the-median",
+    "href": "lec3.html#calculating-the-median",
+    "title": "Measures of Central Tendency",
+    "section": "Calculating The median",
+    "text": "Calculating The median\n\nPut all x values in order from smallest or largest or largest to smallest.\nFind the middle number.\nIf there are an even number of x values, take the average of the 2 middle numbers.\nx = 4,2,5,6,3\nx = 2,3,4,5,6"
+  },
+  {
+    "objectID": "lec3.html#calculating-measures-of-central-tendency-2",
+    "href": "lec3.html#calculating-measures-of-central-tendency-2",
+    "title": "Measures of Central Tendency",
+    "section": "Calculating measures of central tendency",
+    "text": "Calculating measures of central tendency\nCalculating The mode\n\nPut all x values in order from smallest or largest or largest to smallest. \\(x = [3,2,1,5,3,7,8,3,2,4,1]\\)\nFind the number or numbers that repeat the most. \\(x = [1,1,2,2,3,3,3,4,5,7,8]\\)\nThere can be more than 1 mode."
+  },
+  {
+    "objectID": "lec3.html#using-excel",
+    "href": "lec3.html#using-excel",
+    "title": "Measures of Central Tendency",
+    "section": "Using Excel",
+    "text": "Using Excel\nExcel Practice\n\nCell\nColumns\nRows"
+  },
+  {
+    "objectID": "lec3.html#excel-practice-1",
+    "href": "lec3.html#excel-practice-1",
+    "title": "Measures of Central Tendency",
+    "section": "Excel Practice",
+    "text": "Excel Practice\nOpen our Class Data in Google Sheets.\n\nWhat does each row in this spreadsheet represent?\nWhat does each column in this spreadsheet represent?"
+  },
+  {
+    "objectID": "lec3.html#excel-practice-2",
+    "href": "lec3.html#excel-practice-2",
+    "title": "Measures of Central Tendency",
+    "section": "Excel Practice",
+    "text": "Excel Practice\n\nAdding & Summing\nSubtracting\nMultiplying\nDividing\nSquaring"
+  },
+  {
+    "objectID": "lec3.html#excel-practice-3",
+    "href": "lec3.html#excel-practice-3",
+    "title": "Measures of Central Tendency",
+    "section": "Excel Practice",
+    "text": "Excel Practice\n\nAdding & Sum: SUM(B2:B10)\nSubtracting: C9 - C2\nMultiplying: B12 * 4\nDividing: A2/B3\nSquaring: (B2-C2)^2\nAverage: AVERAGE(B2:B20)"
+  },
+  {
+    "objectID": "lec3.html#excel-practice-4",
+    "href": "lec3.html#excel-practice-4",
+    "title": "Measures of Central Tendency",
+    "section": "Excel Practice",
+    "text": "Excel Practice\n\nOpen our Class Data in Google Sheets.\nDownload our Class Data into Microsoft Excel.\nLook at the HYPE rating for 1/25\nCalculate the Mean\nUsing (SUM(x))/n\nUsing Average(x)\nCalculate the Median\nFind the Mode(s)"
+  },
+  {
+    "objectID": "lec3.html#practice",
+    "href": "lec3.html#practice",
+    "title": "Measures of Central Tendency",
+    "section": "Practice",
+    "text": "Practice\nDownload the class data to open it in Excel.\n\nLook at the HYPE rating for 1/30.\nCalculate the mean for 1/30.\nInterpret the mean for 1/30."
+  },
+  {
+    "objectID": "lec3.html#review-5",
+    "href": "lec3.html#review-5",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nWhen do we use the…\n\nMean?\nMedian?\nMode?"
+  },
+  {
+    "objectID": "lec3.html#review-6",
+    "href": "lec3.html#review-6",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nHow do we calculate the…\n\nMean?\nMedian?\nMode?"
+  },
+  {
+    "objectID": "lec3.html#review-7",
+    "href": "lec3.html#review-7",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nWhat is this the formula for?\n• Explain this formula to me."
+  },
+  {
+    "objectID": "lec3.html#review-8",
+    "href": "lec3.html#review-8",
+    "title": "Measures of Central Tendency",
+    "section": "Review",
+    "text": "Review\nWhen are the mean, median, and mode the same (equal to one another)?\n\n\n\n⬡⬢⬡"
+  },
+  {
+    "objectID": "lec1.html#meet-the-instructor",
+    "href": "lec1.html#meet-the-instructor",
+    "title": "Welcome!",
+    "section": "Meet the Instructor",
+    "text": "Meet the Instructor"
+  },
+  {
+    "objectID": "lec1.html#info",
+    "href": "lec1.html#info",
+    "title": "Welcome!",
+    "section": "Info",
+    "text": "Info\nName: Professor Brocker\nBackground: 7+ years of teaching stats, turning confusion into clarity.\nEducation: Master’s in Experimental Psychology (specializing in Morality and Emotion).\nResearch: Morbid Curiosity & Creepiness—let’s explore the weird and wonderful!"
+  },
+  {
+    "objectID": "lec1.html#my-teaching-style",
+    "href": "lec1.html#my-teaching-style",
+    "title": "Welcome!",
+    "section": "My Teaching Style 🎓",
+    "text": "My Teaching Style 🎓\n\nHumor: Statistics can be fun, I promise! Expect some laughs along the way.\nInteractive: I love questions—ask away! [Add RMP comment]\nReal-World Examples: We’ll talk about data that actually matters to you."
+  },
+  {
+    "objectID": "lec1.html#outside-of-class",
+    "href": "lec1.html#outside-of-class",
+    "title": "Welcome!",
+    "section": "Outside of Class 🕹️",
+    "text": "Outside of Class 🕹️\n\nHobbies: When I’m not knee-deep in data, I enjoy making tools to find new music, playing guitar, and finding new food spots with my wife!"
+  },
+  {
+    "objectID": "lec1.html#why-are-we-here",
+    "href": "lec1.html#why-are-we-here",
+    "title": "Welcome!",
+    "section": "Why are we here?",
+    "text": "Why are we here?\nTo turn confusion into confidence and numbers into knowledge!"
+  },
+  {
+    "objectID": "lec1.html#what-is-statistics",
+    "href": "lec1.html#what-is-statistics",
+    "title": "Welcome!",
+    "section": "What is Statistics? 🤔",
+    "text": "What is Statistics? 🤔\n\nThe art of turning data into… more confusing data (just kidding!).\nIt’s the science of making sense of the world through numbers."
+  },
+  {
+    "objectID": "lec1.html#but-seriously-what-is-statistics",
+    "href": "lec1.html#but-seriously-what-is-statistics",
+    "title": "Welcome!",
+    "section": "But Seriously, What is Statistics?",
+    "text": "But Seriously, What is Statistics?\nStatistics is the science of collecting, analyzing, and interpreting data to make informed decisions.\nTranslation:\n“We help people who hate math feel smart with numbers!”"
+  },
+  {
+    "objectID": "lec1.html#why-should-you-care",
+    "href": "lec1.html#why-should-you-care",
+    "title": "Welcome!",
+    "section": "Why Should You Care? 🤓",
+    "text": "Why Should You Care? 🤓\n\nBecause data is everywhere, even in your favorite Netflix recommendations!\nKnowing stats can help you win arguments on the internet with facts.\nIt’s like having a superpower—just without the cape."
+  },
+  {
+    "objectID": "lec1.html#what-youll-learn-this-semester",
+    "href": "lec1.html#what-youll-learn-this-semester",
+    "title": "Welcome!",
+    "section": "What You’ll Learn This Semester 📚",
+    "text": "What You’ll Learn This Semester 📚\n\nHow to describe data like a pro\nThe magic of probability (yes, magic)\nTesting hypotheses (no rabbits involved)\nCorrelation, regression, and causation—oh my!"
+  },
+  {
+    "objectID": "lec1.html#how-this-class-works",
+    "href": "lec1.html#how-this-class-works",
+    "title": "Welcome!",
+    "section": "How This Class Works 🕹️",
+    "text": "How This Class Works 🕹️\n\nParticipation: Asking questions makes you smart (and makes me happy)!\nHomework: It’s like Netflix binging but with numbers.\nExams: Where you’ll show off your new superpowers."
+  },
+  {
+    "objectID": "lec1.html#fun-fact",
+    "href": "lec1.html#fun-fact",
+    "title": "Welcome!",
+    "section": "Fun Fact! 💡",
+    "text": "Fun Fact! 💡\nDid you know? If you toss a coin 10 times, there’s a 50% chance it lands heads every time. (Not really… but we’ll get to that!)"
+  },
+  {
+    "objectID": "lec1.html#any-questions",
+    "href": "lec1.html#any-questions",
+    "title": "Welcome!",
+    "section": "Any Questions? 🗣️",
+    "text": "Any Questions? 🗣️\nBefore we dive into numbers, let’s chat! Any burning questions or random thoughts?"
+  },
+  {
+    "objectID": "lec1.html#syllabus",
+    "href": "lec1.html#syllabus",
+    "title": "Welcome!",
+    "section": "Syllabus",
+    "text": "Syllabus\n[insert iframe of class website]"
+  },
+  {
+    "objectID": "lec2.html#studying-psychology",
+    "href": "lec2.html#studying-psychology",
+    "title": "Operationalization",
+    "section": "Studying Psychology",
+    "text": "Studying Psychology\nWhat do researchers in the areas of psychology that are interesting to you study?"
+  },
+  {
+    "objectID": "lec2.html#studying-psychology-1",
+    "href": "lec2.html#studying-psychology-1",
+    "title": "Operationalization",
+    "section": "Studying Psychology",
+    "text": "Studying Psychology\nWhat do researchers in the areas of psychology that are interesting to you study?\n\n\n\n\nAttitudes\nBeliefs\nBehaviors\nPhysiology\nPlanning\n\n\n\n\n\nBrain Activity\nThoughts\nPerformance/Ability\nAttenton\nMemory"
+  },
+  {
+    "objectID": "lec2.html#studying-psychology-2",
+    "href": "lec2.html#studying-psychology-2",
+    "title": "Operationalization",
+    "section": "Studying Psychology",
+    "text": "Studying Psychology\nThe Bobo Doll Experiment (Bandura, 1961)"
+  },
+  {
+    "objectID": "lec2.html#operationalization",
+    "href": "lec2.html#operationalization",
+    "title": "Operationalization",
+    "section": "Operationalization",
+    "text": "Operationalization\nThe process of defining the measurement of a phenomenon that is not directly measurable (AKA a latent variable) though its existence is implied by other phenomena.\n\nHow could we measure happiness?"
+  },
+  {
+    "objectID": "lec2.html#operationalization-1",
+    "href": "lec2.html#operationalization-1",
+    "title": "Operationalization",
+    "section": "Operationalization",
+    "text": "Operationalization\nFiguring out how to measure something you can’t directly measure.\n\n\nAttitudes, Beliefs, Thoughts\nBehaviors\nBrain activity\nPerformance/Abilities"
+  },
+  {
+    "objectID": "lec2.html#operationalization-2",
+    "href": "lec2.html#operationalization-2",
+    "title": "Operationalization",
+    "section": "Operationalization",
+    "text": "Operationalization\nWhat if I wanted to measure religiosity?\nWhat could I do, or what I could I ask?"
+  },
+  {
+    "objectID": "lec2.html#operationalization-3",
+    "href": "lec2.html#operationalization-3",
+    "title": "Operationalization",
+    "section": "Operationalization",
+    "text": "Operationalization\n\n\nSelf-Report OR Behavioral Measures\nObservation\nImplicit Measures\nTests"
+  },
+  {
+    "objectID": "lec2.html#self-report",
+    "href": "lec2.html#self-report",
+    "title": "Operationalization",
+    "section": "Self-report",
+    "text": "Self-report\n\nSurveys\nQuestionnaires\nPolls\nQuizzes\nInstruments"
+  },
+  {
+    "objectID": "lec2.html#self-report-1",
+    "href": "lec2.html#self-report-1",
+    "title": "Operationalization",
+    "section": "Self-Report",
+    "text": "Self-Report\nWhat’s wrong with this?"
+  },
+  {
+    "objectID": "lec2.html#self-report-2",
+    "href": "lec2.html#self-report-2",
+    "title": "Operationalization",
+    "section": "Self-Report:",
+    "text": "Self-Report:\nAdvantages\n\nMost popular method of assessing attitudes*\nCan obtain large amounts of data\n(Fairly) Quick\nAllows for adaptive testing\n(Fairly) Inexpensive\n\n\n\nIn certain fields"
+  },
+  {
+    "objectID": "lec2.html#self-report-3",
+    "href": "lec2.html#self-report-3",
+    "title": "Operationalization",
+    "section": "Self-Report:",
+    "text": "Self-Report:\nDisadvantages\n\nAcquiescence\n\n\nTendency to say yes, true, agree\n\n\nSocial desirability\n\n\nTendency to respond in ways that are seen as socially acceptable\n\n\nDemand characteristics\n\n\nTendency to response in ways that participant thinks researcher wants"
+  },
+  {
+    "objectID": "lec2.html#self-report-4",
+    "href": "lec2.html#self-report-4",
+    "title": "Operationalization",
+    "section": "Self-report:",
+    "text": "Self-report:\nAvoiding Disadvantages\n\nAnonymous respondents are less likely to make things up\n\nAssure anonymity\n\n\n\nAllow respondents to answer in private\n\nAllow for maximum privacy\n\n\n\nDon’t make your experiment too obvious/revealing\n\nObscure the true goal of the experiment\n\n\n\nAdd questions that test for respondent awareness\n\nInclude attention checks\n\n\n\nPurposely make some questions opposite\n\nReverse coding"
+  },
+  {
+    "objectID": "lec2.html#behavioral-measures",
+    "href": "lec2.html#behavioral-measures",
+    "title": "Operationalization",
+    "section": "Behavioral Measures",
+    "text": "Behavioral Measures\n\nTaking a flier\nSigning a petition\nInternet Behavior 1\nMoving a chair\nDonating money\n\nNot a perfect stand-in!"
+  },
+  {
+    "objectID": "lec2.html#observation",
+    "href": "lec2.html#observation",
+    "title": "Operationalization",
+    "section": "Observation",
+    "text": "Observation\nThe Bobo Doll Experiment (Bandura, 1961)"
+  },
+  {
+    "objectID": "lec2.html#the-bobo-doll-experiment",
+    "href": "lec2.html#the-bobo-doll-experiment",
+    "title": "Operationalization",
+    "section": "The Bobo Doll Experiment",
+    "text": "The Bobo Doll Experiment\n(Bandura, 1961)\n\nLive aggression by adult\nVideotaped aggression by adult\nCartoon aggression\n\nNo aggression"
+  },
+  {
+    "objectID": "lec2.html#observation-1",
+    "href": "lec2.html#observation-1",
+    "title": "Operationalization",
+    "section": "Observation",
+    "text": "Observation\nDisadvantages\n\nTime consuming\nDifferent reviewers/observers may score behaviors differently.\n\nCoding scheme\n\nWho decides what is an example of the behavior?\n\nInter-rater Reliability\n\nHow much agreement is there between 2+ observers?"
+  },
+  {
+    "objectID": "lec2.html#implicit-measures",
+    "href": "lec2.html#implicit-measures",
+    "title": "Operationalization",
+    "section": "Implicit measures",
+    "text": "Implicit measures\nBrain activity\n\n\n\nFunctional Magnetic Resonance Imaging (fMRI)\n\nNeuroimaging of brain activity\n\n\n\n\n\nElectroencephalography (EEG)\n\nElectrodes on surface of scalp measures brain activity"
+  },
+  {
+    "objectID": "lec2.html#issues-with-operationalization",
+    "href": "lec2.html#issues-with-operationalization",
+    "title": "Operationalization",
+    "section": "Issues with Operationalization",
+    "text": "Issues with Operationalization\nWhy is it hard to measure psychological phenomena?\n\nOthers may choose to measure the phenomena differently from us\nOperationalization can be culture-specific\nWhat we measure is based on observable parts of the phenomena, but some parts may be unobservable\n\nMeasuring only the observable/reportable is imprecise"
+  },
+  {
+    "objectID": "lec2.html#operationalization-4",
+    "href": "lec2.html#operationalization-4",
+    "title": "Operationalization",
+    "section": "Operationalization",
+    "text": "Operationalization\nHow should we measure aggression in children?\n\nObserver children for one hour and…\n\nLabel them as Aggressive or Non-Aggressive\nRank them from most aggressive to least aggressive\nScore them on a 10-point scale.\n\n1 = No Aggression\n10 = All of the Aggression\n\nCount number of aggressive behaviors"
+  },
+  {
+    "objectID": "lec2.html#scales-of-measurement",
+    "href": "lec2.html#scales-of-measurement",
+    "title": "Operationalization",
+    "section": "Scales of measurement",
+    "text": "Scales of measurement\nA Scale By Any Other Name\n\nLabels Nominal\nRank Order\nScale Interval\nCount Ratio"
+  },
+  {
+    "objectID": "lec2.html#measurement-scales-nominal",
+    "href": "lec2.html#measurement-scales-nominal",
+    "title": "Operationalization",
+    "section": "Measurement scales: Nominal",
+    "text": "Measurement scales: Nominal\nQualitative\nNominal refers to categories that CANNOT be ordered:\n\nCondition (experimental, control)\nGender\nMajor in college\nCoffee drinker versus Non-coffee drinker\nAndroid User or iPhone User"
+  },
+  {
+    "objectID": "lec2.html#measurement-scales-ordinal",
+    "href": "lec2.html#measurement-scales-ordinal",
+    "title": "Operationalization",
+    "section": "Measurement scales: Ordinal",
+    "text": "Measurement scales: Ordinal\nQuantiative, No Equal Steps\nOrdinal refers to categories that CAN be ordered, but the space between each category isn’t the same:\n\nOlympic Medals\nWinner in a Race\nYour rank in this class\nYour top 10 Movies"
+  },
+  {
+    "objectID": "lec2.html#ordinal-scales",
+    "href": "lec2.html#ordinal-scales",
+    "title": "Operationalization",
+    "section": "Ordinal Scales",
+    "text": "Ordinal Scales\n\nRarely used in psychological research, because it is hard to calculate variance when the interval between each number differs.\nThere are non-parametric statistics designed for ordinal scales, but we will not be covering those this semester."
+  },
+  {
+    "objectID": "lec2.html#measurement-scales-interval",
+    "href": "lec2.html#measurement-scales-interval",
+    "title": "Operationalization",
+    "section": "Measurement scales: Interval",
+    "text": "Measurement scales: Interval\nQuantitative, Equal Distance, No True 0\nInterval refers to ratings that are ordered where the interval between each rating is the same, but there is no real “0.”\n\nTemperature*\n“On a scale of 1-10 How much do you agree with the following statement…”\nGPA\n\n\n\nExcept for Kelvin!"
+  },
+  {
+    "objectID": "lec2.html#measurement-scales-ratio",
+    "href": "lec2.html#measurement-scales-ratio",
+    "title": "Operationalization",
+    "section": "Measurement scales: Ratio",
+    "text": "Measurement scales: Ratio\nQuantitative, Equal Distance, No True 0\nRatio, refers to ratings that are ordered, the interval between each rating is the same, and “0” means “0.”\n\nLength\nReaction Time\nDosage\nMoney Donated"
+  },
+  {
+    "objectID": "lec2.html#interval-vs-ratio",
+    "href": "lec2.html#interval-vs-ratio",
+    "title": "Operationalization",
+    "section": "Interval vs Ratio",
+    "text": "Interval vs Ratio\nWhat’s the difference between interval and ratio?\n\nInterval may have a 0 on the scale, but it doesn’t mean the absence of something. A 0.0 GPA means an F rather than the absence of a grade.\nRatio has a 0 that. means 0 (the absence of something), like a ‘0’ as a response to the questions, “How many drinks did you have last night?”"
+  },
+  {
+    "objectID": "lec2.html#discrete-and-continous",
+    "href": "lec2.html#discrete-and-continous",
+    "title": "Operationalization",
+    "section": "Discrete and Continous",
+    "text": "Discrete and Continous\nWhat’s the Difference?\n\nDiscrete variables have predefined values\n\n\nUS States\nFlavors of Ice Cream\n\n\nContinous Variables can occupy several different values\n\n\nReaction Time\nTV Ratings"
+  },
+  {
+    "objectID": "lec2.html#determining-scale-of-measurement",
+    "href": "lec2.html#determining-scale-of-measurement",
+    "title": "Operationalization",
+    "section": "Determining Scale of measurement",
+    "text": "Determining Scale of measurement\nIdentify the scale of measurement.\n\nUndergraduates report their self-esteem on a scale of 1 to 10. Researchers assess the relationship of undergraduates’ self-esteem and GPA.\n\n\nPredictor variable: Self-Esteem | Continuous (Interval)\nOutcome variable: GPA | Continuous (Interval)"
+  },
+  {
+    "objectID": "lec2.html#determining-scale-of-measurement-1",
+    "href": "lec2.html#determining-scale-of-measurement-1",
+    "title": "Operationalization",
+    "section": "Determining Scale of measurement",
+    "text": "Determining Scale of measurement\nIdentify the scale of measurement.\n\nParticipants are given a mystery drug or placebo and then asked to complete puzzle tasks. Researchers time how long participants take to complete the puzzles.\n\n\nIndependent variable: Drug vs. Placebo | Categorical (Nominal)\nDependent variable: Reaction Time | Continuous (Ratio)"
+  },
+  {
+    "objectID": "lec2.html#determining-scale-of-measurement-2",
+    "href": "lec2.html#determining-scale-of-measurement-2",
+    "title": "Operationalization",
+    "section": "Determining Scale of measurement",
+    "text": "Determining Scale of measurement\nIdentify the scale of measurement.\n\nUndergraduates are shown either pictures of death or pictures of landscapes. They then report their anxiety about aging on a scale of 1 (none) to 10 (lots).\n\n\nIndependent variable: Pictures of death versus landscapes | Categorical (Nominal)\nDependent variable: Anxiety about dying | Continuous (Interval)"
+  },
+  {
+    "objectID": "lec2.html#why-does-scale-of-measurement-matter",
+    "href": "lec2.html#why-does-scale-of-measurement-matter",
+    "title": "Operationalization",
+    "section": "Why does scale of measurement matter?",
+    "text": "Why does scale of measurement matter?\nFor Science!\n\nStatistical tests can only be run on specific scales of measurement.\nt-test & ANOVA: Nominal IV/predictor and Continuous DV/outcome\nCorrelation & Regression: All continuous"
+  },
+  {
+    "objectID": "lec2.html#why-does-scale-of-measurement-matter-1",
+    "href": "lec2.html#why-does-scale-of-measurement-matter-1",
+    "title": "Operationalization",
+    "section": "Why does scale of measurement matter?",
+    "text": "Why does scale of measurement matter?\n\nGenerally, continuous variables (interval and ratio scales) lend themselves better to statistical analysis.\nAs a researcher, you should plan out your statistical analysis BEFORE conducting your study, so that you measure your variables in a way that matches the type of analyses you will run."
+  },
+  {
+    "objectID": "lec2.html#take-away-how-we-measure-variables-matters",
+    "href": "lec2.html#take-away-how-we-measure-variables-matters",
+    "title": "Operationalization",
+    "section": "TAKE AWAY: How we measure variables matters…",
+    "text": "TAKE AWAY: How we measure variables matters…\nbecause it dictates what kind of statistical analyses we can run.\n\nData can be coerced into different formats\n‘Correct’ or ‘Supporting’ results can come from bogus data"
+  },
+  {
+    "objectID": "lec2.html#statistical-terms-symbols",
+    "href": "lec2.html#statistical-terms-symbols",
+    "title": "Operationalization",
+    "section": "Statistical Terms & Symbols",
+    "text": "Statistical Terms & Symbols"
+  },
+  {
+    "objectID": "lec2.html#statistical-terms",
+    "href": "lec2.html#statistical-terms",
+    "title": "Operationalization",
+    "section": "Statistical Terms",
+    "text": "Statistical Terms\n\n\nPopulation\n\nEvery person in the group I am interested in studying\n\nSample\n\nA small subset of people from the population who we will actually study in our experiment.\n\nParameter:\n\nInformation about the population.\n\nStatistic\n\nInformation about the sample."
+  },
+  {
+    "objectID": "lec2.html#statistical-symbols",
+    "href": "lec2.html#statistical-symbols",
+    "title": "Operationalization",
+    "section": "Statistical Symbols",
+    "text": "Statistical Symbols\nCase-sensitive and often Greek\n\n\n\\(n\\) = the number of people in the sample\n\\(x\\) = one datapoint in a sample\n\\(\\bar{x}\\) = Arithmetic mean (average) for a sample, x\n\\(\\Sigma(x)\\) = The sum of all values in a sample, x\n\\(\\sum^{n}_{i = 1}= x_1 +x_2+x_3...\\)"
+  },
+  {
+    "objectID": "lec2.html#practice-1",
+    "href": "lec2.html#practice-1",
+    "title": "Operationalization",
+    "section": "Practice 1",
+    "text": "Practice 1\nStudy Up!\n\nEsmeralda is taking Statistics for the Psychological Sciences. On her first exam, she scored 98. The average grade among the 26 students on that exam was 97\n\nn:\nx:\n\\(\\bar{x}\\)"
+  },
+  {
+    "objectID": "lec2.html#practice-2",
+    "href": "lec2.html#practice-2",
+    "title": "Operationalization",
+    "section": "Practice 2",
+    "text": "Practice 2\nYou Ever Hear of this show?\n\nProfessor Brocker is interested in how many Farmingdale students watch the Netflix Original, Dark. He plans to ask 200 students if they have seen it or not.\n\nN:\nn:\nScale of Measurement:"
+  },
+  {
+    "objectID": "lec2.html#practice-3",
+    "href": "lec2.html#practice-3",
+    "title": "Operationalization",
+    "section": "Practice 3",
+    "text": "Practice 3\nBe Kind to Yourself!\n\nA research study surveys 500 college student across 5 campuses in the United States, asking them to rate their self-esteem on a scale of 1 to 10.\n\nSample:\nPopulation:\nScale of Measurement:\n\n\n\n⬡⬢"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution",
+    "href": "lec5.html#standard-normal-distribution",
+    "title": "Standard Normal Distribution",
+    "section": "STANDARD NORMAL DISTRIBUTION",
+    "text": "STANDARD NORMAL DISTRIBUTION\nWhat do we know about normal distributions?"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-1",
+    "href": "lec5.html#standard-normal-distribution-1",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nThe 4 properties of a standard normal distribution are:\n• They are shaped like a bell (“bell curve”).\n• They are symmetric.\n• They are unimodal.\n• The mean = median = mode."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-2",
+    "href": "lec5.html#standard-normal-distribution-2",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nWhat do we know about normal distributions?\n\n\nThe mean, median, and mode are all the same in a normal distribution."
+  },
+  {
+    "objectID": "lec5.html#standard-deviation",
+    "href": "lec5.html#standard-deviation",
+    "title": "Standard Normal Distribution",
+    "section": "Standard deviation",
+    "text": "Standard deviation\nStandard deviation is in the scale of the variable (x).\n\nThis means a standard deviation of 1 means a distance of 1 on the scale used to measure the variable."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-3",
+    "href": "lec5.html#standard-normal-distribution-3",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\nWhat do we know about normal distributions?"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-4",
+    "href": "lec5.html#standard-normal-distribution-4",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\nJonas scores a 98 on the exam. The average grade on the exam was 97 with a standard deviation of 1.\nFind Jonas’ score on the normal distribution."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-5",
+    "href": "lec5.html#standard-normal-distribution-5",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\nJonas scores a 98 on the exam. The average grade on the exam was 97 with a standard deviation of 1.\nFind Jonas’ score on the normal distribution."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-6",
+    "href": "lec5.html#standard-normal-distribution-6",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nWhere do most scores fall in relation to the mean?"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-7",
+    "href": "lec5.html#standard-normal-distribution-7",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\nMost scores fall within one standard deviation of the mean.\n“Within one standard deviation” means +1 as well as -1 standard deviation."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-8",
+    "href": "lec5.html#standard-normal-distribution-8",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n68.3% of scores fall within one standard deviation of the mean."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-9",
+    "href": "lec5.html#standard-normal-distribution-9",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\n68.3% of scores fall within one standard deviation of the mean."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-10",
+    "href": "lec5.html#standard-normal-distribution-10",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\n\n\n68.3% of the data will fall within 1 SD of the mean.\n95.4% of the data will fall within 2 SD of the mean.\n99.7% of the data will fall within 3 SD of the mean."
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-11",
+    "href": "lec5.html#standard-normal-distribution-11",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nStudents’ ratings of the Netflix Original Dark (range = 1- 10) form a normal distribution with m = 6 and s = 1.\n\nWhat percentage of Students rate it a 7 or higher?\nWhat percentage of Students rate it at least a 4?\nWhat percentage of Students rate it an 8 or lower?"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-12",
+    "href": "lec5.html#standard-normal-distribution-12",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nWhere should we put the mean?\n\n[Insert Mean of 6]"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-13",
+    "href": "lec5.html#standard-normal-distribution-13",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\n\n[Insert 3 4 5 6 7 8 9]\n[Insert -3s -2s .etc]"
+  },
+  {
+    "objectID": "lec5.html#standard-normal-distribution-14",
+    "href": "lec5.html#standard-normal-distribution-14",
+    "title": "Standard Normal Distribution",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nStudents’ ratings of the Netflix Original Dark form a normal distribution with m = 6 and s = 1.\n\nWhat percentage of Students rate the Eric Andre Show a 7 or higher?\n\n15.8%\n\nWhat percentage of Students rate the Eric Andre Show at least a 4?\n\n2.2%\n\nWhat percentage of Students rate the Eric Andre Show an 8 or lower?\n\n97.6%"
+  },
+  {
+    "objectID": "lec5.html#z-scores",
+    "href": "lec5.html#z-scores",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\nA z-score tells you in standard deviation units how far the x-value is from the mean.\n\nZ-scores are better than using raw SD, because when the SD is a decimal, it is hard to find the exact point under the standard normal curve."
+  },
+  {
+    "objectID": "lec5.html#z-scores-1",
+    "href": "lec5.html#z-scores-1",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores:",
+    "text": "Z-scores:\nThe distance from the mean to the 1 on this standard normal curve is equal to the SD.\nThe distance from the mean to the 1 on this standard normal curve is equal to z=1."
+  },
+  {
+    "objectID": "lec5.html#z-scores-2",
+    "href": "lec5.html#z-scores-2",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores:",
+    "text": "Z-scores:\nFind:\n\nZ = 1\nZ = -2\nZ = 0.5"
+  },
+  {
+    "objectID": "lec5.html#z-scores-3",
+    "href": "lec5.html#z-scores-3",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\nZ-scores re-express the original data points (the X’s) in a way that intuitively lets us know:\n\nHow close the X is to the mean (AKA how much this particular participant is like the average person in the sample)\nWhere it falls in the dispersion of the distribution (AKA how different this particular participant is from the majority of people in the sample)"
+  },
+  {
+    "objectID": "lec5.html#calculating",
+    "href": "lec5.html#calculating",
+    "title": "Standard Normal Distribution",
+    "section": "Calculating",
+    "text": "Calculating\nZ-scores\n\nSubtract the mean from each X value.\nDivide by the standard deviation.\n\n\\[\nz = \\frac{x-\\bar{x}}{s}\n\\]"
+  },
+  {
+    "objectID": "lec5.html#z-scores-5",
+    "href": "lec5.html#z-scores-5",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\nZ-Scores are calculated by:\n\nCentering the X values on the mean: When we center the mean (AKA mean-centering), we set the mean to 0.\nDividing by the standard deviation: When we divide by the SD, the space from the mean is expressed in standard deviations."
+  },
+  {
+    "objectID": "lec5.html#z-scores-6",
+    "href": "lec5.html#z-scores-6",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\n\n\n# A tibble: 5 × 3\n      x `x-xbar` `(x-xbar)^2`\n  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;\n1    10      -10          100\n2    10      -10          100\n3    20        0            0\n4    30       10          100\n5    30       10          100"
+  },
+  {
+    "objectID": "lec5.html#z-scores-7",
+    "href": "lec5.html#z-scores-7",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\n\\(z = \\frac{x-\\bar{x}}{s}\\)\n\\(z = \\frac{-10}{10}\\)\n\nSum of Squares = 400\nVariance = 400/(5-1)\nStandard Deviation = 10\n\n\n\n# A tibble: 5 × 4\n      x `x-xbar` `(x-xbar)^2`     z\n  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;\n1    10      -10          100    -1\n2    10      -10          100    -1\n3    20        0            0     0\n4    30       10          100     1\n5    30       10          100     1"
+  },
+  {
+    "objectID": "lec5.html#z-scores-8",
+    "href": "lec5.html#z-scores-8",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\n\nWe made the mean = 0: When you mean-center a distribution, you shift it along the number line.\nWe made the SD = 1: When you divide a distribution by the SD, you shrink the distribution down.\nBUT: The shape of the distribution remains the same."
+  },
+  {
+    "objectID": "lec5.html#z-scores-9",
+    "href": "lec5.html#z-scores-9",
+    "title": "Standard Normal Distribution",
+    "section": "Z-scores",
+    "text": "Z-scores\nShift distribution along the number line.\nShrink distribution down.\nThe shape of the distribution remains the same."
+  },
+  {
+    "objectID": "lec5.html#z-scores-10",
+    "href": "lec5.html#z-scores-10",
+    "title": "Standard Normal Distribution",
+    "section": "Z-Scores",
+    "text": "Z-Scores\nWhy Do We Care?\n\nA z-score tells me where my score falls in SD units.\nI can then look at this standard normal curve, and estimate what percentage of people did better or worse than me."
+  },
+  {
+    "objectID": "lec5.html#z-scores-11",
+    "href": "lec5.html#z-scores-11",
+    "title": "Standard Normal Distribution",
+    "section": "Z-Scores",
+    "text": "Z-Scores\nWhy Do We Care?\nThe mean score for Exam 1 was a 92 with a standard deviation of 3.\n\nEsmeralda scored an 86.\nWhat percent of the class scored better than Esmeralda?\n\n\\(z=\\frac{x-\\bar{x}}{s}\\)\n\\(z = \\frac{86-92}{3} = -2\\)\n\n86-92/3 = -2\n98% of the class did better than Esmeralda."
+  },
+  {
+    "objectID": "lec5.html#z-scores-12",
+    "href": "lec5.html#z-scores-12",
+    "title": "Standard Normal Distribution",
+    "section": "Z-Scores",
+    "text": "Z-Scores\nThe mean score for Exam 1 was a 92 with a standard deviation of 3.\nJonas scored a 95.\n\nWhat percent of the class scored better than Jonas?\n\n\\[\nz = \\frac{95-92}{3} = 1\n\\]\n16% scored higher than Jonas.\n\n\n\n⬡⬢⬡⬢⬡"
+  },
+  {
+    "objectID": "lec4.html#descriptive-statistics",
+    "href": "lec4.html#descriptive-statistics",
+    "title": "Dispersion",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nX = refers to the value for 1 person (1 datapoint) in the sample\n\\(\\bar{x}\\) = refers to the mean or average value of X in the sample\n\\(\\sum(x)\\) = refers to the sum of all x values (sum of all the datapoints)\n\\(x^2\\) = refers to the squared value of x (x multiplied by x)"
+  },
+  {
+    "objectID": "lec4.html#descriptive-statistics-1",
+    "href": "lec4.html#descriptive-statistics-1",
+    "title": "Dispersion",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nDescribe the characteristics of a sample in terms of:\n\nCentral tendency and\nDispersion (aka Variability aka Variance)"
+  },
+  {
+    "objectID": "lec4.html#central-tendency",
+    "href": "lec4.html#central-tendency",
+    "title": "Dispersion",
+    "section": "Central tendency",
+    "text": "Central tendency\nWhat is it, when should we use it, and how do we calculate it?\n\nMean\nMedian\nMode"
+  },
+  {
+    "objectID": "lec4.html#central-tendency-1",
+    "href": "lec4.html#central-tendency-1",
+    "title": "Dispersion",
+    "section": "Central tendency",
+    "text": "Central tendency\nWhat do measures of Central Tendency tell you?\nCentral tendency\nWhat do measures of Central Tendency tell you?\n\nThe mid-point in the data\nThe answer most of the participants gave."
+  },
+  {
+    "objectID": "lec4.html#measures-of-dispersion",
+    "href": "lec4.html#measures-of-dispersion",
+    "title": "Dispersion",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\nWhat does dispersion mean?\n\nSpread-out-ness\nHow much the participants’ responses differ from one another\nVariance"
+  },
+  {
+    "objectID": "lec4.html#measures-of-dispersion-1",
+    "href": "lec4.html#measures-of-dispersion-1",
+    "title": "Dispersion",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\nMeasures of dispersion tell us about the spread-out-ness of the data, but what does that actually mean?"
+  },
+  {
+    "objectID": "lec4.html#measures-of-dispersion-2",
+    "href": "lec4.html#measures-of-dispersion-2",
+    "title": "Dispersion",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\nMeasures of dispersion tell us about the spread-out-ness of the data, but what does that actually mean?\n\nIf I am measuring HYPE, what would low dispersion tell me?\nIf I am measuring HYPE, what would high dispersion tell me?"
+  },
+  {
+    "objectID": "lec4.html#measures-of-dispersion-3",
+    "href": "lec4.html#measures-of-dispersion-3",
+    "title": "Dispersion",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\nMeasures of dispersion tell us about consensus.\n\nDid participants give similar answers?\nDid participants give wildly different answers?"
+  },
+  {
+    "objectID": "lec4.html#dispersion",
+    "href": "lec4.html#dispersion",
+    "title": "Dispersion",
+    "section": "Dispersion",
+    "text": "Dispersion\n\nData should have natural dispersion.\nIf everyone gives a similar answer, it’s harder to analyze difference."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion",
+    "href": "lec4.html#calculating-dispersion",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nON AVERAGE, how far is each X-VALUE from the MIDPOINT.\n\nCalculate how far each X-VALUE is from the MIDPOINT.\nTake the AVERAGE of those distances."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-1",
+    "href": "lec4.html#calculating-dispersion-1",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nIn psychology, the mid-point we use will be the mean."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-2",
+    "href": "lec4.html#calculating-dispersion-2",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nON AVERAGE, how far is each X-VALUE from the MEAN.\n\nCalculate how far each X-VALUE is from the MIDPOINT. 1\nTake the AVERAGE of those distances.\n\n\nDeviation Score"
+  },
+  {
+    "objectID": "lec4.html#deviation-scores",
+    "href": "lec4.html#deviation-scores",
+    "title": "Dispersion",
+    "section": "Deviation Scores",
+    "text": "Deviation Scores\nCalculate how far each X-VALUE is from the MEAN.\n\\[\nx - \\bar{x}\n\\]"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-3",
+    "href": "lec4.html#calculating-dispersion-3",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nStep 1: Calculate the mean.\n\n\n\n\nParticipantIDX\n\n11\n\n23\n\n32\n\n42\n\n53\n\n62\n\n71\n\n83\n\n91\n\n102\n\n\n\n\n\\[\n\\frac{\\sum(x)}{n}\n\\]\n\\[X = 20 / 10 = 2\\]"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-4",
+    "href": "lec4.html#calculating-dispersion-4",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nStep 2: Subtract the mean from each X-value.\n\n\n\n\nParticipantIDXx-M\n\n11-1\n\n231\n\n320\n\n420\n\n531\n\n620\n\n71-1\n\n831\n\n91-1\n\n1020\n\n\n\n\n\nThe average of the deviation scores will always = 0.\nOn average, the x-values = x.\nSo the average distance of x from x is 0."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-5",
+    "href": "lec4.html#calculating-dispersion-5",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nCalculate the mean.\nCalculate the deviation scores.\nWhat can we do to the deviation scores to prevent them from adding up to 0?\n\n[Make this pop out]\n\nTake the AVERAGE"
+  },
+  {
+    "objectID": "lec4.html#what-is-the-mean-of-the-deviation-scores",
+    "href": "lec4.html#what-is-the-mean-of-the-deviation-scores",
+    "title": "Dispersion",
+    "section": "What is the Mean of the Deviation Scores?",
+    "text": "What is the Mean of the Deviation Scores?\n\nThe problem is the negative numbers!\nHow do we get rid of negative numbers?\n\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n11-11\n\n2311\n\n3200\n\n4200\n\n5311\n\n6200\n\n71-11\n\n8311\n\n91-11\n\n10200"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-6",
+    "href": "lec4.html#calculating-dispersion-6",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\n\nStep 1: Calculate the mean.\n  X = 20 / 10 = 2\nStep 2: Subtract the mean from each X-value.\nStep 3: Square each deviation score."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-7",
+    "href": "lec4.html#calculating-dispersion-7",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nNow what: Calculate the average squared deviation.\n\nStep 4: Add up the Squared Deviations.\n\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n11-11\n\n2311\n\n3200\n\n4200\n\n5311\n\n6200\n\n71-11\n\n8311\n\n91-11\n\n10200\n\n\n\n\n[1] 6"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-8",
+    "href": "lec4.html#calculating-dispersion-8",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\n\nStep 5: Divide by (n-1).\n\n[insert Cat? GIF]\n\n(n-1) refers to the degrees of freedom… don’t worry about it for now.\n\n\n\n[1] 0.6\n\n\nVariance ^"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-9",
+    "href": "lec4.html#calculating-dispersion-9",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nON AVERAGE, how far is each X-VALUE from the MEAN.\nCalculate how far each X-VALUE is from the MIDPOINT.\n\n[Make pop-out we did it!…right?]\n\nTake the AVERAGE of those distances."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-10",
+    "href": "lec4.html#calculating-dispersion-10",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nHow do think we should calculate dispersion?\n\nWhen we squared the deviation scores in Step 3, we inflated the deviation.\n\nWe have to undo that inflation.\nHow do you undo squaring?\nWe take the square root."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-11",
+    "href": "lec4.html#calculating-dispersion-11",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\n\nStep 6: Take the square root.\n\n\\[\n\\sqrt{.667} = .816\n\\]"
+  },
+  {
+    "objectID": "lec4.html#calculating-standard-deviation",
+    "href": "lec4.html#calculating-standard-deviation",
+    "title": "Dispersion",
+    "section": "Calculating standard deviation",
+    "text": "Calculating standard deviation\n\nMean: Calculate the mean.\nDeviation scores: Subtract the mean from each x-value.\nSquared deviations: Square each deviation score.\nSum of squares: Add up the squared deviations.\nVariance: Divide the sum of squares by (n-1).\nStandard Deviation: Take the square root of the variance."
+  },
+  {
+    "objectID": "lec4.html#formulas-for-dispersion",
+    "href": "lec4.html#formulas-for-dispersion",
+    "title": "Dispersion",
+    "section": "Formulas for Dispersion",
+    "text": "Formulas for Dispersion\nVariance\n\\[\ns^2 = \\frac{\\sum(x-\\bar{x})^2}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec4.html#formulas-for-dispersion-1",
+    "href": "lec4.html#formulas-for-dispersion-1",
+    "title": "Dispersion",
+    "section": "Formulas for Dispersion",
+    "text": "Formulas for Dispersion\nStandard Deviation\n\\[\ns = \\sqrt{\\frac{\\sum(x-\\bar{x})^2}{N-1}}\n\\]\n\nVariance is a measure of dispersion.\n\nIt’s not helpful, because it’s inflated (from squaring the deviation scores).\n\nStandard deviation is a better measure of dispersion, because it is standardized.\n\nThis means that a standard deviation of 1 means a distance of 1 on the scale used to measure x.\nHYPE scale: 1 to 10: standard deviation of 1 means the distance from one rating to the next, from 1 to 2.\nIf the mean = 5, SD = 1, most scores fall between 4 and 6."
+  },
+  {
+    "objectID": "lec4.html#variance-standard-deviation",
+    "href": "lec4.html#variance-standard-deviation",
+    "title": "Dispersion",
+    "section": "Variance & Standard deviation",
+    "text": "Variance & Standard deviation\n\nThe Variance is the standard deviation squared: s²\nThe Standard Deviation is the square root of the variance: s\n\n\n\n\n⬡⬢⬡⬢"
+  }
+]
