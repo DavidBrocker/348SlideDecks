@@ -6,6 +6,7 @@ institute: "Farmingdale State College"
 footer: "⬡⬢⬡"
 format:
   revealjs:
+    chalkboard: true
     menu: 
       numbers: true
     slide-number: c/t
@@ -314,9 +315,8 @@ ggplot(exam, aes(l)) +
   data.frame(l = c(
     rnorm(500,1,0.5), 
     rnorm(500,5,0.5)) 
-    )
-
-ggplot(exam, aes(l)) + 
+    ) |> 
+ggplot(aes(l)) + 
   geom_histogram(fill = "darkblue") +
   labs(x = "", 
        y = ""
@@ -423,8 +423,6 @@ $\frac{17}{4} = 4.25$
 ![](images/excel.png){fig-align="center" width="301"}
 
 ## **Excel Practice**
-
-### Open our Class Data in Google Sheets.
 
 -   What does each row in this spreadsheet represent?
 
