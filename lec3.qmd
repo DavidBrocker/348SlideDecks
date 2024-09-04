@@ -65,6 +65,14 @@ x = one participant's score
 
 -   What is a parameter?
 
+-   What is a statistic?
+
+## **Review**
+
+### Statistical Terms
+
+-   What is a parameter?
+
     -   Information that describes the population.
 
 -   What is a statistic?
@@ -77,7 +85,7 @@ x = one participant's score
 
 ### Describe the characteristics of the sample.
 
--   Think about our HYPE data.
+-   Think about our lab data.
 
 -   How could we describe it?
 
@@ -87,13 +95,13 @@ x = one participant's score
 
 ## **Descriptive Statistics**
 
-Think about our HYPE data.
+Think about our lab data.
 
 How could we describe it?
 
--   Average: The number most of us rated the HYPE of the song
+-   Average: The number most of us rated the quality of the song
 
--   Min & Max: The lowest and highest we rated the HYPE of the song
+-   Min & Max: The lowest and highest we rated the quality of the song
 
 ## **Descriptive Statistics**
 
@@ -131,8 +139,6 @@ How could we describe it?
 
 ### Standard Normal Distribution
 
-Add geom_annotate for mean, median, mode
-
 ```{r}
 library(ggplot2)
 x <- seq(5, 15, length=1000)
@@ -150,7 +156,11 @@ ggplot(data = nm, aes(x,y)) +
   theme(
     axis.text.x = element_blank()
   ) +
-  geom_vline(xintercept = 10)
+  geom_vline(xintercept = 10) +
+  geom_label(label = "Mean", y = 0, x = 10) +
+  geom_label(label = "Median", y = 0.15, x = 10) +
+  geom_label(label = "Mode", y = 0.3, x = 10)
+  
 ```
 
 ## **Measures of Central tendency**
@@ -161,19 +171,20 @@ Mean = Median = Mode
 
 ## **Measures of Central tendency**
 
-### The Mean is good for use in normal distrbutions
+### The Mean is good for use in normal distributions
 
 ```{r}
-xdf <- 
+ 
   data.frame(
     z = rnorm(500,30,sd =10)
-    )
- 
-  ggplot(xdf, aes(z)) + 
+    ) |> 
+  ggplot(aes(z)) + 
   geom_histogram(
     binwidth = 10
   ) + 
-    theme_minimal()
+    theme_minimal() +
+    labs(x = "",
+         y = "")
 ```
 
 ## **The mean**
@@ -299,19 +310,57 @@ ggplot(exam, aes(l)) +
 
 ### Two or More Peaks
 
-\[Insert Bimodal\]
+```{r}
+  data.frame(l = c(
+    rnorm(500,1,0.5), 
+    rnorm(500,5,0.5)) 
+    )
+
+ggplot(exam, aes(l)) + 
+  geom_histogram(fill = "darkblue") +
+  labs(x = "", 
+       y = ""
+       ) + 
+  theme_minimal()
+```
 
 ## **Central tendency: Which should we use?**
 
 ### Slide to the Left!
 
-\[Insert Skewed\]
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 1000 random values from a Beta distribution
+left_skewed <- rbeta(1000, shape1 = 2, shape2 = 5)
+
+data.frame(left_skewed) |> 
+  ggplot(aes(left_skewed)) + 
+  geom_histogram(fill = "grey30") +
+  labs(
+    x = "",
+    y = ""
+  ) + 
+  theme_minimal() 
+```
 
 ## **Central tendency: Which should we use?**
 
 ### Looks Normal to Me
 
-\[Insert Normal\]
+```{r}
+  
+data.frame(
+  l = rnorm(500,12,1)
+    ) |> 
+ggplot(aes(l)) + 
+  geom_histogram(fill = "darkorange") +
+  labs(x = "", 
+       y = ""
+       ) + 
+  theme_minimal()
+```
 
 ## **Measures of Central tendency:**
 
@@ -409,31 +458,17 @@ $\frac{17}{4} = 4.25$
 
 ## **Excel Practice**
 
--   Open our Class Data in Google Sheets.
-
--   Download our Class Data into Microsoft Excel.
-
--   Look at the HYPE rating for 1/25
+-   Open our Class Data in Microsoft Excel.
 
 -   Calculate the Mean
 
--   Using (SUM(x))/n
+-   Using (`SUM(x))/n`
 
--   Using Average(x)
+-   Using `Average(x)`
 
 -   Calculate the Median
 
--   Find the Mode(s)
-
-## **Practice**
-
-### Download the class data to open it in Excel.
-
--   Look at the HYPE rating for 1/30.
-
--   Calculate the mean for 1/30.
-
--   Interpret the mean for 1/30.
+-   Find the `Mode(s)`
 
 ## **Review**
 
@@ -460,6 +495,8 @@ $\frac{17}{4} = 4.25$
 ### What is this the formula for?
 
 • Explain this formula to me.
+
+$\sum(x)$
 
 ## **Review**
 
