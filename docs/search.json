@@ -53,7 +53,7 @@
     "href": "lec8.html#sampling-theory-4",
     "title": "Sampling Theory",
     "section": "Sampling theory",
-    "text": "Sampling theory\n\n\n# A tibble: 7 × 2\n  Sample  Mean\n  &lt;chr&gt;  &lt;dbl&gt;\n1 Dave   10   \n2 Gaby    7.55\n3 Evan    2.23\n4 Mike    1.60\n5 Jeff    4.80\n6 Paul    6.56\n7 Sean    3.40"
+    "text": "Sampling theory\n\n\n# A tibble: 7 × 2\n  Sample  Mean\n  &lt;chr&gt;  &lt;dbl&gt;\n1 Dave   10   \n2 Gaby    2.06\n3 Evan    8.09\n4 Mike    7.72\n5 Jeff    2.07\n6 Paul    7.35\n7 Sean    7.80"
   },
   {
     "objectID": "lec8.html#sampling-theory-5",
@@ -1334,188 +1334,272 @@
     "href": "lec4.html#descriptive-statistics",
     "title": "Dispersion",
     "section": "Descriptive Statistics",
-    "text": "Descriptive Statistics\nX = refers to the value for 1 person (1 datapoint) in the sample\n\\(\\bar{x}\\) = refers to the mean or average value of X in the sample\n\\(\\sum(x)\\) = refers to the sum of all x values (sum of all the datapoints)\n\\(x^2\\) = refers to the squared value of x (x multiplied by x)"
+    "text": "Descriptive Statistics\nThe Old and the New\n\n\n\\(x\\)\n\\(\\bar{x}\\)\n\\(\\sum(x)\\)\n\\(x^2\\)"
   },
   {
     "objectID": "lec4.html#descriptive-statistics-1",
     "href": "lec4.html#descriptive-statistics-1",
     "title": "Dispersion",
     "section": "Descriptive Statistics",
-    "text": "Descriptive Statistics\nDescribe the characteristics of a sample in terms of:\n\nCentral tendency and\nDispersion (aka Variability aka Variance)"
+    "text": "Descriptive Statistics\nThe Old and the New\n\n\n\\(x\\) = refers to the value for 1 person (1 datapoint) in the sample\n\\(\\bar{x}\\) = refers to the mean or average value of X in the sample\n\\(\\sum(x)\\) = refers to the sum of all x values (sum of all the datapoints)\n\\(x^2\\) = refers to the squared value of x (x multiplied by x)"
+  },
+  {
+    "objectID": "lec4.html#descriptive-statistics-2",
+    "href": "lec4.html#descriptive-statistics-2",
+    "title": "Dispersion",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nExamples\n\n\ndata = {1,4,3,2,4,6}\n\\(x\\) = \\(x = 1 | 4 | 3 | 2 | 4 | 6\\)\n\\(\\bar{x}\\) = \\(3.33\\bar{3}\\)\n\\(\\sum(x)\\) = \\(1 + 4 + 3 + 2 + 4 + 6 = 20\\)\n\\(x^2\\) = \\(1 | 16 | 9 | 4 | 16 | 36\\)"
+  },
+  {
+    "objectID": "lec4.html#descriptive-statistics-3",
+    "href": "lec4.html#descriptive-statistics-3",
+    "title": "Dispersion",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nDescribe the characteristics of a sample in terms of:\n\n\nCentral tendency\nDispersion (aka Variability aka Variance)\n\nDispersion: the action or process of distributing things or people over a wide area."
+  },
+  {
+    "objectID": "lec4.html#central-tendency-mean",
+    "href": "lec4.html#central-tendency-mean",
+    "title": "Dispersion",
+    "section": "Central tendency: Mean",
+    "text": "Central tendency: Mean\nWhat is it, when should we use it, and how do we calculate it?\n\n\nMean\n\nAverage of all \\(x\\) values\nNormal Distribution\n\\(\\frac{\\sum(x)}{n}\\)"
+  },
+  {
+    "objectID": "lec4.html#central-tendency-median",
+    "href": "lec4.html#central-tendency-median",
+    "title": "Dispersion",
+    "section": "Central tendency: Median",
+    "text": "Central tendency: Median\nWhat is it, when should we use it, and how do we calculate it?\n\n\nMedian\n\nMiddle value in sorted data\nSkewed distributions\n\\(Med(X) = \\frac{n + 1}{2}\\)"
+  },
+  {
+    "objectID": "lec4.html#central-tendency-mode",
+    "href": "lec4.html#central-tendency-mode",
+    "title": "Dispersion",
+    "section": "Central tendency: Mode",
+    "text": "Central tendency: Mode\nWhat is it, when should we use it, and how do we calculate it?\n\n\nMode\n\nMost common value\nBi|Tri-Modal Distributions\nMost common value"
   },
   {
     "objectID": "lec4.html#central-tendency",
     "href": "lec4.html#central-tendency",
     "title": "Dispersion",
-    "section": "Central tendency",
-    "text": "Central tendency\nWhat is it, when should we use it, and how do we calculate it?\n\nMean\nMedian\nMode"
+    "section": "Central Tendency",
+    "text": "Central Tendency\nWhat do measures of Central Tendency tell you?\n\n\nThe mid-point in the data\nThe answer most of the participants gave."
   },
   {
     "objectID": "lec4.html#central-tendency-1",
     "href": "lec4.html#central-tendency-1",
     "title": "Dispersion",
-    "section": "Central tendency",
-    "text": "Central tendency\nWhat do measures of Central Tendency tell you?\nCentral tendency\nWhat do measures of Central Tendency tell you?\n\nThe mid-point in the data\nThe answer most of the participants gave."
+    "section": "Central Tendency",
+    "text": "Central Tendency\nWhat do measures of Central Tendency tell you?"
+  },
+  {
+    "objectID": "lec4.html#central-tendency-2",
+    "href": "lec4.html#central-tendency-2",
+    "title": "Dispersion",
+    "section": "Central Tendency",
+    "text": "Central Tendency\nWhat do measures of Central Tendency tell you?"
   },
   {
     "objectID": "lec4.html#measures-of-dispersion",
     "href": "lec4.html#measures-of-dispersion",
     "title": "Dispersion",
     "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\nWhat does dispersion mean?\n\nSpread-out-ness\nHow much the participants’ responses differ from one another\nVariance"
+    "text": "Measures of Dispersion\nWhat does dispersion mean?\n\n\nSpread-out-ness\nHow much the participants’ responses differ from one another\nVariance"
   },
   {
     "objectID": "lec4.html#measures-of-dispersion-1",
     "href": "lec4.html#measures-of-dispersion-1",
     "title": "Dispersion",
     "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\nMeasures of dispersion tell us about the spread-out-ness of the data, but what does that actually mean?"
+    "text": "Measures of Dispersion\nTells us about the spread-out-ness of the data, but what does that actually mean?"
   },
   {
     "objectID": "lec4.html#measures-of-dispersion-2",
     "href": "lec4.html#measures-of-dispersion-2",
     "title": "Dispersion",
     "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\nMeasures of dispersion tell us about the spread-out-ness of the data, but what does that actually mean?\n\nIf I am measuring HYPE, what would low dispersion tell me?\nIf I am measuring HYPE, what would high dispersion tell me?"
+    "text": "Measures of Dispersion\nMeasures of dispersion tell us about the spread-out-ness of the data, but what does that actually mean?\n\n\nIf I am measuring , music popularity what would low dispersion tell me?\nIf I am measuring music popularity, what would high dispersion tell me?"
   },
   {
     "objectID": "lec4.html#measures-of-dispersion-3",
     "href": "lec4.html#measures-of-dispersion-3",
     "title": "Dispersion",
     "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\nMeasures of dispersion tell us about consensus.\n\nDid participants give similar answers?\nDid participants give wildly different answers?"
+    "text": "Measures of Dispersion\nMeasures of dispersion tell us about consensus.\n\n\nDid participants give similar answers?\n\n{1,2,2,1,2,2,3,2,1}\n\nDid participants give wildly different answers?\n\n{1,3,4,5,8,9,21,33}"
   },
   {
     "objectID": "lec4.html#dispersion",
     "href": "lec4.html#dispersion",
     "title": "Dispersion",
     "section": "Dispersion",
-    "text": "Dispersion\n\nData should have natural dispersion.\nIf everyone gives a similar answer, it’s harder to analyze difference."
+    "text": "Dispersion\nMeasures of dispersion tell us about consensus.\n\n\nData should have natural dispersion.\nIf everyone gives a similar answer, it’s harder to analyze difference."
   },
   {
     "objectID": "lec4.html#calculating-dispersion",
     "href": "lec4.html#calculating-dispersion",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nON AVERAGE, how far is each X-VALUE from the MIDPOINT.\n\nCalculate how far each X-VALUE is from the MIDPOINT.\nTake the AVERAGE of those distances."
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\n\nON AVERAGE, how far is each X-VALUE from the MIDPOINT.\n\nCalculate how far each X-VALUE is from the MIDPOINT.\nTake the AVERAGE of those distances."
   },
   {
     "objectID": "lec4.html#calculating-dispersion-1",
     "href": "lec4.html#calculating-dispersion-1",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nIn psychology, the mid-point we use will be the mean."
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\nIn psychology, the mid-point we use will be the mean."
   },
   {
     "objectID": "lec4.html#calculating-dispersion-2",
     "href": "lec4.html#calculating-dispersion-2",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nON AVERAGE, how far is each X-VALUE from the MEAN.\n\nCalculate how far each X-VALUE is from the MIDPOINT. 1\nTake the AVERAGE of those distances.\n\n\nDeviation Score"
+    "text": "Calculating Dispersion\nAcquire Data\n\n\n\n\nParticipant.IDX\n\n11\n\n23\n\n32\n\n42\n\n53\n\n62\n\n71\n\n83\n\n91\n\n102"
   },
   {
     "objectID": "lec4.html#deviation-scores",
     "href": "lec4.html#deviation-scores",
     "title": "Dispersion",
     "section": "Deviation Scores",
-    "text": "Deviation Scores\nCalculate how far each X-VALUE is from the MEAN.\n\\[\nx - \\bar{x}\n\\]"
+    "text": "Deviation Scores\nCalculate how far each X-VALUE is from the MEAN.\n\n\nStep 1. Examine Data\n\n\ndata = {1,3,2,2,3,2,1,3,1,2}\n\n\nStep 2. Calculate Mean\n\n\n\\(\\bar{x} = \\frac{\\sum(x)}{n} = 1 + 3 + 2...\\)\n\\(\\bar{x} = \\frac{20}{10} = 2\\)"
+  },
+  {
+    "objectID": "lec4.html#deviation-scores-1",
+    "href": "lec4.html#deviation-scores-1",
+    "title": "Dispersion",
+    "section": "Deviation Scores",
+    "text": "Deviation Scores\nCalculate how far each X-VALUE is from the MEAN.\n\nStep 2: Subtract the mean from each X-value.\n\n\\(x - \\bar{x}\\)\n\\((1-2) + (3-2) + (2-2) + (2-2)...\\)\n\\((-1) + 1 + 0 + 0...\\)"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-3",
     "href": "lec4.html#calculating-dispersion-3",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nStep 1: Calculate the mean.\n\n\n\n\nParticipantIDX\n\n11\n\n23\n\n32\n\n42\n\n53\n\n62\n\n71\n\n83\n\n91\n\n102\n\n\n\n\n\\[\n\\frac{\\sum(x)}{n}\n\\]\n\\[X = 20 / 10 = 2\\]"
+    "text": "Calculating Dispersion\nVisual\n\n\n\n\nParticipantIDXx-M\n\n11-1\n\n231\n\n320\n\n420\n\n531\n\n620\n\n71-1\n\n831\n\n91-1\n\n1020"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-4",
     "href": "lec4.html#calculating-dispersion-4",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nStep 2: Subtract the mean from each X-value.\n\n\n\n\nParticipantIDXx-M\n\n11-1\n\n231\n\n320\n\n420\n\n531\n\n620\n\n71-1\n\n831\n\n91-1\n\n1020\n\n\n\n\n\nThe average of the deviation scores will always = 0.\nOn average, the x-values = x.\nSo the average distance of x from x is 0."
+    "text": "Calculating Dispersion\nVisual"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-5",
     "href": "lec4.html#calculating-dispersion-5",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nCalculate the mean.\nCalculate the deviation scores.\nWhat can we do to the deviation scores to prevent them from adding up to 0?\n\n[Make this pop out]\n\nTake the AVERAGE"
-  },
-  {
-    "objectID": "lec4.html#what-is-the-mean-of-the-deviation-scores",
-    "href": "lec4.html#what-is-the-mean-of-the-deviation-scores",
-    "title": "Dispersion",
-    "section": "What is the Mean of the Deviation Scores?",
-    "text": "What is the Mean of the Deviation Scores?\n\nThe problem is the negative numbers!\nHow do we get rid of negative numbers?\n\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n11-11\n\n2311\n\n3200\n\n4200\n\n5311\n\n6200\n\n71-11\n\n8311\n\n91-11\n\n10200"
+    "text": "Calculating Dispersion\nVisual"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-6",
     "href": "lec4.html#calculating-dispersion-6",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\n\nStep 1: Calculate the mean.\n  X = 20 / 10 = 2\nStep 2: Subtract the mean from each X-value.\nStep 3: Square each deviation score."
+    "text": "Calculating Dispersion\nVisual\n\n\nThe average of the deviation scores will always = 0.\nOn average, the x-values = x.\nSo the average distance of x from x is 0."
   },
   {
     "objectID": "lec4.html#calculating-dispersion-7",
     "href": "lec4.html#calculating-dispersion-7",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nNow what: Calculate the average squared deviation.\n\nStep 4: Add up the Squared Deviations.\n\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n11-11\n\n2311\n\n3200\n\n4200\n\n5311\n\n6200\n\n71-11\n\n8311\n\n91-11\n\n10200\n\n\n\n\n[1] 6"
+    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\n\nCalculate the mean.\nCalculate the deviation scores.\nWhat can we do to the deviation scores to prevent them from adding up to 0?"
+  },
+  {
+    "objectID": "lec4.html#what-is-the-mean-of-the-deviation-scores",
+    "href": "lec4.html#what-is-the-mean-of-the-deviation-scores",
+    "title": "Dispersion",
+    "section": "What is the Mean of the Deviation Scores?",
+    "text": "What is the Mean of the Deviation Scores?\nStop Being So Negative!\n\nThe problem is the negative numbers!\nHow do we get rid of negative numbers\n\\((x-\\bar{x})^2\\)"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-8",
     "href": "lec4.html#calculating-dispersion-8",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\n\nStep 5: Divide by (n-1).\n\n[insert Cat? GIF]\n\n(n-1) refers to the degrees of freedom… don’t worry about it for now.\n\n\n\n[1] 0.6\n\n\nVariance ^"
+    "text": "Calculating Dispersion\nStop Being So Negative!\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n11-11\n\n2311\n\n3200\n\n4200\n\n5311\n\n6200\n\n71-11\n\n8311\n\n91-11\n\n10200"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-9",
     "href": "lec4.html#calculating-dispersion-9",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nHow do you think we should calculate dispersion?\n\nON AVERAGE, how far is each X-VALUE from the MEAN.\nCalculate how far each X-VALUE is from the MIDPOINT.\n\n[Make pop-out we did it!…right?]\n\nTake the AVERAGE of those distances."
+    "text": "Calculating Dispersion\nFirst 3 Steps\n\n\nStep 1: Calculate the mean.\nStep 2: Subtract the mean from each X-value.\nStep 3: Square each deviation score."
   },
   {
     "objectID": "lec4.html#calculating-dispersion-10",
     "href": "lec4.html#calculating-dispersion-10",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\nHow do think we should calculate dispersion?\n\nWhen we squared the deviation scores in Step 3, we inflated the deviation.\n\nWe have to undo that inflation.\nHow do you undo squaring?\nWe take the square root."
+    "text": "Calculating Dispersion\nNow what: Calculate the average squared deviation.\n\n\nStep 4: Add up the Squared Deviations.\n\\(1+1+0+1...\\)"
   },
   {
     "objectID": "lec4.html#calculating-dispersion-11",
     "href": "lec4.html#calculating-dispersion-11",
     "title": "Dispersion",
     "section": "Calculating Dispersion",
-    "text": "Calculating Dispersion\n\nStep 6: Take the square root.\n\n\\[\n\\sqrt{.667} = .816\n\\]"
+    "text": "Calculating Dispersion\nNow what: Calculate the average squared deviation.\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n11-11\n\n2311\n\n3200\n\n4200\n\n5311\n\n6200\n\n71-11\n\n8311\n\n91-11\n\n10200"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-12",
+    "href": "lec4.html#calculating-dispersion-12",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nDivide by n-1 to Estimate\n\nStep 5: Divide by (n-1).\n\n(n-1) refers to the degrees of freedom… don’t worry about it for now.\n\\(\\frac{\\sum (x-\\bar{x})^2}{n-1}\\)\nVariance\n\nThe fact or quality of being different, divergent, or inconsistent."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-13",
+    "href": "lec4.html#calculating-dispersion-13",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nHow do think we should calculate dispersion?\n\nWhen we squared the deviation scores in Step 3, we inflated the deviation.\n\nWe have to undo that inflation.\nHow do you undo squaring?\nWe take the square root."
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-14",
+    "href": "lec4.html#calculating-dispersion-14",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nInflation\n\n\n\n\nParticipantIDXx-M(x-M)^2\n\n138.5-0.9020.813\n\n249.29.79 95.8  \n\n333.1-6.29 39.6  \n\n444.85.43 29.5  \n\n530.3-9.13 83.4  \n\n640.51.1  1.22"
+  },
+  {
+    "objectID": "lec4.html#calculating-dispersion-15",
+    "href": "lec4.html#calculating-dispersion-15",
+    "title": "Dispersion",
+    "section": "Calculating Dispersion",
+    "text": "Calculating Dispersion\nStep 6: Take the square root.\n\n\\(\\frac{\\sum(x-\\bar{x})^2}{n-1} = \\sqrt{.667} = .816\\)"
   },
   {
     "objectID": "lec4.html#calculating-standard-deviation",
     "href": "lec4.html#calculating-standard-deviation",
     "title": "Dispersion",
     "section": "Calculating standard deviation",
-    "text": "Calculating standard deviation\n\nMean: Calculate the mean.\nDeviation scores: Subtract the mean from each x-value.\nSquared deviations: Square each deviation score.\nSum of squares: Add up the squared deviations.\nVariance: Divide the sum of squares by (n-1).\nStandard Deviation: Take the square root of the variance."
+    "text": "Calculating standard deviation\nStep-by-Step\n\n\nMean: Calculate the mean.\n\n\\(\\bar{x}\\)\n\nDeviation scores: Subtract the mean from each x-value.\n\n\\((x-\\bar{x})\\)\n\nSquared deviations: Square each deviation score.\n\n\\((x-\\bar{x})^2\\)\n\nSum of squares: Add up the squared deviations.\n\n\\(\\sum(x-\\bar{x})^2\\)"
+  },
+  {
+    "objectID": "lec4.html#calculating-standard-deviation-1",
+    "href": "lec4.html#calculating-standard-deviation-1",
+    "title": "Dispersion",
+    "section": "Calculating standard deviation",
+    "text": "Calculating standard deviation\nStep-by-Step\n\n\nVariance: Divide the sum of squares by (n-1).\n\n\\(\\frac{\\sum(x-\\bar{x})^2}{n-1}\\)\n\nStandard Deviation: Take the square root of the variance.\n\n\\(\\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n-1}}\\)"
   },
   {
     "objectID": "lec4.html#formulas-for-dispersion",
     "href": "lec4.html#formulas-for-dispersion",
     "title": "Dispersion",
     "section": "Formulas for Dispersion",
-    "text": "Formulas for Dispersion\nVariance\n\\[\ns^2 = \\frac{\\sum(x-\\bar{x})^2}{N-1}\n\\]"
+    "text": "Formulas for Dispersion\nVariance and Standard Deviation\n\n\n\n\n\n\nImportant\n\n\n\\[\ns^2 = \\frac{\\sum(x-\\bar{x})^2}{N-1}\n\\]\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\\[\ns = \\sqrt{\\frac{\\sum(x-\\bar{x})^2}{N-1}}\n\\]"
   },
   {
     "objectID": "lec4.html#formulas-for-dispersion-1",
     "href": "lec4.html#formulas-for-dispersion-1",
     "title": "Dispersion",
     "section": "Formulas for Dispersion",
-    "text": "Formulas for Dispersion\nStandard Deviation\n\\[\ns = \\sqrt{\\frac{\\sum(x-\\bar{x})^2}{N-1}}\n\\]\n\nVariance is a measure of dispersion.\n\nIt’s not helpful, because it’s inflated (from squaring the deviation scores).\n\nStandard deviation is a better measure of dispersion, because it is standardized.\n\nThis means that a standard deviation of 1 means a distance of 1 on the scale used to measure x.\nHYPE scale: 1 to 10: standard deviation of 1 means the distance from one rating to the next, from 1 to 2.\nIf the mean = 5, SD = 1, most scores fall between 4 and 6."
+    "text": "Formulas for Dispersion\nStandard Deviation\n\nVariance is a measure of dispersion.\n\nIt’s not helpful, because it’s inflated (from squaring the deviation scores).\n\nStandard deviation is a better measure of dispersion, because it is standardized.\n\nThis means that a standard deviation of 1 means a distance of 1 on the scale used to measure x.\nHYPE scale: 1 to 10: standard deviation of 1 means the distance from one rating to the next, from 1 to 2.\nIf the mean = 5, SD = 1, most scores fall between 4 and 6."
   },
   {
     "objectID": "lec4.html#variance-standard-deviation",
     "href": "lec4.html#variance-standard-deviation",
     "title": "Dispersion",
     "section": "Variance & Standard deviation",
-    "text": "Variance & Standard deviation\n\nThe Variance is the standard deviation squared: s²\nThe Standard Deviation is the square root of the variance: s\n\n\n\n\n⬡⬢⬡⬢"
+    "text": "Variance & Standard deviation\n\nThe Variance is the standard deviation squared: s²\nThe Standard Deviation is the square root of the variance: s\n\n\n\n\nDispersion | ⬡⬢⬡⬢"
   }
 ]
