@@ -7,7 +7,10 @@
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Dave Brocker">
@@ -36,6 +39,7 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -346,125 +350,289 @@ Dave Brocker
 </section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
+<h3 id="proportional-breakdown">Proportional Breakdown</h3>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>68.3% of the datapoints (the X’s) will fall within 1 SD of the mean.</p></li>
-<li class="fragment"><p>95.4% of the datapoints (the X’s) will fall within 2 SD of the mean.</p></li>
-<li class="fragment"><p>99.7% of the datapoints (the X’s) will fall within 3 SD of the mean.</p></li>
+<li class="fragment"><p><code>68.3%</code> of the datapoints (the X’s) will fall within <code>1 SD</code> of the mean.</p></li>
+<li class="fragment"><p><code>95.4%</code> of the datapoints (the X’s) will fall within <code>2 SD</code> of the mean.</p></li>
+<li class="fragment"><p><code>99.7%</code> of the datapoints (the X’s) will fall within <code>3 SD</code> of the mean.</p></li>
 </ul>
+</div>
+<div class="fragment">
 <p>Z-scores are expressed in Standard Deviation units.</p>
+</div>
 </section>
 <section id="z-scores" class="slide level2">
 <h2>Z-scores</h2>
+<h3 id="why-do-we-care">Why do we care?</h3>
+<div class="fragment">
 <p>Z-scores re-express the original data points (the X’s) in a way that intuitively lets us know:</p>
+</div>
+<div class="highlight-last">
 <ul>
 <li class="fragment"><p>How close the X is to the mean</p></li>
 <li class="fragment"><p>Where it falls in the dispersion of the distribution</p></li>
-<li class="fragment"><p>how much this participant is like the other person in the sample</p></li>
-<li class="fragment"><p>Where it falls in the dispersion of the distribution</p></li>
-<li class="fragment"><p>how different this participant is from the majority of people in the sample</p></li>
+<li class="fragment"><p>How much this participant is like the other person in the sample</p></li>
 </ul>
+</div>
 </section>
 <section id="z-scores-1" class="slide level2">
 <h2>Z-scores</h2>
-<h3 id="z-scores-are-expressed-in-standard-deviation-units.">Z-scores are expressed in Standard Deviation units.</h3>
+<h3 id="why-do-we-care-1">Why do we care?</h3>
+<p>Z-scores re-express the original data points (the X’s) in a way that intuitively lets us know:</p>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>z = 1</p></li>
-<li class="fragment"><p>z = -2</p></li>
-<li class="fragment"><p>z = 0.5</p></li>
+<li class="fragment"><p>Where it falls in the dispersion of the distribution</p></li>
+<li class="fragment"><p>How different this participant is from the majority of people in the sample</p></li>
 </ul>
+</div>
+</section>
+<section id="z-scores-2" class="slide level2">
+<h2>Z-scores</h2>
+<h3 id="why-do-we-care-2">Why do we care?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="z-scores-3" class="slide level2">
+<h2>Z-scores</h2>
+<h3 id="why-do-we-care-3">Why do we care?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="z-scores-4" class="slide level2">
+<h2>Z-scores</h2>
+<h3 id="imagine-that-s-2-and-barx-25">Imagine that <span class="math inline">\(s\)</span> = 2 and <span class="math inline">\(\bar{x}\)</span> = 25</h3>
+<p>Z-scores are expressed in Standard Deviation units.</p>
+<div class="highlight-last">
+<ul>
+<li class="fragment"><p><span class="math display">\[z = 1 = 25 + 2 = 27\]</span></p></li>
+<li class="fragment"><p><span class="math display">\[z = -2 = 25 - 2 = 23\]</span></p></li>
+<li class="fragment"><p><span class="math display">\[z = 0.5 = 25 - .05 = 24.4\]</span></p></li>
+</ul>
+</div>
 </section>
 <section id="calculating-a-z-score" class="slide level2">
 <h2>Calculating A Z-score</h2>
+<h3 id="step-by-step">Step-by-Step</h3>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>Mean-center the X values —&gt; X — X —&gt; Makes the Mean = 0.</p></li>
-<li class="fragment"><p>Dividing by the standard deviation —&gt; Makes the SD = 1.</p></li>
-</ul>
-<p>How do we calculate the probability of an outcome, using the normal distribution?</p>
+<li class="fragment"><p>Mean-center the X values <span class="math inline">\(x - \bar{x}\)</span></p>
 <ul>
-<li class="fragment"><p>Use a z-score:</p></li>
-<li class="fragment"><p>Mean center the X values.</p></li>
-<li class="fragment"><p>Divide them by the SD.</p></li>
+<li class="fragment">This makes the Mean = 0.</li>
+</ul></li>
+<li class="fragment"><p>Dividing by the standard deviation <span class="math inline">\(\frac{}{s}\)</span></p>
+<ul>
+<li class="fragment">Makes the SD = 1.</li>
+</ul></li>
 </ul>
+</div>
 </section>
-<section id="how-do-we-calculate-the-probability-of-an-outcome-using-the-normal-distribution" class="slide level2">
-<h2>How do we calculate the probability of an outcome, using the normal distribution?</h2>
+<section id="calculating-probability" class="slide level2">
+<h2>Calculating Probability</h2>
+<h3 id="use-the-normal-distribution">Use the normal distribution</h3>
+<blockquote>
+<p>The average grade on the exam was an 86 with a standard deviation of 4.</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-probability-1" class="slide level2">
+<h2>Calculating Probability</h2>
+<blockquote>
+<p>The average grade on the exam was an 86 with a standard deviation of 4. What is the probability of scoring a <code>94</code> or higher on the exam?</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-probability-2" class="slide level2">
+<h2>Calculating Probability</h2>
+<h3 id="use-the-normal-distribution-1">Use the normal distribution</h3>
+<blockquote>
+<p>The average grade on the exam was an <code>86</code> with a standard deviation of <code>4</code>. What is the probability of scoring a <code>94</code> or higher on the exam?</p>
+</blockquote>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>The average grade on the exam was an 86 with a standard deviation of 4.</p></li>
-<li class="fragment"><p>What is the probability of scoring a 94 or higher on the exam?</p></li>
+<li class="fragment"><p><span class="math display">\[z = \frac{x-\bar{x}}{s} = \frac{94-86}{4} = \frac{8}{4}=2\]</span></p></li>
+<li class="fragment"><p>Z = <code>2</code> corresponds with <code>2.1%</code> and <code>0.1%</code> of the curve (<code>2.2%</code>) chance.</p></li>
 </ul>
-<p><span class="math inline">\(z = \frac{x-\bar{x}}{s}\)</span></p>
-<p><span class="math inline">\(z = \frac{94-86}{4} = \frac{8}{4}=2\)</span></p>
-<p><span class="math inline">\(z = 2\)</span></p>
-<ul>
-<li class="fragment">Z = 2 corresponds with 2.1% and 0.1% of the curve 2.2% chance.</li>
-</ul>
+</div>
 </section>
 <section id="example-2" class="slide level2">
 <h2>Example 2</h2>
-<h3 id="the-mean-exam-score-was-86-with-a-standard-deviation-of-4.">The mean exam score was 86 with a standard deviation of 4.</h3>
-<p>What is the probability of scoring between an 82 and a 90?</p>
-<p><span class="math inline">\(z = \frac{82-86}{4} = \frac{-4}{4} = -1\)</span></p>
-<p><span class="math inline">\(z = \frac{90-86}{4} = \frac{4}{4} = 1\)</span></p>
+<h3 id="test-time">Test Time!</h3>
+<blockquote>
+<p>The mean exam score was <code>86</code> with a standard deviation of <code>4</code>.</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-1" class="slide level2">
+<h2>Example 2</h2>
+<h3 id="esmeraldas-second-test">Esmeralda’s Second Test</h3>
+<p>What is the probability of scoring between an <code>82</code> and a <code>90</code>?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-2" class="slide level2">
+<h2>Example 2</h2>
+<h3 id="esmeraldas-second-test-1">Esmeralda’s Second Test</h3>
+<p>What is the probability of scoring between an <code>82</code> and a <code>90</code>?</p>
+<div class="highlight-last">
 <ul>
-<li class="fragment">68.3% chance of scoring between 82 and 90.</li>
+<li class="fragment"><p><span class="math inline">\(z = \frac{82-86}{4} = \frac{-4}{4} = -1\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(z = \frac{90-86}{4} = \frac{4}{4} = 1\)</span></p></li>
+<li class="fragment"><p>There is a 68.3% chance of scoring between <code>82</code> and <code>90</code>.</p></li>
 </ul>
+</div>
 </section>
 <section id="example-3" class="slide level2">
 <h2>Example 3</h2>
+<h3 id="esmeraldas-second-test-2">Esmeralda’s Second Test</h3>
 <blockquote>
 <p>Esmeralda’s stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal.</p>
 </blockquote>
-<p>Esmeralda wants to calculate the probability that she scored below 60</p>
-<p><span class="math inline">\(\frac{60-72}{6} = \frac{-12}{6} = -2\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3-1" class="slide level2">
+<h2>Example 3</h2>
+<h3 id="esmeraldas-second-test-3">Esmeralda’s Second Test</h3>
+<p>Esmeralda wants to calculate the probability that she scored below <code>60</code></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3-2" class="slide level2">
+<h2>Example 3</h2>
+<h3 id="esmeraldas-second-test-barx-72-s-6">Esmeralda’s Second Test: <span class="math inline">\(\bar{x} = 72 | s = 6\)</span></h3>
+<p>Esmeralda wants to calculate the probability that she scored below <code>60</code></p>
+<div class="fragment">
 <ul>
-<li class="fragment"><p>2.2% chance that she failed.</p></li>
+<li class="fragment"><span class="math inline">\(\frac{60-72}{6} = \frac{-12}{6} = -2\)</span></li>
+</ul>
+</div>
+<div class="highlight-last">
+<ul>
+<li class="fragment"><p><code>2.2%</code> chance that she failed.</p></li>
 <li class="fragment"><p>What’s the chance she passed?</p></li>
 </ul>
+</div>
 </section>
 <section id="z-scores-and-probability" class="slide level2">
 <h2>Z-scores and Probability</h2>
+<h3 id="how-does-it-apply">How does it apply?</h3>
 <p>In real life, we are often working with numbers with long decimal points rather than nice whole numbers.</p>
+<div class="highlight-last">
 <ul>
 <li class="fragment"><p>Because the standard normal curve is STANDARD and NORMAL, we can calculate the exact probability of a z-score with a decimal point.</p></li>
 <li class="fragment"><p>Calculate the z-score.</p></li>
-<li class="fragment"><p>Locate the whole number and first decimal point along the left side of the table.</p></li>
-<li class="fragment"><p>Locate the second decimal point along the top of the table.</p></li>
 </ul>
+</div>
 </section>
 <section id="z-scores-and-probability-1" class="slide level2">
 <h2>Z-scores and Probability</h2>
+<h3 id="how-does-it-apply-1">How does it apply?</h3>
+<p>In real life, we are often working with numbers with long decimal points rather than nice whole numbers.</p>
+<div class="highlight-last">
+<ul>
+<li class="fragment"><p>Locate the whole number and first decimal point along the left side of the table.</p></li>
+<li class="fragment"><p>Locate the second decimal point along the top of the table.</p></li>
+</ul>
+</div>
+</section>
+<section id="z-scores-and-probability-2" class="slide level2">
+<h2>Z-scores and Probability</h2>
 <p>The Z-score Probability Table gives you the probability of that z-score or <strong>LESS</strong>.</p>
-<div class="fragment highlight-current-green">
+<div class="highlight-current-green">
 <ul>
 <li class="fragment">If you need that z-score or higher, you have to subtract the decimal from 1.</li>
 </ul>
 </div>
 </section>
-<section id="z-scores-and-probability-2" class="slide level2">
+<section id="z-scores-and-probability-3" class="slide level2">
 <h2>Z-scores and Probability:</h2>
 <h3 id="some-examples">Some examples</h3>
 <blockquote>
-<p>In a recent study on world happiness, participants were asked to evaluate their current lives on a scale from 0 to 10, where 0 represents the worst possible life and 10 represents the best possible life. The responses were normally distributed, with a mean of 5.4 and a standard deviation of 2.2. Find the probability that a randomly selected study participant’s response was:</p>
+<p>In a recent study on world happiness, participants were asked to evaluate their current lives on a scale from <code>0</code> to <code>10</code>, where <code>0</code> represents the worst possible life and <code>10</code> represents the best possible life. The responses were normally distributed, with a mean of <code>5.4</code> and a standard deviation of <code>2.2</code>. Find the probability that a randomly selected study participant’s response was:</p>
 </blockquote>
+<div class="highlight-last">
 <ul>
 <li class="fragment"><p>Less than 4</p></li>
 <li class="fragment"><p>More than 8</p></li>
 </ul>
-</section>
-<section id="z-scores-and-probability-3" class="slide level2">
-<h2>Z-scores and Probability:</h2>
-<h3 id="some-examples-1">Some examples</h3>
-<blockquote>
-<p>In a recent study on world happiness, participants were asked to evaluate their current lives on a scale from 0 to 10, where 0 represents the worst possible life and 10 represents the best possible life. The responses were <strong>normally distributed</strong>, with a mean of <strong>5.4</strong> and a standard deviation of <strong>2.2</strong>. Find the probability that a randomly selected study participant’s response was:</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>Less than 4</p></li>
-<li class="fragment"><p>More than 8</p></li>
-</ul>
-<p><span class="math inline">\(z = \frac{x-\bar{x}}{s}\)</span></p>
-<p><span class="math inline">\(z = \frac{4-5.4}{2.2} = \frac{-1.4}{2.2} = -.63\)</span></p>
+</div>
 </section>
 <section id="z-scores-and-probability-4" class="slide level2">
+<h2>Z-scores and Probability:</h2>
+<h3 id="life-satisfaction-barx-5.4-s-2.2">Life Satisfaction: <span class="math inline">\(\bar{x} = 5.4 | s = 2.2\)</span></h3>
+<ul>
+<li class="fragment">Find the probability that a randomly selected study participant’s response was:</li>
+</ul>
+<div class="highlight-last">
+<ul>
+<li class="fragment"><p>Less than 4</p></li>
+<li class="fragment"><p>More than 8</p></li>
+<li class="fragment"><p><span class="math display">\[z = \frac{x-\bar{x}}{s} = \frac{4-5.4}{2.2} = \frac{-1.4}{2.2} = -.63\]</span></p></li>
+<li class="fragment"><p><span class="math display">\[z = \frac{x-\bar{x}}{s} = \frac{8-5.4}{2.2} = \frac{2.6}{2.2} = 1.18\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="z-scores-and-probability-5" class="slide level2">
 <h2>Z-scores and Probability</h2>
 <h3 id="example-1">Example 1</h3>
 <div style="position: relative; display: inline-block;">
@@ -478,7 +646,7 @@ Dave Brocker
 </section>
 <section id="example-1-1" class="slide level2">
 <h2>Example 1</h2>
-<h3 id="step-by-step">Step by Step</h3>
+<h3 id="step-by-step-1">Step by Step</h3>
 <div style="position: relative; display: inline-block;">
 <!-- Highlighting Horizontal Bar -->
 <div style="width: 380px; height: 20px; background:red; opacity: 0.3; position: absolute; top: 230px; left: 65px;">
@@ -492,27 +660,33 @@ Dave Brocker
 <p><img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"></p>
 </div>
 </section>
-<section id="z-scores-and-probability-5" class="slide level2">
+<section id="z-scores-and-probability-6" class="slide level2">
 <h2>Z-scores and Probability:</h2>
-<h3 id="example-2-1">Example 2</h3>
+<h3 id="example-2-3">Example 2</h3>
 <blockquote>
-<p>The scale of scores for an IQ test are approximately normal with mean 100 and standard deviation 15. The organization MENSA, which calls itself the “high IQ society”, requires a score of 130 or higher.</p>
+<p>The scale of scores for an IQ test are approximately normal with mean <code>100</code> and standard deviation <code>15</code>. The organization MENSA, which calls itself the “high IQ society”, requires a score of <code>130</code> or higher.</p>
 </blockquote>
 <p>What percent of adults would qualify for membership?</p>
-<h3 id="example-2-2">Example 2</h3>
-<blockquote>
-<p>The scale of scores for an IQ test are approximately normal with mean <strong>100</strong> and standard deviation <strong>15</strong>. The organization MENSA, which calls itself the “high IQ society”, requires a score of 130 or higher.</p>
-</blockquote>
-<p>What percent of adults would qualify for membership?</p>
-<p><span class="math inline">\(z = \frac{x-\bar{x}}{s}\)</span></p>
-<p><span class="math inline">\(z = \frac{130-100}{15}=\frac{30}{15} = 2\)</span></p>
 </section>
-<section id="example-2-3" class="slide level2">
+<section id="z-scores-and-probability-7" class="slide level2">
+<h2>Z-scores and Probability:</h2>
+<h3 id="example-2-4">Example 2</h3>
+<blockquote>
+<p>The scale of scores for an IQ test are approximately normal with mean <code>100</code> and standard deviation <code>15</code>. The organization MENSA, which calls itself the “high IQ society”, requires a score of <code>130</code> or higher.</p>
+</blockquote>
+<p>What percent of adults would qualify for membership?</p>
+<div class="highlight-last">
+<ul>
+<li class="fragment"><span class="math inline">\(z = \frac{x-\bar{x}}{s} = z = \frac{130-100}{15}=\frac{30}{15} = 2\)</span></li>
+</ul>
+</div>
+</section>
+<section id="example-2-5" class="slide level2">
 <h2>Example 2</h2>
 <h3 id="mensa">MENSA</h3>
 <div style="position: relative; display: inline-block;">
 <!-- Highlighting Horizontal Bar -->
-<div style="width: 90px; height: 22px; background:red; opacity: 0.3; position: absolute; top: 620px; left: 65px;">
+<div style="width: 90px; height: 22px; background:red; opacity: 0.3; position: absolute; top: 610px; left: 65px;">
 
 </div>
 <!-- Highlighting Vertical Bar -->
@@ -540,6 +714,7 @@ Dave Brocker
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -562,6 +737,7 @@ Dave Brocker
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -732,7 +908,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -741,6 +917,44 @@ Dave Brocker
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -895,6 +1109,31 @@ Dave Brocker
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom"});
+    window.onload = () => {
+      lightboxQuarto.on('slide_before_load', (data) => {
+        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+        const href = trigger.getAttribute('href');
+        if (href !== null) {
+          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+          if (imgEl !== null) {
+            const srcAttr = imgEl.getAttribute("src");
+            if (srcAttr && srcAttr.startsWith("data:")) {
+              slideConfig.href = srcAttr;
+            }
+          }
+        } 
+      });
+
+      lightboxQuarto.on('slide_after_load', (data) => {
+        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(slideNode);
+        }
+      });
+
+    };
+              </script>
     
 
 </body></html>
