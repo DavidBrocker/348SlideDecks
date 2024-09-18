@@ -7,11 +7,14 @@
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides - Operationalization</title>
+  <title>348 Slides - Introduction to Statistical Software</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -34,6 +37,8 @@
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
@@ -245,6 +250,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -321,28 +327,19 @@
       margin-right: 0; 
     }
   </style>
-  <link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-  <link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
-  <script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
-  <script src="site_libs/wordcloud2-0.0.1/hover.js"></script>
-  <script src="site_libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="./images/hcomb.jpg" data-background-opacity="0.2" data-background-size="cover" class="quarto-title-block center">
-  <h1 class="title">Operationalization</h1>
-  <p class="subtitle">PSY 348: Lecture 2</p>
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Introduction to Statistical Software</h1>
+  <p class="subtitle">Lecture 7</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
 Dave Brocker 
-</div>
-<div class="quarto-title-author-email">
-<a href="mailto:brockeda@farmingdale.edu">brockeda@farmingdale.edu</a>
 </div>
         <p class="quarto-title-affiliation">
             Farmingdale State College
@@ -351,496 +348,183 @@ Dave Brocker
 </div>
 
 </section>
-<section id="studying-psychology" class="slide level2">
-<h2>Studying Psychology</h2>
-<h3 id="what-do-researchers-in-the-areas-of-psychology-that-are-interesting-to-you-study">What do researchers in the areas of psychology that are interesting to you study?</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-1d68d501620a1e072859" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-1d68d501620a1e072859">{"x":{"word":["Abnormal Psychology","Child Psych","Forensic","I/O","Neuropsych","Nothing Particular","Applied Psychology","Clinical","Community","Ocelot Cats","Snails","Social"],"freq":[7,7,3,3,2,2,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":25.71428571428572,"backgroundColor":"#F5F5F5","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
-</div>
-</div>
-</section>
-<section id="studying-psychology-1" class="slide level2">
-<h2>Studying Psychology</h2>
-<h3 id="what-do-researchers-in-the-areas-of-psychology-that-are-interesting-to-you-study-1">What do researchers in the areas of psychology that are interesting to you study?</h3>
-<div class="columns">
-<div class="column" style="width:30%;">
+<section id="statistical-software" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-r-spss-jamovi-jasp-oh-my">Excel, R, SPSS, Jamovi, JASP – Oh My!</h3>
+<p>There are several tools you can use for statistical analyses.</p>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>Attitudes</p></li>
-<li class="fragment"><p>Beliefs</p></li>
-<li class="fragment"><p>Behaviors</p></li>
-<li class="fragment"><p>Physiology</p></li>
-<li class="fragment"><p>Planning</p></li>
+<li class="fragment"><p>PSY 360 (Research Methods) typically employs the use of both Excel and SPSS</p></li>
+<li class="fragment"><p>I think the best approach is to use these options <em>in addition</em> to free software such as R.</p></li>
 </ul>
 </div>
-</div><div class="column" style="width:30%;">
+</section>
+<section id="statistical-software-1" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-r-spss-jamovi-jasp-oh-my-1">Excel, R, SPSS, Jamovi, JASP – Oh My!</h3>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>Brain Activity</p></li>
-<li class="fragment"><p>Thoughts</p></li>
-<li class="fragment"><p>Performance/Ability</p></li>
-<li class="fragment"><p>Attenton</p></li>
-<li class="fragment"><p>Memory</p></li>
+<li class="fragment"><p>R is available on all Operating Systems completely free of charge and can even be accessed through web browsers such as Safari, Chrome, or Mozilla Firefox.</p>
+<ul>
+<li class="fragment">As an added bonus, R is <em>even</em> accessible in <em>this</em> presentation! Press ~ to see</li>
+</ul></li>
 </ul>
 </div>
-</div>
-</div>
 </section>
-<section id="studying-psychology-2" class="slide level2">
-<h2>Studying Psychology</h2>
-<h3 id="the-bobo-doll-experiment-bandura-1961">The Bobo Doll Experiment (Bandura, 1961)</h3>
-<h3 id="section"><img data-src="images/bobo.png"></h3>
-</section>
-<section id="operationalization" class="slide level2">
-<h2>Operationalization</h2>
-<p>The process of defining the measurement of a phenomenon that is not directly measurable (AKA a latent variable) though its existence is implied by other phenomena.</p>
-<div class="fragment">
-<p><span class="absolute" style="left: 20%; bottom: 45%; ">How could we measure happiness?</span></p>
-</div>
-<div class="fragment">
-<script src="https://cdn.lordicon.com/lordicon.js"></script>
-<lord-icon src="https://cdn.lordicon.com/bqkijzun.json" trigger="hover" style="width:250px;height:250px;position: absolute; top: 65%; left: 40%">
-</lord-icon>
-</div>
-</section>
-<section id="operationalization-1" class="slide level2">
-<h2>Operationalization</h2>
-<h3 id="figuring-out-how-to-measure-something-you-cant-directly-measure.">Figuring out how to measure something you can’t directly measure.</h3>
+<section id="statistical-software-2" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="why-should-i-care">Why should I care?</h3>
+<p>Your time is worth something and if I can show you a different way of approaching statistical questions that you might find easier—I will do whatever I can to do so!</p>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>Attitudes, Beliefs, Thoughts</p></li>
-<li class="fragment"><p>Behaviors</p></li>
-<li class="fragment"><p>Brain activity</p></li>
-<li class="fragment"><p>Performance/Abilities</p></li>
+<li class="fragment"><p>Your future job might not have SPSS</p></li>
+<li class="fragment"><p>You can learn programming syntax and troubleshoot in real-time</p></li>
 </ul>
 </div>
 </section>
-<section id="operationalization-2" class="slide level2">
-<h2>Operationalization</h2>
-<h3 id="what-if-i-wanted-to-measure-religiosity">What if I wanted to measure religiosity?</h3>
-<p>What could I do, or what I could I ask?</p>
-</section>
-<section id="operationalization-3" class="slide level2">
-<h2>Operationalization</h2>
+<section id="statistical-software-3" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel">Excel</h3>
+<p>We have used Microsoft Excel in this course to demonstrate core concepts such as finding the arithmetic average, standard deviation, measures of central tendency, and calculating z-scores.</p>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>Self-Report OR Behavioral Measures</p></li>
-<li class="fragment"><p>Observation</p></li>
-<li class="fragment"><p>Implicit Measures</p></li>
-<li class="fragment"><p>Tests</p></li>
+<li class="fragment">Since statistical tests are mathematical at a base-level, (most) any test can be run in Excel that can be run elsewhere</li>
 </ul>
 </div>
 </section>
-<section id="self-report" class="slide level2 incremental highlight-last">
-<h2>Self-report</h2>
+<section id="statistical-software-4" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-1">Excel</h3>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>Surveys</p></li>
-<li class="fragment"><p>Questionnaires</p></li>
-<li class="fragment"><p>Polls</p></li>
-<li class="fragment"><p>Quizzes</p></li>
-<li class="fragment"><p>Instruments</p></li>
+<li class="fragment">Excel has dedicated first-party addons such as <code>Data Analysis Toolpak</code> and third-party addons as well. The <code>Data Analysis Toolpak</code> can be used to run the following tests:</li>
 </ul>
+</div>
 </section>
-<section id="self-report-1" class="slide level2">
-<h2>Self-Report</h2>
-<h3 id="whats-wrong-with-this">What’s wrong with this?</h3>
-
-<img data-src="images/SURV.png" class="r-stretch"></section>
-<section id="self-report-2" class="slide level2">
-<h2>Self-Report:</h2>
-<h3 id="advantages">Advantages</h3>
-<ul>
-<li class="fragment"><p>Most popular method of assessing attitudes*</p></li>
-<li class="fragment"><p>Can obtain large amounts of data</p></li>
-<li class="fragment"><p>(Fairly) Quick</p></li>
-<li class="fragment"><p>Allows for adaptive testing</p></li>
-<li class="fragment"><p>(Fairly) Inexpensive</p></li>
-</ul>
-
-<aside><div>
-<p>In certain fields</p>
-</div></aside></section>
-<section id="self-report-3" class="slide level2">
-<h2>Self-Report:</h2>
-<h3 id="disadvantages">Disadvantages</h3>
-<dl>
-<dt class="fragment">Acquiescence</dt>
-<dd class="fragment">
-<ul>
-<li class="fragment">Tendency to say yes, true, agree</li>
-</ul>
-</dd>
-<dt class="fragment">Social desirability</dt>
-<dd class="fragment">
-<ul>
-<li class="fragment">Tendency to respond in ways that are seen as socially acceptable</li>
-</ul>
-</dd>
-<dt class="fragment">Demand characteristics</dt>
-<dd class="fragment">
-<ul>
-<li class="fragment">Tendency to response in ways that participant thinks researcher wants</li>
-</ul>
-</dd>
-</dl>
+<section id="statistical-software-5" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-2">Excel</h3>
+<p><a href="images/excel1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/excel1.png"></a></p>
 </section>
-<section id="self-report-4" class="slide level2">
-<h2>Self-report:</h2>
-<h3 id="avoiding-disadvantages">Avoiding Disadvantages</h3>
-<details>
-<p>Anonymous respondents are less likely to make things up</p>
-<summary>
-Assure anonymity
-</summary>
-</details>
-<details>
-<p>Allow respondents to answer in private</p>
-<summary>
-Allow for maximum privacy
-</summary>
-</details>
-<details>
-<p>Don’t make your experiment too obvious/revealing</p>
-<summary>
-Obscure the true goal of the experiment
-</summary>
-</details>
-<details>
-<p>Add questions that test for respondent awareness</p>
-<summary>
-Include attention checks
-</summary>
-</details>
-<details>
-<p>Purposely make some questions opposite</p>
-<summary>
-Reverse coding
-</summary>
-</details>
+<section id="statistical-software-6" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-3">Excel</h3>
+<p><a href="images/excel2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/excel2.png"></a></p>
 </section>
-<section id="behavioral-measures" class="slide level2">
-<h2>Behavioral Measures</h2>
+<section id="statistical-software-7" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-4">Excel</h3>
+<p><a href="images/excel3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/excel3.png"></a></p>
+</section>
+<section id="statistical-software-8" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="excel-5">Excel</h3>
+<p>Whoa! Those are <em>a lot</em> of tests! Excel is an absolute powerhouse, but some of the tests and options are somewhat difficult to access and/or have a steep learning curve.</p>
+</section>
+<section id="statistical-software-9" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="spss">SPSS</h3>
+<blockquote>
+<p>SPSS (Statistical Principles for Social Science) is used in a variety of disciplines and has options for the majority of tests that you will end up running in your academic career. SPSS also has a syntax editor which allows you to have more control over your data/tests/outputs.</p>
+</blockquote>
+</section>
+<section id="statistical-software-10" class="slide level2">
+<h2>Statistical Software</h2>
+<h3 id="spss-example">SPSS: Example</h3>
+<p>Let’s walk through an example in SPSS step-by-step.</p>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>Taking a flier</p></li>
-<li class="fragment"><p>Signing a petition</p></li>
-<li class="fragment"><p>Internet Behavior <sup>1</sup></p></li>
-<li class="fragment"><p>Moving a chair</p></li>
-<li class="fragment"><p>Donating money</p></li>
+<li class="fragment"><p>Open up the dataset <code>move_dat_reduced.csv</code> from Brightspace</p></li>
+<li class="fragment"><p>Double-click on IBM SPSS and wait for the file to open</p></li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Not a perfect stand-in!</p></li></ol></aside></section>
-<section id="observation" class="slide level2">
-<h2>Observation</h2>
-<h3 id="the-bobo-doll-experiment-bandura-1961-1">The Bobo Doll Experiment (Bandura, 1961)</h3>
-<h3 id="section-1"><img data-src="images/bobo.png"></h3>
+</div>
 </section>
-<section id="the-bobo-doll-experiment" class="slide level2">
-<h2>The Bobo Doll Experiment</h2>
-<h3 id="bandura-1961">(Bandura, 1961)</h3>
+<section id="spss-example-1" class="slide level2">
+<h2>SPSS: Example</h2>
+<h3 id="descriptive-statistics">Descriptive Statistics</h3>
+<p>SPSS does its best to analyze your data and assign data value types (continuous, nominal) as well as scales of measurement (nominal, ordinal, interval, ratio).</p>
+<div class="highlight-last">
 <ul>
-<li class="fragment"><p>Live aggression by adult</p></li>
-<li class="fragment"><p>Videotaped aggression by adult</p></li>
-<li class="fragment"><p>Cartoon aggression</p>
+<li class="fragment"><p>SPSS will <em>only</em> allow specific data types to be analyzed in specific ways</p></li>
+<li class="fragment"><p>SPSS does not always ‘know’ what you are looking for, so <em>you</em> need to make sure your data is set up correctly!</p></li>
+</ul>
+</div>
+</section>
+<section id="spss-example-2" class="slide level2">
+<h2>SPSS: Example</h2>
+<h3 id="descriptive-statistics-1">Descriptive Statistics</h3>
+<p>SPSS has two views, <code>Variable View</code> and <code>Data View</code></p>
+<p>Variable View: Provides an overview of your variables.</p>
+<div class="highlight-last">
 <ul>
-<li class="fragment">No aggression</li>
+<li class="fragment"><p>What is the name?</p></li>
+<li class="fragment"><p>What is the data type?</p></li>
+<li class="fragment"><p>What is the range of values?</p></li>
+<li class="fragment"><p>Are there any labels?</p></li>
+<li class="fragment"><p>What is the Measure type?</p></li>
+</ul>
+</div>
+</section>
+<section id="spss-example-3" class="slide level2">
+<h2>SPSS: Example</h2>
+<h3 id="descriptive-statistics-2">Descriptive Statistics</h3>
+<p>SPSS has two views, Variable View and Data View</p>
+<div class="highlight-last">
+<ul>
+<li class="fragment"><p>Data View: Provides a glimpse of your raw data</p>
+<ul>
+<li class="fragment"><p>What is in the first column?</p></li>
+<li class="fragment"><p>What is in the second column?</p></li>
+<li class="fragment"><p>etc.</p></li>
 </ul></li>
 </ul>
+</div>
 </section>
-<section id="observation-1" class="slide level2">
-<h2>Observation</h2>
-<h3 id="disadvantages-1">Disadvantages</h3>
-<ul>
-<li class="fragment"><p>Time consuming</p></li>
-<li class="fragment"><p>Different reviewers/observers may score behaviors differently.</p>
-<ul>
-<li class="fragment"><p>Coding scheme</p>
-<ul>
-<li class="fragment"><em>Who</em> decides what is an example of the behavior?</li>
-</ul></li>
-<li class="fragment"><p>Inter-rater Reliability</p>
-<ul>
-<li class="fragment">How much <em>agreement</em> is there between 2+ observers?</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="implicit-measures" class="slide level2">
-<h2>Implicit measures</h2>
-<h3 id="brain-activity">Brain activity</h3>
+<section id="spss-example-4" class="slide level2">
+<h2>SPSS: Example</h2>
+<h3 id="descriptive-statistics-3">Descriptive Statistics</h3>
+<p>Descriptive Statistics <em>describe</em> the data, they give us an idea of where our data (likely) comes from, the measures of central tendency, and estimation about normality can be made.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Functional Magnetic Resonance Imaging (fMRI)</p>
-<ul>
-<li class="fragment"><p>Neuroimaging of brain activity</p>
-<p><img data-src="images/fmri.png" width="163"></p></li>
-</ul></li>
+<li class="fragment"><p>Mean | Sum</p></li>
+<li class="fragment"><p>Standard Deviation</p></li>
+<li class="fragment"><p>Range</p></li>
+<li class="fragment"><p>Mode</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Electroencephalography (EEG)</p>
-<ul>
-<li class="fragment"><p>Electrodes on surface of scalp measures brain activity</p>
-<p><img data-src="images/eeg.png" width="158"></p></li>
-</ul></li>
+<li class="fragment"><p>Kurtosis*</p></li>
+<li class="fragment"><p>Skewness*</p></li>
 </ul>
 </div>
 </div>
 </section>
-<section id="issues-with-operationalization" class="slide level2">
-<h2>Issues with Operationalization</h2>
-<h3 id="why-is-it-hard-to-measure-psychological-phenomena">Why is it hard to measure psychological phenomena?</h3>
-<ul>
-<li class="fragment"><p>Others may choose to measure the phenomena differently from us</p></li>
-<li class="fragment"><p>Operationalization can be culture-specific</p></li>
-<li class="fragment"><p>What we measure is based on observable parts of the phenomena, but some parts may be unobservable</p>
-<ul>
-<li class="fragment">Measuring only the observable/reportable is imprecise</li>
-</ul></li>
-</ul>
-</section>
-<section id="operationalization-4" class="slide level2">
-<h2>Operationalization</h2>
-<h3 id="how-should-we-measure-aggression-in-children">How should we measure aggression in children?</h3>
-<ul>
-<li class="fragment"><p>Observer children for one hour and…</p>
-<ul>
-<li class="fragment"><p><strong>Label</strong> them as Aggressive or Non-Aggressive</p></li>
-<li class="fragment"><p><strong>Rank</strong> them from most aggressive to least aggressive</p></li>
-<li class="fragment"><p><strong>Score</strong> them on a 10-point scale.</p>
-<ul>
-<li class="fragment"><p>1 = No Aggression</p></li>
-<li class="fragment"><p>10 = All of the Aggression</p></li>
-</ul></li>
-<li class="fragment"><p><strong>Count</strong> number of aggressive behaviors</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="scales-of-measurement" class="slide level2">
-<h2>Scales of measurement</h2>
-<h3 id="a-scale-by-any-other-name">A Scale By Any Other Name</h3>
-<ul>
-<li class="fragment"><p><del><strong>Labels</strong></del> Nominal</p></li>
-<li class="fragment"><p><del><strong>Rank</strong></del> Order</p></li>
-<li class="fragment"><p><del><strong>Scale</strong></del> Interval</p></li>
-<li class="fragment"><p><del><strong>Count</strong></del> Ratio</p></li>
-</ul>
-</section>
-<section id="measurement-scales-nominal" class="slide level2">
-<h2>Measurement scales: Nominal</h2>
-<h3 id="qualitative">Qualitative</h3>
-<p><em>Nominal refers to categories that CANNOT be ordered:</em></p>
-<ul>
-<li class="fragment"><p>Condition (experimental, control)</p></li>
-<li class="fragment"><p>Gender</p></li>
-<li class="fragment"><p>Major in college</p></li>
-<li class="fragment"><p>Coffee drinker versus Non-coffee drinker</p></li>
-<li class="fragment"><p>Android User or iPhone User</p></li>
-</ul>
-</section>
-<section id="measurement-scales-ordinal" class="slide level2">
-<h2>Measurement scales: Ordinal</h2>
-<h3 id="quantiative-no-equal-steps">Quantiative, No Equal Steps</h3>
-<p><em>Ordinal refers to categories that CAN be ordered, but the space between each category isn’t the same:</em></p>
-<ul>
-<li class="fragment"><p>Olympic Medals</p></li>
-<li class="fragment"><p>Winner in a Race</p></li>
-<li class="fragment"><p>Your rank in this class</p></li>
-<li class="fragment"><p>Your top 10 Movies</p></li>
-</ul>
-</section>
-<section id="ordinal-scales" class="slide level2">
-<h2>Ordinal Scales</h2>
-<ul>
-<li class="fragment"><p>Rarely used in psychological research, because it is hard to calculate variance when the interval between each number differs.</p></li>
-<li class="fragment"><p>There are non-parametric statistics designed for ordinal scales, but we will not be covering those this semester.</p></li>
-</ul>
-</section>
-<section id="measurement-scales-interval" class="slide level2">
-<h2>Measurement scales: Interval</h2>
-<h3 id="quantitative-equal-distance-no-true-0">Quantitative, Equal Distance, No True 0</h3>
-<p><em>Interval refers to ratings that are ordered where the interval between each rating is the same, but there is no real “0.”</em></p>
-<ul>
-<li class="fragment"><p>Temperature*</p></li>
-<li class="fragment"><p>“On a scale of 1-10 How much do you agree with the following statement…”</p></li>
-<li class="fragment"><p>GPA</p></li>
-</ul>
-
-<aside><div>
-<p>Except for Kelvin!</p>
-</div></aside></section>
-<section id="measurement-scales-ratio" class="slide level2">
-<h2>Measurement scales: Ratio</h2>
-<h3 id="quantitative-equal-distance-no-true-0-1">Quantitative, Equal Distance, No True 0</h3>
-<p>Ratio, refers to ratings that are ordered, the interval between each rating is the same, and “0” means “0.”</p>
-<ul>
-<li class="fragment"><p>Length</p></li>
-<li class="fragment"><p>Reaction Time</p></li>
-<li class="fragment"><p>Dosage</p></li>
-<li class="fragment"><p>Money Donated</p></li>
-</ul>
-</section>
-<section id="interval-vs-ratio" class="slide level2">
-<h2>Interval vs Ratio</h2>
-<h3 id="whats-the-difference-between-interval-and-ratio">What’s the difference between interval and ratio?</h3>
-<ul>
-<li class="fragment"><p>Interval may have a 0 on the scale, but it doesn’t mean the absence of something. A 0.0 GPA means an F rather than the absence of a grade.</p></li>
-<li class="fragment"><p>Ratio has a 0 that. means 0 (the absence of something), like a ‘0’ as a response to the questions, “How many drinks did you have last night?”</p></li>
-</ul>
-</section>
-<section id="discrete-and-continous" class="slide level2">
-<h2>Discrete and Continous</h2>
-<h3 id="whats-the-difference">What’s the Difference?</h3>
-<div class="fragment">
-<p><span class="bg" style="--col: #e64173">Discrete variables</span> have predefined values</p>
-</div>
-<ul>
-<li class="fragment"><p>US States</p></li>
-<li class="fragment"><p>Flavors of Ice Cream</p></li>
-</ul>
-<div class="fragment">
-<p><span class="bg" style="--col: #e64173">Continous Variables</span> can occupy several different values</p>
-</div>
-<ul>
-<li class="fragment"><p>Reaction Time</p></li>
-<li class="fragment"><p>TV Ratings</p></li>
-</ul>
-</section>
-<section id="determining-scale-of-measurement" class="slide level2">
-<h2>Determining Scale of measurement</h2>
-<h3 id="identify-the-scale-of-measurement.">Identify the scale of measurement.</h3>
-<blockquote>
-<p>Undergraduates report their self-esteem on a scale of 1 to 10. Researchers assess the relationship of undergraduates’ self-esteem and GPA.</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>Predictor variable: <strong>Self-Esteem</strong> | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></p></li>
-<li class="fragment"><p>Outcome variable: <strong>GPA</strong> | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></p></li>
-</ul>
-</section>
-<section id="determining-scale-of-measurement-1" class="slide level2">
-<h2>Determining Scale of measurement</h2>
-<h3 id="identify-the-scale-of-measurement.-1">Identify the scale of measurement.</h3>
-<blockquote>
-<p>Participants are given a mystery drug or placebo and then asked to complete puzzle tasks. Researchers time how long participants take to complete the puzzles.</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>Independent variable: Drug vs.&nbsp;Placebo | <span class="bg" style="--col: #e64173">Categorical (Nominal)</span></p></li>
-<li class="fragment"><p>Dependent variable: Reaction Time | <span class="bg" style="--col: #e64173">Continuous (Ratio)</span></p></li>
-</ul>
-</section>
-<section id="determining-scale-of-measurement-2" class="slide level2">
-<h2>Determining Scale of measurement</h2>
-<h3 id="identify-the-scale-of-measurement.-2">Identify the scale of measurement.</h3>
-<blockquote>
-<p>Undergraduates are shown either pictures of death or pictures of landscapes. They then report their anxiety about aging on a scale of 1 (none) to 10 (lots).</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>Independent variable: Pictures of death versus landscapes | <span class="bg" style="--col: #e64173">Categorical (Nominal)</span></p></li>
-<li class="fragment"><p>Dependent variable: Anxiety about dying | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></p></li>
-</ul>
-</section>
-<section id="why-does-scale-of-measurement-matter" class="slide level2">
-<h2>Why does scale of measurement matter?</h2>
-<h3 id="for-science">For Science!</h3>
-<ul>
-<li class="fragment"><p>Statistical tests can only be run on specific scales of measurement.</p></li>
-<li class="fragment"><p>t-test &amp; ANOVA: Nominal IV/predictor and Continuous DV/outcome</p></li>
-<li class="fragment"><p>Correlation &amp; Regression: All continuous</p></li>
-</ul>
-</section>
-<section id="why-does-scale-of-measurement-matter-1" class="slide level2">
-<h2>Why does scale of measurement matter?</h2>
-<ul>
-<li class="fragment"><p>Generally, continuous variables (interval and ratio scales) lend themselves better to statistical analysis.</p></li>
-<li class="fragment"><p>As a researcher, you should plan out your statistical analysis BEFORE conducting your study, so that you measure your variables in a way that matches the type of analyses you will run.</p></li>
-</ul>
-</section>
-<section id="take-away-how-we-measure-variables-matters" class="slide level2">
-<h2><u>TAKE AWAY</u>: <em>How</em> we measure variables matters…</h2>
-<h3 id="because-it-dictates-what-kind-of-statistical-analyses-we-can-run.">because it dictates what kind of statistical analyses we can run.</h3>
-<ul>
-<li class="fragment"><p>Data can be coerced into different formats</p></li>
-<li class="fragment"><p>‘Correct’ or ‘Supporting’ results can come from bogus data</p></li>
-</ul>
-</section>
-<section id="statistical-terms-symbols" class="slide level2">
-<h2>Statistical Terms &amp; Symbols</h2>
-
-<img data-src="images/eq.png" class="r-stretch"></section>
-<section id="statistical-terms" class="slide level2">
-<h2>Statistical Terms</h2>
-<div class="highlight-last">
-<dl>
-<dt class="fragment">Population</dt>
-<dd class="fragment">
-<p>Every person in the group I am interested in studying</p>
-</dd>
-<dt class="fragment">Sample</dt>
-<dd class="fragment">
-<p>A small subset of people from the population who we will actually study in our experiment.</p>
-</dd>
-<dt class="fragment">Parameter:</dt>
-<dd class="fragment">
-<p>Information about the population.</p>
-</dd>
-<dt class="fragment">Statistic</dt>
-<dd class="fragment">
-<p>Information about the sample.</p>
-</dd>
-</dl>
-</div>
-</section>
-<section id="statistical-symbols" class="slide level2">
-<h2>Statistical Symbols</h2>
-<h3 id="case-sensitive-and-often-greek">Case-sensitive and often Greek</h3>
+<section id="spss-example-5" class="slide level2">
+<h2>SPSS: Example</h2>
+<h3 id="frequency-statistics">Frequency Statistics</h3>
+<p>Frequency Statistics give us an idea of the composition of our dataset and allow us to make estimations and guesses in relation to the normality of our data</p>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p><span class="math inline">\(n\)</span> = the number of people in the sample</p></li>
-<li class="fragment"><p><span class="math inline">\(x\)</span> = one datapoint in a sample</p></li>
-<li class="fragment"><p><span class="math inline">\(\bar{x}\)</span> = Arithmetic mean (average) for a sample, x</p></li>
-<li class="fragment"><p><span class="math inline">\(\Sigma(x)\)</span> = The sum of all values in a sample, x</p></li>
-<li class="fragment"><p><span class="math inline">\(\sum^{n}_{i = 1}= x_1 +x_2+x_3...\)</span></p></li>
+<li class="fragment"><p>Frequency of Responses (% or n)</p></li>
+<li class="fragment"><p>Minimum Values</p></li>
+<li class="fragment"><p>Max Values</p></li>
+<li class="fragment"><p>Range</p></li>
 </ul>
 </div>
 </section>
-<section id="practice-1" class="slide level2">
-<h2>Practice 1</h2>
-<h3 id="study-up">Study Up!</h3>
-<blockquote>
-<p>Esmeralda is taking Statistics for the Psychological Sciences. On her first exam, she scored 98. The average grade among the 26 students on that exam was 97</p>
-</blockquote>
-<p>n:</p>
-<p>x:</p>
-<p><span class="math inline">\(\bar{x}\)</span></p>
-</section>
-<section id="practice-2" class="slide level2">
-<h2>Practice 2</h2>
-<h3 id="you-ever-hear-of-this-show">You Ever Hear of this show?</h3>
-<blockquote>
-<p>Professor Brocker is interested in how many Farmingdale students watch the Netflix Original, Dark. He plans to ask 200 students if they have seen it or not.</p>
-</blockquote>
-<p>N:</p>
-<p>n:</p>
-<p>Scale of Measurement:</p>
-</section>
-<section id="practice-3" class="slide level2">
-<h2>Practice 3</h2>
-<h3 id="be-kind-to-yourself">Be Kind to Yourself!</h3>
-<blockquote>
-<p>A research study surveys 500 college student across 5 campuses in the United States, asking them to rate their self-esteem on a scale of 1 to 10.</p>
-</blockquote>
-<p>Sample:</p>
-<p>Population:</p>
-<p>Scale of Measurement:</p>
+<section id="spss-example-6" class="slide level2">
+<h2>SPSS: Example</h2>
+<h3 id="descriptive-and-frequency-statistics">Descriptive and Frequency Statistics</h3>
+<p>In our dataset, we want to investigate the <em>categorical composition</em> of our data as well as the <em>statistical makeup</em> of our data.</p>
+<p>For the dataset provided, find the descriptive Statistics and Frequency Statistics for each variable of the appropriate data type.</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>⬡⬢</p>
+<p>⬡⬢⬡⬢⬡⬢⬡</p>
 </div>
 </div>
 </section>
-
     </div>
   </div>
 
@@ -851,6 +535,7 @@ Reverse coding
   <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
@@ -867,12 +552,13 @@ Reverse coding
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': true,
+'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
@@ -894,7 +580,7 @@ Reverse coding
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1044,7 +730,7 @@ Reverse coding
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealDrop, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1053,44 +739,6 @@ Reverse coding
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -1245,6 +893,31 @@ Reverse coding
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false});
+    window.onload = () => {
+      lightboxQuarto.on('slide_before_load', (data) => {
+        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+        const href = trigger.getAttribute('href');
+        if (href !== null) {
+          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+          if (imgEl !== null) {
+            const srcAttr = imgEl.getAttribute("src");
+            if (srcAttr && srcAttr.startsWith("data:")) {
+              slideConfig.href = srcAttr;
+            }
+          }
+        } 
+      });
+
+      lightboxQuarto.on('slide_after_load', (data) => {
+        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(slideNode);
+        }
+      });
+
+    };
+              </script>
     
 
 </body></html>
