@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides - Sampling Theory</title>
+  <title>348 Slides - Exam 1 Review</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -36,6 +36,7 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -329,8 +330,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Sampling Theory</h1>
-  <p class="subtitle">Lecture 9</p>
+  <h1 class="title">Exam 1 Review</h1>
+  <p class="subtitle">Chapters 1 - 4</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -344,449 +345,83 @@ Dave Brocker
 </div>
 
 </section>
-<section id="standard-normal-distribution" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<p>The 4 properties of a standard normal distribution are:</p>
-</section>
-<section id="standard-normal-distribution-1" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<p>The 4 properties of a standard normal distribution are:</p>
-
-<img data-src="images/bell.png" class="r-stretch"><p>• They are shaped like a bell (“bell curve”).</p>
-<p>• They are symmetric.</p>
-<p>• They are unimodal.</p>
-<p>• The mean = median = mode.</p>
-</section>
-<section id="statistics" class="slide level2">
-<h2>Statistics</h2>
-<ul>
-<li class="fragment"><p>Descriptive Statistics:</p>
-<ul>
-<li class="fragment"><p>Goal: Describe the sample</p></li>
-<li class="fragment"><p>Examples: Mean, Standard Deviation</p></li>
-</ul></li>
-<li class="fragment"><p>Inferential Statistics:</p>
-<ul>
-<li class="fragment"><p>Goal: Use the sample to make inferences about the population</p></li>
-<li class="fragment"><p>Examples: t-test, ANOVA, Regression</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="sampling-theory" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="mean-calculation" class="slide level2">
+<h2><strong>Mean Calculation</strong></h2>
+<h3 id="sample-mean-calculation">Sample Mean Calculation</h3>
 <blockquote>
-<p>Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, <em>Dark</em>. She has unlimited funds to study this <strong>very</strong> important research question. She hires her 24 students from to collect the data.</p>
+<p>A psychology researcher collects the following data on the number of hours five participants spent practicing a task: <strong>3, 5, 8, 2, 7</strong>.</p>
 </blockquote>
+<p><strong>Question:</strong> What is the mean number of hours spent practicing?</p>
+</section>
+<section id="mean-calculation-1" class="slide level2">
+<h2><strong>Mean Calculation</strong></h2>
+<h3 id="sample-mean-calculation-1">Sample Mean Calculation</h3>
 <blockquote>
-<p>Each student has to collect 500 responses to the following question:</p>
+<p>A study measures the changes in mood scores before and after an intervention. The changes in mood scores are: <strong>-4, -2, 0, 3, 5</strong>.</p>
 </blockquote>
+<p><strong>Question:</strong> Calculate the mean change in mood score.</p>
 </section>
-<section id="sampling-theory-1" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="standard-deviation-calculation" class="slide level2">
+<h2><strong>Standard Deviation Calculation</strong></h2>
+<h3 id="sample-standard-deviation">Sample Standard Deviation</h3>
 <blockquote>
-<p>On a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?</p>
+<p>A psychologist measures the number of stressful events experienced by a small group of participants over a week: <strong>2, 3, 6, 4, 5</strong>.<br>
+</p>
 </blockquote>
-<p><img data-src="images/dark.png"> ## Sampling Theory</p>
-<ul>
-<li class="fragment"><p>So each one of you asks 500 people how much they enjoy the Netflix Original Dark.</p></li>
-<li class="fragment"><p>This is you on the street asking people:</p></li>
-</ul>
-<p>[Insert Other Pictures]</p>
+<p><strong>Question:</strong> Calculate the standard deviation of stressful events.</p>
 </section>
-<section id="sampling-theory-2" class="slide level2">
-<h2>Sampling theory</h2>
-<p>How many people did each of you ask?[Make Big text]</p>
-</section>
-<section id="sampling-theory-3" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment">Once each of you collect 500 responses, I ask you to calculate the average answer. SO you calculate the mean (you add up all 500 responses, and then divide that number by 500).</li>
-</ul>
-</section>
-<section id="sampling-theory-4" class="slide level2">
-<h2>Sampling theory</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 2
-  Sample  Mean
-  &lt;chr&gt;  &lt;dbl&gt;
-1 Dave   10   
-2 Gaby    2.49
-3 Evan    2.56
-4 Mike    3.66
-5 Jeff    3.92
-6 Paul    7.30
-7 Sean    3.66</code></pre>
-</div>
-</div>
-</section>
-<section id="sampling-theory-5" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>They are the means from each of your samples.</p></li>
-<li class="fragment"><p>These are called <strong>Sample Means</strong></p></li>
-</ul>
-</section>
-<section id="sampling-theory-6" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment">We can do lots of cool things with Sample Means. We could calculate the Mean of the Sample Means. We could calculate the standard deviation of the Sample Means.</li>
-</ul>
-</section>
-<section id="sampling-theory-7" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment">It’s theoretical. It doesn’t really exist, but we imagine it’s existence for the sake of Sampling Theory.</li>
-</ul>
-</section>
-<section id="sampling-distribution" class="slide level2">
-<h2>Sampling distribution</h2>
-<p>A <u><strong>Sampling Distribution</strong></u>is the theoretical distribution of means across every single possible sample.</p>
-<ul>
-<li class="fragment"><p>Like all the Dark samples.</p></li>
-<li class="fragment"><p>If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:</p></li>
-</ul>
-</section>
-<section id="sampling-theory-8" class="slide level2">
-<h2>Sampling theory</h2>
-
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="sampling-theory-9" class="slide level2">
-<h2>Sampling theory</h2>
-<p>[Column Width] - Except now each value in this distribution no longer represents 1 person/participant.</p>
-<ul>
-<li class="fragment">Each value in this distribution represents the average of 1 sample, a Sample Mean.</li>
-</ul>
-
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="sampling-theory-10" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
-<li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p></li>
-</ul>
-</section>
-<section id="what-does-the-stats-cat-saywhat-does-the-stats-cat-say" class="slide level2">
-<h2>What does the Stats Cat say?What does the Stats Cat say?</h2>
-<p><img data-src="images/cat.png"> <span class="math inline">\(\mu\)</span></p>
-</section>
-<section id="sampling-theory-11" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
-<li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p></li>
-</ul>
-<p><img data-src="images/bell_prop.png"> [include <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>]</p>
-</section>
-<section id="review" class="slide level2">
-<h2>Review</h2>
-<ul>
-<li class="fragment"><p>What is a sample distribution?</p></li>
-<li class="fragment"><p>What does each X value in a sample distribution represent?</p></li>
-<li class="fragment"><p>What does <span class="math inline">\(\mu\)</span> represent?</p></li>
-<li class="fragment"><p>What does <span class="math inline">\(\sigma\)</span> represent?</p></li>
-</ul>
-</section>
-<section id="probability" class="slide level2">
-<h2>Probability</h2>
-<ul>
-<li class="fragment">What percentage of participants rated Dark with a z-score of 2 or <u><strong>HIGHER</strong></u>?</li>
-</ul>
-
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="probability-1" class="slide level2">
-<h2>Probability</h2>
-<ul>
-<li class="fragment"><p>This is the distribution of <strong>sample means</strong> from adults in the US.</p></li>
-<li class="fragment"><p>What is the probability of any sample having a mean that is a z-score of 2 or <u><strong>HIGHER</strong></u>?</p></li>
-</ul>
-
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="this-is-the-key-point" class="slide level2">
-<h2>THIS IS the key point</h2>
-<ul>
-<li class="fragment"><p>We <em>assume</em> that the distribution of sample means is normal.</p></li>
-<li class="fragment"><p>We use that assumption to gauge the probability of getting a particular mean from a single sample.</p></li>
-<li class="fragment"><p>We can literally find that probability, the same way we did with x-values in a normal distribution.</p></li>
-</ul>
-</section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
-<p>We want to know how much people like pizza.</p>
-<ul>
-<li class="fragment"><p>There are 12,500 people in our population.</p></li>
-<li class="fragment"><p>Each of the 25 of us collects a sample of 500.</p></li>
-<li class="fragment"><p>(500 x 25 = 12,500)</p></li>
-<li class="fragment"><p><span class="math inline">\(500 \times 25 = 12,500\)</span></p></li>
-<li class="fragment"><p>Each of us calculates the mean response from our sample of 500 people.</p></li>
-<li class="fragment"><p>We plot those means and it gives us a normal distribution.</p></li>
-<li class="fragment"><p>What do we call those means?</p></li>
-</ul>
-</section>
-<section id="pizza-plot" class="slide level2">
-<h2>Pizza Plot</h2>
-<h3 id="visual-example">Visual Example</h3>
-
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="example-1" class="slide level2">
-<h2>Example</h2>
-<p>I randomlyu choose a mean from our distirutin of samoe means, about how much people like pizza.</p>
-<p>What is the probability of picking a mean with a z-score of -1 or less?</p>
-
-<img data-src="images/bell_prop.png" class="r-stretch"><h3 id="sampling-theory-12">Sampling theory</h3>
+<section id="standard-deviation-calculation-1" class="slide level2">
+<h2><strong>Standard Deviation Calculation</strong></h2>
+<h3 id="sample-standard-deviation-1">Sample Standard Deviation</h3>
 <blockquote>
-<p>Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.</p>
+<p><strong>Sample Standard Deviation</strong> Participants’ anxiety scores in a clinical trial are recorded as: <strong>4, 7, 3, 5, 8, 6, 2</strong>.<br>
+</p>
 </blockquote>
+<p><strong>Question:</strong> Compute the standard deviation of these anxiety scores.</p>
 </section>
-<section id="sampling-theory-as-the-basis-for-inferential-statistics" class="slide level2">
-<h2>Sampling theory as the basis for inferential statistics</h2>
-<ul>
-<li class="fragment"><p>Independent variable:</p>
-<ul>
-<li class="fragment">Experimental Group: Super secret limitless drug</li>
-</ul></li>
-<li class="fragment"><p>Control Group: Placebo</p>
-<ul>
-<li class="fragment">Dependent variable: IQ</li>
-</ul></li>
-</ul>
-</section>
-<section id="sampling-theory-as-the-basis-for-inferential-statistics-1" class="slide level2">
-<h2>Sampling theory as the basis for inferential statistics</h2>
-<p>[Insert picture from slideset with two peaks]</p>
-</section>
-<section id="review-1" class="slide level2">
-<h2>Review</h2>
-<ul>
-<li class="fragment"><p>Sampling distribution:</p></li>
-<li class="fragment"><p>Sample mean:</p></li>
-</ul>
-</section>
-<section id="sampling-theory-13" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="standard-deviation-calculation-2" class="slide level2">
+<h2><strong>Standard Deviation Calculation</strong></h2>
+<h3 id="interpreting-standard-deviation-in-psychology">Interpreting Standard Deviation in Psychology</h3>
 <blockquote>
-<p>Sampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.</p>
+<p>A researcher finds that the standard deviation of reaction times in a cognitive task is <strong>1.5 seconds</strong>. Another researcher finds a standard deviation of <strong>0.5 seconds</strong> for a similar task.<br>
+</p>
 </blockquote>
-<ul>
-<li class="fragment"><p>And <strong>because</strong> they’d create a normal distribution, we can make guesses about the probability of getting a specific mean.</p></li>
-<li class="fragment"><p>We will use this probability to gauge significance of our inferential statistics.</p></li>
-</ul>
+<p><strong>Question:</strong> Which task shows more variability in participants’ reaction times, and what might this indicate about task difficulty?</p>
 </section>
-<section id="sampling-theory-14" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>The mean of a sample is notated as M.</p></li>
-<li class="fragment"><p>The mean of a population is notated as (<span class="math inline">\(\mu\)</span>).</p></li>
-</ul>
-</section>
-<section id="sampling-theory-15" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>The dispersion of a sample is known as the standard deviation, or SD, or sometimes just s.</p></li>
-<li class="fragment"><p>The dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).</p></li>
-</ul>
-</section>
-<section id="sampling-theory-but-candy" class="slide level2">
-<h2>Sampling theory, but candy</h2>
-<ul>
-<li class="fragment">This is a jar of 600 pieces of candy.</li>
-</ul>
-<p>[Insert Candy Pic]</p>
-<ul>
-<li class="fragment"><p>If I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?</p></li>
-<li class="fragment"><p>I have a scoop of 25 pieces of candy, and 6 of them are orange.</p></li>
-</ul>
-</section>
-<section id="sampling-theory-but-candy-1" class="slide level2">
-<h2>Sampling theory, but candy</h2>
-<p>[Insert two peaks with MM]</p>
-<ul>
-<li class="fragment"><p>Did this scoop come from the jar of m&amp;ms?</p>
-<ul>
-<li class="fragment">Probably!</li>
-</ul></li>
-<li class="fragment"><p>I have a scoop of 25 pieces of candy, and all 25 of them are orange.</p></li>
-<li class="fragment"><p>Did this scoop come from the jar of m&amp;ms?</p>
-<ul>
-<li class="fragment">Probably not</li>
-</ul></li>
-</ul>
-</section>
-<section id="p-values" class="slide level2">
-<h2>P-values</h2>
-<p>[Make Big Text!] ### Hypothesis testing, Pt 1</p>
-</section>
-<section id="sampling-theory-16" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>There are about 10,000 students at Farmingdale State College.</p></li>
-<li class="fragment"><p>Each of the 25 of us recruits a sample of 400 students.</p></li>
-</ul>
-<p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (<strong>I don’t belong at all</strong>) to 10 (<strong>I belong completely</strong>).</p>
-<p>We each calculate the average response from our own sample of 400.</p>
-</section>
-<section id="sampling-theory-17" class="slide level2">
-<h2>Sampling theory</h2>
-
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="sampling-theory-18" class="slide level2">
-<h2>Sampling theory</h2>
-<p>Now we have 25 samples of 400 FSC students each, which equals the full student population of 10,000.</p>
-<p>We take 25 samples of 400 students each from another college…John Jacob Jinglehymer Smith University. JJJSMU also has 10,000 students.</p>
-<p>We ask the JJJSMU students the same question about sense of belonging.</p>
-<p>We find the mean of each of the 25 samples from JJJSMU</p>
-</section>
-<section id="sampling-theory-as-the-basis-for-inferential-statistics-2" class="slide level2">
-<h2>Sampling Theory as The Basis for Inferential Statistics</h2>
-<p>[Two Peaks with FSC students and JJJSMU Students]</p>
-</section>
-<section id="what-is-a-hypothesis" class="slide level2">
-<h2>What is a hypothesis?</h2>
-<p>A hypothesis is a testable prediction of what will happen in our experiment that:</p>
-<ul>
-<li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
-<li class="fragment"><p>Clearly contrasts the groups</p></li>
-</ul>
-</section>
-<section id="hypothesis" class="slide level2">
-<h2>Hypothesis:</h2>
-<h3 id="example-2">Example</h3>
+<section id="z-score-calculation" class="slide level2">
+<h2><strong>Z-Score Calculation</strong></h2>
+<h3 id="z-score-for-a-single-value">Z-Score for a Single Value</h3>
 <blockquote>
-<p>Professor Brocker wants to know if Millennials enjoy the Netflix Original, <em>Dark</em> significantly more than Gen Z. She recruits 500 Millennials and 500 Zoomers and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).</p>
+<p>In a personality study, the average score on an extraversion scale is <strong>50</strong>, with a standard deviation of <strong>10</strong>. One participant scores <strong>70</strong>.</p>
 </blockquote>
-<ul>
-<li class="fragment">Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</li>
-</ul>
+<p><strong>Question:</strong> What is the Z-score for this participant?</p>
 </section>
-<section id="hypothesis-1" class="slide level2">
-<h2>Hypothesis:</h2>
-<h3 id="example-3">Example</h3>
-<ul>
-<li class="fragment">Hypothesis: <u>Millennials</u> will rate their enjoyment of Dark as significantly higher than their <u>Gen Z</u> peers.</li>
-</ul>
-</section>
-<section id="what-is-a-hypothesis-1" class="slide level2">
-<h2>What is a Hypothesis?</h2>
-<p>An <u><strong>Alternative Hypothesis</strong></u> is a testable prediction of what will happen in our experiment that:</p>
-<ul>
-<li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
-<li class="fragment"><p>Clearly contrasts the groups.</p></li>
-</ul>
-</section>
-<section id="alternative-hypothesis" class="slide level2">
-<h2>Alternative hypothesis</h2>
-<p>An <u><strong>Alternative Hypothesis</strong></u> is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.</p>
-<ul>
-<li class="fragment">The Alternative Hypothesis is written as <span class="math inline">\(H_1\)</span></li>
-</ul>
-</section>
-<section id="null-hypothesis" class="slide level2">
-<h2>Null Hypothesis</h2>
-<p>The Null Hypothesis states that nothing will happen. <span class="math inline">\(H_0\)</span></p>
-<p>Because Null means zero, nothing, nada.</p>
-<p>The <u><strong>Null Hypothesis</strong></u> states that nothing will happen while also:</p>
-<ul>
-<li class="fragment">Naming of the variables (independent and dependent)</li>
-</ul>
-</section>
-<section id="alternative-null-hypotheses" class="slide level2">
-<h2>Alternative &amp; Null Hypotheses:</h2>
-<h3 id="example-4">Example</h3>
-<p>Professor Brocker’s Dark Experiment:</p>
-<ul>
-<li class="fragment"><p><strong>Alternative Hypothesis</strong>: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</p></li>
-<li class="fragment"><p><strong>Null Hypothesis</strong>: Millennials and Gen Z will not differ in their rating of enjoyment of the Eric Andre Show.</p></li>
-</ul>
-</section>
-<section id="hypothesis-testing" class="slide level2">
-<h2>Hypothesis testing</h2>
-<ul>
-<li class="fragment"><p>Null Hypothesis: These is no difference in the DV between the IV groups.</p></li>
-<li class="fragment"><p>Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.</p></li>
-</ul>
-</section>
-<section id="hypothesis-testing-1" class="slide level2">
-<h2>Hypothesis Testing</h2>
-<h3 id="example-1-1">Example 1</h3>
+<section id="z-score-calculation-1" class="slide level2">
+<h2><strong>Z-Score Calculation:</strong></h2>
+<h3 id="interpreting-z-scores">Interpreting Z-Scores</h3>
 <blockquote>
-<p>Dr.&nbsp;Apriceno wants to know if giving her students coffee will improve their exam scores. She <strong>randomly</strong> assigns <strong>13</strong> of her <strong>26</strong> students to drink a doubleshot; she calls this the <strong>experimental</strong> group. The other <strong>13</strong> students drink decaf (a placebo); she calls this the <strong>control</strong> group.</p>
+<p>A participant in a self-esteem survey has a Z-score of <strong>-1.5</strong>. The mean self-esteem score for the survey is <strong>40</strong>, and the standard deviation is <strong>5</strong>.<br>
+</p>
 </blockquote>
-<p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
+<p><strong>Question:</strong> Did this participant score above or below the mean, and by how many standard deviations?</p>
 </section>
-<section id="hypothesis-testing-2" class="slide level2">
-<h2>Hypothesis Testing</h2>
-<h3 id="example-2-1">Example 2</h3>
+<section id="z-score-calculation-2" class="slide level2">
+<h2><strong>Z-Score Calculation</strong></h2>
+<h3 id="z-score-with-negative-value">Z-Score with Negative Value</h3>
 <blockquote>
-<p>Esmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.</p>
+<p>The mean stress score of a group is <strong>25</strong>, with a standard deviation of <strong>4</strong>. If a participant has a stress score of <strong>18</strong>,<br>
+</p>
 </blockquote>
-<p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
+<p><strong>Question:</strong> Calculate their Z-score and interpret its meaning in the context of stress levels.</p>
 </section>
-<section id="hypothesis-testing-3" class="slide level2">
-<h2>Hypothesis Testing</h2>
-<h3 id="practice">Practice</h3>
+<section id="z-score-calculation-3" class="slide level2">
+<h2><strong>Z-Score Calculation</strong></h2>
+<h3 id="multiple-z-scores">Multiple Z-Scores</h3>
 <blockquote>
-<p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day 5 days a week for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
+<p>In a clinical assessment, the average depression score is <strong>60</strong>, with a standard deviation of <strong>8</strong>. Two participants have scores of <strong>72</strong> and <strong>48</strong>.<br>
+</p>
 </blockquote>
-<p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
-<p>[Make big text] ## Better to be a reject than a failure</p>
-</section>
-<section id="rejects-and-failures" class="slide level2">
-<h2>Rejects and Failures</h2>
-<ul>
-<li class="fragment"><p>In science, we <strong>do not</strong> say that we proved anything.</p></li>
-<li class="fragment"><p>Nothing is ever really proven.</p></li>
-<li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis.</p></li>
-<li class="fragment"><p>The Null Hypothesis is that there are no differences between the groups.</p></li>
-</ul>
-</section>
-<section id="hypothesis-testing-practice" class="slide level2">
-<h2>Hypothesis testing practice</h2>
-<blockquote>
-<p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day 5 days a week for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
-</blockquote>
-<p><span class="math inline">\(H_0\)</span>: There are no differences in working memory capacity between the experimental and control groups.</p>
-</section>
-<section id="rejects-and-failures-1" class="slide level2">
-<h2>Rejects and Failures</h2>
-<ul>
-<li class="fragment"><p>In science, we do not say that we proved anything.</p></li>
-<li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis.</p></li>
-<li class="fragment"><p>If there are <strong>significant differences</strong> between the groups, we <strong>Reject the</strong> <span class="math inline">\(H_0\)</span>.</p>
-<ul>
-<li class="fragment">Rejecting is good.</li>
-</ul></li>
-<li class="fragment"><p>If there are <strong>NO differences</strong> between the groups, we <strong>Fail to Reject the</strong> <span class="math inline">\(H_0\)</span>.</p></li>
-</ul>
-</section>
-<section id="hypothesis-testing-4" class="slide level2">
-<h2>Hypothesis testing</h2>
-<p>[Include YODA picture or something similar]</p>
-</section>
-<section id="hypothesis-testing-5" class="slide level2">
-<h2>Hypothesis Testing</h2>
-<p>When reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.</p>
-<ul>
-<li class="fragment"><p>If the groups differ, we reject the null hypothesis: <strong>Reject</strong> <span class="math inline">\(H_0\)</span>.</p></li>
-<li class="fragment"><p>If the groups do NOT differ, we fail: <strong>Fail to Reject</strong> <span class="math inline">\(H_0\)</span></p></li>
-</ul>
-</section>
-<section id="practice-1" class="slide level2">
-<h2>Practice</h2>
-<p>Jonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity. His test is not significant.</p>
-<ul>
-<li class="fragment">State Claudio’s findings in terms of the null hypothesis:</li>
-</ul>
-</section>
-<section id="hypothesis-practice" class="slide level2">
-<h2>Hypothesis Practice</h2>
-<h3 id="practice-2">Practice</h3>
-<blockquote>
-<p>Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look old using an aging filter (experimental condition). Pedro then measures all participants’ anxiety about dying and runs a t-test, which is statistically significant.</p>
-</blockquote>
-<p>State Brendan’s findings in terms of the null hypothesis:</p>
+<p><strong>Question:</strong> Calculate the Z-scores for both participants and explain what the values tell us about their relative positions in the group.</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -805,6 +440,7 @@ Dave Brocker
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -827,6 +463,7 @@ Dave Brocker
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -997,7 +634,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1006,44 +643,6 @@ Dave Brocker
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
