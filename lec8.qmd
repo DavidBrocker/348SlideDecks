@@ -10,6 +10,8 @@ format:
     touch: true
     scrollable: true
     chalkboard: true
+filters:
+  - webr
 ---
 
 ## Standard Normal Distribution
@@ -68,20 +70,45 @@ The 4 properties of a standard normal distribution are:
 
 How many people did each of you ask?\[Make Big text\]
 
+```{webr-r}
+
+webr::install("dplyr")
+# 30 Students in the class
+n = 30
+
+# Each student asks 500 people
+full_sample = n*500
+
+# Simulate Results
+all_data <- 
+  replicate(n = 30,
+            sample(x = 1:7,
+                   size = 500,
+                   replace = TRUE))
+```
+
 ## Sampling theory
 
 -   Once each of you collect 500 responses, I ask you to calculate the average answer. SO you calculate the mean (you add up all 500 responses, and then divide that number by 500).
 
 ## Sampling theory
 
-```{r}
-library(dplyr)
+```{webr-r}
 
-tibble(
-  Sample = c("Dave","Gaby","Evan","Mike",
-             "Jeff","Paul","Sean"),
-  Mean = c(10,runif(6,1,9))
-)
+library(dplyr,warn.conflicts = F)
+library(ggplot2)
+
+all_df |> 
+  rename_with(.fn = function(x)
+    paste0("Student_",1:30)) |> 
+  summarize_all(mean) |> 
+  tidyr::pivot_longer(cols = everything(),
+                      names_to = "Student",
+                      values_to = "Mean") |> 
+  ggplot(aes(Student,Mean)) + 
+  geom_bar(stat="identity") +
+  coord_flip() + 
+  theme_minimal()
 ```
 
 ## Sampling theory
@@ -190,7 +217,8 @@ We want to know how much people like pizza.
 
 ### Visual Example
 
-```{r}
+```{webr-r}
+library(dplyr)
 library(ggplot2)
 
 # Collect 500 Random Samples 25 Times
