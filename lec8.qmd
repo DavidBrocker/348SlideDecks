@@ -18,19 +18,17 @@ filters:
 
 The 4 properties of a standard normal distribution are:
 
-## Standard Normal Distribution
-
-The 4 properties of a standard normal distribution are:
-
 ![](images/bell.png)
 
-• They are shaped like a bell ("bell curve").
+::: {.incremental .highlight-last}
+-   They are shaped like a bell ("bell curve").
 
-• They are symmetric.
+-   They are symmetric.
 
-• They are unimodal.
+-   They are unimodal.
 
-• The mean = median = mode.
+-   The mean = median = mode.
+:::
 
 ## Statistics
 
@@ -38,41 +36,44 @@ The 4 properties of a standard normal distribution are:
 
     -   Goal: Describe the sample
 
-    -   Examples: Mean, Standard Deviation
+        -   Examples: Mean, Standard Deviation
 
 -   Inferential Statistics:
 
     -   Goal: Use the sample to make inferences about the population
 
-    -   Examples: t-test, ANOVA, Regression
+        -   Examples: t-test, ANOVA, Regression
 
 ## Sampling theory
 
-> Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, *Dark*. She has unlimited funds to study this **very** important research question. She hires her 24 students from to collect the data.
-
-> Each student has to collect 500 responses to the following question:
+> Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, *Dark*. He has unlimited funds to study this **very** important research question. He hires his 24 students from to collect the data. Each student has to collect 500 responses to the following question:
 
 ## Sampling theory
 
 > On a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?
 
-![](images/dark.png){style="border-radius: 15px;" width="419"}
+![](images/dark.png){style="border-radius: 15px;" fig-align="center" width="419"}
 
 ## Sampling Theory
 
--   So each one of you asks 500 people how much they enjoy the Netflix Original Dark.
+-   Each one of you asks 500 people how much they enjoy the Netflix Original Dark.
 
 -   This is you on the street asking people:
 
-\[Insert Other Pictures\]
+::: fragment
+![](https://media.tenor.com/xoZUAVXAQuMAAAAM/frantic-running.gif){style="border-radius: 15px;" width="452"}
+:::
 
 ## Sampling Theory
 
-How many people did each of you ask?\[Make Big text\]
+How many people did each of you ask?
 
-```{webr-r}
-
-webr::install("dplyr")
+```{r}
+#| code-fold: true
+library(dplyr)
+library(tibble)
+library(huxtable)
+library(latex2exp)
 # 30 Students in the class
 n = 30
 
@@ -84,31 +85,44 @@ all_data <-
   replicate(n = 30,
             sample(x = 1:7,
                    size = 500,
-                   replace = TRUE))
+                   replace = TRUE)) |> 
+  data.frame() |> 
+  rename_with(.fn = function(x)
+    paste0("S", 1:30)) 
+
+all_data |> 
+  head() |> 
+  hux() |> 
+  theme_article()
+
 ```
 
 ## Sampling theory
 
--   Once each of you collect 500 responses, I ask you to calculate the average answer. SO you calculate the mean (you add up all 500 responses, and then divide that number by 500).
+-   Once each of you collect *500 responses*, I ask you to calculate the average answer. So you calculate the mean (you add up all 500 responses, and then divide that number by 500).
+
+::: fragment
+$$\frac{\sum(x_1...x_{500}}{500}$$
+:::
 
 ## Sampling theory
 
-```{webr-r}
-
-library(dplyr,warn.conflicts = F)
+```{r}
+#| code-fold: true
 library(ggplot2)
+library(gganimate)
 
-all_df |> 
-  rename_with(.fn = function(x)
-    paste0("Student_",1:30)) |> 
+all_data |> 
   summarize_all(mean) |> 
   tidyr::pivot_longer(cols = everything(),
-                      names_to = "Student",
-                      values_to = "Mean") |> 
-  ggplot(aes(Student,Mean)) + 
-  geom_bar(stat="identity") +
-  coord_flip() + 
-  theme_minimal()
+                      names_to = "Sample",
+                      values_to = "Sample Mean") |> 
+  ggplot(aes(factor(Sample,ordered = TRUE),`Sample Mean`)) + 
+  geom_point() +
+  coord_flip() +
+  theme_minimal() 
+
+
 ```
 
 ## Sampling theory
@@ -121,39 +135,32 @@ all_df |>
 
 -   We can do lots of cool things with Sample Means. We could calculate the Mean of the Sample Means. We could calculate the standard deviation of the Sample Means.
 
-## Sampling theory
-
--   It's theoretical. It doesn't really exist, but we imagine it's existence for the sake of Sampling Theory.
+-   But...it's theoretical. It doesn't really exist, but we imagine it's existence for the sake of **Sampling Theory**.
 
 ## Sampling distribution
 
-A [**Sampling Distribution**]{.underline}is the theoretical distribution of means across every single possible sample.
+A [**Sampling Distribution**]{.underline} is the theoretical distribution of means across every single possible sample.
 
--   Like all the Dark samples.
+-   Like all the *Dark* samples.
 
 -   If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:
 
-## Sampling theory
-
-![](images/bell_prop.png)
-
-## Sampling theory
-
-\[Column Width\] - Except now each value in this distribution no longer represents 1 person/participant.
-
--   Each value in this distribution represents the average of 1 sample, a Sample Mean.
-
-![](images/bell_prop.png)
-
-## Sampling theory
-
--   Except now each value in this distribution no longer represents 1 person/participant.
-
--   Each value in this distribution represents the average of 1 sample, a Sample Mean.
-
-## What does the Stats Cat say?What does the Stats Cat say?
-
-![](images/cat.png) $\mu$
+```{r}
+tibble(
+  ratings = rnorm(10000,6.6,2)
+) |> 
+  mutate(
+    dx = dnorm(ratings,mean(ratings),sd(ratings)),
+    z = scale(ratings)
+  ) |> 
+  ggplot(aes(z,dx)) + 
+  geom_point() + 
+  theme_minimal() +
+  labs(
+    y = "Probability Density\n",
+    x = "\n"
+  )
+```
 
 ## Sampling theory
 
@@ -161,7 +168,52 @@ A [**Sampling Distribution**]{.underline}is the theoretical distribution of mean
 
 -   Each value in this distribution represents the average of 1 sample, a Sample Mean.
 
-![](images/bell_prop.png) \[include $\mu$ and $\sigma$\]
+![](images/bell_prop.png)
+
+## What does the Stats Cat say?
+
+![](images/cat.png){style="border-radius: 15px;" fig-align="center"}
+
+## Sampling theory
+
+-   Except now each value in this distribution no longer represents 1 person/participant.
+
+-   Each value in this distribution represents the average of 1 sample, a Sample Mean.
+
+```{r}
+tibble(
+  ratings = rnorm(10000,6.6,2)
+) |> 
+  mutate(
+    dx = dnorm(ratings,mean(ratings),sd(ratings)),
+    z = scale(ratings)
+  ) |> 
+  ggplot(aes(z,dx)) + 
+  geom_point() + 
+  theme_minimal() +
+  labs(
+    y = "Probability Density\n",
+    x = "\n"
+  ) +
+  annotate(
+    geom = "text",
+    x = 0, 
+    y = 0,
+    label = TeX("$\\mu$")
+  ) +
+  annotate(
+    geom = "text",
+    x = -1,
+    y = 0,
+    label = TeX("-1$\\sigma$")
+  ) + 
+    annotate(
+    geom = "text",
+    x = 1,
+    y = 0,
+    label = TeX("1$\\sigma$")
+  )
+```
 
 ## Review
 
@@ -177,7 +229,41 @@ A [**Sampling Distribution**]{.underline}is the theoretical distribution of mean
 
 -   What percentage of participants rated Dark with a z-score of 2 or [**HIGHER**]{.underline}?
 
-![](images/bell_prop.png)
+```{r}
+
+
+# Create a function to calculate the normal distribution
+normal_data <- data.frame(x = seq(-4, 4, by = 0.01))
+normal_data$y <- dnorm(normal_data$x)
+
+# Create the plot
+p <- ggplot(normal_data, aes(x = x, y = y)) + 
+  geom_line(size = 1.2) + 
+  geom_area(data = subset(normal_data, x >= -1 & x <= 1), aes(y = y), fill = "lightblue", alpha = 0.5) +
+  geom_area(data = subset(normal_data, x >= -2 & x <= -1 | x >= 1 & x <= 2), aes(y = y), fill = "blue", alpha = 0.5) +
+  geom_area(data = subset(normal_data, x >= -3 & x <= -2 | x >= 2 & x <= 3), aes(y = y), fill = "darkblue", alpha = 0.5) +
+  
+  # Add vertical lines for standard deviations
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed") +
+  geom_vline(xintercept = c(-2, 2), linetype = "dashed") +
+  geom_vline(xintercept = c(-3, 3), linetype = "dashed") +
+  
+  # Add percentage labels
+  annotate("text", x = 0, y = 0.32, label = "34.1%", size = 5) +
+  annotate("text", x = -1.5, y = 0.05, label = "13.6%", size = 5) +
+  annotate("text", x = 1.5, y = 0.05, label = "13.6%", size = 5) +
+  annotate("text", x = -3, y = 0.02, label = "2.1%", size = 5) +
+  annotate("text", x = 3, y = 0.02, label = "2.1%", size = 5) +
+  annotate("text", x = -4, y = 0, label = "0.1%", size = 5) +
+  annotate("text", x = 4, y = 0, label = "0.1%", size = 5) +
+  
+  # Adjust plot appearance
+  theme_minimal() +
+  labs(title = "Standard Normal Distribution", x = "Standard Deviations", y = "Density") +
+  scale_x_continuous(breaks = seq(-4, 4, 1))
+
+p
+```
 
 ## Probability
 
@@ -185,7 +271,9 @@ A [**Sampling Distribution**]{.underline}is the theoretical distribution of mean
 
 -   What is the probability of any sample having a mean that is a z-score of 2 or [**HIGHER**]{.underline}?
 
-![](images/bell_prop.png)
+```{r}
+p
+```
 
 ## THIS IS the key point
 
@@ -199,11 +287,7 @@ A [**Sampling Distribution**]{.underline}is the theoretical distribution of mean
 
 We want to know how much people like pizza.
 
--   There are 12,500 people in our population.
-
--   Each of the 25 of us collects a sample of 500.
-
--   (500 x 25 = 12,500)
+-   There are 12,500 people in our population. Each of the 25 of us collects a sample of 500.
 
 -   $500 \times 25 = 12,500$
 
@@ -217,14 +301,14 @@ We want to know how much people like pizza.
 
 ### Visual Example
 
-```{webr-r}
+```{r}
 library(dplyr)
 library(ggplot2)
 
 # Collect 500 Random Samples 25 Times
 replicate(
   25,
-  runif(500,1,5) |> round(0) 
+  rnorm(500,4.2,1) |> round(0) 
 ) |> 
   # Coerce into Dataframe
   data.frame() |> 
@@ -250,13 +334,15 @@ replicate(
 
 ## Example
 
-I randomlyu choose a mean from our distirutin of samoe means, about how much people like pizza.
+I randomly choose a mean from our distribution of sample means, about how much people like pizza.
 
 What is the probability of picking a mean with a z-score of -1 or less?
 
-![](images/bell_prop.png)
+```{r}
+p
+```
 
-### Sampling theory
+## Sampling theory
 
 > Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.
 
@@ -269,16 +355,6 @@ What is the probability of picking a mean with a z-score of -1 or less?
 -   Control Group: Placebo
 
     -   Dependent variable: IQ
-
-## Sampling theory as the basis for inferential statistics
-
-\[Insert picture from slideset with two peaks\]
-
-## Review
-
--   Sampling distribution:
-
--   Sample mean:
 
 ## Sampling theory
 
@@ -304,7 +380,7 @@ What is the probability of picking a mean with a z-score of -1 or less?
 
 -   This is a jar of 600 pieces of candy.
 
-\[Insert Candy Pic\]
+![](https://images.unsplash.com/photo-1534706013986-73f676db1790?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHklMjBqYXJzfGVufDB8fDB8fHww)
 
 -   If I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?
 
@@ -326,17 +402,17 @@ What is the probability of picking a mean with a z-score of -1 or less?
 
 ## P-values
 
-\[Make Big Text!\] \### Hypothesis testing, Pt 1
+\### Hypothesis testing, Pt 1
 
 ## Sampling theory
-
--   There are about 10,000 students at Farmingdale State College.
-
--   Each of the 25 of us recruits a sample of 400 students.
 
 We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (**I don't belong at all**) to 10 (**I belong completely**).
 
 We each calculate the average response from our own sample of 400.
+
+-   There are about 10,000 students at Farmingdale State College.
+
+-   Each of the 25 of us recruits a sample of 400 students.
 
 ## Sampling theory
 
@@ -344,17 +420,65 @@ We each calculate the average response from our own sample of 400.
 
 ## Sampling theory
 
-Now we have 25 samples of 400 FSC students each, which equals the full student population of 10,000.
+-   Now we have `25` samples of `400` FSC students each, which equals the full student population of `10,000`.
 
-We take 25 samples of 400 students each from another college...John Jacob Jinglehymer Smith University. JJJSMU also has 10,000 students.
+-   We take `25` samples of `400` students each from another college...John Jacob Jinglehymer Smith University. JJJSMU also has `10,000` students.
 
-We ask the JJJSMU students the same question about sense of belonging.
+-   We ask the JJJSMU students the same question about sense of belonging.
 
-We find the mean of each of the 25 samples from JJJSMU
+-   We find the mean of each of the `25` samples from JJJSMU
 
 ## Sampling Theory as The Basis for Inferential Statistics
 
-\[Two Peaks with FSC students and JJJSMU Students\]
+```{r}
+
+# Simulate 25 * 400
+replicate(
+  25,
+  rnorm(400,7,2) |> round(0)
+) |> 
+  data.frame() |> 
+  rename_with(
+    .fn = function(x) as.character(letters[1:25])
+    ) |> 
+  tidyr::pivot_longer(cols = everything(),
+names_to = "Samples",
+values_to = "Scores"
+                    ) |> 
+  ggplot(aes(factor(Samples),Scores)) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "pointrange"
+  ) +
+  theme_minimal()
+
+
+
+
+xx <- 
+  replicate(
+  25,
+  runif(400,1,10) |> round(0)
+) |> 
+  data.frame() |> 
+  rename_with(
+    .fn = function(x) as.character(letters[1:25])
+    ) |> 
+  tidyr::pivot_longer(cols = everything(),
+names_to = "Samples",
+values_to = "Scores"
+                    )
+
+
+tibble(
+  x = xx$Scores,
+  prob = dnorm(x,mean(x),sd(x))
+) |> ggplot(aes(x,prob)) + 
+  geom_point() + 
+  theme_minimal()
+
+
+```
 
 ## What is a hypothesis?
 
