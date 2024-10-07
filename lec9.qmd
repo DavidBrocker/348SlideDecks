@@ -1,0 +1,593 @@
+---
+title: "Hypothesis Testing, Pt 2"
+subtitle: "Lecture 10"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+format: 
+  revealjs:
+    theme: custom.scss
+    incremental: true   
+    touch: true
+    scrollable: true
+    chalkboard: true
+    lightbox: true
+filters:
+  - webr
+---
+
+## Review
+
+```{r}
+library(ggplot2)
+
+# Create a function to calculate the normal distribution
+normal_data <- data.frame(x = seq(-4, 4, by = 0.01))
+normal_data$y <- dnorm(normal_data$x)
+
+# Create the plot
+p <- ggplot(normal_data, aes(x = x, y = y)) + 
+  geom_line(size = 1.2) + 
+  geom_area(data = subset(normal_data, x >= -1 & x <= 1), aes(y = y), fill = "lightblue", alpha = 0.5) +
+  geom_area(data = subset(normal_data, x >= -2 & x <= -1 | x >= 1 & x <= 2), aes(y = y), fill = "blue", alpha = 0.5) +
+  geom_area(data = subset(normal_data, x >= -3 & x <= -2 | x >= 2 & x <= 3), aes(y = y), fill = "darkblue", alpha = 0.5) +
+  
+  # Add vertical lines for standard deviations
+  geom_vline(xintercept = 0, linetype = "solid", color = "white") +
+  geom_vline(xintercept = c(-1, 1), linetype = "solid", color = "white") +
+  geom_vline(xintercept = c(-2, 2), linetype = "solid", color = "white") +
+  geom_vline(xintercept = c(-3, 3), linetype = "solid", color = "white") +
+  
+  # Add percentage labels
+  annotate("text", x = 0, y = 0.32, label = "34.1%", size = 5) +
+  annotate("text", x = -1.5, y = 0.05, label = "13.6%", size = 5) +
+  annotate("text", x = 1.5, y = 0.05, label = "13.6%", size = 5) +
+  annotate("text", x = -3, y = 0.02, label = "2.1%", size = 5) +
+  annotate("text", x = 3, y = 0.02, label = "2.1%", size = 5) +
+  annotate("text", x = -4, y = 0, label = "0.1%", size = 5) +
+  annotate("text", x = 4, y = 0, label = "0.1%", size = 5) +
+  
+  # Adjust plot appearance
+  theme_minimal() +
+  labs(title = " ", x = " ", y = " ") +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+p
+
+```
+
+## Review
+
+### Sampling Theory
+
+**Sample Mean:**
+
+::: fragment
+If we took infinite samples of a population, the mean of each sample taken would be a Sample Mean -- like how each student collect 500 responses about TV show ratings and took the average of those 500 responses.
+:::
+
+**Sampling Distribution:**
+
+::: fragment
+What we get if we put all the sample means together; we assume it's a normal distribution.
+:::
+
+## Sampling theory
+
+Each value in this distribution represents the average of 1 sample, a Sample Mean.
+
+```{r}
+library(plotly)
+
+p |> ggplotly()
+```
+
+## Sampling theory
+
+-   There are about 10,000 students at Farmingdale State College.
+
+-   Each of the 25 of us recruits a sample of 400 students.
+
+-   We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (*I don't belong at all*) to 10 (*I belong completely*).
+
+-   We each calculate the average response from our own sample of 400.
+
+## Sampling theory
+
+```{r}
+library(dplyr)
+
+tibble(
+  Sample = c("Dave"),
+  Mean = ""
+) 
+
+```
+
+## Sampling Theory
+
+### Just Making Sure...
+
+```{r}
+p
+
+# Add annotate mu
+# Add annotate sigma
+```
+
+## P-Values
+
+### Yeah Can I Get Uhhhhh
+
+> Professor Brocker gives `100` students caffeinated coffee and another `100` students decaf. He then has them complete a stats exam.
+
+-   IV:
+
+-   DV:
+
+-   N =
+
+## P-Values
+
+```{r}
+
+# Generate data for two normal distributions
+x <- seq(-5, 5, length=100)
+null_dist <- dnorm(x, mean = 0, sd = 1)
+alt_dist <- dnorm(x, mean = 2, sd = 1)
+
+data <- data.frame(
+  x = rep(x, 2),
+  y = c(null_dist, alt_dist),
+  hypothesis = factor(rep(c("Null Hypothesis (H₀)", "Alternative Hypothesis (H₁)"), each=length(x)))
+)
+
+# Create the plot
+p_real <- 
+  ggplot(data, aes(x = x, y = y, fill = hypothesis)) +
+  geom_line(aes(color = hypothesis), size = 1) +
+  geom_area(data = subset(data, hypothesis=="Null Hypothesis (H₀)" & x > .1), aes(y=y), fill="gray", alpha=0.5) +  # Type II error
+  geom_area(data=subset(data, hypothesis=="Alternative Hypothesis (H₁)" & x < 0), aes(y=y), fill="darkgray", alpha=0.5) +  # Type I error
+  scale_fill_manual(values = c("lightgray", "darkgray")) +
+  scale_color_manual(values = c("black", "black")) +
+  
+  # Add theme and labels
+  theme_minimal() +
+  labs(
+    title="", 
+    x=" ", 
+    y=""
+    ) +
+  
+  # Customize legend
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank()
+    ) 
+
+```
+
+## P-Values
+
+The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.
+
+```{r}
+p_real
+```
+
+## Example
+
+```{r}
+p
+```
+
+## P-Values
+
+The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.
+
+```{r}
+p_real + 
+  # P-Real
+  annotate(
+    geom = "text",
+    x = -0, 
+    y = .2, 
+    label = "P >.05",
+    size = 8
+  ) +
+  # P-Null
+  annotate(
+    geom = "text",
+    x = 2, 
+    y = .2, 
+    label = "P <.05",
+    size = 8
+  ) +
+  geom_segment(
+    x = 1,
+    xend = 1,
+    y = 0,
+    yend = .2
+  )
+```
+
+## P-values and confidence intervals
+
+### Finding in terms of the null hypothesis
+
+If there is a significant difference between the groups, p will be smaller than `0.05`.
+
+-   If p \< (less than) `0.05`, the difference is **significant**, we Reject $H_0$.
+
+-   If p \> (greater than) `0.05`, the difference is NOT **significant**, we Fail to Reject $H_0$.
+
+## Error
+
+How often are we okay with making a mistake?
+
+```{r}
+err <- 
+  p_real +
+    geom_point(
+      x = 1,
+      y = .1,
+      size = 20,
+      shape = 21,
+      stroke = 1,
+      fill = "white",
+      color = "red"
+      )
+```
+
+## Error
+
+$\beta$
+
+How often are we okay with making a mistake?
+
+Type 1:
+
+-   Reality: There is NO difference between the groups.
+
+-   Conclusion: There is a difference between the groups.
+
+![](images/clipboard-2057166815.png){width="368"}
+
+## Error
+
+How often are we okay with making a mistake?
+
+Type 2:
+
+-   Reality: There is a difference between the groups.
+
+-   Conclusion: There is NO difference between the groups.
+
+```{r}
+err
+```
+
+![](images/clipboard-63089270.png){width="300"}
+
+## Error
+
+How often are we okay with making a mistake?
+
+-   It's better to make a Type 2 Error than a Type 1.
+    -   Type 1 kills people
+    -   Type 2 kills careers
+
+-   We want to minimize the chance of committing a Type 1 Error.
+
+## Error & Alpha
+
+We accept a `5%`chance of committing a Type 1 Error.
+
+```{r}
+ba <- 
+  p + 
+  geom_vline(xintercept = 1.5)
+```
+
+-   We set alpha to `5%` or `0.05`
+
+## Error & Alpha
+
+```{r}
+p_real +
+  geom_vline(xintercept = 1.5)
+```
+
+## Error & Alpha
+
+::: fragment
+
+![](images/clipboard-3692632542.png){width="345"}
+
+:::
+
+## Significance
+
+::: fragment
+
+![](images/clipboard-1570428696.png){width="351"}
+
+:::
+
+## Types of Error
+
+### **Type 2:**
+
+-   Reality: There is a difference between the groups.
+
+-   Conclusion: There is NO difference between the groups.
+
+## Beta
+
+-   We set alpha at `5%` `(0.05)`, meaning we are okay with making a Type 1 Error (false positive) `5%` of the time.
+
+-   As a result, beta gets set at `16%`, meaning we have a 16% chance of committing Type 2 Error (false negative).
+
+::: fragment
+
+![](images/clipboard-2847025632.png){width="350"}
+
+:::
+
+## Error and Alpha and Beta
+
+-   Alpha ($\alpha$) = probability of committing Type 1 Error
+
+-   Beta ($\beta$)= probability of committing Type 2 Error
+
+## Error and Alpha and Beta
+
+|        | H_0        | H_1       |
+|--------|------------|-----------|
+| Accept | 1-$\alpha$ | $\beta$   |
+| Reject | $\alpha$   | 1-$\beta$ |
+|        | 1.00       | 1.00      |
+
+## Error and Alpha and Beta
+
+|        | H_0        | H_1       |
+|--------|------------|-----------|
+| Accept | 1-$\alpha$ | $\beta$   |
+| Reject | $\alpha$   | 1-$\beta$ |
+|        | 1.00       | 1.00      |
+
+## Power & Effect Size
+
+## Sampling theory
+
+```{r}
+p
+```
+
+## Null Hypothesis
+
+The [**Null Hypothesis**]{.underline} states that nothing will happen while also naming of the variables (independent and dependent).
+
+The Null Hypothesis is written as $H_0$
+
+## Alternative hypothesis
+
+An [**Alternative Hypothesis**]{.underline} is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.
+
+The Alternative Hypothesis is written as $H_1$
+
+## Hypothesis testing
+
+• Null Hypothesis ($H_0$): These is no difference in the DV between the IV groups.
+
+• Alternative Hypothesis ($H_1$): The experimental group is significantly different from the control group on the DV.
+
+## Hypothesis testing
+
+![](images/clipboard-1494090978.png){width="314"}
+
+## P-values and confidence intervals
+
+If there is a significant difference between the groups, p will be smaller than `0.05`.
+
+## Findings in terms of the null hypothesis
+
+-   If p \< (less than) `0.05`, the difference is significant, we Reject $H_0$.
+
+-   If p \> (greater than) `0.05`, the difference is NOT significant, we Fail to Reject $H_0$.
+
+## Alpha & beta
+
+![](images/clipboard-421457594.png){width="407"}
+
+## Alpha & beta
+
+### $\alpha$ and $\beta$
+
+Alpha: The probability of committing a Type 1 Error.
+
+-   We set $\alpha$ to `0.05`
+
+Beta: The probability of committing a Type 2 Error.
+
+-   When $\alpha$ = `0.05`, the resulting $\beta$ = `0.16`
+
+## Alpha & beta
+
+![](images/clipboard-421457594.png){width="270"}
+
+## Types of Errors
+
+::::: columns
+::: {.column width="50%"}
+### Type 1 Error
+
+-   Reality: There is NO difference between the groups.
+
+-   Conclusion: There is a difference between the groups.
+:::
+
+::: {.column width="50%"}
+### Type 2 Error
+
+-   Reality: There is a difference between the groups.
+
+-   Conclusion: There is NO difference between the groups.
+:::
+:::::
+
+## Alpha and Beta and Power
+
+![](images/Screenshot%202024-10-07%20at%208.30.29%20AM.png){width="368"}
+
+## Alpha & beta & power
+
+![](images/Screenshot%202024-10-07%20at%208.30.29%20AM.png){width="368"}
+
+## Alpha & beta & power
+
+![](images/Screenshot%202024-10-07%20at%208.30.29%20AM.png){width="368"}
+
+## Alpha & Beta & Power
+
+![](images/clipboard-421457594.png){width="317"}
+
+## Alpha & beta & Power
+
+Alpha: The probability of committing a Type 1 Error.
+
+-   We set $\alpha$ to 0.05
+
+Beta: The probability of committing a Type 2 Error.
+
+-   When $\alpha$ = 0.05, the resulting $\beta$ = 0.16
+
+Power: Ability of the researcher to accurately detect a difference between groups
+
+-   If $\alpha$ = `0.05`, $\beta$ = `0.16`, and the resulting power = `0.84`
+
+## Alpha & Beta & Power
+
+### Power
+
+Power refers to the ability of the researcher to accurately detect a difference between groups.
+
+-   When we assume a normal distribution, we assume power will be about `0.84` or `84%`.
+
+-   Power is dependent on Effect Size.
+
+## Effect size
+
+Effect size in statistics refers to the [**strength of the relationship**]{.underline} between two variables in a population.
+
+## Effect size Example
+
+> Does caffeine decrease the amount of time it takes to solve a puzzle?
+
+::::: columns
+::: {.column width="50%"}
+![](images/clipboard-2323188496.png){width="212"}
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-4121036724.png){width="249"}
+:::
+:::::
+
+## Effect size Example
+
+> Does caffeine decrease the amount of time it takes to solve a puzzle?
+
+-   IV:
+
+::: fragment
+Caffeine versus no caffeine
+:::
+
+-   DV:
+
+::: fragment
+Task speed
+:::
+
+-   Effect size:
+
+::: fragment
+Strength of the relationships between caffeine and task speed
+:::
+
+-   How much does caffeine actually impact task speed?
+
+## Effect size Example
+
+> Does caffeine decrease the amount of time it takes to solve a puzzle?
+
+::::: columns
+::: {.column width="50%"}
+![](images/clipboard-2323188496.png){width="299"}
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-4204953737.png){width="299"}
+:::
+:::::
+
+## Effect size
+
+Effect size in statistics refers to the [**strength of the relationship**]{.underline} between two variables in a population.
+
+Effect size tells us how much one variable actually impacts the other.
+
+## Effect size:
+
+### Cohen's d
+
+Effect size in statistics refers to the [**strength of the relationship**]{.underline} between two variables in a population.
+
+Cohen's d gives us a standardized measure of effect size:
+
+-   $d < 0.3$ is weak
+
+-   $0.3 < d > 0.5$ is moderate
+
+-   $d > 0.7$ is strong
+
+## Cohen's d
+
+-   Cohen's d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the "pooled standard deviation."
+
+-   The pooled standard deviation refers to the average SD across the 2 groups.
+
+$d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}$
+
+## Cohen's d
+
+### Understanding the Terms
+
+$d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}$
+
+$d = \frac{\text{Control Group Mean}-\text{Experimental Group Mean}}{\sqrt{\text{Pooled Variance}}}$
+
+## Effect size
+
+In psychology, we are often dealing with effect sizes that are small `(d = 0.3)`.
+
+-   A smaller effect size is harder to detect.
+
+## Alpha & beta & power
+
+When the effect size is small, the hypothetical alternative distribution is closer to the null distribution.
+
+![](images/clipboard-3726777508.png){width="313"}
+
+## Effect size
+
+What can we do to increase power when an effect size is small?
+
+-   Take bigger samples (as per Central Limit Theorem)
+
+-   Design better experiments with more control and fewer confounds

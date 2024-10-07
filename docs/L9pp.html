@@ -7,14 +7,11 @@
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides – Introduction to Statistical Software</title>
+  <title>348 Slides – Hypothesis Testing, Pt 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -39,7 +36,6 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -333,8 +329,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction to Statistical Software</h1>
-  <p class="subtitle">Lecture 7</p>
+  <h1 class="title">Hypothesis Testing, Pt 2</h1>
+  <p class="subtitle">Lecture 10</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -348,179 +344,224 @@ Dave Brocker
 </div>
 
 </section>
-<section id="statistical-software" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-r-spss-jamovi-jasp-oh-my">Excel, R, SPSS, Jamovi, JASP – Oh My!</h3>
-<p>There are several tools you can use for statistical analyses.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>PSY 360 (Research Methods) typically employs the use of both Excel and SPSS</p></li>
-<li class="fragment"><p>I think the best approach is to use these options <em>in addition</em> to free software such as R.</p></li>
-</ul>
-</div>
-</section>
-<section id="statistical-software-1" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-r-spss-jamovi-jasp-oh-my-1">Excel, R, SPSS, Jamovi, JASP – Oh My!</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>R is available on all Operating Systems completely free of charge and can even be accessed through web browsers such as Safari, Chrome, or Mozilla Firefox.</p>
-<ul>
-<li class="fragment">As an added bonus, R is <em>even</em> accessible in <em>this</em> presentation! Press ~ to see</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="statistical-software-2" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="why-should-i-care">Why should I care?</h3>
-<p>Your time is worth something and if I can show you a different way of approaching statistical questions that you might find easier—I will do whatever I can to do so!</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Your future job might not have SPSS</p></li>
-<li class="fragment"><p>You can learn programming syntax and troubleshoot in real-time</p></li>
-</ul>
-</div>
-</section>
-<section id="statistical-software-3" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel">Excel</h3>
-<p>We have used Microsoft Excel in this course to demonstrate core concepts such as finding the arithmetic average, standard deviation, measures of central tendency, and calculating z-scores.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment">Since statistical tests are mathematical at a base-level, (most) any test can be run in Excel that can be run elsewhere</li>
-</ul>
-</div>
-</section>
-<section id="statistical-software-4" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-1">Excel</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment">Excel has dedicated first-party addons such as <code>Data Analysis Toolpak</code> and third-party addons as well. The <code>Data Analysis Toolpak</code> can be used to run the following tests:</li>
-</ul>
-</div>
-</section>
-<section id="statistical-software-5" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-2">Excel</h3>
-<p><a href="images/excel1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/excel1.png"></a></p>
-</section>
-<section id="statistical-software-6" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-3">Excel</h3>
-<p><a href="images/excel2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/excel2.png"></a></p>
-</section>
-<section id="statistical-software-7" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-4">Excel</h3>
-<p><a href="images/excel3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/excel3.png"></a></p>
-</section>
-<section id="statistical-software-8" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="excel-5">Excel</h3>
-<p>Whoa! Those are <em>a lot</em> of tests! Excel is an absolute powerhouse, but some of the tests and options are somewhat difficult to access and/or have a steep learning curve.</p>
-</section>
-<section id="statistical-software-9" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="spss">SPSS</h3>
-<blockquote>
-<p>SPSS (Statistical Principles for Social Science) is used in a variety of disciplines and has options for the majority of tests that you will end up running in your academic career. SPSS also has a syntax editor which allows you to have more control over your data/tests/outputs.</p>
-</blockquote>
-</section>
-<section id="statistical-software-10" class="slide level2">
-<h2>Statistical Software</h2>
-<h3 id="spss-example">SPSS: Example</h3>
-<p>Let’s walk through an example in SPSS step-by-step.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Open up the dataset <code>move_dat_reduced.csv</code> from Brightspace</p></li>
-<li class="fragment"><p>Double-click on IBM SPSS and wait for the file to open</p></li>
-</ul>
-</div>
-</section>
-<section id="spss-example-1" class="slide level2">
-<h2>SPSS: Example</h2>
-<h3 id="descriptive-statistics">Descriptive Statistics</h3>
-<p>SPSS does its best to analyze your data and assign data value types (continuous, nominal) as well as scales of measurement (nominal, ordinal, interval, ratio).</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>SPSS will <em>only</em> allow specific data types to be analyzed in specific ways</p></li>
-<li class="fragment"><p>SPSS does not always ‘know’ what you are looking for, so <em>you</em> need to make sure your data is set up correctly!</p></li>
-</ul>
-</div>
-</section>
-<section id="spss-example-2" class="slide level2">
-<h2>SPSS: Example</h2>
-<h3 id="descriptive-statistics-1">Descriptive Statistics</h3>
-<p>SPSS has two views, <code>Variable View</code> and <code>Data View</code></p>
-<p>Variable View: Provides an overview of your variables.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What is the name?</p></li>
-<li class="fragment"><p>What is the data type?</p></li>
-<li class="fragment"><p>What is the range of values?</p></li>
-<li class="fragment"><p>Are there any labels?</p></li>
-<li class="fragment"><p>What is the Measure type?</p></li>
-</ul>
-</div>
-</section>
-<section id="spss-example-3" class="slide level2">
-<h2>SPSS: Example</h2>
-<h3 id="descriptive-statistics-2">Descriptive Statistics</h3>
-<p>SPSS has two views, Variable View and Data View</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Data View: Provides a glimpse of your raw data</p>
-<ul>
-<li class="fragment"><p>What is in the first column?</p></li>
-<li class="fragment"><p>What is in the second column?</p></li>
-<li class="fragment"><p>etc.</p></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="spss-example-4" class="slide level2">
-<h2>SPSS: Example</h2>
-<h3 id="descriptive-statistics-3">Descriptive Statistics</h3>
-<p>Descriptive Statistics <em>describe</em> the data, they give us an idea of where our data (likely) comes from, the measures of central tendency, and estimation about normality can be made.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><p>Mean | Sum</p></li>
-<li class="fragment"><p>Standard Deviation</p></li>
-<li class="fragment"><p>Range</p></li>
-<li class="fragment"><p>Mode</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><p>Kurtosis*</p></li>
-<li class="fragment"><p>Skewness*</p></li>
-</ul>
-</div></div>
-</section>
-<section id="spss-example-5" class="slide level2">
-<h2>SPSS: Example</h2>
-<h3 id="frequency-statistics">Frequency Statistics</h3>
-<p>Frequency Statistics give us an idea of the composition of our dataset and allow us to make estimations and guesses in relation to the normality of our data</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Frequency of Responses (% or n)</p></li>
-<li class="fragment"><p>Minimum Values</p></li>
-<li class="fragment"><p>Max Values</p></li>
-<li class="fragment"><p>Range</p></li>
-</ul>
-</div>
-</section>
-<section id="spss-example-6" class="slide level2">
-<h2>SPSS: Example</h2>
-<h3 id="descriptive-and-frequency-statistics">Descriptive and Frequency Statistics</h3>
-<p>In our dataset, we want to investigate the <em>categorical composition</em> of our data as well as the <em>statistical makeup</em> of our data.</p>
-<p>For the dataset provided, find the descriptive Statistics and Frequency Statistics for each variable of the appropriate data type.</p>
+<section id="review" class="slide level2">
+<h2>Review</h2>
+<h3 id="sampling-theory">Sampling Theory</h3>
+<p>Sample Mean:</p>
+<p>::: fragment If we took infinite samples of a population, the mean of each sample taken would be a Sample Mean – like how each student collect 500 responses about the Eric Andre Show and took the average of those 500 responses.</p>
+<p>:::</p>
+<p>Sampling Distribution:</p>
+<p>::: fragment What we get if we put all the sample means together; we assume it’s a normal distribution.</p>
+<p>:::</p>
+<p>Sampling theory</p>
+<p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
+<p>What does the Stats Cat say?</p>
+<p>Sampling theory</p>
+<p>Sampling theory</p>
+<p>There are about 10,000 students at Farmingdale State College.</p>
+<p>Each of the 25 of us recruits a sample of 400 students.</p>
+<p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (I don’t belong at all) to 10 (I belong completely).</p>
+<p>We each calculate the average response from our own sample of 400.</p>
+<p>Sampling theory</p>
+<p>Sampling theory</p>
+<p>Sampling theory</p>
+<p>P-Values</p>
+<p>Professor Brocker gives 100 students caffeinated coffee and another 100 students decaf. He then has them complete a stats exam.</p>
+<p>IV:</p>
+<p>DV:</p>
+<p>N =</p>
+<p>P-Values</p>
+<p>P-Values</p>
+<p>The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.</p>
+<p>Example</p>
+<p>P-Values</p>
+<p>The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.</p>
+<p>P-values and confidence intervals</p>
+<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
+<p>Hypothesis testing</p>
+<p>P-values and confidence intervals</p>
+<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
+<p>P-values and confidence intervals</p>
+<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
+<p>Findings in terms of the null hypothesis</p>
+<p>If p &lt; (less than) 0.05, the difference is significant, we Reject H0.</p>
+<p>If p &gt; (greater than) 0.05, the difference is NOT significant, we Fail to Reject H0.</p>
+<p>Findings in terms of the null hypothesis</p>
+<p>If p &lt; (less than) 0.05, the difference is significant, we Reject H0.</p>
+<p>If p &gt; (greater than) 0.05, the difference is NOT significant, we Fail to Reject H0.</p>
+<p>Error</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>Type 1:</p>
+<p>‣ Reality: There is NO difference between the groups.</p>
+<p>‣ Conclusion: There is a difference between the groups.</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>Type 1:</p>
+<p>‣ Reality: There is NO difference between the groups.</p>
+<p>‣ Conclusion: There is a difference between the groups.</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>Type 2:</p>
+<p>‣ Reality: There is a difference between the groups.</p>
+<p>‣ Conclusion: There is NO difference between the groups.</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>Type 2:</p>
+<p>‣ Reality: There is a difference between the groups.</p>
+<p>‣ Conclusion: There is NO difference between the groups.</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>It’s better to make a Type 2 Error than a Type 1.</p>
+<p>Error</p>
+<p>How often are we okay with making a mistake?</p>
+<p>It’s better to make a Type 2 Error than a Type 1.</p>
+<p>‣ We want to minimize the chance of committing a Type 1 Error.</p>
+<p>Error &amp; Alpha</p>
+<p>We accept a 5% chance of committing a Type 1 Error.</p>
+<p>Error &amp; Alpha</p>
+<p>We accept a 5% chance of committing a Type 1 Error.</p>
+<p>‣ We set alpha to 5% or 0.05</p>
+<p>Error &amp; Alpha</p>
+<p>Error &amp; Alpha</p>
+<p>Error &amp; Alpha</p>
+<p>Error &amp; Alpha</p>
+<p>Significance</p>
+<p>Types of Error</p>
+<p><strong>Type 2:</strong></p>
+<p>‣ Reality: There is a difference between the groups.</p>
+<p>‣ Conclusion: There is NO difference between the groups.</p>
+<p>Types of Error</p>
+<p><strong>Type 2:</strong></p>
+<p>‣ Reality: There is a difference between the groups.</p>
+<p>‣ Conclusion: There is NO difference between the groups.</p>
+<p>Beta</p>
+<p>• We set alpha at 5% (0.05), meaning we are okay with making a Type 1 Error (false positive) 5% of the time.</p>
+<p>• As a result, beta gets set at 16%, meaning we have a 16% chance of committing Type 2 Error (false negative).</p>
+<p>Error &amp; Alpha</p>
+<p>Error &amp; Beta</p>
+<p>Error and Alpha and Beta</p>
+<p>• Alpha = probability of committing Type 1 Error</p>
+<p>• Beta = probability of committing Type 2 Error</p>
+<p>Error and Alpha and Beta</p>
+<p>Error and Alpha and Beta</p>
+<p>Error and Alpha and Beta</p>
+<p>Power &amp; Effect Size</p>
+<p>Sampling theory</p>
+<p>Sampling theory</p>
+<p>Sampling theory</p>
+<p>Null Hypothesis</p>
+<p>The <u><strong>Null Hypothesis</strong></u> states that nothing will happen while also naming of the variables (independent and dependent).</p>
+<p>The Null Hypothesis is written as</p>
+<p>Alternative hypothesis</p>
+<p>An <u><strong>Alternative Hypothesis</strong></u> is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.</p>
+<p>The Alternative Hypothesis is written as</p>
+<p>Hypothesis testing</p>
+<p>• Null Hypothesis (** **): These is no difference in the DV between the IV groups.</p>
+<p>• Alternative Hypothesis ( ** **): The experimental group is significantly different from the control group on the DV.</p>
+<p>Hypothesis testing</p>
+<p>P-values and confidence intervals</p>
+<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
+<p>Findings in terms of the null hypothesis</p>
+<p>If p &lt; (less than) 0.05, the difference is significant, we Reject H0.</p>
+<p>If p &gt; (greater than) 0.05, the difference is NOT significant, we Fail to Reject H0.</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha: The probability of committing a Type 1 Error.</p>
+<p>Beta: The probability of committing a Type 2 Error.</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha: The probability of committing a Type 1 Error.</p>
+<p>‣ We set alpha to 0.05</p>
+<p>Beta: The probability of committing a Type 2 Error.</p>
+<p>‣ When alpha = 0.05, the resulting beta = 0.16</p>
+<p>Alpha &amp; beta</p>
+<p>Type 1 Error</p>
+<p>‣ Reality: There is NO difference between the groups.</p>
+<p>‣ Conclusion: There is a difference between the groups.</p>
+<p>Type 2 Error</p>
+<p>‣ Reality: There is a difference between the groups.</p>
+<p>‣ Conclusion: There is NO difference between the groups.</p>
+<p>Alpha &amp; beta</p>
+<p>Alpha and Beta</p>
+<p>Alpha and Beta</p>
+<p>Alpha and Beta</p>
+<p>Alpha and Beta</p>
+<p>Alpha and Beta</p>
+<p>Alpha and Beta</p>
+<p>Alpha and Beta and power</p>
+<p>Alpha &amp; beta &amp; power</p>
+<p>Alpha &amp; beta &amp; power</p>
+<p>Alpha &amp; Beta &amp; Power</p>
+<p>Alpha &amp; beta &amp; Power</p>
+<p>Alpha: The probability of committing a Type 1 Error.</p>
+<p>‣ We set alpha to 0.05</p>
+<p>Beta: The probability of committing a Type 2 Error.</p>
+<p>‣ When alpha = 0.05, the resulting beta = 0.16</p>
+<p>Power: Ability of the researcher to accurately detect a difference between groups</p>
+<p>Alpha &amp; beta &amp; Power</p>
+<p>Alpha: The probability of committing a Type 1 Error.</p>
+<p>‣ We set alpha to 0.05</p>
+<p>Beta: The probability of committing a Type 2 Error.</p>
+<p>‣ When alpha = 0.05, the resulting beta = 0.16</p>
+<p>Power: Ability of the researcher to accurately detect a difference between groups</p>
+<p>‣ If alpha = 0.05, beta = 0.16, and the resulting power = 0.84</p>
+<p>Alpha &amp; Beta &amp; Power</p>
+<p>Power</p>
+<p>Power refers to the ability of the researcher to accurately detect a difference between groups.</p>
+<p>‣ When we assume a normal distribution, we assume power will be about 0.84 or 84%.</p>
+<p>‣ Power is dependent on Effect Size.</p>
+<p>Effect size</p>
+<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
+<p>Effect size Example</p>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+<p>Effect size Example</p>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+<p>‣ IV: Caffeine versus no caffeine</p>
+<p>‣ DV: Task speed</p>
+<p>‣ Effect size: Strength of the relationships between caffeine and task speed</p>
+<p>‣ How much does caffeine actually impact task speed?</p>
+<p>Effect size Example</p>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+<p>Effect size Example</p>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+<p>Effect size</p>
+<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
+<p>Effect size tells us how much one variable actually impacts the other.</p>
+<p>Effect size: Cohen’s d</p>
+<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
+<p>Cohen’s d gives us a standardized measure of effect size:</p>
+<p>‣ d &lt; 0.3 is weak</p>
+<p>‣ 0.3 &lt; d &gt; 0.5 is moderate</p>
+<p>‣ d &gt; 0.7 is strong</p>
+<p>Cohen’s d</p>
+<p>Cohen’s d</p>
+<p>Cohen’s d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the “pooled standard deviation.”</p>
+<p>Cohen’s d</p>
+<p>Cohen’s d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the square root of the “pooled standard deviation.”</p>
+<p>The pooled standard deviation refers to the average SD across the 2 groups.</p>
+<p>Cohen’s d</p>
+<p>Cohen’s d</p>
+<p>Cohen’s d</p>
+<p>Effect size</p>
+<p>In psychology, we are often dealing with effect sizes that are small (d = 0.3).</p>
+<p>‣ A smaller effect size is harder to detect.</p>
+<p>Alpha &amp; beta &amp; power</p>
+<p>When the effect size is small, the hypothetical alternative distribution is closer to the null distribution.</p>
+<p>Effect size</p>
+<p>What can we do to increase power when an effect size is small?</p>
+<p>‣ Take bigger samples (as per Central Limit Theorem)</p>
+<p>‣ Design better experiments with more control and fewer confounds</p>
+<p>Do not do meth.</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>⬡⬢⬡⬢⬡⬢⬡</p>
+
 </div>
 </div>
 </section>
@@ -535,7 +576,6 @@ Dave Brocker
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -558,7 +598,6 @@ Dave Brocker
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -729,7 +768,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -925,38 +964,6 @@ Dave Brocker
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","loop":false});
-    (function() {
-      let previousOnload = window.onload;
-      window.onload = () => {
-        if (previousOnload) {
-          previousOnload();
-        }
-        lightboxQuarto.on('slide_before_load', (data) => {
-          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-          const href = trigger.getAttribute('href');
-          if (href !== null) {
-            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-            if (imgEl !== null) {
-              const srcAttr = imgEl.getAttribute("src");
-              if (srcAttr && srcAttr.startsWith("data:")) {
-                slideConfig.href = srcAttr;
-              }
-            }
-          } 
-        });
-      
-        lightboxQuarto.on('slide_after_load', (data) => {
-          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(slideNode);
-          }
-        });
-      
-      };
-      
-    })();
-              </script>
     
 
 </body></html>
