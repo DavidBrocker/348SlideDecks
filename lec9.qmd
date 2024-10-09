@@ -62,13 +62,17 @@ p
 
 ### Sampling Theory
 
+::: fragment
 **Sample Mean:**
+:::
 
 ::: fragment
 If we took infinite samples of a population, the mean of each sample taken would be a Sample Mean -- like how each student collect 500 responses about TV show ratings and took the average of those 500 responses.
 :::
 
+::: fragment
 **Sampling Distribution:**
+:::
 
 ::: fragment
 What we get if we put all the sample means together; we assume it's a normal distribution.
@@ -79,9 +83,7 @@ What we get if we put all the sample means together; we assume it's a normal dis
 Each value in this distribution represents the average of 1 sample, a Sample Mean.
 
 ```{r}
-library(plotly)
-
-p |> ggplotly()
+p
 ```
 
 ## Sampling theory
@@ -93,18 +95,6 @@ p |> ggplotly()
 -   We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (*I don't belong at all*) to 10 (*I belong completely*).
 
 -   We each calculate the average response from our own sample of 400.
-
-## Sampling theory
-
-```{r}
-library(dplyr)
-
-tibble(
-  Sample = c("Dave"),
-  Mean = ""
-) 
-
-```
 
 ## Sampling Theory
 
@@ -128,6 +118,18 @@ p
 -   DV:
 
 -   N =
+
+## P-Values
+
+### Yeah Can I Get Uhhhhh
+
+> Professor Brocker gives `100` students caffeinated coffee and another `100` students decaf. He then has them complete a stats exam.
+
+-   IV: Coffee Consumption (Coffee or No Coffee)
+
+-   DV: Exam Scores
+
+-   N = 200
 
 ## P-Values
 
@@ -173,21 +175,7 @@ p_real <-
 
 ## P-Values
 
-The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.
-
-```{r}
-p_real
-```
-
-## Example
-
-```{r}
-p
-```
-
-## P-Values
-
-The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.
+The p-value tells us if the mean of the *experimental group* is far enough away from the *control group* mean that we can be confidence it belongs to a theoretical non-null distribution.
 
 ```{r}
 p_real + 
@@ -221,57 +209,45 @@ p_real +
 
 If there is a significant difference between the groups, p will be smaller than `0.05`.
 
--   If p \< (less than) `0.05`, the difference is **significant**, we Reject $H_0$.
+-   If p \< (less than) `0.05`, the difference is **significant**, we *Reject* $H_0$.
 
--   If p \> (greater than) `0.05`, the difference is NOT **significant**, we Fail to Reject $H_0$.
+-   If p \> (greater than) `0.05`, the difference is NOT **significant**, we *Fail to Reject* $H_0$.
 
-## Error
-
-How often are we okay with making a mistake?
-
-```{r}
-err <- 
-  p_real +
-    geom_point(
-      x = 1,
-      y = .1,
-      size = 20,
-      shape = 21,
-      stroke = 1,
-      fill = "white",
-      color = "red"
-      )
-```
-
-## Error
-
-$\beta$
+## Error ($\beta$)
 
 How often are we okay with making a mistake?
 
+::::: columns
+::: {.column width="50%"}
 Type 1:
 
 -   Reality: There is NO difference between the groups.
 
 -   Conclusion: There is a difference between the groups.
+:::
 
-![](images/clipboard-2057166815.png){width="368"}
-
-## Error
-
-How often are we okay with making a mistake?
-
+::: {.column width="50%"}
 Type 2:
 
 -   Reality: There is a difference between the groups.
 
 -   Conclusion: There is NO difference between the groups.
+:::
+:::::
 
-```{r}
-err
-```
+## Types of Errors
 
+### Visual Aid
+
+::::: columns
+::: {.column width="50%"}
+![](images/clipboard-2057166815.png){width="368"}
+:::
+
+::: {.column width="50%"}
 ![](images/clipboard-63089270.png){width="300"}
+:::
+:::::
 
 ## Error
 
@@ -280,12 +256,11 @@ How often are we okay with making a mistake?
 -   It's better to make a Type 2 Error than a Type 1.
     -   Type 1 kills people
     -   Type 2 kills careers
-
 -   We want to minimize the chance of committing a Type 1 Error.
 
 ## Error & Alpha
 
-We accept a `5%`chance of committing a Type 1 Error.
+We accept a `5%` chance of committing a Type 1 Error.
 
 ```{r}
 ba <- 
@@ -293,7 +268,7 @@ ba <-
   geom_vline(xintercept = 1.5)
 ```
 
--   We set alpha to `5%` or `0.05`
+-   We set alpha ($\alpha$) to `5%` or `0.05`
 
 ## Error & Alpha
 
@@ -305,38 +280,26 @@ p_real +
 ## Error & Alpha
 
 ::: fragment
-
-![](images/clipboard-3692632542.png){width="345"}
-
+![](images/clipboard-3692632542.png){width="629"}
 :::
 
 ## Significance
 
 ::: fragment
-
-![](images/clipboard-1570428696.png){width="351"}
-
+![](images/clipboard-1570428696.png){width="632"}
 :::
-
-## Types of Error
-
-### **Type 2:**
-
--   Reality: There is a difference between the groups.
-
--   Conclusion: There is NO difference between the groups.
 
 ## Beta
 
--   We set alpha at `5%` `(0.05)`, meaning we are okay with making a Type 1 Error (false positive) `5%` of the time.
+-   We set alpha at `5%` `(0.05)`, meaning we are okay with making a Type 1 Error (*false positive*) `5%` of the time.
 
--   As a result, beta gets set at `16%`, meaning we have a 16% chance of committing Type 2 Error (false negative).
+-   As a result, beta gets set at `16%`, meaning we have a 16% chance of committing Type 2 Error (*false negative*).
 
-::: fragment
+## Alpha and Beta
+
+### Example
 
 ![](images/clipboard-2847025632.png){width="350"}
-
-:::
 
 ## Error and Alpha and Beta
 
@@ -346,19 +309,23 @@ p_real +
 
 ## Error and Alpha and Beta
 
-|        | H_0        | H_1       |
-|--------|------------|-----------|
-| Accept | 1-$\alpha$ | $\beta$   |
-| Reject | $\alpha$   | 1-$\beta$ |
-|        | 1.00       | 1.00      |
++----------------------+-----------------------------+--------------------+
+|                      | $H_0$ True                  | $H_0$ False        |
++======================+=============================+====================+
+| Fail to Reject $H_0$ | Correct Decision $1-\alpha$ | Incorrect Decision |
+|                      |                             |                    |
+|                      |                             | Type II Error      |
+|                      |                             |                    |
+|                      |                             | $\beta$            |
++----------------------+-----------------------------+--------------------+
+| Reject $H_0$         | Incorrect Decision          | Correct Decision   |
+|                      |                             |                    |
+|                      | Type I Error                | $1-\beta$          |
+|                      |                             |                    |
+|                      | $\alpha$                    |                    |
++----------------------+-----------------------------+--------------------+
 
 ## Error and Alpha and Beta
-
-|        | H_0        | H_1       |
-|--------|------------|-----------|
-| Accept | 1-$\alpha$ | $\beta$   |
-| Reject | $\alpha$   | 1-$\beta$ |
-|        | 1.00       | 1.00      |
 
 ## Power & Effect Size
 
@@ -368,31 +335,37 @@ p_real +
 p
 ```
 
-## Null Hypothesis
+## Null Hypothesis: $H_0$
 
-The [**Null Hypothesis**]{.underline} states that nothing will happen while also naming of the variables (independent and dependent).
+States that nothing will happen while also naming of the variables (independent and dependent).
 
-The Null Hypothesis is written as $H_0$
+-   The Null Hypothesis is written as $H_0$
 
-## Alternative hypothesis
+## Alternative hypothesis: $H_1|H_A$
 
-An [**Alternative Hypothesis**]{.underline} is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.
+A **testable** prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.
 
-The Alternative Hypothesis is written as $H_1$
-
-## Hypothesis testing
-
-• Null Hypothesis ($H_0$): These is no difference in the DV between the IV groups.
-
-• Alternative Hypothesis ($H_1$): The experimental group is significantly different from the control group on the DV.
+-   The Alternative Hypothesis is written as $H_1$
 
 ## Hypothesis testing
 
-![](images/clipboard-1494090978.png){width="314"}
+-   Null Hypothesis ($H_0$): These is **no** difference in the DV between the IV groups.
+
+-   Alternative Hypothesis ($H_1$): The experimental group is **significantly different** from the control group on the DV.
+
+## Hypothesis testing
+
+![](images/clipboard-1494090978.png){width="481"}
 
 ## P-values and confidence intervals
 
 If there is a significant difference between the groups, p will be smaller than `0.05`.
+
+-   If p = .032...
+
+-   If p = .045...
+
+-   If p = .050...
 
 ## Findings in terms of the null hypothesis
 
@@ -402,23 +375,27 @@ If there is a significant difference between the groups, p will be smaller than 
 
 ## Alpha & beta
 
-![](images/clipboard-421457594.png){width="407"}
+![](images/clipboard-421457594.png){width="637"}
 
 ## Alpha & beta
 
 ### $\alpha$ and $\beta$
 
+::: fragment
 Alpha: The probability of committing a Type 1 Error.
 
 -   We set $\alpha$ to `0.05`
+:::
 
+::: fragment
 Beta: The probability of committing a Type 2 Error.
 
 -   When $\alpha$ = `0.05`, the resulting $\beta$ = `0.16`
+:::
 
 ## Alpha & beta
 
-![](images/clipboard-421457594.png){width="270"}
+![](images/clipboard-421457594.png)
 
 ## Types of Errors
 
@@ -426,17 +403,17 @@ Beta: The probability of committing a Type 2 Error.
 ::: {.column width="50%"}
 ### Type 1 Error
 
--   Reality: There is NO difference between the groups.
+-   **Reality**: There is NO difference between the groups.
 
--   Conclusion: There is a difference between the groups.
+-   **Conclusion**: There is a difference between the groups.
 :::
 
 ::: {.column width="50%"}
 ### Type 2 Error
 
--   Reality: There is a difference between the groups.
+-   **Reality**: There is a difference between the groups.
 
--   Conclusion: There is NO difference between the groups.
+-   **Conclusion**: There is NO difference between the groups.
 :::
 :::::
 
@@ -458,15 +435,21 @@ Beta: The probability of committing a Type 2 Error.
 
 ## Alpha & beta & Power
 
-Alpha: The probability of committing a Type 1 Error.
+::: fragment
+**Alpha**: The probability of committing a Type 1 Error.
+:::
 
--   We set $\alpha$ to 0.05
+-   We set $\alpha$ to `0.05`
 
-Beta: The probability of committing a Type 2 Error.
+::: fragment
+**Beta**: The probability of committing a Type 2 Error.
+:::
 
--   When $\alpha$ = 0.05, the resulting $\beta$ = 0.16
+-   When $\alpha$ = `0.05`, the resulting $\beta$ = `0.16`
 
-Power: Ability of the researcher to accurately detect a difference between groups
+::: fragment
+**Power**: Ability of the researcher to accurately detect a difference between groups
+:::
 
 -   If $\alpha$ = `0.05`, $\beta$ = `0.16`, and the resulting power = `0.84`
 
@@ -480,11 +463,17 @@ Power refers to the ability of the researcher to accurately detect a difference 
 
 -   Power is dependent on Effect Size.
 
-## Effect size
+## Effect Size
 
 Effect size in statistics refers to the [**strength of the relationship**]{.underline} between two variables in a population.
 
-## Effect size Example
+-   Cohen's $d$
+-   Coefficient of Determination $R2$
+-   Omega Hat Squared \| Eta Hat Squared
+    -   $\hat{\omega}^2$
+    -   $\hat{\eta}$
+
+## Effect Size Example
 
 > Does caffeine decrease the amount of time it takes to solve a puzzle?
 
@@ -498,7 +487,7 @@ Effect size in statistics refers to the [**strength of the relationship**]{.unde
 :::
 :::::
 
-## Effect size Example
+## Effect Size Example
 
 > Does caffeine decrease the amount of time it takes to solve a puzzle?
 
@@ -514,7 +503,11 @@ Caffeine versus no caffeine
 Task speed
 :::
 
--   Effect size:
+## Effect Size Example
+
+> Does caffeine decrease the amount of time it takes to solve a puzzle?
+
+-   Effect Size:
 
 ::: fragment
 Strength of the relationships between caffeine and task speed
@@ -538,9 +531,40 @@ Strength of the relationships between caffeine and task speed
 
 ## Effect size
 
-Effect size in statistics refers to the [**strength of the relationship**]{.underline} between two variables in a population.
+The [**strength of the relationship**]{.underline} between two variables in a population.
 
-Effect size tells us how much one variable actually impacts the other.
+Effect size tells us how much one variable *actually* impacts the other.
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+library(dplyr)
+
+tibble(
+  x = runif(100,10,20),
+  y = runif(100,10,20)
+) |> 
+  ggplot(aes(x,y)) + 
+  geom_point() + 
+  theme_minimal()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+tibble(
+  x = runif(100,10,20),
+  y = x + 1
+) |> 
+  ggplot(aes(x,y)) + 
+  geom_point() + 
+  theme_minimal()
+```
+:::
+:::::
+
+```         
+```
 
 ## Effect size:
 
@@ -558,19 +582,25 @@ Cohen's d gives us a standardized measure of effect size:
 
 ## Cohen's d
 
+### Formula
+
 -   Cohen's d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the "pooled standard deviation."
 
 -   The pooled standard deviation refers to the average SD across the 2 groups.
 
+::: fragment
 $d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}$
+:::
 
 ## Cohen's d
 
 ### Understanding the Terms
 
+::: fragment
 $d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}$
 
 $d = \frac{\text{Control Group Mean}-\text{Experimental Group Mean}}{\sqrt{\text{Pooled Variance}}}$
+:::
 
 ## Effect size
 

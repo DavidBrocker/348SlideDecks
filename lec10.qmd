@@ -1,0 +1,651 @@
+---
+title: "Covariance & Correlation"
+subtitle: "Lecture 11"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+format: 
+  revealjs:
+    theme: custom.scss
+    incremental: true   
+    touch: true
+    chalkboard: true
+filters:
+  - webr
+---
+
+## Correlation
+
+### What do you know about correlations?
+
+::: highlight-last
+-   Correlation ≠ Causation
+
+-   r
+
+-   Positive correlation: variables move together
+
+    -   As one goes up, the other goes up.
+
+    -   As one goes down, the other goes down.
+:::
+
+## Correlation
+
+Assesses how two variables move in relation to one another.
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(MASS)
+library(patchwork)
+
+# Load necessary libraries
+set.seed(123)  # For reproducibility
+
+# Function to simulate two variables with a specific correlation
+generate_correlation <- function(n, rho) {
+  # Define the mean and covariance matrix
+  mean_vector <- c(0, 0)
+  covariance_matrix <- matrix(c(1, rho, rho, 1), nrow = 2)
+  
+  # Generate correlated data using mvrnorm from the MASS package
+  data <- mvrnorm(n = n, mu = mean_vector, Sigma = covariance_matrix)
+  
+  # Convert to a data frame
+  data_frame <- data.frame(X = data[, 1], Y = data[, 2])
+  return(data_frame)
+}
+
+# Example: Generate data with a correlation of 0.7
+n <- 100  # Number of data points
+rho <- 0.7  # Desired correlation
+data <- generate_correlation(n, rho)
+
+# Plot the data
+p1 <- 
+  ggplot(data, aes(x = X, y = Y)) +
+  geom_point() +
+  labs(
+  title = "Positive Correlation") +
+  theme_minimal() +
+  geom_smooth(
+      method = "lm", 
+      se = FALSE,
+      color = "red",
+      alpha = .3) +
+  theme_classic() + 
+  theme(
+    axis.text = element_blank(),
+    axis.title = element_blank()
+  )
+
+# Example: Generate data with a correlation of 0.7
+n <- 100  # Number of data points
+rho <- -0.7  # Desired correlation
+data <- generate_correlation(n, rho)
+
+p2 <- 
+  ggplot(data, aes(x = X, y = Y)) +
+  geom_point() +
+  labs(
+  title = "Negative Correlation") +
+  theme_minimal() +
+  geom_smooth(
+      method = "lm", 
+      se = FALSE,
+      color = "red",
+      alpha = .3) +
+  theme_classic() + 
+  theme(
+    axis.text = element_blank(),
+    axis.title = element_blank()
+  )
+
+# Example: Generate data with a correlation of 0.7
+n <- 100  # Number of data points
+rho <- 0.01  # Desired correlation
+data <- generate_correlation(n, rho)
+
+p3 <- 
+  ggplot(data, aes(x = X, y = Y)) +
+  geom_point() +
+  labs(
+  title = "No Correlation") +
+  theme_minimal() +
+  geom_smooth(
+      method = "lm", 
+      se = FALSE,
+      color = "red",
+      alpha = .3) +
+  theme_classic() + 
+  theme(
+    axis.text = element_blank(),
+    axis.title = element_blank()
+  )
+
+p1 + p2 + p3
+
+```
+
+# Ok, but how?!
+
+## Measures of Dispersion
+
+::: highlight-last
+-   What are measures of dispersion?
+
+-   Measures of how spread out the data are, how much participants differ.
+:::
+
+## Measures of Dispersion
+
+::: highlight-last
+-   How do we measure dispersion when we were looking at one variable?
+
+-   Standard deviation
+
+-   Variance
+:::
+
+## Measures of Dispersion
+
+::: highlight-last
+-   Univariate = one variable
+
+-   Bivariate = two variables
+
+-   Multivariate = more than two variables
+:::
+
+## Measures of Dispersion
+
+::: highlight-last
+-   **Uni**variate = one variable
+
+-   **Bi**variate = two variables
+
+-   **Multi**variate = more than two variables
+:::
+
+## Measures of Dispersion
+
+::: highlight-last
+-   Univariate measures of dispersion?
+
+    -   Standard deviation: How different are participants from the average?
+
+-   Bivariate measures of dispersion:
+
+    -   Covariance
+
+    -   How much variation in one variable is the same in another variable?
+
+    -   Do the variables vary in the same way?
+:::
+
+## Measures of Dispersion
+
+::: highlight-last
+-   Univariate measures of dispersion?
+
+-   Standard deviation: **Height** `M = 5'6"`, `s = 2 inches`
+
+-   Bivariate measures of dispersion:
+
+    -   Covariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?
+:::
+
+## Covariance
+
+> Professor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks `50` professors how many cups they have in a typical day and then has them rate their happiness on a scale of `1 to 10`.
+
+::: highlight-last
+-   Variable 1: Number of Cups of Coffee = continuous
+
+-   Variable 2: Happiness = continuous
+:::
+
+## Covariance
+
+We could:
+
+::: highlight-last
+-   Find the variance of each variable
+
+-   Find the covariance of the two variables together
+:::
+
+## Covariance
+
+Covariance refers to how two continuous variables vary in tandem.
+
+::: fragment
+![](images/clipboard-3437818122.png){width="498"}
+:::
+
+## Covariance
+
+Covariance refers to how two variables vary together:
+
+::: highlight-last
+-   Generally, if cups of coffee goes up, what does happiness tend to do?
+
+-   Generally, if happiness goes up, what does cups of coffee tend to do?
+:::
+
+## Covariance
+
+> Professor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks `50` professors how many cups they have in a typical day and then has them rate their happiness on a scale of `1 to 10`.
+
+::: highlight-last
+-   Variable 1: Number of Cups of Coffee
+
+-   Variable 2: Happiness
+:::
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
+$$
+:::
+
+## Covariance
+
+### Well, well, well–We Meet Again
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
+$$
+:::
+
+::: fragment
+$$
+s^2 = \frac{\Sigma(X-\bar{X})^2}{N-1}
+$$
+:::
+
+## Covariance
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
+$$
+:::
+
+::: fragment
+$$
+s^2 = \frac{\Sigma(X-\bar{X})^2}{N-1} = \frac{\Sigma(X-\bar{X})(X-\bar{X})}{N-1}
+$$
+:::
+
+## Covariance
+
+The variance of a variable is the covariance of that variable with itself.
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
+$$
+:::
+
+## Covariance
+
+Covariance is the variance of two variables together... how they move together.
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
+$$
+:::
+
+## Covariance
+
+Let's break it down.
+
+::: highlight-last
+-   Find the mean of each variable.
+:::
+
+::: fragment
+$$\bar{X} = \frac{\Sigma(x)}{n}$$ $$\bar{Y} = \frac{\Sigma(Y)}{n}$$
+:::
+
+## Covariance
+
+Let's break it down.
+
+::: highlight-last
+-   Find the mean of each variable.
+
+-   Subtract the mean of x from each x value.
+
+-   Subtract the mean of y from each y value.
+:::
+
+::: fragment
+$$(X-\bar{X})$$ $$(Y-\bar{Y})$$
+:::
+
+## Covariance
+
+Let's break it down.
+
+::: highlight-last
+-   Find the mean of each variable.
+
+-   Subtract the mean of x from each x value.
+
+-   Subtract the mean of y from each y value.
+
+-   Multiple the deviation scores of x with the deviation scores of y.
+:::
+
+$$(X-\bar{X})(Y-\bar{Y})$$
+
+## Covariance
+
+Let's break it down.
+
+::: highlight-last
+-   Find the mean of each variable.
+
+-   Subtract the mean of x from each x value.
+
+-   Subtract the mean of y from each y value.
+
+-   Multiple the deviation scores of x with the deviation scores of y.
+
+-   Sum the products of the deviation scores.
+:::
+
+::: fragment
+$$\sum(X-\bar{X})(Y-\bar{Y})$$
+:::
+
+## Covariance
+
+Let's break it down.
+
+::: highlight-last
+-   Find the mean of each variable.
+
+-   Subtract the mean of x from each x value.
+
+-   Subtract the mean of y from each y value.
+
+-   Multiple the deviation scores of x with the deviation scores of y.
+
+-   Sum the products of the deviation scores.
+
+-   Divide by N-1.
+:::
+
+::: fragment
+$$\frac{\sum(X-\bar{X})(Y-\bar{Y})}{N-1}$$
+:::
+
+## Covariance
+
+Covariance is the [**bivariate**]{.underline} equivalent of variance.
+
+::: highlight-last
+-   What does the covariance tell us?
+
+-   What did the variance tell us?
+
+    -   Not much because it was inflated.
+
+-   For it to be useful, we had to ***standardize*** it.
+:::
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
+$$
+:::
+
+## Correlation
+
+::: highlight-last
+-   Correlation is the standardized covariance.
+
+-   Correlation is the bivariate version of the standard deviation.
+
+-   To calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.
+:::
+
+::: fragment
+$$\frac{cov_{xy}}{(SD_x)(SD_y)}$$
+:::
+
+# Calculating Correlation:
+
+## Correlation
+
+::: fragment
+$$
+COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
+$$ $$\frac{cov_{xy}}{(SD_x)(SD_y)}$$
+:::
+
+## Correlation
+
+### Calculating Correlation:
+
+::: fragment
+$$
+\frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}
+$$
+:::
+
+## Correlation
+
+Correlation is the bivariate version of the standard deviation.
+
+::: fragment
+$$
+\frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}
+$$
+:::
+
+## Correlation
+
+::: highlight-last
+-   Correlation is bounded between -1 and +1.
+
+-   Closer to -1 is a negative correlation.
+
+-   Closer to +1 is a positive correlation.
+
+-   Closer to 0 means no correlation.
+:::
+
+## Correlation
+
+```{r}
+p1+p2+p3
+```
+
+## Correlation
+
+This is the Pearson Product-Moment Correlation (Pearson, 1895).
+
+::: highlight-last
+-   The sign indicates the **direction**.
+
+-   The number indicates the **magnitude/strength** of the relationship.
+
+    -   0.1 is a small correlation
+
+    -   0.3 is a moderate correlation
+
+    -   0.5 or higher is a large correlation
+:::
+
+## Correlation
+
+::: highlight-last
+-   Correlation is written as r
+
+-   If we square r, we get $R^2$
+
+-   $R^2$ is always positive
+
+-   $R^2$ refers to:
+
+    -   The amount of x accounted for by y.
+
+    -   The amount of y accounted for by x.
+:::
+
+## Correlation and $R^2$
+
+### Example
+
+> Students grades in MTH 110 and their grades in correlation at r = 0.3
+
+::: highlight-last
+-   Moderate correlation
+
+-   How much of your grade is accounted for by your MTH 110 grade?
+
+-   0.3 x 0.3 = 0.09
+
+-   $R^2$ = 9% of your grade is explained by your MTH 110 grade.
+:::
+
+## Interpreting Correlation
+
+![](images/clipboard-592522789.png){width="464"}
+
+## Interpreting Correlation
+
+::: highlight-last
+-   We don't use the words *caused/resulting from*.
+
+-   When reporting r: *"As x goes up, y tends to go up."*
+
+-   When reporting $R^2$: *"z% of x is accounted for by y."*
+:::
+
+## Reporting correlation
+
+### Correlation Matrix
+
+::: highlight-last
+-   In the Method, we report descriptive statistics about our variables (M, s).
+
+-   It is common to refer readers to a table where they can look at correlations between the variables.
+
+-   Why might this be important?
+:::
+
+## Correlation Matrix
+
+Table 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:
+
+::: fragment
+```{r}
+library(huxtable)
+library(janitor)
+
+tab <- 
+  tibble(
+  var = c("Age","Song 1","Song 2"),
+  M = c(20.91,4.21,6.42),
+  s = c(1.76,1.2,2.18),
+  var1 = c("1",".03",".65**"),
+  var2 = c("--","1","-.34*"),
+  var3 = c("--","--","1")
+) |> hux() |> 
+  theme_article()
+
+tab[1,1] <- ""
+tab[1,4:6] <- c("1","2","3")
+
+tab |> 
+  set_align(value = "center")
+
+```
+:::
+
+## Correlation Matrix
+
+Table 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:
+
+::: fragment
+```{r}
+tab2 <- 
+  tibble(
+  var = c("Age","Song 1","Song 2"),
+  M = c(20.91,4.21,6.42),
+  s = c(1.76,1.2,2.18),
+  var1 = c("1","-.03",".65**"),
+  var2 = c("-.03","1","-.34*"),
+  var3 = c(".65**","-.34*","1")
+) |> hux() |> 
+  theme_article()
+
+tab2[1,1] <- ""
+tab2[1,4:6] <- c("1","2","3")
+
+tab2 |> 
+  set_align(value = "center")
+
+```
+:::
+
+## Reporting Calculation
+
+### Example 1
+
+> In a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for `50` students. Below is a scatterplot showing the relationship between the two variables.
+
+::: fragment
+```{r}
+# Example: Generate data with a correlation of 0.7
+n <- 100  # Number of data points
+rho <- 0.85  # Desired correlation
+data <- generate_correlation(n, rho)
+
+ 
+ex1 <- 
+  ggplot(data, aes(x = X, y = Y)) +
+  geom_point() +
+  labs(
+    x = "Hours Studying",
+    y = "Exam Score"
+    ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank()
+  )
+
+ex1
+```
+:::
+
+-   Based on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?
+
+## Reporting Calculation
+
+### Example 1
+
+::: fragment
+```{r}
+ex1
+```
+:::
+
+-   Suppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables.
+
+## Reporting Calculation
+
+### Example 2
+
+> Using the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The $R^2$ value for the model is `0.72`.
+
+-   What does an $R^2$ value of `0.72` tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?
+
+-   Imagine you are the researcher. Based on the $R^2$ value of `0.72`, would you consider study time to be a good predictor of exam performance? Why or why not?
