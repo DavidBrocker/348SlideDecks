@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides – Covariance &amp; Correlation</title>
+  <title>348 Slides – R Workstation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -36,6 +36,7 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -246,6 +247,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -328,8 +330,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Covariance &amp; Correlation</h1>
-  <p class="subtitle">Lecture 11</p>
+  <h1 class="title">R Workstation</h1>
+  <p class="subtitle">Lecture 12</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -343,519 +345,15 @@ Dave Brocker
 </div>
 
 </section>
-<section id="correlation" class="slide level2">
-<h2>Correlation</h2>
-<h3 id="what-do-you-know-about-correlations">What do you know about correlations?</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Correlation ≠ Causation</p></li>
-<li class="fragment"><p>r</p></li>
-<li class="fragment"><p>Positive correlation: variables move together</p>
-<ul>
-<li class="fragment"><p>As one goes up, the other goes up.</p></li>
-<li class="fragment"><p>As one goes down, the other goes down.</p></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="correlation-1" class="slide level2">
-<h2>Correlation</h2>
-<p>Assesses how two variables move in relation to one another.</p>
+<section class="slide level2">
 
-<img data-src="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section>
-<section id="ok-but-how" class="title-slide slide level1 center">
-<h1>Ok, but how?!</h1>
-
-</section>
-<section id="measures-of-dispersion" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What are measures of dispersion?</p></li>
-<li class="fragment"><p>Measures of how spread out the data are, how much participants differ.</p></li>
-</ul>
-</div>
-</section>
-<section id="measures-of-dispersion-1" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>How do we measure dispersion when we were looking at one variable?</p></li>
-<li class="fragment"><p>Standard deviation</p></li>
-<li class="fragment"><p>Variance</p></li>
-</ul>
-</div>
-</section>
-<section id="measures-of-dispersion-2" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Univariate = one variable</p></li>
-<li class="fragment"><p>Bivariate = two variables</p></li>
-<li class="fragment"><p>Multivariate = more than two variables</p></li>
-</ul>
-</div>
-</section>
-<section id="measures-of-dispersion-3" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p><strong>Uni</strong>variate = one variable</p></li>
-<li class="fragment"><p><strong>Bi</strong>variate = two variables</p></li>
-<li class="fragment"><p><strong>Multi</strong>variate = more than two variables</p></li>
-</ul>
-</div>
-</section>
-<section id="measures-of-dispersion-4" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Univariate measures of dispersion?</p>
-<ul>
-<li class="fragment">Standard deviation: How different are participants from the average?</li>
-</ul></li>
-<li class="fragment"><p>Bivariate measures of dispersion:</p>
-<ul>
-<li class="fragment"><p>Covariance</p></li>
-<li class="fragment"><p>How much variation in one variable is the same in another variable?</p></li>
-<li class="fragment"><p>Do the variables vary in the same way?</p></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="measures-of-dispersion-5" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Univariate measures of dispersion?</p></li>
-<li class="fragment"><p>Standard deviation: <strong>Height</strong> <code>M = 5'6"</code>, <code>s = 2 inches</code></p></li>
-<li class="fragment"><p>Bivariate measures of dispersion:</p>
-<ul>
-<li class="fragment">Covariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="covariance" class="slide level2">
-<h2>Covariance</h2>
-<blockquote>
-<p>Professor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks <code>50</code> professors how many cups they have in a typical day and then has them rate their happiness on a scale of <code>1 to 10</code>.</p>
-</blockquote>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Variable 1: Number of Cups of Coffee = continuous</p></li>
-<li class="fragment"><p>Variable 2: Happiness = continuous</p></li>
-</ul>
-</div>
-</section>
-<section id="covariance-1" class="slide level2">
-<h2>Covariance</h2>
-<p>We could:</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the variance of each variable</p></li>
-<li class="fragment"><p>Find the covariance of the two variables together</p></li>
-</ul>
-</div>
-</section>
-<section id="covariance-2" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance refers to how two continuous variables vary in tandem.</p>
-<div class="fragment">
-<p><img data-src="images/clipboard-3437818122.png" width="498"></p>
-</div>
-</section>
-<section id="covariance-3" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance refers to how two variables vary together:</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Generally, if cups of coffee goes up, what does happiness tend to do?</p></li>
-<li class="fragment"><p>Generally, if happiness goes up, what does cups of coffee tend to do?</p></li>
-</ul>
-</div>
-</section>
-<section id="covariance-4" class="slide level2">
-<h2>Covariance</h2>
-<blockquote>
-<p>Professor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks <code>50</code> professors how many cups they have in a typical day and then has them rate their happiness on a scale of <code>1 to 10</code>.</p>
-</blockquote>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Variable 1: Number of Cups of Coffee</p></li>
-<li class="fragment"><p>Variable 2: Happiness</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-5" class="slide level2">
-<h2>Covariance</h2>
-<h3 id="well-well-wellwe-meet-again">Well, well, well–We Meet Again</h3>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-s^2 = \frac{\Sigma(X-\bar{X})^2}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-6" class="slide level2">
-<h2>Covariance</h2>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-s^2 = \frac{\Sigma(X-\bar{X})^2}{N-1} = \frac{\Sigma(X-\bar{X})(X-\bar{X})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-7" class="slide level2">
-<h2>Covariance</h2>
-<p>The variance of a variable is the covariance of that variable with itself.</p>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-8" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance is the variance of two variables together… how they move together.</p>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-9" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment">Find the mean of each variable.</li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\bar{X} = \frac{\Sigma(x)}{n}\]</span> <span class="math display">\[\bar{Y} = \frac{\Sigma(Y)}{n}\]</span></p>
-</div>
-</section>
-<section id="covariance-10" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[(X-\bar{X})\]</span> <span class="math display">\[(Y-\bar{Y})\]</span></p>
-</div>
-</section>
-<section id="covariance-11" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-<li class="fragment"><p>Multiple the deviation scores of x with the deviation scores of y.</p></li>
-</ul>
-</div>
-<p><span class="math display">\[(X-\bar{X})(Y-\bar{Y})\]</span></p>
-</section>
-<section id="covariance-12" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-<li class="fragment"><p>Multiple the deviation scores of x with the deviation scores of y.</p></li>
-<li class="fragment"><p>Sum the products of the deviation scores.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\sum(X-\bar{X})(Y-\bar{Y})\]</span></p>
-</div>
-</section>
-<section id="covariance-13" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-<li class="fragment"><p>Multiple the deviation scores of x with the deviation scores of y.</p></li>
-<li class="fragment"><p>Sum the products of the deviation scores.</p></li>
-<li class="fragment"><p>Divide by N-1.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\frac{\sum(X-\bar{X})(Y-\bar{Y})}{N-1}\]</span></p>
-</div>
-</section>
-<section id="covariance-14" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance is the <u><strong>bivariate</strong></u> equivalent of variance.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What does the covariance tell us?</p></li>
-<li class="fragment"><p>What did the variance tell us?</p>
-<ul>
-<li class="fragment">Not much because it was inflated.</li>
-</ul></li>
-<li class="fragment"><p>For it to be useful, we had to <strong><em>standardize</em></strong> it.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="correlation-2" class="slide level2">
-<h2>Correlation</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Correlation is the standardized covariance.</p></li>
-<li class="fragment"><p>Correlation is the bivariate version of the standard deviation.</p></li>
-<li class="fragment"><p>To calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\frac{cov_{xy}}{(SD_x)(SD_y)}\]</span></p>
-</div>
-</section></section>
-<section>
-<section id="calculating-correlation" class="title-slide slide level1 center">
-<h1>Calculating Correlation:</h1>
-
-</section>
-<section id="correlation-3" class="slide level2">
-<h2>Correlation</h2>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span> <span class="math display">\[\frac{cov_{xy}}{(SD_x)(SD_y)}\]</span></p>
-</div>
-</section>
-<section id="correlation-4" class="slide level2">
-<h2>Correlation</h2>
-<h3 id="calculating-correlation-1">Calculating Correlation:</h3>
-<div class="fragment">
-<p><span class="math display">\[
-\frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}
-\]</span></p>
-</div>
-</section>
-<section id="correlation-5" class="slide level2">
-<h2>Correlation</h2>
-<p>Correlation is the bivariate version of the standard deviation.</p>
-<div class="fragment">
-<p><span class="math display">\[
-\frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}
-\]</span></p>
-</div>
-</section>
-<section id="correlation-6" class="slide level2">
-<h2>Correlation</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Correlation is bounded between -1 and +1.</p></li>
-<li class="fragment"><p>Closer to -1 is a negative correlation.</p></li>
-<li class="fragment"><p>Closer to +1 is a positive correlation.</p></li>
-<li class="fragment"><p>Closer to 0 means no correlation.</p></li>
-</ul>
-</div>
-</section>
-<section id="correlation-7" class="slide level2">
-<h2>Correlation</h2>
-
-<img data-src="lec10_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="correlation-8" class="slide level2">
-<h2>Correlation</h2>
-<p>This is the Pearson Product-Moment Correlation (Pearson, 1895).</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>The sign indicates the <strong>direction</strong>.</p></li>
-<li class="fragment"><p>The number indicates the <strong>magnitude/strength</strong> of the relationship.</p>
-<ul>
-<li class="fragment"><p>0.1 is a small correlation</p></li>
-<li class="fragment"><p>0.3 is a moderate correlation</p></li>
-<li class="fragment"><p>0.5 or higher is a large correlation</p></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="correlation-9" class="slide level2">
-<h2>Correlation</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Correlation is written as r</p></li>
-<li class="fragment"><p>If we square r, we get <span class="math inline">\(R^2\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(R^2\)</span> is always positive</p></li>
-<li class="fragment"><p><span class="math inline">\(R^2\)</span> refers to:</p>
-<ul>
-<li class="fragment"><p>The amount of x accounted for by y.</p></li>
-<li class="fragment"><p>The amount of y accounted for by x.</p></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="correlation-and-r2" class="slide level2">
-<h2>Correlation and <span class="math inline">\(R^2\)</span></h2>
-<h3 id="example">Example</h3>
-<blockquote>
-<p>Students grades in MTH 110 and their grades in correlation at r = 0.3</p>
-</blockquote>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Moderate correlation</p></li>
-<li class="fragment"><p>How much of your grade is accounted for by your MTH 110 grade?</p></li>
-<li class="fragment"><p>0.3 x 0.3 = 0.09</p></li>
-<li class="fragment"><p><span class="math inline">\(R^2\)</span> = 9% of your grade is explained by your MTH 110 grade.</p></li>
-</ul>
-</div>
-</section>
-<section id="interpreting-correlation" class="slide level2">
-<h2>Interpreting Correlation</h2>
-
-<img data-src="images/clipboard-592522789.png" width="464" class="r-stretch"></section>
-<section id="interpreting-correlation-1" class="slide level2">
-<h2>Interpreting Correlation</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>We don’t use the words <em>caused/resulting from</em>.</p></li>
-<li class="fragment"><p>When reporting r: <em>“As x goes up, y tends to go up.”</em></p></li>
-<li class="fragment"><p>When reporting <span class="math inline">\(R^2\)</span>: <em>“z% of x is accounted for by y.”</em></p></li>
-</ul>
-</div>
-</section>
-<section id="reporting-correlation" class="slide level2">
-<h2>Reporting correlation</h2>
-<h3 id="correlation-matrix">Correlation Matrix</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>In the Method, we report descriptive statistics about our variables (M, s).</p></li>
-<li class="fragment"><p>It is common to refer readers to a table where they can look at correlations between the variables.</p></li>
-<li class="fragment"><p>Why might this be important?</p></li>
-</ul>
-</div>
-</section>
-<section id="correlation-matrix-1" class="slide level2">
-<h2>Correlation Matrix</h2>
-<p>Table 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:</p>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
-<colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">M</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">s</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">3</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Age</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">20.9</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.76</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">--</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">--</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Song 1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4.21</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.2</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.03</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">--</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Song 2</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6.42</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2.18</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.65**</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-.34*</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td></tr>
-</tbody></table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="correlation-matrix-2" class="slide level2">
-<h2>Correlation Matrix</h2>
-<p>Table 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:</p>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
-<colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">M</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">s</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">3</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Age</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">20.9</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.76</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-.03</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.65**</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Song 1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4.21</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.2</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-.03</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">-.34*</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Song 2</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6.42</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2.18</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.65**</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-.34*</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td></tr>
-</tbody></table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="reporting-calculation" class="slide level2">
-<h2>Reporting Calculation</h2>
-<h3 id="example-1">Example 1</h3>
-<blockquote>
-<p>In a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for <code>50</code> students. Below is a scatterplot showing the relationship between the two variables.</p>
-</blockquote>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li class="fragment">Based on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?</li>
-</ul>
-</section>
-<section id="reporting-calculation-1" class="slide level2">
-<h2>Reporting Calculation</h2>
-<h3 id="example-1-1">Example 1</h3>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li class="fragment">Suppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables.</li>
-</ul>
-</section>
-<section id="reporting-calculation-2" class="slide level2">
-<h2>Reporting Calculation</h2>
-<h3 id="example-2">Example 2</h3>
-<blockquote>
-<p>Using the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The <span class="math inline">\(R^2\)</span> value for the model is <code>0.72</code>.</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>What does an <span class="math inline">\(R^2\)</span> value of <code>0.72</code> tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?</p></li>
-<li class="fragment"><p>Imagine you are the researcher. Based on the <span class="math inline">\(R^2\)</span> value of <code>0.72</code>, would you consider study time to be a good predictor of exam performance? Why or why not?</p></li>
-</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -867,6 +365,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -889,6 +388,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1059,7 +559,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1068,44 +568,6 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
