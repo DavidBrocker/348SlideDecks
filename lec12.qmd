@@ -1,0 +1,609 @@
+---
+title: "Regression Part II"
+subtitle: "Lecture 12"
+author: "Dave Brocker"
+footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+institute: "Farmingdale State College"
+format: 
+  revealjs:
+    theme: custom.scss
+    incremental: true   
+    touch: true
+    chalkboard: true
+    lightbox: true
+    code-fold: true
+    drop:
+      engine: webr
+      webr:
+        packages:
+         - ggplot2
+         - dplyr
+revealjs-plugins:
+  - drop
+---
+
+## Types of Analysis
+
+-   Univariate: One variable, like the mean
+
+-   Bivariate: Two variables, like correlation
+
+-   Multivariate: More than 2 variables
+
+## Regression
+
+-   Regression is the multivariate version of correlation.
+
+-   Correlation is the bivariate version of regression.
+
+## Regression
+
+-   Regression is the multivariate version of correlation.
+
+-   Correlation is the bivariate version of regression.
+
+-   We're doing the same thing in regression as we do in correlation, BUT there are more than 2 variables.
+
+## Regression terminology
+
+In regression we will choose one variable to predict.
+
+-   We call this `y`.
+
+-   `Y` is the outcome variable.
+
+-   `Y` is the predicted variable.
+
+## Regression terminology
+
+In regression we will choose two or more variables we with believe predict y.
+
+-   We call these $x_1$, $x_2$, etc.
+
+-   Some people call these `x` and `z`.
+
+-   `X` is the predictor variable.
+
+## Regression terminology
+
+We we predict Y with `X`, we say;
+
+we regress `y` on the `x`.
+
+## Regression Equation
+
+$\hat{Y} = b_0 + b_1X_1i$
+
+$Y = ax + b$
+
+## Linear Regression
+
+### Line of Best Fit
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(MASS)
+
+generate_correlation <- function(n, rho) {
+  # Define the mean and covariance matrix
+  mean_vector <- c(0, 0)
+  covariance_matrix <- matrix(c(1, rho, rho, 1), nrow = 2)
+  
+  # Generate correlated data using mvrnorm from the MASS package
+  data <- mvrnorm(n = n, mu = mean_vector, Sigma = covariance_matrix)
+  
+  # Convert to a data frame
+  data_frame <- data.frame(X = data[, 1], Y = data[, 2])
+  return(data_frame)
+}
+
+# Example: Generate data with a correlation of 0.7
+n <- 100  # Number of data points
+rho <- 0.82  # Desired correlation
+data <- generate_correlation(n, rho)
+
+data <- data*23
+
+data |> 
+  ggplot(aes(X, Y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_minimal() + 
+  labs(
+    title = "Simple Linear Regression",
+    x = "\nX",
+    y = "Y\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+
+```
+
+## Regression:
+
+### Equation Component Meanings
+
+-   $Y$ = theoretical prediction of `y`
+
+-   $\hat{Y}$= the actual y value for a participant
+
+-   $b_0$ = the intercept: the average `y` value
+
+-   $X_1$ = the x value for a participant
+
+-   $b_1$ = a weighted value that is multiplied by x and added to $b_0$ to estimate `y`.
+
+## Regression Equation: More than one X
+
+$\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
+
+## Regression:
+
+### Equation Component Meanings
+
+-   $Y$ = theoretical prediction of `y`
+
+-   $\hat{Y}$= the actual `y` value for a participant
+
+-   $b_0$ = the intercept: the average `y` value
+
+-   $X_1$ = the `x` value for a participant
+
+-   $b_1$ = a weighted value that is multiplied by x and added to $b_0$ to estimate y.
+
+-   $X_2$ = the $x_2$ value for a participant
+
+-   $b_2$ = a weighted value that is multiplied by $x_2$
+
+## Regression Equation:
+
+## More than one X
+
+$\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
+
+# Interpreting coefficients
+
+## Interpreting coefficients
+
+```{r}
+library(huxtable)
+
+test <- 
+  tibble(
+  money = runif(100,10000,50000),
+  x1 = runif(100,14,50),
+  x2 = runif(100,30,60),
+  x3 = runif(100,23,90) ,
+  x4 = runif(100,60,100) ,
+  x5 = runif(100,30,100),
+  x6 = runif(100,88,100)
+) 
+
+mod1 <- lm(money ~ x1+x2+x3+x4+x5+x6, data = test) |> summary() 
+  
+huxreg("Model 1"=mod1,
+       error_pos = "right",
+       statistics = NULL) |> 
+  theme_article() 
+  
+```
+
+## Interpreting coefficients
+
+-   Unstandardized `b` coefficient
+
+-   Beta coefficient
+
+-   t-value
+
+-   p-value
+
+## Interpreting coefficients
+
+-   Unstandardized `b` coefficient
+
+-   Beta coefficient
+
+-   t-value
+
+-   **p-value \<--- is this a significant predictor of y?**
+
+## Interpreting coefficients
+
+-   Unstandardized `b` coefficient
+
+-   **Beta coefficient \<--- which predictor of y has the more predictive power?**
+
+-   t-value
+
+-   p-value
+
+## Interpreting coefficients
+
+!!Put Table Here
+
+# $R^2$
+
+## $R^2$
+
+-   $R^2$ is the correlation coefficient (`r`) squared.
+
+-   $R^2$ is always positive
+
+-   In correlation, the amount of `y` accounted for by `x`
+
+## R\^2
+
+-   In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
+
+-   How much of `y` did we account for?
+
+-   Did we account for a **significant** amount of the variance in `y`?
+
+## $R^2$
+
+!! Input model summary
+
+## Interpreting R Squared
+
+-   R Squared
+
+-   Adjusted R Squared
+
+-   F-value
+
+-   p-value
+
+## Interpreting R Squared
+
+-   R Squared
+
+-   Adjusted R Squared
+
+-   F-value
+
+-   **p-value \<--- is this a significant predictor of `y`?**
+
+## Interpreting R Squared
+
+-   **R Squared \<--- The percentage of `y` accounted for by the predictors**
+
+-   Adjusted R Squared
+
+-   F-value
+
+-   p-value
+
+## Interpreting R Squared
+
+-   R Squared
+
+-   **Adjusted R Squared \<--- The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
+
+-   F-value
+
+-   p-value
+
+## Linear Regression
+
+### Example
+
+> Professor Brocker wants to be able to predict high thoughts.
+>
+> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.)
+
+## Linear Regression
+
+> Professor Brocker wants to be able to predict high thoughts.
+>
+> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com
+
+## Linear Regression
+
+> Professor Brocker wants to be able to predict high thoughts.
+>
+> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com
+
+## Linear Regression
+
+> Professor Brocker wants to be able to predict high thoughts.
+>
+> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com
+
+## Linear Regression
+
+> Professor Brocker wants to be able to predict high thoughts.
+
+What are some predictors of high thoughts?
+
+## Linear Regression
+
+> Professor Brocker wants to be able to predict high thoughts.
+
+What are some predictors of high thoughts?
+
+-   High-making substance consumption
+
+## Linear Regression
+
+Professor Brocker wants to be able to predict high thoughts.
+
+What are some predictors of high thoughts?
+
+-   High-making substance consumption
+
+-   Propensity for high thoughts at baseline
+
+## Linear Regression
+
+Professor Brocker wants to be able to predict high thoughts.
+
+What are some predictors of high thoughts?
+
+-   High-making substance consumption
+
+-   Propensity for high thoughts at baseline
+
+## Linear Regression
+
+Professor Brocker wants to be able to predict high thoughts.
+
+What are some predictors of high thoughts?
+
+-   High-making substance consumption
+
+-   Propensity for high thoughts at baseline
+
+## Linear Regression
+
+Professor Brocker wants to be able to predict high thoughts.
+
+What are some predictors of high thoughts?
+
+-   High-making substance consumption
+
+-   Propensity for high thoughts at baseline
+
+## Regression Equation
+
+$Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i$
+
+## Regression Equation
+
+::: {style="position: absolute; top: 20%; font-size: 10px;"}
+The predicted degree of high thoughts for a participant "`i`"
+:::
+
+$$Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i$$
+
+!Intercept: Average degree of high thoughts
+
+!Coefficient for $X_1$
+
+!How much substance has been consumed?
+
+!One's baseline high thoughts propensity
+
+!Coefficient for $X_2$
+
+## Regression Equation: Theoretical
+
+$Y_i = b_0 + b_1X_1i + b_2X_2i + e_i$
+
+! Randomness
+
+## Regression Equation
+
+$Y_i = b_0 + b_1X_1i + b_2X_2i + e_i$
+
+## Regression Equation: Computational
+
+$\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
+
+## Linear Regression
+
+-   This form of regression is called linear regression.
+
+## Example
+
+## Example
+
+# Reporting Regression Findings
+
+## Example
+
+First, report adjusted $R^2$ and it's corresponding p:
+
+-   Our model predicted a significant amount of variance in high thoughts, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
+
+-   Age, consumption of high-making substances, and propensity for high thoughts predicted a significant amount of variance in high thoughts, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
+
+## Example
+
+Then report individual betas and their p's:
+
+-   High-making substances consumed (*beta = 0.912, p = 0.001*) and propensity for high thoughts (*beta = 0.042, p = 0.04*) significantly predicted a higher high thoughts.
+
+-   Age did not predict likelihood of experiencing high thoughts.
+
+-   It's common to report betas and p's in text as well as in a table.
+
+# Categorical variables in regression
+
+### Categorical variables
+
+### Discrete, not continuous:
+
+-   Groups
+
+-   Categories
+
+-   Labels
+
+## Categorical variables
+
+If your only predictor is a categorical variable, you should run a t-test or ANOVA.
+
+## Categorical variables in Regression
+
+Sometimes researchers want to examine how several variables predict one outcome.
+
+We did this with high thoughts:
+
+-   Age
+
+-   \# of marijuanas
+
+-   Propensity for high thoughts
+
+## Categorical variables in Regression
+
+Sometimes researchers want to examine how several variables predict one outcome.
+
+Sometimes one of these variables is categorical.
+
+> Example: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
+
+## Categorical variables in Regression
+
+Dependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
+
+Predictors:
+
+-   Time of night
+
+-   Cups of coffee consumed
+
+-   Is it about death or time travel?
+
+Variable Type:
+
+-   Continuous
+
+-   Continuous
+
+-   *Categorical*
+
+## Categorical variables in Regression
+
+Dependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
+
+Predictors:
+
+-   Time of night: As it gets later, the number of episodes will decrease (negative correlation)
+
+-   Cups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)
+
+-   Is the show about death or time travel? If so, number of episodes will increase.
+
+## Dummy coding
+
+-   Assign each category a number value.
+
+    -   0 = No
+
+    -   1 = Yes
+
+## Dummy coding
+
+-   Assign each category a number value.
+
+    -   0 = No, The show is not about death or time travel.
+
+    -   1 = Yes, The show is about death or time travel.
+
+## Interpreting dummy coded variables
+
+!! Table
+
+## Report the findings
+
+-   Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (*beta = -0.412, p = 0.04*).
+
+## Interpreting dummy coded variables
+
+!! Table
+
+## Report the findings
+
+-   Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (*beta = -0.412, p = 0.04*).
+
+-   Coffee was not a significant predictor of number of episodes.
+
+## Interpreting dummy coded variables
+
+!! Table
+
+## Report the findings
+
+-   Time significantly predicted the outcome variable in that as the tim got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).
+
+-   Coffee was not a significant predictor of number of episodes.
+
+-   Show content significantly predicted watching more episodes (beta = 0.912, p \< 0.001).
+
+## Dummy coding
+
+-   Gender:
+
+    -   0 = Male
+
+    -   1 = Female
+
+## Interpreting dummy coded variables
+
+!! Table
+
+## Interpreting dummy coded gender
+
+-   Beta is positive (beta = 0.912, p \< 0.001).
+
+-   Whatever is coded as 1 is higher on the the dependent variable.
+
+-   Women reported significantly more enjoyment of True Crime than men.
+
+## Categorical variables in regression
+
+-   Y = How many days would you survive in the zombie apocalypse?
+
+-   Y = How many days would you survive in the zombie apocalypse?
+
+-   X1 = Crossbow skills on a scale of 1 (what's a crossbow?) to 10 (bullseye)
+
+## Categorical variables in regression
+
+-   Y = How many days would you survive in the zombie apocalypse?
+
+-   X1 = Crossbow skills on a scale of 1 (what's a crossbow?) to 10 (bullseye)
+
+-   X2 = \# of episodes of the Walking Dead watched
+
+-   X3 = Do you have a weapon? Y/N
+
+## Categorical variables in regression
+
+-   Crossbow skills: As crossbow skills go up, days survived will go up.
+
+-   WD episodes: As episodes goes up, days survived will go up.
+
+-   Weapon:
+
+    -   0 = No weapon :(
+
+    -   1 = Weapon! :)
+
+## Categorical variables in regression
+
+-   Crossbow skills: As crossbow skills go up, days survived will go up.
+
+-   WD episodes: As episodes goes up, days survived will go up.
+
+-   Weapon: Individuals who have weapon will survive more days.
+
+-   How will we know if this is true?
+
+    -   Beta will be positive if having a weapon increases days.
+
+    -   Beta will be negative if having a weapon decreases days.

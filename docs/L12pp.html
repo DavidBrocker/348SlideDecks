@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>348slides – 348 Slides</title>
+<title>l12pp – 348 Slides</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">348slides</span></a>
   </li>  
 </ul>
@@ -109,38 +109,415 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">348slides</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p><a href="lec2.html">Slides 2</a></p>
-<p><a href="lec3.html">Slides 3</a></p>
-<p><a href="lec4.html">Slides 4</a></p>
-<p><a href="lec5.html">Slides 5</a></p>
-<p><a href="lec6.html">Slides 6</a></p>
-<p><a href="lec7.html">Slides 7</a></p>
-<p><a href="lec8.html">Slides 8</a></p>
-<p><a href="exam1_review.html">Exam 1 Review</a></p>
-<p><a href="exam1_scrap.html">Exam 1 Scrap</a></p>
-<p><a href="lec9.html">Slides 9</a></p>
-<p><a href="lec10.html">Slides 10</a></p>
-<p><a href="RWorkstation.html">R-Workstation</a></p>
-<p><a href="lect11.html">Slides 11</a></p>
+<p>Regression, Pt 2</p>
+<p>Lecture 13:</p>
+<p>Types of Analysis</p>
+<p>▸ Univariate</p>
+<p>▸ Bivariate</p>
+<p>▸ Multivariate</p>
+<p>PSY 348</p>
+<p>Types of Analysis</p>
+<p>▸ Univariate: One variable, like the mean</p>
+<p>▸ Bivariate: Two variables, like correlation</p>
+<p>▸ Multivariate: More than 2 variables</p>
+<p>PSY 348</p>
+<p>Regression</p>
+<p>▸ Regression is the multivariate version of correlation.</p>
+<p>▸ Correlation is the bivariate version of regression.</p>
+<p>PSY 348</p>
+<p>Regression</p>
+<p>▸ Regression is the multivariate version of correlation.</p>
+<p>▸ Correlation is the bivariate version of regression.</p>
+<p>▸ We’re doing the same thing in regression as we do in correlation, BUT there are more than 2 variables.</p>
+<p>PSY 348</p>
+<p>Regression terminology</p>
+<p>In regression we will choose one variable to predict.</p>
+<p>▸ We call this y.</p>
+<p>▸ Y is the outcome variable.</p>
+<p>▸ Y is the predicted variable.</p>
+<p>PSY 348</p>
+<p>Regression terminology</p>
+<p>In regression we will choose two or more variables we with believe predict y.</p>
+<p>▸ We call these x1, x2, etc.</p>
+<p>▸ Some people call these x and z.</p>
+<p>▸ X is the predictor variable.</p>
+<p>PSY 348</p>
+<p>Regression terminology</p>
+<p>We we predict Y with X, we say;</p>
+<p>we regress y on the x.</p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> <del>+ e<sub>i</sub></del></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p><sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p><sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub></p>
+<p><sub>Y&nbsp;=&nbsp;mx&nbsp;+&nbsp;b</sub></p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>▸ This form of regression is called linear regression.</p>
+<p>PSY 348</p>
+<p>Regression: Equation Component Meanings</p>
+<p>▸ Y = theoretical prediction of y</p>
+<p>▸ = the actual y value for a participant</p>
+<p>▸ b<sub>0</sub> = the intercept: the average y value</p>
+<p>▸ X<sub>1</sub> = the x value for a participant</p>
+<p>▸ b<sub>1</sub> = a weighted value that is multiplied by x and added to b<sub>0</sub> to estimate y.</p>
+<p>PSY 348</p>
+<p>Regression Equation: More than one X</p>
+<p><sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i&nbsp;</sub>+b<sub>2</sub>X<sub>2i</sub></p>
+<p>PSY 348</p>
+<p>Regression: Equation Component Meanings</p>
+<p>▸ Y = theoretical prediction of y</p>
+<p>▸ = the actual y value for a participant</p>
+<p>▸ b<sub>0</sub> = the average y value</p>
+<p>▸ X<sub>1</sub> = the x<sub>1</sub> value for a participant</p>
+<p>▸ b<sub>1</sub> = a weighted value that is multiplied by x<sub>1</sub></p>
+<p>▸ X<sub>2</sub> = the x<sub>2</sub> value for a participant</p>
+<p>▸ b<sub>2</sub> = a weighted value that is multiplied by x<sub>2</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation: More than one X</p>
+<p><sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i&nbsp;</sub>+b<sub>2</sub>X<sub>2i</sub></p>
+<p>PSY 348</p>
+<p>Interpreting coefficients</p>
+<p>Interpreting coefficients</p>
+<p>PSY 348</p>
+<p>Interpreting coefficients</p>
+<p>▸ Unstandardized b coefficient</p>
+<p>▸ Beta coefficient</p>
+<p>▸ t-value</p>
+<p>▸ p-value</p>
+<p>PSY 348</p>
+<p>Interpreting coefficients</p>
+<p>▸ Unstandardized b coefficient</p>
+<p>▸ Beta coefficient</p>
+<p>▸ t-value</p>
+<p>▸ <strong>p-value &lt;— is this a significant predictor of y?</strong></p>
+<p>PSY 348</p>
+<p>Interpreting coefficients</p>
+<p>▸ Unstandardized b coefficient</p>
+<p>▸ <strong>Beta coefficient &lt;— which predictor of y has the more predictive power?</strong></p>
+<p>▸ t-value</p>
+<p>▸ p-value</p>
+<p>PSY 348</p>
+<p>Interpreting coefficients</p>
+<p>PSY 348</p>
+<p>R^2</p>
+<p>R^2</p>
+<p>▸ R^2 is the correlation coefficient (r) squared.</p>
+<p>▸ R^2 is always positive</p>
+<p>PSY 348</p>
+<p>R^2</p>
+<p>▸ R^2 is the correlation coefficient (r) squared.</p>
+<p>▸ R^2 is always positive</p>
+<p>▸ In correlation, the amount of y accounted for by x</p>
+<p>PSY 348</p>
+<p>R^2</p>
+<p>In Regression, R^2 refers to the amount of y accounted for by all of the x’s.</p>
+<p>PSY 348</p>
+<p>R^2</p>
+<p>In Regression, R^2 refers to the amount of y accounted for by all of the x’s.</p>
+<p>How much of y did we account for?</p>
+<p>PSY 348</p>
+<p>R^2</p>
+<p>In Regression, R^2 refers to the amount of y accounted for by all of the x’s.</p>
+<p>How much of y did we account for?</p>
+<p>Did we account for a significant amount of the variance in y?</p>
+<p>PSY 348</p>
+<p>R^2</p>
+<p>PSY 348</p>
+<p>Interpreting R Squared</p>
+<p>▸ R Squared</p>
+<p>▸ Adjusted R Squared</p>
+<p>▸ F-value</p>
+<p>▸ p-value</p>
+<p>PSY 348</p>
+<p>Interpreting R Squared</p>
+<p>▸ R Squared</p>
+<p>▸ Adjusted R Squared</p>
+<p>▸ F-value</p>
+<p>▸ <strong>p-value &lt;— is this a significant predictor of y?</strong></p>
+<p>PSY 348</p>
+<p>Interpreting R Squared</p>
+<p>▸ <strong>R Squared &lt;— The percentage of y accounted for by the predictors</strong></p>
+<p>▸ Adjusted R Squared</p>
+<p>▸ F-value</p>
+<p>▸ p-value</p>
+<p>PSY 348</p>
+<p>Interpreting R Squared</p>
+<p>▸ R Squared</p>
+<p>▸ <strong>Adjusted R Squared &lt;— The percentage of y accounted for by the predictors, controlling for using too many predictors</strong></p>
+<p>▸ F-value</p>
+<p>▸ p-value</p>
+<p>PSY 348</p>
+<p>Example</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.)</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>What are some predictors of high thoughts?</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>What are some predictors of high thoughts?</p>
+<p>‣ High-making substance consumption</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>What are some predictors of high thoughts?</p>
+<p>‣ High-making substance consumption</p>
+<p>‣ Propensity for high thoughts at baseline</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>What are some predictors of high thoughts?</p>
+<p>‣ High-making substance consumption</p>
+<p>‣ Propensity for high thoughts at baseline</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>What are some predictors of high thoughts?</p>
+<p>‣ High-making substance consumption</p>
+<p>‣ Propensity for high thoughts at baseline</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>Dr.&nbsp;Apriceno wants to be able to predict high thoughts.</p>
+<p>What are some predictors of high thoughts?</p>
+<p>‣ High-making substance consumption</p>
+<p>‣ Propensity for high thoughts at baseline</p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation: Theoretical</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation: Computational</p>
+<p>Y<sub>i</sub> = b<sub>0</sub> + b<sub>1</sub>X<sub>1i</sub> + b<sub>2</sub>X<sub>2i</sub> + e<sub>i</sub></p>
+<p>PSY 348</p>
+<p>Regression Equation: Computational</p>
+<p>PSY 348</p>
+<p>Linear Regression</p>
+<p>▸ This form of regression is called linear regression.</p>
+<p>PSY 348</p>
+<p>Example</p>
+<p>PSY 348</p>
+<p>Example</p>
+<p>PSY 348</p>
+<p>Reporting regression findings</p>
+<p>Example</p>
+<p>First, report adjusted R^2 and it’s corresponding p:</p>
+<p>▸ Our model predicted a significant amount of variance in high thoughts, <em>adjusted R^2</em> = 0.29, <em>p</em> &lt; 0.001.</p>
+<p>▸ Age, consumption of high-making substances, and prosperity for high thoughts predicted a significant amount of variance in high thoughts, <em>adjusted R^2</em> = 0.29, <em>p</em> &lt; 0.001.</p>
+<p>PSY 348</p>
+<p>Example</p>
+<p>Then report individual betas and their p’s:</p>
+<p>▸ High-making substances consumed (beta = 0.912, p = 0.001) and propensity for high thoughts (beta = 0.042, p = 0.04) significantly predicted a higher high thoughts.</p>
+<p>▸ Age did not predict likelihood of experiencing high thoughts.</p>
+<p>▸ It’s common to report betas and p’s in text as well as in a table.</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>Categorical variables</p>
+<p>PSY 348</p>
+<p>Categorical variables</p>
+<p>Categorical variables are variables that are not continuous:</p>
+<p>‣ Groups</p>
+<p>‣ Categories</p>
+<p>‣ Labels</p>
+<p>PSY 348</p>
+<p>Categorical variables</p>
+<p>If your only predictor is a categorical variable, you should run a t-test or ANOVA.</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Sometimes researchers want to examine how several variables predict one outcome.</p>
+<p>We did this with high thoughts:</p>
+<p>‣ Age</p>
+<p>‣ # of marijuanas</p>
+<p>‣ Propensity for high thoughts</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Sometimes researchers want to examine how several variables predict one outcome.</p>
+<p>Sometimes one of these variables is categorical.</p>
+<p>Example: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Dependent variable: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>Predictors:</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Dependent variable: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>Predictors:</p>
+<p>‣ Time of night</p>
+<p>‣ Cups of coffee consumed</p>
+<p>‣ Is Pedro Pascal in the show?</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Dependent variable: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>Predictors:</p>
+<p>‣ Time of night</p>
+<p>‣ Cups of coffee consumed</p>
+<p>‣ Is Pedro Pascal in the show?</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Dependent variable: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>Predictors:</p>
+<p>‣ Time of night</p>
+<p>‣ Cups of coffee consumed</p>
+<p>‣ Is Pedro Pascal in the show?</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Dependent variable: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>Predictors:</p>
+<p>‣ Time of night: As it gets later, the number of episodes will decrease (negative correlation)</p>
+<p>‣ Cups of coffee consumed: As cups of coffee increases, number of eps will increase (positive correlation)</p>
+<p>‣ Pedro:</p>
+<p>PSY 348</p>
+<p>Categorical variables in Regression</p>
+<p>Dependent variable: How many episodes of a show can Dr.&nbsp;Apriceno watch before she passes out on her couch?</p>
+<p>Predictors:</p>
+<p>‣ Time of night: As it gets later, the number of episodes will decrease (negative correlation)</p>
+<p>‣ Cups of coffee consumed: As cups of coffee increases, number of eps will increase (positive correlation)</p>
+<p>‣ Is Pedro Pascal in the show? If Pedro’s in the show, number of episodes will increase.</p>
+<p>PSY 348</p>
+<p>Dummy coding</p>
+<p>‣ Assign each category a number value.</p>
+<p>‣ 0 = no</p>
+<p>‣ 1 = yes</p>
+<p>PSY 348</p>
+<p>Dummy coding</p>
+<p>‣ Assign each category a number value.</p>
+<p>‣ 0 = no, Pedro is not in the show.</p>
+<p>‣ 1 = yes, Pedro is in the show.</p>
+<p>PSY 348</p>
+<p>Interpreting dummy coded variables</p>
+<p>PSY 348</p>
+<p>Report the findings</p>
+<p>▸ Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).</p>
+<p>PSY 348</p>
+<p>Interpreting dummy coded variables</p>
+<p>PSY 348</p>
+<p>Report the findings</p>
+<p>▸ Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).</p>
+<p>▸ Coffee was not a significant predictor of number of episodes.</p>
+<p>PSY 348</p>
+<p>Interpreting dummy coded variables</p>
+<p>PSY 348</p>
+<p>Report the findings</p>
+<p>▸ Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).</p>
+<p>▸ Coffee was not a significant predictor of number of episodes.</p>
+<p>▸ Pedro Pascal being in the show significantly predicted watching more episodes (beta = 0.912, p &lt; 0.001).</p>
+<p>PSY 348</p>
+<p>Dummy coding</p>
+<p>PSY 348</p>
+<p>Dummy coding</p>
+<p>‣ Gender:</p>
+<p>PSY 348</p>
+<p>Dummy coding</p>
+<p>‣ Gender:</p>
+<p>‣ 0 = male</p>
+<p>‣ 1 = female</p>
+<p>PSY 348</p>
+<p>Interpreting dummy coded variables</p>
+<p>PSY 348</p>
+<p>Interpreting dummy coded gender</p>
+<p>▸ Beta is positive (beta = 0.912, p &lt; 0.001).</p>
+<p>▸ Whatever is coded as 1 is higher on the the dependent variable.</p>
+<p>PSY 348</p>
+<p>Interpreting dummy coded gender</p>
+<p>▸ Beta is positive (beta = 0.912, p &lt; 0.001).</p>
+<p>▸ Whatever is coded as 1 is higher on the the dependent variable.</p>
+<p>▸ Women reported significantly more enjoyment of True Crime than men.</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Y = How many days would you survive in the zombie apocalypse?</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Y = How many days would you survive in the zombie apocalypse?</p>
+<p>▸ X1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Y = How many days would you survive in the zombie apocalypse?</p>
+<p>▸ X1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)</p>
+<p>▸ X2 = # of episodes of the Walking Dead watched</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Y = How many days would you survive in the zombie apocalypse?</p>
+<p>▸ X1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)</p>
+<p>▸ X2 = # of episodes of the Walking Dead watched</p>
+<p>▸ X3 = Do you have a weapon? Y/N</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Crossbow skills: As crossbow skills go up, days survived will go up.</p>
+<p>▸ WD episodes: As episodes goes up, days survived will go up.</p>
+<p>▸ Weapon: ?</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Crossbow skills: As crossbow skills go up, days survived will go up.</p>
+<p>▸ WD episodes: As episodes goes up, days survived will go up.</p>
+<p>▸ Weapon:</p>
+<p>▸ 0 = No weapon :(</p>
+<p>▸ 1 = Weapon! :)</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Crossbow skills: As crossbow skills go up, days survived will go up.</p>
+<p>▸ WD episodes: As episodes goes up, days survived will go up.</p>
+<p>▸ Weapon: Individuals who have weapon will survive more days.</p>
+<p>▸ How will we know if this is true?</p>
+<p>PSY 348</p>
+<p>Categorical variables in regression</p>
+<p>▸ Crossbow skills: As crossbow skills go up, days survived will go up.</p>
+<p>▸ WD episodes: As episodes goes up, days survived will go up.</p>
+<p>▸ Weapon: Individuals who have weapon will survive more days.</p>
+<p>▸ How will we know if this is true?</p>
+<p>▸ Beta will be positive if having a weapon increases days.</p>
+<p>▸ Beta will be negative if having a weapon decreases days.</p>
+<p>PSY 348</p>
 
 
 
