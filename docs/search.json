@@ -445,7 +445,7 @@
     "href": "index.html",
     "title": "348slides",
     "section": "",
-    "text": "Slides 2\nSlides 3\nSlides 4\nSlides 5\nSlides 6\nSlides 7\nSlides 8\nExam 1 Review\nExam 1 Scrap\nSlides 9\nSlides 10\nR-Workstation\nSlides 11"
+    "text": "Slides 2\nSlides 3\nSlides 4\nSlides 5\nSlides 6\nSlides 7\nSlides 8\nExam 1 Review\nExam 1 Scrap\nSlides 9\nSlides 10\nR-Workstation\nSlides 11\nSlides 12"
   },
   {
     "objectID": "L10.html#correlation",
@@ -949,13 +949,6 @@
     "href": "lec12.html#regression",
     "title": "Regression Part II",
     "section": "Regression",
-    "text": "Regression\n\nRegression is the multivariate version of correlation.\nCorrelation is the bivariate version of regression."
-  },
-  {
-    "objectID": "lec12.html#regression-1",
-    "href": "lec12.html#regression-1",
-    "title": "Regression Part II",
-    "section": "Regression",
     "text": "Regression\n\nRegression is the multivariate version of correlation.\nCorrelation is the bivariate version of regression.\nWe’re doing the same thing in regression as we do in correlation, BUT there are more than 2 variables."
   },
   {
@@ -977,25 +970,32 @@
     "href": "lec12.html#regression-terminology-2",
     "title": "Regression Part II",
     "section": "Regression terminology",
-    "text": "Regression terminology\nWe we predict Y with X, we say;\nwe regress y on the x."
+    "text": "Regression terminology\nWhen we predict Y with X, we say;\n\n\nWe regress y on the x."
   },
   {
     "objectID": "lec12.html#regression-equation",
     "href": "lec12.html#regression-equation",
     "title": "Regression Part II",
     "section": "Regression Equation",
-    "text": "Regression Equation\n\\(\\hat{Y} = b_0 + b_1X_1i\\)\n\\(Y = ax + b\\)"
+    "text": "Regression Equation\nStep-by-Step\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}+\\color{orange}{e_i}}\n\\]\n\n1. The predicted value of y for a particular participant (i)\n\n\n2. Intercept\n\n\n3. Weight\n\n\n4. The Value of a particular participant (i) on the measure of \\(X_1\\)\n\n\n5. Error. Random, and therefore cannot be predicted"
+  },
+  {
+    "objectID": "lec12.html#regression-equation-1",
+    "href": "lec12.html#regression-equation-1",
+    "title": "Regression Part II",
+    "section": "Regression Equation",
+    "text": "Regression Equation\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}}\n\\]\n\n\\[\\hat{Y} = b_0 + b_1X_{1i}\\]\n\n\n\\[Y = ax + b\\]"
   },
   {
     "objectID": "lec12.html#linear-regression",
     "href": "lec12.html#linear-regression",
     "title": "Regression Part II",
     "section": "Linear Regression",
-    "text": "Linear Regression\nLine of Best Fit"
+    "text": "Linear Regression\nLine of Best Fit\n\n\n\nCall:\nlm(formula = Y ~ X, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-32.132  -9.411  -1.832  10.794  34.330 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  0.37831    1.41520   0.267     0.79    \nX            0.80020    0.06196  12.914   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 14.15 on 98 degrees of freedom\nMultiple R-squared:  0.6299,    Adjusted R-squared:  0.6261 \nF-statistic: 166.8 on 1 and 98 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "lec12.html#regression-2",
-    "href": "lec12.html#regression-2",
+    "objectID": "lec12.html#regression-1",
+    "href": "lec12.html#regression-1",
     "title": "Regression Part II",
     "section": "Regression:",
     "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the x value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y."
@@ -1005,18 +1005,18 @@
     "href": "lec12.html#regression-equation-more-than-one-x",
     "title": "Regression Part II",
     "section": "Regression Equation: More than one X",
-    "text": "Regression Equation: More than one X\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
+    "text": "Regression Equation: More than one X\n\\[\\large{\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}\\]"
   },
   {
-    "objectID": "lec12.html#regression-3",
-    "href": "lec12.html#regression-3",
+    "objectID": "lec12.html#regression-2",
+    "href": "lec12.html#regression-2",
     "title": "Regression Part II",
     "section": "Regression:",
-    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the x value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y.\n\\(X_2\\) = the \\(x_2\\) value for a participant\n\\(b_2\\) = a weighted value that is multiplied by \\(x_2\\)"
+    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the \\(X_1\\) value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y.\n\\(X_2\\) = the \\(x_2\\) value for a participant\n\\(b_2\\) = a weighted value that is multiplied by \\(x_2\\)"
   },
   {
-    "objectID": "lec12.html#regression-equation-1",
-    "href": "lec12.html#regression-equation-1",
+    "objectID": "lec12.html#regression-equation-2",
+    "href": "lec12.html#regression-equation-2",
     "title": "Regression Part II",
     "section": "Regression Equation:",
     "text": "Regression Equation:"
@@ -1033,7 +1033,7 @@
     "href": "lec12.html#interpreting-coefficients-1",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\n\n\n\nModel 1\n\n(Intercept)-2177.729(37368.118)\n\nx1-60.244(119.951)\n\nx2182.440(138.180)\n\nx3-15.462(68.559)\n\nx4-0.703(115.809)\n\nx5123.375(66.331)\n\nx6205.177(370.736)\n\nnobs100         \n\nr.squared0.052     \n\nadj.r.squared-0.009     \n\nsigma11802.134     \n\nstatistic0.852     \n\np.value0.533     \n\ndf6.000     \n\ndf.residual93.000     \n\nnobs.1100.000     \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Interpreting coefficients"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-2",
@@ -1047,21 +1047,70 @@
     "href": "lec12.html#interpreting-coefficients-3",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value &lt;— is this a significant predictor of y?"
+    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value &lt;— is this a significant predictor of y?"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-4",
     "href": "lec12.html#interpreting-coefficients-4",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\nUnstandardized b coefficient\nBeta coefficient &lt;— which predictor of y has the more predictive power?\nt-value\np-value"
+    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient &lt;— which predictor of y has the more predictive power?\nt-value\np-value"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-5",
     "href": "lec12.html#interpreting-coefficients-5",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n!!Put Table Here"
+    "text": "Interpreting coefficients\nIntercept\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-6",
+    "href": "lec12.html#interpreting-coefficients-6",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nFirst Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-7",
+    "href": "lec12.html#interpreting-coefficients-7",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nSecond Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-8",
+    "href": "lec12.html#interpreting-coefficients-8",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nSample Size\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-9",
+    "href": "lec12.html#interpreting-coefficients-9",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nR Squared\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-10",
+    "href": "lec12.html#interpreting-coefficients-10",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nAdjusted R Squared\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-11",
+    "href": "lec12.html#interpreting-coefficients-11",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nF Statistic\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+  },
+  {
+    "objectID": "lec12.html#interpreting-coefficients-12",
+    "href": "lec12.html#interpreting-coefficients-12",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nP Value\n\n\n\n\nMoney\n\n(Intercept)51.061 ***(8.823)\n\nx10.024    (0.262)\n\nx20.080    (0.244)\n\n# Observations100             \n\nR squared0.001         \n\nAdjusted R squared-0.019         \n\nF statistic0.054         \n\nP value0.947         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#r2-1",
@@ -1074,15 +1123,15 @@
     "objectID": "lec12.html#r2-2",
     "href": "lec12.html#r2-2",
     "title": "Regression Part II",
-    "section": "R^2",
-    "text": "R^2\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?"
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?"
   },
   {
     "objectID": "lec12.html#r2-3",
     "href": "lec12.html#r2-3",
     "title": "Regression Part II",
     "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)\n!! Input model summary"
+    "text": "\\(R^2\\)"
   },
   {
     "objectID": "lec12.html#interpreting-r-squared",
@@ -1096,130 +1145,60 @@
     "href": "lec12.html#interpreting-r-squared-1",
     "title": "Regression Part II",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\nR Squared\nAdjusted R Squared\nF-value\np-value &lt;— is this a significant predictor of y?"
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared\nF-value\np-value &lt;— is this a significant predictor of y?"
   },
   {
     "objectID": "lec12.html#interpreting-r-squared-2",
     "href": "lec12.html#interpreting-r-squared-2",
     "title": "Regression Part II",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\nR Squared &lt;— The percentage of y accounted for by the predictors\nAdjusted R Squared\nF-value\np-value"
+    "text": "Interpreting R Squared\n\n\nR Squared &lt;— The percentage of y accounted for by the predictors\nAdjusted R Squared\nF-value\np-value"
   },
   {
     "objectID": "lec12.html#interpreting-r-squared-3",
     "href": "lec12.html#interpreting-r-squared-3",
     "title": "Regression Part II",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\nR Squared\nAdjusted R Squared &lt;— The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value"
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared &lt;— The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value"
   },
   {
     "objectID": "lec12.html#linear-regression-1",
     "href": "lec12.html#linear-regression-1",
     "title": "Regression Part II",
     "section": "Linear Regression",
-    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict high thoughts.\n(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.)"
+    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms."
   },
   {
     "objectID": "lec12.html#linear-regression-2",
     "href": "lec12.html#linear-regression-2",
     "title": "Regression Part II",
     "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict high thoughts.\n(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-3",
-    "href": "lec12.html#linear-regression-3",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict high thoughts.\n(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-4",
-    "href": "lec12.html#linear-regression-4",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict high thoughts.\n(High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-5",
-    "href": "lec12.html#linear-regression-5",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict high thoughts.\n\nWhat are some predictors of high thoughts?"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-6",
-    "href": "lec12.html#linear-regression-6",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict high thoughts.\n\nWhat are some predictors of high thoughts?\n\nHigh-making substance consumption"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-7",
-    "href": "lec12.html#linear-regression-7",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nProfessor Brocker wants to be able to predict high thoughts.\nWhat are some predictors of high thoughts?\n\nHigh-making substance consumption\nPropensity for high thoughts at baseline"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-8",
-    "href": "lec12.html#linear-regression-8",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nProfessor Brocker wants to be able to predict high thoughts.\nWhat are some predictors of high thoughts?\n\nHigh-making substance consumption\nPropensity for high thoughts at baseline"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-9",
-    "href": "lec12.html#linear-regression-9",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nProfessor Brocker wants to be able to predict high thoughts.\nWhat are some predictors of high thoughts?\n\nHigh-making substance consumption\nPropensity for high thoughts at baseline"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-10",
-    "href": "lec12.html#linear-regression-10",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nProfessor Brocker wants to be able to predict high thoughts.\nWhat are some predictors of high thoughts?\n\nHigh-making substance consumption\nPropensity for high thoughts at baseline"
-  },
-  {
-    "objectID": "lec12.html#regression-equation-2",
-    "href": "lec12.html#regression-equation-2",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\n\\(Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i\\)"
+    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict social media use.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge"
   },
   {
     "objectID": "lec12.html#regression-equation-3",
     "href": "lec12.html#regression-equation-3",
     "title": "Regression Part II",
     "section": "Regression Equation",
-    "text": "Regression Equation\n\nThe predicted degree of high thoughts for a participant “i”\n\n\\[Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i\\]\n!Intercept: Average degree of high thoughts\n!Coefficient for \\(X_1\\)\n!How much substance has been consumed?\n!One’s baseline high thoughts propensity\n!Coefficient for \\(X_2\\)"
-  },
-  {
-    "objectID": "lec12.html#regression-equation-theoretical",
-    "href": "lec12.html#regression-equation-theoretical",
-    "title": "Regression Part II",
-    "section": "Regression Equation: Theoretical",
-    "text": "Regression Equation: Theoretical\n\\(Y_i = b_0 + b_1X_1i + b_2X_2i + e_i\\)\n! Randomness"
+    "text": "Regression Equation\n\\[\\large{Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i}\\]"
   },
   {
     "objectID": "lec12.html#regression-equation-4",
     "href": "lec12.html#regression-equation-4",
     "title": "Regression Part II",
     "section": "Regression Equation",
-    "text": "Regression Equation\n\\(Y_i = b_0 + b_1X_1i + b_2X_2i + e_i\\)"
+    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{orange}{b_1}\\color{blue}{X_{1i}} + \\color{purple}{b_2}\\color{pink}{X_{2i}}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use\nCoefficient for \\(X_1\\)\nWhat is the sense of belonging?\nCoefficient for \\(X_2\\)\nAge\nRandomness"
   },
   {
-    "objectID": "lec12.html#regression-equation-computational",
-    "href": "lec12.html#regression-equation-computational",
+    "objectID": "lec12.html#regression-equation-5",
+    "href": "lec12.html#regression-equation-5",
     "title": "Regression Part II",
-    "section": "Regression Equation: Computational",
-    "text": "Regression Equation: Computational\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
+    "section": "Regression Equation",
+    "text": "Regression Equation\nComputational\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
   },
   {
-    "objectID": "lec12.html#linear-regression-11",
-    "href": "lec12.html#linear-regression-11",
+    "objectID": "lec12.html#linear-regression-3",
+    "href": "lec12.html#linear-regression-3",
     "title": "Regression Part II",
     "section": "Linear Regression",
     "text": "Linear Regression\n\nThis form of regression is called linear regression."
@@ -1229,63 +1208,63 @@
     "href": "lec12.html#example-1",
     "title": "Regression Part II",
     "section": "Example",
-    "text": "Example"
+    "text": "Example\nModel Coefficients"
   },
   {
     "objectID": "lec12.html#example-2",
     "href": "lec12.html#example-2",
     "title": "Regression Part II",
     "section": "Example",
-    "text": "Example"
+    "text": "Example\nModel Summary"
   },
   {
     "objectID": "lec12.html#example-3",
     "href": "lec12.html#example-3",
     "title": "Regression Part II",
     "section": "Example",
-    "text": "Example\nFirst, report adjusted \\(R^2\\) and it’s corresponding p:\n\nOur model predicted a significant amount of variance in high thoughts, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001.\nAge, consumption of high-making substances, and propensity for high thoughts predicted a significant amount of variance in high thoughts, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001."
+    "text": "Example\nFirst, report adjusted \\(R^2\\) and it’s corresponding p:\n\nOur model predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001.\nAge, sense of belonging, predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001."
   },
   {
     "objectID": "lec12.html#example-4",
     "href": "lec12.html#example-4",
     "title": "Regression Part II",
     "section": "Example",
-    "text": "Example\nThen report individual betas and their p’s:\n\nHigh-making substances consumed (beta = 0.912, p = 0.001) and propensity for high thoughts (beta = 0.042, p = 0.04) significantly predicted a higher high thoughts.\nAge did not predict likelihood of experiencing high thoughts.\nIt’s common to report betas and p’s in text as well as in a table."
+    "text": "Example\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.912, p = 0.001) significantly predicted social media use.\nAge did not predict likelihood of social media use.\n\n(beta = .112, p = .06)\n\nIt’s common to report betas and p’s in text as well as in a table."
+  },
+  {
+    "objectID": "lec12.html#categorical-variables",
+    "href": "lec12.html#categorical-variables",
+    "title": "Regression Part II",
+    "section": "Categorical variables",
+    "text": "Categorical variables\nDiscrete, not continuous:\n\nGroups\nCategories\nLabels"
   },
   {
     "objectID": "lec12.html#categorical-variables-1",
     "href": "lec12.html#categorical-variables-1",
     "title": "Regression Part II",
     "section": "Categorical variables",
-    "text": "Categorical variables\nIf your only predictor is a categorical variable, you should run a t-test or ANOVA."
+    "text": "Categorical variables\n\nIf your only predictor is a categorical variable, you should run a t-test or ANOVA.\nSometimes researchers want to examine how several variables predict one outcome.\nWe did this with high thoughts:\n\nAge\nSense of Belonging\nSocial Media Use"
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-1",
     "href": "lec12.html#categorical-variables-in-regression-1",
     "title": "Regression Part II",
     "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nWe did this with high thoughts:\n\nAge\n# of marijuanas\nPropensity for high thoughts"
+    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nSometimes one of these variables is categorical.\n\nExample: How many episodes of a show can Professor Brocker watch before he passes out on his couch?"
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-2",
     "href": "lec12.html#categorical-variables-in-regression-2",
     "title": "Regression Part II",
     "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nSometimes one of these variables is categorical.\n\nExample: How many episodes of a show can Professor Brocker watch before he passes out on his couch?"
+    "text": "Categorical variables in Regression\n\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\n\n\n\nPredictors:\n\nTime of night\nCups of coffee consumed\nIs it about time travel?\n\n\nVariable Type:\n\nContinuous\nContinuous\nCategorical"
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-3",
     "href": "lec12.html#categorical-variables-in-regression-3",
     "title": "Regression Part II",
     "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night\nCups of coffee consumed\nIs it about death or time travel?\n\nVariable Type:\n\nContinuous\nContinuous\nCategorical"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-4",
-    "href": "lec12.html#categorical-variables-in-regression-4",
-    "title": "Regression Part II",
-    "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night: As it gets later, the number of episodes will decrease (negative correlation)\nCups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)\nIs the show about death or time travel? If so, number of episodes will increase."
+    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night: As it gets later, the number of episodes will decrease (negative correlation)\nCups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)\nIs the show about time travel? If so, number of episodes will increase."
   },
   {
     "objectID": "lec12.html#dummy-coding",
@@ -1299,14 +1278,14 @@
     "href": "lec12.html#dummy-coding-1",
     "title": "Regression Part II",
     "section": "Dummy coding",
-    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No, The show is not about death or time travel.\n1 = Yes, The show is about death or time travel."
+    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No, The show is not about time travel.\n1 = Yes, The show is about time travel."
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-variables",
     "href": "lec12.html#interpreting-dummy-coded-variables",
     "title": "Regression Part II",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables\n!! Table"
+    "text": "Interpreting dummy coded variables"
   },
   {
     "objectID": "lec12.html#report-the-findings",
@@ -1320,7 +1299,7 @@
     "href": "lec12.html#interpreting-dummy-coded-variables-1",
     "title": "Regression Part II",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables\n!! Table"
+    "text": "Interpreting dummy coded variables"
   },
   {
     "objectID": "lec12.html#report-the-findings-1",
@@ -1334,7 +1313,7 @@
     "href": "lec12.html#interpreting-dummy-coded-variables-2",
     "title": "Regression Part II",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables\n!! Table"
+    "text": "Interpreting dummy coded variables"
   },
   {
     "objectID": "lec12.html#report-the-findings-2",
@@ -1355,7 +1334,7 @@
     "href": "lec12.html#interpreting-dummy-coded-variables-3",
     "title": "Regression Part II",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables\n!! Table"
+    "text": "Interpreting dummy coded variables"
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-gender",
@@ -1365,32 +1344,39 @@
     "text": "Interpreting dummy coded gender\n\nBeta is positive (beta = 0.912, p &lt; 0.001).\nWhatever is coded as 1 is higher on the the dependent variable.\nWomen reported significantly more enjoyment of True Crime than men."
   },
   {
+    "objectID": "lec12.html#categorical-variables-in-regression-4",
+    "href": "lec12.html#categorical-variables-in-regression-4",
+    "title": "Regression Part II",
+    "section": "Categorical variables in regression",
+    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)"
+  },
+  {
     "objectID": "lec12.html#categorical-variables-in-regression-5",
     "href": "lec12.html#categorical-variables-in-regression-5",
     "title": "Regression Part II",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)"
+    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)\nX2 = # of episodes of the Walking Dead watched\nX3 = Do you have a weapon? Y/N"
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-6",
     "href": "lec12.html#categorical-variables-in-regression-6",
     "title": "Regression Part II",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)\nX2 = # of episodes of the Walking Dead watched\nX3 = Do you have a weapon? Y/N"
+    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon:\n\n0 = No weapon :(\n1 = Weapon! :)"
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-7",
     "href": "lec12.html#categorical-variables-in-regression-7",
     "title": "Regression Part II",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon:\n\n0 = No weapon :(\n1 = Weapon! :)"
+    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon: Individuals who have weapon will survive more days.\nHow will we know if this is true?\n\nBeta will be positive if having a weapon increases days.\nBeta will be negative if having a weapon decreases days."
   },
   {
-    "objectID": "lec12.html#categorical-variables-in-regression-8",
-    "href": "lec12.html#categorical-variables-in-regression-8",
+    "objectID": "lec12.html#horror-movies",
+    "href": "lec12.html#horror-movies",
     "title": "Regression Part II",
-    "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon: Individuals who have weapon will survive more days.\nHow will we know if this is true?\n\nBeta will be positive if having a weapon increases days.\nBeta will be negative if having a weapon decreases days.\n\n\n\n\n\n⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+    "section": "Horror Movies",
+    "text": "Horror Movies\n\n\n                ┌──────────────────────────┬───────────────────┐\n                │                          │        (1)        │\n                ├──────────────────────────┼───────────────────┤\n                │ Ranking                  │    -0.009 (0.013) │\n                ├──────────────────────────┼───────────────────┤\n                │ Avg. Heart Rate (BPM)    │    -0.043 (0.110) │\n                ├──────────────────────────┼───────────────────┤\n                │ Overall Difference (BPM) │ 1.823 *** (0.115) │\n                ├──────────────────────────┼───────────────────┤\n                │ HRV Difference           │ 1.564 *** (0.034) │\n                ├──────────────────────────┼───────────────────┤\n                │ Highest Spike            │ 0.182 *** (0.006) │\n                ├──────────────────────────┼───────────────────┤\n                │ Sequel                   │     0.004 (0.122) │\n                ├──────────────────────────┼───────────────────┤\n                │ At Least One Sequel      │    -0.030 (0.123) │\n                ├──────────────────────────┼───────────────────┤\n                │ Rotten Tomato Score      │     0.001 (0.003) │\n                ├──────────────────────────┼───────────────────┤\n                │ Year                     │    -0.004 (0.005) │\n                ├──────────────────────────┼───────────────────┤\n                │ nobs                     │           50      │\n                ├──────────────────────────┼───────────────────┤\n                │ r.squared                │            1.000  │\n                ├──────────────────────────┴───────────────────┤\n                │ *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05       │\n                └──────────────────────────────────────────────┘\n\nColumn names: names, model1\n\n\n\n\n\n⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
   },
   {
     "objectID": "lec10.html#correlation",
@@ -2846,7 +2832,7 @@
     "href": "lec8.html#sampling-theory-3",
     "title": "Sampling Theory",
     "section": "Sampling Theory",
-    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n743263136665463673475677132521\n\n616576125736635311671664647734\n\n466534417444316651557672422515\n\n726475366435254433751233536775\n\n533472235646646136375314233135\n\n424176217437513363756554644226"
+    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n165135545534315767423742655773\n\n627557464426536755376744125233\n\n417352455577431423164743365562\n\n523573735711352234721732111442\n\n526562313633676156451272675533\n\n466572642335547422653273754752"
   },
   {
     "objectID": "lec8.html#sampling-theory-4",

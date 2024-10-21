@@ -7,6 +7,7 @@ institute: "Farmingdale State College"
 format: 
   revealjs:
     theme: custom.scss
+    scrollable: true
     incremental: true   
     touch: true
     chalkboard: true
@@ -29,12 +30,6 @@ revealjs-plugins:
 -   Bivariate: Two variables, like correlation
 
 -   Multivariate: More than 2 variables
-
-## Regression
-
--   Regression is the multivariate version of correlation.
-
--   Correlation is the bivariate version of regression.
 
 ## Regression
 
@@ -66,15 +61,55 @@ In regression we will choose two or more variables we with believe predict y.
 
 ## Regression terminology
 
-We we predict Y with `X`, we say;
+When we predict Y with `X`, we say;
 
-we regress `y` on the `x`.
+. . .
+
+::: {style="font-size:90px;"}
+We regress `y` on the `x`.
+:::
 
 ## Regression Equation
 
-$\hat{Y} = b_0 + b_1X_1i$
+### Step-by-Step
 
-$Y = ax + b$
+$$
+\large{\color{red}{Y_i} = \color{green}{b_0} + \color{blue}{b_1}X_{1i}+\color{orange}{e_i}}
+$$
+
+::: fragment
+[1. The predicted value of y for a particular participant (i)]{style="color:red"}
+:::
+
+::: fragment
+[2. Intercept]{style="color:green"}
+:::
+
+::: fragment
+[3. Weight]{style="color:blue"}
+:::
+
+::: fragment
+[4. The Value of a particular participant (i) on the measure of $X_1$]{style="color:black"}
+:::
+
+::: fragment
+[5. Error. Random, and therefore cannot be predicted]{style="color:orange"}
+:::
+
+## Regression Equation
+
+$$
+\large{\color{red}{Y_i} = \color{green}{b_0} + \color{blue}{b_1}X_{1i}}
+$$
+
+::: fragment
+$$\hat{Y} = b_0 + b_1X_{1i}$$
+:::
+
+::: fragment
+$$Y = ax + b$$
+:::
 
 ## Linear Regression
 
@@ -105,6 +140,8 @@ data <- generate_correlation(n, rho)
 
 data <- data*23
 
+lm(Y~X, data = data) |> summary()
+
 data |> 
   ggplot(aes(X, Y)) + 
   geom_point() + 
@@ -113,7 +150,8 @@ data |>
   labs(
     title = "Simple Linear Regression",
     x = "\nX",
-    y = "Y\n"
+    y = "Y\n",
+    caption = "Y = .72 + 831x"
   ) + 
   theme(
     panel.grid = element_blank()
@@ -127,17 +165,17 @@ data |>
 
 -   $Y$ = theoretical prediction of `y`
 
--   $\hat{Y}$= the actual y value for a participant
+-   $\hat{Y}$= the actual `y` value for a participant
 
 -   $b_0$ = the intercept: the average `y` value
 
--   $X_1$ = the x value for a participant
+-   $X_1$ = the `x` value for a participant
 
--   $b_1$ = a weighted value that is multiplied by x and added to $b_0$ to estimate `y`.
+-   $b_1$ = a weighted value that is multiplied by `x` and added to $b_0$ to estimate `y`.
 
 ## Regression Equation: More than one X
 
-$\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
+$$\large{\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}$$
 
 ## Regression:
 
@@ -149,7 +187,7 @@ $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
 -   $b_0$ = the intercept: the average `y` value
 
--   $X_1$ = the `x` value for a participant
+-   $X_1$ = the $X_1$ value for a participant
 
 -   $b_1$ = a weighted value that is multiplied by x and added to $b_0$ to estimate y.
 
@@ -163,31 +201,41 @@ $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
 $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
-# Interpreting coefficients
+# Interpreting Coefficients
 
 ## Interpreting coefficients
 
 ```{r}
+#| 
+
+library(dplyr)
 library(huxtable)
 
 test <- 
   tibble(
-  money = runif(100,10000,50000),
-  x1 = runif(100,14,50),
-  x2 = runif(100,30,60),
-  x3 = runif(100,23,90) ,
-  x4 = runif(100,60,100) ,
-  x5 = runif(100,30,100),
-  x6 = runif(100,88,100)
+  money = rnorm(100,55,5),
+  x1 = rnorm(100,14,2),
+  x2 = rnorm(100,30,2)
 ) 
 
-mod1 <- lm(money ~ x1+x2+x3+x4+x5+x6, data = test) |> summary() 
+mod1 <- lm(money ~ x1+x2, data = test) |> summary() 
   
-huxreg("Model 1"=mod1,
-       error_pos = "right",
-       statistics = NULL) |> 
-  theme_article() 
-  
+tab1 <- 
+  huxreg(
+  "Money"=mod1,
+  error_pos = "right",
+  statistics = 
+    c('# Observations' = 'nobs', 
+      'R squared' = 'r.squared', 
+      'Adjusted R squared' = 'adj.r.squared',
+      'F statistic' = 'statistic',
+      'P value' = 'p.value'),
+  bold_signif = .05,
+  note = "{stars}"
+  ) |> 
+  theme_striped() |> 
+  set_all_padding(0) |> 
+  set_width(.8)
 ```
 
 ## Interpreting coefficients
@@ -202,6 +250,7 @@ huxreg("Model 1"=mod1,
 
 ## Interpreting coefficients
 
+::: nonincremental
 -   Unstandardized `b` coefficient
 
 -   Beta coefficient
@@ -209,9 +258,11 @@ huxreg("Model 1"=mod1,
 -   t-value
 
 -   **p-value \<--- is this a significant predictor of y?**
+:::
 
 ## Interpreting coefficients
 
+::: nonincremental
 -   Unstandardized `b` coefficient
 
 -   **Beta coefficient \<--- which predictor of y has the more predictive power?**
@@ -219,10 +270,87 @@ huxreg("Model 1"=mod1,
 -   t-value
 
 -   p-value
+:::
 
 ## Interpreting coefficients
 
-!!Put Table Here
+### Intercept
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 2, value = "red") |>
+  set_all_border_styles(row = 2, value = "solid")
+```
+
+## Interpreting coefficients
+
+### First Predictor Variable
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 3, value = "red") |>
+  set_all_border_styles(row = 3, value = "solid")
+```
+
+## Interpreting coefficients
+
+### Second Predictor Variable
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 4, value = "red") |>
+  set_all_border_styles(row = 4, value = "solid")
+```
+
+## Interpreting coefficients
+
+### Sample Size
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 5, value = "red") |>
+  set_all_border_styles(row = 5, value = "solid")
+```
+
+## Interpreting coefficients
+
+### R Squared
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 6, value = "red") |>
+  set_all_border_styles(row = 6, value = "solid")
+```
+
+## Interpreting coefficients
+
+### Adjusted R Squared
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 7, value = "red") |>
+  set_all_border_styles(row = 7, value = "solid")
+```
+
+## Interpreting coefficients
+
+### F Statistic
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 8, value = "red") |>
+  set_all_border_styles(row = 8, value = "solid")
+```
+
+## Interpreting coefficients
+
+### P Value
+
+```{r}
+tab1 |> 
+  set_all_border_colors(row = 9, value = "red") |>
+  set_all_border_styles(row = 9, value = "solid")
+```
 
 # $R^2$
 
@@ -234,7 +362,7 @@ huxreg("Model 1"=mod1,
 
 -   In correlation, the amount of `y` accounted for by `x`
 
-## R\^2
+## $R^2$
 
 -   In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
 
@@ -244,7 +372,7 @@ huxreg("Model 1"=mod1,
 
 ## $R^2$
 
-!! Input model summary
+![](images/Screenshot%202024-10-21%20at%208.17.56%20AM.png)
 
 ## Interpreting R Squared
 
@@ -258,6 +386,7 @@ huxreg("Model 1"=mod1,
 
 ## Interpreting R Squared
 
+::: nonincremental
 -   R Squared
 
 -   Adjusted R Squared
@@ -265,9 +394,11 @@ huxreg("Model 1"=mod1,
 -   F-value
 
 -   **p-value \<--- is this a significant predictor of `y`?**
+:::
 
 ## Interpreting R Squared
 
+::: nonincremental
 -   **R Squared \<--- The percentage of `y` accounted for by the predictors**
 
 -   Adjusted R Squared
@@ -275,9 +406,11 @@ huxreg("Model 1"=mod1,
 -   F-value
 
 -   p-value
+:::
 
 ## Interpreting R Squared
 
+::: nonincremental
 -   R Squared
 
 -   **Adjusted R Squared \<--- The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
@@ -285,120 +418,53 @@ huxreg("Model 1"=mod1,
 -   F-value
 
 -   p-value
+:::
+
+# Linear Regression Example
 
 ## Linear Regression
 
 ### Example
 
-> Professor Brocker wants to be able to predict high thoughts.
->
-> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.)
+> Professor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.
 
 ## Linear Regression
 
-> Professor Brocker wants to be able to predict high thoughts.
->
-> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com
+> Professor Brocker wants to be able to predict social media use.
 
-## Linear Regression
+What are some predictors of social media use?
 
-> Professor Brocker wants to be able to predict high thoughts.
->
-> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com
+-   Sense of belonging
 
-## Linear Regression
-
-> Professor Brocker wants to be able to predict high thoughts.
->
-> (High thoughts are ideas that provide a different perspective on the mundane facts and activities of regular life.) - HonestMarijuana.com
-
-## Linear Regression
-
-> Professor Brocker wants to be able to predict high thoughts.
-
-What are some predictors of high thoughts?
-
-## Linear Regression
-
-> Professor Brocker wants to be able to predict high thoughts.
-
-What are some predictors of high thoughts?
-
--   High-making substance consumption
-
-## Linear Regression
-
-Professor Brocker wants to be able to predict high thoughts.
-
-What are some predictors of high thoughts?
-
--   High-making substance consumption
-
--   Propensity for high thoughts at baseline
-
-## Linear Regression
-
-Professor Brocker wants to be able to predict high thoughts.
-
-What are some predictors of high thoughts?
-
--   High-making substance consumption
-
--   Propensity for high thoughts at baseline
-
-## Linear Regression
-
-Professor Brocker wants to be able to predict high thoughts.
-
-What are some predictors of high thoughts?
-
--   High-making substance consumption
-
--   Propensity for high thoughts at baseline
-
-## Linear Regression
-
-Professor Brocker wants to be able to predict high thoughts.
-
-What are some predictors of high thoughts?
-
--   High-making substance consumption
-
--   Propensity for high thoughts at baseline
+-   Age
 
 ## Regression Equation
 
-$Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i$
+$$\large{Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i}$$
 
 ## Regression Equation
 
-::: {style="position: absolute; top: 20%; font-size: 10px;"}
-The predicted degree of high thoughts for a participant "`i`"
-:::
+### Theoretical
 
-$$Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i$$
+$$\large{\color{red}{Y_i} = \color{green}{b_0} + \color{orange}{b_1}\color{blue}{X_{1i}} + \color{purple}{b_2}\color{pink}{X_{2i}}~ + e_i}$$
 
-!Intercept: Average degree of high thoughts
+1.  The predicted degree of social media use for a participant "`i`"
 
-!Coefficient for $X_1$
+2.  Intercept: Average social media use
 
-!How much substance has been consumed?
+3.  Coefficient for $X_1$
 
-!One's baseline high thoughts propensity
+4.  What is the sense of belonging?
 
-!Coefficient for $X_2$
+5.  Coefficient for $X_2$
 
-## Regression Equation: Theoretical
+6.  Age
 
-$Y_i = b_0 + b_1X_1i + b_2X_2i + e_i$
-
-! Randomness
+7.  Randomness
 
 ## Regression Equation
 
-$Y_i = b_0 + b_1X_1i + b_2X_2i + e_i$
-
-## Regression Equation: Computational
+### Computational
 
 $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
@@ -408,7 +474,15 @@ $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
 ## Example
 
+### Model Coefficients
+
+![](images/model.png)
+
 ## Example
+
+### Model Summary
+
+![](images/modelsum.png)
 
 # Reporting Regression Findings
 
@@ -416,23 +490,27 @@ $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
 First, report adjusted $R^2$ and it's corresponding p:
 
--   Our model predicted a significant amount of variance in high thoughts, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
+-   Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
 
--   Age, consumption of high-making substances, and propensity for high thoughts predicted a significant amount of variance in high thoughts, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
+-   Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
 
 ## Example
 
+![](images/model.png)
+
 Then report individual betas and their p's:
 
--   High-making substances consumed (*beta = 0.912, p = 0.001*) and propensity for high thoughts (*beta = 0.042, p = 0.04*) significantly predicted a higher high thoughts.
+-   Sense of belonging (*beta = 0.912, p = 0.001*) significantly predicted social media use.
 
--   Age did not predict likelihood of experiencing high thoughts.
+-   Age did not predict likelihood of social media use.
+
+    -   (beta = .112, p = .06)
 
 -   It's common to report betas and p's in text as well as in a table.
 
-# Categorical variables in regression
+# Categorical Variables in Regression
 
-### Categorical variables
+## Categorical variables
 
 ### Discrete, not continuous:
 
@@ -444,19 +522,17 @@ Then report individual betas and their p's:
 
 ## Categorical variables
 
-If your only predictor is a categorical variable, you should run a t-test or ANOVA.
+-   If your *only* predictor is a categorical variable, you should run a t-test or ANOVA.
 
-## Categorical variables in Regression
+-   Sometimes researchers want to examine how several variables predict one outcome.
 
-Sometimes researchers want to examine how several variables predict one outcome.
+-   We did this with high thoughts:
 
-We did this with high thoughts:
+    -   Age
 
--   Age
+    -   Sense of Belonging
 
--   \# of marijuanas
-
--   Propensity for high thoughts
+    -   Social Media Use
 
 ## Categorical variables in Regression
 
@@ -468,16 +544,20 @@ Sometimes one of these variables is categorical.
 
 ## Categorical variables in Regression
 
-Dependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
+> Dependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
 
+::::: columns
+::: {.column width="50%"}
 Predictors:
 
 -   Time of night
 
 -   Cups of coffee consumed
 
--   Is it about death or time travel?
+-   Is it about time travel?
+:::
 
+::: {.column width="50%"}
 Variable Type:
 
 -   Continuous
@@ -485,6 +565,8 @@ Variable Type:
 -   Continuous
 
 -   *Categorical*
+:::
+:::::
 
 ## Categorical variables in Regression
 
@@ -496,7 +578,7 @@ Predictors:
 
 -   Cups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)
 
--   Is the show about death or time travel? If so, number of episodes will increase.
+-   Is the show about time travel? If so, number of episodes will increase.
 
 ## Dummy coding
 
@@ -510,13 +592,13 @@ Predictors:
 
 -   Assign each category a number value.
 
-    -   0 = No, The show is not about death or time travel.
+    -   0 = No, The show is not about time travel.
 
-    -   1 = Yes, The show is about death or time travel.
+    -   1 = Yes, The show is about time travel.
 
 ## Interpreting dummy coded variables
 
-!! Table
+![](images/dummyvar.png)
 
 ## Report the findings
 
@@ -524,7 +606,7 @@ Predictors:
 
 ## Interpreting dummy coded variables
 
-!! Table
+![](images/dummyvar.png)
 
 ## Report the findings
 
@@ -534,7 +616,7 @@ Predictors:
 
 ## Interpreting dummy coded variables
 
-!! Table
+![](images/dummyvar.png)
 
 ## Report the findings
 
@@ -554,7 +636,7 @@ Predictors:
 
 ## Interpreting dummy coded variables
 
-!! Table
+![](images/dummyvar.png)
 
 ## Interpreting dummy coded gender
 
@@ -607,3 +689,36 @@ Predictors:
     -   Beta will be positive if having a weapon increases days.
 
     -   Beta will be negative if having a weapon decreases days.
+
+## Horror Movies
+
+```{r}
+library(janitor)
+
+hm <- read.csv("Horror Movie Data https___notawfulandboring.blogspot.com_ - Data.csv")
+
+hm_cln <- 
+  hm |> 
+  clean_names() |> 
+  dplyr::select(-movie,-avg_resting_heart_rate_bpm)
+
+lm(scare_score ~ ., data = hm_cln) |> 
+  summary() |> 
+  huxreg(bold_signif = .05,
+         note = "{stars}",
+         error_pos = "same",
+         statistics = c("nobs","r.squared"),
+         coefs = c("Ranking" = "ranking",
+                   "Avg. Heart Rate (BPM)" = "avg_movie_heart_rate_bpm",
+                   "Overall Difference (BPM)" = "overall_difference_bpm",
+                   "HRV Difference" = "hrv_difference",
+                   "Highest Spike" ="highest_spike_bpm",
+                   "Sequel" ="this_film_is_a_sequelyes",
+                   "At Least One Sequel" ="this_film_has_at_least_one_sequelyes",
+                  "Rotten Tomato Score" ="rotten_tomato_score",
+                   "Year" ="year")) |> 
+  theme_striped() |> 
+  print_screen()
+
+
+```
