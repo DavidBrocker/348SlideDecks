@@ -1,0 +1,247 @@
+---
+title: "Exam 2 Review"
+subtitle: "Chapters 5-8"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+format: 
+  revealjs:
+    theme: custom.scss
+    incremental: true   
+    touch: true
+    chalkboard: true
+    scrollable: true
+    lightbox: true
+    drop:
+      engine: webr
+      webr:
+        packages:
+         - ggplot2
+         - dplyr
+revealjs-plugins:
+  - drop
+---
+
+# Multiple Choice Questions (1-5)
+
+## Question 1
+
+1.  Which of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?
+
+<!-- -->
+
+a)  -0.87
+b)  -0.12
+c)  0.55
+d)  0.94
+
+## Question 1
+
+### Answer
+
+Which of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?
+
+a)  -0.87
+b)  -0.12
+c)  0.55
+d)  **0.94**
+
+## Question 2
+
+If two variables have a correlation coefficient of r = 0, what does this indicate?
+
+a)  A perfect positive relationship
+b)  A perfect negative relationship
+c)  No linear relationship
+d)  The variables are unrelated
+
+## Question 2
+
+### Answer
+
+If two variables have a correlation coefficient of r = 0, what does this indicate?
+
+a)  A perfect positive relationship
+b)  A perfect negative relationship
+c)  **No linear relationship**
+d)  The variables are unrelated
+
+## Question 3
+
+What does the slope of the regression line represent?
+
+a)  The value of the dependent variable when all predictors are zero
+b)  The amount of change in the dependent variable for a one-unit change in the independent variable
+c)  The strength of the correlation
+d)  The total variance in the dependent variable
+
+## Question 3
+
+### Answer
+
+What does the slope of the regression line represent?
+
+a)  The value of the dependent variable when all predictors are zero
+b)  **The amount of change in the dependent variable for a one-unit change in the independent variable**
+c)  The strength of the correlation
+d)  The total variance in the dependent variable
+
+## Question 4
+
+Which of the following best describes the meaning of an R-squared value of 0.85?
+
+a)  85% of the variation in the dependent variable is explained by the independent variables
+b)  The correlation between the variables is 0.85
+c)  The model’s predictions are 85% accurate
+d)  The independent variables account for 15% of the error in predictions
+
+## Question 4
+
+### Answer
+
+Which of the following best describes the meaning of an R-squared value of 0.85?
+
+**a) 85% of the variation in the dependent variable is explained by the independent variables**
+
+b\) The correlation between the variables is 0.85
+
+c\) The model’s predictions are 85% accurate
+
+d\) The independent variables account for 15% of the error in predictions
+
+# True/False Questions (5-7)
+
+## Question 5
+
+True or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50.
+
+## Question 5
+
+### Answer
+
+True or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50.
+
+**False**
+
+## Question 6
+
+True or False: Linear regression is appropriate only when the relationship between the variables is nonlinear.
+
+## Question 6
+
+### Answer
+
+True or False: Linear regression is appropriate only when the relationship between the variables is nonlinear.
+
+**False**
+
+## Question 7
+
+True or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line.
+
+## Question 7
+
+### Answer
+
+True or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line.
+
+**True**
+
+# Short Answer Questions (9-12)
+
+## Question 9
+
+What is the difference between simple linear regression and multiple linear regression?
+
+## Question 9
+
+What is the difference between simple linear regression and multiple linear regression?
+
+> Answer: Simple linear regression uses one independent variable to predict the dependent variable, while multiple linear regression uses two or more independent variables.
+
+## Question 10
+
+Describe the difference between correlation and causation. Why is it important not to infer causation directly from correlation?
+
+::: fragment
+> Answer: Correlation refers to a relationship or association between two variables, while causation indicates that one variable directly affects another. It is important not to infer causation from correlation because there may be confounding variables or the relationship may be coincidental.
+:::
+
+## Question 11
+
+Suppose you perform a regression analysis and the p-value of one of your predictors is 0.15. How would you interpret this result? Should you include this predictor in your model?
+
+::: fragment
+> Answer: A p-value of 0.15 suggests that the predictor is not statistically significant at conventional levels (e.g., 0.05). You may consider removing this predictor, though you might keep it if there is theoretical justification
+:::
+
+# Problem-Solving/Interpretation Questions (12-15)
+
+## Question 12
+
+A researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.
+
+-   What does this tell you about the relationship between study hours and exam scores?
+
+-   Would you expect the relationship to be strong, moderate, or weak? Why?
+
+## Question 12
+
+### Answer
+
+A researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.
+
+-   What does this tell you about the relationship between study hours and exam scores?
+    -   A correlation of r = 0.65 indicates a positive and moderate relationship. As study hours increase, exam scores tend to increase, but the relationship is not perfect.
+-   Would you expect the relationship to be strong, moderate, or weak? Why?
+    -   The relationship would be considered moderate because the correlation is between 0.5 and 0.7, indicating a noticeable but not perfect relationship.
+
+## Question 13
+
+You run a simple linear regression analysis and get the following equation:
+
+$\hat{Y} = 2.5 + 1.8X$
+
+-   What is the predicted value of Y if X is 4?
+
+-   What does the coefficient 1.8 represent in this context?
+
+## Question 13
+
+### Answer
+
+$\hat{Y} = 2.5 + 1.8X$
+
+-   What is the predicted value of Y if X is 4?
+
+$\hat{Y} = 2.5 + 1.8(4) = 2.5 + 7.2 = 9.7$
+
+-   What does the coefficient 1.8 represent in this context?
+
+    -   The coefficient `1.8` represents the predicted change in Y for each additional unit of X. In this context, it means that for each additional unit of X, Y is expected to increase by `1.8` units.
+
+## Question 14
+
+Consider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.
+
+-   Interpret the R-squared value in terms of the model’s explanatory power.
+
+-   Based on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?
+
+## Question 14
+
+### Answer
+
+Consider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.
+
+-   Interpret the R-squared value in terms of the model’s explanatory power.
+    -   <div>
+
+        > Answer: An R-squared value of 0.70 means that 70% of the variance in the dependent variable is explained by the independent variable(s) in the model.
+
+        </div>
+-   Based on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?
+    -   <div>
+
+        > Answer: Yes, the predictor is significant. The p-value of 0.02 is less than 0.05, indicating that the predictor variable is statistically significant at the 5% level.
+
+        </div>

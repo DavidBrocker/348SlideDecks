@@ -14,7 +14,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides – Standard Normal Distribution</title>
+  <title>348 Slides – Hypothesis Testing, Pt 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -39,7 +39,6 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -250,6 +249,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -332,8 +332,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Standard Normal Distribution</h1>
-  <p class="subtitle">Lecture 5</p>
+  <h1 class="title">Hypothesis Testing, Pt 2</h1>
+  <p class="subtitle">Lecture 10</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -347,439 +347,539 @@ Dave Brocker
 </div>
 
 </section>
-<section id="standard-normal-distribution" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="what-do-we-know-about-normal-distributions">What do we know about normal distributions?</h3>
-<div class="fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/bell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/bell.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</section>
-<section id="standard-normal-distribution-1" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="properties-and-principles">Properties and Principles</h3>
-<p>The 4 properties of a standard normal distribution are:</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>They are shaped like a bell (“bell curve”).</p></li>
-<li class="fragment"><p>They are symmetric.</p></li>
-<li class="fragment"><p>They are unimodal.</p></li>
-<li class="fragment"><p>The mean = median = mode.</p></li>
-</ul>
-</div>
-</section>
-<section id="standard-deviation" class="slide level2">
-<h2>Standard Deviation</h2>
-<h3 id="standard-deviation-is-in-the-scale-of-the-variable-x.">Standard deviation is in the scale of the variable (<code>x</code>).</h3>
-<ul>
-<li class="fragment">A standard deviation of 1 means a distance of 1 on the scale used to measure the variable.</li>
-</ul>
-<div class="fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/bell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/bell.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</section>
-<section id="standard-normal-distribution-2" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="example-1">Example 1</h3>
-<blockquote>
-<p>Jonas scores a 98 on the exam. The average grade on the exam was 97 with a standard deviation of 1.</p>
-</blockquote>
-<ul>
-<li class="fragment">Find Jonas’ score on the normal distribution.</li>
-</ul>
-<div class="fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/bell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/bell.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</section>
-<section id="standard-normal-distribution-3" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="where-do-most-scores-fall-in-relation-to-the-mean">Where do most scores fall in relation to the mean?</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Most scores fall within one standard deviation of the mean.</p></li>
-<li class="fragment"><p>“Within one standard deviation” means +1 as well as -1 standard deviation.</p></li>
-</ul>
-</div>
-</section>
-<section id="standard-normal-distribution-4" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="percentages-and-proportions">Percentages and Proportions</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>68.3% of the data will fall within 1 SD of the mean.</p></li>
-<li class="fragment"><p>95.4% of the data will fall within 2 SD of the mean.</p></li>
-<li class="fragment"><p>99.7% of the data will fall within 3 SD of the mean.</p></li>
-</ul>
-</div>
-</div><div class="column" style="width:50%;">
-<p><a href="images/bell_prop2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="images/bell_prop2.png"></a></p>
-</div></div>
-</section>
-<section id="standard-normal-distribution-5" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="example-1-1">Example 1</h3>
-<blockquote>
-<p>Students’ ratings of the Netflix Original <em>Dark</em> (range = 1- 10) form a normal distribution with m = 6 and s = 1.</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>What percentage of Students rate it a 7 or higher?</p></li>
-<li class="fragment"><p>What percentage of Students rate it at least a 4?</p></li>
-<li class="fragment"><p>What percentage of Students rate it an 8 or lower?</p></li>
-</ul>
-</section>
-<section id="standard-normal-distribution-6" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="where-should-we-put-the-mean">Where should we put the mean?</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/bell_prop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/bell_prop.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</section>
-<section id="standard-normal-distribution-7" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="where-should-we-put-the-mean-1">Where should we put the mean?</h3>
+<section id="review" class="slide level2">
+<h2>Review</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec5_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec5_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="standard-normal-distribution-8" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="mean-6-standard-deviation-1">Mean: 6 | Standard Deviation: 1</h3>
+<section id="review-1" class="slide level2">
+<h2>Review</h2>
+<h3 id="sampling-theory">Sampling Theory</h3>
+<div class="fragment">
+<p><strong>Sample Mean:</strong></p>
+</div>
+<div class="fragment">
+<p>If we took infinite samples of a population, the mean of each sample taken would be a Sample Mean – like how each student collect 500 responses about TV show ratings and took the average of those 500 responses.</p>
+</div>
+<div class="fragment">
+<p><strong>Sampling Distribution:</strong></p>
+</div>
+<div class="fragment">
+<p>What we get if we put all the sample means together; we assume it’s a normal distribution.</p>
+</div>
+</section>
+<section id="sampling-theory-1" class="slide level2">
+<h2>Sampling theory</h2>
+<p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec5_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec5_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="standard-normal-distribution-9" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="example-1-2">Example 1:</h3>
-<blockquote>
-<p>Students’ ratings of the Netflix Original <em>Dark</em> form a normal distribution with m = 6 and s = 1.</p>
-</blockquote>
-<div class="highlight-last">
+<section id="sampling-theory-2" class="slide level2">
+<h2>Sampling theory</h2>
 <ul>
-<li class="fragment"><p>What percentage of Students rate the Netflix Original <em>Dark</em> a 7 or higher?</p>
-<ul>
-<li class="fragment">15.8%</li>
-</ul></li>
+<li class="fragment"><p>There are about 10,000 students at Farmingdale State College.</p></li>
+<li class="fragment"><p>Each of the 25 of us recruits a sample of 400 students.</p></li>
+<li class="fragment"><p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (<em>I don’t belong at all</em>) to 10 (<em>I belong completely</em>).</p></li>
+<li class="fragment"><p>We each calculate the average response from our own sample of 400.</p></li>
 </ul>
-</div>
 </section>
-<section id="standard-normal-distribution-10" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="example-1-3">Example 1:</h3>
-<blockquote>
-<p>Students’ ratings of the Netflix Original <em>Dark</em> form a normal distribution with m = 6 and s = 1.</p>
-</blockquote>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What percentage of Students rate the Netflix Original <em>Dark</em> at least a 4?</p>
-<ul>
-<li class="fragment">2.2%</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="standard-normal-distribution-11" class="slide level2">
-<h2>Standard Normal Distribution</h2>
-<h3 id="example-1-4">Example 1:</h3>
-<blockquote>
-<p>Students’ ratings of the Netflix Original <em>Dark</em> form a normal distribution with m = 6 and s = 1.</p>
-</blockquote>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What percentage of Students rate the Netflix Original <em>Dark</em> an 8 or lower?</p>
-<ul>
-<li class="fragment">97.6%</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="z-scores" class="slide level2">
-<h2>Z-scores</h2>
-<h3 id="what-does-it-do">What does it do?</h3>
-<p>A z-score tells you, in standard deviation units how far the x-value is from the mean.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Z-scores are better than using raw SD,</p></li>
-<li class="fragment"><p>When the SD is a decimal, it is hard to find the exact point under the standard normal curve.</p></li>
-</ul>
-</div>
-</section>
-<section id="z-scores-1" class="slide level2">
-<h2>Z-scores</h2>
-<h3 id="rule-of-thumb">Rule of Thumb</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/bell_prop2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="images/bell_prop2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="highlight-last">
-<ul>
-<li class="fragment">The distance from the mean to the 1 on this standard normal curve is equal to the SD.</li>
-</ul>
-</div>
-</div></div>
-</section>
-<section id="z-scores-2" class="slide level2">
-<h2>Z-scores</h2>
-<h3 id="rule-of-thumb-1">Rule of Thumb</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/bell_prop2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/bell_prop2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="highlight-last">
-<ul>
-<li class="fragment">The distance from the mean to the 1 on this standard normal curve is equal to z=1.</li>
-</ul>
-</div>
-</div></div>
-</section>
-<section id="z-scores-3" class="slide level2">
-<h2>Z-scores:</h2>
-<h3 id="find-z-1-z--2-z-0.5">Find: Z = 1 | Z = -2 | Z = 0.5</h3>
-<p><a href="images/bell_prop2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/bell_prop2.png"></a></p>
-</section>
-<section id="z-scores-4" class="slide level2">
-<h2>Z-scores]</h2>
-<h3 id="what-do-they-do">What do they do!</h3>
-<p>Z-scores re-express the original data points (the <code>x</code>’s) in a way that intuitively lets us know:</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>How close the <code>x</code> is to the mean (AKA how much this particular participant is like the average person in the sample)</p></li>
-<li class="fragment"><p>Where it falls in the dispersion of the distribution (AKA how different this particular participant is from the majority of people in the sample)</p></li>
-</ul>
-</div>
-</section>
-<section id="calculating" class="slide level2">
-<h2>Calculating</h2>
-<h3 id="z-scores-5">Z-scores</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Subtract the mean from each X value.</p></li>
-<li class="fragment"><p>Divide by the standard deviation.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[
-z = \frac{x-\bar{x}}{s}
-\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="z-scores-6" class="slide level2">
-<h2>Z-scores</h2>
-<h3 id="z-scores-are-calculated-by">Z-Scores are calculated by</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Centering the X values on the mean: When we center the mean (AKA mean-centering), we set the mean to 0.</p></li>
-<li class="fragment"><p>Dividing by the standard deviation</p></li>
-<li class="fragment"><p>When we divide by the SD, the space from the mean is expressed in standard deviations.</p></li>
-</ul>
-</div>
-</section>
-<section id="z-scores-7" class="slide level2">
-<h2>Z-scores</h2>
-<h3 id="a-familiar-face-barx-20">A Familiar Face: <span class="math inline">\(\bar{x} = 20\)</span></h3>
+<section id="sampling-theory-3" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="just-making-sure">Just Making Sure…</h3>
 <div class="cell">
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
-<colgroup><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">x</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">x-xbar</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">(x-xbar)^2</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">100</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">100</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">20</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">30</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">100</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">30</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">100</td></tr>
-</tbody></table>
-
-</div>
-</div>
-</section>
-<section id="z-scores-8" class="slide level2">
-<h2>Z-scores</h2>
-<h3 id="formula-in-action">Formula in Action</h3>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[z =\frac{x-\bar{x}}{s} =  \frac{20-10}{s}=\frac{-10}{s}\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[s^2 = \frac{\sum(x-\bar{x}^2)}{n-1} = \frac{400}{4} = 100 = \sqrt{100} = s\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="z-scores-9" class="slide level2">
-<h2>Z-scores</h2>
-<div class="cell">
-<div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
-<colgroup><col><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">x</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">x-xbar</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(x-xbar)^2</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">z</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">100</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-1</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">100</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">20</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">30</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">100</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">30</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">10</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">100</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td></tr>
-</tbody></table>
-
-</div>
-</div>
-</section>
-<section id="z-scores-10" class="slide level2">
-<h2>Z-scores</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>We made the mean = 0: When you mean-center a distribution, you shift it along the number line.</p></li>
-<li class="fragment"><p>We made the SD = 1: When you divide a distribution by the SD, you shrink the distribution down.</p></li>
-<li class="fragment"><p><strong>BUT: The shape of the distribution remains the same.</strong></p></li>
-</ul>
-</div>
-</section>
-<section id="z-scores-11" class="slide level2">
-<h2>Z-scores</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Shift distribution along the number line.</p></li>
-<li class="fragment"><p>Shrink distribution down.</p></li>
-<li class="fragment"><p><strong>The shape of the distribution remains the same.</strong></p></li>
-</ul>
-</div>
-<div class="fragment">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><a href="lec5_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec5_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
 </section>
-<section id="z-scores-12" class="slide level2">
-<h2>Z-Scores</h2>
-<h3 id="why-do-we-care">Why Do We Care?</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>A z-score tells me where my score falls in SD units.</p></li>
-<li class="fragment"><p>I can then look at this standard normal curve, and estimate what percentage of people did better or worse than me.</p></li>
-</ul>
-</div>
-</section>
-<section id="z-scores-13" class="slide level2">
-<h2>Z-Scores</h2>
-<h3 id="why-do-we-care-1">Why Do We Care?</h3>
+<section id="p-values" class="slide level2">
+<h2>P-Values</h2>
+<h3 id="yeah-can-i-get-uhhhhh">Yeah Can I Get Uhhhhh</h3>
 <blockquote>
-<p>The mean score for Exam 1 was a 92 with a standard deviation of 3.</p>
+<p>Professor Brocker gives <code>100</code> students caffeinated coffee and another <code>100</code> students decaf. He then has them complete a stats exam.</p>
 </blockquote>
 <ul>
-<li class="fragment"><p>Esmeralda scored an 86.</p></li>
-<li class="fragment"><p>What percent of the class scored better than Esmeralda?</p></li>
+<li class="fragment"><p>IV:</p></li>
+<li class="fragment"><p>DV:</p></li>
+<li class="fragment"><p>N =</p></li>
 </ul>
 </section>
-<section id="z-scores-14" class="slide level2">
-<h2>Z-Scores</h2>
-<h3 id="why-do-we-care-2">Why Do We Care?</h3>
-<div class="fragment">
-<p><span class="math inline">\(z=\frac{x-\bar{x}}{s} = \frac{86-92}{3} = -2\)</span></p>
-</div>
-<p><a href="images/bell_prop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/bell_prop.png"></a></p>
+<section id="p-values-1" class="slide level2">
+<h2>P-Values</h2>
+<h3 id="yeah-can-i-get-uhhhhh-1">Yeah Can I Get Uhhhhh</h3>
+<blockquote>
+<p>Professor Brocker gives <code>100</code> students caffeinated coffee and another <code>100</code> students decaf. He then has them complete a stats exam.</p>
+</blockquote>
 <ul>
-<li class="fragment">98% of the class did better than Esmeralda.</li>
+<li class="fragment"><p>IV: Coffee Consumption (Coffee or No Coffee)</p></li>
+<li class="fragment"><p>DV: Exam Scores</p></li>
+<li class="fragment"><p>N = 200</p></li>
 </ul>
 </section>
-<section id="z-scores-15" class="slide level2">
-<h2>Z-Scores</h2>
-<h3 id="the-mean-score-for-exam-1-was-a-92-with-a-standard-deviation-of-3.">The mean score for Exam 1 was a 92 with a standard deviation of 3.</h3>
-<p>Jonas scored a 95.</p>
+<section id="p-values-2" class="slide level2">
+<h2>P-Values</h2>
+</section>
+<section id="p-values-3" class="slide level2">
+<h2>P-Values</h2>
+<p>The p-value tells us if the mean of the <em>experimental group</em> is far enough away from the <em>control group</em> mean that we can be confidence it belongs to a theoretical non-null distribution.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="p-values-and-confidence-intervals" class="slide level2">
+<h2>P-values and confidence intervals</h2>
+<h3 id="finding-in-terms-of-the-null-hypothesis">Finding in terms of the null hypothesis</h3>
+<p>If there is a significant difference between the groups, p will be smaller than <code>0.05</code>.</p>
 <ul>
-<li class="fragment">What percent of the class scored better than Jonas?</li>
+<li class="fragment"><p>If p &lt; (less than) <code>0.05</code>, the difference is <strong>significant</strong>, we <em>Reject</em> <span class="math inline">\(H_0\)</span>.</p></li>
+<li class="fragment"><p>If p &gt; (greater than) <code>0.05</code>, the difference is NOT <strong>significant</strong>, we <em>Fail to Reject</em> <span class="math inline">\(H_0\)</span>.</p></li>
 </ul>
+</section>
+<section id="error-beta" class="slide level2">
+<h2>Error (<span class="math inline">\(\beta\)</span>)</h2>
+<p>How often are we okay with making a mistake?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Type 1:</p>
+<ul>
+<li class="fragment"><p>Reality: There is NO difference between the groups.</p></li>
+<li class="fragment"><p>Conclusion: There is a difference between the groups.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Type 2:</p>
+<ul>
+<li class="fragment"><p>Reality: There is a difference between the groups.</p></li>
+<li class="fragment"><p>Conclusion: There is NO difference between the groups.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="types-of-errors" class="slide level2">
+<h2>Types of Errors</h2>
+<h3 id="visual-aid">Visual Aid</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="images/clipboard-2057166815.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/clipboard-2057166815.png" width="368"></a></p>
+</div><div class="column" style="width:50%;">
+<p><a href="images/clipboard-63089270.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/clipboard-63089270.png" width="300"></a></p>
+</div></div>
+</section>
+<section id="error" class="slide level2">
+<h2>Error</h2>
+<p>How often are we okay with making a mistake?</p>
+<ul>
+<li class="fragment">It’s better to make a Type 2 Error than a Type 1.
+<ul>
+<li class="fragment">Type 1 kills people</li>
+<li class="fragment">Type 2 kills careers</li>
+</ul></li>
+<li class="fragment">We want to minimize the chance of committing a Type 1 Error.</li>
+</ul>
+</section>
+<section id="error-alpha" class="slide level2">
+<h2>Error &amp; Alpha</h2>
+<p>We accept a <code>5%</code> chance of committing a Type 1 Error.</p>
+<ul>
+<li class="fragment">We set alpha (<span class="math inline">\(\alpha\)</span>) to <code>5%</code> or <code>0.05</code></li>
+</ul>
+</section>
+<section id="error-alpha-1" class="slide level2">
+<h2>Error &amp; Alpha</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="error-alpha-2" class="slide level2">
+<h2>Error &amp; Alpha</h2>
 <div class="fragment">
-<p><span class="math display">\[
-z = \frac{95-92}{3} = 1
-\]</span></p>
+<p><a href="images/clipboard-3692632542.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="images/clipboard-3692632542.png" width="629"></a></p>
+</div>
+</section>
+<section id="significance" class="slide level2">
+<h2>Significance</h2>
+<div class="fragment">
+<p><a href="images/clipboard-1570428696.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/clipboard-1570428696.png" width="632"></a></p>
+</div>
+</section>
+<section id="beta" class="slide level2">
+<h2>Beta</h2>
+<ul>
+<li class="fragment"><p>We set alpha at <code>5%</code> <code>(0.05)</code>, meaning we are okay with making a Type 1 Error (<em>false positive</em>) <code>5%</code> of the time.</p></li>
+<li class="fragment"><p>As a result, beta gets set at <code>16%</code>, meaning we have a 16% chance of committing Type 2 Error (<em>false negative</em>).</p></li>
+</ul>
+</section>
+<section id="alpha-and-beta" class="slide level2">
+<h2>Alpha and Beta</h2>
+<h3 id="example">Example</h3>
+<p><a href="images/clipboard-2847025632.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/clipboard-2847025632.png" width="350"></a></p>
+</section>
+<section id="error-and-alpha-and-beta" class="slide level2">
+<h2>Error and Alpha and Beta</h2>
+<ul>
+<li class="fragment"><p>Alpha (<span class="math inline">\(\alpha\)</span>) = probability of committing Type 1 Error</p></li>
+<li class="fragment"><p>Beta (<span class="math inline">\(\beta\)</span>)= probability of committing Type 2 Error</p></li>
+</ul>
+</section>
+<section id="error-and-alpha-and-beta-1" class="slide level2">
+<h2>Error and Alpha and Beta</h2>
+<table class="caption-top" style="width:99%;">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(H_0\)</span> True</th>
+<th><span class="math inline">\(H_0\)</span> False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fail to Reject <span class="math inline">\(H_0\)</span></td>
+<td>Correct Decision <span class="math inline">\(1-\alpha\)</span></td>
+<td><p>Incorrect Decision</p>
+<p>Type II Error</p>
+<p><span class="math inline">\(\beta\)</span></p></td>
+</tr>
+<tr class="even">
+<td>Reject <span class="math inline">\(H_0\)</span></td>
+<td><p>Incorrect Decision</p>
+<p>Type I Error</p>
+<p><span class="math inline">\(\alpha\)</span></p></td>
+<td><p>Correct Decision</p>
+<p><span class="math inline">\(1-\beta\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-and-alpha-and-beta-2" class="slide level2">
+<h2>Error and Alpha and Beta</h2>
+</section>
+<section id="power-effect-size" class="slide level2">
+<h2>Power &amp; Effect Size</h2>
+</section>
+<section id="sampling-theory-4" class="slide level2">
+<h2>Sampling theory</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="null-hypothesis-h_0" class="slide level2">
+<h2>Null Hypothesis: <span class="math inline">\(H_0\)</span></h2>
+<p>States that nothing will happen while also naming of the variables (independent and dependent).</p>
+<ul>
+<li class="fragment">The Null Hypothesis is written as <span class="math inline">\(H_0\)</span></li>
+</ul>
+</section>
+<section id="alternative-hypothesis-h_1h_a" class="slide level2">
+<h2>Alternative hypothesis: <span class="math inline">\(H_1|H_A\)</span></h2>
+<p>A <strong>testable</strong> prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.</p>
+<ul>
+<li class="fragment">The Alternative Hypothesis is written as <span class="math inline">\(H_1\)</span></li>
+</ul>
+</section>
+<section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis testing</h2>
+<ul>
+<li class="fragment"><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): These is <strong>no</strong> difference in the DV between the IV groups.</p></li>
+<li class="fragment"><p>Alternative Hypothesis (<span class="math inline">\(H_1\)</span>): The experimental group is <strong>significantly different</strong> from the control group on the DV.</p></li>
+</ul>
+</section>
+<section id="hypothesis-testing-1" class="slide level2">
+<h2>Hypothesis testing</h2>
+<p><a href="images/clipboard-1494090978.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/clipboard-1494090978.png" width="481"></a></p>
+</section>
+<section id="p-values-and-confidence-intervals-1" class="slide level2">
+<h2>P-values and confidence intervals</h2>
+<p>If there is a significant difference between the groups, p will be smaller than <code>0.05</code>.</p>
+<ul>
+<li class="fragment"><p>If p = .032…</p></li>
+<li class="fragment"><p>If p = .045…</p></li>
+<li class="fragment"><p>If p = .050…</p></li>
+</ul>
+</section>
+<section id="findings-in-terms-of-the-null-hypothesis" class="slide level2">
+<h2>Findings in terms of the null hypothesis</h2>
+<ul>
+<li class="fragment"><p>If p &lt; (less than) <code>0.05</code>, the difference is significant, we Reject <span class="math inline">\(H_0\)</span>.</p></li>
+<li class="fragment"><p>If p &gt; (greater than) <code>0.05</code>, the difference is NOT significant, we Fail to Reject <span class="math inline">\(H_0\)</span>.</p></li>
+</ul>
+</section>
+<section id="alpha-beta" class="slide level2">
+<h2>Alpha &amp; beta</h2>
+<p><a href="images/clipboard-421457594.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/clipboard-421457594.png" width="637"></a></p>
+</section>
+<section id="alpha-beta-1" class="slide level2">
+<h2>Alpha &amp; beta</h2>
+<h3 id="alpha-and-beta-1"><span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></h3>
+<div class="fragment">
+<p>Alpha: The probability of committing a Type 1 Error.</p>
+<ul>
+<li class="fragment">We set <span class="math inline">\(\alpha\)</span> to <code>0.05</code></li>
+</ul>
 </div>
 <div class="fragment">
+<p>Beta: The probability of committing a Type 2 Error.</p>
 <ul>
-<li class="fragment">16% scored higher than Jonas.</li>
+<li class="fragment">When <span class="math inline">\(\alpha\)</span> = <code>0.05</code>, the resulting <span class="math inline">\(\beta\)</span> = <code>0.16</code></li>
 </ul>
 </div>
+</section>
+<section id="alpha-beta-2" class="slide level2">
+<h2>Alpha &amp; beta</h2>
+<p><a href="images/clipboard-421457594.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/clipboard-421457594.png"></a></p>
+</section>
+<section id="types-of-errors-1" class="slide level2">
+<h2>Types of Errors</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="type-1-error">Type 1 Error</h3>
+<ul>
+<li class="fragment"><p><strong>Reality</strong>: There is NO difference between the groups.</p></li>
+<li class="fragment"><p><strong>Conclusion</strong>: There is a difference between the groups.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="type-2-error">Type 2 Error</h3>
+<ul>
+<li class="fragment"><p><strong>Reality</strong>: There is a difference between the groups.</p></li>
+<li class="fragment"><p><strong>Conclusion</strong>: There is NO difference between the groups.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="alpha-and-beta-and-power" class="slide level2">
+<h2>Alpha and Beta and Power</h2>
+<p><a href="images/Screenshot 2024-10-07 at 8.30.29 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/Screenshot 2024-10-07 at 8.30.29 AM.png" width="368"></a></p>
+</section>
+<section id="alpha-beta-power" class="slide level2">
+<h2>Alpha &amp; beta &amp; power</h2>
+<p><a href="images/Screenshot 2024-10-07 at 8.30.29 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/Screenshot 2024-10-07 at 8.30.29 AM.png" width="368"></a></p>
+</section>
+<section id="alpha-beta-power-1" class="slide level2">
+<h2>Alpha &amp; beta &amp; power</h2>
+<p><a href="images/Screenshot 2024-10-07 at 8.30.29 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="images/Screenshot 2024-10-07 at 8.30.29 AM.png" width="368"></a></p>
+</section>
+<section id="alpha-beta-power-2" class="slide level2">
+<h2>Alpha &amp; Beta &amp; Power</h2>
+<p><a href="images/clipboard-421457594.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="images/clipboard-421457594.png" width="317"></a></p>
+</section>
+<section id="alpha-beta-power-3" class="slide level2">
+<h2>Alpha &amp; beta &amp; Power</h2>
+<div class="fragment">
+<p><strong>Alpha</strong>: The probability of committing a Type 1 Error.</p>
+</div>
+<ul>
+<li class="fragment">We set <span class="math inline">\(\alpha\)</span> to <code>0.05</code></li>
+</ul>
+<div class="fragment">
+<p><strong>Beta</strong>: The probability of committing a Type 2 Error.</p>
+</div>
+<ul>
+<li class="fragment">When <span class="math inline">\(\alpha\)</span> = <code>0.05</code>, the resulting <span class="math inline">\(\beta\)</span> = <code>0.16</code></li>
+</ul>
+<div class="fragment">
+<p><strong>Power</strong>: Ability of the researcher to accurately detect a difference between groups</p>
+</div>
+<ul>
+<li class="fragment">If <span class="math inline">\(\alpha\)</span> = <code>0.05</code>, <span class="math inline">\(\beta\)</span> = <code>0.16</code>, and the resulting power = <code>0.84</code></li>
+</ul>
+</section>
+<section id="alpha-beta-power-4" class="slide level2">
+<h2>Alpha &amp; Beta &amp; Power</h2>
+<h3 id="power">Power</h3>
+<p>Power refers to the ability of the researcher to accurately detect a difference between groups.</p>
+<ul>
+<li class="fragment"><p>When we assume a normal distribution, we assume power will be about <code>0.84</code> or <code>84%</code>.</p></li>
+<li class="fragment"><p>Power is dependent on Effect Size.</p></li>
+</ul>
+</section>
+<section id="effect-size" class="slide level2">
+<h2>Effect Size</h2>
+<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
+<ul>
+<li class="fragment">Cohen’s <span class="math inline">\(d\)</span></li>
+<li class="fragment">Coefficient of Determination <span class="math inline">\(R2\)</span></li>
+<li class="fragment">Omega Hat Squared | Eta Hat Squared
+<ul>
+<li class="fragment"><span class="math inline">\(\hat{\omega}^2\)</span></li>
+<li class="fragment"><span class="math inline">\(\hat{\eta}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="effect-size-example" class="slide level2">
+<h2>Effect Size Example</h2>
+<blockquote>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="images/clipboard-2323188496.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="images/clipboard-2323188496.png" width="212"></a></p>
+</div><div class="column" style="width:50%;">
+<p><a href="images/clipboard-4121036724.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="images/clipboard-4121036724.png" width="249"></a></p>
+</div></div>
+</section>
+<section id="effect-size-example-1" class="slide level2">
+<h2>Effect Size Example</h2>
+<blockquote>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+</blockquote>
+<ul>
+<li class="fragment">IV:</li>
+</ul>
+<div class="fragment">
+<p>Caffeine versus no caffeine</p>
+</div>
+<ul>
+<li class="fragment">DV:</li>
+</ul>
+<div class="fragment">
+<p>Task speed</p>
+</div>
+</section>
+<section id="effect-size-example-2" class="slide level2">
+<h2>Effect Size Example</h2>
+<blockquote>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+</blockquote>
+<ul>
+<li class="fragment">Effect Size:</li>
+</ul>
+<div class="fragment">
+<p>Strength of the relationships between caffeine and task speed</p>
+</div>
+<ul>
+<li class="fragment">How much does caffeine actually impact task speed?</li>
+</ul>
+</section>
+<section id="effect-size-example-3" class="slide level2">
+<h2>Effect size Example</h2>
+<blockquote>
+<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="images/clipboard-2323188496.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="images/clipboard-2323188496.png" width="299"></a></p>
+</div><div class="column" style="width:50%;">
+<p><a href="images/clipboard-4204953737.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="images/clipboard-4204953737.png" width="299"></a></p>
+</div></div>
+</section>
+<section id="effect-size-1" class="slide level2">
+<h2>Effect size</h2>
+<p>The <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
+<p>Effect size tells us how much one variable <em>actually</em> impacts the other.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<pre><code></code></pre>
+</section>
+<section id="effect-size-2" class="slide level2">
+<h2>Effect size:</h2>
+<h3 id="cohens-d">Cohen’s d</h3>
+<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
+<p>Cohen’s d gives us a standardized measure of effect size:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(d &lt; 0.3\)</span> is weak</p></li>
+<li class="fragment"><p><span class="math inline">\(0.3 &lt; d &gt; 0.5\)</span> is moderate</p></li>
+<li class="fragment"><p><span class="math inline">\(d &gt; 0.7\)</span> is strong</p></li>
+</ul>
+</section>
+<section id="cohens-d-1" class="slide level2">
+<h2>Cohen’s d</h2>
+<h3 id="formula">Formula</h3>
+<ul>
+<li class="fragment"><p>Cohen’s d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the “pooled standard deviation.”</p></li>
+<li class="fragment"><p>The pooled standard deviation refers to the average SD across the 2 groups.</p></li>
+</ul>
+<div class="fragment">
+<p><span class="math inline">\(d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}\)</span></p>
+</div>
+</section>
+<section id="cohens-d-2" class="slide level2">
+<h2>Cohen’s d</h2>
+<h3 id="understanding-the-terms">Understanding the Terms</h3>
+<div class="fragment">
+<p><span class="math inline">\(d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}\)</span></p>
+<p><span class="math inline">\(d = \frac{\text{Control Group Mean}-\text{Experimental Group Mean}}{\sqrt{\text{Pooled Variance}}}\)</span></p>
+</div>
+</section>
+<section id="effect-size-3" class="slide level2">
+<h2>Effect size</h2>
+<p>In psychology, we are often dealing with effect sizes that are small <code>(d = 0.3)</code>.</p>
+<ul>
+<li class="fragment">A smaller effect size is harder to detect.</li>
+</ul>
+</section>
+<section id="alpha-beta-power-5" class="slide level2">
+<h2>Alpha &amp; beta &amp; power</h2>
+<p>When the effect size is small, the hypothetical alternative distribution is closer to the null distribution.</p>
+<p><a href="images/clipboard-3726777508.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="images/clipboard-3726777508.png" width="313"></a></p>
+</section>
+<section id="effect-size-4" class="slide level2">
+<h2>Effect size</h2>
+<p>What can we do to increase power when an effect size is small?</p>
+<ul>
+<li class="fragment"><p>Take bigger samples (as per Central Limit Theorem)</p></li>
+<li class="fragment"><p>Design better experiments with more control and fewer confounds</p></li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>Standard Normal Distrubution | ⬡⬢⬡⬢⬡</p>
+
 </div>
 </div>
 </section>
@@ -794,7 +894,6 @@ z = \frac{95-92}{3} = 1
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -817,7 +916,6 @@ z = \frac{95-92}{3} = 1
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -988,7 +1086,7 @@ z = \frac{95-92}{3} = 1
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1222,7 +1320,7 @@ z = \frac{95-92}{3} = 1
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
