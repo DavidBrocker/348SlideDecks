@@ -22,6 +22,7 @@ revealjs-plugins:
 ---
 
 ## Review
+
 ### Proportional Breakdown
 
 ::: {.incremental .highlight-last}
@@ -53,19 +54,19 @@ Z-scores re-express the original data points (the X's) in a way that intuitively
 :::
 
 ## Z-scores
+
 ### Why do we care?
 
 Z-scores re-express the original data points (the X's) in a way that intuitively lets us know:
 
 ::: {.incremental .highlight-last}
-
 -   Where it falls in the dispersion of the distribution
 
 -   How different this participant is from the majority of people in the sample
 :::
 
-
 ## Z-scores
+
 ### Why do we care?
 
 ```{r}
@@ -98,6 +99,7 @@ tibble(
 ```
 
 ## Z-scores
+
 ### Why do we care?
 
 ```{r}
@@ -131,7 +133,6 @@ tibble(
 
 ```
 
-
 ## Z-scores
 
 ### Imagine that $s$ = 2 and $\bar{x}$ = 25
@@ -139,13 +140,11 @@ tibble(
 Z-scores are expressed in Standard Deviation units.
 
 ::: {.incremental .highlight-last}
-
 -   $$z = 1 = 25 + 2 = 27$$
 
 -   $$z = -2 = 25 - 2 = 23$$
 
 -   $$z = 0.5 = 25 - .05 = 24.4$$
-
 :::
 
 ## Calculating A Z-score
@@ -157,14 +156,15 @@ Z-scores are expressed in Standard Deviation units.
 
     -   This makes the Mean = 0.
 
--   Dividing by the standard deviation $\frac{}{s}$ 
+-   Dividing by the standard deviation $\frac{}{s}$
 
     -   Makes the SD = 1.
-
 :::
 
 ## Calculating Probability
+
 ### Use the normal distribution
+
 > The average grade on the exam was an 86 with a standard deviation of 4.
 
 ```{r}
@@ -187,10 +187,9 @@ tibble(
   scale_color_identity()
 ```
 
-
 ## Calculating Probability
-> The average grade on the exam was an 86 with a standard deviation of 4. What is the probability of scoring a `94` or higher on the exam?
 
+> The average grade on the exam was an 86 with a standard deviation of 4. What is the probability of scoring a `94` or higher on the exam?
 
 ```{r}
 
@@ -213,20 +212,20 @@ tibble(
   scale_color_identity()
 ```
 
-
 ## Calculating Probability
+
 ### Use the normal distribution
 
 > The average grade on the exam was an `86` with a standard deviation of `4`. What is the probability of scoring a `94` or higher on the exam?
 
 ::: {.incremental .highlight-last}
-
 -   $$z = \frac{x-\bar{x}}{s} = \frac{94-86}{4} = \frac{8}{4}=2$$
 
 -   Z = `2` corresponds with `2.1%` and `0.1%` of the curve (`2.2%`) chance.
 :::
 
 ## Example 2
+
 ### Test Time!
 
 > The mean exam score was `86` with a standard deviation of `4`.
@@ -252,6 +251,7 @@ tibble(
 ```
 
 ## Example 2
+
 ### Esmeralda's Second Test
 
 What is the probability of scoring between an `82` and a `90`?
@@ -278,6 +278,7 @@ tibble(
 ```
 
 ## Example 2
+
 ### Esmeralda's Second Test
 
 What is the probability of scoring between an `82` and a `90`?
@@ -288,10 +289,10 @@ What is the probability of scoring between an `82` and a `90`?
 -   $z = \frac{90-86}{4} = \frac{4}{4} = 1$
 
 -   There is a 68.3% chance of scoring between `82` and `90`.
-
 :::
 
 ## Example 3
+
 ### Esmeralda's Second Test
 
 > Esmeralda's stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal.
@@ -317,9 +318,8 @@ tibble(
   )
 ```
 
-
-
 ## Example 3
+
 ### Esmeralda's Second Test
 
 Esmeralda wants to calculate the probability that she scored below `60`
@@ -347,6 +347,7 @@ tibble(
 ```
 
 ## Example 3
+
 ### Esmeralda's Second Test: $\bar{x} = 72 | s = 6$
 
 Esmeralda wants to calculate the probability that she scored below `60`
@@ -362,6 +363,7 @@ Esmeralda wants to calculate the probability that she scored below `60`
 :::
 
 ## Z-scores and Probability
+
 ### How does it apply?
 
 In real life, we are often working with numbers with long decimal points rather than nice whole numbers.
@@ -370,20 +372,18 @@ In real life, we are often working with numbers with long decimal points rather 
 -   Because the standard normal curve is STANDARD and NORMAL, we can calculate the exact probability of a z-score with a decimal point.
 
 -   Calculate the z-score.
-
 :::
 
 ## Z-scores and Probability
+
 ### How does it apply?
 
 In real life, we are often working with numbers with long decimal points rather than nice whole numbers.
 
 ::: {.incremental .highlight-last}
-
 -   Locate the whole number and first decimal point along the left side of the table.
 
 -   Locate the second decimal point along the top of the table.
-
 :::
 
 ## Z-scores and Probability
@@ -426,7 +426,7 @@ The Z-score Probability Table gives you the probability of that z-score or **LES
 
 ### Example 1
 
-::: {style="position: relative; display: inline-block;"}
+:::: {style="position: relative; display: inline-block;"}
 <!-- Highlighting Vertical Bar -->
 
 ::: {style="height: 200px; width: 35px; background:red; opacity: 0.3; position: absolute; top: 50px; left: 30px;"}
@@ -435,13 +435,13 @@ The Z-score Probability Table gives you the probability of that z-score or **LES
 <!-- Z-table Image -->
 
 <img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
-:::
+::::
 
 ## Example 1
 
 ### Step by Step
 
-::: {style="position: relative; display: inline-block;"}
+::::: {style="position: relative; display: inline-block;"}
 <!-- Highlighting Horizontal Bar -->
 
 ::: {style="width: 380px; height: 20px; background:red; opacity: 0.3; position: absolute; top: 230px; left: 65px;"}
@@ -455,7 +455,7 @@ The Z-score Probability Table gives you the probability of that z-score or **LES
 <!-- Z-table Image -->
 
 <img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
-:::
+:::::
 
 ## Z-scores and Probability:
 
@@ -466,6 +466,7 @@ The Z-score Probability Table gives you the probability of that z-score or **LES
 What percent of adults would qualify for membership?
 
 ## Z-scores and Probability:
+
 ### Example 2
 
 > The scale of scores for an IQ test are approximately normal with mean `100` and standard deviation `15`. The organization MENSA, which calls itself the "high IQ society", requires a score of `130` or higher.
@@ -474,14 +475,13 @@ What percent of adults would qualify for membership?
 
 ::: {.incremental .highlight-last}
 -   $z = \frac{x-\bar{x}}{s} = z = \frac{130-100}{15}=\frac{30}{15} = 2$
-
 :::
 
 ## Example 2
 
 ### MENSA
 
-::: {style="position: relative; display: inline-block;"}
+::::: {style="position: relative; display: inline-block;"}
 <!-- Highlighting Horizontal Bar -->
 
 ::: {style="width: 90px; height: 22px; background:red; opacity: 0.3; position: absolute; top: 610px; left: 65px;"}
@@ -495,4 +495,4 @@ What percent of adults would qualify for membership?
 <!-- Z-table Image -->
 
 <img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
-:::
+:::::

@@ -7,11 +7,14 @@
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides – Hypothesis Testing, Pt 2</title>
+  <title>348 Slides – T-Tests</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -36,6 +39,7 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -329,8 +333,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Hypothesis Testing, Pt 2</h1>
-  <p class="subtitle">Lecture 10</p>
+  <h1 class="title">T-Tests</h1>
+  <p class="subtitle">Lecture 13</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -344,227 +348,454 @@ Dave Brocker
 </div>
 
 </section>
-<section id="review" class="slide level2">
-<h2>Review</h2>
-<h3 id="sampling-theory">Sampling Theory</h3>
-<p>Sample Mean:</p>
-<p>::: fragment If we took infinite samples of a population, the mean of each sample taken would be a Sample Mean – like how each student collect 500 responses about the Eric Andre Show and took the average of those 500 responses.</p>
-<p>:::</p>
-<p>Sampling Distribution:</p>
-<p>::: fragment What we get if we put all the sample means together; we assume it’s a normal distribution.</p>
-<p>:::</p>
-<p>Sampling theory</p>
-<p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
-<p>What does the Stats Cat say?</p>
-<p>Sampling theory</p>
-<p>Sampling theory</p>
-<p>There are about 10,000 students at Farmingdale State College.</p>
-<p>Each of the 25 of us recruits a sample of 400 students.</p>
-<p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (I don’t belong at all) to 10 (I belong completely).</p>
-<p>We each calculate the average response from our own sample of 400.</p>
-<p>Sampling theory</p>
-<p>Sampling theory</p>
-<p>Sampling theory</p>
-<p>P-Values</p>
-<p>Professor Brocker gives 100 students caffeinated coffee and another 100 students decaf. He then has them complete a stats exam.</p>
-<p>IV:</p>
-<p>DV:</p>
-<p>N =</p>
-<p>P-Values</p>
-<p>P-Values</p>
-<p>The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.</p>
-<p>Example</p>
-<p>P-Values</p>
-<p>The p-value tells us if the mean of the experimental group is far enough away from the control group mean that we can be confidence it belongs to a theoretical non-null distribution.</p>
-<p>P-values and confidence intervals</p>
-<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
-<p>Hypothesis testing</p>
-<p>P-values and confidence intervals</p>
-<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
-<p>P-values and confidence intervals</p>
-<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
-<p>Findings in terms of the null hypothesis</p>
-<p>If p &lt; (less than) 0.05, the difference is significant, we Reject H0.</p>
-<p>If p &gt; (greater than) 0.05, the difference is NOT significant, we Fail to Reject H0.</p>
-<p>Findings in terms of the null hypothesis</p>
-<p>If p &lt; (less than) 0.05, the difference is significant, we Reject H0.</p>
-<p>If p &gt; (greater than) 0.05, the difference is NOT significant, we Fail to Reject H0.</p>
-<p>Error</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>Type 1:</p>
-<p>‣ Reality: There is NO difference between the groups.</p>
-<p>‣ Conclusion: There is a difference between the groups.</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>Type 1:</p>
-<p>‣ Reality: There is NO difference between the groups.</p>
-<p>‣ Conclusion: There is a difference between the groups.</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>Type 2:</p>
-<p>‣ Reality: There is a difference between the groups.</p>
-<p>‣ Conclusion: There is NO difference between the groups.</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>Type 2:</p>
-<p>‣ Reality: There is a difference between the groups.</p>
-<p>‣ Conclusion: There is NO difference between the groups.</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>It’s better to make a Type 2 Error than a Type 1.</p>
-<p>Error</p>
-<p>How often are we okay with making a mistake?</p>
-<p>It’s better to make a Type 2 Error than a Type 1.</p>
-<p>‣ We want to minimize the chance of committing a Type 1 Error.</p>
-<p>Error &amp; Alpha</p>
-<p>We accept a 5% chance of committing a Type 1 Error.</p>
-<p>Error &amp; Alpha</p>
-<p>We accept a 5% chance of committing a Type 1 Error.</p>
-<p>‣ We set alpha to 5% or 0.05</p>
-<p>Error &amp; Alpha</p>
-<p>Error &amp; Alpha</p>
-<p>Error &amp; Alpha</p>
-<p>Error &amp; Alpha</p>
-<p>Significance</p>
-<p>Types of Error</p>
-<p><strong>Type 2:</strong></p>
-<p>‣ Reality: There is a difference between the groups.</p>
-<p>‣ Conclusion: There is NO difference between the groups.</p>
-<p>Types of Error</p>
-<p><strong>Type 2:</strong></p>
-<p>‣ Reality: There is a difference between the groups.</p>
-<p>‣ Conclusion: There is NO difference between the groups.</p>
-<p>Beta</p>
-<p>• We set alpha at 5% (0.05), meaning we are okay with making a Type 1 Error (false positive) 5% of the time.</p>
-<p>• As a result, beta gets set at 16%, meaning we have a 16% chance of committing Type 2 Error (false negative).</p>
-<p>Error &amp; Alpha</p>
-<p>Error &amp; Beta</p>
-<p>Error and Alpha and Beta</p>
-<p>• Alpha = probability of committing Type 1 Error</p>
-<p>• Beta = probability of committing Type 2 Error</p>
-<p>Error and Alpha and Beta</p>
-<p>Error and Alpha and Beta</p>
-<p>Error and Alpha and Beta</p>
-<p>Power &amp; Effect Size</p>
-<p>Sampling theory</p>
-<p>Sampling theory</p>
-<p>Sampling theory</p>
-<p>Null Hypothesis</p>
-<p>The <u><strong>Null Hypothesis</strong></u> states that nothing will happen while also naming of the variables (independent and dependent).</p>
-<p>The Null Hypothesis is written as</p>
-<p>Alternative hypothesis</p>
-<p>An <u><strong>Alternative Hypothesis</strong></u> is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.</p>
-<p>The Alternative Hypothesis is written as</p>
-<p>Hypothesis testing</p>
-<p>• Null Hypothesis (** **): These is no difference in the DV between the IV groups.</p>
-<p>• Alternative Hypothesis ( ** **): The experimental group is significantly different from the control group on the DV.</p>
-<p>Hypothesis testing</p>
-<p>P-values and confidence intervals</p>
-<p>If there is a significant difference between the groups, p will be smaller than 0.05.</p>
-<p>Findings in terms of the null hypothesis</p>
-<p>If p &lt; (less than) 0.05, the difference is significant, we Reject H0.</p>
-<p>If p &gt; (greater than) 0.05, the difference is NOT significant, we Fail to Reject H0.</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha: The probability of committing a Type 1 Error.</p>
-<p>Beta: The probability of committing a Type 2 Error.</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha: The probability of committing a Type 1 Error.</p>
-<p>‣ We set alpha to 0.05</p>
-<p>Beta: The probability of committing a Type 2 Error.</p>
-<p>‣ When alpha = 0.05, the resulting beta = 0.16</p>
-<p>Alpha &amp; beta</p>
-<p>Type 1 Error</p>
-<p>‣ Reality: There is NO difference between the groups.</p>
-<p>‣ Conclusion: There is a difference between the groups.</p>
-<p>Type 2 Error</p>
-<p>‣ Reality: There is a difference between the groups.</p>
-<p>‣ Conclusion: There is NO difference between the groups.</p>
-<p>Alpha &amp; beta</p>
-<p>Alpha and Beta</p>
-<p>Alpha and Beta</p>
-<p>Alpha and Beta</p>
-<p>Alpha and Beta</p>
-<p>Alpha and Beta</p>
-<p>Alpha and Beta</p>
-<p>Alpha and Beta and power</p>
-<p>Alpha &amp; beta &amp; power</p>
-<p>Alpha &amp; beta &amp; power</p>
-<p>Alpha &amp; Beta &amp; Power</p>
-<p>Alpha &amp; beta &amp; Power</p>
-<p>Alpha: The probability of committing a Type 1 Error.</p>
-<p>‣ We set alpha to 0.05</p>
-<p>Beta: The probability of committing a Type 2 Error.</p>
-<p>‣ When alpha = 0.05, the resulting beta = 0.16</p>
-<p>Power: Ability of the researcher to accurately detect a difference between groups</p>
-<p>Alpha &amp; beta &amp; Power</p>
-<p>Alpha: The probability of committing a Type 1 Error.</p>
-<p>‣ We set alpha to 0.05</p>
-<p>Beta: The probability of committing a Type 2 Error.</p>
-<p>‣ When alpha = 0.05, the resulting beta = 0.16</p>
-<p>Power: Ability of the researcher to accurately detect a difference between groups</p>
-<p>‣ If alpha = 0.05, beta = 0.16, and the resulting power = 0.84</p>
-<p>Alpha &amp; Beta &amp; Power</p>
-<p>Power</p>
-<p>Power refers to the ability of the researcher to accurately detect a difference between groups.</p>
-<p>‣ When we assume a normal distribution, we assume power will be about 0.84 or 84%.</p>
-<p>‣ Power is dependent on Effect Size.</p>
-<p>Effect size</p>
-<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
-<p>Effect size Example</p>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-<p>Effect size Example</p>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-<p>‣ IV: Caffeine versus no caffeine</p>
-<p>‣ DV: Task speed</p>
-<p>‣ Effect size: Strength of the relationships between caffeine and task speed</p>
-<p>‣ How much does caffeine actually impact task speed?</p>
-<p>Effect size Example</p>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-<p>Effect size Example</p>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-<p>Effect size</p>
-<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
-<p>Effect size tells us how much one variable actually impacts the other.</p>
-<p>Effect size: Cohen’s d</p>
-<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
-<p>Cohen’s d gives us a standardized measure of effect size:</p>
-<p>‣ d &lt; 0.3 is weak</p>
-<p>‣ 0.3 &lt; d &gt; 0.5 is moderate</p>
-<p>‣ d &gt; 0.7 is strong</p>
-<p>Cohen’s d</p>
-<p>Cohen’s d</p>
-<p>Cohen’s d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the “pooled standard deviation.”</p>
-<p>Cohen’s d</p>
-<p>Cohen’s d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the square root of the “pooled standard deviation.”</p>
-<p>The pooled standard deviation refers to the average SD across the 2 groups.</p>
-<p>Cohen’s d</p>
-<p>Cohen’s d</p>
-<p>Cohen’s d</p>
-<p>Effect size</p>
-<p>In psychology, we are often dealing with effect sizes that are small (d = 0.3).</p>
-<p>‣ A smaller effect size is harder to detect.</p>
-<p>Alpha &amp; beta &amp; power</p>
-<p>When the effect size is small, the hypothetical alternative distribution is closer to the null distribution.</p>
-<p>Effect size</p>
-<p>What can we do to increase power when an effect size is small?</p>
-<p>‣ Take bigger samples (as per Central Limit Theorem)</p>
-<p>‣ Design better experiments with more control and fewer confounds</p>
-<p>Do not do meth.</p>
-
-<div class="quarto-auto-generated-content">
-<div class="footer footer-default">
-
+<section id="sampling-theory" class="slide level2">
+<h2>Sampling Theory</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
+<section id="sampling-theory-1" class="slide level2">
+<h2>Sampling Theory</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-theory-2" class="slide level2">
+<h2>Sampling Theory</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-theory-3" class="slide level2">
+<h2>Sampling Theory</h2>
+<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="probability" class="slide level2">
+<h2>Probability</h2>
+<p><a href="images/bell_prop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/bell_prop.png"></a></p>
+</section>
+<section id="sampling-theory-4" class="slide level2">
+<h2>Sampling Theory</h2>
+<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="inferential-statistics" class="slide level2">
+<h2>Inferential Statistics</h2>
+<p>Each inferential statistic will give us:</p>
+<ul>
+<li class="fragment"><p>Test statistic</p>
+<ul>
+<li class="fragment"><span class="math inline">\(r,t,F,\chi^2...\)</span></li>
+</ul></li>
+<li class="fragment"><p>p-value: probability of committing a Type 1 Error &lt; 0.05 or 5%</p>
+<ul>
+<li class="fragment"><p>p &gt; 0.05: Fail to reject the <span class="math inline">\(H_0\)</span></p></li>
+<li class="fragment"><p>p &lt; 0.05: Reject <span class="math inline">\(H_0\)</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="sampling-theory-5" class="slide level2">
+<h2>Sampling Theory</h2>
+<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="t-tests" class="slide level2">
+<h2>T-tests</h2>
+<ul>
+<li class="fragment"><p>IV <strong>must be</strong> nominal and have <em>only</em> 2 categories</p>
+<ul>
+<li class="fragment"><p>Using experimental versus control</p></li>
+<li class="fragment"><p>Any two categories (bad/good)</p></li>
+</ul></li>
+<li class="fragment"><p>DV <strong>must be</strong> continuous</p>
+<ul>
+<li class="fragment">Scale of 1 to 10</li>
+<li class="fragment">Count</li>
+</ul></li>
+</ul>
+</section>
+<section id="independent-samples-t-test" class="slide level2">
+<h2>Independent Samples t-test</h2>
+<h3 id="example">Example</h3>
+<blockquote>
+<p>The experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>The experimental group has a mean happiness score of <code>8</code></p></li>
+<li class="fragment"><p>The control group mean happiness score of <code>6</code></p></li>
+</ul>
+<div class="fragment">
+<p>Is the group that drank coffee significantly happier than the control group?</p>
+</div>
+</section>
+<section id="independent-samples-t-test-1" class="slide level2">
+<h2>Independent samples t-test</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-samples-t-test-2" class="slide level2">
+<h2>Independent samples t-test</h2>
+<p>To compare the means we need to know:</p>
+<ul>
+<li class="fragment"><p>Between group variance: how much the answers from the <strong>experimental</strong> group differ from the <strong>control</strong> group.</p></li>
+<li class="fragment"><p>Within group variance: how much the answers of all participants differ from one another.</p></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-3" class="slide level2">
+<h2>Independent samples t-test</h2>
+<p>To compare the means we need to know:</p>
+<ul>
+<li class="fragment"><p>Between group variance</p></li>
+<li class="fragment"><p>Within group variance</p></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-4" class="slide level2">
+<h2>Independent samples t-test</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-samples-t-test-5" class="slide level2">
+<h2>Independent samples t-test</h2>
+<p>To compare the means we need to know:</p>
+<ul>
+<li class="fragment"><p>Between group variance</p></li>
+<li class="fragment"><p>Within group variance</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-samples-t-test-6" class="slide level2">
+<h2>Independent samples t-test</h2>
+<p>To compare the means we need to know:</p>
+<ul>
+<li class="fragment"><p><strong>Between group variance</strong>: how much the answers from the experimental group differ from the control group.</p></li>
+<li class="fragment"><p><strong>Within group variance</strong>: how much the answers of all participants differ from one another.</p></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-7" class="slide level2">
+<h2>Independent samples t-test</h2>
+</section>
+<section id="theoretical-formula" class="slide level2">
+<h2>Theoretical Formula:</h2>
+<p><span class="math display">\[\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\color{grey}{s^{2}_{pooled}}}}\]</span> - <span style="color:blue">t</span></p>
+<ul>
+<li class="fragment"><p><span style="color:red">Sample Mean</span></p></li>
+<li class="fragment"><p><span style="color:orange">Population Mean</span></p></li>
+<li class="fragment"><p><span style="color:grey">Pooled Variance</span></p></li>
+</ul>
+</section>
+<section id="forumlas" class="slide level2">
+<h2>Forumlas</h2>
+<p>Inferential statistics have both <strong>theoretical</strong> and <strong>computational</strong> formulas:</p>
+<ul>
+<li class="fragment"><p>Theoretical</p>
+<ul>
+<li class="fragment">Formula for if we actually knew the population parameters</li>
+</ul></li>
+<li class="fragment"><p>Computational</p>
+<ul>
+<li class="fragment">Formula for estimating the test statistics based solely on sample data</li>
+</ul></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-8" class="slide level2">
+<h2>Independent samples t-test</h2>
+<p>Theoretical Formula:</p>
+<p><span class="math display">\[t = \frac{\bar{x} - \color{green}{μ}}{\sqrt{s^{2}_{pooled}}}\]</span></p>
+</section>
+<section id="independent-samples-t-test-9" class="slide level2">
+<h2>Independent samples t-test</h2>
+<h3 id="theoretical-formula-1">Theoretical Formula:</h3>
+<p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{\color{orange}{s^{2}_{pooled}}}}\]</span></p>
+</section>
+<section id="independent-samples-t-test-10" class="slide level2">
+<h2>Independent samples t-test</h2>
+<h3 id="theoretical-formula-2">Theoretical Formula:</h3>
+<p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}\]</span></p>
+</section>
+<section id="independent-samples-t-test-11" class="slide level2">
+<h2>Independent samples t-test</h2>
+<h3 id="theoretical-formula-3">Theoretical Formula:</h3>
+<p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}\]</span></p>
+</section>
+<section id="independent-samples-t-test-12" class="slide level2">
+<h2>Independent samples t-test</h2>
+<h3 id="computational-formula">Computational Formula:</h3>
+<p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\color{darkblue}{\frac{s1}{n1}+ \frac{s2}{n2}}}}\]</span></p>
+<ul>
+<li class="fragment"><span style="color: darkblue">Pooled Variance</span></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-13" class="slide level2">
+<h2>Independent samples t-test</h2>
+<h3 id="computational-formula-1">Computational Formula:</h3>
+<p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}\]</span></p>
+</section>
+<section id="data-overview" class="slide level2">
+<h2>Data Overview</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">estimate</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate1</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate2</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">parameter</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.low</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.high</th><th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">method</th><th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">alternative</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">-2.5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8.2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-4.68</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.000187</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">18</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3.62</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.38</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Two Sample t-test</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">two.sided</td></tr>
+</tbody></table>
+
+</div>
+</div>
+<p><a href="images/Screenshot 2024-11-04 at 7.50.42 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/Screenshot 2024-11-04 at 7.50.42 AM.png"></a></p>
+</section>
+<section>
+<section id="spss" class="title-slide slide level1 center">
+<h1>SPSS</h1>
+
+</section>
+<section id="the-data" class="slide level2">
+<h2>The Data</h2>
+<ul>
+<li class="fragment"><p>The main window that opens in SPSS</p></li>
+<li class="fragment"><p><strong>Data view</strong>: every row is a participant</p></li>
+<li class="fragment"><p><strong>Variable view</strong>: every row is a variable</p></li>
+<li class="fragment"><p>Click commands from the data file.</p></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-spss" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<ul>
+<li class="fragment"><p>Analyze</p></li>
+<li class="fragment"><p>Compare Means</p></li>
+<li class="fragment"><p>Independent Samples</p></li>
+</ul>
+</section></section>
+<section>
+<section id="interpretting-t" class="title-slide slide level1 center">
+<h1>INTERPRETTING T</h1>
+
+</section>
+<section id="independent-samples-t-test-14" class="slide level2">
+<h2>Independent samples t-test:</h2>
+<h3 id="assumptions-of-the-t-test">Assumptions of the T-Test</h3>
+<ul>
+<li class="fragment"><p><strong>Data type</strong>:</p>
+<ul>
+<li class="fragment">The data is quantitative and continuous&nbsp;</li>
+</ul></li>
+<li class="fragment"><p><strong>Distribution</strong>:</p>
+<ul>
+<li class="fragment">The data is approximately normally distributed&nbsp;</li>
+</ul></li>
+<li class="fragment"><p><strong>Sample size</strong>:</p>
+<ul>
+<li class="fragment">The sample size is adequate*&nbsp;</li>
+</ul></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-15" class="slide level2">
+<h2>Independent samples t-test:</h2>
+<h3 id="assumptions-of-the-t-test-1">Assumptions of the T-Test</h3>
+<ul>
+<li class="fragment"><p><strong>Random sampling</strong>:</p>
+<ul>
+<li class="fragment">The data is randomly sampled from a population&nbsp;</li>
+</ul></li>
+<li class="fragment"><p><strong>Independence</strong>:</p>
+<ul>
+<li class="fragment">The data values are independent, meaning that measurements for one observation do not affect other observations&nbsp;</li>
+</ul></li>
+<li class="fragment"><p><strong>Homogeneity of variance</strong>:</p>
+<ul>
+<li class="fragment">The variability of the data in each group is similar&nbsp;</li>
+</ul></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-16" class="slide level2">
+<h2>Independent samples t-test</h2>
+<h3 id="homogeneity-of-variance">Homogeneity of Variance</h3>
+<h3 id="section"><img data-src="images/spiderman.png" style="border-radius: 20px;"></h3>
+<div class="fragment">
+<p>If the <strong>Levene’s Test</strong> is significant, use the t value from the second row and its corresponding significance.</p>
+</div>
+<ul>
+<li class="fragment"><p>t is the test statistic.</p></li>
+<li class="fragment"><p>Sig (2-tailed) is the p-value.</p></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-17" class="slide level2">
+<h2>Independent samples t-test</h2>
+<p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}\]</span></p>
+</section>
+<section id="independent-samples-t-test-spss-1" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<h3 id="why-do-we-care">Why Do We Care?</h3>
+<p>We need the <strong>Levene’s Test</strong>, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.</p>
+<ul>
+<li class="fragment">A significant Levene’s Test means a significant difference in the variances.</li>
+</ul>
+</section>
+<section id="independent-samples-t-test-spss-2" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<h3 id="interpreting-results">Interpreting Results</h3>
+<p>If the <strong>Levene’s Test</strong> is significant, use the t value from the second row and its corresponding significance</p>
+<p><a href="images/indsamp_lev.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/indsamp_lev.png"></a></p>
+</section>
+<section id="independent-samples-t-test-spss-3" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/indsamp.png"></a></p>
+</section>
+<section id="independent-samples-t-test-reporting-your-findings" class="slide level2">
+<h2>Independent samples t-test: Reporting your findings</h2>
+<p><a href="images/indsamp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/indsamp.png"></a></p>
+<div class="fragment">
+<blockquote>
+<p>There was not a significant difference between the groups, t(18) = 1.287, p = 0.215</p>
+</blockquote>
+</div>
+</section>
+<section id="independent-samples-t-test-spss-4" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/indsamp.png"></a></p>
+<p><a href="images/indsamp_lev.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/indsamp_lev.png"></a></p>
+</section>
+<section id="independent-samples-t-test-spss-5" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="images/indsamp_ex.png"></a></p>
+<ul>
+<li class="fragment"><p>Step 1: Look at Levene’s</p>
+<ul>
+<li class="fragment"><p>Smaller than .05 —&gt; Bottom</p></li>
+<li class="fragment"><p>Larger than .05 —&gt; Top</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-spss-6" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="images/indsamp_ex.png"></a></p>
+<ul>
+<li class="fragment"><p>Step Two: Look at p (Sig.)</p>
+<ul>
+<li class="fragment"><p>Smaller than .05 —&gt; Report Full Findings</p></li>
+<li class="fragment"><p>Larger than .05 —&gt; Report only Null</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-spss-7" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="images/indsamp_ex.png"></a></p>
+<blockquote>
+<p><em>t(degrees of freedom) = value, p = value</em></p>
+</blockquote>
+</section>
+<section id="independent-samples-t-test-spss-8" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="images/indsamp_ex.png"></a></p>
+<blockquote>
+<p><em>t(893) = value, p = value</em></p>
+</blockquote>
+</section>
+<section id="independent-samples-t-test-spss-9" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="images/indsamp_ex.png"></a></p>
+<blockquote>
+<p><em>t(893) = 5.038, p = value</em></p>
+</blockquote>
+</section>
+<section id="independent-samples-t-test-spss-10" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="images/indsamp_ex.png"></a></p>
+<blockquote>
+<p><em>t(893) = 5.038, p &lt; .001</em></p>
+</blockquote>
+</section>
+<section id="independent-samples-t-test-spss-11" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="images/indsamp_ex.png"></a></p>
+<blockquote>
+<p>There was a significant difference in number of hours worked last week between men and women, t (893) = 5.038, p &lt; 0.001.</p>
+</blockquote>
+</section>
+<section id="independent-samples-t-test-spss-12" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="images/indsamp_ex.png"></a></p>
+<p>But who worked more hours?!</p>
+</section>
+<section id="independent-samples-t-test-spss-13" class="slide level2">
+<h2>Independent samples t-test: SPSS</h2>
+<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="images/indsamp_ex.png"></a></p>
+<blockquote>
+<p>Men (M = 43.92, s = 15.53) worked significantly more hours last week compared to women (M = 38.92, s = 14.085), t (893) = 5.038, p &lt; 0.001.</p>
+</blockquote>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
+</div>
+</div>
+</section></section>
     </div>
   </div>
 
@@ -576,6 +807,7 @@ Dave Brocker
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -598,6 +830,7 @@ Dave Brocker
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -768,7 +1001,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -777,6 +1010,44 @@ Dave Brocker
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -964,6 +1235,38 @@ Dave Brocker
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

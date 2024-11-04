@@ -1,0 +1,600 @@
+---
+title: "T-Tests"
+subtitle: "Lecture 13"
+author: "Dave Brocker"
+footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+institute: "Farmingdale State College"
+format: 
+  revealjs:
+    theme: custom.scss
+    scrollable: true
+    incremental: true   
+    touch: true
+    chalkboard: true
+    lightbox: true
+    code-fold: true
+    drop:
+      engine: webr
+      webr:
+        packages:
+         - ggplot2
+         - dplyr
+revealjs-plugins:
+  - drop
+---
+
+## Sampling Theory
+
+```{r}
+#| echo: false
+library(ggplot2)
+library(dplyr,warn.conflicts = FALSE)
+library(huxtable)
+library(tidyr)
+
+# Generate data for two normal distributions
+x <- seq(-6, 6, length=100)
+null_dist <- dnorm(x, mean = 0, sd = 1)
+alt_dist <- dnorm(x, mean = 2, sd = 1)
+
+data <- data.frame(
+  x = rep(x, 2),
+  y = c(null_dist, alt_dist),
+  hypothesis = factor(rep(c("Null Hypothesis", "Alternative Hypothesis"), each=length(x)))
+)
+
+# Create the plot
+
+plt <- 
+  ggplot(data, aes(x = x, y = y, 
+                 lty = rev(hypothesis))) +
+    geom_line(aes(color = "purple")) +
+  theme_linedraw() + 
+  labs(
+    x = "",
+    y = "",
+    lty = "Hypotheses"
+  ) + 
+  theme(
+    panel.grid = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(.2,.5),
+    legend.background = element_rect(color = "black")
+  ) + 
+  scale_color_identity()
+
+plt 
+
+```
+
+## Sampling Theory
+
+```{r}
+#| echo: false
+
+plt + 
+  geom_vline(xintercept = -.8,color = "darkblue") + 
+  scale_x_continuous(breaks = c(-6,-4,-2,0,2,4,6))
+```
+
+## Sampling Theory
+
+```{r}
+#| echo: false
+
+plt + 
+  geom_vline(xintercept = 1.6,color = "darkblue") + 
+  scale_x_continuous(breaks = c(-6,-4,-2,0,2,4,6))
+
+```
+
+## Sampling Theory
+
+Setting alpha to 0.05, puts the critical value at a point where 5% of
+the null distribution's area is to the right of it.
+
+```{r}
+#| echo: false
+
+plt + 
+  geom_vline(
+    xintercept = 1.6,
+    color = "darkblue"
+    ) + 
+  geom_vline(
+    xintercept = 1, 
+    color = "red"
+    ) + 
+  geom_text(
+    x = 1, 
+    y = .05, 
+    label = "Critical Value",
+    color = "red",
+    angle = 90,
+    size = 3,
+    vjust = -.4
+    ) +
+  scale_x_continuous(
+    breaks = c(-6,-4,-2,0,2,4,6)
+    )
+
+```
+
+## Probability
+
+![](images/bell_prop.png)
+
+## Sampling Theory
+
+Setting alpha to 0.05, puts the critical value at a point where 5% of
+the null distribution's area is to the right of it.
+
+```{r}
+#| echo: false
+
+plt + 
+  geom_vline(
+    xintercept = 1.6,
+    color = "darkblue"
+    ) + 
+  geom_vline(
+    xintercept = 1, 
+    color = "red"
+    ) + 
+  geom_text(
+    x = 1, 
+    y = .05, 
+    label = "Critical Value",
+    color = "red",
+    angle = 90,
+    size = 3,
+    vjust = -.4
+    ) +
+  scale_x_continuous(
+    breaks = c(-6,-4,-2,0,2,4,6)
+    )
+```
+
+## Inferential Statistics
+
+Each inferential statistic will give us:
+
+-   Test statistic
+
+    -   $r,t,F,\chi^2...$
+
+-   p-value: probability of committing a Type 1 Error \< 0.05 or 5%
+
+    -   p \> 0.05: Fail to reject the $H_0$
+
+    -   p \< 0.05: Reject $H_0$
+
+## Sampling Theory
+
+Setting alpha to 0.05, puts the critical value at a point where 5% of
+the null distribution's area is to the right of it.
+
+```{r}
+#| echo: false
+
+plt + 
+  geom_vline(
+    xintercept = 2,
+    color = "darkblue"
+    ) + 
+  geom_vline(
+    xintercept = 1, 
+    color = "red"
+    ) + 
+  theme(
+    axis.text.x = element_blank()
+  ) + 
+  geom_text(
+    x = 1,
+    y = .05,
+    label = "Critical Value",
+    angle = 90,
+    color = "red",
+    vjust = -1
+  )
+```
+
+## T-tests
+
+-   IV **must be** nominal and have *only* 2 categories
+
+    -   Using experimental versus control
+
+    -   Any two categories (bad/good)
+
+-   DV **must be** continuous
+
+    -   Scale of 1 to 10
+    -   Count
+
+## Independent Samples t-test
+
+### Example
+
+> The experimental group drinks caffeinated coffee. The control group
+> drinks decaf. I ask both groups to complete a survey to measure their
+> happiness on a scale of `1` to `10`.
+
+-   The experimental group has a mean happiness score of `8`
+
+-   The control group mean happiness score of `6`
+
+::: fragment
+Is the group that drank coffee significantly happier than the control
+group?
+:::
+
+## Independent samples t-test
+
+```{r}
+#| echo: false
+
+plt + 
+  geom_vline(
+    xintercept = 2,
+    color = "darkblue"
+    ) + 
+  geom_vline(
+    xintercept = 0, 
+    color = "red"
+    ) + 
+  theme(
+    axis.text.x = element_blank()
+  ) + 
+  geom_text(
+    x = -4,
+    y = .1,
+    label = "M_Control = 6"
+  ) +
+    geom_text(
+    x = -4.3,
+    y = .05,
+    label = "M_Exp = 8"
+  )
+```
+
+## Independent samples t-test
+
+To compare the means we need to know:
+
+-   Between group variance: how much the answers from the
+    **experimental** group differ from the **control** group.
+
+-   Within group variance: how much the answers of all participants
+    differ from one another.
+
+## Independent samples t-test
+
+To compare the means we need to know:
+
+-   Between group variance
+
+-   Within group variance
+
+## Independent samples t-test
+
+```{r}
+#| echo: false
+
+library(dplyr,warn.conflicts = FALSE)
+
+tibble(
+  height =c(rnorm(80,72,5),rnorm(80,62,5)),
+  weight = c(rnorm(80,190,30),rnorm(80,120,10)),
+  sex = rep(c("M","F"),each = 80)
+) |> 
+  ggplot(aes(height,weight,color = sex)) + 
+  geom_point() + 
+  theme_linedraw() + 
+  labs(
+    x = "\nHeight",
+    y = "Weight\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+```
+
+## Independent samples t-test
+
+To compare the means we need to know:
+
+-   Between group variance
+
+-   Within group variance
+
+```{r}
+
+#| echo: false
+library(dplyr,warn.conflicts = FALSE)
+
+tibble(
+  write =c(rnorm(100,50,5),rnorm(100,65,5)),
+  read = c(rnorm(100,55,5),rnorm(100,70,10)),
+  sex = rep(c("M","F"),each = 100)
+) |> 
+  ggplot(aes(write,read,color = sex)) + 
+  geom_point(aes(shape = sex)) + 
+  theme_linedraw() + 
+  labs(
+    x = "\nWriting Score",
+    y = "Reading Score\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  ) + 
+  scale_color_manual(values = c("steelblue","darkorange"))
+```
+
+## Independent samples t-test
+
+To compare the means we need to know:
+
+-   **Between group variance**: how much the answers from the
+    experimental group differ from the control group.
+
+-   **Within group variance**: how much the answers of all participants
+    differ from one another.
+
+## Independent samples t-test
+
+## Theoretical Formula:
+
+$$\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\color{grey}{s^{2}_{pooled}}}}$$ -
+[t]{style="color:blue"}
+
+-   [Sample Mean]{style="color:red"}
+
+-   [Population Mean]{style="color:orange"}
+
+-   [Pooled Variance]{style="color:grey"}
+
+## Forumlas
+
+Inferential statistics have both **theoretical** and **computational**
+formulas:
+
+-   Theoretical
+
+    -   Formula for if we actually knew the population parameters
+
+-   Computational
+
+    -   Formula for estimating the test statistics based solely on
+        sample data
+
+## Independent samples t-test
+
+Theoretical Formula:
+
+$$t = \frac{\bar{x} - \color{green}{μ}}{\sqrt{s^{2}_{pooled}}}$$
+
+## Independent samples t-test
+
+### Theoretical Formula:
+
+$$t = \frac{\bar{x} - μ}{\sqrt{\color{orange}{s^{2}_{pooled}}}}$$
+
+## Independent samples t-test
+
+### Theoretical Formula:
+
+$$t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}$$
+
+## Independent samples t-test
+
+### Theoretical Formula:
+
+$$t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}$$
+
+## Independent samples t-test
+
+### Computational Formula:
+
+$$\frac{M_{Experimental}-M_{Control}}{\sqrt{\color{darkblue}{\frac{s1}{n1}+ \frac{s2}{n2}}}}$$
+
+-   [Pooled Variance]{style="color: darkblue"}
+
+## Independent samples t-test
+
+### Computational Formula:
+
+$$\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}$$
+
+## Data Overview
+
+```{r}
+dat <- 
+  tibble(
+  grp = rep(c("Experimental","Control"),
+            each = 10),
+  happy = c(rnorm(10,8,1),rnorm(10,6,1)) |> round(0)
+  ) 
+
+t.test(dat$happy ~ dat$grp, var.equal = TRUE) |> 
+  broom::tidy() |> 
+  huxtable::hux() |> 
+  huxtable::theme_article()
+```
+
+![](images/Screenshot%202024-11-04%20at%207.50.42%20AM.png)
+
+# SPSS
+
+## The Data
+
+-   The main window that opens in SPSS
+
+-   **Data view**: every row is a participant
+
+-   **Variable view**: every row is a variable
+
+-   Click commands from the data file.
+
+## Independent samples t-test: SPSS
+
+-   Analyze
+
+-   Compare Means
+
+-   Independent Samples
+
+# INTERPRETTING T
+
+## Independent samples t-test:
+
+### Assumptions of the T-Test
+
+-   **Data type**:
+
+    -   The data is quantitative and continuous 
+
+-   **Distribution**:
+
+    -   The data is approximately normally distributed 
+
+-   **Sample size**:
+
+    -   The sample size is adequate\* 
+
+## Independent samples t-test:
+
+### Assumptions of the T-Test
+
+-   **Random sampling**:
+
+    -   The data is randomly sampled from a population 
+
+-   **Independence**:
+
+    -   The data values are independent, meaning that measurements for
+        one observation do not affect other observations 
+
+-   **Homogeneity of variance**:
+
+    -   The variability of the data in each group is similar 
+
+## Independent samples t-test
+
+### Homogeneity of Variance
+
+### ![](images/spiderman.png){style="border-radius: 20px;"}
+
+::: fragment
+If the **Levene's Test** is significant, use the t value from the second
+row and its corresponding significance.
+:::
+
+-   t is the test statistic.
+
+-   Sig (2-tailed) is the p-value.
+
+## Independent samples t-test
+
+$$\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}$$
+
+## Independent samples t-test: SPSS
+
+### Why Do We Care?
+
+We need the **Levene's Test**, because if the variance from the
+experimental group is not equal to the variance of the control group, we
+have to use a different formula for the pooled standard deviation.
+
+-   A significant Levene's Test means a significant difference in the
+    variances.
+
+## Independent samples t-test: SPSS
+
+### Interpreting Results
+
+If the **Levene's Test** is significant, use the t value from the second
+row and its corresponding significance
+
+![](images/indsamp_lev.png)
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp.png)
+
+## Independent samples t-test: Reporting your findings
+
+![](images/indsamp.png)
+
+::: fragment
+> There was not a significant difference between the groups, t(18) =
+> 1.287, p = 0.215
+:::
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp.png)
+
+![](images/indsamp_lev.png)
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+-   Step 1: Look at Levene's
+
+    -   Smaller than .05 —\> Bottom
+
+    -   Larger than .05 —\> Top
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+-   Step Two: Look at p (Sig.)
+
+    -   Smaller than .05 —\> Report Full Findings
+
+    -   Larger than .05 —\> Report only Null
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+> *t(degrees of freedom) = value, p = value*
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+> *t(893) = value, p = value*
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+> *t(893) = 5.038, p = value*
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+> *t(893) = 5.038, p \< .001*
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+> There was a significant difference in number of hours worked last week between men and women, t (893) = 5.038, p < 0.001.
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+But who worked more hours?!
+
+## Independent samples t-test: SPSS
+
+![](images/indsamp_ex.png)
+
+> Men (M = 43.92, s = 15.53) worked significantly more hours last week compared to women (M = 38.92, s = 14.085), t (893) = 5.038, p < 0.001. 
