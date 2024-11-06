@@ -7,14 +7,11 @@
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dave Brocker">
-  <title>348 Slides – Hypothesis Testing, Pt 2</title>
+  <title>348 Slides – Paired Samples T-Test</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -39,6 +36,7 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -332,8 +330,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Hypothesis Testing, Pt 2</h1>
-  <p class="subtitle">Lecture 10</p>
+  <h1 class="title">Paired Samples T-Test</h1>
+  <p class="subtitle">Lecture 14</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -347,542 +345,100 @@ Dave Brocker
 </div>
 
 </section>
-<section id="review" class="slide level2">
-<h2>Review</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="review-1" class="slide level2">
-<h2>Review</h2>
-<h3 id="sampling-theory">Sampling Theory</h3>
-<div class="fragment">
-<p><strong>Sample Mean:</strong></p>
-</div>
-<div class="fragment">
-<p>If we took infinite samples of a population, the mean of each sample taken would be a Sample Mean – like how each student collect 500 responses about TV show ratings and took the average of those 500 responses.</p>
-</div>
-<div class="fragment">
-<p><strong>Sampling Distribution:</strong></p>
-</div>
-<div class="fragment">
-<p>What we get if we put all the sample means together; we assume it’s a normal distribution.</p>
-</div>
-</section>
-<section id="sampling-theory-1" class="slide level2">
-<h2>Sampling theory</h2>
-<p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="sampling-theory-2" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="introduction-to-paired-samples-t-test" class="slide level2">
+<h2>Introduction to Paired Samples t-Test</h2>
+<h3 id="what-is-a-paired-samples-t-test">What is a Paired Samples t-Test?</h3>
 <ul>
-<li class="fragment"><p>There are about 10,000 students at Farmingdale State College.</p></li>
-<li class="fragment"><p>Each of the 25 of us recruits a sample of 400 students.</p></li>
-<li class="fragment"><p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (<em>I don’t belong at all</em>) to 10 (<em>I belong completely</em>).</p></li>
-<li class="fragment"><p>We each calculate the average response from our own sample of 400.</p></li>
+<li class="fragment">A statistical method used to compare the means of two related groups.</li>
+<li class="fragment">Commonly used when measuring the same group before and after an intervention or over two different conditions.</li>
 </ul>
 </section>
-<section id="sampling-theory-3" class="slide level2">
-<h2>Sampling Theory</h2>
-<h3 id="just-making-sure">Just Making Sure…</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="p-values" class="slide level2">
-<h2>P-Values</h2>
-<h3 id="yeah-can-i-get-uhhhhh">Yeah Can I Get Uhhhhh</h3>
-<blockquote>
-<p>Professor Brocker gives <code>100</code> students caffeinated coffee and another <code>100</code> students decaf. He then has them complete a stats exam.</p>
-</blockquote>
+<section id="purpose-of-paired-samples-t-test" class="slide level2">
+<h2>Purpose of Paired Samples t-Test</h2>
+<h3 id="why-use-paired-samples-t-test">Why Use Paired Samples t-Test?</h3>
 <ul>
-<li class="fragment"><p>IV:</p></li>
-<li class="fragment"><p>DV:</p></li>
-<li class="fragment"><p>N =</p></li>
+<li class="fragment">To determine if there is a statistically significant difference between two related group means.</li>
+<li class="fragment">Useful in psychology for assessing changes due to an intervention, therapy, or experiment.</li>
 </ul>
 </section>
-<section id="p-values-1" class="slide level2">
-<h2>P-Values</h2>
-<h3 id="yeah-can-i-get-uhhhhh-1">Yeah Can I Get Uhhhhh</h3>
-<blockquote>
-<p>Professor Brocker gives <code>100</code> students caffeinated coffee and another <code>100</code> students decaf. He then has them complete a stats exam.</p>
-</blockquote>
+<section id="formula-for-paired-samples-t-test" class="slide level2">
+<h2>Formula for Paired Samples t-Test</h2>
+<h3 id="mathematical-representation">Mathematical Representation</h3>
 <ul>
-<li class="fragment"><p>IV: Coffee Consumption (Coffee or No Coffee)</p></li>
-<li class="fragment"><p>DV: Exam Scores</p></li>
-<li class="fragment"><p>N = 200</p></li>
-</ul>
-</section>
-<section id="p-values-2" class="slide level2">
-<h2>P-Values</h2>
-</section>
-<section id="p-values-3" class="slide level2">
-<h2>P-Values</h2>
-<p>The p-value tells us if the mean of the <em>experimental group</em> is far enough away from the <em>control group</em> mean that we can be confidence it belongs to a theoretical non-null distribution.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="p-values-and-confidence-intervals" class="slide level2">
-<h2>P-values and confidence intervals</h2>
-<h3 id="finding-in-terms-of-the-null-hypothesis">Finding in terms of the null hypothesis</h3>
-<p>If there is a significant difference between the groups, p will be smaller than <code>0.05</code>.</p>
+<li class="fragment"><strong>Formula</strong>: <span class="math inline">\(\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}\)</span>
 <ul>
-<li class="fragment"><p>If p &lt; (less than) <code>0.05</code>, the difference is <strong>significant</strong>, we <em>Reject</em> <span class="math inline">\(H_0\)</span>.</p></li>
-<li class="fragment"><p>If p &gt; (greater than) <code>0.05</code>, the difference is NOT <strong>significant</strong>, we <em>Fail to Reject</em> <span class="math inline">\(H_0\)</span>.</p></li>
-</ul>
-</section>
-<section id="error-beta" class="slide level2">
-<h2>Error (<span class="math inline">\(\beta\)</span>)</h2>
-<p>How often are we okay with making a mistake?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Type 1:</p>
-<ul>
-<li class="fragment"><p>Reality: There is NO difference between the groups.</p></li>
-<li class="fragment"><p>Conclusion: There is a difference between the groups.</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p>Type 2:</p>
-<ul>
-<li class="fragment"><p>Reality: There is a difference between the groups.</p></li>
-<li class="fragment"><p>Conclusion: There is NO difference between the groups.</p></li>
-</ul>
-</div></div>
-</section>
-<section id="types-of-errors" class="slide level2">
-<h2>Types of Errors</h2>
-<h3 id="visual-aid">Visual Aid</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="images/clipboard-2057166815.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/clipboard-2057166815.png" width="368"></a></p>
-</div><div class="column" style="width:50%;">
-<p><a href="images/clipboard-63089270.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/clipboard-63089270.png" width="300"></a></p>
-</div></div>
-</section>
-<section id="error" class="slide level2">
-<h2>Error</h2>
-<p>How often are we okay with making a mistake?</p>
-<ul>
-<li class="fragment">It’s better to make a Type 2 Error than a Type 1.
-<ul>
-<li class="fragment">Type 1 kills people</li>
-<li class="fragment">Type 2 kills careers</li>
-</ul></li>
-<li class="fragment">We want to minimize the chance of committing a Type 1 Error.</li>
-</ul>
-</section>
-<section id="error-alpha" class="slide level2">
-<h2>Error &amp; Alpha</h2>
-<p>We accept a <code>5%</code> chance of committing a Type 1 Error.</p>
-<ul>
-<li class="fragment">We set alpha (<span class="math inline">\(\alpha\)</span>) to <code>5%</code> or <code>0.05</code></li>
-</ul>
-</section>
-<section id="error-alpha-1" class="slide level2">
-<h2>Error &amp; Alpha</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="error-alpha-2" class="slide level2">
-<h2>Error &amp; Alpha</h2>
-<div class="fragment">
-<p><a href="images/clipboard-3692632542.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="images/clipboard-3692632542.png" width="629"></a></p>
-</div>
-</section>
-<section id="significance" class="slide level2">
-<h2>Significance</h2>
-<div class="fragment">
-<p><a href="images/clipboard-1570428696.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/clipboard-1570428696.png" width="632"></a></p>
-</div>
-</section>
-<section id="beta" class="slide level2">
-<h2>Beta</h2>
-<ul>
-<li class="fragment"><p>We set alpha at <code>5%</code> <code>(0.05)</code>, meaning we are okay with making a Type 1 Error (<em>false positive</em>) <code>5%</code> of the time.</p></li>
-<li class="fragment"><p>As a result, beta gets set at <code>16%</code>, meaning we have a 16% chance of committing Type 2 Error (<em>false negative</em>).</p></li>
-</ul>
-</section>
-<section id="alpha-and-beta" class="slide level2">
-<h2>Alpha and Beta</h2>
-<h3 id="example">Example</h3>
-<p><a href="images/clipboard-2847025632.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/clipboard-2847025632.png" width="350"></a></p>
-</section>
-<section id="error-and-alpha-and-beta" class="slide level2">
-<h2>Error and Alpha and Beta</h2>
-<ul>
-<li class="fragment"><p>Alpha (<span class="math inline">\(\alpha\)</span>) = probability of committing Type 1 Error</p></li>
-<li class="fragment"><p>Beta (<span class="math inline">\(\beta\)</span>)= probability of committing Type 2 Error</p></li>
-</ul>
-</section>
-<section id="error-and-alpha-and-beta-1" class="slide level2">
-<h2>Error and Alpha and Beta</h2>
-<table class="caption-top" style="width:99%;">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 40%">
-<col style="width: 28%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><span class="math inline">\(H_0\)</span> True</th>
-<th><span class="math inline">\(H_0\)</span> False</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Fail to Reject <span class="math inline">\(H_0\)</span></td>
-<td>Correct Decision <span class="math inline">\(1-\alpha\)</span></td>
-<td><p>Incorrect Decision</p>
-<p>Type II Error</p>
-<p><span class="math inline">\(\beta\)</span></p></td>
-</tr>
-<tr class="even">
-<td>Reject <span class="math inline">\(H_0\)</span></td>
-<td><p>Incorrect Decision</p>
-<p>Type I Error</p>
-<p><span class="math inline">\(\alpha\)</span></p></td>
-<td><p>Correct Decision</p>
-<p><span class="math inline">\(1-\beta\)</span></p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="error-and-alpha-and-beta-2" class="slide level2">
-<h2>Error and Alpha and Beta</h2>
-</section>
-<section id="power-effect-size" class="slide level2">
-<h2>Power &amp; Effect Size</h2>
-</section>
-<section id="sampling-theory-4" class="slide level2">
-<h2>Sampling theory</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="null-hypothesis-h_0" class="slide level2">
-<h2>Null Hypothesis: <span class="math inline">\(H_0\)</span></h2>
-<p>States that nothing will happen while also naming of the variables (independent and dependent).</p>
-<ul>
-<li class="fragment">The Null Hypothesis is written as <span class="math inline">\(H_0\)</span></li>
-</ul>
-</section>
-<section id="alternative-hypothesis-h_1h_a" class="slide level2">
-<h2>Alternative hypothesis: <span class="math inline">\(H_1|H_A\)</span></h2>
-<p>A <strong>testable</strong> prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.</p>
-<ul>
-<li class="fragment">The Alternative Hypothesis is written as <span class="math inline">\(H_1\)</span></li>
-</ul>
-</section>
-<section id="hypothesis-testing" class="slide level2">
-<h2>Hypothesis testing</h2>
-<ul>
-<li class="fragment"><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): These is <strong>no</strong> difference in the DV between the IV groups.</p></li>
-<li class="fragment"><p>Alternative Hypothesis (<span class="math inline">\(H_1\)</span>): The experimental group is <strong>significantly different</strong> from the control group on the DV.</p></li>
-</ul>
-</section>
-<section id="hypothesis-testing-1" class="slide level2">
-<h2>Hypothesis testing</h2>
-<p><a href="images/clipboard-1494090978.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/clipboard-1494090978.png" width="481"></a></p>
-</section>
-<section id="p-values-and-confidence-intervals-1" class="slide level2">
-<h2>P-values and confidence intervals</h2>
-<p>If there is a significant difference between the groups, p will be smaller than <code>0.05</code>.</p>
-<ul>
-<li class="fragment"><p>If p = .032…</p></li>
-<li class="fragment"><p>If p = .045…</p></li>
-<li class="fragment"><p>If p = .050…</p></li>
-</ul>
-</section>
-<section id="findings-in-terms-of-the-null-hypothesis" class="slide level2">
-<h2>Findings in terms of the null hypothesis</h2>
-<ul>
-<li class="fragment"><p>If p &lt; (less than) <code>0.05</code>, the difference is significant, we Reject <span class="math inline">\(H_0\)</span>.</p></li>
-<li class="fragment"><p>If p &gt; (greater than) <code>0.05</code>, the difference is NOT significant, we Fail to Reject <span class="math inline">\(H_0\)</span>.</p></li>
-</ul>
-</section>
-<section id="alpha-beta" class="slide level2">
-<h2>Alpha &amp; beta</h2>
-<p><a href="images/clipboard-421457594.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/clipboard-421457594.png" width="637"></a></p>
-</section>
-<section id="alpha-beta-1" class="slide level2">
-<h2>Alpha &amp; beta</h2>
-<h3 id="alpha-and-beta-1"><span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></h3>
-<div class="fragment">
-<p>Alpha: The probability of committing a Type 1 Error.</p>
-<ul>
-<li class="fragment">We set <span class="math inline">\(\alpha\)</span> to <code>0.05</code></li>
-</ul>
-</div>
-<div class="fragment">
-<p>Beta: The probability of committing a Type 2 Error.</p>
-<ul>
-<li class="fragment">When <span class="math inline">\(\alpha\)</span> = <code>0.05</code>, the resulting <span class="math inline">\(\beta\)</span> = <code>0.16</code></li>
-</ul>
-</div>
-</section>
-<section id="alpha-beta-2" class="slide level2">
-<h2>Alpha &amp; beta</h2>
-<p><a href="images/clipboard-421457594.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/clipboard-421457594.png"></a></p>
-</section>
-<section id="types-of-errors-1" class="slide level2">
-<h2>Types of Errors</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h3 id="type-1-error">Type 1 Error</h3>
-<ul>
-<li class="fragment"><p><strong>Reality</strong>: There is NO difference between the groups.</p></li>
-<li class="fragment"><p><strong>Conclusion</strong>: There is a difference between the groups.</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h3 id="type-2-error">Type 2 Error</h3>
-<ul>
-<li class="fragment"><p><strong>Reality</strong>: There is a difference between the groups.</p></li>
-<li class="fragment"><p><strong>Conclusion</strong>: There is NO difference between the groups.</p></li>
-</ul>
-</div></div>
-</section>
-<section id="alpha-and-beta-and-power" class="slide level2">
-<h2>Alpha and Beta and Power</h2>
-<p><a href="images/Screenshot 2024-10-07 at 8.30.29 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/Screenshot 2024-10-07 at 8.30.29 AM.png" width="368"></a></p>
-</section>
-<section id="alpha-beta-power" class="slide level2">
-<h2>Alpha &amp; beta &amp; power</h2>
-<p><a href="images/Screenshot 2024-10-07 at 8.30.29 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/Screenshot 2024-10-07 at 8.30.29 AM.png" width="368"></a></p>
-</section>
-<section id="alpha-beta-power-1" class="slide level2">
-<h2>Alpha &amp; beta &amp; power</h2>
-<p><a href="images/Screenshot 2024-10-07 at 8.30.29 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="images/Screenshot 2024-10-07 at 8.30.29 AM.png" width="368"></a></p>
-</section>
-<section id="alpha-beta-power-2" class="slide level2">
-<h2>Alpha &amp; Beta &amp; Power</h2>
-<p><a href="images/clipboard-421457594.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="images/clipboard-421457594.png" width="317"></a></p>
-</section>
-<section id="alpha-beta-power-3" class="slide level2">
-<h2>Alpha &amp; beta &amp; Power</h2>
-<div class="fragment">
-<p><strong>Alpha</strong>: The probability of committing a Type 1 Error.</p>
-</div>
-<ul>
-<li class="fragment">We set <span class="math inline">\(\alpha\)</span> to <code>0.05</code></li>
-</ul>
-<div class="fragment">
-<p><strong>Beta</strong>: The probability of committing a Type 2 Error.</p>
-</div>
-<ul>
-<li class="fragment">When <span class="math inline">\(\alpha\)</span> = <code>0.05</code>, the resulting <span class="math inline">\(\beta\)</span> = <code>0.16</code></li>
-</ul>
-<div class="fragment">
-<p><strong>Power</strong>: Ability of the researcher to accurately detect a difference between groups</p>
-</div>
-<ul>
-<li class="fragment">If <span class="math inline">\(\alpha\)</span> = <code>0.05</code>, <span class="math inline">\(\beta\)</span> = <code>0.16</code>, and the resulting power = <code>0.84</code></li>
-</ul>
-</section>
-<section id="alpha-beta-power-4" class="slide level2">
-<h2>Alpha &amp; Beta &amp; Power</h2>
-<h3 id="power">Power</h3>
-<p>Power refers to the ability of the researcher to accurately detect a difference between groups.</p>
-<ul>
-<li class="fragment"><p>When we assume a normal distribution, we assume power will be about <code>0.84</code> or <code>84%</code>.</p></li>
-<li class="fragment"><p>Power is dependent on Effect Size.</p></li>
-</ul>
-</section>
-<section id="effect-size" class="slide level2">
-<h2>Effect Size</h2>
-<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
-<ul>
-<li class="fragment">Cohen’s <span class="math inline">\(d\)</span></li>
-<li class="fragment">Coefficient of Determination <span class="math inline">\(R2\)</span></li>
-<li class="fragment">Omega Hat Squared | Eta Hat Squared
-<ul>
-<li class="fragment"><span class="math inline">\(\hat{\omega}^2\)</span></li>
-<li class="fragment"><span class="math inline">\(\hat{\eta}\)</span></li>
+<li class="fragment"><span class="math inline">\(\bar{D}\)</span>: Mean of the differences between paired observations.</li>
+<li class="fragment"><span class="math inline">\(s_D\)</span>: Standard deviation of the differences.</li>
+<li class="fragment"><span class="math inline">\(n\)</span>: Number of pairs.</li>
 </ul></li>
 </ul>
 </section>
-<section id="effect-size-example" class="slide level2">
-<h2>Effect Size Example</h2>
-<blockquote>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-</blockquote>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="images/clipboard-2323188496.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="images/clipboard-2323188496.png" width="212"></a></p>
-</div><div class="column" style="width:50%;">
-<p><a href="images/clipboard-4121036724.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="images/clipboard-4121036724.png" width="249"></a></p>
-</div></div>
-</section>
-<section id="effect-size-example-1" class="slide level2">
-<h2>Effect Size Example</h2>
-<blockquote>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-</blockquote>
+<section id="theoretical-formula-explanation" class="slide level2">
+<h2>Theoretical Formula Explanation</h2>
+<h3 id="understanding-each-component">Understanding Each Component</h3>
 <ul>
-<li class="fragment">IV:</li>
-</ul>
-<div class="fragment">
-<p>Caffeine versus no caffeine</p>
-</div>
-<ul>
-<li class="fragment">DV:</li>
-</ul>
-<div class="fragment">
-<p>Task speed</p>
-</div>
-</section>
-<section id="effect-size-example-2" class="slide level2">
-<h2>Effect Size Example</h2>
-<blockquote>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-</blockquote>
-<ul>
-<li class="fragment">Effect Size:</li>
-</ul>
-<div class="fragment">
-<p>Strength of the relationships between caffeine and task speed</p>
-</div>
-<ul>
-<li class="fragment">How much does caffeine actually impact task speed?</li>
+<li class="fragment"><strong>Difference Mean</strong> <span class="math inline">\(\bar{D}\)</span>: Average of the differences between paired scores.</li>
+<li class="fragment"><strong>Standard Deviation of Differences</strong> <span class="math inline">\(s_D\)</span>: Indicates how much individual differences deviate from the mean difference.</li>
+<li class="fragment"><strong>Sample Size</strong> <span class="math inline">\(n\)</span>: Number of pairs, affecting the significance of results.</li>
 </ul>
 </section>
-<section id="effect-size-example-3" class="slide level2">
-<h2>Effect size Example</h2>
-<blockquote>
-<p>Does caffeine decrease the amount of time it takes to solve a puzzle?</p>
-</blockquote>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="images/clipboard-2323188496.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="images/clipboard-2323188496.png" width="299"></a></p>
-</div><div class="column" style="width:50%;">
-<p><a href="images/clipboard-4204953737.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="images/clipboard-4204953737.png" width="299"></a></p>
-</div></div>
+<section id="application-of-paired-samples-t-test" class="slide level2">
+<h2>Application of Paired Samples t-Test</h2>
+<h3 id="when-to-apply-this-test">When to Apply This Test</h3>
+<ul>
+<li class="fragment"><strong>Pretest-Posttest Design</strong>: Measure changes in the same group over time.</li>
+<li class="fragment"><strong>Matched Pairs</strong>: Compare two related groups, such as twins or matched participants.</li>
+<li class="fragment"><strong>Repeated Measures</strong>: Test the same group under different conditions or at different times.</li>
+</ul>
 </section>
-<section id="effect-size-1" class="slide level2">
-<h2>Effect size</h2>
-<p>The <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
-<p>Effect size tells us how much one variable <em>actually</em> impacts the other.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
+<section>
+<section id="paired-samples-t-test-example" class="title-slide slide level1 center">
+<h1>Paired Samples t-Test Example</h1>
+
+</section>
+<section id="paired-samples-t-test" class="slide level2">
+<h2>Paired Samples t-Test</h2>
+<h3 id="application-in-psychology-research">Application in Psychology Research</h3>
+<blockquote>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program.</p>
+</blockquote>
+<p><strong>Steps</strong>:</p>
+<ul>
+<li class="fragment">Calculate the difference between pre- and post-intervention scores.</li>
+<li class="fragment">Find the mean <span class="math inline">\(\bar{D}\)</span> and standard deviation <span class="math inline">\(s_D\)</span> of the differences.</li>
+<li class="fragment">Apply the formula to calculate the t-value and check for significance.</li>
+</ul>
+</section>
+<section id="paired-samples-t-test-1" class="slide level2">
+<h2>Paired Samples t-Test</h2>
+<h3 id="application-in-psychology-research-1">Application in Psychology Research</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
-</figure>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">D</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">t</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p</th><th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">CI[uu,ll]</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">3.27</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8.59</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">29</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.8e-09</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">[2.49, 4.04]</td></tr>
+</tbody></table>
+
 </div>
 </div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec9_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-<pre><code></code></pre>
 </section>
-<section id="effect-size-2" class="slide level2">
-<h2>Effect size:</h2>
-<h3 id="cohens-d">Cohen’s d</h3>
-<p>Effect size in statistics refers to the <u><strong>strength of the relationship</strong></u> between two variables in a population.</p>
-<p>Cohen’s d gives us a standardized measure of effect size:</p>
+<section id="summary-of-paired-samples-t-test" class="slide level2">
+<h2>Summary of Paired Samples t-Test</h2>
+<h3 id="key-takeaways">Key Takeaways</h3>
 <ul>
-<li class="fragment"><p><span class="math inline">\(d &lt; 0.3\)</span> is weak</p></li>
-<li class="fragment"><p><span class="math inline">\(0.3 &lt; d &gt; 0.5\)</span> is moderate</p></li>
-<li class="fragment"><p><span class="math inline">\(d &gt; 0.7\)</span> is strong</p></li>
-</ul>
-</section>
-<section id="cohens-d-1" class="slide level2">
-<h2>Cohen’s d</h2>
-<h3 id="formula">Formula</h3>
-<ul>
-<li class="fragment"><p>Cohen’s d is calculated by subtracting the mean of the experimental group from the mean of the control group and dividing it by the “pooled standard deviation.”</p></li>
-<li class="fragment"><p>The pooled standard deviation refers to the average SD across the 2 groups.</p></li>
-</ul>
-<div class="fragment">
-<p><span class="math inline">\(d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}\)</span></p>
-</div>
-</section>
-<section id="cohens-d-2" class="slide level2">
-<h2>Cohen’s d</h2>
-<h3 id="understanding-the-terms">Understanding the Terms</h3>
-<div class="fragment">
-<p><span class="math inline">\(d = \frac{M_2-M_1}{\sqrt{\frac{SD_1^2\ +\ SD_2^2}{2}}}\)</span></p>
-<p><span class="math inline">\(d = \frac{\text{Control Group Mean}-\text{Experimental Group Mean}}{\sqrt{\text{Pooled Variance}}}\)</span></p>
-</div>
-</section>
-<section id="effect-size-3" class="slide level2">
-<h2>Effect size</h2>
-<p>In psychology, we are often dealing with effect sizes that are small <code>(d = 0.3)</code>.</p>
-<ul>
-<li class="fragment">A smaller effect size is harder to detect.</li>
-</ul>
-</section>
-<section id="alpha-beta-power-5" class="slide level2">
-<h2>Alpha &amp; beta &amp; power</h2>
-<p>When the effect size is small, the hypothetical alternative distribution is closer to the null distribution.</p>
-<p><a href="images/clipboard-3726777508.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="images/clipboard-3726777508.png" width="313"></a></p>
-</section>
-<section id="effect-size-4" class="slide level2">
-<h2>Effect size</h2>
-<p>What can we do to increase power when an effect size is small?</p>
-<ul>
-<li class="fragment"><p>Take bigger samples (as per Central Limit Theorem)</p></li>
-<li class="fragment"><p>Design better experiments with more control and fewer confounds</p></li>
+<li class="fragment">Paired samples t-tests are ideal for comparing two related groups.</li>
+<li class="fragment">They help determine if interventions or conditions produce significant changes.</li>
+<li class="fragment">Remember to check assumptions: normality of differences and appropriate pairing.</li>
 </ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -894,6 +450,7 @@ Dave Brocker
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -916,6 +473,7 @@ Dave Brocker
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1086,7 +644,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1320,38 +878,6 @@ Dave Brocker
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
-    (function() {
-      let previousOnload = window.onload;
-      window.onload = () => {
-        if (previousOnload) {
-          previousOnload();
-        }
-        lightboxQuarto.on('slide_before_load', (data) => {
-          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-          const href = trigger.getAttribute('href');
-          if (href !== null) {
-            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-            if (imgEl !== null) {
-              const srcAttr = imgEl.getAttribute("src");
-              if (srcAttr && srcAttr.startsWith("data:")) {
-                slideConfig.href = srcAttr;
-              }
-            }
-          } 
-        });
-      
-        lightboxQuarto.on('slide_after_load', (data) => {
-          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(slideNode);
-          }
-        });
-      
-      };
-      
-    })();
-              </script>
     
 
 </body></html>
