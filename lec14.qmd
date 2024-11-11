@@ -4,6 +4,8 @@ subtitle: "Lecture 14"
 author: "Dave Brocker"
 footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
 institute: "Farmingdale State College"
+execute: 
+  echo: true
 format: 
   revealjs:
     theme: custom.scss
@@ -13,6 +15,7 @@ format:
     chalkboard: true
     lightbox: true
     code-fold: true
+    code-line-numbers: true
     drop:
       engine: webr
       webr:
@@ -24,40 +27,50 @@ revealjs-plugins:
 ---
 
 ## Introduction to Paired Samples t-Test
-### What is a Paired Samples t-Test?
-- A statistical method used to compare the means of two related groups.
-- Commonly used when measuring the same group before and after an intervention or over two different conditions.
 
+### What is a Paired Samples t-Test?
+
+-   A statistical method used to compare the means of two related groups.
+-   Commonly used when measuring the same group before and after an intervention or over two different conditions.
 
 ## Purpose of Paired Samples t-Test
-### Why Use Paired Samples t-Test?
-- To determine if there is a statistically significant difference between two related group means.
-- Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
 
+### Why Use Paired Samples t-Test?
+
+-   To determine if there is a statistically significant difference between two related group means.
+-   Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
 
 ## Formula for Paired Samples t-Test
+
 ### Mathematical Representation
-- **Formula**: $\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}$
-  - $\bar{D}$: Mean of the differences between paired observations.
-  - $s_D$: Standard deviation of the differences.
-  - $n$: Number of pairs.
+
+-   **Formula**: $\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}$
+    -   $\bar{D}$: Mean of the differences between paired observations.
+    -   $s_D$: Standard deviation of the differences.
+    -   $n$: Number of pairs.
 
 ## Theoretical Formula Explanation
+
 ### Understanding Each Component
-- **Difference Mean** $\bar{D}$: Average of the differences between paired scores.
-- **Standard Deviation of Differences** $s_D$: Indicates how much individual differences deviate from the mean difference.
-- **Sample Size** $n$: Number of pairs, affecting the significance of results.
+
+-   **Difference Mean** $\bar{D}$: Average of the differences between paired scores.
+-   **Standard Deviation of Differences** $s_D$: Indicates how much individual differences deviate from the mean difference.
+-   **Sample Size** $n$: Number of pairs, affecting the significance of results.
 
 ## Application of Paired Samples t-Test
+
 ### When to Apply This Test
-- **Pretest-Posttest Design**: Measure changes in the same group over time.
-- **Matched Pairs**: Compare two related groups, such as twins or matched participants.
-- **Repeated Measures**: Test the same group under different conditions or at different times.
+
+-   **Pretest-Posttest Design**: Measure changes in the same group over time.
+-   **Matched Pairs**: Compare two related groups, such as twins or matched participants.
+-   **Repeated Measures**: Test the same group under different conditions or at different times.
 
 # Paired Samples t-Test Example
 
 ## Paired Samples t-Test
+
 ### Application in Psychology Research
+
 > A psychologist measures stress levels of a group before and after a mindfulness program.
 
 **Steps**:
@@ -67,9 +80,34 @@ revealjs-plugins:
 -   Apply the formula to calculate the t-value and check for significance.
 
 ## Paired Samples t-Test
+
 ### Application in Psychology Research
 
+``` {.r code-line-numbers="1,2,3,4|6,7|9,10,11,12,13,14,15"}
+# Load Packages
+library(dplyr)
+library(broom)
+library(huxtable)
+
+# Random Seed
+set.seed(20)
+
+# Create data
+data <- 
+  tibble(
+  # Make a variable, `group` with 30 T1 and 30 T2
+  grp = rep(c("T1","T2"), each = 30),
+  # Make a variable, `score` with 60 scores
+  score = c(rnorm(30,8,2),rnorm(30,4,1)) |> round(0)
+) 
+```
+
+## Paired Samples t-Test
+
+### Data Preview
+
 ```{r}
+#| echo: true
 library(dplyr)
 library(broom)
 library(huxtable)
@@ -81,7 +119,52 @@ data <-
   score = c(rnorm(30,8,2),rnorm(30,4,1)) |> round(0)
 ) 
 
-t.test(score ~ grp, data = data, paired = TRUE) |> 
+data |> slice_sample(n = 5) |> 
+  huxtable() |> 
+  theme_article() |> 
+  set_width(value = .8)
+```
+
+## Paired Samples t-Test
+
+### Compare Scores
+
+```{r}
+data_new <- 
+  data |> 
+  group_by(grp) |> 
+  mutate(
+    id = row_number()
+  ) |> 
+  tidyr::pivot_wider(
+                     names_from = grp,
+                     values_from = score
+                     ) |> 
+  ungroup() |> 
+  mutate(
+    D = T2-T1,
+    Dfi = ifelse(stringr::str_detect(D,"^-"),paste0("(",D,")"),D)
+  )
+
+data_new |> 
+  select(-D) |> 
+  huxtable() |> 
+  theme_article() |> 
+  set_width(value = .8)
+```
+
+## Paired Samples t-Test
+
+### Construct the Formula ($\bar{D}$ \| $\sigma_{\bar{D}}$)
+
+$$\large{t = \frac{D}{\frac{\sigma}{\sqrt{n}}} =  \frac{-3.26}{\frac{2.083}{\sqrt{30}}} = (-8.57)}$$
+
+## Paired Samples t-Test
+
+### Construct the Formula ($\bar{D}$ \| $\sigma_{\bar{D}}$)
+
+```{r}
+t.test(score ~ grp, data = data, paired = TRUE,conf.level = 0.95) |> 
   tidy() |> 
   rename(
     D = estimate,
@@ -89,18 +172,99 @@ t.test(score ~ grp, data = data, paired = TRUE) |>
     p = p.value,
     df = parameter) |> 
   mutate(
-    `CI[uu,ll]` = paste0("[",conf.low |> round(2),", ",conf.high |> round(2),"]"),
+    `CI[ll,uu]` = paste0("[",conf.low |> round(2),", ",conf.high |> round(2),"]"),
     p = p |> round(10)
   ) |> 
   select(-conf.low:-alternative) |> 
-  select(D,t,df,p,`CI[uu,ll]`) |> 
+  select(D,t,df,p,`CI[ll,uu]`) |> 
   huxtable() |> 
+  # bold d
+  set_bold(col = 1, row = 2, value = TRUE) |> 
+  set_text_color(col = 2, row = 2, value = "darkred") |> 
+  set_text_color(col = 3, row = 2, value = "darkgreen") |> 
+  set_text_color(col = 4, row = 2, value = "darkblue") |> 
+  set_text_color(col = 5, row = 2, value = "darkorange") |> 
   theme_article()
+```
 
+::: {.eq-expl style="font-size: 20px;"}
+-   D = mean difference of T2-T1
+-   t = t-test statistic
+-   df = n-1 (30-1)
+-   p = probability results came from the Null Distribution
+-   CI\[ll,uu\] = 95% CI of Mean Difference (D)
+:::
+
+## Paired T-Tests
+### Visualizing Results: Option 1
+
+```{r}
+library(ggplot2)
+library(viridis)
+
+data |> 
+  ggplot(aes(grp, score, fill = grp)) + 
+  stat_summary(
+    fun = "mean",
+    geom = "bar"
+  ) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar"
+  ) +
+  theme_minimal() +
+  labs(
+    x = "\nTreatment Group",
+    y = "Stress Score\n",
+    fill = "Time",
+    title = "Mindfulness Intervention decreases stress levels\n"
+  ) + 
+  theme(
+    plot.title.position =  "plot",
+    plot.title = element_text(face = "bold")
+  ) +
+  scale_fill_viridis(discrete = TRUE, option = "E")
+```
+
+## Paired T-Tests
+### Visualizing Results: Option 2
+
+```{r}
+library(ggplot2)
+library(viridis)
+
+data |> 
+  ggplot(aes(grp, score, color = grp)) + 
+  geom_jitter(aes(alpha = .2)) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
+    color = "black"
+  ) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "pointrange"
+  ) +
+  theme_minimal() +
+  labs(
+    x = "\nTreatment Group",
+    y = "Stress Score\n",
+    fill = "Time",
+    title = "Mindfulness Intervention decreases stress levels\n"
+  ) + 
+  theme(
+    plot.title.position =  "plot",
+    plot.title = element_text(face = "bold"),
+    legend.position = "none"
+  ) +
+  scale_color_manual(values = c("darkgreen","darkred"))
 ```
 
 ## Summary of Paired Samples t-Test
+
 ### Key Takeaways
-- Paired samples t-tests are ideal for comparing two related groups.
-- They help determine if interventions or conditions produce significant changes.
-- Remember to check assumptions: normality of differences and appropriate pairing.
+
+-   Paired samples t-tests are ideal for comparing **two related** groups.
+-   They help determine if interventions or conditions produce **significant changes**.
+-   Remember to check **assumptions**: normality of differences and appropriate pairing.
