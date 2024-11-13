@@ -1743,781 +1743,984 @@
     "text": "Review\nWhen are the mean, median, and mode the same (equal to one another)?"
   },
   {
-    "objectID": "lec15.html#introduction-to-paired-samples-t-test",
-    "href": "lec15.html#introduction-to-paired-samples-t-test",
+    "objectID": "lec16.html#analysis-of-variance-anova",
+    "href": "lec16.html#analysis-of-variance-anova",
+    "title": "Analysis of Variance",
+    "section": "Analysis Of Variance (ANOVA)",
+    "text": "Analysis Of Variance (ANOVA)\n\nANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another.\n\n\n\\[\\large{F = \\frac{\\Sigma n_j(\\bar{X}_j-\\bar{X})^2/(k-1)}{\\Sigma \\Sigma(X -\\bar{X}_j)^2/N-k}}\\]"
+  },
+  {
+    "objectID": "lec16.html#t-tests",
+    "href": "lec16.html#t-tests",
+    "title": "Analysis of Variance",
+    "section": "T-tests",
+    "text": "T-tests\nStructure\n\nIndependent Variable must be what two things?\nDependent Variable must be what one thing?"
+  },
+  {
+    "objectID": "lec16.html#t-tests-1",
+    "href": "lec16.html#t-tests-1",
+    "title": "Analysis of Variance",
+    "section": "T-tests",
+    "text": "T-tests\nStructure\n\nIV must be nominal and have only 2 categories (levels)\nDV must be continuous"
+  },
+  {
+    "objectID": "lec16.html#t-tests-2",
+    "href": "lec16.html#t-tests-2",
+    "title": "Analysis of Variance",
+    "section": "T-Tests",
+    "text": "T-Tests\nHypothesis Testing\n\n\\(H_0: \\mu_1 = \\mu_2\\)\n\n\\(H_0: \\mu_A = \\mu_B\\)\n\\(H_0: \\mu_{Coffee} = \\mu_{\\text{No Coffee}}\\)\n\n\\(H_1: \\text{Means are not Equal}\\)"
+  },
+  {
+    "objectID": "lec16.html#t-tests-3",
+    "href": "lec16.html#t-tests-3",
+    "title": "Analysis of Variance",
+    "section": "T-Tests",
+    "text": "T-Tests\nHypothesis Testing"
+  },
+  {
+    "objectID": "lec16.html#anova",
+    "href": "lec16.html#anova",
+    "title": "Analysis of Variance",
+    "section": "AnOVA",
+    "text": "AnOVA\nANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another.\n\nANOVA can examine independent variables with more than 2 groups.\nANOVA can also be used for just 2 groups.\nIt’s more robust than t-tests.\n\nWe can investigate differences in differences and include additional factors (IV’s) in our hypotheses."
+  },
+  {
+    "objectID": "lec16.html#anova-1",
+    "href": "lec16.html#anova-1",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nHypothesis Testing\n\n\\(H_0: \\mu_1 = \\mu_2 = \\mu_3\\)\n\\(H_1: \\text{Means are not Equal}\\)"
+  },
+  {
+    "objectID": "lec16.html#anova-2",
+    "href": "lec16.html#anova-2",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nDoes this look familiar?\n\\[\\large{F = \\frac{\\Sigma n_j(\\color{red}{\\bar{X}_j-\\bar{X})^2}/(k-1)}{\\Sigma \\color{orange}{\\Sigma(X -\\bar{X}_j)^2}/N-k}}\\]"
+  },
+  {
+    "objectID": "lec16.html#anova-3",
+    "href": "lec16.html#anova-3",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nWhy Do We Need It?\n\nWith a t-test, we were able to compare two means from independent samples, why not just do the same but for three independent samples?\nConceptually, imagine we have an Independent Variable with 3 levels (A,B,C). If we wanted to see if there was a difference we need to examine multiple comparisons.\n\n\\(A &gt; B \\| A &gt; C\\| B &gt; C\\)"
+  },
+  {
+    "objectID": "lec16.html#anova-4",
+    "href": "lec16.html#anova-4",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nSampling Theory\n\n\nCode\nlibrary(ggplot2)\nlibrary(dplyr,warn.conflicts = FALSE)\nlibrary(huxtable)\nlibrary(tidyr)\n\n# Generate data for two normal distributions\nx &lt;- seq(-6, 6, length=100)\nnull_dist &lt;- dnorm(x, mean = 0, sd = 1)\nalt_dist &lt;- dnorm(x, mean = 2, sd = 1)\n\ndata &lt;- data.frame(\n  x = rep(x, 2),\n  y = c(null_dist, alt_dist),\n  hypothesis = factor(rep(c(\"Null Hypothesis\", \"Alternative Hypothesis\"), each=length(x)))\n)\n\n\nplt &lt;- \n  ggplot(data, aes(x = x, y = y, \n                 lty = rev(hypothesis))) +\n    geom_line(aes(color = \"purple\")) +\n  theme_linedraw() + \n  labs(\n    x = \"\",\n    y = \"\",\n    lty = \"Hypotheses\"\n  ) + \n  theme(\n    panel.grid = element_blank(),\n    legend.position = \"inside\",\n    legend.position.inside = c(.8,.8),\n    legend.background = element_rect(color = \"black\")\n  ) + \n  scale_color_identity()\n\nplt + \n  geom_vline(\n    xintercept = 1.6,\n    color = \"darkblue\"\n    ) + \n  geom_vline(\n    xintercept = 1, \n    color = \"red\"\n    ) + \n  geom_text(\n    x = 1, \n    y = .05, \n    label = \"Critical Value\",\n    color = \"red\",\n    angle = 90,\n    size = 3,\n    vjust = -.4\n    ) +\n  scale_x_continuous(\n    breaks = c(-6,-4,-2,0,2,4,6)\n    ) + \n  labs(title = \"We set the critical value so that 5% of the null distribution's area is to the right of it\")"
+  },
+  {
+    "objectID": "lec16.html#anova-5",
+    "href": "lec16.html#anova-5",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nThe Types\nThere are 3 types of ANOVA:\n\nBetween-Subjects\nWithin subjects (repeated measures ANOVA)\nMixed designs (between and within together)"
+  },
+  {
+    "objectID": "lec16.html#anova-6",
+    "href": "lec16.html#anova-6",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nThe Types\nThere are 3 types of ANOVA:\n\nOne Factor (1 IV)\nFactorial (2+ IV)\nMANOVA"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-1",
+    "href": "lec16.html#between-subjects-anova-1",
+    "title": "Analysis of Variance",
+    "section": "Between Subjects ANOVA",
+    "text": "Between Subjects ANOVA\nDefinition\n\nThe Independent Samples t-test was an example of Between Subjects experimental design\nBetween-Subjects designs are also known as Independent Group Designs as they utilize the same principles\n\n\n\nParticipants are randomly assigned to each level of the Independent Variable making their scores independent from each other"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-2",
+    "href": "lec16.html#between-subjects-anova-2",
+    "title": "Analysis of Variance",
+    "section": "Between Subjects ANOVA",
+    "text": "Between Subjects ANOVA\nExample\n\nThe experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. I ask all 3 groups to complete a survey to measure their happiness on a scale of 1 to 10.\n\n\nWhat is the IV?\n\nHow many levels does the IV have?\n\nWhat is the DV?"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-3",
+    "href": "lec16.html#between-subjects-anova-3",
+    "title": "Analysis of Variance",
+    "section": "Between Subjects ANOVA",
+    "text": "Between Subjects ANOVA\nExample\n\nThe experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. I ask all 3 groups to complete a survey to measure their happiness on a scale of 1 to 10.\n\n\nIV: Coffee Consumption\n\n3 Levels: Coffee, Decaf, Water\n\nDV: Happiness Score (1-10)"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-4",
+    "href": "lec16.html#between-subjects-anova-4",
+    "title": "Analysis of Variance",
+    "section": "Between Subjects ANOVA",
+    "text": "Between Subjects ANOVA\nExample\n\nThe experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. I ask all 3 groups to complete a survey to measure their happiness on a scale of 1 to 10.\n\n\nThe experimental group has a mean happiness score: 8\nThe placebo group mean happiness score: 6\nThe control group mean happiness score: 5"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-5",
+    "href": "lec16.html#between-subjects-anova-5",
+    "title": "Analysis of Variance",
+    "section": "Between Subjects ANOVA",
+    "text": "Between Subjects ANOVA\nExample\nIs the group that drank coffee significantly happier than the other groups?\n\n\\(H_0 = \\mu_{1} = \\mu_{2} = \\mu_{3}\\)\n\\(H_0 = \\mu_{Coffee} = \\mu_{Control} = \\mu_{Placebo}\\)\n\\(H_{1} = \\mu_{Coffee} &gt; \\mu_{Control} = \\mu_{Placebo}\\)"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-6",
+    "href": "lec16.html#between-subjects-anova-6",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nVisually\n\n\nCode\nplt + \n  geom_vline(\n    xintercept = 2,\n    color = \"darkblue\"\n    ) + \n  geom_vline(\n    xintercept = 0, \n    color = \"red\"\n    ) + \n  theme(\n    axis.text.x = element_blank()\n  ) + \n  geom_text(\n    x = -2,\n    y = .3,\n    label = \"Placebo &\\nControl\"\n  ) +\n    geom_text(\n    x = 4,\n    y = .3,\n    label = \"Experimental\\nCaffeine\"\n  ) + \n  theme(\n    legend.position = \"none\"\n  )"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-7",
+    "href": "lec16.html#between-subjects-anova-7",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\nIf it’s all about the means, why is it called Analysis of Variance?\nTo compare the means, we analyzing two types of variance:\nVariance among all of the scores (within group variance)\nVariance between the groups (between group variance)."
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-8",
+    "href": "lec16.html#between-subjects-anova-8",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nVisual\n\n\nCode\nset.seed(123)\nlibrary(ggtext)\n\nexp &lt;- \n  tibble(\n  grp = rep(c(\"SSLD\",\"Placebo\",\"Control\"),each = 100),\n  IQ = c(rnorm(100,140,5),\n         rnorm(100,120,10),\n         rnorm(100,100,15)) |&gt; round(0)\n  )\n\npl &lt;- \n  exp |&gt; \n  ggplot(aes(grp,IQ, color = grp)) + \n  geom_jitter() + \n  theme_minimal() + \n  theme(\n    panel.grid = element_blank(),\n    plot.title.position = \"plot\",\n    plot.subtitle = element_markdown()\n  ) + \n  labs(\n    x = \"\\nTest Condition\",\n    y = \"IQ Score\\n\",\n    title = \"Experimental Drug and IQ\",\n    subtitle = \"Is the variance between the &lt;span style = 'color:darkgreen'&gt;green&lt;/span&gt;, &lt;span style = 'color:red'&gt;red&lt;/span&gt;, and &lt;span style = 'color:blue'&gt;blue &lt;/span&gt;dots &lt;br&gt;greater than the variance across all of the dots?\"\n  )\n\npl"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-9",
+    "href": "lec16.html#between-subjects-anova-9",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nVisual\n\n\nCode\nlibrary(patchwork)\n\npa1 &lt;- pl + scale_color_manual(values = c(\"red\",\"grey\",\"grey\"))\npa2 &lt;- pl + scale_color_manual(values = c(\"grey\",\"darkblue\",\"grey\"))\npa3 &lt;- pl + scale_color_manual(values = c(\"grey\",\"grey\",\"darkgreen\"))\n\npa1 + plot_spacer() + pa2 + plot_spacer() + pa3"
+  },
+  {
+    "objectID": "lec16.html#the-f-statistic",
+    "href": "lec16.html#the-f-statistic",
+    "title": "Analysis of Variance",
+    "section": "The F Statistic",
+    "text": "The F Statistic\n\nANOVA produces what we call the F statistic.\nWhy do we call it F?\n\n\n\n\n\nSir Ronald Fisher"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-10",
+    "href": "lec16.html#between-subjects-anova-10",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\n\nCode\nlibrary(broom)\n\nano &lt;- \n  aov(IQ ~ grp, data = exp) |&gt;\n  tidy() |&gt;\n  rename(\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  hux() |&gt; \n  set_align(value = \"center\") |&gt; \n  theme_article()\n\nano[1,1] &lt;- \"\"\nano[2:3,1] &lt;- c(\"Between Groups\",\"Within groups\")\n\nanonew &lt;- \n  ano |&gt; \n  set_text_color(row = 2, col = 6, value = \"red\") |&gt; \n  set_number_format(fmt_pretty(digits = 3)) \n\nanonew[2,6] &lt;- \"&lt;.001**\"\n\nanonew\n\n\n\n\ndfSSMSFp\n\nBetween Groups275,29337,647355&lt;0.001**\n\nWithin groups29731,474106"
+  },
+  {
+    "objectID": "lec16.html#calculating-f",
+    "href": "lec16.html#calculating-f",
+    "title": "Analysis of Variance",
+    "section": "Calculating F",
+    "text": "Calculating F\n\nCalculating the variance\nANOVA looks at variance.\n\nHow do we calculate the Variance?\n\\(s^2 = \\frac{\\Sigma(x-\\bar{x})^2}{n-1}\\)"
+  },
+  {
+    "objectID": "lec16.html#calculating-the-variance",
+    "href": "lec16.html#calculating-the-variance",
+    "title": "Analysis of Variance",
+    "section": "Calculating the variance",
+    "text": "Calculating the variance\nANOVA looks at variance. To calculate the Variance:\n\nCalculate the mean.\n\n\\(\\frac{\\sum x}{n}\\)\n\nSubtract the mean from each x-value - what is this called?\n\n\\((x-\\bar{x})\\)"
+  },
+  {
+    "objectID": "lec16.html#calculating-the-variance-1",
+    "href": "lec16.html#calculating-the-variance-1",
+    "title": "Analysis of Variance",
+    "section": "Calculating the variance",
+    "text": "Calculating the variance\nANOVA looks at variance. To calculate the Variance:\n\nCalculate the mean.\nSubtract the mean from each x-value (deviation score).\nSquare the deviation scores.\n\n\\((x-\\bar{x})^2\\)\n\nTake the sum of the squared deviations - what is this called?\n\n\\(\\Sigma (x-\\bar{x})^2\\)"
+  },
+  {
+    "objectID": "lec16.html#calculating-the-variance-2",
+    "href": "lec16.html#calculating-the-variance-2",
+    "title": "Analysis of Variance",
+    "section": "Calculating the variance",
+    "text": "Calculating the variance\nANOVA looks at variance. To calculate the Variance:\n\nCalculate the mean.\nSubtract the mean from each x-value (deviation score).\nSquare the deviation scores.\nTake the sum of the squared deviations (Sum of Squared Deviations)."
+  },
+  {
+    "objectID": "lec16.html#calculating-the-variance-3",
+    "href": "lec16.html#calculating-the-variance-3",
+    "title": "Analysis of Variance",
+    "section": "Calculating the variance",
+    "text": "Calculating the variance\nANOVA looks at variance. To calculate the Variance:\n\nCalculate the mean.\nSubtract the mean from each x-value (deviation score).\nSquare the deviation scores.\nTake the sum of the squared deviations (Sum of Squared Deviations).\nDivide by (n-1) - what is this called?"
+  },
+  {
+    "objectID": "lec16.html#calculating-the-variance-in-anova",
+    "href": "lec16.html#calculating-the-variance-in-anova",
+    "title": "Analysis of Variance",
+    "section": "Calculating the variance in ANOVA",
+    "text": "Calculating the variance in ANOVA\nTo calculate the Variance in ANOVA:\n\nCalculate the mean.\nSubtract the mean from each x-value (deviation score).\nSquare the deviation scores.\nTake the sum of the squared deviations (Sum of Squared Deviations).\nDivide by (degrees of freedom).\n\n\nThis is the variance, but in ANOVA we also call it a Mean Squared (MS)."
+  },
+  {
+    "objectID": "lec16.html#calculating-means-squared-ms",
+    "href": "lec16.html#calculating-means-squared-ms",
+    "title": "Analysis of Variance",
+    "section": "Calculating Means squared (MS)",
+    "text": "Calculating Means squared (MS)\n\n\nCode\n# Calculate the Sum of Squares (SS).\nssex &lt;- \n  tibble(\n  X = c(1,2,2,3,4,4,5,5,5,5,5,5,5,5,6,6,7,7,8,10),\n  `x-xbar` = X - mean(X),\n  `(X-xbar)^2` = `x-xbar`^2\n)\n\n# Show Data\nssex |&gt; hux() |&gt; theme_article() |&gt; set_width(.8)\n\n\n\n\nXx-xbar(X-xbar)^2\n\n1-416\n\n2-39\n\n2-39\n\n3-24\n\n4-11\n\n4-11\n\n500\n\n500\n\n500\n\n500\n\n500\n\n500\n\n500\n\n500\n\n611\n\n611\n\n724\n\n724\n\n839\n\n10525\n\n\n\n\n\n\nCode\n# Divide the SS by the degrees of freedom.\nss &lt;- sum(ssex$`(X-xbar)^2`)\n\n# Show SS\nss\n\n\n[1] 84\n\n\nCode\nss/(length(ssex$X)-1)\n\n\n[1] 4.421053"
+  },
+  {
+    "objectID": "lec16.html#calculating-means-squared-ms-1",
+    "href": "lec16.html#calculating-means-squared-ms-1",
+    "title": "Analysis of Variance",
+    "section": "Calculating Means squared (MS)",
+    "text": "Calculating Means squared (MS)\n\nWe will calculate a SS for the between group variance.\n\nHow much variance in the data is from group differences?\n\nWe will calculate a SS for all the data.\n\nHow much variance in the data is from random error?"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-11",
+    "href": "lec16.html#between-subjects-anova-11",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\n\n\n\\(SS_{BG}\\) = How much variance comes comes from the group differences?\n\\(SS_{Error}\\) = How much variance is there in total among all the data points?\n\n\n\n\nCode\npl"
+  },
+  {
+    "objectID": "lec16.html#calculating-means-squared-ms-2",
+    "href": "lec16.html#calculating-means-squared-ms-2",
+    "title": "Analysis of Variance",
+    "section": "Calculating means squared (MS)",
+    "text": "Calculating means squared (MS)\n\nCalculate the \\(SS_{BG}\\)\nCalculate the \\(SS_{Error}\\)\nDivide the \\(SS\\) by their degrees of freedom."
+  },
+  {
+    "objectID": "lec16.html#degrees-of-freedom-df",
+    "href": "lec16.html#degrees-of-freedom-df",
+    "title": "Analysis of Variance",
+    "section": "Degrees of Freedom (df)",
+    "text": "Degrees of Freedom (df)\nWhat Does it All Mean!\n\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nI own 7 hats. I want to wear a different hat every day of the week."
+  },
+  {
+    "objectID": "lec16.html#degrees-of-freedom-df-1",
+    "href": "lec16.html#degrees-of-freedom-df-1",
+    "title": "Analysis of Variance",
+    "section": "Degrees of Freedom (df)",
+    "text": "Degrees of Freedom (df)\nWhat Does it All Mean!\n\nOn Monday, I have 7 hats to choose from.\nOn Tuesday, I have 6 hats to choose from.\nOn Wednesday, I have 5 hats to choose from.\nOn Thursday, I have 4 hats to choose from.\nOn Friday, I have 3 hats to choose from.\nOn Saturday, I have 2 hats to choose from."
+  },
+  {
+    "objectID": "lec16.html#degrees-of-freedom-df-2",
+    "href": "lec16.html#degrees-of-freedom-df-2",
+    "title": "Analysis of Variance",
+    "section": "Degrees of Freedom (df)",
+    "text": "Degrees of Freedom (df)\nWhat Does it All Mean!\nOn Sunday, I don’t get a choice. On Sunday, I have to wear the Santa hat."
+  },
+  {
+    "objectID": "lec16.html#degrees-of-freedom-df-3",
+    "href": "lec16.html#degrees-of-freedom-df-3",
+    "title": "Analysis of Variance",
+    "section": "Degrees of Freedom (df)",
+    "text": "Degrees of Freedom (df)\nWhat Does it All Mean!\n\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nThe degrees of freedom is how many times I get a choice before I’m stuck with what’s left over."
+  },
+  {
+    "objectID": "lec16.html#degrees-of-freedom",
+    "href": "lec16.html#degrees-of-freedom",
+    "title": "Analysis of Variance",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\n\nBetween Groups (\\(df_{BG} = k - 1\\))\n\nk is the number of groups in the independent variable.\n\nWithin Groups (\\(df_{WG} = n - k\\))\n\\(Total = n - 1\\)"
+  },
+  {
+    "objectID": "lec16.html#calculating-means-squared-ms-3",
+    "href": "lec16.html#calculating-means-squared-ms-3",
+    "title": "Analysis of Variance",
+    "section": "Calculating Means Squared (MS)",
+    "text": "Calculating Means Squared (MS)\n\nCalculate the \\(SS_{BG}\\).\nCalculate the \\(SS_{Error}\\).\nDivide the SS by their degrees of freedom."
+  },
+  {
+    "objectID": "lec16.html#calculating-the-ms",
+    "href": "lec16.html#calculating-the-ms",
+    "title": "Analysis of Variance",
+    "section": "Calculating the MS",
+    "text": "Calculating the MS\n\nBetween Group Mean Squared: \\(MS_{BG} = \\frac{SS_{BG}}{k - 1}\\)\nError Mean Squared: \\(MS_{Error} = \\frac{SS_{Error} }{(n - k)}\\)"
+  },
+  {
+    "objectID": "lec16.html#calculating-between-subjects-anova",
+    "href": "lec16.html#calculating-between-subjects-anova",
+    "title": "Analysis of Variance",
+    "section": "Calculating Between subjects anova",
+    "text": "Calculating Between subjects anova\n\\[F = \\frac{\\color{orange}{MS_{BG}}}{\\color{grey}{MS_{Error}}}\\] - \\(MS_{BG} = \\frac{SS_{BG}}{df_{BG}\\)\n\n\\(MS_{Error} = \\frac{SS_{Error}}{df_{Error}}\\)"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-12",
+    "href": "lec16.html#between-subjects-anova-12",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nExample\n\nProf Brocker gives one group of 100 participants the Super Secret Limitless Drug (SSLD). He gives another group of 100 participants a placebo. He gives the third group of 100 participants nothing. All participants then complete an IQ test. He wants to know if those who took the SSLD has significantly higher IQ than the placebo and the control groups."
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-13",
+    "href": "lec16.html#between-subjects-anova-13",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nExample: The Data\n\n\nCode\n# Create Group Variable\n# Three Levels (SSLD, Placebo, Control)\n\nexp &lt;- \n  tibble(\n  grp = rep(c(\"SSLD\",\"Placebo\",\"Control\"),each = 100),\n  IQ = c(rnorm(100,140,5),\n         rnorm(100,120,10),\n         rnorm(100,100,15)) |&gt; round(0)\n  )\n\nexp |&gt; \n  group_by(grp) |&gt; \n  mutate(\n     id = row_number()\n  ) |&gt; \n  tidyr::pivot_wider(\n    names_from = \"grp\",\n    values_from = \"IQ\"\n    ) |&gt; \n  select(!id) |&gt; \n  head() |&gt; \n  hux() |&gt; \n  theme_article()\n\n\n\n\nSSLDPlaceboControl\n\n13814496\n\n13810693\n\n14510498\n\n137126102\n\n145127102\n\n14312683"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-14",
+    "href": "lec16.html#between-subjects-anova-14",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nExample\n\n\nCode\nano |&gt; \n  set_text_color(row = 2,col = 2:3,value = \"darkgreen\") |&gt; \n  set_text_color(row = 2, col = 4, value = \"darkblue\") |&gt; \n  set_number_format(fmt_pretty())\n\n\n\n\ndfSSMSFp\n\nBetween Groups275,293.4537,646.72355.25140.0000000000000000000000000000000000000000000000000000000000000000000000000000001668243\n\nWithin groups29731,473.7105.9721"
+  },
+  {
+    "objectID": "lec16.html#between-subjects-anova-15",
+    "href": "lec16.html#between-subjects-anova-15",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nExample\n\nProf Brocker recruits 500 participants. He shows half of them the Netflix Original, Dark and the other half Jeopardy. He then measures their happiness on a scale of 1 to 10. He wants to know if Dark participants are significantly happier than the Jeopardy participants.\n\n\nWhat is the IV?\nWhat is the DV?\nWhat is the sample size?"
+  },
+  {
+    "objectID": "lec16.html#f-distribution",
+    "href": "lec16.html#f-distribution",
+    "title": "Analysis of Variance",
+    "section": "F-Distribution",
+    "text": "F-Distribution\n\n\nCode\n# Define the degrees of freedom\ndf1 &lt;- 2  # Numerator degrees of freedom\ndf2 &lt;- 497 # Denominator degrees of freedom\n\n# Plot the F-distribution curve\ncurve(df(x, df1, df2), from = 0, to = 5, col = \"blue\", lwd = 2,\n      xlab = \"F value\", ylab = \"Density\",\n      main = paste(\"F-Distribution (df1 =\", df1, \", df2 =\", df2, \")\"))\n\n# Add a vertical line at the critical value (e.g., 0.05 significance level)\ncritical_value &lt;- qf(0.95, df1, df2)\nabline(v = critical_value, col = \"red\", lwd = 2, lty = 2)\n\n# Add a legend\nlegend(\"topright\", legend = c(\"F-Density\", \"Critical Value (0.05)\"),\n       col = c(\"blue\", \"red\"), lwd = 2, lty = c(1, 2))"
+  },
+  {
+    "objectID": "lec16.html#interpreting-f-1",
+    "href": "lec16.html#interpreting-f-1",
+    "title": "Analysis of Variance",
+    "section": "Interpreting f",
+    "text": "Interpreting f\nThe \\(MS_{BG}\\) is made up of the \\(MS_{Error}\\) + the theoretical difference between groups:\n\n\\(MS_{BG} = \\text{group difference} + MS_{Error}\\)\n\\(MS_{BG} = 0 + MS_{Error}\\)\n\\(MS_{BG} = MS_{Error}\\)\n\\(F = \\frac{MS_{BG}}{MS_{Error}}\\)\n\\(F = 1\\)"
+  },
+  {
+    "objectID": "lec16.html#interpreting-f-2",
+    "href": "lec16.html#interpreting-f-2",
+    "title": "Analysis of Variance",
+    "section": "Interpreting f",
+    "text": "Interpreting f\n\nWhen \\(F =&lt; 1\\), it’s not likely to be statistically significant."
+  },
+  {
+    "objectID": "lec16.html#interpreting-f-3",
+    "href": "lec16.html#interpreting-f-3",
+    "title": "Analysis of Variance",
+    "section": "Interpreting f",
+    "text": "Interpreting f\nThe \\(MS_{BG}\\) is made up of the \\(MS_{Error}\\) + the theoretical difference between groups:\n\n\\(MS~BG~ = \\text{group difference} + MS_{Error}\\)\n\\(MS~BG~ = \\text{NUMBER GREATER THAN 0} + MS_{Error}\\)\n\\(F = \\text{DIFFERENCE} + \\frac{MS_{Error}}{MS_{Error}}\\)\n\\(F = DIFFERENCE\\)"
+  },
+  {
+    "objectID": "lec16.html#hypothesis-testing-anova",
+    "href": "lec16.html#hypothesis-testing-anova",
+    "title": "Analysis of Variance",
+    "section": "Hypothesis testing: ANOVA",
+    "text": "Hypothesis testing: ANOVA\nDecision Criteria\n\n\\(F \\leq 1\\): Fail to reject the Null Hypothesis\n\\(F \\gt 1\\): Refer to p-value: Reject the Null Hypothesis"
+  },
+  {
+    "objectID": "lec16.html#reporting-f-1",
+    "href": "lec16.html#reporting-f-1",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in terms of the Null Hypothesis (\\(H_0\\)), you should report findings as:\n\nReject \\(H_0\\)\nFail to Reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lec16.html#reporting-f-2",
+    "href": "lec16.html#reporting-f-2",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\nWhat to Look For\nIf asked to report findings in general or for publication, you need to report 5 things:\n\n\\(F(df_{bg},df_{error})\\)\nF-value\np-value\nMean and standard deviation of each group"
+  },
+  {
+    "objectID": "lec16.html#reporting-f-3",
+    "href": "lec16.html#reporting-f-3",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nThe group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F(1,498) = 7.12, p &lt; 0.05."
+  },
+  {
+    "objectID": "lec16.html#reporting-f-4",
+    "href": "lec16.html#reporting-f-4",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\nThere was not a significant difference in happiness between the groups, \\(F(1, 498) = 1.02, p = 0.07\\)."
+  },
+  {
+    "objectID": "lec16.html#reporting-f-5",
+    "href": "lec16.html#reporting-f-5",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\nExample\n\n\nCode\nex2 &lt;- \n  tibble(\n    grp = rep(c(\"A\",\"B\",\"C\"),each = 30),\n    score = c(rnorm(30,50,5),rnorm(30,55,5),rnorm(30,60,5))\n    )\n\naov(score~grp, data = ex2) |&gt; \n  tidy() |&gt; \n  hux() |&gt; \n  theme_article()\n\n\n\n\ntermdfsumsqmeansqstatisticp.value\n\ngrp21.49e+03744  34.31.05e-11\n\nResiduals871.89e+0321.7"
+  },
+  {
+    "objectID": "lec16.html#anova-7",
+    "href": "lec16.html#anova-7",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nVisualizing\n\nBarplot with ErrorbarsDistribution with Point EstimatesBoxplot with Distribution\n\n\n\n\nCode\nex2 |&gt; \n  ggplot(aes(grp,score,fill = grp)) +\n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\",\n    width = .2\n  ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Score\\n\",\n    fill = \"Group\"\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nex2 |&gt; \n  ggplot(aes(grp,score,color = grp)) +\n  geom_jitter(alpha = .2, show.legend = FALSE) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n    labs(\n    x = \"\\nTreatment Group\",\n    y = \"Score\\n\",\n    color = \"Group\"\n  ) \n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(ggdist)\nggplot(ex2, aes(x = grp, y = score, fill = grp)) +\n  geom_boxplot(width = 0.2, \n               outlier.shape = NA, \n               alpha = 0.4) +\n  geom_jitter(\n    alpha = 0.4, \n    width = 0.2,\n    show.legend = FALSE,\n    aes(color = grp)\n    ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Score\\n\",\n    fill = \"Group\"\n  )"
+  },
+  {
+    "objectID": "lec14.html#introduction-to-paired-samples-t-test",
+    "href": "lec14.html#introduction-to-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Introduction to Paired Samples t-Test",
     "text": "Introduction to Paired Samples t-Test\nWhat is a Paired Samples t-Test?\n\nA statistical method used to compare the means of two related groups.\nCommonly used when measuring the same group before and after an intervention or over two different conditions."
   },
   {
-    "objectID": "lec15.html#purpose-of-paired-samples-t-test",
-    "href": "lec15.html#purpose-of-paired-samples-t-test",
+    "objectID": "lec14.html#purpose-of-paired-samples-t-test",
+    "href": "lec14.html#purpose-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Purpose of Paired Samples t-Test",
     "text": "Purpose of Paired Samples t-Test\nWhy Use Paired Samples t-Test?\n\nTo determine if there is a statistically significant difference between two related group means.\nUseful in psychology for assessing changes due to an intervention, therapy, or experiment."
   },
   {
-    "objectID": "lec15.html#formula-for-paired-samples-t-test",
-    "href": "lec15.html#formula-for-paired-samples-t-test",
+    "objectID": "lec14.html#formula-for-paired-samples-t-test",
+    "href": "lec14.html#formula-for-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Formula for Paired Samples t-Test",
     "text": "Formula for Paired Samples t-Test\nMathematical Representation\n\nFormula: \\(\\large{t = \\frac{\\bar{D}}{\\frac{s_D}{\\sqrt{n}}}}\\)\n\n\\(\\bar{D}\\): Mean of the differences between paired observations.\n\\(s_D\\): Standard deviation of the differences.\n\\(n\\): Number of pairs."
   },
   {
-    "objectID": "lec15.html#theoretical-formula-explanation",
-    "href": "lec15.html#theoretical-formula-explanation",
+    "objectID": "lec14.html#theoretical-formula-explanation",
+    "href": "lec14.html#theoretical-formula-explanation",
     "title": "Paired Samples T-Test",
     "section": "Theoretical Formula Explanation",
     "text": "Theoretical Formula Explanation\nUnderstanding Each Component\n\nDifference Mean \\(\\bar{D}\\): Average of the differences between paired scores.\nStandard Deviation of Differences \\(s_D\\): Indicates how much individual differences deviate from the mean difference.\nSample Size \\(n\\): Number of pairs, affecting the significance of results."
   },
   {
-    "objectID": "lec15.html#application-of-paired-samples-t-test",
-    "href": "lec15.html#application-of-paired-samples-t-test",
+    "objectID": "lec14.html#application-of-paired-samples-t-test",
+    "href": "lec14.html#application-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Application of Paired Samples t-Test",
     "text": "Application of Paired Samples t-Test\nWhen to Apply This Test\n\nPretest-Posttest Design: Measure changes in the same group over time.\nMatched Pairs: Compare two related groups, such as twins or matched participants.\nRepeated Measures: Test the same group under different conditions or at different times."
   },
   {
-    "objectID": "lec15.html#paired-samples-t-test",
-    "href": "lec15.html#paired-samples-t-test",
+    "objectID": "lec14.html#paired-samples-t-test",
+    "href": "lec14.html#paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
     "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program.\n\nSteps:\n\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{D}\\) and standard deviation \\(s_D\\) of the differences.\nApply the formula to calculate the t-value and check for significance."
   },
   {
-    "objectID": "lec15.html#paired-samples-t-test-1",
-    "href": "lec15.html#paired-samples-t-test-1",
+    "objectID": "lec14.html#paired-samples-t-test-1",
+    "href": "lec14.html#paired-samples-t-test-1",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\n\n\n\nDtdfpCI[uu,ll]\n\n3.278.59291.8e-09[2.49, 4.04]"
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n# Load Packages\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\n# Random Seed\nset.seed(20)\n\n# Create data\ndata &lt;- \n  tibble(\n  # Make a variable, `group` with 30 T1 and 30 T2\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  # Make a variable, `score` with 60 scores\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n)"
   },
   {
-    "objectID": "lec15.html#summary-of-paired-samples-t-test",
-    "href": "lec15.html#summary-of-paired-samples-t-test",
+    "objectID": "lec14.html#paired-samples-t-test-2",
+    "href": "lec14.html#paired-samples-t-test-2",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nData Preview\n\n\nCode\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\nset.seed(20)\ndata &lt;- \n  tibble(\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n) \n\ndata |&gt; slice_sample(n = 5) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\ngrpscore\n\nT18\n\nT25\n\nT24\n\nT25\n\nT16"
+  },
+  {
+    "objectID": "lec14.html#paired-samples-t-test-3",
+    "href": "lec14.html#paired-samples-t-test-3",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nCompare Scores\n\n\nCode\ndata_new &lt;- \n  data |&gt; \n  group_by(grp) |&gt; \n  mutate(\n    id = row_number()\n  ) |&gt; \n  tidyr::pivot_wider(\n                     names_from = grp,\n                     values_from = score\n                     ) |&gt; \n  ungroup() |&gt; \n  mutate(\n    D = T2-T1,\n    Dfi = ifelse(stringr::str_detect(D,\"^-\"),paste0(\"(\",D,\")\"),D)\n  )\n\ndata_new |&gt; \n  select(-D) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\nidT1T2Dfi\n\n1104(-6)\n\n276(-1)\n\n3126(-6)\n\n4550\n\n573(-4)\n\n692(-7)\n\n7231\n\n865(-1)\n\n974(-3)\n\n1074(-3)\n\n1183(-5)\n\n1282(-6)\n\n1375(-2)\n\n14114(-7)\n\n1553(-2)\n\n1674(-3)\n\n17105(-5)\n\n1885(-3)\n\n1985(-3)\n\n2094(-5)\n\n2185(-3)\n\n2284(-4)\n\n2394(-5)\n\n2495(-4)\n\n2585(-3)\n\n2654(-1)\n\n2775(-2)\n\n2864(-2)\n\n29330\n\n3074(-3)"
+  },
+  {
+    "objectID": "lec14.html#paired-samples-t-test-4",
+    "href": "lec14.html#paired-samples-t-test-4",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\\[\\large{t = \\frac{D}{\\frac{\\sigma}{\\sqrt{n}}} =  \\frac{-3.26}{\\frac{2.083}{\\sqrt{30}}} = (-8.57)}\\]"
+  },
+  {
+    "objectID": "lec14.html#paired-samples-t-test-5",
+    "href": "lec14.html#paired-samples-t-test-5",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\n\nCode\nt.test(score ~ grp, data = data, paired = TRUE,conf.level = 0.95) |&gt; \n  tidy() |&gt; \n  rename(\n    D = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = p |&gt; round(10)\n  ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(D,t,df,p,`CI[ll,uu]`) |&gt; \n  huxtable() |&gt; \n  # bold d\n  set_bold(col = 1, row = 2, value = TRUE) |&gt; \n  set_text_color(col = 2, row = 2, value = \"darkred\") |&gt; \n  set_text_color(col = 3, row = 2, value = \"darkgreen\") |&gt; \n  set_text_color(col = 4, row = 2, value = \"darkblue\") |&gt; \n  set_text_color(col = 5, row = 2, value = \"darkorange\") |&gt; \n  theme_article()\n\n\n\n\nDtdfpCI[ll,uu]\n\n3.278.59291.8e-09[2.49, 4.04]\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (D)"
+  },
+  {
+    "objectID": "lec14.html#paired-t-tests",
+    "href": "lec14.html#paired-t-tests",
+    "title": "Paired Samples T-Test",
+    "section": "Paired T-Tests",
+    "text": "Paired T-Tests\nVisualizing Results: Option 1\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, fill = grp)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\")\n  ) +\n  scale_fill_viridis(discrete = TRUE, option = \"E\")"
+  },
+  {
+    "objectID": "lec14.html#paired-t-tests-1",
+    "href": "lec14.html#paired-t-tests-1",
+    "title": "Paired Samples T-Test",
+    "section": "Paired T-Tests",
+    "text": "Paired T-Tests\nVisualizing Results: Option 2\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, color = grp)) + \n  geom_jitter(aes(alpha = .2)) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    legend.position = \"none\"\n  ) +\n  scale_color_manual(values = c(\"darkgreen\",\"darkred\"))"
+  },
+  {
+    "objectID": "lec14.html#summary-of-paired-samples-t-test",
+    "href": "lec14.html#summary-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Summary of Paired Samples t-Test",
     "text": "Summary of Paired Samples t-Test\nKey Takeaways\n\nPaired samples t-tests are ideal for comparing two related groups.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check assumptions: normality of differences and appropriate pairing."
   },
   {
-    "objectID": "lec10.html#correlation",
-    "href": "lec10.html#correlation",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nWhat do you know about correlations?\n\n\nCorrelation ≠ Causation\nr\nPositive correlation: variables move together\n\nAs one goes up, the other goes up.\nAs one goes down, the other goes down."
+    "objectID": "lec13.html#sampling-theory",
+    "href": "lec13.html#sampling-theory",
+    "title": "T-Tests",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory"
   },
   {
-    "objectID": "lec10.html#correlation-1",
-    "href": "lec10.html#correlation-1",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nAssesses how two variables move in relation to one another."
+    "objectID": "lec13.html#sampling-theory-1",
+    "href": "lec13.html#sampling-theory-1",
+    "title": "T-Tests",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory"
   },
   {
-    "objectID": "lec10.html#measures-of-dispersion",
-    "href": "lec10.html#measures-of-dispersion",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nWhat are measures of dispersion?\nMeasures of how spread out the data are, how much participants differ."
+    "objectID": "lec13.html#sampling-theory-2",
+    "href": "lec13.html#sampling-theory-2",
+    "title": "T-Tests",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory"
   },
   {
-    "objectID": "lec10.html#measures-of-dispersion-1",
-    "href": "lec10.html#measures-of-dispersion-1",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nHow do we measure dispersion when we were looking at one variable?\nStandard deviation\nVariance"
+    "objectID": "lec13.html#sampling-theory-3",
+    "href": "lec13.html#sampling-theory-3",
+    "title": "T-Tests",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\nSetting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it."
   },
   {
-    "objectID": "lec10.html#measures-of-dispersion-2",
-    "href": "lec10.html#measures-of-dispersion-2",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
+    "objectID": "lec13.html#probability",
+    "href": "lec13.html#probability",
+    "title": "T-Tests",
+    "section": "Probability",
+    "text": "Probability"
   },
   {
-    "objectID": "lec10.html#measures-of-dispersion-3",
-    "href": "lec10.html#measures-of-dispersion-3",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
+    "objectID": "lec13.html#sampling-theory-4",
+    "href": "lec13.html#sampling-theory-4",
+    "title": "T-Tests",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\nSetting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it."
   },
   {
-    "objectID": "lec10.html#measures-of-dispersion-4",
-    "href": "lec10.html#measures-of-dispersion-4",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\n\nStandard deviation: How different are participants from the average?\n\nBivariate measures of dispersion:\n\nCovariance\nHow much variation in one variable is the same in another variable?\nDo the variables vary in the same way?"
+    "objectID": "lec13.html#inferential-statistics",
+    "href": "lec13.html#inferential-statistics",
+    "title": "T-Tests",
+    "section": "Inferential Statistics",
+    "text": "Inferential Statistics\nEach inferential statistic will give us:\n\nTest statistic\n\n\\(r,t,F,\\chi^2...\\)\n\np-value: probability of committing a Type 1 Error &lt; 0.05 or 5%\n\np &gt; 0.05: Fail to reject the \\(H_0\\)\np &lt; 0.05: Reject \\(H_0\\)"
   },
   {
-    "objectID": "lec10.html#measures-of-dispersion-5",
-    "href": "lec10.html#measures-of-dispersion-5",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\nStandard deviation: Height M = 5'6\", s = 2 inches\nBivariate measures of dispersion:\n\nCovariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?"
+    "objectID": "lec13.html#sampling-theory-5",
+    "href": "lec13.html#sampling-theory-5",
+    "title": "T-Tests",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\nSetting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it."
   },
   {
-    "objectID": "lec10.html#covariance",
-    "href": "lec10.html#covariance",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee = continuous\nVariable 2: Happiness = continuous"
+    "objectID": "lec13.html#t-tests",
+    "href": "lec13.html#t-tests",
+    "title": "T-Tests",
+    "section": "T-tests",
+    "text": "T-tests\n\nIV must be nominal and have only 2 categories\n\nUsing experimental versus control\nAny two categories (bad/good)\n\nDV must be continuous\n\nScale of 1 to 10\nCount"
   },
   {
-    "objectID": "lec10.html#covariance-1",
-    "href": "lec10.html#covariance-1",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nWe could:\n\n\nFind the variance of each variable\nFind the covariance of the two variables together"
+    "objectID": "lec13.html#independent-samples-t-test",
+    "href": "lec13.html#independent-samples-t-test",
+    "title": "T-Tests",
+    "section": "Independent Samples t-test",
+    "text": "Independent Samples t-test\nExample\n\nThe experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of 1 to 10.\n\n\nThe experimental group has a mean happiness score of 8\nThe control group mean happiness score of 6\n\n\nIs the group that drank coffee significantly happier than the control group?"
   },
   {
-    "objectID": "lec10.html#covariance-2",
-    "href": "lec10.html#covariance-2",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance refers to how two continuous variables vary in tandem."
+    "objectID": "lec13.html#independent-samples-t-test-1",
+    "href": "lec13.html#independent-samples-t-test-1",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test"
   },
   {
-    "objectID": "lec10.html#covariance-3",
-    "href": "lec10.html#covariance-3",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance refers to how two variables vary together:\n\n\nGenerally, if cups of coffee goes up, what does happiness tend to do?\nGenerally, if happiness goes up, what does cups of coffee tend to do?"
+    "objectID": "lec13.html#independent-samples-t-test-2",
+    "href": "lec13.html#independent-samples-t-test-2",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance: how much the answers from the experimental group differ from the control group.\nWithin group variance: how much the answers of all participants differ from one another."
   },
   {
-    "objectID": "lec10.html#covariance-4",
-    "href": "lec10.html#covariance-4",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee\nVariable 2: Happiness\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
+    "objectID": "lec13.html#independent-samples-t-test-3",
+    "href": "lec13.html#independent-samples-t-test-3",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance\nWithin group variance"
   },
   {
-    "objectID": "lec10.html#covariance-5",
-    "href": "lec10.html#covariance-5",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nWell, well, well–We Meet Again\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1}\n\\]"
+    "objectID": "lec13.html#independent-samples-t-test-4",
+    "href": "lec13.html#independent-samples-t-test-4",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test"
   },
   {
-    "objectID": "lec10.html#covariance-6",
-    "href": "lec10.html#covariance-6",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1} = \\frac{\\Sigma(X-\\bar{X})(X-\\bar{X})}{N-1}\n\\]"
+    "objectID": "lec13.html#independent-samples-t-test-5",
+    "href": "lec13.html#independent-samples-t-test-5",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance\nWithin group variance"
   },
   {
-    "objectID": "lec10.html#covariance-7",
-    "href": "lec10.html#covariance-7",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nThe variance of a variable is the covariance of that variable with itself.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
+    "objectID": "lec13.html#independent-samples-t-test-6",
+    "href": "lec13.html#independent-samples-t-test-6",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance: how much the answers from the experimental group differ from the control group.\nWithin group variance: how much the answers of all participants differ from one another."
   },
   {
-    "objectID": "lec10.html#covariance-8",
-    "href": "lec10.html#covariance-8",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance is the variance of two variables together… how they move together.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
+    "objectID": "lec13.html#independent-samples-t-test-7",
+    "href": "lec13.html#independent-samples-t-test-7",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test"
   },
   {
-    "objectID": "lec10.html#covariance-9",
-    "href": "lec10.html#covariance-9",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\n\n\n\n\\[\\bar{X} = \\frac{\\Sigma(x)}{n}\\] \\[\\bar{Y} = \\frac{\\Sigma(Y)}{n}\\]"
+    "objectID": "lec13.html#theoretical-formula",
+    "href": "lec13.html#theoretical-formula",
+    "title": "T-Tests",
+    "section": "Theoretical Formula:",
+    "text": "Theoretical Formula:\n\\[\\color{blue}{t} = \\frac{\\color{red}{\\bar{x}} -\\color{orange}{\\mu}}{\\sqrt{\\color{grey}{s^{2}_{pooled}}}}\\] - t\n\nSample Mean\nPopulation Mean\nPooled Variance"
   },
   {
-    "objectID": "lec10.html#covariance-10",
-    "href": "lec10.html#covariance-10",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\n\n\n\n\\[(X-\\bar{X})\\] \\[(Y-\\bar{Y})\\]"
+    "objectID": "lec13.html#forumlas",
+    "href": "lec13.html#forumlas",
+    "title": "T-Tests",
+    "section": "Forumlas",
+    "text": "Forumlas\nInferential statistics have both theoretical and computational formulas:\n\nTheoretical\n\nFormula for if we actually knew the population parameters\n\nComputational\n\nFormula for estimating the test statistics based solely on sample data"
   },
   {
-    "objectID": "lec10.html#covariance-11",
-    "href": "lec10.html#covariance-11",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\n\n\n\\[(X-\\bar{X})(Y-\\bar{Y})\\]"
+    "objectID": "lec13.html#independent-samples-t-test-8",
+    "href": "lec13.html#independent-samples-t-test-8",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - \\color{green}{μ}}{\\sqrt{s^{2}_{pooled}}}\\]"
   },
   {
-    "objectID": "lec10.html#covariance-12",
-    "href": "lec10.html#covariance-12",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\n\n\n\n\\[\\sum(X-\\bar{X})(Y-\\bar{Y})\\]"
+    "objectID": "lec13.html#independent-samples-t-test-9",
+    "href": "lec13.html#independent-samples-t-test-9",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - μ}{\\sqrt{\\color{orange}{s^{2}_{pooled}}}}\\]"
   },
   {
-    "objectID": "lec10.html#covariance-13",
-    "href": "lec10.html#covariance-13",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\nDivide by N-1.\n\n\n\n\\[\\frac{\\sum(X-\\bar{X})(Y-\\bar{Y})}{N-1}\\]"
+    "objectID": "lec13.html#independent-samples-t-test-10",
+    "href": "lec13.html#independent-samples-t-test-10",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - μ}{\\sqrt{s^{2}_{pooled}}}\\]"
   },
   {
-    "objectID": "lec10.html#covariance-14",
-    "href": "lec10.html#covariance-14",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance is the bivariate equivalent of variance.\n\n\nWhat does the covariance tell us?\nWhat did the variance tell us?\n\nNot much because it was inflated.\n\nFor it to be useful, we had to standardize it.\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
+    "objectID": "lec13.html#independent-samples-t-test-11",
+    "href": "lec13.html#independent-samples-t-test-11",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - μ}{\\sqrt{s^{2}_{pooled}}}\\]"
   },
   {
-    "objectID": "lec10.html#correlation-2",
-    "href": "lec10.html#correlation-2",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\nCorrelation is the standardized covariance.\nCorrelation is the bivariate version of the standard deviation.\nTo calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.\n\n\n\n\\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
+    "objectID": "lec13.html#independent-samples-t-test-12",
+    "href": "lec13.html#independent-samples-t-test-12",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nComputational Formula:\n\\[\\frac{M_{Experimental}-M_{Control}}{\\sqrt{\\color{darkblue}{\\frac{s1}{n1}+ \\frac{s2}{n2}}}}\\]\n\nPooled Variance"
   },
   {
-    "objectID": "lec10.html#correlation-3",
-    "href": "lec10.html#correlation-3",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\] \\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
+    "objectID": "lec13.html#independent-samples-t-test-13",
+    "href": "lec13.html#independent-samples-t-test-13",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nComputational Formula:\n\\[\\frac{M_{Experimental}-M_{Control}}{\\sqrt{\\frac{s1}{n1}+ \\frac{s2}{n2}}}\\]"
   },
   {
-    "objectID": "lec10.html#correlation-4",
-    "href": "lec10.html#correlation-4",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nCalculating Correlation:\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
+    "objectID": "lec13.html#data-overview",
+    "href": "lec13.html#data-overview",
+    "title": "T-Tests",
+    "section": "Data Overview",
+    "text": "Data Overview\n\n\n\n\nestimateestimate1estimate2statisticp.valueparameterconf.lowconf.highmethodalternative\n\n-1.76.58.2-2.940.0087618-2.91-0.485Two Sample t-testtwo.sided"
   },
   {
-    "objectID": "lec10.html#correlation-5",
-    "href": "lec10.html#correlation-5",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nCorrelation is the bivariate version of the standard deviation.\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
+    "objectID": "lec13.html#the-data",
+    "href": "lec13.html#the-data",
+    "title": "T-Tests",
+    "section": "The Data",
+    "text": "The Data\n\nThe main window that opens in SPSS\nData view: every row is a participant\nVariable view: every row is a variable\nClick commands from the data file."
   },
   {
-    "objectID": "lec10.html#correlation-6",
-    "href": "lec10.html#correlation-6",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\nCorrelation is bounded between -1 and +1.\nCloser to -1 is a negative correlation.\nCloser to +1 is a positive correlation.\nCloser to 0 means no correlation."
+    "objectID": "lec13.html#independent-samples-t-test-spss",
+    "href": "lec13.html#independent-samples-t-test-spss",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\nAnalyze\nCompare Means\nIndependent Samples"
   },
   {
-    "objectID": "lec10.html#correlation-7",
-    "href": "lec10.html#correlation-7",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation"
+    "objectID": "lec13.html#independent-samples-t-test-14",
+    "href": "lec13.html#independent-samples-t-test-14",
+    "title": "T-Tests",
+    "section": "Independent samples t-test:",
+    "text": "Independent samples t-test:\nAssumptions of the T-Test\n\nData type:\n\nThe data is quantitative and continuous \n\nDistribution:\n\nThe data is approximately normally distributed \n\nSample size:\n\nThe sample size is adequate*"
   },
   {
-    "objectID": "lec10.html#correlation-8",
-    "href": "lec10.html#correlation-8",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nThis is the Pearson Product-Moment Correlation (Pearson, 1895).\n\n\nThe sign indicates the direction.\nThe number indicates the magnitude/strength of the relationship.\n\n0.1 is a small correlation\n0.3 is a moderate correlation\n0.5 or higher is a large correlation"
+    "objectID": "lec13.html#independent-samples-t-test-15",
+    "href": "lec13.html#independent-samples-t-test-15",
+    "title": "T-Tests",
+    "section": "Independent samples t-test:",
+    "text": "Independent samples t-test:\nAssumptions of the T-Test\n\nRandom sampling:\n\nThe data is randomly sampled from a population \n\nIndependence:\n\nThe data values are independent, meaning that measurements for one observation do not affect other observations \n\nHomogeneity of variance:\n\nThe variability of the data in each group is similar"
   },
   {
-    "objectID": "lec10.html#correlation-9",
-    "href": "lec10.html#correlation-9",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\nCorrelation is written as r\nIf we square r, we get \\(R^2\\)\n\\(R^2\\) is always positive\n\\(R^2\\) refers to:\n\nThe amount of x accounted for by y.\nThe amount of y accounted for by x."
+    "objectID": "lec13.html#independent-samples-t-test-16",
+    "href": "lec13.html#independent-samples-t-test-16",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nHomogeneity of Variance\n\n\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance.\n\n\nt is the test statistic.\nSig (2-tailed) is the p-value."
   },
   {
-    "objectID": "lec10.html#correlation-and-r2",
-    "href": "lec10.html#correlation-and-r2",
-    "title": "Covariance & Correlation",
-    "section": "Correlation and \\(R^2\\)",
-    "text": "Correlation and \\(R^2\\)\nExample\n\nStudents grades in MTH 110 and their grades in correlation at r = 0.3\n\n\n\nModerate correlation\nHow much of your grade is accounted for by your MTH 110 grade?\n0.3 x 0.3 = 0.09\n\\(R^2\\) = 9% of your grade is explained by your MTH 110 grade."
+    "objectID": "lec13.html#independent-samples-t-test-17",
+    "href": "lec13.html#independent-samples-t-test-17",
+    "title": "T-Tests",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\n\\[\\frac{M_{Experimental}-M_{Control}}{\\sqrt{\\frac{s1}{n1}+ \\frac{s2}{n2}}}\\]"
   },
   {
-    "objectID": "lec10.html#interpreting-correlation",
-    "href": "lec10.html#interpreting-correlation",
-    "title": "Covariance & Correlation",
-    "section": "Interpreting Correlation",
-    "text": "Interpreting Correlation"
+    "objectID": "lec13.html#independent-samples-t-test-spss-1",
+    "href": "lec13.html#independent-samples-t-test-spss-1",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\nWhy Do We Care?\nWe need the Levene’s Test, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.\n\nA significant Levene’s Test means a significant difference in the variances."
   },
   {
-    "objectID": "lec10.html#interpreting-correlation-1",
-    "href": "lec10.html#interpreting-correlation-1",
-    "title": "Covariance & Correlation",
-    "section": "Interpreting Correlation",
-    "text": "Interpreting Correlation\n\n\nWe don’t use the words caused/resulting from.\nWhen reporting r: “As x goes up, y tends to go up.”\nWhen reporting \\(R^2\\): “z% of x is accounted for by y.”"
+    "objectID": "lec13.html#independent-samples-t-test-spss-2",
+    "href": "lec13.html#independent-samples-t-test-spss-2",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\nInterpreting Results\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance"
   },
   {
-    "objectID": "lec10.html#reporting-correlation",
-    "href": "lec10.html#reporting-correlation",
-    "title": "Covariance & Correlation",
-    "section": "Reporting correlation",
-    "text": "Reporting correlation\nCorrelation Matrix\n\n\nIn the Method, we report descriptive statistics about our variables (M, s).\nIt is common to refer readers to a table where they can look at correlations between the variables.\nWhy might this be important?"
+    "objectID": "lec13.html#independent-samples-t-test-spss-3",
+    "href": "lec13.html#independent-samples-t-test-spss-3",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS"
   },
   {
-    "objectID": "lec10.html#correlation-matrix-1",
-    "href": "lec10.html#correlation-matrix-1",
-    "title": "Covariance & Correlation",
-    "section": "Correlation Matrix",
-    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761----\n\nSong 14.211.2.031--\n\nSong 26.422.18.65**-.34*1"
+    "objectID": "lec13.html#independent-samples-t-test-reporting-your-findings",
+    "href": "lec13.html#independent-samples-t-test-reporting-your-findings",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: Reporting your findings",
+    "text": "Independent samples t-test: Reporting your findings\n\n\n\nThere was not a significant difference between the groups, t(18) = 1.287, p = 0.215"
   },
   {
-    "objectID": "lec10.html#correlation-matrix-2",
-    "href": "lec10.html#correlation-matrix-2",
-    "title": "Covariance & Correlation",
-    "section": "Correlation Matrix",
-    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761-.03.65**\n\nSong 14.211.2-.031-.34*\n\nSong 26.422.18.65**-.34*1"
+    "objectID": "lec13.html#independent-samples-t-test-spss-4",
+    "href": "lec13.html#independent-samples-t-test-spss-4",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS"
   },
   {
-    "objectID": "lec10.html#reporting-calculation",
-    "href": "lec10.html#reporting-calculation",
-    "title": "Covariance & Correlation",
-    "section": "Reporting Calculation",
-    "text": "Reporting Calculation\nExample 1\n\nIn a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for 50 students. Below is a scatterplot showing the relationship between the two variables.\n\n\n\n\n\n\n\n\n\n\n\n\n\nBased on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?"
+    "objectID": "lec13.html#independent-samples-t-test-spss-5",
+    "href": "lec13.html#independent-samples-t-test-spss-5",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nStep 1: Look at Levene’s\n\nSmaller than .05 —&gt; Bottom\nLarger than .05 —&gt; Top"
   },
   {
-    "objectID": "lec10.html#reporting-calculation-1",
-    "href": "lec10.html#reporting-calculation-1",
-    "title": "Covariance & Correlation",
-    "section": "Reporting Calculation",
-    "text": "Reporting Calculation\nExample 1\n\n\n\n\n\n\n\n\n\n\n\n\nSuppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables."
+    "objectID": "lec13.html#independent-samples-t-test-spss-6",
+    "href": "lec13.html#independent-samples-t-test-spss-6",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nStep Two: Look at p (Sig.)\n\nSmaller than .05 —&gt; Report Full Findings\nLarger than .05 —&gt; Report only Null"
   },
   {
-    "objectID": "lec10.html#reporting-calculation-2",
-    "href": "lec10.html#reporting-calculation-2",
-    "title": "Covariance & Correlation",
-    "section": "Reporting Calculation",
-    "text": "Reporting Calculation\nExample 2\n\nUsing the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The \\(R^2\\) value for the model is 0.72.\n\n\nWhat does an \\(R^2\\) value of 0.72 tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?\nImagine you are the researcher. Based on the \\(R^2\\) value of 0.72, would you consider study time to be a good predictor of exam performance? Why or why not?"
+    "objectID": "lec13.html#independent-samples-t-test-spss-7",
+    "href": "lec13.html#independent-samples-t-test-spss-7",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nt(degrees of freedom) = value, p = value"
   },
   {
-    "objectID": "lec12.html#types-of-analysis",
-    "href": "lec12.html#types-of-analysis",
-    "title": "Regression Part II",
-    "section": "Types of Analysis",
-    "text": "Types of Analysis\n\nUnivariate: One variable, like the mean\nBivariate: Two variables, like correlation\nMultivariate: More than 2 variables"
+    "objectID": "lec13.html#independent-samples-t-test-spss-8",
+    "href": "lec13.html#independent-samples-t-test-spss-8",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nt(893) = value, p = value"
   },
   {
-    "objectID": "lec12.html#regression",
-    "href": "lec12.html#regression",
-    "title": "Regression Part II",
-    "section": "Regression",
-    "text": "Regression\n\nRegression is the multivariate version of correlation.\nCorrelation is the bivariate version of regression.\nWe’re doing the same thing in regression as we do in correlation, BUT there are more than 2 variables."
+    "objectID": "lec13.html#independent-samples-t-test-spss-9",
+    "href": "lec13.html#independent-samples-t-test-spss-9",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nt(893) = 5.038, p = value"
   },
   {
-    "objectID": "lec12.html#regression-terminology",
-    "href": "lec12.html#regression-terminology",
-    "title": "Regression Part II",
-    "section": "Regression terminology",
-    "text": "Regression terminology\nIn regression we will choose one variable to predict.\n\nWe call this y.\nY is the outcome variable.\nY is the predicted variable."
+    "objectID": "lec13.html#independent-samples-t-test-spss-10",
+    "href": "lec13.html#independent-samples-t-test-spss-10",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nt(893) = 5.038, p &lt; .001"
   },
   {
-    "objectID": "lec12.html#regression-terminology-1",
-    "href": "lec12.html#regression-terminology-1",
-    "title": "Regression Part II",
-    "section": "Regression terminology",
-    "text": "Regression terminology\nIn regression we will choose two or more variables we with believe predict y.\n\nWe call these \\(x_1\\), \\(x_2\\), etc.\nSome people call these x and z.\nX is the predictor variable."
+    "objectID": "lec13.html#independent-samples-t-test-spss-11",
+    "href": "lec13.html#independent-samples-t-test-spss-11",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nThere was a significant difference in number of hours worked last week between men and women, t (893) = 5.038, p &lt; 0.001."
   },
   {
-    "objectID": "lec12.html#regression-terminology-2",
-    "href": "lec12.html#regression-terminology-2",
-    "title": "Regression Part II",
-    "section": "Regression terminology",
-    "text": "Regression terminology\nWhen we predict Y with X, we say;\n\n\nWe regress y on the x."
+    "objectID": "lec13.html#independent-samples-t-test-spss-12",
+    "href": "lec13.html#independent-samples-t-test-spss-12",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\nBut who worked more hours?!"
   },
   {
-    "objectID": "lec12.html#regression-equation",
-    "href": "lec12.html#regression-equation",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\nStep-by-Step\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}+\\color{orange}{e_i}}\n\\]\n\n1. The predicted value of y for a particular participant (i)\n\n\n2. Intercept\n\n\n3. Weight\n\n\n4. The Value of a particular participant (i) on the measure of \\(X_1\\)\n\n\n5. Error. Random, and therefore cannot be predicted"
+    "objectID": "lec13.html#independent-samples-t-test-spss-13",
+    "href": "lec13.html#independent-samples-t-test-spss-13",
+    "title": "T-Tests",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\n\n\nMen (M = 43.92, s = 15.53) worked significantly more hours last week compared to women (M = 38.92, s = 14.085), t (893) = 5.038, p &lt; 0.001."
   },
   {
-    "objectID": "lec12.html#regression-equation-1",
-    "href": "lec12.html#regression-equation-1",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}}\n\\]\n\n\\[\\hat{Y} = b_0 + b_1X_{1i}\\]\n\n\n\\[Y = ax + b\\]"
+    "objectID": "exam2_review.html#question-1",
+    "href": "exam2_review.html#question-1",
+    "title": "Exam 2 Review",
+    "section": "Question 1",
+    "text": "Question 1\n\nWhich of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?\n\n\n\n-0.87\n-0.12\n0.55\n0.94"
   },
   {
-    "objectID": "lec12.html#linear-regression",
-    "href": "lec12.html#linear-regression",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nLine of Best Fit\n\n\n\nCall:\nlm(formula = Y ~ X, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-34.807  -7.177   0.149   9.192  24.609 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.78331    1.32231   2.105   0.0379 *  \nX            0.87634    0.05524  15.863   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 13.05 on 98 degrees of freedom\nMultiple R-squared:  0.7197,    Adjusted R-squared:  0.7168 \nF-statistic: 251.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16"
+    "objectID": "exam2_review.html#question-1-1",
+    "href": "exam2_review.html#question-1-1",
+    "title": "Exam 2 Review",
+    "section": "Question 1",
+    "text": "Question 1\nAnswer\nWhich of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?\n\n-0.87\n-0.12\n0.55\n0.94"
   },
   {
-    "objectID": "lec12.html#regression-1",
-    "href": "lec12.html#regression-1",
-    "title": "Regression Part II",
-    "section": "Regression:",
-    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the x value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y."
+    "objectID": "exam2_review.html#question-2",
+    "href": "exam2_review.html#question-2",
+    "title": "Exam 2 Review",
+    "section": "Question 2",
+    "text": "Question 2\nIf two variables have a correlation coefficient of r = 0, what does this indicate?\n\nA perfect positive relationship\nA perfect negative relationship\nNo linear relationship\nThe variables are unrelated"
   },
   {
-    "objectID": "lec12.html#regression-equation-more-than-one-x",
-    "href": "lec12.html#regression-equation-more-than-one-x",
-    "title": "Regression Part II",
-    "section": "Regression Equation: More than one X",
-    "text": "Regression Equation: More than one X\n\\[\\large{\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}\\]"
+    "objectID": "exam2_review.html#question-2-1",
+    "href": "exam2_review.html#question-2-1",
+    "title": "Exam 2 Review",
+    "section": "Question 2",
+    "text": "Question 2\nAnswer\nIf two variables have a correlation coefficient of r = 0, what does this indicate?\n\nA perfect positive relationship\nA perfect negative relationship\nNo linear relationship\nThe variables are unrelated"
   },
   {
-    "objectID": "lec12.html#regression-2",
-    "href": "lec12.html#regression-2",
-    "title": "Regression Part II",
-    "section": "Regression:",
-    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the \\(X_1\\) value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y.\n\\(X_2\\) = the \\(x_2\\) value for a participant\n\\(b_2\\) = a weighted value that is multiplied by \\(x_2\\)"
+    "objectID": "exam2_review.html#question-3",
+    "href": "exam2_review.html#question-3",
+    "title": "Exam 2 Review",
+    "section": "Question 3",
+    "text": "Question 3\nWhat does the slope of the regression line represent?\n\nThe value of the dependent variable when all predictors are zero\nThe amount of change in the dependent variable for a one-unit change in the independent variable\nThe strength of the correlation\nThe total variance in the dependent variable"
   },
   {
-    "objectID": "lec12.html#regression-equation-2",
-    "href": "lec12.html#regression-equation-2",
-    "title": "Regression Part II",
-    "section": "Regression Equation:",
-    "text": "Regression Equation:"
+    "objectID": "exam2_review.html#question-3-1",
+    "href": "exam2_review.html#question-3-1",
+    "title": "Exam 2 Review",
+    "section": "Question 3",
+    "text": "Question 3\nAnswer\nWhat does the slope of the regression line represent?\n\nThe value of the dependent variable when all predictors are zero\nThe amount of change in the dependent variable for a one-unit change in the independent variable\nThe strength of the correlation\nThe total variance in the dependent variable"
   },
   {
-    "objectID": "lec12.html#more-than-one-x",
-    "href": "lec12.html#more-than-one-x",
-    "title": "Regression Part II",
-    "section": "More than one X",
-    "text": "More than one X\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
+    "objectID": "exam2_review.html#question-4",
+    "href": "exam2_review.html#question-4",
+    "title": "Exam 2 Review",
+    "section": "Question 4",
+    "text": "Question 4\nWhich of the following best describes the meaning of an R-squared value of 0.85?\n\n85% of the variation in the dependent variable is explained by the independent variables\nThe correlation between the variables is 0.85\nThe model’s predictions are 85% accurate\nThe independent variables account for 15% of the error in predictions"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-1",
-    "href": "lec12.html#interpreting-coefficients-1",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients"
+    "objectID": "exam2_review.html#question-4-1",
+    "href": "exam2_review.html#question-4-1",
+    "title": "Exam 2 Review",
+    "section": "Question 4",
+    "text": "Question 4\nAnswer\nWhich of the following best describes the meaning of an R-squared value of 0.85?\na) 85% of the variation in the dependent variable is explained by the independent variables\nb) The correlation between the variables is 0.85\nc) The model’s predictions are 85% accurate\nd) The independent variables account for 15% of the error in predictions"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-2",
-    "href": "lec12.html#interpreting-coefficients-2",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value"
+    "objectID": "exam2_review.html#question-5",
+    "href": "exam2_review.html#question-5",
+    "title": "Exam 2 Review",
+    "section": "Question 5",
+    "text": "Question 5\nTrue or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50."
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-3",
-    "href": "lec12.html#interpreting-coefficients-3",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value &lt;— is this a significant predictor of y?"
+    "objectID": "exam2_review.html#question-5-1",
+    "href": "exam2_review.html#question-5-1",
+    "title": "Exam 2 Review",
+    "section": "Question 5",
+    "text": "Question 5\nAnswer\nTrue or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50.\nFalse"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-4",
-    "href": "lec12.html#interpreting-coefficients-4",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient &lt;— which predictor of y has the more predictive power?\nt-value\np-value"
+    "objectID": "exam2_review.html#question-6",
+    "href": "exam2_review.html#question-6",
+    "title": "Exam 2 Review",
+    "section": "Question 6",
+    "text": "Question 6\nTrue or False: Linear regression is appropriate only when the relationship between the variables is nonlinear."
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-5",
-    "href": "lec12.html#interpreting-coefficients-5",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nIntercept\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-6-1",
+    "href": "exam2_review.html#question-6-1",
+    "title": "Exam 2 Review",
+    "section": "Question 6",
+    "text": "Question 6\nAnswer\nTrue or False: Linear regression is appropriate only when the relationship between the variables is nonlinear.\nFalse"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-6",
-    "href": "lec12.html#interpreting-coefficients-6",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nFirst Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-7",
+    "href": "exam2_review.html#question-7",
+    "title": "Exam 2 Review",
+    "section": "Question 7",
+    "text": "Question 7\nTrue or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line."
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-7",
-    "href": "lec12.html#interpreting-coefficients-7",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nSecond Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-7-1",
+    "href": "exam2_review.html#question-7-1",
+    "title": "Exam 2 Review",
+    "section": "Question 7",
+    "text": "Question 7\nAnswer\nTrue or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line.\nTrue"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-8",
-    "href": "lec12.html#interpreting-coefficients-8",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nSample Size\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-9",
+    "href": "exam2_review.html#question-9",
+    "title": "Exam 2 Review",
+    "section": "Question 9",
+    "text": "Question 9\nWhat is the difference between simple linear regression and multiple linear regression?"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-9",
-    "href": "lec12.html#interpreting-coefficients-9",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nR Squared\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-9-1",
+    "href": "exam2_review.html#question-9-1",
+    "title": "Exam 2 Review",
+    "section": "Question 9",
+    "text": "Question 9\nWhat is the difference between simple linear regression and multiple linear regression?\n\nAnswer: Simple linear regression uses one independent variable to predict the dependent variable, while multiple linear regression uses two or more independent variables."
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-10",
-    "href": "lec12.html#interpreting-coefficients-10",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nAdjusted R Squared\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-10",
+    "href": "exam2_review.html#question-10",
+    "title": "Exam 2 Review",
+    "section": "Question 10",
+    "text": "Question 10\nDescribe the difference between correlation and causation. Why is it important not to infer causation directly from correlation?\n\n\nAnswer: Correlation refers to a relationship or association between two variables, while causation indicates that one variable directly affects another. It is important not to infer causation from correlation because there may be confounding variables or the relationship may be coincidental."
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-11",
-    "href": "lec12.html#interpreting-coefficients-11",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nF Statistic\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-11",
+    "href": "exam2_review.html#question-11",
+    "title": "Exam 2 Review",
+    "section": "Question 11",
+    "text": "Question 11\nSuppose you perform a regression analysis and the p-value of one of your predictors is 0.15. How would you interpret this result? Should you include this predictor in your model?\n\n\nAnswer: A p-value of 0.15 suggests that the predictor is not statistically significant at conventional levels (e.g., 0.05). You may consider removing this predictor, though you might keep it if there is theoretical justification"
   },
   {
-    "objectID": "lec12.html#interpreting-coefficients-12",
-    "href": "lec12.html#interpreting-coefficients-12",
-    "title": "Regression Part II",
-    "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nP Value\n\n\n\n\nMoney\n\n(Intercept)69.091 ***(7.116)\n\nx1-0.258    (0.249)\n\nx2-0.362    (0.207)\n\n# Observations100             \n\nR squared0.040         \n\nAdjusted R squared0.020         \n\nF statistic2.033         \n\nP value0.137         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "objectID": "exam2_review.html#question-12",
+    "href": "exam2_review.html#question-12",
+    "title": "Exam 2 Review",
+    "section": "Question 12",
+    "text": "Question 12\nA researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.\n\nWhat does this tell you about the relationship between study hours and exam scores?\nWould you expect the relationship to be strong, moderate, or weak? Why?"
   },
   {
-    "objectID": "lec12.html#r2-1",
-    "href": "lec12.html#r2-1",
-    "title": "Regression Part II",
-    "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)\n\n\\(R^2\\) is the correlation coefficient (r) squared.\n\\(R^2\\) is always positive\nIn correlation, the amount of y accounted for by x"
+    "objectID": "exam2_review.html#question-12-1",
+    "href": "exam2_review.html#question-12-1",
+    "title": "Exam 2 Review",
+    "section": "Question 12",
+    "text": "Question 12\nAnswer\nA researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.\n\nWhat does this tell you about the relationship between study hours and exam scores?\n\nA correlation of r = 0.65 indicates a positive and moderate relationship. As study hours increase, exam scores tend to increase, but the relationship is not perfect.\n\nWould you expect the relationship to be strong, moderate, or weak? Why?\n\nThe relationship would be considered moderate because the correlation is between 0.5 and 0.7, indicating a noticeable but not perfect relationship."
   },
   {
-    "objectID": "lec12.html#r2-2",
-    "href": "lec12.html#r2-2",
-    "title": "Regression Part II",
-    "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?"
+    "objectID": "exam2_review.html#question-13",
+    "href": "exam2_review.html#question-13",
+    "title": "Exam 2 Review",
+    "section": "Question 13",
+    "text": "Question 13\nYou run a simple linear regression analysis and get the following equation:\n\\(\\hat{Y} = 2.5 + 1.8X\\)\n\nWhat is the predicted value of Y if X is 4?\nWhat does the coefficient 1.8 represent in this context?"
   },
   {
-    "objectID": "lec12.html#r2-3",
-    "href": "lec12.html#r2-3",
-    "title": "Regression Part II",
-    "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)"
+    "objectID": "exam2_review.html#question-13-1",
+    "href": "exam2_review.html#question-13-1",
+    "title": "Exam 2 Review",
+    "section": "Question 13",
+    "text": "Question 13\nAnswer\n\\(\\hat{Y} = 2.5 + 1.8X\\)\n\nWhat is the predicted value of Y if X is 4?\n\n\\(\\hat{Y} = 2.5 + 1.8(4) = 2.5 + 7.2 = 9.7\\)\n\nWhat does the coefficient 1.8 represent in this context?\n\nThe coefficient 1.8 represents the predicted change in Y for each additional unit of X. In this context, it means that for each additional unit of X, Y is expected to increase by 1.8 units."
   },
   {
-    "objectID": "lec12.html#interpreting-r-squared",
-    "href": "lec12.html#interpreting-r-squared",
-    "title": "Regression Part II",
-    "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\nR Squared\nAdjusted R Squared\nF-value\np-value"
+    "objectID": "exam2_review.html#question-14",
+    "href": "exam2_review.html#question-14",
+    "title": "Exam 2 Review",
+    "section": "Question 14",
+    "text": "Question 14\nConsider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.\n\nInterpret the R-squared value in terms of the model’s explanatory power.\nBased on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?"
   },
   {
-    "objectID": "lec12.html#interpreting-r-squared-1",
-    "href": "lec12.html#interpreting-r-squared-1",
-    "title": "Regression Part II",
-    "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared\nF-value\np-value &lt;— is this a significant predictor of y?"
-  },
-  {
-    "objectID": "lec12.html#interpreting-r-squared-2",
-    "href": "lec12.html#interpreting-r-squared-2",
-    "title": "Regression Part II",
-    "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\n\nR Squared &lt;— The percentage of y accounted for by the predictors\nAdjusted R Squared\nF-value\np-value"
-  },
-  {
-    "objectID": "lec12.html#interpreting-r-squared-3",
-    "href": "lec12.html#interpreting-r-squared-3",
-    "title": "Regression Part II",
-    "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared &lt;— The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-1",
-    "href": "lec12.html#linear-regression-1",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms."
-  },
-  {
-    "objectID": "lec12.html#linear-regression-2",
-    "href": "lec12.html#linear-regression-2",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict social media use.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge"
-  },
-  {
-    "objectID": "lec12.html#regression-equation-3",
-    "href": "lec12.html#regression-equation-3",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\n\\[\\large{Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i}\\]"
-  },
-  {
-    "objectID": "lec12.html#regression-equation-4",
-    "href": "lec12.html#regression-equation-4",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{orange}{b_1}\\color{blue}{X_{1i}} + \\color{purple}{b_2}\\color{pink}{X_{2i}}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use\nCoefficient for \\(X_1\\)\nWhat is the sense of belonging?\nCoefficient for \\(X_2\\)\nAge\nRandomness"
-  },
-  {
-    "objectID": "lec12.html#regression-equation-5",
-    "href": "lec12.html#regression-equation-5",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\nComputational\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
-  },
-  {
-    "objectID": "lec12.html#linear-regression-3",
-    "href": "lec12.html#linear-regression-3",
-    "title": "Regression Part II",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nThis form of regression is called linear regression."
-  },
-  {
-    "objectID": "lec12.html#example-1",
-    "href": "lec12.html#example-1",
-    "title": "Regression Part II",
-    "section": "Example",
-    "text": "Example\nModel Coefficients"
-  },
-  {
-    "objectID": "lec12.html#example-2",
-    "href": "lec12.html#example-2",
-    "title": "Regression Part II",
-    "section": "Example",
-    "text": "Example\nModel Summary"
-  },
-  {
-    "objectID": "lec12.html#example-3",
-    "href": "lec12.html#example-3",
-    "title": "Regression Part II",
-    "section": "Example",
-    "text": "Example\nFirst, report adjusted \\(R^2\\) and it’s corresponding p:\n\nOur model predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001.\nAge, sense of belonging, predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001."
-  },
-  {
-    "objectID": "lec12.html#example-4",
-    "href": "lec12.html#example-4",
-    "title": "Regression Part II",
-    "section": "Example",
-    "text": "Example\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.912, p = 0.001) significantly predicted social media use.\nAge did not predict likelihood of social media use.\n\n(beta = .112, p = .06)\n\nIt’s common to report betas and p’s in text as well as in a table."
-  },
-  {
-    "objectID": "lec12.html#categorical-variables",
-    "href": "lec12.html#categorical-variables",
-    "title": "Regression Part II",
-    "section": "Categorical variables",
-    "text": "Categorical variables\nDiscrete, not continuous:\n\nGroups\nCategories\nLabels"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-1",
-    "href": "lec12.html#categorical-variables-1",
-    "title": "Regression Part II",
-    "section": "Categorical variables",
-    "text": "Categorical variables\n\nIf your only predictor is a categorical variable, you should run a t-test or ANOVA.\nSometimes researchers want to examine how several variables predict one outcome.\nWe did this with high thoughts:\n\nAge\nSense of Belonging\nSocial Media Use"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-1",
-    "href": "lec12.html#categorical-variables-in-regression-1",
-    "title": "Regression Part II",
-    "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nSometimes one of these variables is categorical.\n\nExample: How many episodes of a show can Professor Brocker watch before he passes out on his couch?"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-2",
-    "href": "lec12.html#categorical-variables-in-regression-2",
-    "title": "Regression Part II",
-    "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\n\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\n\n\n\nPredictors:\n\nTime of night\nCups of coffee consumed\nIs it about time travel?\n\n\nVariable Type:\n\nContinuous\nContinuous\nCategorical"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-3",
-    "href": "lec12.html#categorical-variables-in-regression-3",
-    "title": "Regression Part II",
-    "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night: As it gets later, the number of episodes will decrease (negative correlation)\nCups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)\nIs the show about time travel? If so, number of episodes will increase."
-  },
-  {
-    "objectID": "lec12.html#dummy-coding",
-    "href": "lec12.html#dummy-coding",
-    "title": "Regression Part II",
-    "section": "Dummy coding",
-    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No\n1 = Yes"
-  },
-  {
-    "objectID": "lec12.html#dummy-coding-1",
-    "href": "lec12.html#dummy-coding-1",
-    "title": "Regression Part II",
-    "section": "Dummy coding",
-    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No, The show is not about time travel.\n1 = Yes, The show is about time travel."
-  },
-  {
-    "objectID": "lec12.html#interpreting-dummy-coded-variables",
-    "href": "lec12.html#interpreting-dummy-coded-variables",
-    "title": "Regression Part II",
-    "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
-  },
-  {
-    "objectID": "lec12.html#report-the-findings",
-    "href": "lec12.html#report-the-findings",
-    "title": "Regression Part II",
-    "section": "Report the findings",
-    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04)."
-  },
-  {
-    "objectID": "lec12.html#interpreting-dummy-coded-variables-1",
-    "href": "lec12.html#interpreting-dummy-coded-variables-1",
-    "title": "Regression Part II",
-    "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
-  },
-  {
-    "objectID": "lec12.html#report-the-findings-1",
-    "href": "lec12.html#report-the-findings-1",
-    "title": "Regression Part II",
-    "section": "Report the findings",
-    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes."
-  },
-  {
-    "objectID": "lec12.html#interpreting-dummy-coded-variables-2",
-    "href": "lec12.html#interpreting-dummy-coded-variables-2",
-    "title": "Regression Part II",
-    "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
-  },
-  {
-    "objectID": "lec12.html#report-the-findings-2",
-    "href": "lec12.html#report-the-findings-2",
-    "title": "Regression Part II",
-    "section": "Report the findings",
-    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the tim got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes.\nShow content significantly predicted watching more episodes (beta = 0.912, p &lt; 0.001)."
-  },
-  {
-    "objectID": "lec12.html#dummy-coding-2",
-    "href": "lec12.html#dummy-coding-2",
-    "title": "Regression Part II",
-    "section": "Dummy coding",
-    "text": "Dummy coding\n\nGender:\n\n0 = Male\n1 = Female"
-  },
-  {
-    "objectID": "lec12.html#interpreting-dummy-coded-variables-3",
-    "href": "lec12.html#interpreting-dummy-coded-variables-3",
-    "title": "Regression Part II",
-    "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
-  },
-  {
-    "objectID": "lec12.html#interpreting-dummy-coded-gender",
-    "href": "lec12.html#interpreting-dummy-coded-gender",
-    "title": "Regression Part II",
-    "section": "Interpreting dummy coded gender",
-    "text": "Interpreting dummy coded gender\n\nBeta is positive (beta = 0.912, p &lt; 0.001).\nWhatever is coded as 1 is higher on the the dependent variable.\nWomen reported significantly more enjoyment of True Crime than men."
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-4",
-    "href": "lec12.html#categorical-variables-in-regression-4",
-    "title": "Regression Part II",
-    "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-5",
-    "href": "lec12.html#categorical-variables-in-regression-5",
-    "title": "Regression Part II",
-    "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)\nX2 = # of episodes of the Walking Dead watched\nX3 = Do you have a weapon? Y/N"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-6",
-    "href": "lec12.html#categorical-variables-in-regression-6",
-    "title": "Regression Part II",
-    "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon:\n\n0 = No weapon :(\n1 = Weapon! :)"
-  },
-  {
-    "objectID": "lec12.html#categorical-variables-in-regression-7",
-    "href": "lec12.html#categorical-variables-in-regression-7",
-    "title": "Regression Part II",
-    "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon: Individuals who have weapon will survive more days.\nHow will we know if this is true?\n\nBeta will be positive if having a weapon increases days.\nBeta will be negative if having a weapon decreases days."
-  },
-  {
-    "objectID": "lec12.html#horror-movies",
-    "href": "lec12.html#horror-movies",
-    "title": "Regression Part II",
-    "section": "Horror Movies",
-    "text": "Horror Movies\n\n\n                ┌──────────────────────────┬───────────────────┐\n                │                          │        (1)        │\n                ├──────────────────────────┼───────────────────┤\n                │ Ranking                  │    -0.009 (0.013) │\n                ├──────────────────────────┼───────────────────┤\n                │ Avg. Heart Rate (BPM)    │    -0.043 (0.110) │\n                ├──────────────────────────┼───────────────────┤\n                │ Overall Difference (BPM) │ 1.823 *** (0.115) │\n                ├──────────────────────────┼───────────────────┤\n                │ HRV Difference           │ 1.564 *** (0.034) │\n                ├──────────────────────────┼───────────────────┤\n                │ Highest Spike            │ 0.182 *** (0.006) │\n                ├──────────────────────────┼───────────────────┤\n                │ Sequel                   │     0.004 (0.122) │\n                ├──────────────────────────┼───────────────────┤\n                │ At Least One Sequel      │    -0.030 (0.123) │\n                ├──────────────────────────┼───────────────────┤\n                │ Rotten Tomato Score      │     0.001 (0.003) │\n                ├──────────────────────────┼───────────────────┤\n                │ Year                     │    -0.004 (0.005) │\n                ├──────────────────────────┼───────────────────┤\n                │ nobs                     │           50      │\n                ├──────────────────────────┼───────────────────┤\n                │ r.squared                │            1.000  │\n                ├──────────────────────────┴───────────────────┤\n                │ *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05       │\n                └──────────────────────────────────────────────┘\n\nColumn names: names, model1"
+    "objectID": "exam2_review.html#question-14-1",
+    "href": "exam2_review.html#question-14-1",
+    "title": "Exam 2 Review",
+    "section": "Question 14",
+    "text": "Question 14\nAnswer\nConsider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.\n\nInterpret the R-squared value in terms of the model’s explanatory power.\n\n\n\nAnswer: An R-squared value of 0.70 means that 70% of the variance in the dependent variable is explained by the independent variable(s) in the model.\n\n\n\nBased on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?\n\n\n\nAnswer: Yes, the predictor is significant. The p-value of 0.02 is less than 0.05, indicating that the predictor variable is statistically significant at the 5% level."
   },
   {
     "objectID": "L14pp.html#anova-analysis-of-variance",
@@ -2863,589 +3066,778 @@
     "text": "Reporting F\nThere was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07."
   },
   {
-    "objectID": "exam2_review.html#question-1",
-    "href": "exam2_review.html#question-1",
-    "title": "Exam 2 Review",
-    "section": "Question 1",
-    "text": "Question 1\n\nWhich of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?\n\n\n\n-0.87\n-0.12\n0.55\n0.94"
+    "objectID": "lec12.html#types-of-analysis",
+    "href": "lec12.html#types-of-analysis",
+    "title": "Regression Part II",
+    "section": "Types of Analysis",
+    "text": "Types of Analysis\n\nUnivariate: One variable, like the mean\nBivariate: Two variables, like correlation\nMultivariate: More than 2 variables"
   },
   {
-    "objectID": "exam2_review.html#question-1-1",
-    "href": "exam2_review.html#question-1-1",
-    "title": "Exam 2 Review",
-    "section": "Question 1",
-    "text": "Question 1\nAnswer\nWhich of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?\n\n-0.87\n-0.12\n0.55\n0.94"
+    "objectID": "lec12.html#regression",
+    "href": "lec12.html#regression",
+    "title": "Regression Part II",
+    "section": "Regression",
+    "text": "Regression\n\nRegression is the multivariate version of correlation.\nCorrelation is the bivariate version of regression.\nWe’re doing the same thing in regression as we do in correlation, BUT there are more than 2 variables."
   },
   {
-    "objectID": "exam2_review.html#question-2",
-    "href": "exam2_review.html#question-2",
-    "title": "Exam 2 Review",
-    "section": "Question 2",
-    "text": "Question 2\nIf two variables have a correlation coefficient of r = 0, what does this indicate?\n\nA perfect positive relationship\nA perfect negative relationship\nNo linear relationship\nThe variables are unrelated"
+    "objectID": "lec12.html#regression-terminology",
+    "href": "lec12.html#regression-terminology",
+    "title": "Regression Part II",
+    "section": "Regression terminology",
+    "text": "Regression terminology\nIn regression we will choose one variable to predict.\n\nWe call this y.\nY is the outcome variable.\nY is the predicted variable."
   },
   {
-    "objectID": "exam2_review.html#question-2-1",
-    "href": "exam2_review.html#question-2-1",
-    "title": "Exam 2 Review",
-    "section": "Question 2",
-    "text": "Question 2\nAnswer\nIf two variables have a correlation coefficient of r = 0, what does this indicate?\n\nA perfect positive relationship\nA perfect negative relationship\nNo linear relationship\nThe variables are unrelated"
+    "objectID": "lec12.html#regression-terminology-1",
+    "href": "lec12.html#regression-terminology-1",
+    "title": "Regression Part II",
+    "section": "Regression terminology",
+    "text": "Regression terminology\nIn regression we will choose two or more variables we with believe predict y.\n\nWe call these \\(x_1\\), \\(x_2\\), etc.\nSome people call these x and z.\nX is the predictor variable."
   },
   {
-    "objectID": "exam2_review.html#question-3",
-    "href": "exam2_review.html#question-3",
-    "title": "Exam 2 Review",
-    "section": "Question 3",
-    "text": "Question 3\nWhat does the slope of the regression line represent?\n\nThe value of the dependent variable when all predictors are zero\nThe amount of change in the dependent variable for a one-unit change in the independent variable\nThe strength of the correlation\nThe total variance in the dependent variable"
+    "objectID": "lec12.html#regression-terminology-2",
+    "href": "lec12.html#regression-terminology-2",
+    "title": "Regression Part II",
+    "section": "Regression terminology",
+    "text": "Regression terminology\nWhen we predict Y with X, we say;\n\n\nWe regress y on the x."
   },
   {
-    "objectID": "exam2_review.html#question-3-1",
-    "href": "exam2_review.html#question-3-1",
-    "title": "Exam 2 Review",
-    "section": "Question 3",
-    "text": "Question 3\nAnswer\nWhat does the slope of the regression line represent?\n\nThe value of the dependent variable when all predictors are zero\nThe amount of change in the dependent variable for a one-unit change in the independent variable\nThe strength of the correlation\nThe total variance in the dependent variable"
+    "objectID": "lec12.html#regression-equation",
+    "href": "lec12.html#regression-equation",
+    "title": "Regression Part II",
+    "section": "Regression Equation",
+    "text": "Regression Equation\nStep-by-Step\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}+\\color{orange}{e_i}}\n\\]\n\n1. The predicted value of y for a particular participant (i)\n\n\n2. Intercept\n\n\n3. Weight\n\n\n4. The Value of a particular participant (i) on the measure of \\(X_1\\)\n\n\n5. Error. Random, and therefore cannot be predicted"
   },
   {
-    "objectID": "exam2_review.html#question-4",
-    "href": "exam2_review.html#question-4",
-    "title": "Exam 2 Review",
-    "section": "Question 4",
-    "text": "Question 4\nWhich of the following best describes the meaning of an R-squared value of 0.85?\n\n85% of the variation in the dependent variable is explained by the independent variables\nThe correlation between the variables is 0.85\nThe model’s predictions are 85% accurate\nThe independent variables account for 15% of the error in predictions"
+    "objectID": "lec12.html#regression-equation-1",
+    "href": "lec12.html#regression-equation-1",
+    "title": "Regression Part II",
+    "section": "Regression Equation",
+    "text": "Regression Equation\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}}\n\\]\n\n\\[\\hat{Y} = b_0 + b_1X_{1i}\\]\n\n\n\\[Y = ax + b\\]"
   },
   {
-    "objectID": "exam2_review.html#question-4-1",
-    "href": "exam2_review.html#question-4-1",
-    "title": "Exam 2 Review",
-    "section": "Question 4",
-    "text": "Question 4\nAnswer\nWhich of the following best describes the meaning of an R-squared value of 0.85?\na) 85% of the variation in the dependent variable is explained by the independent variables\nb) The correlation between the variables is 0.85\nc) The model’s predictions are 85% accurate\nd) The independent variables account for 15% of the error in predictions"
+    "objectID": "lec12.html#linear-regression",
+    "href": "lec12.html#linear-regression",
+    "title": "Regression Part II",
+    "section": "Linear Regression",
+    "text": "Linear Regression\nLine of Best Fit\n\n\n\nCall:\nlm(formula = Y ~ X, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-28.425  -7.665  -1.094   8.099  27.902 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.14317    1.18963   -0.12    0.904    \nX            0.87338    0.05677   15.38   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11.9 on 98 degrees of freedom\nMultiple R-squared:  0.7072,    Adjusted R-squared:  0.7042 \nF-statistic: 236.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "exam2_review.html#question-5",
-    "href": "exam2_review.html#question-5",
-    "title": "Exam 2 Review",
-    "section": "Question 5",
-    "text": "Question 5\nTrue or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50."
+    "objectID": "lec12.html#regression-1",
+    "href": "lec12.html#regression-1",
+    "title": "Regression Part II",
+    "section": "Regression:",
+    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the x value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y."
   },
   {
-    "objectID": "exam2_review.html#question-5-1",
-    "href": "exam2_review.html#question-5-1",
-    "title": "Exam 2 Review",
-    "section": "Question 5",
-    "text": "Question 5\nAnswer\nTrue or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50.\nFalse"
+    "objectID": "lec12.html#regression-equation-more-than-one-x",
+    "href": "lec12.html#regression-equation-more-than-one-x",
+    "title": "Regression Part II",
+    "section": "Regression Equation: More than one X",
+    "text": "Regression Equation: More than one X\n\\[\\large{\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}\\]"
   },
   {
-    "objectID": "exam2_review.html#question-6",
-    "href": "exam2_review.html#question-6",
-    "title": "Exam 2 Review",
-    "section": "Question 6",
-    "text": "Question 6\nTrue or False: Linear regression is appropriate only when the relationship between the variables is nonlinear."
+    "objectID": "lec12.html#regression-2",
+    "href": "lec12.html#regression-2",
+    "title": "Regression Part II",
+    "section": "Regression:",
+    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the \\(X_1\\) value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y.\n\\(X_2\\) = the \\(x_2\\) value for a participant\n\\(b_2\\) = a weighted value that is multiplied by \\(x_2\\)"
   },
   {
-    "objectID": "exam2_review.html#question-6-1",
-    "href": "exam2_review.html#question-6-1",
-    "title": "Exam 2 Review",
-    "section": "Question 6",
-    "text": "Question 6\nAnswer\nTrue or False: Linear regression is appropriate only when the relationship between the variables is nonlinear.\nFalse"
+    "objectID": "lec12.html#regression-equation-2",
+    "href": "lec12.html#regression-equation-2",
+    "title": "Regression Part II",
+    "section": "Regression Equation:",
+    "text": "Regression Equation:"
   },
   {
-    "objectID": "exam2_review.html#question-7",
-    "href": "exam2_review.html#question-7",
-    "title": "Exam 2 Review",
-    "section": "Question 7",
-    "text": "Question 7\nTrue or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line."
+    "objectID": "lec12.html#more-than-one-x",
+    "href": "lec12.html#more-than-one-x",
+    "title": "Regression Part II",
+    "section": "More than one X",
+    "text": "More than one X\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
   },
   {
-    "objectID": "exam2_review.html#question-7-1",
-    "href": "exam2_review.html#question-7-1",
-    "title": "Exam 2 Review",
-    "section": "Question 7",
-    "text": "Question 7\nAnswer\nTrue or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line.\nTrue"
+    "objectID": "lec12.html#interpreting-coefficients-1",
+    "href": "lec12.html#interpreting-coefficients-1",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients"
   },
   {
-    "objectID": "exam2_review.html#question-9",
-    "href": "exam2_review.html#question-9",
-    "title": "Exam 2 Review",
-    "section": "Question 9",
-    "text": "Question 9\nWhat is the difference between simple linear regression and multiple linear regression?"
+    "objectID": "lec12.html#interpreting-coefficients-2",
+    "href": "lec12.html#interpreting-coefficients-2",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value"
   },
   {
-    "objectID": "exam2_review.html#question-9-1",
-    "href": "exam2_review.html#question-9-1",
-    "title": "Exam 2 Review",
-    "section": "Question 9",
-    "text": "Question 9\nWhat is the difference between simple linear regression and multiple linear regression?\n\nAnswer: Simple linear regression uses one independent variable to predict the dependent variable, while multiple linear regression uses two or more independent variables."
+    "objectID": "lec12.html#interpreting-coefficients-3",
+    "href": "lec12.html#interpreting-coefficients-3",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value &lt;— is this a significant predictor of y?"
   },
   {
-    "objectID": "exam2_review.html#question-10",
-    "href": "exam2_review.html#question-10",
-    "title": "Exam 2 Review",
-    "section": "Question 10",
-    "text": "Question 10\nDescribe the difference between correlation and causation. Why is it important not to infer causation directly from correlation?\n\n\nAnswer: Correlation refers to a relationship or association between two variables, while causation indicates that one variable directly affects another. It is important not to infer causation from correlation because there may be confounding variables or the relationship may be coincidental."
+    "objectID": "lec12.html#interpreting-coefficients-4",
+    "href": "lec12.html#interpreting-coefficients-4",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient &lt;— which predictor of y has the more predictive power?\nt-value\np-value"
   },
   {
-    "objectID": "exam2_review.html#question-11",
-    "href": "exam2_review.html#question-11",
-    "title": "Exam 2 Review",
-    "section": "Question 11",
-    "text": "Question 11\nSuppose you perform a regression analysis and the p-value of one of your predictors is 0.15. How would you interpret this result? Should you include this predictor in your model?\n\n\nAnswer: A p-value of 0.15 suggests that the predictor is not statistically significant at conventional levels (e.g., 0.05). You may consider removing this predictor, though you might keep it if there is theoretical justification"
+    "objectID": "lec12.html#interpreting-coefficients-5",
+    "href": "lec12.html#interpreting-coefficients-5",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nIntercept\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "exam2_review.html#question-12",
-    "href": "exam2_review.html#question-12",
-    "title": "Exam 2 Review",
-    "section": "Question 12",
-    "text": "Question 12\nA researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.\n\nWhat does this tell you about the relationship between study hours and exam scores?\nWould you expect the relationship to be strong, moderate, or weak? Why?"
+    "objectID": "lec12.html#interpreting-coefficients-6",
+    "href": "lec12.html#interpreting-coefficients-6",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nFirst Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "exam2_review.html#question-12-1",
-    "href": "exam2_review.html#question-12-1",
-    "title": "Exam 2 Review",
-    "section": "Question 12",
-    "text": "Question 12\nAnswer\nA researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.\n\nWhat does this tell you about the relationship between study hours and exam scores?\n\nA correlation of r = 0.65 indicates a positive and moderate relationship. As study hours increase, exam scores tend to increase, but the relationship is not perfect.\n\nWould you expect the relationship to be strong, moderate, or weak? Why?\n\nThe relationship would be considered moderate because the correlation is between 0.5 and 0.7, indicating a noticeable but not perfect relationship."
+    "objectID": "lec12.html#interpreting-coefficients-7",
+    "href": "lec12.html#interpreting-coefficients-7",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nSecond Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "exam2_review.html#question-13",
-    "href": "exam2_review.html#question-13",
-    "title": "Exam 2 Review",
-    "section": "Question 13",
-    "text": "Question 13\nYou run a simple linear regression analysis and get the following equation:\n\\(\\hat{Y} = 2.5 + 1.8X\\)\n\nWhat is the predicted value of Y if X is 4?\nWhat does the coefficient 1.8 represent in this context?"
+    "objectID": "lec12.html#interpreting-coefficients-8",
+    "href": "lec12.html#interpreting-coefficients-8",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nSample Size\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "exam2_review.html#question-13-1",
-    "href": "exam2_review.html#question-13-1",
-    "title": "Exam 2 Review",
-    "section": "Question 13",
-    "text": "Question 13\nAnswer\n\\(\\hat{Y} = 2.5 + 1.8X\\)\n\nWhat is the predicted value of Y if X is 4?\n\n\\(\\hat{Y} = 2.5 + 1.8(4) = 2.5 + 7.2 = 9.7\\)\n\nWhat does the coefficient 1.8 represent in this context?\n\nThe coefficient 1.8 represents the predicted change in Y for each additional unit of X. In this context, it means that for each additional unit of X, Y is expected to increase by 1.8 units."
+    "objectID": "lec12.html#interpreting-coefficients-9",
+    "href": "lec12.html#interpreting-coefficients-9",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nR Squared\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "exam2_review.html#question-14",
-    "href": "exam2_review.html#question-14",
-    "title": "Exam 2 Review",
-    "section": "Question 14",
-    "text": "Question 14\nConsider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.\n\nInterpret the R-squared value in terms of the model’s explanatory power.\nBased on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?"
+    "objectID": "lec12.html#interpreting-coefficients-10",
+    "href": "lec12.html#interpreting-coefficients-10",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nAdjusted R Squared\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "exam2_review.html#question-14-1",
-    "href": "exam2_review.html#question-14-1",
-    "title": "Exam 2 Review",
-    "section": "Question 14",
-    "text": "Question 14\nAnswer\nConsider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.\n\nInterpret the R-squared value in terms of the model’s explanatory power.\n\n\n\nAnswer: An R-squared value of 0.70 means that 70% of the variance in the dependent variable is explained by the independent variable(s) in the model.\n\n\n\nBased on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?\n\n\n\nAnswer: Yes, the predictor is significant. The p-value of 0.02 is less than 0.05, indicating that the predictor variable is statistically significant at the 5% level."
+    "objectID": "lec12.html#interpreting-coefficients-11",
+    "href": "lec12.html#interpreting-coefficients-11",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nF Statistic\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "lec13.html#sampling-theory",
-    "href": "lec13.html#sampling-theory",
-    "title": "T-Tests",
-    "section": "Sampling Theory",
-    "text": "Sampling Theory"
+    "objectID": "lec12.html#interpreting-coefficients-12",
+    "href": "lec12.html#interpreting-coefficients-12",
+    "title": "Regression Part II",
+    "section": "Interpreting coefficients",
+    "text": "Interpreting coefficients\nP Value\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
-    "objectID": "lec13.html#sampling-theory-1",
-    "href": "lec13.html#sampling-theory-1",
-    "title": "T-Tests",
-    "section": "Sampling Theory",
-    "text": "Sampling Theory"
+    "objectID": "lec12.html#r2-1",
+    "href": "lec12.html#r2-1",
+    "title": "Regression Part II",
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)\n\n\\(R^2\\) is the correlation coefficient (r) squared.\n\\(R^2\\) is always positive\nIn correlation, the amount of y accounted for by x"
   },
   {
-    "objectID": "lec13.html#sampling-theory-2",
-    "href": "lec13.html#sampling-theory-2",
-    "title": "T-Tests",
-    "section": "Sampling Theory",
-    "text": "Sampling Theory"
+    "objectID": "lec12.html#r2-2",
+    "href": "lec12.html#r2-2",
+    "title": "Regression Part II",
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?"
   },
   {
-    "objectID": "lec13.html#sampling-theory-3",
-    "href": "lec13.html#sampling-theory-3",
-    "title": "T-Tests",
-    "section": "Sampling Theory",
-    "text": "Sampling Theory\nSetting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it."
+    "objectID": "lec12.html#r2-3",
+    "href": "lec12.html#r2-3",
+    "title": "Regression Part II",
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)"
   },
   {
-    "objectID": "lec13.html#probability",
-    "href": "lec13.html#probability",
-    "title": "T-Tests",
-    "section": "Probability",
-    "text": "Probability"
+    "objectID": "lec12.html#interpreting-r-squared",
+    "href": "lec12.html#interpreting-r-squared",
+    "title": "Regression Part II",
+    "section": "Interpreting R Squared",
+    "text": "Interpreting R Squared\n\nR Squared\nAdjusted R Squared\nF-value\np-value"
   },
   {
-    "objectID": "lec13.html#sampling-theory-4",
-    "href": "lec13.html#sampling-theory-4",
-    "title": "T-Tests",
-    "section": "Sampling Theory",
-    "text": "Sampling Theory\nSetting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it."
+    "objectID": "lec12.html#interpreting-r-squared-1",
+    "href": "lec12.html#interpreting-r-squared-1",
+    "title": "Regression Part II",
+    "section": "Interpreting R Squared",
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared\nF-value\np-value &lt;— is this a significant predictor of y?"
   },
   {
-    "objectID": "lec13.html#inferential-statistics",
-    "href": "lec13.html#inferential-statistics",
-    "title": "T-Tests",
-    "section": "Inferential Statistics",
-    "text": "Inferential Statistics\nEach inferential statistic will give us:\n\nTest statistic\n\n\\(r,t,F,\\chi^2...\\)\n\np-value: probability of committing a Type 1 Error &lt; 0.05 or 5%\n\np &gt; 0.05: Fail to reject the \\(H_0\\)\np &lt; 0.05: Reject \\(H_0\\)"
+    "objectID": "lec12.html#interpreting-r-squared-2",
+    "href": "lec12.html#interpreting-r-squared-2",
+    "title": "Regression Part II",
+    "section": "Interpreting R Squared",
+    "text": "Interpreting R Squared\n\n\nR Squared &lt;— The percentage of y accounted for by the predictors\nAdjusted R Squared\nF-value\np-value"
   },
   {
-    "objectID": "lec13.html#sampling-theory-5",
-    "href": "lec13.html#sampling-theory-5",
-    "title": "T-Tests",
-    "section": "Sampling Theory",
-    "text": "Sampling Theory\nSetting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it."
+    "objectID": "lec12.html#interpreting-r-squared-3",
+    "href": "lec12.html#interpreting-r-squared-3",
+    "title": "Regression Part II",
+    "section": "Interpreting R Squared",
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared &lt;— The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value"
   },
   {
-    "objectID": "lec13.html#t-tests",
-    "href": "lec13.html#t-tests",
-    "title": "T-Tests",
-    "section": "T-tests",
-    "text": "T-tests\n\nIV must be nominal and have only 2 categories\n\nUsing experimental versus control\nAny two categories (bad/good)\n\nDV must be continuous\n\nScale of 1 to 10\nCount"
+    "objectID": "lec12.html#linear-regression-1",
+    "href": "lec12.html#linear-regression-1",
+    "title": "Regression Part II",
+    "section": "Linear Regression",
+    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test",
-    "href": "lec13.html#independent-samples-t-test",
-    "title": "T-Tests",
-    "section": "Independent Samples t-test",
-    "text": "Independent Samples t-test\nExample\n\nThe experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of 1 to 10.\n\n\nThe experimental group has a mean happiness score of 8\nThe control group mean happiness score of 6\n\n\nIs the group that drank coffee significantly happier than the control group?"
+    "objectID": "lec12.html#linear-regression-2",
+    "href": "lec12.html#linear-regression-2",
+    "title": "Regression Part II",
+    "section": "Linear Regression",
+    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict social media use.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-1",
-    "href": "lec13.html#independent-samples-t-test-1",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test"
+    "objectID": "lec12.html#regression-equation-3",
+    "href": "lec12.html#regression-equation-3",
+    "title": "Regression Part II",
+    "section": "Regression Equation",
+    "text": "Regression Equation\n\\[\\large{Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i}\\]"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-2",
-    "href": "lec13.html#independent-samples-t-test-2",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance: how much the answers from the experimental group differ from the control group.\nWithin group variance: how much the answers of all participants differ from one another."
+    "objectID": "lec12.html#regression-equation-4",
+    "href": "lec12.html#regression-equation-4",
+    "title": "Regression Part II",
+    "section": "Regression Equation",
+    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{orange}{b_1}\\color{blue}{X_{1i}} + \\color{purple}{b_2}\\color{pink}{X_{2i}}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use\nCoefficient for \\(X_1\\)\nWhat is the sense of belonging?\nCoefficient for \\(X_2\\)\nAge\nRandomness"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-3",
-    "href": "lec13.html#independent-samples-t-test-3",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance\nWithin group variance"
+    "objectID": "lec12.html#regression-equation-5",
+    "href": "lec12.html#regression-equation-5",
+    "title": "Regression Part II",
+    "section": "Regression Equation",
+    "text": "Regression Equation\nComputational\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-4",
-    "href": "lec13.html#independent-samples-t-test-4",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test"
+    "objectID": "lec12.html#linear-regression-3",
+    "href": "lec12.html#linear-regression-3",
+    "title": "Regression Part II",
+    "section": "Linear Regression",
+    "text": "Linear Regression\n\nThis form of regression is called linear regression."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-5",
-    "href": "lec13.html#independent-samples-t-test-5",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance\nWithin group variance"
+    "objectID": "lec12.html#example-1",
+    "href": "lec12.html#example-1",
+    "title": "Regression Part II",
+    "section": "Example",
+    "text": "Example\nModel Coefficients"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-6",
-    "href": "lec13.html#independent-samples-t-test-6",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTo compare the means we need to know:\n\nBetween group variance: how much the answers from the experimental group differ from the control group.\nWithin group variance: how much the answers of all participants differ from one another."
+    "objectID": "lec12.html#example-2",
+    "href": "lec12.html#example-2",
+    "title": "Regression Part II",
+    "section": "Example",
+    "text": "Example\nModel Summary"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-7",
-    "href": "lec13.html#independent-samples-t-test-7",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test"
+    "objectID": "lec12.html#example-3",
+    "href": "lec12.html#example-3",
+    "title": "Regression Part II",
+    "section": "Example",
+    "text": "Example\nFirst, report adjusted \\(R^2\\) and it’s corresponding p:\n\nOur model predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001.\nAge, sense of belonging, predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001."
   },
   {
-    "objectID": "lec13.html#theoretical-formula",
-    "href": "lec13.html#theoretical-formula",
-    "title": "T-Tests",
-    "section": "Theoretical Formula:",
-    "text": "Theoretical Formula:\n\\[\\color{blue}{t} = \\frac{\\color{red}{\\bar{x}} -\\color{orange}{\\mu}}{\\sqrt{\\color{grey}{s^{2}_{pooled}}}}\\] - t\n\nSample Mean\nPopulation Mean\nPooled Variance"
+    "objectID": "lec12.html#example-4",
+    "href": "lec12.html#example-4",
+    "title": "Regression Part II",
+    "section": "Example",
+    "text": "Example\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.912, p = 0.001) significantly predicted social media use.\nAge did not predict likelihood of social media use.\n\n(beta = .112, p = .06)\n\nIt’s common to report betas and p’s in text as well as in a table."
   },
   {
-    "objectID": "lec13.html#forumlas",
-    "href": "lec13.html#forumlas",
-    "title": "T-Tests",
-    "section": "Forumlas",
-    "text": "Forumlas\nInferential statistics have both theoretical and computational formulas:\n\nTheoretical\n\nFormula for if we actually knew the population parameters\n\nComputational\n\nFormula for estimating the test statistics based solely on sample data"
+    "objectID": "lec12.html#categorical-variables",
+    "href": "lec12.html#categorical-variables",
+    "title": "Regression Part II",
+    "section": "Categorical variables",
+    "text": "Categorical variables\nDiscrete, not continuous:\n\nGroups\nCategories\nLabels"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-8",
-    "href": "lec13.html#independent-samples-t-test-8",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - \\color{green}{μ}}{\\sqrt{s^{2}_{pooled}}}\\]"
+    "objectID": "lec12.html#categorical-variables-1",
+    "href": "lec12.html#categorical-variables-1",
+    "title": "Regression Part II",
+    "section": "Categorical variables",
+    "text": "Categorical variables\n\nIf your only predictor is a categorical variable, you should run a t-test or ANOVA.\nSometimes researchers want to examine how several variables predict one outcome.\nWe did this with high thoughts:\n\nAge\nSense of Belonging\nSocial Media Use"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-9",
-    "href": "lec13.html#independent-samples-t-test-9",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - μ}{\\sqrt{\\color{orange}{s^{2}_{pooled}}}}\\]"
+    "objectID": "lec12.html#categorical-variables-in-regression-1",
+    "href": "lec12.html#categorical-variables-in-regression-1",
+    "title": "Regression Part II",
+    "section": "Categorical variables in Regression",
+    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nSometimes one of these variables is categorical.\n\nExample: How many episodes of a show can Professor Brocker watch before he passes out on his couch?"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-10",
-    "href": "lec13.html#independent-samples-t-test-10",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - μ}{\\sqrt{s^{2}_{pooled}}}\\]"
+    "objectID": "lec12.html#categorical-variables-in-regression-2",
+    "href": "lec12.html#categorical-variables-in-regression-2",
+    "title": "Regression Part II",
+    "section": "Categorical variables in Regression",
+    "text": "Categorical variables in Regression\n\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\n\n\n\nPredictors:\n\nTime of night\nCups of coffee consumed\nIs it about time travel?\n\n\nVariable Type:\n\nContinuous\nContinuous\nCategorical"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-11",
-    "href": "lec13.html#independent-samples-t-test-11",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x} - μ}{\\sqrt{s^{2}_{pooled}}}\\]"
+    "objectID": "lec12.html#categorical-variables-in-regression-3",
+    "href": "lec12.html#categorical-variables-in-regression-3",
+    "title": "Regression Part II",
+    "section": "Categorical variables in Regression",
+    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night: As it gets later, the number of episodes will decrease (negative correlation)\nCups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)\nIs the show about time travel? If so, number of episodes will increase."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-12",
-    "href": "lec13.html#independent-samples-t-test-12",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nComputational Formula:\n\\[\\frac{M_{Experimental}-M_{Control}}{\\sqrt{\\color{darkblue}{\\frac{s1}{n1}+ \\frac{s2}{n2}}}}\\]\n\nPooled Variance"
+    "objectID": "lec12.html#dummy-coding",
+    "href": "lec12.html#dummy-coding",
+    "title": "Regression Part II",
+    "section": "Dummy coding",
+    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No\n1 = Yes"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-13",
-    "href": "lec13.html#independent-samples-t-test-13",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nComputational Formula:\n\\[\\frac{M_{Experimental}-M_{Control}}{\\sqrt{\\frac{s1}{n1}+ \\frac{s2}{n2}}}\\]"
+    "objectID": "lec12.html#dummy-coding-1",
+    "href": "lec12.html#dummy-coding-1",
+    "title": "Regression Part II",
+    "section": "Dummy coding",
+    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No, The show is not about time travel.\n1 = Yes, The show is about time travel."
   },
   {
-    "objectID": "lec13.html#data-overview",
-    "href": "lec13.html#data-overview",
-    "title": "T-Tests",
-    "section": "Data Overview",
-    "text": "Data Overview\n\n\n\n\nestimateestimate1estimate2statisticp.valueparameterconf.lowconf.highmethodalternative\n\n-1.86.17.9-4.60.00022418-2.62-0.977Two Sample t-testtwo.sided"
+    "objectID": "lec12.html#interpreting-dummy-coded-variables",
+    "href": "lec12.html#interpreting-dummy-coded-variables",
+    "title": "Regression Part II",
+    "section": "Interpreting dummy coded variables",
+    "text": "Interpreting dummy coded variables"
   },
   {
-    "objectID": "lec13.html#the-data",
-    "href": "lec13.html#the-data",
-    "title": "T-Tests",
-    "section": "The Data",
-    "text": "The Data\n\nThe main window that opens in SPSS\nData view: every row is a participant\nVariable view: every row is a variable\nClick commands from the data file."
+    "objectID": "lec12.html#report-the-findings",
+    "href": "lec12.html#report-the-findings",
+    "title": "Regression Part II",
+    "section": "Report the findings",
+    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04)."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss",
-    "href": "lec13.html#independent-samples-t-test-spss",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\nAnalyze\nCompare Means\nIndependent Samples"
+    "objectID": "lec12.html#interpreting-dummy-coded-variables-1",
+    "href": "lec12.html#interpreting-dummy-coded-variables-1",
+    "title": "Regression Part II",
+    "section": "Interpreting dummy coded variables",
+    "text": "Interpreting dummy coded variables"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-14",
-    "href": "lec13.html#independent-samples-t-test-14",
-    "title": "T-Tests",
-    "section": "Independent samples t-test:",
-    "text": "Independent samples t-test:\nAssumptions of the T-Test\n\nData type:\n\nThe data is quantitative and continuous \n\nDistribution:\n\nThe data is approximately normally distributed \n\nSample size:\n\nThe sample size is adequate*"
+    "objectID": "lec12.html#report-the-findings-1",
+    "href": "lec12.html#report-the-findings-1",
+    "title": "Regression Part II",
+    "section": "Report the findings",
+    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-15",
-    "href": "lec13.html#independent-samples-t-test-15",
-    "title": "T-Tests",
-    "section": "Independent samples t-test:",
-    "text": "Independent samples t-test:\nAssumptions of the T-Test\n\nRandom sampling:\n\nThe data is randomly sampled from a population \n\nIndependence:\n\nThe data values are independent, meaning that measurements for one observation do not affect other observations \n\nHomogeneity of variance:\n\nThe variability of the data in each group is similar"
+    "objectID": "lec12.html#interpreting-dummy-coded-variables-2",
+    "href": "lec12.html#interpreting-dummy-coded-variables-2",
+    "title": "Regression Part II",
+    "section": "Interpreting dummy coded variables",
+    "text": "Interpreting dummy coded variables"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-16",
-    "href": "lec13.html#independent-samples-t-test-16",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\nHomogeneity of Variance\n\n\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance.\n\n\nt is the test statistic.\nSig (2-tailed) is the p-value."
+    "objectID": "lec12.html#report-the-findings-2",
+    "href": "lec12.html#report-the-findings-2",
+    "title": "Regression Part II",
+    "section": "Report the findings",
+    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the tim got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes.\nShow content significantly predicted watching more episodes (beta = 0.912, p &lt; 0.001)."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-17",
-    "href": "lec13.html#independent-samples-t-test-17",
-    "title": "T-Tests",
-    "section": "Independent samples t-test",
-    "text": "Independent samples t-test\n\\[\\frac{M_{Experimental}-M_{Control}}{\\sqrt{\\frac{s1}{n1}+ \\frac{s2}{n2}}}\\]"
+    "objectID": "lec12.html#dummy-coding-2",
+    "href": "lec12.html#dummy-coding-2",
+    "title": "Regression Part II",
+    "section": "Dummy coding",
+    "text": "Dummy coding\n\nGender:\n\n0 = Male\n1 = Female"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-1",
-    "href": "lec13.html#independent-samples-t-test-spss-1",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\nWhy Do We Care?\nWe need the Levene’s Test, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.\n\nA significant Levene’s Test means a significant difference in the variances."
+    "objectID": "lec12.html#interpreting-dummy-coded-variables-3",
+    "href": "lec12.html#interpreting-dummy-coded-variables-3",
+    "title": "Regression Part II",
+    "section": "Interpreting dummy coded variables",
+    "text": "Interpreting dummy coded variables"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-2",
-    "href": "lec13.html#independent-samples-t-test-spss-2",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\nInterpreting Results\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance"
+    "objectID": "lec12.html#interpreting-dummy-coded-gender",
+    "href": "lec12.html#interpreting-dummy-coded-gender",
+    "title": "Regression Part II",
+    "section": "Interpreting dummy coded gender",
+    "text": "Interpreting dummy coded gender\n\nBeta is positive (beta = 0.912, p &lt; 0.001).\nWhatever is coded as 1 is higher on the the dependent variable.\nWomen reported significantly more enjoyment of True Crime than men."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-3",
-    "href": "lec13.html#independent-samples-t-test-spss-3",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS"
+    "objectID": "lec12.html#categorical-variables-in-regression-4",
+    "href": "lec12.html#categorical-variables-in-regression-4",
+    "title": "Regression Part II",
+    "section": "Categorical variables in regression",
+    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-reporting-your-findings",
-    "href": "lec13.html#independent-samples-t-test-reporting-your-findings",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: Reporting your findings",
-    "text": "Independent samples t-test: Reporting your findings\n\n\n\nThere was not a significant difference between the groups, t(18) = 1.287, p = 0.215"
+    "objectID": "lec12.html#categorical-variables-in-regression-5",
+    "href": "lec12.html#categorical-variables-in-regression-5",
+    "title": "Regression Part II",
+    "section": "Categorical variables in regression",
+    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)\nX2 = # of episodes of the Walking Dead watched\nX3 = Do you have a weapon? Y/N"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-4",
-    "href": "lec13.html#independent-samples-t-test-spss-4",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS"
+    "objectID": "lec12.html#categorical-variables-in-regression-6",
+    "href": "lec12.html#categorical-variables-in-regression-6",
+    "title": "Regression Part II",
+    "section": "Categorical variables in regression",
+    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon:\n\n0 = No weapon :(\n1 = Weapon! :)"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-5",
-    "href": "lec13.html#independent-samples-t-test-spss-5",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nStep 1: Look at Levene’s\n\nSmaller than .05 —&gt; Bottom\nLarger than .05 —&gt; Top"
+    "objectID": "lec12.html#categorical-variables-in-regression-7",
+    "href": "lec12.html#categorical-variables-in-regression-7",
+    "title": "Regression Part II",
+    "section": "Categorical variables in regression",
+    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon: Individuals who have weapon will survive more days.\nHow will we know if this is true?\n\nBeta will be positive if having a weapon increases days.\nBeta will be negative if having a weapon decreases days."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-6",
-    "href": "lec13.html#independent-samples-t-test-spss-6",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nStep Two: Look at p (Sig.)\n\nSmaller than .05 —&gt; Report Full Findings\nLarger than .05 —&gt; Report only Null"
+    "objectID": "lec12.html#horror-movies",
+    "href": "lec12.html#horror-movies",
+    "title": "Regression Part II",
+    "section": "Horror Movies",
+    "text": "Horror Movies\n\n\n                ┌──────────────────────────┬───────────────────┐\n                │                          │        (1)        │\n                ├──────────────────────────┼───────────────────┤\n                │ Ranking                  │    -0.009 (0.013) │\n                ├──────────────────────────┼───────────────────┤\n                │ Avg. Heart Rate (BPM)    │    -0.043 (0.110) │\n                ├──────────────────────────┼───────────────────┤\n                │ Overall Difference (BPM) │ 1.823 *** (0.115) │\n                ├──────────────────────────┼───────────────────┤\n                │ HRV Difference           │ 1.564 *** (0.034) │\n                ├──────────────────────────┼───────────────────┤\n                │ Highest Spike            │ 0.182 *** (0.006) │\n                ├──────────────────────────┼───────────────────┤\n                │ Sequel                   │     0.004 (0.122) │\n                ├──────────────────────────┼───────────────────┤\n                │ At Least One Sequel      │    -0.030 (0.123) │\n                ├──────────────────────────┼───────────────────┤\n                │ Rotten Tomato Score      │     0.001 (0.003) │\n                ├──────────────────────────┼───────────────────┤\n                │ Year                     │    -0.004 (0.005) │\n                ├──────────────────────────┼───────────────────┤\n                │ nobs                     │           50      │\n                ├──────────────────────────┼───────────────────┤\n                │ r.squared                │            1.000  │\n                ├──────────────────────────┴───────────────────┤\n                │ *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05       │\n                └──────────────────────────────────────────────┘\n\nColumn names: names, model1"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-7",
-    "href": "lec13.html#independent-samples-t-test-spss-7",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nt(degrees of freedom) = value, p = value"
+    "objectID": "lec10.html#correlation",
+    "href": "lec10.html#correlation",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nWhat do you know about correlations?\n\n\nCorrelation ≠ Causation\nr\nPositive correlation: variables move together\n\nAs one goes up, the other goes up.\nAs one goes down, the other goes down."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-8",
-    "href": "lec13.html#independent-samples-t-test-spss-8",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nt(893) = value, p = value"
+    "objectID": "lec10.html#correlation-1",
+    "href": "lec10.html#correlation-1",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nAssesses how two variables move in relation to one another."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-9",
-    "href": "lec13.html#independent-samples-t-test-spss-9",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nt(893) = 5.038, p = value"
+    "objectID": "lec10.html#measures-of-dispersion",
+    "href": "lec10.html#measures-of-dispersion",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nWhat are measures of dispersion?\nMeasures of how spread out the data are, how much participants differ."
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-10",
-    "href": "lec13.html#independent-samples-t-test-spss-10",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nt(893) = 5.038, p &lt; .001"
+    "objectID": "lec10.html#measures-of-dispersion-1",
+    "href": "lec10.html#measures-of-dispersion-1",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nHow do we measure dispersion when we were looking at one variable?\nStandard deviation\nVariance"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-11",
-    "href": "lec13.html#independent-samples-t-test-spss-11",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nThere was a significant difference in number of hours worked last week between men and women, t (893) = 5.038, p &lt; 0.001."
+    "objectID": "lec10.html#measures-of-dispersion-2",
+    "href": "lec10.html#measures-of-dispersion-2",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-12",
-    "href": "lec13.html#independent-samples-t-test-spss-12",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\nBut who worked more hours?!"
+    "objectID": "lec10.html#measures-of-dispersion-3",
+    "href": "lec10.html#measures-of-dispersion-3",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
   },
   {
-    "objectID": "lec13.html#independent-samples-t-test-spss-13",
-    "href": "lec13.html#independent-samples-t-test-spss-13",
-    "title": "T-Tests",
-    "section": "Independent samples t-test: SPSS",
-    "text": "Independent samples t-test: SPSS\n\n\nMen (M = 43.92, s = 15.53) worked significantly more hours last week compared to women (M = 38.92, s = 14.085), t (893) = 5.038, p &lt; 0.001."
+    "objectID": "lec10.html#measures-of-dispersion-4",
+    "href": "lec10.html#measures-of-dispersion-4",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\n\nStandard deviation: How different are participants from the average?\n\nBivariate measures of dispersion:\n\nCovariance\nHow much variation in one variable is the same in another variable?\nDo the variables vary in the same way?"
   },
   {
-    "objectID": "lec14.html#introduction-to-paired-samples-t-test",
-    "href": "lec14.html#introduction-to-paired-samples-t-test",
+    "objectID": "lec10.html#measures-of-dispersion-5",
+    "href": "lec10.html#measures-of-dispersion-5",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\nStandard deviation: Height M = 5'6\", s = 2 inches\nBivariate measures of dispersion:\n\nCovariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?"
+  },
+  {
+    "objectID": "lec10.html#covariance",
+    "href": "lec10.html#covariance",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee = continuous\nVariable 2: Happiness = continuous"
+  },
+  {
+    "objectID": "lec10.html#covariance-1",
+    "href": "lec10.html#covariance-1",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nWe could:\n\n\nFind the variance of each variable\nFind the covariance of the two variables together"
+  },
+  {
+    "objectID": "lec10.html#covariance-2",
+    "href": "lec10.html#covariance-2",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance refers to how two continuous variables vary in tandem."
+  },
+  {
+    "objectID": "lec10.html#covariance-3",
+    "href": "lec10.html#covariance-3",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance refers to how two variables vary together:\n\n\nGenerally, if cups of coffee goes up, what does happiness tend to do?\nGenerally, if happiness goes up, what does cups of coffee tend to do?"
+  },
+  {
+    "objectID": "lec10.html#covariance-4",
+    "href": "lec10.html#covariance-4",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee\nVariable 2: Happiness\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-5",
+    "href": "lec10.html#covariance-5",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nWell, well, well–We Meet Again\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-6",
+    "href": "lec10.html#covariance-6",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1} = \\frac{\\Sigma(X-\\bar{X})(X-\\bar{X})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-7",
+    "href": "lec10.html#covariance-7",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nThe variance of a variable is the covariance of that variable with itself.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-8",
+    "href": "lec10.html#covariance-8",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance is the variance of two variables together… how they move together.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-9",
+    "href": "lec10.html#covariance-9",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\n\n\n\n\\[\\bar{X} = \\frac{\\Sigma(x)}{n}\\] \\[\\bar{Y} = \\frac{\\Sigma(Y)}{n}\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-10",
+    "href": "lec10.html#covariance-10",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\n\n\n\n\\[(X-\\bar{X})\\] \\[(Y-\\bar{Y})\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-11",
+    "href": "lec10.html#covariance-11",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\n\n\n\\[(X-\\bar{X})(Y-\\bar{Y})\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-12",
+    "href": "lec10.html#covariance-12",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\n\n\n\n\\[\\sum(X-\\bar{X})(Y-\\bar{Y})\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-13",
+    "href": "lec10.html#covariance-13",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\nDivide by N-1.\n\n\n\n\\[\\frac{\\sum(X-\\bar{X})(Y-\\bar{Y})}{N-1}\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-14",
+    "href": "lec10.html#covariance-14",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance is the bivariate equivalent of variance.\n\n\nWhat does the covariance tell us?\nWhat did the variance tell us?\n\nNot much because it was inflated.\n\nFor it to be useful, we had to standardize it.\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-2",
+    "href": "lec10.html#correlation-2",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\nCorrelation is the standardized covariance.\nCorrelation is the bivariate version of the standard deviation.\nTo calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.\n\n\n\n\\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-3",
+    "href": "lec10.html#correlation-3",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\] \\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-4",
+    "href": "lec10.html#correlation-4",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nCalculating Correlation:\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-5",
+    "href": "lec10.html#correlation-5",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nCorrelation is the bivariate version of the standard deviation.\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-6",
+    "href": "lec10.html#correlation-6",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\nCorrelation is bounded between -1 and +1.\nCloser to -1 is a negative correlation.\nCloser to +1 is a positive correlation.\nCloser to 0 means no correlation."
+  },
+  {
+    "objectID": "lec10.html#correlation-7",
+    "href": "lec10.html#correlation-7",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation"
+  },
+  {
+    "objectID": "lec10.html#correlation-8",
+    "href": "lec10.html#correlation-8",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nThis is the Pearson Product-Moment Correlation (Pearson, 1895).\n\n\nThe sign indicates the direction.\nThe number indicates the magnitude/strength of the relationship.\n\n0.1 is a small correlation\n0.3 is a moderate correlation\n0.5 or higher is a large correlation"
+  },
+  {
+    "objectID": "lec10.html#correlation-9",
+    "href": "lec10.html#correlation-9",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\nCorrelation is written as r\nIf we square r, we get \\(R^2\\)\n\\(R^2\\) is always positive\n\\(R^2\\) refers to:\n\nThe amount of x accounted for by y.\nThe amount of y accounted for by x."
+  },
+  {
+    "objectID": "lec10.html#correlation-and-r2",
+    "href": "lec10.html#correlation-and-r2",
+    "title": "Covariance & Correlation",
+    "section": "Correlation and \\(R^2\\)",
+    "text": "Correlation and \\(R^2\\)\nExample\n\nStudents grades in MTH 110 and their grades in correlation at r = 0.3\n\n\n\nModerate correlation\nHow much of your grade is accounted for by your MTH 110 grade?\n0.3 x 0.3 = 0.09\n\\(R^2\\) = 9% of your grade is explained by your MTH 110 grade."
+  },
+  {
+    "objectID": "lec10.html#interpreting-correlation",
+    "href": "lec10.html#interpreting-correlation",
+    "title": "Covariance & Correlation",
+    "section": "Interpreting Correlation",
+    "text": "Interpreting Correlation"
+  },
+  {
+    "objectID": "lec10.html#interpreting-correlation-1",
+    "href": "lec10.html#interpreting-correlation-1",
+    "title": "Covariance & Correlation",
+    "section": "Interpreting Correlation",
+    "text": "Interpreting Correlation\n\n\nWe don’t use the words caused/resulting from.\nWhen reporting r: “As x goes up, y tends to go up.”\nWhen reporting \\(R^2\\): “z% of x is accounted for by y.”"
+  },
+  {
+    "objectID": "lec10.html#reporting-correlation",
+    "href": "lec10.html#reporting-correlation",
+    "title": "Covariance & Correlation",
+    "section": "Reporting correlation",
+    "text": "Reporting correlation\nCorrelation Matrix\n\n\nIn the Method, we report descriptive statistics about our variables (M, s).\nIt is common to refer readers to a table where they can look at correlations between the variables.\nWhy might this be important?"
+  },
+  {
+    "objectID": "lec10.html#correlation-matrix-1",
+    "href": "lec10.html#correlation-matrix-1",
+    "title": "Covariance & Correlation",
+    "section": "Correlation Matrix",
+    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761----\n\nSong 14.211.2.031--\n\nSong 26.422.18.65**-.34*1"
+  },
+  {
+    "objectID": "lec10.html#correlation-matrix-2",
+    "href": "lec10.html#correlation-matrix-2",
+    "title": "Covariance & Correlation",
+    "section": "Correlation Matrix",
+    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761-.03.65**\n\nSong 14.211.2-.031-.34*\n\nSong 26.422.18.65**-.34*1"
+  },
+  {
+    "objectID": "lec10.html#reporting-calculation",
+    "href": "lec10.html#reporting-calculation",
+    "title": "Covariance & Correlation",
+    "section": "Reporting Calculation",
+    "text": "Reporting Calculation\nExample 1\n\nIn a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for 50 students. Below is a scatterplot showing the relationship between the two variables.\n\n\n\n\n\n\n\n\n\n\n\n\n\nBased on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?"
+  },
+  {
+    "objectID": "lec10.html#reporting-calculation-1",
+    "href": "lec10.html#reporting-calculation-1",
+    "title": "Covariance & Correlation",
+    "section": "Reporting Calculation",
+    "text": "Reporting Calculation\nExample 1\n\n\n\n\n\n\n\n\n\n\n\n\nSuppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables."
+  },
+  {
+    "objectID": "lec10.html#reporting-calculation-2",
+    "href": "lec10.html#reporting-calculation-2",
+    "title": "Covariance & Correlation",
+    "section": "Reporting Calculation",
+    "text": "Reporting Calculation\nExample 2\n\nUsing the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The \\(R^2\\) value for the model is 0.72.\n\n\nWhat does an \\(R^2\\) value of 0.72 tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?\nImagine you are the researcher. Based on the \\(R^2\\) value of 0.72, would you consider study time to be a good predictor of exam performance? Why or why not?"
+  },
+  {
+    "objectID": "lec15.html#introduction-to-paired-samples-t-test",
+    "href": "lec15.html#introduction-to-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Introduction to Paired Samples t-Test",
     "text": "Introduction to Paired Samples t-Test\nWhat is a Paired Samples t-Test?\n\nA statistical method used to compare the means of two related groups.\nCommonly used when measuring the same group before and after an intervention or over two different conditions."
   },
   {
-    "objectID": "lec14.html#purpose-of-paired-samples-t-test",
-    "href": "lec14.html#purpose-of-paired-samples-t-test",
+    "objectID": "lec15.html#purpose-of-paired-samples-t-test",
+    "href": "lec15.html#purpose-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Purpose of Paired Samples t-Test",
     "text": "Purpose of Paired Samples t-Test\nWhy Use Paired Samples t-Test?\n\nTo determine if there is a statistically significant difference between two related group means.\nUseful in psychology for assessing changes due to an intervention, therapy, or experiment."
   },
   {
-    "objectID": "lec14.html#formula-for-paired-samples-t-test",
-    "href": "lec14.html#formula-for-paired-samples-t-test",
+    "objectID": "lec15.html#formula-for-paired-samples-t-test",
+    "href": "lec15.html#formula-for-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Formula for Paired Samples t-Test",
     "text": "Formula for Paired Samples t-Test\nMathematical Representation\n\nFormula: \\(\\large{t = \\frac{\\bar{D}}{\\frac{s_D}{\\sqrt{n}}}}\\)\n\n\\(\\bar{D}\\): Mean of the differences between paired observations.\n\\(s_D\\): Standard deviation of the differences.\n\\(n\\): Number of pairs."
   },
   {
-    "objectID": "lec14.html#theoretical-formula-explanation",
-    "href": "lec14.html#theoretical-formula-explanation",
+    "objectID": "lec15.html#theoretical-formula-explanation",
+    "href": "lec15.html#theoretical-formula-explanation",
     "title": "Paired Samples T-Test",
     "section": "Theoretical Formula Explanation",
     "text": "Theoretical Formula Explanation\nUnderstanding Each Component\n\nDifference Mean \\(\\bar{D}\\): Average of the differences between paired scores.\nStandard Deviation of Differences \\(s_D\\): Indicates how much individual differences deviate from the mean difference.\nSample Size \\(n\\): Number of pairs, affecting the significance of results."
   },
   {
-    "objectID": "lec14.html#application-of-paired-samples-t-test",
-    "href": "lec14.html#application-of-paired-samples-t-test",
+    "objectID": "lec15.html#application-of-paired-samples-t-test",
+    "href": "lec15.html#application-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Application of Paired Samples t-Test",
     "text": "Application of Paired Samples t-Test\nWhen to Apply This Test\n\nPretest-Posttest Design: Measure changes in the same group over time.\nMatched Pairs: Compare two related groups, such as twins or matched participants.\nRepeated Measures: Test the same group under different conditions or at different times."
   },
   {
-    "objectID": "lec14.html#paired-samples-t-test",
-    "href": "lec14.html#paired-samples-t-test",
+    "objectID": "lec15.html#paired-samples-t-test",
+    "href": "lec15.html#paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
     "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program.\n\nSteps:\n\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{D}\\) and standard deviation \\(s_D\\) of the differences.\nApply the formula to calculate the t-value and check for significance."
   },
   {
-    "objectID": "lec14.html#paired-samples-t-test-1",
-    "href": "lec14.html#paired-samples-t-test-1",
+    "objectID": "lec15.html#paired-samples-t-test-1",
+    "href": "lec15.html#paired-samples-t-test-1",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nApplication in Psychology Research\n# Load Packages\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\n# Random Seed\nset.seed(20)\n\n# Create data\ndata &lt;- \n  tibble(\n  # Make a variable, `group` with 30 T1 and 30 T2\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  # Make a variable, `score` with 60 scores\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n)"
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\n\n\n\nDtdfpCI[uu,ll]\n\n3.278.59291.8e-09[2.49, 4.04]"
   },
   {
-    "objectID": "lec14.html#paired-samples-t-test-2",
-    "href": "lec14.html#paired-samples-t-test-2",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nData Preview\n\n\nCode\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\nset.seed(20)\ndata &lt;- \n  tibble(\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n) \n\ndata |&gt; slice_sample(n = 5) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\ngrpscore\n\nT18\n\nT25\n\nT24\n\nT25\n\nT16"
-  },
-  {
-    "objectID": "lec14.html#paired-samples-t-test-3",
-    "href": "lec14.html#paired-samples-t-test-3",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nCompare Scores\n\n\nCode\ndata_new &lt;- \n  data |&gt; \n  group_by(grp) |&gt; \n  mutate(\n    id = row_number()\n  ) |&gt; \n  tidyr::pivot_wider(\n                     names_from = grp,\n                     values_from = score\n                     ) |&gt; \n  ungroup() |&gt; \n  mutate(\n    D = T2-T1,\n    Dfi = ifelse(stringr::str_detect(D,\"^-\"),paste0(\"(\",D,\")\"),D)\n  )\n\ndata_new |&gt; \n  select(-D) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\nidT1T2Dfi\n\n1104(-6)\n\n276(-1)\n\n3126(-6)\n\n4550\n\n573(-4)\n\n692(-7)\n\n7231\n\n865(-1)\n\n974(-3)\n\n1074(-3)\n\n1183(-5)\n\n1282(-6)\n\n1375(-2)\n\n14114(-7)\n\n1553(-2)\n\n1674(-3)\n\n17105(-5)\n\n1885(-3)\n\n1985(-3)\n\n2094(-5)\n\n2185(-3)\n\n2284(-4)\n\n2394(-5)\n\n2495(-4)\n\n2585(-3)\n\n2654(-1)\n\n2775(-2)\n\n2864(-2)\n\n29330\n\n3074(-3)"
-  },
-  {
-    "objectID": "lec14.html#paired-samples-t-test-4",
-    "href": "lec14.html#paired-samples-t-test-4",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\\[\\large{t = \\frac{D}{\\frac{\\sigma}{\\sqrt{n}}} =  \\frac{-3.26}{\\frac{2.083}{\\sqrt{30}}} = (-8.57)}\\]"
-  },
-  {
-    "objectID": "lec14.html#paired-samples-t-test-5",
-    "href": "lec14.html#paired-samples-t-test-5",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\n\nCode\nt.test(score ~ grp, data = data, paired = TRUE,conf.level = 0.95) |&gt; \n  tidy() |&gt; \n  rename(\n    D = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = p |&gt; round(10)\n  ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(D,t,df,p,`CI[ll,uu]`) |&gt; \n  huxtable() |&gt; \n  # bold d\n  set_bold(col = 1, row = 2, value = TRUE) |&gt; \n  set_text_color(col = 2, row = 2, value = \"darkred\") |&gt; \n  set_text_color(col = 3, row = 2, value = \"darkgreen\") |&gt; \n  set_text_color(col = 4, row = 2, value = \"darkblue\") |&gt; \n  set_text_color(col = 5, row = 2, value = \"darkorange\") |&gt; \n  theme_article()\n\n\n\n\nDtdfpCI[ll,uu]\n\n3.278.59291.8e-09[2.49, 4.04]\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (D)"
-  },
-  {
-    "objectID": "lec14.html#paired-t-tests",
-    "href": "lec14.html#paired-t-tests",
-    "title": "Paired Samples T-Test",
-    "section": "Paired T-Tests",
-    "text": "Paired T-Tests\nVisualizing Results: Option 1\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, fill = grp)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\")\n  ) +\n  scale_fill_viridis(discrete = TRUE, option = \"E\")"
-  },
-  {
-    "objectID": "lec14.html#paired-t-tests-1",
-    "href": "lec14.html#paired-t-tests-1",
-    "title": "Paired Samples T-Test",
-    "section": "Paired T-Tests",
-    "text": "Paired T-Tests\nVisualizing Results: Option 2\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, color = grp)) + \n  geom_jitter(aes(alpha = .2)) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    legend.position = \"none\"\n  ) +\n  scale_color_manual(values = c(\"darkgreen\",\"darkred\"))"
-  },
-  {
-    "objectID": "lec14.html#summary-of-paired-samples-t-test",
-    "href": "lec14.html#summary-of-paired-samples-t-test",
+    "objectID": "lec15.html#summary-of-paired-samples-t-test",
+    "href": "lec15.html#summary-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Summary of Paired Samples t-Test",
     "text": "Summary of Paired Samples t-Test\nKey Takeaways\n\nPaired samples t-tests are ideal for comparing two related groups.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check assumptions: normality of differences and appropriate pairing."
@@ -3994,7 +4386,7 @@
     "href": "lec8.html#sampling-theory-3",
     "title": "Sampling Theory",
     "section": "Sampling Theory",
-    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n414476421535244521516377143756\n\n227376214176165126763641615461\n\n115647544536674753344361444635\n\n725163766414322342323261452535\n\n224244211364742114761272174316\n\n123673456642574226273171572751"
+    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n176264277175331654713676626224\n\n716542113445461637767232264332\n\n334623251465532265746311235371\n\n247656735115534432661531225157\n\n225267313214371456233675162367\n\n727762633414732766372731251555"
   },
   {
     "objectID": "lec8.html#sampling-theory-4",
