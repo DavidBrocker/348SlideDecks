@@ -2135,102 +2135,340 @@
     "text": "ANOVA\nVisualizing\n\nBarplot with ErrorbarsDistribution with Point EstimatesBoxplot with Distribution\n\n\n\n\nCode\nex2 |&gt; \n  ggplot(aes(grp,score,fill = grp)) +\n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\",\n    width = .2\n  ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Score\\n\",\n    fill = \"Group\"\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nex2 |&gt; \n  ggplot(aes(grp,score,color = grp)) +\n  geom_jitter(alpha = .2, show.legend = FALSE) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n    labs(\n    x = \"\\nTreatment Group\",\n    y = \"Score\\n\",\n    color = \"Group\"\n  ) \n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(ggdist)\nggplot(ex2, aes(x = grp, y = score, fill = grp)) +\n  geom_boxplot(width = 0.2, \n               outlier.shape = NA, \n               alpha = 0.4) +\n  geom_jitter(\n    alpha = 0.4, \n    width = 0.2,\n    show.legend = FALSE,\n    aes(color = grp)\n    ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Score\\n\",\n    fill = \"Group\"\n  )"
   },
   {
-    "objectID": "lec14.html#introduction-to-paired-samples-t-test",
-    "href": "lec14.html#introduction-to-paired-samples-t-test",
+    "objectID": "lec15.html#introduction-to-paired-samples-t-test",
+    "href": "lec15.html#introduction-to-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Introduction to Paired Samples t-Test",
     "text": "Introduction to Paired Samples t-Test\nWhat is a Paired Samples t-Test?\n\nA statistical method used to compare the means of two related groups.\nCommonly used when measuring the same group before and after an intervention or over two different conditions."
   },
   {
-    "objectID": "lec14.html#purpose-of-paired-samples-t-test",
-    "href": "lec14.html#purpose-of-paired-samples-t-test",
+    "objectID": "lec15.html#purpose-of-paired-samples-t-test",
+    "href": "lec15.html#purpose-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Purpose of Paired Samples t-Test",
     "text": "Purpose of Paired Samples t-Test\nWhy Use Paired Samples t-Test?\n\nTo determine if there is a statistically significant difference between two related group means.\nUseful in psychology for assessing changes due to an intervention, therapy, or experiment."
   },
   {
-    "objectID": "lec14.html#formula-for-paired-samples-t-test",
-    "href": "lec14.html#formula-for-paired-samples-t-test",
+    "objectID": "lec15.html#formula-for-paired-samples-t-test",
+    "href": "lec15.html#formula-for-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Formula for Paired Samples t-Test",
     "text": "Formula for Paired Samples t-Test\nMathematical Representation\n\nFormula: \\(\\large{t = \\frac{\\bar{D}}{\\frac{s_D}{\\sqrt{n}}}}\\)\n\n\\(\\bar{D}\\): Mean of the differences between paired observations.\n\\(s_D\\): Standard deviation of the differences.\n\\(n\\): Number of pairs."
   },
   {
-    "objectID": "lec14.html#theoretical-formula-explanation",
-    "href": "lec14.html#theoretical-formula-explanation",
+    "objectID": "lec15.html#theoretical-formula-explanation",
+    "href": "lec15.html#theoretical-formula-explanation",
     "title": "Paired Samples T-Test",
     "section": "Theoretical Formula Explanation",
     "text": "Theoretical Formula Explanation\nUnderstanding Each Component\n\nDifference Mean \\(\\bar{D}\\): Average of the differences between paired scores.\nStandard Deviation of Differences \\(s_D\\): Indicates how much individual differences deviate from the mean difference.\nSample Size \\(n\\): Number of pairs, affecting the significance of results."
   },
   {
-    "objectID": "lec14.html#application-of-paired-samples-t-test",
-    "href": "lec14.html#application-of-paired-samples-t-test",
+    "objectID": "lec15.html#application-of-paired-samples-t-test",
+    "href": "lec15.html#application-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Application of Paired Samples t-Test",
     "text": "Application of Paired Samples t-Test\nWhen to Apply This Test\n\nPretest-Posttest Design: Measure changes in the same group over time.\nMatched Pairs: Compare two related groups, such as twins or matched participants.\nRepeated Measures: Test the same group under different conditions or at different times."
   },
   {
-    "objectID": "lec14.html#paired-samples-t-test",
-    "href": "lec14.html#paired-samples-t-test",
+    "objectID": "lec15.html#paired-samples-t-test",
+    "href": "lec15.html#paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
     "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program.\n\nSteps:\n\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{D}\\) and standard deviation \\(s_D\\) of the differences.\nApply the formula to calculate the t-value and check for significance."
   },
   {
-    "objectID": "lec14.html#paired-samples-t-test-1",
-    "href": "lec14.html#paired-samples-t-test-1",
+    "objectID": "lec15.html#paired-samples-t-test-1",
+    "href": "lec15.html#paired-samples-t-test-1",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nApplication in Psychology Research\n# Load Packages\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\n# Random Seed\nset.seed(20)\n\n# Create data\ndata &lt;- \n  tibble(\n  # Make a variable, `group` with 30 T1 and 30 T2\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  # Make a variable, `score` with 60 scores\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n)"
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\n\n\n\nDtdfpCI[uu,ll]\n\n3.278.59291.8e-09[2.49, 4.04]"
   },
   {
-    "objectID": "lec14.html#paired-samples-t-test-2",
-    "href": "lec14.html#paired-samples-t-test-2",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nData Preview\n\n\nCode\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\nset.seed(20)\ndata &lt;- \n  tibble(\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n) \n\ndata |&gt; slice_sample(n = 5) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\ngrpscore\n\nT18\n\nT25\n\nT24\n\nT25\n\nT16"
-  },
-  {
-    "objectID": "lec14.html#paired-samples-t-test-3",
-    "href": "lec14.html#paired-samples-t-test-3",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nCompare Scores\n\n\nCode\ndata_new &lt;- \n  data |&gt; \n  group_by(grp) |&gt; \n  mutate(\n    id = row_number()\n  ) |&gt; \n  tidyr::pivot_wider(\n                     names_from = grp,\n                     values_from = score\n                     ) |&gt; \n  ungroup() |&gt; \n  mutate(\n    D = T2-T1,\n    Dfi = ifelse(stringr::str_detect(D,\"^-\"),paste0(\"(\",D,\")\"),D)\n  )\n\ndata_new |&gt; \n  select(-D) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\nidT1T2Dfi\n\n1104(-6)\n\n276(-1)\n\n3126(-6)\n\n4550\n\n573(-4)\n\n692(-7)\n\n7231\n\n865(-1)\n\n974(-3)\n\n1074(-3)\n\n1183(-5)\n\n1282(-6)\n\n1375(-2)\n\n14114(-7)\n\n1553(-2)\n\n1674(-3)\n\n17105(-5)\n\n1885(-3)\n\n1985(-3)\n\n2094(-5)\n\n2185(-3)\n\n2284(-4)\n\n2394(-5)\n\n2495(-4)\n\n2585(-3)\n\n2654(-1)\n\n2775(-2)\n\n2864(-2)\n\n29330\n\n3074(-3)"
-  },
-  {
-    "objectID": "lec14.html#paired-samples-t-test-4",
-    "href": "lec14.html#paired-samples-t-test-4",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\\[\\large{t = \\frac{D}{\\frac{\\sigma}{\\sqrt{n}}} =  \\frac{-3.26}{\\frac{2.083}{\\sqrt{30}}} = (-8.57)}\\]"
-  },
-  {
-    "objectID": "lec14.html#paired-samples-t-test-5",
-    "href": "lec14.html#paired-samples-t-test-5",
-    "title": "Paired Samples T-Test",
-    "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\n\nCode\nt.test(score ~ grp, data = data, paired = TRUE,conf.level = 0.95) |&gt; \n  tidy() |&gt; \n  rename(\n    D = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = p |&gt; round(10)\n  ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(D,t,df,p,`CI[ll,uu]`) |&gt; \n  huxtable() |&gt; \n  # bold d\n  set_bold(col = 1, row = 2, value = TRUE) |&gt; \n  set_text_color(col = 2, row = 2, value = \"darkred\") |&gt; \n  set_text_color(col = 3, row = 2, value = \"darkgreen\") |&gt; \n  set_text_color(col = 4, row = 2, value = \"darkblue\") |&gt; \n  set_text_color(col = 5, row = 2, value = \"darkorange\") |&gt; \n  theme_article()\n\n\n\n\nDtdfpCI[ll,uu]\n\n3.278.59291.8e-09[2.49, 4.04]\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (D)"
-  },
-  {
-    "objectID": "lec14.html#paired-t-tests",
-    "href": "lec14.html#paired-t-tests",
-    "title": "Paired Samples T-Test",
-    "section": "Paired T-Tests",
-    "text": "Paired T-Tests\nVisualizing Results: Option 1\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, fill = grp)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\")\n  ) +\n  scale_fill_viridis(discrete = TRUE, option = \"E\")"
-  },
-  {
-    "objectID": "lec14.html#paired-t-tests-1",
-    "href": "lec14.html#paired-t-tests-1",
-    "title": "Paired Samples T-Test",
-    "section": "Paired T-Tests",
-    "text": "Paired T-Tests\nVisualizing Results: Option 2\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, color = grp)) + \n  geom_jitter(aes(alpha = .2)) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    legend.position = \"none\"\n  ) +\n  scale_color_manual(values = c(\"darkgreen\",\"darkred\"))"
-  },
-  {
-    "objectID": "lec14.html#summary-of-paired-samples-t-test",
-    "href": "lec14.html#summary-of-paired-samples-t-test",
+    "objectID": "lec15.html#summary-of-paired-samples-t-test",
+    "href": "lec15.html#summary-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Summary of Paired Samples t-Test",
     "text": "Summary of Paired Samples t-Test\nKey Takeaways\n\nPaired samples t-tests are ideal for comparing two related groups.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check assumptions: normality of differences and appropriate pairing."
+  },
+  {
+    "objectID": "lec10.html#correlation",
+    "href": "lec10.html#correlation",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nWhat do you know about correlations?\n\n\nCorrelation ≠ Causation\nr\nPositive correlation: variables move together\n\nAs one goes up, the other goes up.\nAs one goes down, the other goes down."
+  },
+  {
+    "objectID": "lec10.html#correlation-1",
+    "href": "lec10.html#correlation-1",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nAssesses how two variables move in relation to one another."
+  },
+  {
+    "objectID": "lec10.html#measures-of-dispersion",
+    "href": "lec10.html#measures-of-dispersion",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nWhat are measures of dispersion?\nMeasures of how spread out the data are, how much participants differ."
+  },
+  {
+    "objectID": "lec10.html#measures-of-dispersion-1",
+    "href": "lec10.html#measures-of-dispersion-1",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nHow do we measure dispersion when we were looking at one variable?\nStandard deviation\nVariance"
+  },
+  {
+    "objectID": "lec10.html#measures-of-dispersion-2",
+    "href": "lec10.html#measures-of-dispersion-2",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
+  },
+  {
+    "objectID": "lec10.html#measures-of-dispersion-3",
+    "href": "lec10.html#measures-of-dispersion-3",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
+  },
+  {
+    "objectID": "lec10.html#measures-of-dispersion-4",
+    "href": "lec10.html#measures-of-dispersion-4",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\n\nStandard deviation: How different are participants from the average?\n\nBivariate measures of dispersion:\n\nCovariance\nHow much variation in one variable is the same in another variable?\nDo the variables vary in the same way?"
+  },
+  {
+    "objectID": "lec10.html#measures-of-dispersion-5",
+    "href": "lec10.html#measures-of-dispersion-5",
+    "title": "Covariance & Correlation",
+    "section": "Measures of Dispersion",
+    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\nStandard deviation: Height M = 5'6\", s = 2 inches\nBivariate measures of dispersion:\n\nCovariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?"
+  },
+  {
+    "objectID": "lec10.html#covariance",
+    "href": "lec10.html#covariance",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee = continuous\nVariable 2: Happiness = continuous"
+  },
+  {
+    "objectID": "lec10.html#covariance-1",
+    "href": "lec10.html#covariance-1",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nWe could:\n\n\nFind the variance of each variable\nFind the covariance of the two variables together"
+  },
+  {
+    "objectID": "lec10.html#covariance-2",
+    "href": "lec10.html#covariance-2",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance refers to how two continuous variables vary in tandem."
+  },
+  {
+    "objectID": "lec10.html#covariance-3",
+    "href": "lec10.html#covariance-3",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance refers to how two variables vary together:\n\n\nGenerally, if cups of coffee goes up, what does happiness tend to do?\nGenerally, if happiness goes up, what does cups of coffee tend to do?"
+  },
+  {
+    "objectID": "lec10.html#covariance-4",
+    "href": "lec10.html#covariance-4",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee\nVariable 2: Happiness\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-5",
+    "href": "lec10.html#covariance-5",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nWell, well, well–We Meet Again\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-6",
+    "href": "lec10.html#covariance-6",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1} = \\frac{\\Sigma(X-\\bar{X})(X-\\bar{X})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-7",
+    "href": "lec10.html#covariance-7",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nThe variance of a variable is the covariance of that variable with itself.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-8",
+    "href": "lec10.html#covariance-8",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance is the variance of two variables together… how they move together.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-9",
+    "href": "lec10.html#covariance-9",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\n\n\n\n\\[\\bar{X} = \\frac{\\Sigma(x)}{n}\\] \\[\\bar{Y} = \\frac{\\Sigma(Y)}{n}\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-10",
+    "href": "lec10.html#covariance-10",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\n\n\n\n\\[(X-\\bar{X})\\] \\[(Y-\\bar{Y})\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-11",
+    "href": "lec10.html#covariance-11",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\n\n\n\\[(X-\\bar{X})(Y-\\bar{Y})\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-12",
+    "href": "lec10.html#covariance-12",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\n\n\n\n\\[\\sum(X-\\bar{X})(Y-\\bar{Y})\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-13",
+    "href": "lec10.html#covariance-13",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\nDivide by N-1.\n\n\n\n\\[\\frac{\\sum(X-\\bar{X})(Y-\\bar{Y})}{N-1}\\]"
+  },
+  {
+    "objectID": "lec10.html#covariance-14",
+    "href": "lec10.html#covariance-14",
+    "title": "Covariance & Correlation",
+    "section": "Covariance",
+    "text": "Covariance\nCovariance is the bivariate equivalent of variance.\n\n\nWhat does the covariance tell us?\nWhat did the variance tell us?\n\nNot much because it was inflated.\n\nFor it to be useful, we had to standardize it.\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-2",
+    "href": "lec10.html#correlation-2",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\nCorrelation is the standardized covariance.\nCorrelation is the bivariate version of the standard deviation.\nTo calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.\n\n\n\n\\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-3",
+    "href": "lec10.html#correlation-3",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\] \\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-4",
+    "href": "lec10.html#correlation-4",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nCalculating Correlation:\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-5",
+    "href": "lec10.html#correlation-5",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nCorrelation is the bivariate version of the standard deviation.\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
+  },
+  {
+    "objectID": "lec10.html#correlation-6",
+    "href": "lec10.html#correlation-6",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\nCorrelation is bounded between -1 and +1.\nCloser to -1 is a negative correlation.\nCloser to +1 is a positive correlation.\nCloser to 0 means no correlation."
+  },
+  {
+    "objectID": "lec10.html#correlation-7",
+    "href": "lec10.html#correlation-7",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation"
+  },
+  {
+    "objectID": "lec10.html#correlation-8",
+    "href": "lec10.html#correlation-8",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\nThis is the Pearson Product-Moment Correlation (Pearson, 1895).\n\n\nThe sign indicates the direction.\nThe number indicates the magnitude/strength of the relationship.\n\n0.1 is a small correlation\n0.3 is a moderate correlation\n0.5 or higher is a large correlation"
+  },
+  {
+    "objectID": "lec10.html#correlation-9",
+    "href": "lec10.html#correlation-9",
+    "title": "Covariance & Correlation",
+    "section": "Correlation",
+    "text": "Correlation\n\n\nCorrelation is written as r\nIf we square r, we get \\(R^2\\)\n\\(R^2\\) is always positive\n\\(R^2\\) refers to:\n\nThe amount of x accounted for by y.\nThe amount of y accounted for by x."
+  },
+  {
+    "objectID": "lec10.html#correlation-and-r2",
+    "href": "lec10.html#correlation-and-r2",
+    "title": "Covariance & Correlation",
+    "section": "Correlation and \\(R^2\\)",
+    "text": "Correlation and \\(R^2\\)\nExample\n\nStudents grades in MTH 110 and their grades in correlation at r = 0.3\n\n\n\nModerate correlation\nHow much of your grade is accounted for by your MTH 110 grade?\n0.3 x 0.3 = 0.09\n\\(R^2\\) = 9% of your grade is explained by your MTH 110 grade."
+  },
+  {
+    "objectID": "lec10.html#interpreting-correlation",
+    "href": "lec10.html#interpreting-correlation",
+    "title": "Covariance & Correlation",
+    "section": "Interpreting Correlation",
+    "text": "Interpreting Correlation"
+  },
+  {
+    "objectID": "lec10.html#interpreting-correlation-1",
+    "href": "lec10.html#interpreting-correlation-1",
+    "title": "Covariance & Correlation",
+    "section": "Interpreting Correlation",
+    "text": "Interpreting Correlation\n\n\nWe don’t use the words caused/resulting from.\nWhen reporting r: “As x goes up, y tends to go up.”\nWhen reporting \\(R^2\\): “z% of x is accounted for by y.”"
+  },
+  {
+    "objectID": "lec10.html#reporting-correlation",
+    "href": "lec10.html#reporting-correlation",
+    "title": "Covariance & Correlation",
+    "section": "Reporting correlation",
+    "text": "Reporting correlation\nCorrelation Matrix\n\n\nIn the Method, we report descriptive statistics about our variables (M, s).\nIt is common to refer readers to a table where they can look at correlations between the variables.\nWhy might this be important?"
+  },
+  {
+    "objectID": "lec10.html#correlation-matrix-1",
+    "href": "lec10.html#correlation-matrix-1",
+    "title": "Covariance & Correlation",
+    "section": "Correlation Matrix",
+    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761----\n\nSong 14.211.2.031--\n\nSong 26.422.18.65**-.34*1"
+  },
+  {
+    "objectID": "lec10.html#correlation-matrix-2",
+    "href": "lec10.html#correlation-matrix-2",
+    "title": "Covariance & Correlation",
+    "section": "Correlation Matrix",
+    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761-.03.65**\n\nSong 14.211.2-.031-.34*\n\nSong 26.422.18.65**-.34*1"
+  },
+  {
+    "objectID": "lec10.html#reporting-calculation",
+    "href": "lec10.html#reporting-calculation",
+    "title": "Covariance & Correlation",
+    "section": "Reporting Calculation",
+    "text": "Reporting Calculation\nExample 1\n\nIn a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for 50 students. Below is a scatterplot showing the relationship between the two variables.\n\n\n\n\n\n\n\n\n\n\n\n\n\nBased on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?"
+  },
+  {
+    "objectID": "lec10.html#reporting-calculation-1",
+    "href": "lec10.html#reporting-calculation-1",
+    "title": "Covariance & Correlation",
+    "section": "Reporting Calculation",
+    "text": "Reporting Calculation\nExample 1\n\n\n\n\n\n\n\n\n\n\n\n\nSuppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables."
+  },
+  {
+    "objectID": "lec10.html#reporting-calculation-2",
+    "href": "lec10.html#reporting-calculation-2",
+    "title": "Covariance & Correlation",
+    "section": "Reporting Calculation",
+    "text": "Reporting Calculation\nExample 2\n\nUsing the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The \\(R^2\\) value for the model is 0.72.\n\n\nWhat does an \\(R^2\\) value of 0.72 tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?\nImagine you are the researcher. Based on the \\(R^2\\) value of 0.72, would you consider study time to be a good predictor of exam performance? Why or why not?"
   },
   {
     "objectID": "lec13.html#sampling-theory",
@@ -2412,7 +2650,7 @@
     "href": "lec13.html#data-overview",
     "title": "T-Tests",
     "section": "Data Overview",
-    "text": "Data Overview\n\n\n\n\nestimateestimate1estimate2statisticp.valueparameterconf.lowconf.highmethodalternative\n\n-1.76.58.2-2.940.0087618-2.91-0.485Two Sample t-testtwo.sided"
+    "text": "Data Overview\n\n\n\n\nestimateestimate1estimate2statisticp.valueparameterconf.lowconf.highmethodalternative\n\n-2.45.98.3-5.881.45e-0518-3.26-1.54Two Sample t-testtwo.sided"
   },
   {
     "objectID": "lec13.html#the-data",
@@ -3119,7 +3357,7 @@
     "href": "lec12.html#linear-regression",
     "title": "Regression Part II",
     "section": "Linear Regression",
-    "text": "Linear Regression\nLine of Best Fit\n\n\n\nCall:\nlm(formula = Y ~ X, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-28.425  -7.665  -1.094   8.099  27.902 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.14317    1.18963   -0.12    0.904    \nX            0.87338    0.05677   15.38   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11.9 on 98 degrees of freedom\nMultiple R-squared:  0.7072,    Adjusted R-squared:  0.7042 \nF-statistic: 236.7 on 1 and 98 DF,  p-value: &lt; 2.2e-16"
+    "text": "Linear Regression\nLine of Best Fit\n\n\n\nCall:\nlm(formula = Y ~ X, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-32.242  -8.545   0.374   9.311  34.233 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -1.34111    1.32546  -1.012    0.314    \nX            0.82203    0.05465  15.041   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 13.12 on 98 degrees of freedom\nMultiple R-squared:  0.6977,    Adjusted R-squared:  0.6947 \nF-statistic: 226.2 on 1 and 98 DF,  p-value: &lt; 2.2e-16"
   },
   {
     "objectID": "lec12.html#regression-1",
@@ -3189,56 +3427,56 @@
     "href": "lec12.html#interpreting-coefficients-5",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nIntercept\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nIntercept\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-6",
     "href": "lec12.html#interpreting-coefficients-6",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nFirst Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nFirst Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-7",
     "href": "lec12.html#interpreting-coefficients-7",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nSecond Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nSecond Predictor Variable\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-8",
     "href": "lec12.html#interpreting-coefficients-8",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nSample Size\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nSample Size\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-9",
     "href": "lec12.html#interpreting-coefficients-9",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nR Squared\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nR Squared\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-10",
     "href": "lec12.html#interpreting-coefficients-10",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nAdjusted R Squared\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nAdjusted R Squared\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-11",
     "href": "lec12.html#interpreting-coefficients-11",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nF Statistic\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nF Statistic\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-12",
     "href": "lec12.html#interpreting-coefficients-12",
     "title": "Regression Part II",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\nP Value\n\n\n\n\nMoney\n\n(Intercept)55.406 ***(7.963)\n\nx10.198    (0.235)\n\nx2-0.102    (0.235)\n\n# Observations100             \n\nR squared0.010         \n\nAdjusted R squared-0.011         \n\nF statistic0.466         \n\nP value0.629         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
+    "text": "Interpreting coefficients\nP Value\n\n\n\n\nMoney\n\n(Intercept)51.624 ***(9.027)\n\nx1-0.250    (0.271)\n\nx20.260    (0.257)\n\n# Observations100             \n\nR squared0.021         \n\nAdjusted R squared0.001         \n\nF statistic1.053         \n\nP value0.353         \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05"
   },
   {
     "objectID": "lec12.html#r2-1",
@@ -3507,340 +3745,368 @@
     "text": "Horror Movies\n\n\n                ┌──────────────────────────┬───────────────────┐\n                │                          │        (1)        │\n                ├──────────────────────────┼───────────────────┤\n                │ Ranking                  │    -0.009 (0.013) │\n                ├──────────────────────────┼───────────────────┤\n                │ Avg. Heart Rate (BPM)    │    -0.043 (0.110) │\n                ├──────────────────────────┼───────────────────┤\n                │ Overall Difference (BPM) │ 1.823 *** (0.115) │\n                ├──────────────────────────┼───────────────────┤\n                │ HRV Difference           │ 1.564 *** (0.034) │\n                ├──────────────────────────┼───────────────────┤\n                │ Highest Spike            │ 0.182 *** (0.006) │\n                ├──────────────────────────┼───────────────────┤\n                │ Sequel                   │     0.004 (0.122) │\n                ├──────────────────────────┼───────────────────┤\n                │ At Least One Sequel      │    -0.030 (0.123) │\n                ├──────────────────────────┼───────────────────┤\n                │ Rotten Tomato Score      │     0.001 (0.003) │\n                ├──────────────────────────┼───────────────────┤\n                │ Year                     │    -0.004 (0.005) │\n                ├──────────────────────────┼───────────────────┤\n                │ nobs                     │           50      │\n                ├──────────────────────────┼───────────────────┤\n                │ r.squared                │            1.000  │\n                ├──────────────────────────┴───────────────────┤\n                │ *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05       │\n                └──────────────────────────────────────────────┘\n\nColumn names: names, model1"
   },
   {
-    "objectID": "lec10.html#correlation",
-    "href": "lec10.html#correlation",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nWhat do you know about correlations?\n\n\nCorrelation ≠ Causation\nr\nPositive correlation: variables move together\n\nAs one goes up, the other goes up.\nAs one goes down, the other goes down."
+    "objectID": "L16.html",
+    "href": "L16.html",
+    "title": "348 Slides",
+    "section": "",
+    "text": "Factorial ANOVA\nLecture 17\nANOVA\nPSY 348\nANOVA\nANalysis\nOf\nVAriance\nPSY 348\nAnOVA\nWhat does ANOVA do?\nPSY 348\nAnOVA\nANOVA compares the means of different groups to determine if they differ significantly from one another.\nPSY 348\nAnOVA\nANOVA compares the means of different groups to determine if they differ significantly from one another.\n‣ ANOVA can examine independent variables with more than 2 groups.\nPSY 348\nAnOVA\nANOVA compares the means of different groups to determine if they differ significantly from one another.\n‣ ANOVA can examine independent variables with more than 2 groups.\n‣ ANOVA can also look at multiple independent variables.\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it.\nWhat kind of design is she using?\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it.\nWhat kind of design is she using?\n2 x 2\nPSY 348\n2-way AnOVA\nWe can write the design of a study analyzed using ANOVA as the number of groups/conditions in the first independent variable “x” the number of groups/conditions in the second independent variable, etc.\n2 x 2\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it. This is a 2 x 2 design.\nNumber of groups in coffee: 2\nNumber of groups in Eric Andre: 2\nDV?\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it. This is a 2 x 2 design.\nNumber of groups in coffee: 2\nNumber of groups in Eric Andre: 2\nDV = Happiness\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it. This is a 2 x 2 design.\nWhat are Dr. Apriceno’s Alternative Hypotheses?\n•\n•\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it. This is a 2 x 2 design.\nWhat are Dr. Apriceno’s Alternative Hypotheses?\n• Participants who drink coffee will be significantly happier than those who don’t.\n• Participants who watch Eric Andre will be significantly happier than those who don’t.\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it. This is a 2 x 2 design.\n• Participants who drink coffee will be significantly happier than those who don’t.\n• Participants who watch Eric Andre will be significantly happier than those who don’t.\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it. This is a 2 x 2 design.\n• Participants who drink coffee will be significantly happier than those who don’t.\n• Participants who watch Eric Andre will be significantly happier than those who don’t.\n• Participants who drink coffee while watching the Eric Andre Show will be the happiest.\nPSY 348\nanova\nThere are 3 types of ANOVA:\n▸ Between subjects One-Way or Factorial\n▸ Within subjects (repeated measures ANOVA)\n▸ Mixed designs (between and within together)\nPSY 348\n2-way Between subjects ANOVA\n▸ IVs must benominal/categorical\n▸ DV must be continuous\nPSY 348\n2-way Between subjects ANOVA\n▸ IVs must benominal/categorical\n▸ DV must be continuous\nPSY 348\n2-way ANOVA\nTo compare the means, we analyzing two types of variance:\n▸ Variance among all of the scores (error variance).\n▸ Variance between the groups of the first IV (between group variance 1).\n▸ Variance between the groups of the second IV (between group variance 2).\n▸ Variance between the combination of the groups (interaction variance).\nPSY 348\n2-way ANOVA\nPSY 348\n2-way ANOVA\nPSY 348\n2-way ANOVA\nPSY 348\n2-way ANOVA\nTo compare the means, we analyzing two types of variance:\n▸ Variance among all of the scores (within group variance).\n▸ Variance between the groups of the first IV (between group variance 1).\n▸ Variance between the groups of the second IV (between group variance 2).\n▸ Variance between the combination of the groups (interaction variance).\nPSY 348\nCalculating the Fs\nDegrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nPSY 348\nDegrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nI own 7 pairs of sock. I want to wear a different pair of socks every day.\nPSY 348\nDegrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nI own 7 pairs of sock. I want to wear a different pair of socks every day.\nPSY 348\nDegrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nI own 7 pairs of sock. I want to wear a different pair of socks every day.\nPSY 348\nDegrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\nThe degrees of freedom is how many times things can vary before we are stuck with what’s left over.\nPSY 348\nDegrees of freedom\nBetween Groups (MSBG ) = number of groups – 1\nError Groups (MSError) = number of participants – number of groups\nTotal = n – 1\n*k is the number of groups in the independent variable.\nPSY 348\nDegrees of freedom\nBetween Groups 1 (MSBG1 ) = k1 – 1\nBetween Groups 2 (MSBG2 ) = k2 – 1\nInteraction (MSInteractioni) = (k1 – 1) x (k2 – 1)\nError (MSError) = n – (k1 x k2)\nTotal = n – 1\n*k is the number of groups in each independent variable.\nPSY 348\nCalculating the ms in 2-way ANOVA\nBetween Group 1 Mean Squared: MSBG1 = SSBG1 / (k1 – 1)\nBetween Group 2 Mean Squared: MSBG2 = SSBG2 / (k2 – 1)\nInteraction Mean Squared: MSInteraction = SSInteraction / (k1 – 1) x (k2 – 1)\nError Mean Squared: MSError = SSError / n – (k1 x k2)\nPSY 348\nCalculating 2-way ANOVA anova\nF = MSBG1 / MSError\nF = MSBG2 / MSError\nF = MSInteraction / MSError\nPSY 348\nInterpreting f\nInterpreting the Fs in 2-way ANOVA\nPSY 348\nInterpreting the Fs in 2-way ANOVA\n▸ IV 1 = Gender\n▸ IV 2 = Education Level\nPSY 348\nInterpreting the Fs in 2-way ANOVA\n▸ F1 = Gender\n▸ F2 = Education Level\n▸ F3 = Interaction of Gender x Education Level\nPSY 348\nInterpreting the Fs in 2-way ANOVA\nPSY 348\nInterpreting the Fs in 2-way ANOVA\n▸ F1 =\n▸ F2 =\n▸ F3 =\nPSY 348\nInterpreting the Fs in 2-way ANOVA\n▸ F1 = Section\n▸ F2 = Review\n▸ F3 = Section x Review\nPSY 348\n2-way AnOVA\nDr. Apriceno believes the key to happiness involves 2 things: coffee and Eric Andre. She wants to see if drinking coffee makes participants significantly happier than not drinking coffee. She also wants to see if watching the Eric Andre show makes them significantly happier than not watching it.\nShe randomly assigns 100 participants to coffee or no coffee x Eric under no Eric Andre.\nPSY 348\nCalculating the Fs in 2-way ANOVA\nPSY 348\nCalculating the Fs in 2-way ANOVA\nPSY 348\n2-way AnOVA\nDr. Apriceno recruit 500 kiddos on Halloween. She assigns half to wear a costume with a mask, and the other half to wear a costume without a mask. She assigns participants to trick-or-treat alone or in groups. Then she measures how much candy each child collects while trick-or-treating.\nPSY 348\nText\nCalculating the Fs in 2-way ANOVA\nPSY 348\nCalculating the Fs in 2-way ANOVA\nPSY 348\nCalculating 2-way ANOVA anova\nF = MSBG1 / MSError\nF = MSBG2 / MSError\nF = MSInteraction / MSError\n**All MS are divided by MSError.**\nPSY 348\nReporting f\nReporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n‣ Reject H0, or\n‣ Fail to Reject H0\nPSY 348\nReporting F\nIf asked to report findings in general or for publication, you need EACH F-vale:\n‣ F(df for the between group MS, df for the error MS)\n‣ = F-value\n‣ Corresponding p-value\n‣ *For significant results: Means and standard deviations of each group\nPSY 348\nReporting F\nThe group that watched the Eric Andre Show (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F(1,496) = 7.12, p &lt; 0.05.\nPSY 348\nReporting F\nResults IV1:\nIf significant: The group that watched the Eric Andre Show (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F (1, 496) = 7.12, p &lt; 0.05.\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.\nPSY 348\nReporting F\nResults IV2:\nIf significant: The group that drank coffee (M=7.35, s=1.01) reported significantly more happiness compared to their peers in the control group who drank decaf (M=4.21, s=0.99), F (1, 496) = 9.12, p &lt; 0.05.\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.\nPSY 348\nReporting F\nResults Interaction:\nIf significant: The group that drank coffee AND watched Eric Andre (M=7.35, s=1.01) reported significantly more happiness compared to the other groups (M=4.21, s=0.99), F (1, 496) = 11.14, p &lt; 0.05.\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.\nPSY 348"
   },
   {
-    "objectID": "lec10.html#correlation-1",
-    "href": "lec10.html#correlation-1",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nAssesses how two variables move in relation to one another."
-  },
-  {
-    "objectID": "lec10.html#measures-of-dispersion",
-    "href": "lec10.html#measures-of-dispersion",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nWhat are measures of dispersion?\nMeasures of how spread out the data are, how much participants differ."
-  },
-  {
-    "objectID": "lec10.html#measures-of-dispersion-1",
-    "href": "lec10.html#measures-of-dispersion-1",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nHow do we measure dispersion when we were looking at one variable?\nStandard deviation\nVariance"
-  },
-  {
-    "objectID": "lec10.html#measures-of-dispersion-2",
-    "href": "lec10.html#measures-of-dispersion-2",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
-  },
-  {
-    "objectID": "lec10.html#measures-of-dispersion-3",
-    "href": "lec10.html#measures-of-dispersion-3",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate = one variable\nBivariate = two variables\nMultivariate = more than two variables"
-  },
-  {
-    "objectID": "lec10.html#measures-of-dispersion-4",
-    "href": "lec10.html#measures-of-dispersion-4",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\n\nStandard deviation: How different are participants from the average?\n\nBivariate measures of dispersion:\n\nCovariance\nHow much variation in one variable is the same in another variable?\nDo the variables vary in the same way?"
-  },
-  {
-    "objectID": "lec10.html#measures-of-dispersion-5",
-    "href": "lec10.html#measures-of-dispersion-5",
-    "title": "Covariance & Correlation",
-    "section": "Measures of Dispersion",
-    "text": "Measures of Dispersion\n\n\nUnivariate measures of dispersion?\nStandard deviation: Height M = 5'6\", s = 2 inches\nBivariate measures of dispersion:\n\nCovariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?"
-  },
-  {
-    "objectID": "lec10.html#covariance",
-    "href": "lec10.html#covariance",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee = continuous\nVariable 2: Happiness = continuous"
-  },
-  {
-    "objectID": "lec10.html#covariance-1",
-    "href": "lec10.html#covariance-1",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nWe could:\n\n\nFind the variance of each variable\nFind the covariance of the two variables together"
-  },
-  {
-    "objectID": "lec10.html#covariance-2",
-    "href": "lec10.html#covariance-2",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance refers to how two continuous variables vary in tandem."
-  },
-  {
-    "objectID": "lec10.html#covariance-3",
-    "href": "lec10.html#covariance-3",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance refers to how two variables vary together:\n\n\nGenerally, if cups of coffee goes up, what does happiness tend to do?\nGenerally, if happiness goes up, what does cups of coffee tend to do?"
-  },
-  {
-    "objectID": "lec10.html#covariance-4",
-    "href": "lec10.html#covariance-4",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\n\nProfessor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. She asks 50 professors how many cups they have in a typical day and then has them rate their happiness on a scale of 1 to 10.\n\n\n\nVariable 1: Number of Cups of Coffee\nVariable 2: Happiness\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-5",
-    "href": "lec10.html#covariance-5",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nWell, well, well–We Meet Again\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-6",
-    "href": "lec10.html#covariance-6",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]\n\n\n\\[\ns^2 = \\frac{\\Sigma(X-\\bar{X})^2}{N-1} = \\frac{\\Sigma(X-\\bar{X})(X-\\bar{X})}{N-1}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-7",
-    "href": "lec10.html#covariance-7",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nThe variance of a variable is the covariance of that variable with itself.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X}(Y-\\bar{Y})}{N-1}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-8",
-    "href": "lec10.html#covariance-8",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance is the variance of two variables together… how they move together.\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-9",
-    "href": "lec10.html#covariance-9",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\n\n\n\n\\[\\bar{X} = \\frac{\\Sigma(x)}{n}\\] \\[\\bar{Y} = \\frac{\\Sigma(Y)}{n}\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-10",
-    "href": "lec10.html#covariance-10",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\n\n\n\n\\[(X-\\bar{X})\\] \\[(Y-\\bar{Y})\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-11",
-    "href": "lec10.html#covariance-11",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\n\n\n\\[(X-\\bar{X})(Y-\\bar{Y})\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-12",
-    "href": "lec10.html#covariance-12",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\n\n\n\n\\[\\sum(X-\\bar{X})(Y-\\bar{Y})\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-13",
-    "href": "lec10.html#covariance-13",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nLet’s break it down.\n\n\nFind the mean of each variable.\nSubtract the mean of x from each x value.\nSubtract the mean of y from each y value.\nMultiple the deviation scores of x with the deviation scores of y.\nSum the products of the deviation scores.\nDivide by N-1.\n\n\n\n\\[\\frac{\\sum(X-\\bar{X})(Y-\\bar{Y})}{N-1}\\]"
-  },
-  {
-    "objectID": "lec10.html#covariance-14",
-    "href": "lec10.html#covariance-14",
-    "title": "Covariance & Correlation",
-    "section": "Covariance",
-    "text": "Covariance\nCovariance is the bivariate equivalent of variance.\n\n\nWhat does the covariance tell us?\nWhat did the variance tell us?\n\nNot much because it was inflated.\n\nFor it to be useful, we had to standardize it.\n\n\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#correlation-2",
-    "href": "lec10.html#correlation-2",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\nCorrelation is the standardized covariance.\nCorrelation is the bivariate version of the standard deviation.\nTo calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.\n\n\n\n\\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
-  },
-  {
-    "objectID": "lec10.html#correlation-3",
-    "href": "lec10.html#correlation-3",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\\[\nCOV_{XY} = \\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{N-1}\n\\] \\[\\frac{cov_{xy}}{(SD_x)(SD_y)}\\]"
-  },
-  {
-    "objectID": "lec10.html#correlation-4",
-    "href": "lec10.html#correlation-4",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nCalculating Correlation:\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#correlation-5",
-    "href": "lec10.html#correlation-5",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nCorrelation is the bivariate version of the standard deviation.\n\n\\[\n\\frac{\\Sigma(X-\\bar{X})(Y-\\bar{Y})}{(SD_x)(SD_y)(N-1)}\n\\]"
-  },
-  {
-    "objectID": "lec10.html#correlation-6",
-    "href": "lec10.html#correlation-6",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\nCorrelation is bounded between -1 and +1.\nCloser to -1 is a negative correlation.\nCloser to +1 is a positive correlation.\nCloser to 0 means no correlation."
-  },
-  {
-    "objectID": "lec10.html#correlation-7",
-    "href": "lec10.html#correlation-7",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation"
-  },
-  {
-    "objectID": "lec10.html#correlation-8",
-    "href": "lec10.html#correlation-8",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\nThis is the Pearson Product-Moment Correlation (Pearson, 1895).\n\n\nThe sign indicates the direction.\nThe number indicates the magnitude/strength of the relationship.\n\n0.1 is a small correlation\n0.3 is a moderate correlation\n0.5 or higher is a large correlation"
-  },
-  {
-    "objectID": "lec10.html#correlation-9",
-    "href": "lec10.html#correlation-9",
-    "title": "Covariance & Correlation",
-    "section": "Correlation",
-    "text": "Correlation\n\n\nCorrelation is written as r\nIf we square r, we get \\(R^2\\)\n\\(R^2\\) is always positive\n\\(R^2\\) refers to:\n\nThe amount of x accounted for by y.\nThe amount of y accounted for by x."
-  },
-  {
-    "objectID": "lec10.html#correlation-and-r2",
-    "href": "lec10.html#correlation-and-r2",
-    "title": "Covariance & Correlation",
-    "section": "Correlation and \\(R^2\\)",
-    "text": "Correlation and \\(R^2\\)\nExample\n\nStudents grades in MTH 110 and their grades in correlation at r = 0.3\n\n\n\nModerate correlation\nHow much of your grade is accounted for by your MTH 110 grade?\n0.3 x 0.3 = 0.09\n\\(R^2\\) = 9% of your grade is explained by your MTH 110 grade."
-  },
-  {
-    "objectID": "lec10.html#interpreting-correlation",
-    "href": "lec10.html#interpreting-correlation",
-    "title": "Covariance & Correlation",
-    "section": "Interpreting Correlation",
-    "text": "Interpreting Correlation"
-  },
-  {
-    "objectID": "lec10.html#interpreting-correlation-1",
-    "href": "lec10.html#interpreting-correlation-1",
-    "title": "Covariance & Correlation",
-    "section": "Interpreting Correlation",
-    "text": "Interpreting Correlation\n\n\nWe don’t use the words caused/resulting from.\nWhen reporting r: “As x goes up, y tends to go up.”\nWhen reporting \\(R^2\\): “z% of x is accounted for by y.”"
-  },
-  {
-    "objectID": "lec10.html#reporting-correlation",
-    "href": "lec10.html#reporting-correlation",
-    "title": "Covariance & Correlation",
-    "section": "Reporting correlation",
-    "text": "Reporting correlation\nCorrelation Matrix\n\n\nIn the Method, we report descriptive statistics about our variables (M, s).\nIt is common to refer readers to a table where they can look at correlations between the variables.\nWhy might this be important?"
-  },
-  {
-    "objectID": "lec10.html#correlation-matrix-1",
-    "href": "lec10.html#correlation-matrix-1",
-    "title": "Covariance & Correlation",
-    "section": "Correlation Matrix",
-    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761----\n\nSong 14.211.2.031--\n\nSong 26.422.18.65**-.34*1"
-  },
-  {
-    "objectID": "lec10.html#correlation-matrix-2",
-    "href": "lec10.html#correlation-matrix-2",
-    "title": "Covariance & Correlation",
-    "section": "Correlation Matrix",
-    "text": "Correlation Matrix\nTable 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:\n\n\n\n\n\nMs123\n\nAge20.91.761-.03.65**\n\nSong 14.211.2-.031-.34*\n\nSong 26.422.18.65**-.34*1"
-  },
-  {
-    "objectID": "lec10.html#reporting-calculation",
-    "href": "lec10.html#reporting-calculation",
-    "title": "Covariance & Correlation",
-    "section": "Reporting Calculation",
-    "text": "Reporting Calculation\nExample 1\n\nIn a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for 50 students. Below is a scatterplot showing the relationship between the two variables.\n\n\n\n\n\n\n\n\n\n\n\n\n\nBased on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?"
-  },
-  {
-    "objectID": "lec10.html#reporting-calculation-1",
-    "href": "lec10.html#reporting-calculation-1",
-    "title": "Covariance & Correlation",
-    "section": "Reporting Calculation",
-    "text": "Reporting Calculation\nExample 1\n\n\n\n\n\n\n\n\n\n\n\n\nSuppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables."
-  },
-  {
-    "objectID": "lec10.html#reporting-calculation-2",
-    "href": "lec10.html#reporting-calculation-2",
-    "title": "Covariance & Correlation",
-    "section": "Reporting Calculation",
-    "text": "Reporting Calculation\nExample 2\n\nUsing the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The \\(R^2\\) value for the model is 0.72.\n\n\nWhat does an \\(R^2\\) value of 0.72 tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?\nImagine you are the researcher. Based on the \\(R^2\\) value of 0.72, would you consider study time to be a good predictor of exam performance? Why or why not?"
-  },
-  {
-    "objectID": "lec15.html#introduction-to-paired-samples-t-test",
-    "href": "lec15.html#introduction-to-paired-samples-t-test",
+    "objectID": "lec14.html#introduction-to-paired-samples-t-test",
+    "href": "lec14.html#introduction-to-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Introduction to Paired Samples t-Test",
     "text": "Introduction to Paired Samples t-Test\nWhat is a Paired Samples t-Test?\n\nA statistical method used to compare the means of two related groups.\nCommonly used when measuring the same group before and after an intervention or over two different conditions."
   },
   {
-    "objectID": "lec15.html#purpose-of-paired-samples-t-test",
-    "href": "lec15.html#purpose-of-paired-samples-t-test",
+    "objectID": "lec14.html#purpose-of-paired-samples-t-test",
+    "href": "lec14.html#purpose-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Purpose of Paired Samples t-Test",
     "text": "Purpose of Paired Samples t-Test\nWhy Use Paired Samples t-Test?\n\nTo determine if there is a statistically significant difference between two related group means.\nUseful in psychology for assessing changes due to an intervention, therapy, or experiment."
   },
   {
-    "objectID": "lec15.html#formula-for-paired-samples-t-test",
-    "href": "lec15.html#formula-for-paired-samples-t-test",
+    "objectID": "lec14.html#formula-for-paired-samples-t-test",
+    "href": "lec14.html#formula-for-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Formula for Paired Samples t-Test",
     "text": "Formula for Paired Samples t-Test\nMathematical Representation\n\nFormula: \\(\\large{t = \\frac{\\bar{D}}{\\frac{s_D}{\\sqrt{n}}}}\\)\n\n\\(\\bar{D}\\): Mean of the differences between paired observations.\n\\(s_D\\): Standard deviation of the differences.\n\\(n\\): Number of pairs."
   },
   {
-    "objectID": "lec15.html#theoretical-formula-explanation",
-    "href": "lec15.html#theoretical-formula-explanation",
+    "objectID": "lec14.html#theoretical-formula-explanation",
+    "href": "lec14.html#theoretical-formula-explanation",
     "title": "Paired Samples T-Test",
     "section": "Theoretical Formula Explanation",
     "text": "Theoretical Formula Explanation\nUnderstanding Each Component\n\nDifference Mean \\(\\bar{D}\\): Average of the differences between paired scores.\nStandard Deviation of Differences \\(s_D\\): Indicates how much individual differences deviate from the mean difference.\nSample Size \\(n\\): Number of pairs, affecting the significance of results."
   },
   {
-    "objectID": "lec15.html#application-of-paired-samples-t-test",
-    "href": "lec15.html#application-of-paired-samples-t-test",
+    "objectID": "lec14.html#application-of-paired-samples-t-test",
+    "href": "lec14.html#application-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Application of Paired Samples t-Test",
     "text": "Application of Paired Samples t-Test\nWhen to Apply This Test\n\nPretest-Posttest Design: Measure changes in the same group over time.\nMatched Pairs: Compare two related groups, such as twins or matched participants.\nRepeated Measures: Test the same group under different conditions or at different times."
   },
   {
-    "objectID": "lec15.html#paired-samples-t-test",
-    "href": "lec15.html#paired-samples-t-test",
+    "objectID": "lec14.html#paired-samples-t-test",
+    "href": "lec14.html#paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
     "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program.\n\nSteps:\n\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{D}\\) and standard deviation \\(s_D\\) of the differences.\nApply the formula to calculate the t-value and check for significance."
   },
   {
-    "objectID": "lec15.html#paired-samples-t-test-1",
-    "href": "lec15.html#paired-samples-t-test-1",
+    "objectID": "lec14.html#paired-samples-t-test-1",
+    "href": "lec14.html#paired-samples-t-test-1",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\n\n\n\nDtdfpCI[uu,ll]\n\n3.278.59291.8e-09[2.49, 4.04]"
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n# Load Packages\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\n# Random Seed\nset.seed(20)\n\n# Create data\ndata &lt;- \n  tibble(\n  # Make a variable, `group` with 30 T1 and 30 T2\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  # Make a variable, `score` with 60 scores\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n)"
   },
   {
-    "objectID": "lec15.html#summary-of-paired-samples-t-test",
-    "href": "lec15.html#summary-of-paired-samples-t-test",
+    "objectID": "lec14.html#paired-samples-t-test-2",
+    "href": "lec14.html#paired-samples-t-test-2",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nData Preview\n\n\nCode\nlibrary(dplyr)\nlibrary(broom)\nlibrary(huxtable)\n\nset.seed(20)\ndata &lt;- \n  tibble(\n  grp = rep(c(\"T1\",\"T2\"), each = 30),\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n) \n\ndata |&gt; slice_sample(n = 5) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\ngrpscore\n\nT18\n\nT25\n\nT24\n\nT25\n\nT16"
+  },
+  {
+    "objectID": "lec14.html#paired-samples-t-test-3",
+    "href": "lec14.html#paired-samples-t-test-3",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nCompare Scores\n\n\nCode\ndata_new &lt;- \n  data |&gt; \n  group_by(grp) |&gt; \n  mutate(\n    id = row_number()\n  ) |&gt; \n  tidyr::pivot_wider(\n                     names_from = grp,\n                     values_from = score\n                     ) |&gt; \n  ungroup() |&gt; \n  mutate(\n    D = T2-T1,\n    Dfi = ifelse(stringr::str_detect(D,\"^-\"),paste0(\"(\",D,\")\"),D)\n  )\n\ndata_new |&gt; \n  select(-D) |&gt; \n  huxtable() |&gt; \n  theme_article() |&gt; \n  set_width(value = .8)\n\n\n\n\nidT1T2Dfi\n\n1104(-6)\n\n276(-1)\n\n3126(-6)\n\n4550\n\n573(-4)\n\n692(-7)\n\n7231\n\n865(-1)\n\n974(-3)\n\n1074(-3)\n\n1183(-5)\n\n1282(-6)\n\n1375(-2)\n\n14114(-7)\n\n1553(-2)\n\n1674(-3)\n\n17105(-5)\n\n1885(-3)\n\n1985(-3)\n\n2094(-5)\n\n2185(-3)\n\n2284(-4)\n\n2394(-5)\n\n2495(-4)\n\n2585(-3)\n\n2654(-1)\n\n2775(-2)\n\n2864(-2)\n\n29330\n\n3074(-3)"
+  },
+  {
+    "objectID": "lec14.html#paired-samples-t-test-4",
+    "href": "lec14.html#paired-samples-t-test-4",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\\[\\large{t = \\frac{D}{\\frac{\\sigma}{\\sqrt{n}}} =  \\frac{-3.26}{\\frac{2.083}{\\sqrt{30}}} = (-8.57)}\\]"
+  },
+  {
+    "objectID": "lec14.html#paired-samples-t-test-5",
+    "href": "lec14.html#paired-samples-t-test-5",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\n\nCode\nt.test(score ~ grp, data = data, paired = TRUE,conf.level = 0.95) |&gt; \n  tidy() |&gt; \n  rename(\n    D = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = p |&gt; round(10)\n  ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(D,t,df,p,`CI[ll,uu]`) |&gt; \n  huxtable() |&gt; \n  # bold d\n  set_bold(col = 1, row = 2, value = TRUE) |&gt; \n  set_text_color(col = 2, row = 2, value = \"darkred\") |&gt; \n  set_text_color(col = 3, row = 2, value = \"darkgreen\") |&gt; \n  set_text_color(col = 4, row = 2, value = \"darkblue\") |&gt; \n  set_text_color(col = 5, row = 2, value = \"darkorange\") |&gt; \n  theme_article()\n\n\n\n\nDtdfpCI[ll,uu]\n\n3.278.59291.8e-09[2.49, 4.04]\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (D)"
+  },
+  {
+    "objectID": "lec14.html#paired-t-tests",
+    "href": "lec14.html#paired-t-tests",
+    "title": "Paired Samples T-Test",
+    "section": "Paired T-Tests",
+    "text": "Paired T-Tests\nVisualizing Results: Option 1\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, fill = grp)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\")\n  ) +\n  scale_fill_viridis(discrete = TRUE, option = \"E\")"
+  },
+  {
+    "objectID": "lec14.html#paired-t-tests-1",
+    "href": "lec14.html#paired-t-tests-1",
+    "title": "Paired Samples T-Test",
+    "section": "Paired T-Tests",
+    "text": "Paired T-Tests\nVisualizing Results: Option 2\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(grp, score, color = grp)) + \n  geom_jitter(aes(alpha = .2)) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    legend.position = \"none\"\n  ) +\n  scale_color_manual(values = c(\"darkgreen\",\"darkred\"))"
+  },
+  {
+    "objectID": "lec14.html#summary-of-paired-samples-t-test",
+    "href": "lec14.html#summary-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Summary of Paired Samples t-Test",
     "text": "Summary of Paired Samples t-Test\nKey Takeaways\n\nPaired samples t-tests are ideal for comparing two related groups.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check assumptions: normality of differences and appropriate pairing."
+  },
+  {
+    "objectID": "lec17.html#anova",
+    "href": "lec17.html#anova",
+    "title": "Factorial ANOVA",
+    "section": "AnOVA",
+    "text": "AnOVA\nWhat does ANOVA do?\nANOVA compares the means of different groups to determine if they differ significantly from one another.\n\nANOVA can examine independent variables with more than 2 groups.\nANOVA can also look at multiple independent variables."
+  },
+  {
+    "objectID": "lec17.html#way-anova",
+    "href": "lec17.html#way-anova",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it.\n\n\nWhat kind of design is he using?\n2 x 2"
+  },
+  {
+    "objectID": "lec17.html#way-anova-1",
+    "href": "lec17.html#way-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\nWe can write the design of a study analyzed using ANOVA as:\n\nNumber of groups “x” the Number of groups\nConditions in the first independent variable “x” Conditions in the second independent variable, etc.\n2 x 2"
+  },
+  {
+    "objectID": "lec17.html#way-anova-2",
+    "href": "lec17.html#way-anova-2",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it. This is a 2 x 2 design.\n\n\nNumber of groups in coffee: 2 (coffee or no coffee)\nNumber of groups in Dark: 2 (Dark or No Dark)\nDV\n\nHappiness"
+  },
+  {
+    "objectID": "lec17.html#way-anova-3",
+    "href": "lec17.html#way-anova-3",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\nWhat are Prof Brocker’s Alternative Hypotheses?\n\nH1: Participants who drink coffee will be significantly happier than those who don’t.\nH2: Participants who watch Dark will be significantly happier than those who don’t."
+  },
+  {
+    "objectID": "lec17.html#way-anova-4",
+    "href": "lec17.html#way-anova-4",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it. This is a 2 x 2 design.\n\n\nParticipants who drink coffee will be significantly happier than those who don’t.\nParticipants who watch Dark will be significantly happier than those who don’t.\nH3: Participants who drink coffee while watching the Dark will be the happiest."
+  },
+  {
+    "objectID": "lec17.html#anova-1",
+    "href": "lec17.html#anova-1",
+    "title": "Factorial ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\nThe Three Type\n\nBetween-subjects: [One-Way or Factorial]\nWithin-subjects: (Repeated Measures ANOVA)\nMixed-designs: (Between and Within)"
+  },
+  {
+    "objectID": "lec17.html#way-between-subjects-anova",
+    "href": "lec17.html#way-between-subjects-anova",
+    "title": "Factorial ANOVA",
+    "section": "2-way Between subjects ANOVA",
+    "text": "2-way Between subjects ANOVA\n\nIVs must be nominal/categorical\nDV must be continuous"
+  },
+  {
+    "objectID": "lec17.html#way-between-subjects-anova-1",
+    "href": "lec17.html#way-between-subjects-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "2-way Between subjects ANOVA",
+    "text": "2-way Between subjects ANOVA\n\nIVs must be nominal/categorical\nDV must be continuous"
+  },
+  {
+    "objectID": "lec17.html#way-anova-5",
+    "href": "lec17.html#way-anova-5",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\nTwo types of variance:\n\nVariance among all of the scores (error variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance)."
+  },
+  {
+    "objectID": "lec17.html#way-anova-6",
+    "href": "lec17.html#way-anova-6",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\n\n\nCode\nlibrary(gt)\n\n# Load libraries\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(gt)\n\n# Load libraries\nlibrary(ggplot2)\nlibrary(dplyr)\n\n# Create a 2x2 grid structure for visualization\nmatrix_data &lt;- expand.grid(\n  Coffee = c(\"Yes\", \"No\"),\n  TV_Show = c(\"Yes\", \"No\")\n) %&gt;%\n  mutate(\n    x = as.numeric(Coffee == \"Yes\"),\n    y = as.numeric(TV_Show == \"Yes\"),\n    fill_color = c(\"lightblue\", \"lightcoral\", \"lightgreen\", \"khaki\") # Assign colors\n  )\n\n# Visualize the 2x2 matrix\nfac_mat &lt;- \n  ggplot(matrix_data, aes(xmin = x - 0.5, xmax = x + 0.5, ymin = y - 0.5, ymax = y + 0.5)) +\n  geom_rect(aes(fill = fill_color), color = \"black\", alpha = 0.8) + # Draw rectangles\n  scale_fill_identity() + # Use fill_color directly\n  labs(\n    title = \"2x2 Factorial Matrix\",\n    x = \"Coffee\", y = \"TV Show\"\n  ) +\n  scale_x_continuous(breaks = c(0, 1), labels = c(\"No\", \"Yes\"), limits = c(-0.5, 1.5)) +\n  scale_y_continuous(breaks = c(0, 1), labels = c(\"No\", \"Yes\"), limits = c(-0.5, 1.5)) +\n  theme_minimal() +\n  theme(\n    axis.text = element_text(size = 12),\n    axis.title = element_text(size = 14),\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5)\n  )"
+  },
+  {
+    "objectID": "lec17.html#way-anova-7",
+    "href": "lec17.html#way-anova-7",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\n\n\nCode\nfac_mat + \n  annotate(\n    \"text\", x = 1, y = 1, label = \"Coffee\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 1, label = \"Coffee\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 0, label = \"No Coffee\"\n  ) +\n    annotate(\n    \"text\", x = 1, y = 0, label = \"No Coffee\"\n  )"
+  },
+  {
+    "objectID": "lec17.html#way-anova-8",
+    "href": "lec17.html#way-anova-8",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\n\n\nCode\nfac_mat + \n  annotate(\n    \"text\", x = 1, y = 1, label = \"Coffee\\nDark\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 1, label = \"Coffee\\nNo Dark\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 0, label = \"No Coffee\\nDark\"\n  ) +\n    annotate(\n    \"text\", x = 1, y = 0, label = \"No Coffee\\nNo Dark\"\n  )"
+  },
+  {
+    "objectID": "lec17.html#way-anova-9",
+    "href": "lec17.html#way-anova-9",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\nTo compare the means, we analyzing two types of variance:\n\nVariance among all of the scores (within group variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance)."
+  },
+  {
+    "objectID": "lec17.html#degrees-of-freedom",
+    "href": "lec17.html#degrees-of-freedom",
+    "title": "Factorial ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\n\nI own 7 pairs of sock. I want to wear a different pair of socks every day.\nHow many times do I get to pick a pair of socks before I get stuck?\nThe degrees of freedom is how many times things can vary before we are stuck with what’s left over."
+  },
+  {
+    "objectID": "lec17.html#degrees-of-freedom-1",
+    "href": "lec17.html#degrees-of-freedom-1",
+    "title": "Factorial ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\n\nBetween Groups (dfBG ) = number of groups (k) - 1\nError Groups (dfError) = number of participants (n) - number of groups (k)\ndfTotal = n - 1\n\n\n*k is the number of groups in the independent variable."
+  },
+  {
+    "objectID": "lec17.html#degrees-of-freedom-2",
+    "href": "lec17.html#degrees-of-freedom-2",
+    "title": "Factorial ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\n\nBetween Groups 1 (dfBG1 ) = k1 - 1\nBetween Groups 2 (dfBG2 ) = k2 - 1\nInteraction (MSInteractioni) = (k1 - 1) x (k2 - 1)\nError (MSError) = n - (k1 x k2)\nTotal = n - 1\n*k is the number of groups in each independent variable."
+  },
+  {
+    "objectID": "lec17.html#calculating-the-ms-in-2-way-anova",
+    "href": "lec17.html#calculating-the-ms-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the MS in 2-way ANOVA",
+    "text": "Calculating the MS in 2-way ANOVA\n\nBetween Group 1 Mean Squared:\n\n\\(MS_{BG_1} = \\frac{SS_{BG_{1}}}{k_1-1}\\)\n\nBetween Group 2 Mean Squared:\n\n\\(MS_{BG_{2}} = \\frac{SS_{BG_{2}}}{k_2-1}\\)\n\nInteraction Mean Squared:\n\n\\(MS_{Interaction} = \\frac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError Mean Squared:\n\n\\(MS_{Error} = \\frac{SS{Error}}{n-(k_1 \\times k_2)}\\)"
+  },
+  {
+    "objectID": "lec17.html#calculating-2-way-anova-anova",
+    "href": "lec17.html#calculating-2-way-anova-anova",
+    "title": "Factorial ANOVA",
+    "section": "Calculating 2-way ANOVA anova",
+    "text": "Calculating 2-way ANOVA anova\n\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{BG_{2}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{Interaction}}{MS{Error}}\\)"
+  },
+  {
+    "objectID": "lec17.html#interpreting-the-fs-in-2-way-anova",
+    "href": "lec17.html#interpreting-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 = Gender\nF2 = Education Level\nF3 = Interaction of Gender x Education Level"
+  },
+  {
+    "objectID": "lec17.html#interpreting-the-fs-in-2-way-anova-1",
+    "href": "lec17.html#interpreting-the-fs-in-2-way-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA"
+  },
+  {
+    "objectID": "lec17.html#interpreting-the-fs-in-2-way-anova-2",
+    "href": "lec17.html#interpreting-the-fs-in-2-way-anova-2",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 =\nF2 =\nF3 ="
+  },
+  {
+    "objectID": "lec17.html#interpreting-the-fs-in-2-way-anova-3",
+    "href": "lec17.html#interpreting-the-fs-in-2-way-anova-3",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 = Section\nF2 = Review\nF3 = Section x Review"
+  },
+  {
+    "objectID": "lec17.html#way-anova-10",
+    "href": "lec17.html#way-anova-10",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it. This is a 2 x 2 design.\n\nShe randomly assigns 100 participants to Coffee or No Coffee x Dark or No Dark."
+  },
+  {
+    "objectID": "lec17.html#calculating-the-fs-in-2-way-anova",
+    "href": "lec17.html#calculating-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Coffee\",432, \"\",\"\",\"\",\n\"Dark\",486,\"\",\"\",\"\",\n\"Coffee x Dark\",540,\"\",\"\",\"\",\n\"Error\",5184,\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nCoffee\n432\n\n\n\n\n\nDark\n486\n\n\n\n\n\nCoffee x Dark\n540\n\n\n\n\n\nError\n5184"
+  },
+  {
+    "objectID": "lec17.html#calculating-the-fs-in-2-way-anova-1",
+    "href": "lec17.html#calculating-the-fs-in-2-way-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Coffee\",432, 1,432,\"8\",\n\"Dark\",486,1,486,\"9\",\n\"Coffee x Dark\",540,1,540,\"10\",\n\"Error\",5184,96,54,\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nCoffee\n432\n1\n432\n8\n\n\nDark\n486\n1\n486\n9\n\n\nCoffee x Dark\n540\n1\n540\n10\n\n\nError\n5184\n96\n54"
+  },
+  {
+    "objectID": "lec17.html#way-anova-11",
+    "href": "lec17.html#way-anova-11",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf. Brocker recruit 500 children on Halloween. He assigns half to wear a costume with a mask, and the other half to wear a costume without a mask. He assigns participants to trick-or-treat alone or in groups. Then he measures how much candy each child collects while trick-or-treating."
+  },
+  {
+    "objectID": "lec17.html#calculating-the-fs-in-2-way-anova-2",
+    "href": "lec17.html#calculating-the-fs-in-2-way-anova-2",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"IV1\",252, \"\",\"\",\"\",\n\"IV2\",441,\"\",\"\",\"\",\n\"Interaction\",882,\"\",\"\",\"\",\n\"Error\",10416,\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n  cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nIV1\n252\n\n\n\n\n\nIV2\n441\n\n\n\n\n\nInteraction\n882\n\n\n\n\n\nError\n10416"
+  },
+  {
+    "objectID": "lec17.html#calculating-the-fs-in-2-way-anova-3",
+    "href": "lec17.html#calculating-the-fs-in-2-way-anova-3",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"IV1\",252, \"1\",\"252\",\"12\",\n\"IV2\",441,\"1\",\"441\",\"21\",\n\"Interaction\",882,\"1\",\"882\",\"42\",\n\"Error\",10416,\"496\",\"21\",\"\"\n) |&gt; \n  gt() |&gt; \n  cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nIV1\n252\n1\n252\n12\n\n\nIV2\n441\n1\n441\n21\n\n\nInteraction\n882\n1\n882\n42\n\n\nError\n10416\n496\n21"
+  },
+  {
+    "objectID": "lec17.html#calculating-2-way-anova-anova-1",
+    "href": "lec17.html#calculating-2-way-anova-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "Calculating 2-way ANOVA anova",
+    "text": "Calculating 2-way ANOVA anova\n\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{Interaction}}{MS{Error}}\\)\n*All MS are divided by \\(MS_{Error}\\)"
+  },
+  {
+    "objectID": "lec17.html#reporting-f",
+    "href": "lec17.html#reporting-f",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F"
+  },
+  {
+    "objectID": "lec17.html#reporting-f-1",
+    "href": "lec17.html#reporting-f-1",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\nReject H0, or\nFail to Reject H0"
+  },
+  {
+    "objectID": "lec17.html#reporting-f-2",
+    "href": "lec17.html#reporting-f-2",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in general or for publication, you need EACH F-value:\n\nF(df for the between group MS, df for the error MS)\n\n= F-value\n\nCorresponding p-value\n\nFor significant results: Means and standard deviations of each group"
+  },
+  {
+    "objectID": "lec17.html#reporting-f-3",
+    "href": "lec17.html#reporting-f-3",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nThe group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F(1,496) = 7.12, p &lt; 0.05."
+  },
+  {
+    "objectID": "lec17.html#reporting-f-4",
+    "href": "lec17.html#reporting-f-4",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults IV1:\n\n\nIf significant: The group that watched the Eric Andre Show (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F (1, 496) = 7.12, p &lt; 0.05.\n\n\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07."
+  },
+  {
+    "objectID": "lec17.html#reporting-f-5",
+    "href": "lec17.html#reporting-f-5",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults IV2:\n\nIf significant: The group that drank coffee (M=7.35, s=1.01) reported significantly more happiness compared to their peers in the control group who drank decaf (M=4.21, s=0.99), F (1, 496) = 9.12, p &lt; 0.05.\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07."
+  },
+  {
+    "objectID": "lec17.html#reporting-f-6",
+    "href": "lec17.html#reporting-f-6",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults Interaction:\n\nIf significant: The group that drank coffee AND watched Eric Andre (M=7.35, s=1.01) reported significantly more happiness compared to the other groups (M=4.21, s=0.99), F (1, 496) = 11.14, p &lt; 0.05.\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.\n\n\n\n\n\nCode\nlibrary(dplyr)\nlibrary(ggplot2)\n\n# Set seed for reproducibility\nset.seed(123)\n\n# Create levels for the independent variables\ncoffee &lt;- c(\"Yes\", \"No\")\ntv_show &lt;- c(\"Yes\", \"No\")\n\n# Create a data frame with all combinations of coffee and tv_show\nfactorial_design &lt;- expand.grid(Coffee = coffee, TV_Show = tv_show)\n\n# Simulate happiness scores for each group\n# Adjust means to reflect interaction effects\nn_per_group &lt;- 30 # Number of participants per condition\ndata &lt;- factorial_design[rep(1:nrow(factorial_design), each = n_per_group), ]\ndata$Happiness &lt;- NA\n\n# Define mean happiness scores for each condition\nmeans &lt;- c(\n  \"Yes_Yes\" = 8,  # Coffee + TV Show\n  \"Yes_No\" = 6,   # Coffee + No TV Show\n  \"No_Yes\" = 5,   # No Coffee + TV Show\n  \"No_No\" = 3     # No Coffee + No TV Show\n)\n\n# Assign happiness scores with some random noise\ndata$Happiness &lt;- rnorm(\n  n = nrow(data),\n  mean = means[paste(data$Coffee, data$TV_Show, sep = \"_\")],\n  sd = 1.5 # Standard deviation for noise\n)\n\n# View the first few rows of the data\nhead(data)\n\n\n    Coffee TV_Show Happiness\n1      Yes     Yes  7.159287\n1.1    Yes     Yes  7.654734\n1.2    Yes     Yes 10.338062\n1.3    Yes     Yes  8.105763\n1.4    Yes     Yes  8.193932\n1.5    Yes     Yes 10.572597\n\n\nCode\n# Summary of the dataset\nsummary(data)\n\n\n Coffee   TV_Show    Happiness      \n Yes:60   Yes:60   Min.   : 0.4981  \n No :60   No :60   1st Qu.: 4.1162  \n                   Median : 5.5420  \n                   Mean   : 5.5232  \n                   3rd Qu.: 7.0553  \n                   Max.   :10.6804  \n\n\nCode\n# Model\nfac_mod &lt;- \n  aov(Happiness ~ Coffee * TV_Show, data  = data)\n\ndata |&gt; \n  ggplot(aes(Coffee, Happiness, color = TV_Show)) + \n  geom_jitter(alpha = .4) + \n   stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    color = \"black\",\n    aes(group = TV_Show,\n        lty = TV_Show)\n  ) + \n    stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\",\n    aes(color = TV_Show)\n  ) + \n  theme_minimal() + \n  theme(\n    panel.grid = element_blank()\n  )\n\n\n\n\n\n\n\n\n\nCode\nplot(TukeyHSD(fac_mod))"
   },
   {
     "objectID": "lec1.html#meet-the-instructor",
@@ -4337,7 +4603,7 @@
     "href": "index.html",
     "title": "348slides",
     "section": "",
-    "text": "Slides 2\nSlides 3\nSlides 4\nSlides 5\nSlides 6\nSlides 7\nSlides 8\nExam 1 Review\nExam 1 Scrap\nSlides 9\nSlides 10\nR-Workstation\nSlides 11\nSlides 12\nExam 2 Review\nSlides 13\nSlides 14"
+    "text": "Slides 2\nSlides 3\nSlides 4\nSlides 5\nSlides 6\nSlides 7\nSlides 8\nExam 1 Review\nExam 1 Scrap\nSlides 9\nSlides 10\nR-Workstation\nSlides 11\nSlides 12\nExam 2 Review\nSlides 13\nSlides 14\nSlides 15\nSlides 16\nSlides 17"
   },
   {
     "objectID": "L13pp.html",
@@ -4386,7 +4652,7 @@
     "href": "lec8.html#sampling-theory-3",
     "title": "Sampling Theory",
     "section": "Sampling Theory",
-    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n176264277175331654713676626224\n\n716542113445461637767232264332\n\n334623251465532265746311235371\n\n247656735115534432661531225157\n\n225267313214371456233675162367\n\n727762633414732766372731251555"
+    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n334277231643342131251442163454\n\n523367142342463364217572772175\n\n445336337517316236322725237523\n\n712433634444154546142345673612\n\n126741442454565165426523225367\n\n747231311725776143661613573767"
   },
   {
     "objectID": "lec8.html#sampling-theory-4",
