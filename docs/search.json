@@ -5947,7 +5947,7 @@
     "href": "lec18.html#within-subjects-anova-5",
     "title": "Within Subjects ANOVA",
     "section": "WITHIN Subjects ANOVA",
-    "text": "WITHIN Subjects ANOVA\n\n\nCode\n# Generate data for two normal distributions\nx &lt;- seq(-6, 6, length=100)\nnull_dist &lt;- dnorm(x, mean = 0, sd = 1)\nalt_dist &lt;- dnorm(x, mean = 2, sd = 1)\n\ndata &lt;- data.frame(\n  x = rep(x, 2),\n  y = c(null_dist, alt_dist),\n  hypothesis = factor(rep(c(\"Null Hypothesis\", \"Alternative Hypothesis\"), each=length(x)))\n)\n\n# Create the plot\n\nplt &lt;- \n  ggplot(data, aes(x = x, y = y, \n                 lty = rev(hypothesis))) +\n    geom_line(aes(color = \"purple\")) +\n  theme_linedraw() + \n  labs(\n    x = \"\",\n    y = \"\",\n    lty = \"Hypotheses\"\n  ) + \n  theme(\n    panel.grid = element_blank(),\n    legend.position = \"inside\",\n    legend.position.inside = c(.2,.5),\n    legend.background = element_rect(color = \"black\")\n  ) + \n  scale_color_identity()"
+    "text": "WITHIN Subjects ANOVA\n\n\nCode\n# Generate data for two normal distributions\nx &lt;- seq(-6, 6, length=100)\nnull_dist &lt;- dnorm(x, mean = 0, sd = 1)\nalt_dist &lt;- dnorm(x, mean = 2, sd = 1)\n\ndata &lt;- data.frame(\n  x = rep(x, 2),\n  y = c(null_dist, alt_dist),\n  hypothesis = factor(rep(c(\"Null Hypothesis\", \"Alternative Hypothesis\"), each=length(x)))\n)\n\n# Create the plot\n\nplt &lt;- \n  ggplot(data, aes(x = x, y = y, \n                 lty = rev(hypothesis))) +\n    geom_line(aes(color = \"purple\")) +\n  theme_linedraw() + \n  labs(\n    x = \"\",\n    y = \"\",\n    lty = \"Hypotheses\"\n  ) + \n  theme(\n    panel.grid = element_blank(),\n    legend.position = \"inside\",\n    legend.position.inside = c(.2,.5),\n    legend.background = element_rect(color = \"black\")\n  ) + \n  scale_color_identity()\n\nplt"
   },
   {
     "objectID": "lec18.html#between-subjects-anova",
@@ -6045,7 +6045,7 @@
     "href": "lec18.html#within-subjects-anova-12",
     "title": "Within Subjects ANOVA",
     "section": "WITHIN subjects ANOVA",
-    "text": "WITHIN subjects ANOVA\nWhat is the F ratio in between subjects ANOVA?\n\\(F = \\frac{MS_{BG}{\\color{red}{MS_{Error}}}\\)\n\\(MS_{Error} = \\frac{SS_{Error}}{df_{Error}}\\)"
+    "text": "WITHIN subjects ANOVA\nWhat is the F ratio in between subjects ANOVA?\n\\(F = \\frac{MS_{BG}}{\\color{red}{MS_{Error}}}\\)\n\\(MS_{Error} = \\frac{SS_{Error}}{df_{Error}}\\)"
   },
   {
     "objectID": "lec18.html#within-subjects-anova-13",
@@ -6087,7 +6087,7 @@
     "href": "lec18.html#calculating-means-squared-ms-1",
     "title": "Within Subjects ANOVA",
     "section": "Calculating means squared (MS)",
-    "text": "Calculating means squared (MS)\n\nWe calculate a SS for the variance between the times points (SSTime).\nTo find SSError, we subtract SSSubjects from SSWG."
+    "text": "Calculating means squared (MS)\n\nWe calculate a SS for the variance between the times points (SSTime).\nTo find \\(SS_{Error}\\), we subtract \\(SS_{Subjects}\\) from \\(SS_{WG}\\)."
   },
   {
     "objectID": "lec18.html#calculating-means-squared-ms-2",
@@ -6256,5 +6256,96 @@
     "title": "Within Subjects ANOVA",
     "section": "5. Physiological Stress Study",
     "text": "5. Physiological Stress Study\n\n\nCode\nset.seed(100)\n\n# Physiological Stress Study\nstress_data &lt;- data.frame(\n  Participant = factor(1:30),\n  Rest = rnorm(30, mean = 50, sd = 5),\n  Task = rnorm(30, mean = 70, sd = 5),\n  Recovery = rnorm(30, mean = 55, sd = 5)\n)\n\nstress_data\n\n\n   Participant     Rest     Task Recovery\n1            1 47.48904 69.54443 53.69002\n2            2 50.65766 78.78688 54.65578\n3            3 49.60541 69.31035 53.10558\n4            4 54.43392 69.44403 67.90979\n5            5 50.58486 66.54993 55.64917\n6            6 51.59315 68.89103 51.43488\n7            7 47.09105 70.91454 58.18997\n8            8 53.57266 72.08662 56.00846\n9            9 45.87370 75.32701 54.65042\n10          10 48.20069 74.85101 54.53755\n11          11 50.44943 69.49185 57.24452\n12          12 50.48137 77.01602 49.67822\n13          13 48.99183 61.11612 49.18790\n14          14 53.69920 73.11434 63.24261\n15          15 50.61690 67.38858 44.68952\n16          16 49.85342 76.61115 55.06375\n17          17 48.05573 68.18280 49.56236\n18          18 52.55428 76.59533 56.35270\n19          19 45.43093 70.21890 60.04226\n20          20 61.55148 60.60672 44.62798\n21          21 47.80955 67.76469 59.48411\n22          22 53.82030 61.30701 54.75002\n23          23 51.30981 70.89432 48.27325\n24          24 53.86702 79.48733 45.34394\n25          25 45.92810 58.64037 58.54791\n26          26 47.80775 74.90232 54.21047\n27          27 46.39889 63.00587 56.08184\n28          28 51.15472 79.12436 59.08681\n29          29 44.21135 76.90649 63.63588\n30          30 51.23538 65.80574 54.48115"
+  },
+  {
+    "objectID": "lec18.html#practice-1",
+    "href": "lec18.html#practice-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n\nProf. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.\n\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Time\",\"49\", \"1\",\"49\",\".053\",\n\"Within Group\",\"912\",\"198\",\"\",\"\",\n\"Subjects\",\"219\",\"99\",\"2.2\",\"\",\n\"Error\",\"912\",\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nTime\n49\n1\n49\n.053\n\n\nWithin Group\n912\n198\n\n\n\n\nSubjects\n219\n99\n2.2\n\n\n\nError\n912"
+  },
+  {
+    "objectID": "lec18.html#practice-4",
+    "href": "lec18.html#practice-4",
+    "title": "Within Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n\nOpen Ihno’s dataset in SPSS\nWas anxiety just before the Stats Exam significantly higher than baseline anxiety?"
+  },
+  {
+    "objectID": "lab1.html#method-section",
+    "href": "lab1.html#method-section",
+    "title": "Writing a Method Section",
+    "section": "Method Section",
+    "text": "Method Section\nObjective\n\nTransparency: Allows replication of the study.\nOrganization: Structured approach to presenting details.\nCredibility: Demonstrates rigor and validity."
+  },
+  {
+    "objectID": "lab1.html#components-of-the-method-section",
+    "href": "lab1.html#components-of-the-method-section",
+    "title": "Writing a Method Section",
+    "section": "Components of the Method Section",
+    "text": "Components of the Method Section\n\nParticipants\nMaterials\nProcedure\nDesign"
+  },
+  {
+    "objectID": "lab1.html#components-of-the-method-section-1",
+    "href": "lab1.html#components-of-the-method-section-1",
+    "title": "Writing a Method Section",
+    "section": "Components of the Method Section",
+    "text": "Components of the Method Section"
+  },
+  {
+    "objectID": "lab1.html#example-review",
+    "href": "lab1.html#example-review",
+    "title": "Writing a Method Section",
+    "section": "Example Review",
+    "text": "Example Review"
+  },
+  {
+    "objectID": "lab1.html#writing-exercise",
+    "href": "lab1.html#writing-exercise",
+    "title": "Writing a Method Section",
+    "section": "Writing Exercise",
+    "text": "Writing Exercise\n\nYou are conducting a study to explore how exposure to morbidly curious stimuli (e.g., unpleasant smells, sights, or sounds) influences people’s emotional reactions and decision-making. The research focuses on visual stimuli (e.g., unsettling images) and their impact on self-reported curiosity and arousal levels.\n\n\nThe study uses two groups:\n\nParticipants who view neutral images (e.g., landscapes).\nParticipants who view morbidly curious images (e.g., depictions of natural disasters or abandoned locations)."
+  },
+  {
+    "objectID": "lab1.html#common-mistakes-to-avoid",
+    "href": "lab1.html#common-mistakes-to-avoid",
+    "title": "Writing a Method Section",
+    "section": "Common Mistakes to Avoid",
+    "text": "Common Mistakes to Avoid\n\nOvergeneralization or lack of specificity.\nOmitting key details (e.g., sample size or instrument reliability).\nFailing to justify design choices."
+  },
+  {
+    "objectID": "lab1.html#participants",
+    "href": "lab1.html#participants",
+    "title": "Writing a Method Section",
+    "section": "Participants",
+    "text": "Participants\n\nNumber of participants.\nDemographics (age, gender, other relevant factors).\nRecruitment method."
+  },
+  {
+    "objectID": "lab1.html#components-of-the-method-section-2",
+    "href": "lab1.html#components-of-the-method-section-2",
+    "title": "Writing a Method Section",
+    "section": "Components of the Method Section",
+    "text": "Components of the Method Section\nMaterials:\n\nInstruments (e.g., scales, questionnaires).\nDescription and citation of tools used."
+  },
+  {
+    "objectID": "lab1.html#components-of-the-method-section-3",
+    "href": "lab1.html#components-of-the-method-section-3",
+    "title": "Writing a Method Section",
+    "section": "Components of the Method Section",
+    "text": "Components of the Method Section\nProcedure:\n\nStep-by-step explanation of what participants did.\nTimeline of events.\nEthical considerations (e.g., informed consent, debriefing)."
+  },
+  {
+    "objectID": "lab1.html#components-of-the-method-section-4",
+    "href": "lab1.html#components-of-the-method-section-4",
+    "title": "Writing a Method Section",
+    "section": "Components of the Method Section",
+    "text": "Components of the Method Section\nDesign:\n\nSpecify research design (e.g., experimental, correlational).\nVariables (IVs, DVs, and control)."
+  },
+  {
+    "objectID": "lab1.html#writing-exercise-1",
+    "href": "lab1.html#writing-exercise-1",
+    "title": "Writing a Method Section",
+    "section": "Writing Exercise",
+    "text": "Writing Exercise\nAfter viewing the images, participants rate their curiosity and emotional arousal using a validated 5-point Likert scale.\n\nParticipants: Who would participate and how they are selected.\nMaterials: Instruments or tools used for the study.\nProcedure: Describe how the study will be conducted.\nDesign: Outline the study design and variables.\nPeer Review: Students exchange drafts and give constructive feedback."
   }
 ]

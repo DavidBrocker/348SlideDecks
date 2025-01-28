@@ -454,10 +454,10 @@ tribble(
 ```{r}
 tribble(
 ~Source, ~SS, ~df, ~MS, ~F,
-"Time","49", "","","",
-"Within Group","912","","","",
-"Subjects","219","","","",
-"Error","","","",""
+"Time","49", "1","49",".053",
+"Within Group","912","198","","",
+"Subjects","219","99","2.2","",
+"Error","912","","",""
 ) |> 
   gt() |> 
     cols_align(align = "center",
