@@ -17,13 +17,13 @@ format:
 ### The Old and the New
 
 ::: {.incremental .highlight-last}
--   $x$ 
+-   $x$
 
--   $\bar{x}$ 
+-   $\bar{x}$
 
--   $\sum(x)$ 
+-   $\sum(x)$
 
--   $x^2$ 
+-   $x^2$
 :::
 
 ## Descriptive Statistics
@@ -315,8 +315,7 @@ data.frame(
 
 ### Calculate how far each X-VALUE is from the MEAN.
 
-::: {.incremental .highlight-last}
-
+::::: {.incremental .highlight-last}
 ::: fragment
 Step 1. Examine Data
 :::
@@ -330,7 +329,7 @@ Step 2. Calculate Mean
 -   $\bar{x} = \frac{\sum(x)}{n} = 1 + 3 + 2...$
 
 -   $\bar{x} = \frac{20}{10} = 2$
-:::
+:::::
 
 ## Deviation Scores
 
@@ -411,6 +410,7 @@ tibble(
   )
 
 ```
+
 ## Calculating Dispersion
 
 ### Visual
@@ -501,10 +501,10 @@ tibble(
 ```
 
 ## Calculating Dispersion
+
 ### Divide by n-1 to Estimate
 
 ::: {.incremental .highlight-last}
-
 Step 5: Divide by (n-1).
 
 -   (n-1) refers to the *degrees of freedom*... don't worry about it for now.
@@ -514,7 +514,6 @@ Step 5: Divide by (n-1).
 -   Variance
 
     -   The fact or quality of being different, divergent, or inconsistent.
-    
 :::
 
 ## Calculating Dispersion
@@ -530,6 +529,7 @@ Step 5: Divide by (n-1).
     -   We take the square root.
 
 ## Calculating Dispersion
+
 ### Inflation
 
 ```{r}
@@ -550,10 +550,10 @@ Step 6: Take the square root.
 -   $\frac{\sum(x-\bar{x})^2}{n-1} = \sqrt{.667} = .816$
 
 ## Calculating standard deviation
+
 ### Step-by-Step
 
 ::: {.incremental .highlight-last}
-
 1.  Mean: Calculate the mean.
 
     -   $\bar{x}$
@@ -569,14 +569,13 @@ Step 6: Take the square root.
 4.  Sum of squares: Add up the squared deviations.
 
     -   $\sum(x-\bar{x})^2$
-    
 :::
 
 ## Calculating standard deviation
+
 ### Step-by-Step
 
 ::: {.incremental .highlight-last}
-
 5.  Variance: Divide the sum of squares by (n-1).
 
     -   $\frac{\sum(x-\bar{x})^2}{n-1}$
@@ -584,29 +583,26 @@ Step 6: Take the square root.
 6.  Standard Deviation: Take the square root of the variance.
 
     -   $\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$
-
 :::
 
 ## Formulas for Dispersion
 
 ### Variance and Standard Deviation
 
-::: {.callout-important}
+::: callout-important
 $$
 s^2 = \frac{\sum(x-\bar{x})^2}{N-1}
 $$
-
 :::
 
-::: {.callout-important}
-
+::: callout-important
 $$
 s = \sqrt{\frac{\sum(x-\bar{x})^2}{N-1}}
 $$
-
 :::
 
 ## Formulas for Dispersion
+
 ### Standard Deviation
 
 -   Variance is a measure of dispersion.
