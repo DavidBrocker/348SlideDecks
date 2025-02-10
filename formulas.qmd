@@ -1,0 +1,79 @@
+---
+title: "Statistical Formulas"
+---
+
+## Measures of Central Tendency
+
+### Arithmetic Mean
+
+$\bar{x} = \frac{\sum(x)}{n}$
+
+## Measures of Dispersion
+### Sample Variance
+
+$s^2 = \frac{\sum(x-\bar{x})^2}{n-1}$
+
+### Sample Standard Deviation
+$s = \sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$
+
+### Z-Score
+$z = \frac{x - \bar{x}}{s}$
+
+## Correlation and Covariance
+
+$r = \frac{\sum(X-\bar{X})(Y-\bar{Y})}{(s_x)(s_y)(N-1)}$
+
+## Inferential Statistics
+### Single Sample T-Test
+
+$t = \frac{\bar{x}-\mu}{\sigma_{\bar{x}}}$
+
+- $t$  = The t-statistic, representing how far the sample mean is from the population mean (in standard error units).
+
+- $\bar{X}$  = The sample mean of your data.
+
+- $\mu_0$  = The hypothesized population mean (the value you’re comparing your sample to).
+
+- $\sigma_{\bar{X}}$  = The standard error of the mean, calculated as:
+
+    - $\sigma_{\bar{X}} = \frac{s}{\sqrt{n}}$
+
+
+### Paired-Samples T-Test
+
+$t = \frac{\bar{D}}{\sigma_{\bar{D}}}$
+
+- $\bar{D}$ = Mean difference between T1 and T2
+
+- $\sigma_{\bar{D}}$ = Standard Error of the mean difference
+
+    - $\frac{\sigma_{\bar{D}}}{n}$
+
+### Independent-Samples T-Test
+$t = \frac{\bar{X}_1-\bar{X}_2}{\sqrt{\frac{s^2_1}{N_1}-\frac{s^2_2}{N_2}}}$
+
+- $t$  = The t-statistic, representing how far apart the two sample means are, relative to the variability in the data.
+
+- $\bar{X}_1$  and  $\bar{X}_2$  = The means of the two independent samples (Group 1 and Group 2).
+
+- $s_1^2$  and  $s_2^2$  = The sample variances of the two groups.
+
+- $n_1$  and  $n_2$  = The sample sizes of the two groups.
+
+### One-Way ANOVA (Between)
+
+$F = \frac{MS_{\text{between}}}{MS_{\text{within}}} = \frac{\frac{SS_{\text{between}}}{df_{\text{between}}}}{\frac{SS_{\text{within}}}{df_{\text{within}}}}$
+
+- $F$  = Test statistic for the ANOVA
+
+- $MS_{between}$  = Mean Square Between Groups
+
+- $MS_{within}$  = Mean Square Within Groups (also called Error)
+
+- $SS_{between}$  = Sum of Squares Between Groups
+
+- $SS_{within}$  = Sum of Squares Within Groups
+
+- $df_{between}$  = Degrees of Freedom Between Groups
+
+- $df_{within}$  = Degrees of Freedom Within Groups
