@@ -179,7 +179,7 @@ Dave Brocker
 <p>In regression we will choose two or more variables we have reason to believe predict y.</p>
 <ul>
 <li class="fragment"><p>We call these <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, etc.</p></li>
-<li class="fragment"><p>$A$ is the predictor variable.</p></li>
+<li class="fragment"><p><span class="math inline">\(A\)</span> is the predictor variable.</p></li>
 </ul>
 </section>
 <section id="regression-terminology-2" class="slide level2">
@@ -303,25 +303,30 @@ Dave Brocker
 <section>
 <section id="interpreting-coefficients" class="title-slide slide level1 center">
 <h1>Interpreting Coefficients</h1>
+
+</section>
+<section id="regression-model-table" class="slide level2">
+<h2>Regression Model Table</h2>
+<h3 id="two-predictor-variables">Two Predictor Variables</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div id="einzpflrua" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#einzpflrua table {
+<div id="mirzjhfhox" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mirzjhfhox table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#einzpflrua thead, #einzpflrua tbody, #einzpflrua tfoot, #einzpflrua tr, #einzpflrua td, #einzpflrua th {
+#mirzjhfhox thead, #mirzjhfhox tbody, #mirzjhfhox tfoot, #mirzjhfhox tr, #mirzjhfhox td, #mirzjhfhox th {
   border-style: none;
 }
 
-#einzpflrua p {
+#mirzjhfhox p {
   margin: 0;
   padding: 0;
 }
 
-#einzpflrua .gt_table {
+#mirzjhfhox .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -347,12 +352,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#einzpflrua .gt_caption {
+#mirzjhfhox .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#einzpflrua .gt_title {
+#mirzjhfhox .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -364,7 +369,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#einzpflrua .gt_subtitle {
+#mirzjhfhox .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -376,7 +381,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#einzpflrua .gt_heading {
+#mirzjhfhox .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -388,13 +393,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#einzpflrua .gt_bottom_border {
+#mirzjhfhox .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#einzpflrua .gt_col_headings {
+#mirzjhfhox .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -409,7 +414,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#einzpflrua .gt_col_heading {
+#mirzjhfhox .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -429,7 +434,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#einzpflrua .gt_column_spanner_outer {
+#mirzjhfhox .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -441,15 +446,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#einzpflrua .gt_column_spanner_outer:first-child {
+#mirzjhfhox .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#einzpflrua .gt_column_spanner_outer:last-child {
+#mirzjhfhox .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#einzpflrua .gt_column_spanner {
+#mirzjhfhox .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -461,11 +466,11 @@ Dave Brocker
   width: 100%;
 }
 
-#einzpflrua .gt_spanner_row {
+#mirzjhfhox .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#einzpflrua .gt_group_heading {
+#mirzjhfhox .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -491,7 +496,7 @@ Dave Brocker
   text-align: left;
 }
 
-#einzpflrua .gt_empty_group_heading {
+#mirzjhfhox .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -506,15 +511,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#einzpflrua .gt_from_md > :first-child {
+#mirzjhfhox .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#einzpflrua .gt_from_md > :last-child {
+#mirzjhfhox .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#einzpflrua .gt_row {
+#mirzjhfhox .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -533,7 +538,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#einzpflrua .gt_stub {
+#mirzjhfhox .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -546,7 +551,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#einzpflrua .gt_stub_row_group {
+#mirzjhfhox .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -560,15 +565,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#einzpflrua .gt_row_group_first td {
+#mirzjhfhox .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#einzpflrua .gt_row_group_first th {
+#mirzjhfhox .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#einzpflrua .gt_summary_row {
+#mirzjhfhox .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -578,16 +583,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#einzpflrua .gt_first_summary_row {
+#mirzjhfhox .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#einzpflrua .gt_first_summary_row.thick {
+#mirzjhfhox .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#einzpflrua .gt_last_summary_row {
+#mirzjhfhox .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -597,7 +602,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#einzpflrua .gt_grand_summary_row {
+#mirzjhfhox .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -607,7 +612,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#einzpflrua .gt_first_grand_summary_row {
+#mirzjhfhox .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -617,7 +622,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#einzpflrua .gt_last_grand_summary_row_top {
+#mirzjhfhox .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -627,11 +632,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#einzpflrua .gt_striped {
+#mirzjhfhox .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#einzpflrua .gt_table_body {
+#mirzjhfhox .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -640,7 +645,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#einzpflrua .gt_footnotes {
+#mirzjhfhox .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -654,7 +659,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#einzpflrua .gt_footnote {
+#mirzjhfhox .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -663,7 +668,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#einzpflrua .gt_sourcenotes {
+#mirzjhfhox .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -677,7 +682,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#einzpflrua .gt_sourcenote {
+#mirzjhfhox .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -685,72 +690,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#einzpflrua .gt_left {
+#mirzjhfhox .gt_left {
   text-align: left;
 }
 
-#einzpflrua .gt_center {
+#mirzjhfhox .gt_center {
   text-align: center;
 }
 
-#einzpflrua .gt_right {
+#mirzjhfhox .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#einzpflrua .gt_font_normal {
+#mirzjhfhox .gt_font_normal {
   font-weight: normal;
 }
 
-#einzpflrua .gt_font_bold {
+#mirzjhfhox .gt_font_bold {
   font-weight: bold;
 }
 
-#einzpflrua .gt_font_italic {
+#mirzjhfhox .gt_font_italic {
   font-style: italic;
 }
 
-#einzpflrua .gt_super {
+#mirzjhfhox .gt_super {
   font-size: 65%;
 }
 
-#einzpflrua .gt_footnote_marks {
+#mirzjhfhox .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#einzpflrua .gt_asterisk {
+#mirzjhfhox .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#einzpflrua .gt_indent_1 {
+#mirzjhfhox .gt_indent_1 {
   text-indent: 5px;
 }
 
-#einzpflrua .gt_indent_2 {
+#mirzjhfhox .gt_indent_2 {
   text-indent: 10px;
 }
 
-#einzpflrua .gt_indent_3 {
+#mirzjhfhox .gt_indent_3 {
   text-indent: 15px;
 }
 
-#einzpflrua .gt_indent_4 {
+#mirzjhfhox .gt_indent_4 {
   text-indent: 20px;
 }
 
-#einzpflrua .gt_indent_5 {
+#mirzjhfhox .gt_indent_5 {
   text-indent: 25px;
 }
 
-#einzpflrua .katex-display {
+#mirzjhfhox .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#einzpflrua div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mirzjhfhox div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -778,14 +783,14 @@ Dave Brocker
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">x1</td>
-<td class="gt_row gt_center" headers="estimate">0.06</td>
-<td class="gt_row gt_center" headers="conf.low">-0.39, 0.50</td>
-<td class="gt_row gt_center" headers="p.value">0.8</td>
+<td class="gt_row gt_center" headers="estimate">0.35</td>
+<td class="gt_row gt_center" headers="conf.low">-0.14, 0.84</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">x2</td>
-<td class="gt_row gt_center" headers="estimate">0.09</td>
-<td class="gt_row gt_center" headers="conf.low">-0.40, 0.57</td>
+<td class="gt_row gt_center" headers="estimate">0.12</td>
+<td class="gt_row gt_center" headers="conf.low">-0.41, 0.64</td>
 <td class="gt_row gt_center" headers="p.value">0.7</td>
 </tr>
 </tbody><tfoot class="gt_footnotes">
@@ -828,18 +833,16 @@ Dave Brocker
 <li><p>p-value</p></li>
 </ul>
 </div>
-</section></section>
-<section>
-<section id="r2-coefficient-of-determination" class="title-slide slide level1 center">
-<h1><span class="math inline">\(R^2\)</span>: Coefficient of Determination</h1>
-
 </section>
+<section id="r2-coefficient-of-determination" class="slide level2">
+<h2><span class="math inline">\(R^2\)</span>: Coefficient of Determination</h2>
 <h3 id="how-much-can-we-account-for">How much can we account for?</h3>
 <ul>
 <li class="fragment"><p><span class="math inline">\(R^2\)</span> is the correlation coefficient (<code>r</code>) squared.</p></li>
 <li class="fragment"><p><span class="math inline">\(R^2\)</span> is always positive</p></li>
 <li class="fragment"><p>In correlation, the amount of <code>y</code> accounted for by <code>x</code></p></li>
 </ul>
+</section>
 <section id="r2-coefficient-of-determination-1" class="slide level2">
 <h2><span class="math inline">\(R^2\)</span>: Coefficient of Determination</h2>
 <h3 id="how-much-can-we-account-for-1">How much can we account for?</h3>
@@ -897,12 +900,6 @@ Dave Brocker
 <blockquote>
 <p>Professor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.</p>
 </blockquote>
-</section>
-<section id="linear-regression-3" class="slide level2">
-<h2>Linear Regression</h2>
-<blockquote>
-<p>Professor Brocker wants to be able to predict social media use.</p>
-</blockquote>
 <p>What are some predictors of social media use?</p>
 <ul>
 <li class="fragment"><p>Sense of belonging</p></li>
@@ -916,7 +913,7 @@ Dave Brocker
 <section id="regression-equation-5" class="slide level2 scrollable">
 <h2>Regression Equation</h2>
 <h3 id="theoretical">Theoretical</h3>
-<p><span class="math display">\[\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(A)} + \color{purple}{\beta_2(B)}\color{pink}{X}~ + e_i}\]</span></p>
+<p><span class="math display">\[\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(Age)} + \color{purple}{\beta_2(SOB)}\color{pink}~ + e_i}\]</span></p>
 <ol type="1">
 <li class="fragment"><p>The predicted degree of social media use for a participant “<code>i</code>”</p></li>
 <li class="fragment"><p>Intercept: Average social media use when all other predictors are 0.</p></li>
@@ -932,7 +929,7 @@ Dave Brocker
 <h3 id="computational">Computational</h3>
 <p><span class="math inline">\(\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)\)</span></p>
 </section>
-<section id="linear-regression-4" class="slide level2">
+<section id="linear-regression-3" class="slide level2">
 <h2>Linear Regression</h2>
 <ul>
 <li class="fragment">This form of regression is called linear regression.</li>
@@ -2474,6 +2471,24 @@ Dave Brocker
 <section id="categorical-variables-in-regression" class="title-slide slide level1 center">
 <h1>Categorical Variables in Regression</h1>
 
+</section>
+<section id="multiple-predictors" class="slide level2">
+<h2>Multiple Predictors</h2>
+<h3 id="understanding-the-factors-that-influence-energy-levels">Understanding the Factors That Influence Energy Levels</h3>
+<blockquote>
+<p>What determines how energized you feel throughout the day? Is it the number of cups of coffee you drink? The amount of sleep you got the night before? Or maybe even the type of TV shows you watch before bed?</p>
+</blockquote>
+</section>
+<section id="multiple-predictors-1" class="slide level2">
+<h2>Multiple Predictors</h2>
+<h3 id="understanding-the-factors-that-influence-energy-levels-1">Understanding the Factors That Influence Energy Levels</h3>
+<p>In this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:</p>
+<ul>
+<li class="fragment">Duration of TV Watching (Continuous) – Does watching more TV affect energy?</li>
+<li class="fragment">Cups of Coffee (Continuous) – Does caffeine actually help?</li>
+<li class="fragment">Prior Sleep (Continuous) – Does more sleep always mean more energy?</li>
+<li class="fragment">TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?</li>
+</ul>
 </section>
 <section id="categorical-variables" class="slide level2">
 <h2>Categorical variables</h2>

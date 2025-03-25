@@ -55,7 +55,7 @@ In regression we will choose two or more variables we have reason to believe pre
 
 -   We call these $A$, $B$, etc.
 
--   \$A\$ is the predictor variable.
+-   $A$ is the predictor variable.
 
 ## Regression terminology
 
@@ -246,6 +246,9 @@ $\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
 
 # Interpreting Coefficients
 
+## Regression Model Table
+### Two Predictor Variables
+
 ```{r}
 test <- 
   tibble(
@@ -287,7 +290,7 @@ mod1 |> tbl_regression()
 -   p-value
 :::
 
-# $R^2$: Coefficient of Determination
+## $R^2$: Coefficient of Determination
 
 ### How much can we account for?
 
@@ -355,10 +358,6 @@ mod1 |> tbl_regression()
 
 > Professor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.
 
-## Linear Regression
-
-> Professor Brocker wants to be able to predict social media use.
-
 What are some predictors of social media use?
 
 -   Sense of belonging
@@ -373,7 +372,7 @@ $$\large{Y_i = \beta_0 + \beta_1A + \beta_2B~ + e_i}$$
 
 ### Theoretical
 
-$$\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(A)} + \color{purple}{\beta_2(B)}\color{pink}{X}~ + e_i}$$
+$$\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(Age)} + \color{purple}{\beta_2(SOB)}\color{pink}~ + e_i}$$
 
 1.  The predicted degree of social media use for a participant "`i`"
 
@@ -498,6 +497,24 @@ Then report individual betas and their p's:
 -   It's common to report betas and p's in text as well as in a table.
 
 # Categorical Variables in Regression
+
+## Multiple Predictors
+
+### Understanding the Factors That Influence Energy Levels
+
+> What determines how energized you feel throughout the day? Is it the number of cups of coffee you drink? The amount of sleep you got the night before? Or maybe even the type of TV shows you watch before bed?
+
+
+## Multiple Predictors
+
+### Understanding the Factors That Influence Energy Levels
+
+In this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:
+
+- Duration of TV Watching (Continuous) – Does watching more TV affect energy?
+- Cups of Coffee (Continuous) – Does caffeine actually help?
+- Prior Sleep (Continuous) – Does more sleep always mean more energy?
+- TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
 
 ## Categorical variables
 

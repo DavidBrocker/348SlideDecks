@@ -5407,7 +5407,7 @@
     "href": "lec13.html#data-overview",
     "title": "T-Tests",
     "section": "Data Overview",
-    "text": "Data Overview\n\n\n\n\nestimateestimate1estimate2statisticp.valueparameterconf.lowconf.highmethodalternative\n\n-1.667.6-2.850.010718-2.78-0.42Two Sample t-testtwo.sided",
+    "text": "Data Overview\n\n\n\n\nestimateestimate1estimate2statisticp.valueparameterconf.lowconf.highmethodalternative\n\n-2.16.28.3-3.330.0036918-3.42-0.777Two Sample t-testtwo.sided",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -6326,7 +6326,7 @@
     "href": "lec12.html#regression-terminology-1",
     "title": "Linear Regression",
     "section": "Regression terminology",
-    "text": "Regression terminology\nIn regression we will choose two or more variables we have reason to believe predict y.\n\nWe call these \\(A\\), \\(B\\), etc.\n$A$ is the predictor variable.",
+    "text": "Regression terminology\nIn regression we will choose two or more variables we have reason to believe predict y.\n\nWe call these \\(A\\), \\(B\\), etc.\n\\(A\\) is the predictor variable.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -6442,6 +6442,18 @@
     ]
   },
   {
+    "objectID": "lec12.html#regression-model-table",
+    "href": "lec12.html#regression-model-table",
+    "title": "Linear Regression",
+    "section": "Regression Model Table",
+    "text": "Regression Model Table\nTwo Predictor Variables\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\nx1\n0.35\n-0.14, 0.84\n0.2\n\n\nx2\n0.12\n-0.41, 0.64\n0.7\n\n\n\n1\nCI = Confidence Interval",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
     "objectID": "lec12.html#interpreting-coefficients-1",
     "href": "lec12.html#interpreting-coefficients-1",
     "title": "Linear Regression",
@@ -6471,6 +6483,18 @@
     "title": "Linear Regression",
     "section": "Interpreting coefficients",
     "text": "Interpreting coefficients\n\n\nBeta coefficient: which predictor of y has the more predictive power?\nt-value\np-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#r2-coefficient-of-determination",
+    "href": "lec12.html#r2-coefficient-of-determination",
+    "title": "Linear Regression",
+    "section": "\\(R^2\\): Coefficient of Determination",
+    "text": "\\(R^2\\): Coefficient of Determination\nHow much can we account for?\n\n\\(R^2\\) is the correlation coefficient (r) squared.\n\\(R^2\\) is always positive\nIn correlation, the amount of y accounted for by x",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -6542,19 +6566,7 @@
     "href": "lec12.html#linear-regression-2",
     "title": "Linear Regression",
     "section": "Linear Regression",
-    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.",
-    "crumbs": [
-      "Course Overview",
-      "Lectures",
-      "Linear Regression"
-    ]
-  },
-  {
-    "objectID": "lec12.html#linear-regression-3",
-    "href": "lec12.html#linear-regression-3",
-    "title": "Linear Regression",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict social media use.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge",
+    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -6578,7 +6590,7 @@
     "href": "lec12.html#regression-equation-5",
     "title": "Linear Regression",
     "section": "Regression Equation",
-    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{\\beta_0} + \\color{orange}{\\beta_1}\\color{blue}{(A)} + \\color{purple}{\\beta_2(B)}\\color{pink}{X}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use when all other predictors are 0.\nCoefficient for \\(A\\)\nWhat is the sense of belonging?\nCoefficient for \\(B\\)\nAge\nRandomness",
+    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{\\beta_0} + \\color{orange}{\\beta_1}\\color{blue}{(Age)} + \\color{purple}{\\beta_2(SOB)}\\color{pink}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use when all other predictors are 0.\nCoefficient for \\(A\\)\nWhat is the sense of belonging?\nCoefficient for \\(B\\)\nAge\nRandomness",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -6598,8 +6610,8 @@
     ]
   },
   {
-    "objectID": "lec12.html#linear-regression-4",
-    "href": "lec12.html#linear-regression-4",
+    "objectID": "lec12.html#linear-regression-3",
+    "href": "lec12.html#linear-regression-3",
     "title": "Linear Regression",
     "section": "Linear Regression",
     "text": "Linear Regression\n\nThis form of regression is called linear regression.",
@@ -6639,6 +6651,30 @@
     "title": "Linear Regression",
     "section": "Example",
     "text": "Example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSocial Media Use Model\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\n(Intercept)\n5.2\n4.3, 6.1\n&lt;0.001\n\n\nAge\n-0.10\n-0.13, -0.08\n&lt;0.001\n\n\nSense_of_Belonging\n0.29\n0.22, 0.36\n&lt;0.001\n\n\n\n1\nCI = Confidence Interval\n\n\n\n\n\n\n\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.29, p = 0.001) significantly predicted social media use.\nAge significantly predicted likelihood of social media use (beta = -.10, p &lt;.001)\nIt’s common to report betas and p’s in text as well as in a table.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#multiple-predictors",
+    "href": "lec12.html#multiple-predictors",
+    "title": "Linear Regression",
+    "section": "Multiple Predictors",
+    "text": "Multiple Predictors\nUnderstanding the Factors That Influence Energy Levels\n\nWhat determines how energized you feel throughout the day? Is it the number of cups of coffee you drink? The amount of sleep you got the night before? Or maybe even the type of TV shows you watch before bed?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#multiple-predictors-1",
+    "href": "lec12.html#multiple-predictors-1",
+    "title": "Linear Regression",
+    "section": "Multiple Predictors",
+    "text": "Multiple Predictors\nUnderstanding the Factors That Influence Energy Levels\nIn this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:\n\nDuration of TV Watching (Continuous) – Does watching more TV affect energy?\nCups of Coffee (Continuous) – Does caffeine actually help?\nPrior Sleep (Continuous) – Does more sleep always mean more energy?\nTV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -8085,7 +8121,7 @@
     "href": "lec8.html#sampling-theory-3",
     "title": "Sampling Theory",
     "section": "Sampling Theory",
-    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n726645111165763167355612561542\n\n213112271424317347154651232722\n\n362745617531554261675765674525\n\n261722324166337521772553675376\n\n521434212444346561633524321131\n\n242526436134217633333273332542",
+    "text": "Sampling Theory\nHow many people did each of you ask?\n\n\n\n\nS1S2S3S4S5S6S7S8S9S10S11S12S13S14S15S16S17S18S19S20S21S22S23S24S25S26S27S28S29S30\n\n253522246313336271633633377134\n\n571325642414535332647275577752\n\n145265377576637537457446615335\n\n312273646423425144321576572427\n\n445123516115134457215125522555\n\n721746344373337374451475646637",
     "crumbs": [
       "Course Overview",
       "Lectures",
