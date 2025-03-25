@@ -214,7 +214,7 @@ data |>
 
 -   $\beta_1$ = a weighted value that is multiplied by `A` and added to $\beta_0$ to estimate `y`.
 
-## Regression Equation: 
+## Regression Equation:
 
 ### More than one X
 
@@ -247,6 +247,7 @@ $\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
 # Interpreting Coefficients
 
 ## Regression Model Table
+
 ### Two Predictor Variables
 
 ```{r}
@@ -504,17 +505,16 @@ Then report individual betas and their p's:
 
 > What determines how energized you feel throughout the day? Is it the number of cups of coffee you drink? The amount of sleep you got the night before? Or maybe even the type of TV shows you watch before bed?
 
-
 ## Multiple Predictors
 
 ### Understanding the Factors That Influence Energy Levels
 
 In this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:
 
-- Duration of TV Watching (Continuous) – Does watching more TV affect energy?
-- Cups of Coffee (Continuous) – Does caffeine actually help?
-- Prior Sleep (Continuous) – Does more sleep always mean more energy?
-- TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
+-   Duration of TV Watching (Continuous) – Does watching more TV affect energy?
+-   Cups of Coffee (Continuous) – Does caffeine actually help?
+-   Prior Sleep (Continuous) – Does more sleep always mean more energy?
+-   TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
 
 ## Categorical variables
 
@@ -596,11 +596,11 @@ tbl_regression(label =
                    "year" = "Year" )) 
 ```
 
-## Review Questions
+# Review Questions
 
 **Multiple-Choice Questions**
 
-**1. What does the slope in a simple linear regression equation represent?**
+## **1. What does the slope in a simple linear regression equation represent?**
 
 A\) The value of Y when X = 0
 
@@ -610,20 +610,15 @@ C\) The strength of the correlation between X and Y
 
 D\) The proportion of variance in Y explained by X
 
-**Answer:** B
-
-**2. If a linear regression model has an R² value of 0.85, what does this mean?**
+## **2. If a linear regression model has an R² value of 0.85, what does this mean?**
 
 A\) 85% of the variability in X is explained by Y
 
 B\) The regression model is 85% accurate
 
-C\) 85% of the variability in Y is explained by X
-D) The relationship between X and Y is statistically significant
+C\) 85% of the variability in Y is explained by X D) The relationship between X and Y is statistically significant
 
-**Answer:** C
-
-**3. A researcher runs a regression model and finds the following equation:**
+## **3. A researcher runs a regression model and finds the following equation:**
 
 What does the number **5** represent?
 
@@ -635,20 +630,15 @@ C\) The effect size of X on Y
 
 D\) The p-value of the regression
 
-**Answer:** B
-
-**4. Which of the following would indicate that a multiple regression model is overfitting?**
+## **4. Which of the following would indicate that a multiple regression model is overfitting?**
 
 A\) A high R² value on the training data but poor performance on new data
 
 B\) A non-significant p-value for the intercept
 
-C\) The presence of a negative coefficient in the model
-D) A low standard error for the slope
+C\) The presence of a negative coefficient in the model D) A low standard error for the slope
 
-**Answer:** A
-
-**5. A regression model predicts salary based on years of experience. The p-value for the slope is 0.0003. What does this mean?**
+## **5. A regression model predicts salary based on years of experience. The p-value for the slope is 0.0003. What does this mean?**
 
 A\) Years of experience does not significantly predict salary
 
@@ -658,32 +648,17 @@ C\) The slope coefficient is 0.0003
 
 D\) The model is not linear
 
-**Answer:** B
+# **Open-Ended Questions (Show Your Work)**
 
-## **Open-Ended Questions (Show Your Work)**
-
-**6. Given the following data, calculate the least squares regression equation:**
-
-|                       |                    |
-|-----------------------|--------------------|
-| **X (Hours Studied)** | 	**Y (Exam Score)** |
-| 2                     | 50                 |
-| 4                     | 60                 |
-| 6                     | 70                 |
-| 8                     | 80                 |
-| 10                    | 90                 |
-
-**Show all calculations to determine the slope and intercept.**
-
-**7. A multiple regression model is given by:**
+## **6. A multiple regression model is given by:**
 
 $\hat{Y} = 3 + 1.5X_1 - 0.7X_2$
 
 where:
 
-	• \$X_1\$ = Number of hours spent studying
+• $X_1$ = Number of hours spent studying
 
-	• \$X_2\$ = Number of hours spent watching TV
+• $X_2$ = Number of hours spent watching TV
 
 **a)** Predict the outcome if a student studies for 6 hours and watches TV for 2 hours.
 
@@ -693,26 +668,19 @@ where:
 
 **b)** Interpret the coefficient of .
 
-**8. A researcher runs a simple linear regression and obtains the following output:**
+## **7. A researcher runs a simple linear regression and obtains the following output:**
 
-**Predictor**	**Coefficient**	**Standard Error**	**p-value**
-
-Intercept	4.2	0.5	0.001
-
-X	1.8	0.3	0.0005
+| Predictor | Coefficient | Std. Error | p-value |
+|-----------|-------------|------------|---------|
+| Intercept | 4.2         | .5         | .001    |
+| X         | 1.8         | .3         | .0005   |
 
 **a)** Write the regression equation.
 
 **b)** Interpret the slope in context.
 
-**c)** If , predict .
+**c)** If X = 10, predict Y.
 
-**9. A study investigates the relationship between sleep (X) and energy levels (Y). The model output is:**
+## **8. A study investigates the relationship between sleep (X) and energy levels (Y). The model output is: \$\\hat{Y} = 2 + 3X\$**
 
-	•	What is the residual for a participant who slept **5 hours** and had an energy level of **18**?
-
-**10. You are given a dataset with 100 observations and decide to build a regression model predicting house prices based on square footage, number of bedrooms, and crime rate.**
-
-	•	List two possible **assumptions of linear regression** that should be checked before interpreting the model.
-
-	•	Explain how violating each assumption could affect the model’s accuracy.
+What is the residual for a participant who slept **5 hours** and had an energy level of **18**?
