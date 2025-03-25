@@ -1689,114 +1689,194 @@
   {
     "objectID": "lec12.html#types-of-analysis",
     "href": "lec12.html#types-of-analysis",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Types of Analysis",
-    "text": "Types of Analysis\n\nUnivariate: One variable, like the mean\nBivariate: Two variables, like correlation\nMultivariate: More than 2 variables"
+    "text": "Types of Analysis\n\nUnivariate: One variable, like the mean\nBivariate: Two variables, like correlation\nMultivariate: More than 2 variables",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression",
     "href": "lec12.html#regression",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression",
-    "text": "Regression\n\nRegression is the multivariate version of correlation.\nCorrelation is the bivariate version of regression.\nWe’re doing the same thing in regression as we do in correlation, BUT there are more than 2 variables."
+    "text": "Regression\n\nRegression is the multivariate version of correlation.\nCorrelation is the bivariate version of regression.\nWe’re doing the same thing in regression as we do in correlation, BUT there are more than 2 variables.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-terminology",
     "href": "lec12.html#regression-terminology",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression terminology",
-    "text": "Regression terminology\nIn regression we will choose one variable to predict.\n\nWe call this y.\nY is the outcome variable.\nY is the predicted variable."
+    "text": "Regression terminology\nIn regression we will choose one variable to predict.\n\nWe call this \\(Y\\).\n\\(Y\\) is the outcome variable.\n\\(\\hat{Y}\\) is the predicted variable.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-terminology-1",
     "href": "lec12.html#regression-terminology-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression terminology",
-    "text": "Regression terminology\nIn regression we will choose two or more variables we with believe predict y.\n\nWe call these \\(x_1\\), \\(x_2\\), etc.\nSome people call these x and z.\nX is the predictor variable."
+    "text": "Regression terminology\nIn regression we will choose two or more variables we have reason to believe predict y.\n\nWe call these \\(A\\), \\(B\\), etc.\n$A$ is the predictor variable.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-terminology-2",
     "href": "lec12.html#regression-terminology-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression terminology",
-    "text": "Regression terminology\nWhen we predict Y with X, we say;\n\n\nWe regress y on the x."
+    "text": "Regression terminology\nWhen we predict Y with X, we say;\nWe regress y on the x.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation",
     "href": "lec12.html#regression-equation",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression Equation",
-    "text": "Regression Equation\nStep-by-Step\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}+\\color{orange}{e_i}}\n\\]\n\n1. The predicted value of y for a particular participant (i)\n\n\n2. Intercept\n\n\n3. Weight\n\n\n4. The Value of a particular participant (i) on the measure of \\(X_1\\)\n\n\n5. Error. Random, and therefore cannot be predicted"
+    "text": "Regression Equation\nStep-by-Step\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{\\beta_0} + \\color{blue}{\\beta_1(A)}+\\color{orange}{e_i}}\n\\]\n\n1. The predicted value of y for a particular participant (i)\n\n\n2. Intercept: Value of Y when all other predictors are 0\n\n\n3. Weight\n\n\n4. The Value of a particular participant on the measure of \\(A\\)\n\n\n5. Error. Random, and therefore cannot be predicted",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation-1",
     "href": "lec12.html#regression-equation-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression Equation",
-    "text": "Regression Equation\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{blue}{b_1}X_{1i}}\n\\]\n\n\\[\\hat{Y} = b_0 + b_1X_{1i}\\]\n\n\n\\[Y = ax + b\\]"
+    "text": "Regression Equation\nA Few Ways to Write the Same Thing!\n\\[\n\\large{\\color{red}{Y_i} = \\color{green}{\\beta_0} + \\color{blue}{\\beta_1(A)}}\n\\]\n\n\\[\\hat{Y} = \\beta_0 + \\beta_1(A)\\]\n\n\n\\[Y = ax + b\\]",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#linear-regression",
     "href": "lec12.html#linear-regression",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Linear Regression",
-    "text": "Linear Regression\nLine of Best Fit\n\n\n\nCall:\nlm(formula = Y ~ X, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-28.377  -9.863  -1.451   9.156  47.527 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -1.26786    1.36619  -0.928    0.356    \nX            0.82594    0.06092  13.557   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 13.65 on 98 degrees of freedom\nMultiple R-squared:  0.6522,    Adjusted R-squared:  0.6487 \nF-statistic: 183.8 on 1 and 98 DF,  p-value: &lt; 2.2e-16"
+    "text": "Linear Regression\nLine of Best Fit\n\nScaterrplotLinear RegressionResidual Plot",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-1",
     "href": "lec12.html#regression-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression:",
-    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the x value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y."
+    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(\\beta_0\\) = the intercept: the average y value\n\\(A\\) = the A value for a participant\n\\(\\beta_1\\) = a weighted value that is multiplied by A and added to \\(\\beta_0\\) to estimate y.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation-more-than-one-x",
     "href": "lec12.html#regression-equation-more-than-one-x",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression Equation: More than one X",
-    "text": "Regression Equation: More than one X\n\\[\\large{\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}\\]"
+    "text": "Regression Equation: More than one X\n\\[\\large{\\hat{Y}_i = \\beta_0 + \\beta_1(A) + \\beta_2(B)}\\]",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-2",
     "href": "lec12.html#regression-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression:",
-    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(b_0\\) = the intercept: the average y value\n\\(X_1\\) = the \\(X_1\\) value for a participant\n\\(b_1\\) = a weighted value that is multiplied by x and added to \\(b_0\\) to estimate y.\n\\(X_2\\) = the \\(x_2\\) value for a participant\n\\(b_2\\) = a weighted value that is multiplied by \\(x_2\\)"
+    "text": "Regression:\nEquation Component Meanings\n\n\\(Y\\) = theoretical prediction of y\n\\(\\hat{Y}\\)= the actual y value for a participant\n\\(\\beta_0\\) = the intercept: the average y value\n\\(A\\) = the \\(A\\) value for a participant\n\\(\\beta_1\\) = a weighted value that is multiplied by x and added to \\(\\beta_0\\) to estimate y.\n\\(B\\) = the \\(B\\) value for a participant\n\\(\\beta_2\\) = a weighted value that is multiplied by \\(B\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation-2",
     "href": "lec12.html#regression-equation-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression Equation:",
-    "text": "Regression Equation:"
+    "text": "Regression Equation:\nMore than one X\n\\(\\large{\\hat{Y}_i = \\beta_0 + \\beta_1(A) + \\beta_2(B)}...\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#more-than-one-x",
     "href": "lec12.html#more-than-one-x",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "More than one X",
-    "text": "More than one X\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
+    "text": "More than one X\n\\(\\hat{Y}_i = \\beta_0 + \\beta_1(A) + \\beta_2(B)\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-1",
     "href": "lec12.html#interpreting-coefficients-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients"
+    "text": "Interpreting coefficients\n\nBeta coefficient\nt-value\np-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-2",
     "href": "lec12.html#interpreting-coefficients-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value"
+    "text": "Interpreting coefficients\n\n\nBeta coefficient\nt-value\np-value: is this a significant predictor of y?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-3",
     "href": "lec12.html#interpreting-coefficients-3",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting coefficients",
-    "text": "Interpreting coefficients\n\n\nUnstandardized b coefficient\nBeta coefficient\nt-value\np-value &lt;— is this a significant predictor of y?"
+    "text": "Interpreting coefficients\n\n\nBeta coefficient: which predictor of y has the more predictive power?\nt-value\np-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-coefficients-4",
@@ -1864,16 +1944,26 @@
   {
     "objectID": "lec12.html#r2-1",
     "href": "lec12.html#r2-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)\n\n\\(R^2\\) is the correlation coefficient (r) squared.\n\\(R^2\\) is always positive\nIn correlation, the amount of y accounted for by x"
+    "text": "\\(R^2\\)\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#r2-2",
     "href": "lec12.html#r2-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?"
+    "text": "\\(R^2\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#r2-3",
@@ -1885,247 +1975,422 @@
   {
     "objectID": "lec12.html#interpreting-r-squared",
     "href": "lec12.html#interpreting-r-squared",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\nR Squared\nAdjusted R Squared\nF-value\np-value"
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared\nF-value\np-value: is this a significant predictor of y?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-r-squared-1",
     "href": "lec12.html#interpreting-r-squared-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared\nF-value\np-value &lt;— is this a significant predictor of y?"
+    "text": "Interpreting R Squared\n\n\nR Squared: The percentage of y accounted for by the predictors\nAdjusted R Squared\nF-value\np-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-r-squared-2",
     "href": "lec12.html#interpreting-r-squared-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\n\nR Squared &lt;— The percentage of y accounted for by the predictors\nAdjusted R Squared\nF-value\np-value"
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared: The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-r-squared-3",
     "href": "lec12.html#interpreting-r-squared-3",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting R Squared",
-    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared &lt;— The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value"
+    "text": "Interpreting R Squared\n\n\nR Squared\nAdjusted R Squared: The percentage of y accounted for by the predictors, controlling for using too many predictors\nF-value\np-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#linear-regression-1",
     "href": "lec12.html#linear-regression-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression Part",
     "section": "Linear Regression",
-    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms."
+    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression Part"
+    ]
   },
   {
     "objectID": "lec12.html#linear-regression-2",
     "href": "lec12.html#linear-regression-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Linear Regression",
-    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict social media use.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge"
+    "text": "Linear Regression\nExample\n\nProfessor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation-3",
     "href": "lec12.html#regression-equation-3",
-    "title": "Regression Part II",
-    "section": "Regression Equation",
-    "text": "Regression Equation\n\\[\\large{Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i}\\]"
+    "title": "Linear Regression",
+    "section": "Regression Equation:",
+    "text": "Regression Equation:",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation-4",
     "href": "lec12.html#regression-equation-4",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression Equation",
-    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{b_0} + \\color{orange}{b_1}\\color{blue}{X_{1i}} + \\color{purple}{b_2}\\color{pink}{X_{2i}}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use\nCoefficient for \\(X_1\\)\nWhat is the sense of belonging?\nCoefficient for \\(X_2\\)\nAge\nRandomness"
+    "text": "Regression Equation\n\\[\\large{Y_i = \\beta_0 + \\beta_1A + \\beta_2B~ + e_i}\\]",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#regression-equation-5",
     "href": "lec12.html#regression-equation-5",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Regression Equation",
-    "text": "Regression Equation\nComputational\n\\(\\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i\\)"
+    "text": "Regression Equation\nTheoretical\n\\[\\large{\\color{red}{Y_i} = \\color{green}{\\beta_0} + \\color{orange}{\\beta_1}\\color{blue}{(A)} + \\color{purple}{\\beta_2(B)}\\color{pink}{X}~ + e_i}\\]\n\nThe predicted degree of social media use for a participant “i”\nIntercept: Average social media use when all other predictors are 0.\nCoefficient for \\(A\\)\nWhat is the sense of belonging?\nCoefficient for \\(B\\)\nAge\nRandomness",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#linear-regression-3",
     "href": "lec12.html#linear-regression-3",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Linear Regression",
-    "text": "Linear Regression\n\nThis form of regression is called linear regression."
+    "text": "Linear Regression\n\nProfessor Brocker wants to be able to predict social media use.\n\nWhat are some predictors of social media use?\n\nSense of belonging\nAge",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#example-1",
     "href": "lec12.html#example-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Example",
-    "text": "Example\nModel Coefficients"
+    "text": "Example\nModel Coefficients\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSocial Media Use Model\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\n(Intercept)\n5.2\n4.3, 6.1\n&lt;0.001\n\n\nAge\n-0.10\n-0.13, -0.08\n&lt;0.001\n\n\nSense_of_Belonging\n0.29\n0.22, 0.36\n&lt;0.001\n\n\n\n1\nCI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegression Model Summary\n\n\nPredicting Social Media Use for Age and Sense of Belonging\n\n\nMetric\nValue\n\n\n\n\nResidual Standard Error\n0.512\n\n\nMultiple R-squared\n0.87\n\n\nAdjusted R-squared\n0.861\n\n\nF-statistic\n90.681\n\n\np\n1.046 × 10−12",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#example-2",
     "href": "lec12.html#example-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Example",
-    "text": "Example\nModel Summary"
+    "text": "Example\nFirst, report adjusted \\(R^2\\) and it’s corresponding p:\n\nOur model predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.86, p* &lt; 0.001.\nAge, sense of belonging, predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.86, p &lt; 0.001.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#example-3",
     "href": "lec12.html#example-3",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Example",
-    "text": "Example\nFirst, report adjusted \\(R^2\\) and it’s corresponding p:\n\nOur model predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001.\nAge, sense of belonging, predicted a significant amount of variance in social media use, adjusted \\(R^2\\) = 0.29, p* &lt; 0.001."
+    "text": "Example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSocial Media Use Model\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\n(Intercept)\n5.2\n4.3, 6.1\n&lt;0.001\n\n\nAge\n-0.10\n-0.13, -0.08\n&lt;0.001\n\n\nSense_of_Belonging\n0.29\n0.22, 0.36\n&lt;0.001\n\n\n\n1\nCI = Confidence Interval\n\n\n\n\n\n\n\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.29, p = 0.001) significantly predicted social media use.\nAge significantly predicted likelihood of social media use (beta = -.10, p &lt;.001)\nIt’s common to report betas and p’s in text as well as in a table.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#example-4",
     "href": "lec12.html#example-4",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Example",
-    "text": "Example\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.912, p = 0.001) significantly predicted social media use.\nAge did not predict likelihood of social media use.\n\n(beta = .112, p = .06)\n\nIt’s common to report betas and p’s in text as well as in a table."
+    "text": "Example\n\nThen report individual betas and their p’s:\n\nSense of belonging (beta = 0.912, p = 0.001) significantly predicted social media use.\nAge did not predict likelihood of social media use.\n\n(beta = .112, p = .06)\n\nIt’s common to report betas and p’s in text as well as in a table.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables",
     "href": "lec12.html#categorical-variables",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables",
-    "text": "Categorical variables\nDiscrete, not continuous:\n\nGroups\nCategories\nLabels"
+    "text": "Categorical variables",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-1",
     "href": "lec12.html#categorical-variables-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables",
-    "text": "Categorical variables\n\nIf your only predictor is a categorical variable, you should run a t-test or ANOVA.\nSometimes researchers want to examine how several variables predict one outcome.\nWe did this with high thoughts:\n\nAge\nSense of Belonging\nSocial Media Use"
+    "text": "Categorical variables\n\nIf your only predictor is a categorical variable, you should run a t-test or ANOVA.\nSometimes researchers want to examine how several variables predict one outcome.\nWe did this with high thoughts:\n\nAge\nSense of Belonging\nSocial Media Use",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-1",
     "href": "lec12.html#categorical-variables-in-regression-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nSometimes one of these variables is categorical.\n\nExample: How many episodes of a show can Professor Brocker watch before he passes out on his couch?"
+    "text": "Categorical variables in Regression\nSometimes researchers want to examine how several variables predict one outcome.\nSometimes one of these variables is categorical.\n\nExample: How many episodes of a show can Professor Brocker watch before he passes out on his couch?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-2",
     "href": "lec12.html#categorical-variables-in-regression-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\n\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\n\n\n\nPredictors:\n\nTime of night\nCups of coffee consumed\nIs it about time travel?\n\n\nVariable Type:\n\nContinuous\nContinuous\nCategorical"
+    "text": "Categorical variables in Regression\n\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\n\n\n\nPredictors:\n\nTime of night\nCups of coffee consumed\nIs it about time travel?\n\n\nVariable Type:\n\nContinuous\nContinuous\nCategorical",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-3",
     "href": "lec12.html#categorical-variables-in-regression-3",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in Regression",
-    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night: As it gets later, the number of episodes will decrease (negative correlation)\nCups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)\nIs the show about time travel? If so, number of episodes will increase."
+    "text": "Categorical variables in Regression\nDependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?\nPredictors:\n\nTime of night: As it gets later, the number of episodes will decrease (negative correlation)\nCups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)\nIs the show about time travel? If so, number of episodes will increase.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#dummy-coding",
     "href": "lec12.html#dummy-coding",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Dummy coding",
-    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No\n1 = Yes"
+    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No\n1 = Yes",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#dummy-coding-1",
     "href": "lec12.html#dummy-coding-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Dummy coding",
-    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No, The show is not about time travel.\n1 = Yes, The show is about time travel."
+    "text": "Dummy coding\n\nAssign each category a number value.\n\n0 = No, The show is not about time travel.\n1 = Yes, The show is about time travel.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-variables",
     "href": "lec12.html#interpreting-dummy-coded-variables",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
+    "text": "Interpreting dummy coded variables",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#report-the-findings",
     "href": "lec12.html#report-the-findings",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Report the findings",
-    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04)."
+    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-variables-1",
     "href": "lec12.html#interpreting-dummy-coded-variables-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
+    "text": "Interpreting dummy coded variables",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#report-the-findings-1",
     "href": "lec12.html#report-the-findings-1",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Report the findings",
-    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes."
+    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-variables-2",
     "href": "lec12.html#interpreting-dummy-coded-variables-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
+    "text": "Interpreting dummy coded variables",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#report-the-findings-2",
     "href": "lec12.html#report-the-findings-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Report the findings",
-    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the tim got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes.\nShow content significantly predicted watching more episodes (beta = 0.912, p &lt; 0.001)."
+    "text": "Report the findings\n\nTime significantly predicted the outcome variable in that as the tim got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).\nCoffee was not a significant predictor of number of episodes.\nShow content significantly predicted watching more episodes (beta = 0.912, p &lt; 0.001).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#dummy-coding-2",
     "href": "lec12.html#dummy-coding-2",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Dummy coding",
-    "text": "Dummy coding\n\nGender:\n\n0 = Male\n1 = Female"
+    "text": "Dummy coding\n\nGender:\n\n0 = Male\n1 = Female",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-variables-3",
     "href": "lec12.html#interpreting-dummy-coded-variables-3",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting dummy coded variables",
-    "text": "Interpreting dummy coded variables"
+    "text": "Interpreting dummy coded variables",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#interpreting-dummy-coded-gender",
     "href": "lec12.html#interpreting-dummy-coded-gender",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Interpreting dummy coded gender",
-    "text": "Interpreting dummy coded gender\n\nBeta is positive (beta = 0.912, p &lt; 0.001).\nWhatever is coded as 1 is higher on the the dependent variable.\nWomen reported significantly more enjoyment of True Crime than men."
+    "text": "Interpreting dummy coded gender\n\nBeta is positive (beta = 0.912, p &lt; 0.001).\nWhatever is coded as 1 is higher on the the dependent variable.\nWomen reported significantly more enjoyment of True Crime than men.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-4",
     "href": "lec12.html#categorical-variables-in-regression-4",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)"
+    "text": "Categorical variables in regression",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-5",
     "href": "lec12.html#categorical-variables-in-regression-5",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nY = How many days would you survive in the zombie apocalypse?\nX1 = Crossbow skills on a scale of 1 (what’s a crossbow?) to 10 (bullseye)\nX2 = # of episodes of the Walking Dead watched\nX3 = Do you have a weapon? Y/N"
+    "text": "Categorical variables in regression",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-6",
     "href": "lec12.html#categorical-variables-in-regression-6",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon:\n\n0 = No weapon :(\n1 = Weapon! :)"
+    "text": "Categorical variables in regression",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#categorical-variables-in-regression-7",
     "href": "lec12.html#categorical-variables-in-regression-7",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Categorical variables in regression",
-    "text": "Categorical variables in regression\n\nCrossbow skills: As crossbow skills go up, days survived will go up.\nWD episodes: As episodes goes up, days survived will go up.\nWeapon: Individuals who have weapon will survive more days.\nHow will we know if this is true?\n\nBeta will be positive if having a weapon increases days.\nBeta will be negative if having a weapon decreases days."
+    "text": "Categorical variables in regression",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "lec12.html#horror-movies",
     "href": "lec12.html#horror-movies",
-    "title": "Regression Part II",
+    "title": "Linear Regression",
     "section": "Horror Movies",
-    "text": "Horror Movies\n\n\n                ┌──────────────────────────┬───────────────────┐\n                │                          │        (1)        │\n                ├──────────────────────────┼───────────────────┤\n                │ Ranking                  │    -0.009 (0.013) │\n                ├──────────────────────────┼───────────────────┤\n                │ Avg. Heart Rate (BPM)    │    -0.043 (0.110) │\n                ├──────────────────────────┼───────────────────┤\n                │ Overall Difference (BPM) │ 1.823 *** (0.115) │\n                ├──────────────────────────┼───────────────────┤\n                │ HRV Difference           │ 1.564 *** (0.034) │\n                ├──────────────────────────┼───────────────────┤\n                │ Highest Spike            │ 0.182 *** (0.006) │\n                ├──────────────────────────┼───────────────────┤\n                │ Sequel                   │     0.004 (0.122) │\n                ├──────────────────────────┼───────────────────┤\n                │ At Least One Sequel      │    -0.030 (0.123) │\n                ├──────────────────────────┼───────────────────┤\n                │ Rotten Tomato Score      │     0.001 (0.003) │\n                ├──────────────────────────┼───────────────────┤\n                │ Year                     │    -0.004 (0.005) │\n                ├──────────────────────────┼───────────────────┤\n                │ nobs                     │           50      │\n                ├──────────────────────────┼───────────────────┤\n                │ r.squared                │            1.000  │\n                ├──────────────────────────┴───────────────────┤\n                │ *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05       │\n                └──────────────────────────────────────────────┘\n\nColumn names: names, model1"
+    "text": "Horror Movies\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\nRanking\n-0.01\n-0.04, 0.02\n0.5\n\n\nAvg. Heart Rate (BPM)\n-0.04\n-0.27, 0.18\n0.7\n\n\nOverall Difference (BPM)\n1.8\n1.6, 2.1\n&lt;0.001\n\n\nHRV Difference\n1.6\n1.5, 1.6\n&lt;0.001\n\n\nHighest Spike\n0.18\n0.17, 0.19\n&lt;0.001\n\n\nSequel\n\n\n\n\n\n\n\n\n    no\n—\n—\n\n\n\n\n    yes\n0.00\n-0.24, 0.25\n&gt;0.9\n\n\nAt Least One Sequel\n\n\n\n\n\n\n\n\n    no\n—\n—\n\n\n\n\n    yes\n-0.03\n-0.28, 0.22\n0.8\n\n\nRotten Tomato Score\n0.00\n0.00, 0.01\n0.8\n\n\nYear\n0.00\n-0.01, 0.01\n0.4\n\n\n\n1\nCI = Confidence Interval",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
   },
   {
     "objectID": "L14pp.html#anova-analysis-of-variance",
@@ -6750,6 +7015,205 @@
       "Course Overview",
       "Exam Review",
       "Statistical Formulas"
+    ]
+  },
+  {
+    "objectID": "lab7.html#does-coffee-make-you-more-awake",
+    "href": "lab7.html#does-coffee-make-you-more-awake",
+    "title": "Lab 7: Regression",
+    "section": "Does Coffee Make You More Awake?",
+    "text": "Does Coffee Make You More Awake?\nObjective: Get students to intuitively understand regression by predicting the relationship between coffee consumption and self-reported energy levels."
+  },
+  {
+    "objectID": "lab7.html#warm-up-question-engagement",
+    "href": "lab7.html#warm-up-question-engagement",
+    "title": "Lab 7: Regression",
+    "section": "Warm-Up Question (Engagement)",
+    "text": "Warm-Up Question (Engagement)\nDiscussion Prompt:\n“How many cups of coffee do you drink per day? Do you feel more awake when you drink more?”\n(This taps into personal experience and makes the topic immediately relevant.)"
+  },
+  {
+    "objectID": "lab7.html#interactive-data-collection",
+    "href": "lab7.html#interactive-data-collection",
+    "title": "Lab 7: Regression",
+    "section": "Interactive Data Collection",
+    "text": "Interactive Data Collection\nInstead of using pre-made data, let’s collect some from the class:\nExample data from a fictional class:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\nCups_of_Coffee\n1.2\n1.0, 1.5\n&lt;0.001\n\n\n\n1\nCI = Confidence Interval"
+  },
+  {
+    "objectID": "lab7.html#finding-the-regression-line",
+    "href": "lab7.html#finding-the-regression-line",
+    "title": "Lab 7: Regression",
+    "section": "Finding the Regression Line",
+    "text": "Finding the Regression Line\n\nDoes the relationship look positive or negative?\nIt seems like more coffee is generally linked to higher energy but may have a limit.\nIntroduce the simple regression equation:\n\n\\[\\text{Energy Level} = \\text{Intercept} + (\\text{Slope} \\times \\text{Cups of Coffee})\\]\n\\[ \\text{Energy Level} = 1.24(X) + 2.80\\]\n\n\nExample Interpretation:\n\n“For each extra cup, energy increases by ~1.2 points.”\n\n\ny = 1.24x + 2.80\ny = represents Energy Level,\nx = represents Cups of Coffee,\n1.24 is the slope, meaning for each additional cup of coffee, the energy level increases by approximately 1.24 points,\n2.80 is the intercept, meaning when no coffee is consumed ( x = 0 ), the predicted energy level is 2.80."
+  },
+  {
+    "objectID": "lab7.html#application-making-predictions",
+    "href": "lab7.html#application-making-predictions",
+    "title": "Lab 7: Regression",
+    "section": "Application: Making Predictions",
+    "text": "Application: Making Predictions\n\n“If you drink 6 cups, what does the model predict for you?”\n“What if someone drinks 10 cups? Is that reasonable?”\n\nLimitations:\n\nIs there a point where too much coffee makes people jittery instead of energetic?\n“Would this model work for someone who doesn’t drink coffee at all?”\n“Does everyone react to caffeine the same way?”"
+  },
+  {
+    "objectID": "lab7.html#warm-up-question",
+    "href": "lab7.html#warm-up-question",
+    "title": "Lab 7: Regression",
+    "section": "Warm-Up Question",
+    "text": "Warm-Up Question\nHow many cups of coffee do you drink per day? Do you feel more awake when you drink more?"
+  },
+  {
+    "objectID": "lab7.html#example-data-from-a-fictional-class",
+    "href": "lab7.html#example-data-from-a-fictional-class",
+    "title": "Lab 7: Regression",
+    "section": "Example data from a fictional class:",
+    "text": "Example data from a fictional class:"
+  },
+  {
+    "objectID": "lab7.html#activity-the-limits-of-prediction",
+    "href": "lab7.html#activity-the-limits-of-prediction",
+    "title": "Lab 7: Regression",
+    "section": "Activity: The Limits of Prediction",
+    "text": "Activity: The Limits of Prediction\nStep 1: Make Predictions\nQuestion:\n“Based on our regression equation:\n\\[ Energy Level = 1.24(\\text{Cups of Coffee}) + 2.80 \\]\nwhat do you predict the energy level will be for a student who drinks 10 cups? 20 cups?“\n\nCalculate and share your predictions.\n\nWrite answers on the board."
+  },
+  {
+    "objectID": "lab7.html#step-2-visualizing-the-problem",
+    "href": "lab7.html#step-2-visualizing-the-problem",
+    "title": "Lab 7: Regression",
+    "section": "Step 2: Visualizing the Problem",
+    "text": "Step 2: Visualizing the Problem\n\nLook at the scatterplot with the regression line.\n\nLet’s extend the line beyond our observed data (e.g., past 10 cups).\n\n\n\n\n\n\nDoes this seem realistic? Why or why not?"
+  },
+  {
+    "objectID": "lab7.html#step-3-critical-thinking-discussion",
+    "href": "lab7.html#step-3-critical-thinking-discussion",
+    "title": "Lab 7: Regression",
+    "section": "Step 3: Critical Thinking Discussion",
+    "text": "Step 3: Critical Thinking Discussion\nDiscuss with a partner or in groups:\n\nAt what point do you think this model stops making sense?\n\nWhat real-world factors might cause the energy level to level off or decrease?\n\nCaffeine crashes?\n\nHealth risks?\n\nIndividual differences in tolerance?\n\n\nWhy is it risky to make predictions outside of the observed range?"
+  },
+  {
+    "objectID": "lab7.html#step-4-alternative-models",
+    "href": "lab7.html#step-4-alternative-models",
+    "title": "Lab 7: Regression",
+    "section": "Step 4: Alternative Models",
+    "text": "Step 4: Alternative Models\n\nSome relationships are nonlinear (e.g., caffeine effects might follow a curve)."
+  },
+  {
+    "objectID": "lab7.html#conclusion-key-takeaways",
+    "href": "lab7.html#conclusion-key-takeaways",
+    "title": "Lab 7: Regression",
+    "section": "Conclusion: Key Takeaways",
+    "text": "Conclusion: Key Takeaways\n\nLinear models have limits—extrapolating beyond observed data can lead to unrealistic predictions.\n\nReal-world relationships often have thresholds where effects change.\n\nAlways consider context before making predictions!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\ncups_of_coffee\n1.2\n1.0, 1.4\n&lt;0.001\n\n\nsleep_quality_num\n3.3\n2.4, 4.1\n&lt;0.001\n\n\nstudy_time\n0.48\n0.39, 0.56\n&lt;0.001\n\n\n\n1\nCI = Confidence Interval"
+  },
+  {
+    "objectID": "lab7.html#multiple-regression-equation",
+    "href": "lab7.html#multiple-regression-equation",
+    "title": "Lab 7: Regression",
+    "section": "Multiple Regression Equation",
+    "text": "Multiple Regression Equation\n\\(\\hat{Y} = 2.97 + 1.27(A) + 3.66(B) + .44(C)\\)\n\nX = Cups_of_Coffee (continuous variable)\nA = Sleep_Quality (categorical, likely coded as 0 = “Poor”, 1 = “Good”)\nB = Study_Time (continuous variable)\nThis way, you’re indicating that:\n\nEach cup of coffee increases energy by 1.27.\nHaving good sleep (A = 1) adds 3.66 to energy, while poor sleep (A = 0) means no added effect.\nEvery additional unit of study time increases energy by 0.44.\n\n\n\\(\\hat{Y} = \\beta_0 + \\beta_1 A + \\beta_2 B + \\beta_3 C\\)"
+  },
+  {
+    "objectID": "lec12.html#r2",
+    "href": "lec12.html#r2",
+    "title": "Linear Regression",
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)\n\n\\(R^2\\) is the correlation coefficient (r) squared.\n\\(R^2\\) is always positive\nIn correlation, the amount of y accounted for by x",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#linear-regression-4",
+    "href": "lec12.html#linear-regression-4",
+    "title": "Linear Regression",
+    "section": "Linear Regression",
+    "text": "Linear Regression\n\nThis form of regression is called linear regression.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#more-than-one-x-1",
+    "href": "lec12.html#more-than-one-x-1",
+    "title": "Linear Regression",
+    "section": "More than one X",
+    "text": "More than one X\n\\(\\hat{Y}_i = \\beta_0 + \\beta_1(A) + \\beta_2(B)\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#r2-coefficient-of-determination-1",
+    "href": "lec12.html#r2-coefficient-of-determination-1",
+    "title": "Linear Regression",
+    "section": "\\(R^2\\): Coefficient of Determination",
+    "text": "\\(R^2\\): Coefficient of Determination\nHow much can we account for?\n\nIn Regression, \\(R^2\\) refers to the amount of y accounted for by all of the x's.\nHow much of y did we account for?\nDid we account for a significant amount of the variance in y?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#r2-coefficient-of-determination-2",
+    "href": "lec12.html#r2-coefficient-of-determination-2",
+    "title": "Linear Regression",
+    "section": "\\(R^2\\): Coefficient of Determination",
+    "text": "\\(R^2\\): Coefficient of Determination\nHow much can we account for?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#regression-equation-6",
+    "href": "lec12.html#regression-equation-6",
+    "title": "Linear Regression",
+    "section": "Regression Equation",
+    "text": "Regression Equation\nComputational\n\\(\\hat{Y}_i = \\beta_0 + \\beta_1(A) + \\beta_2(B)\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#fit-the-model",
+    "href": "lec12.html#fit-the-model",
+    "title": "Linear Regression",
+    "section": "Fit the Model",
+    "text": "Fit the Model\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnergy Level Model\n\n\nWhat is the best predictor?\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\n(Intercept)\n3.2\n1.8, 4.5\n&lt;0.001\n\n\nDuration_TV\n1.2\n0.93, 1.4\n&lt;0.001\n\n\nCups_of_Coffee\n0.62\n0.43, 0.81\n&lt;0.001\n\n\nPrior_Sleep\n-0.37\n-0.54, -0.21\n&lt;0.001\n\n\nTV_Genre\n\n\n\n\n\n\n\n\n    Comedy\n—\n—\n\n\n\n\n    Documentary\n3.2\n2.6, 3.8\n&lt;0.001\n\n\n    Drama\n1.5\n0.63, 2.4\n0.002\n\n\n\n1\nCI = Confidence Interval",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#review-questions",
+    "href": "lec12.html#review-questions",
+    "title": "Linear Regression",
+    "section": "Review Questions",
+    "text": "Review Questions\nMultiple-Choice Questions\n1. What does the slope in a simple linear regression equation represent?\nA) The value of Y when X = 0\nB) The predicted change in Y for a one-unit increase in X\nC) The strength of the correlation between X and Y\nD) The proportion of variance in Y explained by X\nAnswer: B\n2. If a linear regression model has an R² value of 0.85, what does this mean?\nA) 85% of the variability in X is explained by Y\nB) The regression model is 85% accurate\nC) 85% of the variability in Y is explained by X D) The relationship between X and Y is statistically significant\nAnswer: C\n3. A researcher runs a regression model and finds the following equation:\nWhat does the number 5 represent?\nA) The slope of the regression line\nB) The predicted value of Y when X = 0\nC) The effect size of X on Y\nD) The p-value of the regression\nAnswer: B\n4. Which of the following would indicate that a multiple regression model is overfitting?\nA) A high R² value on the training data but poor performance on new data\nB) A non-significant p-value for the intercept\nC) The presence of a negative coefficient in the model D) A low standard error for the slope\nAnswer: A\n5. A regression model predicts salary based on years of experience. The p-value for the slope is 0.0003. What does this mean?\nA) Years of experience does not significantly predict salary\nB) Years of experience significantly predicts salary at the α = 0.05 level\nC) The slope coefficient is 0.0003\nD) The model is not linear\nAnswer: B",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "lec12.html#open-ended-questions-show-your-work",
+    "href": "lec12.html#open-ended-questions-show-your-work",
+    "title": "Linear Regression",
+    "section": "Open-Ended Questions (Show Your Work)",
+    "text": "Open-Ended Questions (Show Your Work)\n6. Given the following data, calculate the least squares regression equation:\n\n\n\nX (Hours Studied)\nY (Exam Score)\n\n\n2\n50\n\n\n4\n60\n\n\n6\n70\n\n\n8\n80\n\n\n10\n90\n\n\n\nShow all calculations to determine the slope and intercept.\n7. A multiple regression model is given by:\n\\(\\hat{Y} = 3 + 1.5X_1 - 0.7X_2\\)\nwhere:\n• \\$X_1\\$ = Number of hours spent studying\n\n• \\$X_2\\$ = Number of hours spent watching TV\na) Predict the outcome if a student studies for 6 hours and watches TV for 2 hours.\n3 + (1.56) + (.72)\n13.4\nb) Interpret the coefficient of .\n8. A researcher runs a simple linear regression and obtains the following output:\nPredictor Coefficient Standard Error p-value\nIntercept 4.2 0.5 0.001\nX 1.8 0.3 0.0005\na) Write the regression equation.\nb) Interpret the slope in context.\nc) If , predict .\n9. A study investigates the relationship between sleep (X) and energy levels (Y). The model output is:\n•   What is the residual for a participant who slept **5 hours** and had an energy level of **18**?\n10. You are given a dataset with 100 observations and decide to build a regression model predicting house prices based on square footage, number of bedrooms, and crime rate.\n•   List two possible **assumptions of linear regression** that should be checked before interpreting the model.\n\n•   Explain how violating each assumption could affect the model’s accuracy.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Linear Regression"
     ]
   }
 ]

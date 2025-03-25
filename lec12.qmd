@@ -1,8 +1,8 @@
 ---
-title: "Regression Part II"
-subtitle: "Lecture 12"
+title: "Linear Regression"
+subtitle: "Lecture 11"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢"
 institute: "Farmingdale State College"
 format: 
   revealjs:
@@ -25,56 +25,50 @@ revealjs-plugins:
 
 ## Types of Analysis
 
--   Univariate: One variable, like the mean
+-   **Univariate**: One variable, like the mean
 
--   Bivariate: Two variables, like correlation
+-   **Bivariate**: Two variables, like correlation
 
--   Multivariate: More than 2 variables
+-   **Multivariate**: More than 2 variables
 
 ## Regression
 
--   Regression is the multivariate version of correlation.
+-   Regression is the **multivariate** version of correlation.
 
--   Correlation is the bivariate version of regression.
+-   Correlation is the **bivariate** version of regression.
 
--   We're doing the same thing in regression as we do in correlation, BUT there are more than 2 variables.
+-   We're doing the same thing in regression as we do in correlation, **BUT** there are more than 2 variables.
 
 ## Regression terminology
 
 In regression we will choose one variable to predict.
 
--   We call this `y`.
+-   We call this $Y$.
 
--   `Y` is the outcome variable.
+-   $Y$ is the outcome variable.
 
--   `Y` is the predicted variable.
+-   $\hat{Y}$ is the predicted variable.
 
 ## Regression terminology
 
-In regression we will choose two or more variables we with believe predict y.
+In regression we will choose two or more variables we have reason to believe predict y.
 
--   We call these $x_1$, $x_2$, etc.
+-   We call these $A$, $B$, etc.
 
--   Some people call these `x` and `z`.
-
--   `X` is the predictor variable.
+-   \$A\$ is the predictor variable.
 
 ## Regression terminology
 
 When we predict Y with `X`, we say;
 
-. . .
-
-::: {style="font-size:90px;"}
 We regress `y` on the `x`.
-:::
 
 ## Regression Equation
 
 ### Step-by-Step
 
 $$
-\large{\color{red}{Y_i} = \color{green}{b_0} + \color{blue}{b_1}X_{1i}+\color{orange}{e_i}}
+\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{blue}{\beta_1(A)}+\color{orange}{e_i}}
 $$
 
 ::: fragment
@@ -82,7 +76,7 @@ $$
 :::
 
 ::: fragment
-[2. Intercept]{style="color:green"}
+[2. Intercept]{style="color:green"}: Value of Y when all other predictors are 0
 :::
 
 ::: fragment
@@ -90,7 +84,7 @@ $$
 :::
 
 ::: fragment
-[4. The Value of a particular participant (i) on the measure of $X_1$]{style="color:black"}
+[4. The Value of a particular participant on the measure of $A$]{style="color:black"}
 :::
 
 ::: fragment
@@ -99,12 +93,14 @@ $$
 
 ## Regression Equation
 
+### A Few Ways to Write the Same Thing!
+
 $$
-\large{\color{red}{Y_i} = \color{green}{b_0} + \color{blue}{b_1}X_{1i}}
+\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{blue}{\beta_1(A)}}
 $$
 
 ::: fragment
-$$\hat{Y} = b_0 + b_1X_{1i}$$
+$$\hat{Y} = \beta_0 + \beta_1(A)$$
 :::
 
 ::: fragment
@@ -119,6 +115,7 @@ $$Y = ax + b$$
 library(dplyr)
 library(ggplot2)
 library(MASS)
+library(gtsummary)
 
 generate_correlation <- function(n, rho) {
   # Define the mean and covariance matrix
@@ -134,31 +131,75 @@ generate_correlation <- function(n, rho) {
 }
 
 # Example: Generate data with a correlation of 0.7
-n <- 100  # Number of data points
-rho <- 0.82  # Desired correlation
-data <- generate_correlation(n, rho)
+as <- generate_correlation(35,.51)
 
-data <- data*23
+mod1 <- lm(Y~X, data = as)
 
-lm(Y~X, data = data) |> summary()
+data <- 
+  as |> 
+  mutate(
+    yhat = predict(mod1) |> as.vector(),
+    res = Y - yhat
+  )
+```
 
+::: panel-tabset
+## Scaterrplot
+
+```{r}
 data |> 
   ggplot(aes(X, Y)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE) + 
   theme_minimal() + 
   labs(
     title = "Simple Linear Regression",
     x = "\nX",
     y = "Y\n",
-    caption = "Y = .72 + 831x"
   ) + 
   theme(
     panel.grid = element_blank()
   )
-
 ```
 
+## Linear Regression
+
+```{r}
+data |> 
+  ggplot(aes(X, Y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() + 
+  labs(
+    title = "Simple Linear Regression",
+    x = "\nX",
+    y = "Y\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+```
+
+## Residual Plot
+
+```{r}
+data |> 
+  ggplot(aes(X, Y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_segment(aes(xend = X, yend = yhat),
+               lty = "dashed") + 
+  theme_minimal() + 
+  labs(
+    title = "Simple Linear Regression",
+    x = "\nX",
+    y = "Y\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+```
+:::
+
 ## Regression:
 
 ### Equation Component Meanings
@@ -167,15 +208,17 @@ data |>
 
 -   $\hat{Y}$= the actual `y` value for a participant
 
--   $b_0$ = the intercept: the average `y` value
+-   $\beta_0$ = the intercept: the average `y` value
 
--   $X_1$ = the `x` value for a participant
+-   $A$ = the A value for a participant
 
--   $b_1$ = a weighted value that is multiplied by `x` and added to $b_0$ to estimate `y`.
+-   $\beta_1$ = a weighted value that is multiplied by `A` and added to $\beta_0$ to estimate `y`.
 
-## Regression Equation: More than one X
+## Regression Equation: 
 
-$$\large{\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}$$
+### More than one X
+
+$\large{\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)}...$
 
 ## Regression:
 
@@ -185,32 +228,25 @@ $$\large{\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i}$$
 
 -   $\hat{Y}$= the actual `y` value for a participant
 
--   $b_0$ = the intercept: the average `y` value
+-   $\beta_0$ = the intercept: the average `y` value
 
--   $X_1$ = the $X_1$ value for a participant
+-   $A$ = the $A$ value for a participant
 
--   $b_1$ = a weighted value that is multiplied by x and added to $b_0$ to estimate y.
+-   $\beta_1$ = a weighted value that is multiplied by x and added to $\beta_0$ to estimate y.
 
--   $X_2$ = the $x_2$ value for a participant
+-   $B$ = the $B$ value for a participant
 
--   $b_2$ = a weighted value that is multiplied by $x_2$
+-   $\beta_2$ = a weighted value that is multiplied by $B$
 
 ## Regression Equation:
 
 ## More than one X
 
-$\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
+$\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
 
 # Interpreting Coefficients
 
-## Interpreting coefficients
-
 ```{r}
-#| 
-
-library(dplyr)
-library(huxtable)
-
 test <- 
   tibble(
   money = rnorm(100,55,5),
@@ -220,27 +256,10 @@ test <-
 
 mod1 <- lm(money ~ x1+x2, data = test) |> summary() 
   
-tab1 <- 
-  huxreg(
-  "Money"=mod1,
-  error_pos = "right",
-  statistics = 
-    c('# Observations' = 'nobs', 
-      'R squared' = 'r.squared', 
-      'Adjusted R squared' = 'adj.r.squared',
-      'F statistic' = 'statistic',
-      'P value' = 'p.value'),
-  bold_signif = .05,
-  note = "{stars}"
-  ) |> 
-  theme_striped() |> 
-  set_all_padding(0) |> 
-  set_width(.8)
+mod1 |> tbl_regression()
 ```
 
 ## Interpreting coefficients
-
--   Unstandardized `b` coefficient
 
 -   Beta coefficient
 
@@ -251,110 +270,26 @@ tab1 <-
 ## Interpreting coefficients
 
 ::: nonincremental
--   Unstandardized `b` coefficient
-
 -   Beta coefficient
 
 -   t-value
 
--   **p-value \<--- is this a significant predictor of y?**
+-   **p-value: is this a significant predictor of y?**
 :::
 
 ## Interpreting coefficients
 
 ::: nonincremental
--   Unstandardized `b` coefficient
-
--   **Beta coefficient \<--- which predictor of y has the more predictive power?**
+-   **Beta coefficient: which predictor of y has the more predictive power?**
 
 -   t-value
 
 -   p-value
 :::
 
-## Interpreting coefficients
+# $R^2$: Coefficient of Determination
 
-### Intercept
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 2, value = "red") |>
-  set_all_border_styles(row = 2, value = "solid")
-```
-
-## Interpreting coefficients
-
-### First Predictor Variable
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 3, value = "red") |>
-  set_all_border_styles(row = 3, value = "solid")
-```
-
-## Interpreting coefficients
-
-### Second Predictor Variable
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 4, value = "red") |>
-  set_all_border_styles(row = 4, value = "solid")
-```
-
-## Interpreting coefficients
-
-### Sample Size
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 5, value = "red") |>
-  set_all_border_styles(row = 5, value = "solid")
-```
-
-## Interpreting coefficients
-
-### R Squared
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 6, value = "red") |>
-  set_all_border_styles(row = 6, value = "solid")
-```
-
-## Interpreting coefficients
-
-### Adjusted R Squared
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 7, value = "red") |>
-  set_all_border_styles(row = 7, value = "solid")
-```
-
-## Interpreting coefficients
-
-### F Statistic
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 8, value = "red") |>
-  set_all_border_styles(row = 8, value = "solid")
-```
-
-## Interpreting coefficients
-
-### P Value
-
-```{r}
-tab1 |> 
-  set_all_border_colors(row = 9, value = "red") |>
-  set_all_border_styles(row = 9, value = "solid")
-```
-
-# $R^2$
-
-## $R^2$
+### How much can we account for?
 
 -   $R^2$ is the correlation coefficient (`r`) squared.
 
@@ -362,7 +297,9 @@ tab1 |>
 
 -   In correlation, the amount of `y` accounted for by `x`
 
-## $R^2$
+## $R^2$: Coefficient of Determination
+
+### How much can we account for?
 
 -   In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
 
@@ -370,19 +307,9 @@ tab1 |>
 
 -   Did we account for a **significant** amount of the variance in `y`?
 
-## $R^2$
+## $R^2$: Coefficient of Determination
 
-![](images/Screenshot%202024-10-21%20at%208.17.56%20AM.png)
-
-## Interpreting R Squared
-
--   R Squared
-
--   Adjusted R Squared
-
--   F-value
-
--   p-value
+### How much can we account for?
 
 ## Interpreting R Squared
 
@@ -393,13 +320,13 @@ tab1 |>
 
 -   F-value
 
--   **p-value \<--- is this a significant predictor of `y`?**
+-   **p-value: is this a significant predictor of `y`?**
 :::
 
 ## Interpreting R Squared
 
 ::: nonincremental
--   **R Squared \<--- The percentage of `y` accounted for by the predictors**
+-   **R Squared: The percentage of `y` accounted for by the predictors**
 
 -   Adjusted R Squared
 
@@ -413,7 +340,7 @@ tab1 |>
 ::: nonincremental
 -   R Squared
 
--   **Adjusted R Squared \<--- The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
+-   **Adjusted R Squared: The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
 
 -   F-value
 
@@ -440,23 +367,23 @@ What are some predictors of social media use?
 
 ## Regression Equation
 
-$$\large{Y_i = b_0 + b_1X_1i + b_2X_2i~ + e_i}$$
+$$\large{Y_i = \beta_0 + \beta_1A + \beta_2B~ + e_i}$$
 
 ## Regression Equation
 
 ### Theoretical
 
-$$\large{\color{red}{Y_i} = \color{green}{b_0} + \color{orange}{b_1}\color{blue}{X_{1i}} + \color{purple}{b_2}\color{pink}{X_{2i}}~ + e_i}$$
+$$\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(A)} + \color{purple}{\beta_2(B)}\color{pink}{X}~ + e_i}$$
 
 1.  The predicted degree of social media use for a participant "`i`"
 
-2.  Intercept: Average social media use
+2.  Intercept: Average social media use when all other predictors are 0.
 
-3.  Coefficient for $X_1$
+3.  Coefficient for $A$
 
 4.  What is the sense of belonging?
 
-5.  Coefficient for $X_2$
+5.  Coefficient for $B$
 
 6.  Age
 
@@ -466,7 +393,7 @@ $$\large{\color{red}{Y_i} = \color{green}{b_0} + \color{orange}{b_1}\color{blue}
 
 ### Computational
 
-$\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
+$\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
 
 ## Linear Regression
 
@@ -476,13 +403,75 @@ $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
 ### Model Coefficients
 
-![](images/model.png)
+```{r}
+library(gt)
+library(broom)
+# Set seed for reproducibility
+set.seed(123)
 
-## Example
+# Generate 30 participants
+participants <- paste0("P", 1:30)
 
-### Model Summary
+# Age: Randomly sampled from 18 to 50
+age <- sample(18:50, 30, replace = TRUE)
 
-![](images/modelsum.png)
+# Sense of Belonging: Continuous scale from 0 to 10
+belonging <- round(runif(30, min = 0, max = 10), 2)
+
+# Generate social media use (hours per day) using a model
+# Assume younger people and those with higher belonging use social media more
+social_media_use <- 5 - (0.1 * age) + (0.3 * belonging) + rnorm(30, mean = 0, sd = 0.5)
+
+# Create data frame
+df_sob <- data.frame(
+  Participant = participants,
+  Age = age,
+  Sense_of_Belonging = belonging,
+  Social_Media_Use = round(social_media_use, 2)
+)
+
+# Create Model
+sm_mod <- 
+  lm(Social_Media_Use ~ 
+     Age + Sense_of_Belonging, 
+   data = df_sob) |> 
+  tbl_regression(
+    intercept = TRUE
+  ) |> 
+  as_gt() |> 
+  tab_header(title = "Social Media Use Model")
+
+# Show Model
+sm_mod
+
+# Show Other Summaries
+model_summary <- 
+  lm(Social_Media_Use ~ 
+     Age + Sense_of_Belonging, 
+   data = df_sob) |> 
+    summary()
+
+# Create a data frame with the desired values
+mod2 <- data.frame(
+  Metric = c("Residual Standard Error", "Multiple R-squared", "Adjusted R-squared", "F-statistic", "p"),
+  Value = c(
+    model_summary$sigma,                        # Residual Standard Error
+    model_summary$r.squared,                    # Multiple R-squared
+    model_summary$adj.r.squared,                # Adjusted R-squared
+    model_summary$fstatistic[1],                # F-statistic
+    pf(model_summary$fstatistic[1], model_summary$fstatistic[2], model_summary$fstatistic[3], lower.tail = FALSE)  # p-value
+  )
+)
+
+# Convert to a gt table
+mod2 |> 
+  gt() |> 
+  fmt_auto() |> 
+  tab_header(
+    title = md("**Regression Model Summary**"),
+    subtitle = md("*Predicting Social Media Use for Age and Sense of Belonging*")
+  )
+```
 
 # Reporting Regression Findings
 
@@ -490,21 +479,21 @@ $\hat{Y}_i = b_0 + b_1X_1i + b_2X_2i$
 
 First, report adjusted $R^2$ and it's corresponding p:
 
--   Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
+-   Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p\* \< 0.001.
 
--   Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.29, p\* \< 0.001.
+-   Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p \< 0.001.
 
 ## Example
 
-![](images/model.png)
+```{r}
+sm_mod
+```
 
 Then report individual betas and their p's:
 
--   Sense of belonging (*beta = 0.912, p = 0.001*) significantly predicted social media use.
+-   Sense of belonging (*beta = 0.29, p = 0.001*) significantly predicted social media use.
 
--   Age did not predict likelihood of social media use.
-
-    -   (beta = .112, p = .06)
+-   Age significantly predicted likelihood of social media use (beta = -.10, p \<.001)
 
 -   It's common to report betas and p's in text as well as in a table.
 
@@ -512,183 +501,58 @@ Then report individual betas and their p's:
 
 ## Categorical variables
 
-### Discrete, not continuous:
-
--   Groups
-
--   Categories
-
--   Labels
-
-## Categorical variables
-
--   If your *only* predictor is a categorical variable, you should run a t-test or ANOVA.
-
--   Sometimes researchers want to examine how several variables predict one outcome.
-
--   We did this with high thoughts:
-
-    -   Age
-
-    -   Sense of Belonging
-
-    -   Social Media Use
-
-## Categorical variables in Regression
-
-Sometimes researchers want to examine how several variables predict one outcome.
-
-Sometimes one of these variables is categorical.
-
-> Example: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
-
-## Categorical variables in Regression
-
-> Dependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
-
-::::: columns
-::: {.column width="50%"}
-Predictors:
-
--   Time of night
-
--   Cups of coffee consumed
-
--   Is it about time travel?
-:::
-
-::: {.column width="50%"}
-Variable Type:
-
--   Continuous
-
--   Continuous
-
--   *Categorical*
-:::
-:::::
-
-## Categorical variables in Regression
-
-Dependent variable: How many episodes of a show can Professor Brocker watch before he passes out on his couch?
-
-Predictors:
-
--   Time of night: As it gets later, the number of episodes will decrease (negative correlation)
-
--   Cups of coffee consumed: As cups of coffee increases, number of episodes will increase (positive correlation)
-
--   Is the show about time travel? If so, number of episodes will increase.
-
-## Dummy coding
-
--   Assign each category a number value.
-
-    -   0 = No
-
-    -   1 = Yes
-
-## Dummy coding
-
--   Assign each category a number value.
-
-    -   0 = No, The show is not about time travel.
-
-    -   1 = Yes, The show is about time travel.
-
-## Interpreting dummy coded variables
-
-![](images/dummyvar.png)
-
-## Report the findings
-
--   Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (*beta = -0.412, p = 0.04*).
-
-## Interpreting dummy coded variables
-
-![](images/dummyvar.png)
-
-## Report the findings
-
--   Time significantly predicted the outcome variable in that as the time got later in the evening, number of episodes decreased (*beta = -0.412, p = 0.04*).
-
--   Coffee was not a significant predictor of number of episodes.
-
-## Interpreting dummy coded variables
-
-![](images/dummyvar.png)
-
-## Report the findings
-
--   Time significantly predicted the outcome variable in that as the tim got later in the evening, number of episodes decreased (beta = -0.412, p = 0.04).
-
--   Coffee was not a significant predictor of number of episodes.
-
--   Show content significantly predicted watching more episodes (beta = 0.912, p \< 0.001).
-
-## Dummy coding
-
--   Gender:
-
-    -   0 = Male
-
-    -   1 = Female
-
-## Interpreting dummy coded variables
-
-![](images/dummyvar.png)
-
-## Interpreting dummy coded gender
-
--   Beta is positive (beta = 0.912, p \< 0.001).
-
--   Whatever is coded as 1 is higher on the the dependent variable.
-
--   Women reported significantly more enjoyment of True Crime than men.
-
-## Categorical variables in regression
-
--   Y = How many days would you survive in the zombie apocalypse?
-
--   Y = How many days would you survive in the zombie apocalypse?
-
--   X1 = Crossbow skills on a scale of 1 (what's a crossbow?) to 10 (bullseye)
-
-## Categorical variables in regression
-
--   Y = How many days would you survive in the zombie apocalypse?
-
--   X1 = Crossbow skills on a scale of 1 (what's a crossbow?) to 10 (bullseye)
-
--   X2 = \# of episodes of the Walking Dead watched
-
--   X3 = Do you have a weapon? Y/N
-
-## Categorical variables in regression
-
--   Crossbow skills: As crossbow skills go up, days survived will go up.
-
--   WD episodes: As episodes goes up, days survived will go up.
-
--   Weapon:
-
-    -   0 = No weapon :(
-
-    -   1 = Weapon! :)
-
-## Categorical variables in regression
-
--   Crossbow skills: As crossbow skills go up, days survived will go up.
-
--   WD episodes: As episodes goes up, days survived will go up.
-
--   Weapon: Individuals who have weapon will survive more days.
-
--   How will we know if this is true?
-
-    -   Beta will be positive if having a weapon increases days.
-
-    -   Beta will be negative if having a weapon decreases days.
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 30 participants
+n <- 30
+
+# Continuous predictors
+duration_tv <- round(runif(n, 0.5, 5), 2)  # Hours of TV watched
+cups_of_coffee <- sample(0:5, n, replace = TRUE)  # Cups of coffee
+prior_sleep <- round(rnorm(n, mean = 7, sd = 1.5), 2)  # Hours of sleep
+
+# Categorical predictor: TV Show Genre (Drama, Comedy, Documentary)
+tv_genre <- sample(c("Drama", "Comedy", "Documentary"), n, replace = TRUE)
+
+# Assign numeric values for regression (Dummy coding: Comedy as reference)
+tv_genre_num <- ifelse(tv_genre == "Drama", 1, ifelse(tv_genre == "Documentary", 2, 0))
+
+# Generate energy level using a regression model
+energy_level <- 3.5 + 
+  (1.2 * duration_tv) + 
+  (0.8 * cups_of_coffee) + 
+  (-0.5 * prior_sleep) + 
+  (1.5 * tv_genre_num) +  # Drama increases energy, Documentary increases it more
+  rnorm(n, mean = 0, sd = 1)  # Add some random noise
+
+# Round energy levels for readability
+energy_level <- round(energy_level, 2)
+
+# Create a data frame
+df_cat <- data.frame(
+  Participant = paste0("P", 1:n),
+  Duration_TV = duration_tv,
+  Cups_of_Coffee = cups_of_coffee,
+  Prior_Sleep = prior_sleep,
+  TV_Genre = tv_genre,
+  Energy_Level = energy_level
+)
+```
+
+## Fit the Model
+
+```{r}
+model_3 <- lm(Energy_Level ~ Duration_TV + Cups_of_Coffee + Prior_Sleep + TV_Genre, data = df_cat)
+
+tbl_regression(model_3,intercept = TRUE) |> 
+  as_gt() |> 
+  tab_header(title = md("**Energy Level Model**"),
+             subtitle = md("*What is the best predictor?*"))
+
+
+```
 
 ## Horror Movies
 
@@ -703,22 +567,135 @@ hm_cln <-
   dplyr::select(-movie,-avg_resting_heart_rate_bpm)
 
 lm(scare_score ~ ., data = hm_cln) |> 
-  summary() |> 
-  huxreg(bold_signif = .05,
-         note = "{stars}",
-         error_pos = "same",
-         statistics = c("nobs","r.squared"),
-         coefs = c("Ranking" = "ranking",
-                   "Avg. Heart Rate (BPM)" = "avg_movie_heart_rate_bpm",
-                   "Overall Difference (BPM)" = "overall_difference_bpm",
-                   "HRV Difference" = "hrv_difference",
-                   "Highest Spike" ="highest_spike_bpm",
-                   "Sequel" ="this_film_is_a_sequelyes",
-                   "At Least One Sequel" ="this_film_has_at_least_one_sequelyes",
-                  "Rotten Tomato Score" ="rotten_tomato_score",
-                   "Year" ="year")) |> 
-  theme_striped() |> 
-  print_screen()
-
-
+tbl_regression(label = 
+                 list("ranking" = "Ranking",
+                    "avg_movie_heart_rate_bpm" = "Avg. Heart Rate (BPM)",
+                   "overall_difference_bpm" = "Overall Difference (BPM)" ,
+                   "hrv_difference" = "HRV Difference" ,
+                   "highest_spike_bpm" = "Highest Spike",
+                   "this_film_is_a_sequel" = "Sequel",
+                   "this_film_has_at_least_one_sequel" = "At Least One Sequel",
+                  "rotten_tomato_score" = "Rotten Tomato Score" ,
+                   "year" = "Year" )) 
 ```
+
+## Review Questions
+
+**Multiple-Choice Questions**
+
+**1. What does the slope in a simple linear regression equation represent?**
+
+A\) The value of Y when X = 0
+
+B\) The predicted change in Y for a one-unit increase in X
+
+C\) The strength of the correlation between X and Y
+
+D\) The proportion of variance in Y explained by X
+
+**Answer:** B
+
+**2. If a linear regression model has an R² value of 0.85, what does this mean?**
+
+A\) 85% of the variability in X is explained by Y
+
+B\) The regression model is 85% accurate
+
+C\) 85% of the variability in Y is explained by X
+D) The relationship between X and Y is statistically significant
+
+**Answer:** C
+
+**3. A researcher runs a regression model and finds the following equation:**
+
+What does the number **5** represent?
+
+A\) The slope of the regression line
+
+B\) The predicted value of Y when X = 0
+
+C\) The effect size of X on Y
+
+D\) The p-value of the regression
+
+**Answer:** B
+
+**4. Which of the following would indicate that a multiple regression model is overfitting?**
+
+A\) A high R² value on the training data but poor performance on new data
+
+B\) A non-significant p-value for the intercept
+
+C\) The presence of a negative coefficient in the model
+D) A low standard error for the slope
+
+**Answer:** A
+
+**5. A regression model predicts salary based on years of experience. The p-value for the slope is 0.0003. What does this mean?**
+
+A\) Years of experience does not significantly predict salary
+
+B\) Years of experience significantly predicts salary at the α = 0.05 level
+
+C\) The slope coefficient is 0.0003
+
+D\) The model is not linear
+
+**Answer:** B
+
+## **Open-Ended Questions (Show Your Work)**
+
+**6. Given the following data, calculate the least squares regression equation:**
+
+|                       |                    |
+|-----------------------|--------------------|
+| **X (Hours Studied)** | 	**Y (Exam Score)** |
+| 2                     | 50                 |
+| 4                     | 60                 |
+| 6                     | 70                 |
+| 8                     | 80                 |
+| 10                    | 90                 |
+
+**Show all calculations to determine the slope and intercept.**
+
+**7. A multiple regression model is given by:**
+
+$\hat{Y} = 3 + 1.5X_1 - 0.7X_2$
+
+where:
+
+	• \$X_1\$ = Number of hours spent studying
+
+	• \$X_2\$ = Number of hours spent watching TV
+
+**a)** Predict the outcome if a student studies for 6 hours and watches TV for 2 hours.
+
+3 + (1.5*6) + (.7*2)
+
+13.4
+
+**b)** Interpret the coefficient of .
+
+**8. A researcher runs a simple linear regression and obtains the following output:**
+
+**Predictor**	**Coefficient**	**Standard Error**	**p-value**
+
+Intercept	4.2	0.5	0.001
+
+X	1.8	0.3	0.0005
+
+**a)** Write the regression equation.
+
+**b)** Interpret the slope in context.
+
+**c)** If , predict .
+
+**9. A study investigates the relationship between sleep (X) and energy levels (Y). The model output is:**
+
+	•	What is the residual for a participant who slept **5 hours** and had an energy level of **18**?
+
+**10. You are given a dataset with 100 observations and decide to build a regression model predicting house prices based on square footage, number of bedrooms, and crime rate.**
+
+	•	List two possible **assumptions of linear regression** that should be checked before interpreting the model.
+
+	•	Explain how violating each assumption could affect the model’s accuracy.
