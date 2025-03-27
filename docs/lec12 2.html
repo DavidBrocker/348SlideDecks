@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.6.33">
 
   <meta name="author" content="Dave Brocker">
-  <title>PSY 348: Statistics for Psychology – T-Tests</title>
+  <title>PSY 348: Statistics for Psychology – One-Sample T-Test</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -134,8 +134,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">T-Tests</h1>
-  <p class="subtitle">Lecture 13</p>
+  <h1 class="title">One-Sample T-Test</h1>
+  <p class="subtitle">Lecture 12</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -149,454 +149,224 @@ Dave Brocker
 </div>
 
 </section>
-<section id="sampling-theory" class="slide level2">
-<h2>Sampling Theory</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="sampling-theory-1" class="slide level2">
-<h2>Sampling Theory</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="sampling-theory-2" class="slide level2">
-<h2>Sampling Theory</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="sampling-theory-3" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="probability" class="slide level2">
-<h2>Probability</h2>
-<p><a href="images/bell_prop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/bell_prop.png"></a></p>
-</section>
-<section id="sampling-theory-4" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="inferential-statistics" class="slide level2">
-<h2>Inferential Statistics</h2>
-<p>Each inferential statistic will give us:</p>
-<ul>
-<li class="fragment"><p>Test statistic</p>
-<ul>
-<li class="fragment"><span class="math inline">\(r,t,F,\chi^2...\)</span></li>
-</ul></li>
-<li class="fragment"><p>p-value: probability of committing a Type 1 Error &lt; 0.05 or 5%</p>
-<ul>
-<li class="fragment"><p>p &gt; 0.05: Fail to reject the <span class="math inline">\(H_0\)</span></p></li>
-<li class="fragment"><p>p &lt; 0.05: Reject <span class="math inline">\(H_0\)</span></p></li>
-</ul></li>
-</ul>
-</section>
-<section id="sampling-theory-5" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="t-tests" class="slide level2">
-<h2>T-tests</h2>
-<ul>
-<li class="fragment"><p>IV <strong>must be</strong> nominal and have <em>only</em> 2 categories</p>
-<ul>
-<li class="fragment"><p>Using experimental versus control</p></li>
-<li class="fragment"><p>Any two categories (bad/good)</p></li>
-</ul></li>
-<li class="fragment"><p>DV <strong>must be</strong> continuous</p>
-<ul>
-<li class="fragment">Scale of 1 to 10</li>
-<li class="fragment">Count</li>
-</ul></li>
-</ul>
-</section>
-<section id="independent-samples-t-test" class="slide level2">
-<h2>Independent Samples t-test</h2>
-<h3 id="example">Example</h3>
-<blockquote>
-<p>The experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>The experimental group has a mean happiness score of <code>8</code></p></li>
-<li class="fragment"><p>The control group mean happiness score of <code>6</code></p></li>
-</ul>
-<div class="fragment">
-<p>Is the group that drank coffee significantly happier than the control group?</p>
-</div>
-</section>
-<section id="independent-samples-t-test-1" class="slide level2">
-<h2>Independent samples t-test</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="independent-samples-t-test-2" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p>To compare the means we need to know:</p>
-<ul>
-<li class="fragment"><p>Between group variance: how much the answers from the <strong>experimental</strong> group differ from the <strong>control</strong> group.</p></li>
-<li class="fragment"><p>Within group variance: how much the answers of all participants differ from one another.</p></li>
-</ul>
-</section>
-<section id="independent-samples-t-test-3" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p>To compare the means we need to know:</p>
-<ul>
-<li class="fragment"><p>Between group variance</p></li>
-<li class="fragment"><p>Within group variance</p></li>
-</ul>
-</section>
-<section id="independent-samples-t-test-4" class="slide level2">
-<h2>Independent samples t-test</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="independent-samples-t-test-5" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p>To compare the means we need to know:</p>
-<ul>
-<li class="fragment"><p>Between group variance</p></li>
-<li class="fragment"><p>Within group variance</p></li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec13_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec13_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="independent-samples-t-test-6" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p>To compare the means we need to know:</p>
-<ul>
-<li class="fragment"><p><strong>Between group variance</strong>: how much the answers from the experimental group differ from the control group.</p></li>
-<li class="fragment"><p><strong>Within group variance</strong>: how much the answers of all participants differ from one another.</p></li>
-</ul>
-</section>
-<section id="independent-samples-t-test-7" class="slide level2">
-<h2>Independent samples t-test</h2>
-</section>
-<section id="theoretical-formula" class="slide level2">
-<h2>Theoretical Formula:</h2>
-<p><span class="math display">\[\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\color{grey}{s^{2}_{pooled}}}}\]</span> - <span style="color:blue">t</span></p>
-<ul>
-<li class="fragment"><p><span style="color:red">Sample Mean</span></p></li>
-<li class="fragment"><p><span style="color:orange">Population Mean</span></p></li>
-<li class="fragment"><p><span style="color:grey">Pooled Variance</span></p></li>
-</ul>
-</section>
-<section id="forumlas" class="slide level2">
-<h2>Forumlas</h2>
-<p>Inferential statistics have both <strong>theoretical</strong> and <strong>computational</strong> formulas:</p>
-<ul>
-<li class="fragment"><p>Theoretical</p>
-<ul>
-<li class="fragment">Formula for if we actually knew the population parameters</li>
-</ul></li>
-<li class="fragment"><p>Computational</p>
-<ul>
-<li class="fragment">Formula for estimating the test statistics based solely on sample data</li>
-</ul></li>
-</ul>
-</section>
-<section id="independent-samples-t-test-8" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p>Theoretical Formula:</p>
-<p><span class="math display">\[t = \frac{\bar{x} - \color{green}{μ}}{\sqrt{s^{2}_{pooled}}}\]</span></p>
-</section>
-<section id="independent-samples-t-test-9" class="slide level2">
-<h2>Independent samples t-test</h2>
-<h3 id="theoretical-formula-1">Theoretical Formula:</h3>
-<p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{\color{orange}{s^{2}_{pooled}}}}\]</span></p>
-</section>
-<section id="independent-samples-t-test-10" class="slide level2">
-<h2>Independent samples t-test</h2>
-<h3 id="theoretical-formula-2">Theoretical Formula:</h3>
-<p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}\]</span></p>
-</section>
-<section id="independent-samples-t-test-11" class="slide level2">
-<h2>Independent samples t-test</h2>
-<h3 id="theoretical-formula-3">Theoretical Formula:</h3>
-<p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}\]</span></p>
-</section>
-<section id="independent-samples-t-test-12" class="slide level2">
-<h2>Independent samples t-test</h2>
-<h3 id="computational-formula">Computational Formula:</h3>
-<p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\color{darkblue}{\frac{s1}{n1}+ \frac{s2}{n2}}}}\]</span></p>
-<ul>
-<li class="fragment"><span style="color: darkblue">Pooled Variance</span></li>
-</ul>
-</section>
-<section id="independent-samples-t-test-13" class="slide level2">
-<h2>Independent samples t-test</h2>
-<h3 id="computational-formula-1">Computational Formula:</h3>
-<p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}\]</span></p>
-</section>
-<section id="data-overview" class="slide level2">
-<h2>Data Overview</h2>
-<div class="cell">
-<div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
-<colgroup><col><col><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">estimate</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate1</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate2</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">parameter</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.low</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.high</th><th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">method</th><th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">alternative</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">-2.5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.8</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8.3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-5.64</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2.39e-05</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">18</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3.43</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.57</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Two Sample t-test</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">two.sided</td></tr>
-</tbody></table>
-
-</div>
-</div>
-<p><a href="images/Screenshot 2024-11-04 at 7.50.42 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/Screenshot 2024-11-04 at 7.50.42 AM.png"></a></p>
-</section>
 <section>
-<section id="spss" class="title-slide slide level1 center">
-<h1>SPSS</h1>
+<section id="introduction-to-comparing-means" class="title-slide slide level1 center">
+<h1>Introduction to Comparing Means</h1>
 
 </section>
-<section id="the-data" class="slide level2">
-<h2>The Data</h2>
+<section id="why-compare-means" class="slide level2">
+<h2>Why Compare Means?</h2>
 <ul>
-<li class="fragment"><p>The main window that opens in SPSS</p></li>
-<li class="fragment"><p><strong>Data view</strong>: every row is a participant</p></li>
-<li class="fragment"><p><strong>Variable view</strong>: every row is a variable</p></li>
-<li class="fragment"><p>Click commands from the data file.</p></li>
+<li class="fragment">We often want to test whether a sample mean differs from a known population mean.</li>
+<li class="fragment">The <strong>one-sample t-test</strong> helps determine if the sample mean is significantly different from the hypothesized population mean.</li>
+<li class="fragment">Example scenarios:
+<ul>
+<li class="fragment">Does the average exam score in a class differ from a national average of 75?</li>
+<li class="fragment">Do people’s reaction times differ from a published standard of 250ms?</li>
+</ul></li>
 </ul>
 </section>
-<section id="independent-samples-t-test-spss" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
+<section id="assumptions-of-the-one-sample-t-test" class="slide level2 scrollable">
+<h2>Assumptions of the One-Sample t-Test</h2>
+<ol type="1">
+<li class="fragment">The data are <strong>continuous</strong> (interval or ratio scale).</li>
+<li class="fragment">The sample is <strong>randomly selected</strong>.</li>
+<li class="fragment">The data are <strong>normally distributed</strong> (or the sample size is large enough for the Central Limit Theorem to apply).</li>
+</ol>
+</section>
+<section id="the-one-sample-t-test-formula" class="slide level2">
+<h2>The One-Sample t-Test Formula</h2>
+<p>The test statistic is calculated as:</p>
+<p><span class="math display">\[ t = \frac{\bar{X} - \mu}{s / \sqrt{n}} \]</span></p>
+<p>Where:</p>
 <ul>
-<li class="fragment"><p>Analyze</p></li>
-<li class="fragment"><p>Compare Means</p></li>
-<li class="fragment"><p>Independent Samples</p></li>
+<li class="fragment"><p><span class="math inline">\(\bar{X}\)</span> = sample mean</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> = population mean (null hypothesis value)</p></li>
+<li class="fragment"><p><span class="math inline">\(s\)</span> = sample standard deviation</p></li>
+<li class="fragment"><p><span class="math inline">\(n\)</span> = sample size</p></li>
 </ul>
 </section></section>
 <section>
-<section id="interpretting-t" class="title-slide slide level1 center">
-<h1>INTERPRETTING T</h1>
+<section id="example-exam-scores" class="title-slide slide level1 center">
+<h1>Example: Exam Scores</h1>
 
 </section>
-<section id="independent-samples-t-test-14" class="slide level2">
-<h2>Independent samples t-test:</h2>
-<h3 id="assumptions-of-the-t-test">Assumptions of the T-Test</h3>
+<section id="hypothesis-testing-steps" class="slide level2 scrollable">
+<h2>Hypothesis Testing Steps</h2>
+<ol type="1">
+<li class="fragment"><strong>Set Hypotheses:</strong>
 <ul>
-<li class="fragment"><p><strong>Data type</strong>:</p>
-<ul>
-<li class="fragment">The data is quantitative and continuous&nbsp;</li>
+<li class="fragment"><span class="math inline">\(H_0\)</span>: The average exam score is 75 (<span class="math inline">\(\mu = 75\)</span>).</li>
+<li class="fragment"><span class="math inline">\(H_A\)</span>: The average exam score is <strong>not</strong> 75 (<span class="math inline">\(\mu \neq 75\)</span>).</li>
 </ul></li>
-<li class="fragment"><p><strong>Distribution</strong>:</p>
+<li class="fragment"><strong>Collect Sample Data:</strong>
 <ul>
-<li class="fragment">The data is approximately normally distributed&nbsp;</li>
+<li class="fragment">Sample size: <span class="math inline">\(n = 20\)</span></li>
+<li class="fragment">Sample mean: <span class="math inline">\(\bar{X} = 78\)</span></li>
+<li class="fragment">Sample standard deviation: <span class="math inline">\(s = 5\)</span></li>
 </ul></li>
-<li class="fragment"><p><strong>Sample size</strong>:</p>
+</ol>
+</section>
+<section id="hypothesis-testing-steps-1" class="slide level2 scrollable">
+<h2>Hypothesis Testing Steps</h2>
+<ol start="3" type="1">
+<li class="fragment"><strong>Compute the t-Statistic:</strong></li>
+</ol>
+<p><span class="math display">\[ t = \frac{78 - 75}{5 / \sqrt{20}} = \frac{3}{1.118} = 2.68 \]</span></p>
+<ol start="4" type="1">
+<li class="fragment"><strong>Compare to Critical Value:</strong>
 <ul>
-<li class="fragment">The sample size is adequate*&nbsp;</li>
+<li class="fragment">Using a <span class="math inline">\(\alpha = 0.05\)</span> level and df = 19, critical <span class="math inline">\(t_{.025,19} = \pm 2.093\)</span>.</li>
+<li class="fragment">Since <span class="math inline">\(2.68 &gt; 2.093\)</span>, we reject <span class="math inline">\(H_0\)</span>.</li>
 </ul></li>
+</ol>
+</section>
+<section id="reporting-results" class="slide level2">
+<h2>Reporting Results</h2>
+<p>APA-style:</p>
+<blockquote>
+<p>A one-sample t-test was conducted to compare exam scores to the national average of 75. Results showed a significant difference, <strong>t(19) = 2.68, p &lt; .05</strong>, indicating that students scored significantly higher than the national average.</p>
+</blockquote>
+</section></section>
+<section id="interpreting-results" class="title-slide slide level1 center">
+<h1>Interpreting Results</h1>
+<ul>
+<li class="fragment">A <strong>significant</strong> result (<span class="math inline">\(p &lt; .05\)</span>) suggests that the sample mean is different from the population mean.</li>
+<li class="fragment">A <strong>non-significant</strong> result (<span class="math inline">\(p &gt; .05\)</span>) means we fail to reject <span class="math inline">\(H_0\)</span> (no evidence of a difference).</li>
 </ul>
 </section>
-<section id="independent-samples-t-test-15" class="slide level2">
-<h2>Independent samples t-test:</h2>
-<h3 id="assumptions-of-the-t-test-1">Assumptions of the T-Test</h3>
-<ul>
-<li class="fragment"><p><strong>Random sampling</strong>:</p>
-<ul>
-<li class="fragment">The data is randomly sampled from a population&nbsp;</li>
-</ul></li>
-<li class="fragment"><p><strong>Independence</strong>:</p>
-<ul>
-<li class="fragment">The data values are independent, meaning that measurements for one observation do not affect other observations&nbsp;</li>
-</ul></li>
-<li class="fragment"><p><strong>Homogeneity of variance</strong>:</p>
-<ul>
-<li class="fragment">The variability of the data in each group is similar&nbsp;</li>
-</ul></li>
-</ul>
+
+<section>
+<section id="visualizing-data" class="title-slide slide level1 center">
+<h1>Visualizing Data</h1>
+
 </section>
-<section id="independent-samples-t-test-16" class="slide level2">
-<h2>Independent samples t-test</h2>
-<h3 id="homogeneity-of-variance">Homogeneity of Variance</h3>
-<h3 id="section"><img data-src="images/spiderman.png" style="border-radius: 20px;"></h3>
-<div class="fragment">
-<p>If the <strong>Levene’s Test</strong> is significant, use the t value from the second row and its corresponding significance.</p>
+<section id="sample-summary-table" class="slide level2">
+<h2>Sample Summary Table</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample Mean</td>
+<td>78</td>
+</tr>
+<tr class="even">
+<td>Population Mean</td>
+<td>75</td>
+</tr>
+<tr class="odd">
+<td>Sample SD</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Sample Size</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>t-Statistic</td>
+<td>2.68</td>
+</tr>
+<tr class="even">
+<td>p-Value</td>
+<td>0.014</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="boxplot-example" class="slide level2">
+<h2>Boxplot Example</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec12_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec12_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+</figure>
 </div>
-<ul>
-<li class="fragment"><p>t is the test statistic.</p></li>
-<li class="fragment"><p>Sig (2-tailed) is the p-value.</p></li>
-</ul>
-</section>
-<section id="independent-samples-t-test-17" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}\]</span></p>
-</section>
-<section id="independent-samples-t-test-spss-1" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<h3 id="why-do-we-care">Why Do We Care?</h3>
-<p>We need the <strong>Levene’s Test</strong>, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.</p>
-<ul>
-<li class="fragment">A significant Levene’s Test means a significant difference in the variances.</li>
-</ul>
-</section>
-<section id="independent-samples-t-test-spss-2" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<h3 id="interpreting-results">Interpreting Results</h3>
-<p>If the <strong>Levene’s Test</strong> is significant, use the t value from the second row and its corresponding significance</p>
-<p><a href="images/indsamp_lev.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/indsamp_lev.png"></a></p>
-</section>
-<section id="independent-samples-t-test-spss-3" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/indsamp.png"></a></p>
-</section>
-<section id="independent-samples-t-test-reporting-your-findings" class="slide level2">
-<h2>Independent samples t-test: Reporting your findings</h2>
-<p><a href="images/indsamp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/indsamp.png"></a></p>
-<div class="fragment">
-<blockquote>
-<p>There was not a significant difference between the groups, t(18) = 1.287, p = 0.215</p>
-</blockquote>
+</div>
 </div>
 </section>
-<section id="independent-samples-t-test-spss-4" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/indsamp.png"></a></p>
-<p><a href="images/indsamp_lev.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/indsamp_lev.png"></a></p>
+<section id="example-1-exam-scores-vs.-national-average" class="slide level2">
+<h2>📝 <strong>Example 1: Exam Scores vs.&nbsp;National Average</strong></h2>
+<h3 id="scenario"><strong>Scenario</strong></h3>
+<p>A professor wants to test if students in their class scored <strong>differently</strong> from the national average of 75 on an exam. A sample of <strong>25 students</strong> has a mean score of <strong>78</strong> with a standard deviation of <strong>10</strong>.</p>
+<h3 id="hypotheses"><strong>Hypotheses</strong></h3>
+<ul>
+<li class="fragment"><strong>Null Hypothesis (H₀)</strong>: ( = 75 ) (no difference)<br>
+</li>
+<li class="fragment"><strong>Alternative Hypothesis (H₁)</strong>: ( ) (scores differ)</li>
+</ul>
+<h3 id="calculation"><strong>Calculation</strong></h3>
+<p>Using the one-sample t-test formula:</p>
+<p>[ t = ]</p>
+<p>Substituting values:</p>
+<p>[ t = = = 1.5 ]</p>
+<p>For <strong>df = 24</strong>, the critical value at <strong>α = .05</strong> (two-tailed) is <strong>±2.064</strong>. Since <strong>1.5 &lt; 2.064</strong>, we <strong>fail to reject (H_0)</strong>.</p>
+<h3 id="apa-reporting"><strong>APA Reporting</strong></h3>
+<p><em>A one-sample t-test was conducted to determine whether students’ exam scores differed from the national average (M = 75). Results were not statistically significant, ( t(24) = 1.5, p &gt; .05 ), indicating that students performed similarly to the national average.</em></p>
 </section>
-<section id="independent-samples-t-test-spss-5" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="images/indsamp_ex.png"></a></p>
+<section id="example-2-daily-coffee-consumption" class="slide level2">
+<h2>📝 <strong>Example 2: Daily Coffee Consumption</strong></h2>
+<h3 id="scenario-1"><strong>Scenario</strong></h3>
+<p>A coffee company claims that people drink an average of <strong>3 cups</strong> of coffee per day. A researcher samples <strong>16 individuals</strong>, finding a <strong>mean of 2.5 cups</strong> and a <strong>standard deviation of 1 cup</strong>.</p>
+<h3 id="hypotheses-1"><strong>Hypotheses</strong></h3>
 <ul>
-<li class="fragment"><p>Step 1: Look at Levene’s</p>
+<li class="fragment"><strong>Null Hypothesis (H₀)</strong>: ( = 3 )<br>
+</li>
+<li class="fragment"><strong>Alternative Hypothesis (H₁)</strong>: ( &lt; 3 ) (people drink less)</li>
+</ul>
+<h3 id="calculation-1"><strong>Calculation</strong></h3>
+<p>[ t = = = -2.0 ]</p>
+<p>For <strong>df = 15</strong>, the critical t-value for a <strong>one-tailed test</strong> at <strong>α = .05</strong> is <strong>-1.753</strong>. Since <strong>-2.0 &lt; -1.753</strong>, we <strong>reject (H_0)</strong>.</p>
+<h3 id="apa-reporting-1"><strong>APA Reporting</strong></h3>
+<p><em>A one-sample t-test was conducted to test whether daily coffee consumption was lower than the reported average of 3 cups. Results showed a significant difference, ( t(15) = -2.0, p &lt; .05 ), suggesting that people consume significantly fewer cups of coffee per day than reported.</em></p>
+</section>
+<section id="example-3-sleep-duration-among-college-students" class="slide level2">
+<h2>📝 <strong>Example 3: Sleep Duration Among College Students</strong></h2>
+<h3 id="scenario-2"><strong>Scenario</strong></h3>
+<p>A health researcher believes college students sleep <strong>less than 7 hours</strong> per night. A sample of <strong>30 students</strong> reports a mean of <strong>6.5 hours</strong> with a standard deviation of <strong>1.2 hours</strong>.</p>
+<h3 id="hypotheses-2"><strong>Hypotheses</strong></h3>
 <ul>
-<li class="fragment"><p>Smaller than .05 —&gt; Bottom</p></li>
-<li class="fragment"><p>Larger than .05 —&gt; Top</p></li>
-</ul></li>
+<li class="fragment"><strong>Null Hypothesis (H₀)</strong>: ( = 7 )<br>
+</li>
+<li class="fragment"><strong>Alternative Hypothesis (H₁)</strong>: ( &lt; 7 )</li>
+</ul>
+<h3 id="calculation-2"><strong>Calculation</strong></h3>
+<p>[ t = = = -2.28 ]</p>
+<p>For <strong>df = 29</strong>, the critical t-value for a <strong>one-tailed test</strong> at <strong>α = .05</strong> is <strong>-1.699</strong>. Since <strong>-2.28 &lt; -1.699</strong>, we <strong>reject (H_0)</strong>.</p>
+<h3 id="apa-reporting-2"><strong>APA Reporting</strong></h3>
+<p><em>A one-sample t-test was conducted to test whether college students sleep fewer than 7 hours per night. Results were statistically significant, ( t(29) = -2.28, p &lt; .05 ), indicating that students get significantly less sleep than the recommended amount.</em></p>
+</section>
+<section class="slide level2">
+
+<h3 id="final-notes">🔹 <strong>Final Notes:</strong></h3>
+<ul>
+<li class="fragment">I included <strong>two-tailed</strong> and <strong>one-tailed</strong> examples for variety.<br>
+</li>
+<li class="fragment">Let me know if you’d like <strong>visuals</strong> (e.g., histograms, box plots).<br>
+</li>
+<li class="fragment">I can also format this into a <strong>Quarto slide deck</strong> if needed! 🚀</li>
 </ul>
 </section>
-<section id="independent-samples-t-test-spss-6" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="images/indsamp_ex.png"></a></p>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<h3 id="one-sample-t-test">One Sample T-Test</h3>
 <ul>
-<li class="fragment"><p>Step Two: Look at p (Sig.)</p>
-<ul>
-<li class="fragment"><p>Smaller than .05 —&gt; Report Full Findings</p></li>
-<li class="fragment"><p>Larger than .05 —&gt; Report only Null</p></li>
-</ul></li>
+<li class="fragment">The one-sample t-test is useful for comparing a sample mean to a known population mean.</li>
+<li class="fragment">Always check assumptions before conducting the test.</li>
+<li class="fragment">Report results in APA format, including effect size if necessary.</li>
 </ul>
-</section>
-<section id="independent-samples-t-test-spss-7" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="images/indsamp_ex.png"></a></p>
-<blockquote>
-<p><em>t(degrees of freedom) = value, p = value</em></p>
-</blockquote>
-</section>
-<section id="independent-samples-t-test-spss-8" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="images/indsamp_ex.png"></a></p>
-<blockquote>
-<p><em>t(893) = value, p = value</em></p>
-</blockquote>
-</section>
-<section id="independent-samples-t-test-spss-9" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="images/indsamp_ex.png"></a></p>
-<blockquote>
-<p><em>t(893) = 5.038, p = value</em></p>
-</blockquote>
-</section>
-<section id="independent-samples-t-test-spss-10" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="images/indsamp_ex.png"></a></p>
-<blockquote>
-<p><em>t(893) = 5.038, p &lt; .001</em></p>
-</blockquote>
-</section>
-<section id="independent-samples-t-test-spss-11" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="images/indsamp_ex.png"></a></p>
-<blockquote>
-<p>There was a significant difference in number of hours worked last week between men and women, t (893) = 5.038, p &lt; 0.001.</p>
-</blockquote>
-</section>
-<section id="independent-samples-t-test-spss-12" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="images/indsamp_ex.png"></a></p>
-<p>But who worked more hours?!</p>
-</section>
-<section id="independent-samples-t-test-spss-13" class="slide level2">
-<h2>Independent samples t-test: SPSS</h2>
-<p><a href="images/indsamp_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="images/indsamp_ex.png"></a></p>
-<blockquote>
-<p>Men (M = 43.92, s = 15.53) worked significantly more hours last week compared to women (M = 38.92, s = 14.085), t (893) = 5.038, p &lt; 0.001.</p>
-</blockquote>
 
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢</p>
 </div>
 </div></div>
 

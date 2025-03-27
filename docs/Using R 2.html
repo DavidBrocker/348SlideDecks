@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>l17pp – PSY 348: Statistics for Psychology</title>
+<title>using-r – PSY 348: Statistics for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Using R.html">Using R</a></li><li class="breadcrumb-item"><a href="./Using R.html">Using Posit Cloud for Statistics Students</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -180,14 +180,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lec11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./lec12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">One-Sample T-Test</span></a>
+ <span class="menu-text">Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -266,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Using R.html" class="sidebar-item-text sidebar-link">
+  <a href="./Using R.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Using Posit Cloud for Statistics Students</span></a>
   </div>
 </li>
@@ -283,337 +277,61 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-posit-cloud-for-statistics-students" id="toc-using-posit-cloud-for-statistics-students" class="nav-link active" data-scroll-target="#using-posit-cloud-for-statistics-students">Using Posit Cloud for Statistics Students</a>
+  <ul class="collapse">
+  <li><a href="#why-use-posit-cloud" id="toc-why-use-posit-cloud" class="nav-link" data-scroll-target="#why-use-posit-cloud">Why Use Posit Cloud?</a></li>
+  <li><a href="#how-to-get-started" id="toc-how-to-get-started" class="nav-link" data-scroll-target="#how-to-get-started">How to Get Started</a></li>
+  <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features">Key Features</a></li>
+  <li><a href="#tips-for-success" id="toc-tips-for-success" class="nav-link" data-scroll-target="#tips-for-success">Tips for Success</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Using R.html">Using R</a></li><li class="breadcrumb-item"><a href="./Using R.html">Using Posit Cloud for Statistics Students</a></li></ol></nav></header>
 
 
 
 
-<p>Within Subjects ANOVA</p>
-<p>Lecture 18</p>
-<p>ANOVA</p>
-<p>ANalysis</p>
-<p>Of</p>
-<p>VAriance</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>ANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another:</p>
-<p>‣ Independent variable: Categorical / Nominal</p>
-<p>‣ Dependent variable: Continuous</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Prof.&nbsp;Brocker believes the key to happiness involves 2 things: drinking coffee and watching <strong>Dark</strong>. He randomly assigns 300 participants to drink coffee or decaf. He also randomly assigns them to watch the <strong>Dark</strong> or <strong>Jeopardy</strong>. He then measures their happiness on a scale of 1 (<em>not happy</em>) to 10 (<em>so very happy</em>).</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Dr.&nbsp;Apriceno believes the key to happiness involves 2 things: drinking coffee and watching the Eric Andre Show. She randomly assigns 300 participants to drink coffee or decaf. She also randomly assigns them to watch the Eric Andre Show or Jeopardy. She then measures their happiness on a scale of 1 (not happy) to 10 (so very happy).</p>
-<p>‣ Independent variable 1:</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Dr.&nbsp;Apriceno believes the key to happiness involves 2 things: drinking coffee and watching the Eric Andre Show. She randomly assigns 300 participants to drink coffee or decaf. She also randomly assigns them to watch the Eric Andre Show or Jeopardy. She then measures their happiness on a scale of 1 (not happy) to 10 (so very happy).</p>
-<p>‣ Independent variable 1: Coffee vs.&nbsp;Decaf</p>
-<p>‣ Independent variable 2:</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Dr.&nbsp;Apriceno believes the key to happiness involves 2 things: drinking coffee and watching the Eric Andre Show. She randomly assigns 300 participants to drink coffee or decaf. She also randomly assigns them to watch the Eric Andre Show or Jeopardy. She then measures their happiness on a scale of 1 (not happy) to 10 (so very happy).</p>
-<p>‣ Independent variable 1: Coffee vs.&nbsp;Decaf</p>
-<p>‣ Independent variable 2: Eric Andre Show vs.&nbsp;Jeopardy</p>
-<p>‣ Dependent variable:</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Prof.&nbsp;Brocker believes the key to happiness involves 2 things: drinking coffee and watching <strong>Dark</strong>. He randomly assigns 300 participants to drink coffee or decaf. He also randomly assigns them to watch the <strong>Dark</strong> or <strong>Jeopardy</strong>. He then measures their happiness on a scale of 1 (<em>not happy</em>) to 10 (<em>so very happy</em>).</p>
-<p>‣ Independent variable 1: Coffee vs.&nbsp;Decaf</p>
-<p>‣ Independent variable 2: Dark vs.&nbsp;Jeopardy</p>
-<p>‣ Dependent variable: Happiness</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Prof.&nbsp;Brocker believes the key to happiness involves 2 things: drinking coffee and watching <strong>Dark</strong>. He randomly assigns 300 participants to drink coffee or decaf. He also randomly assigns them to watch the <strong>Dark</strong> or <strong>Jeopardy</strong>. He then measures their happiness on a scale of 1 (<em>not happy</em>) to 10 (<em>so very happy</em>).</p>
-<p>PSY 348</p>
-<p>2-way AnOVA</p>
-<p>Prof.&nbsp;Brocker believes the key to happiness involves 2 things: drinking coffee and watching <strong>Dark</strong>. He randomly assigns 300 participants to drink coffee or decaf. He also randomly assigns them to watch the <strong>Dark</strong> or <strong>Jeopardy</strong>. He then measures their happiness on a scale of 1 (<em>not happy</em>) to 10 (<em>so very happy</em>).</p>
-<p>PSY 348</p>
-<p>2-way ANOVA</p>
-<p>PSY 348</p>
-<p>2-way ANOVA</p>
-<p>PSY 348</p>
-<p>2-way ANOVA</p>
-<p>PSY 348</p>
-<p>2-way ANOVA</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Dr.&nbsp;Apriceno wants to know if giving lollypops to statistics students improves their opinion of statistics. She asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then she gives each student a lollypop at the start of statistics class for 2 weeks. After two weeks of conditioning, Dr. Apriceno asks participants to rate how much they enjoy statistics again.</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Dr.&nbsp;Apriceno wants to know if giving lollypops to statistics students improves their opinion of statistics. She asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then she gives each student a lollypop at the start of statistics class for 2 weeks. After two weeks of conditioning, Dr. Apriceno asks participants to rate how much they enjoy statistics again.</p>
-<p>‣ Independent variable:</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Dr.&nbsp;Apriceno wants to know if giving lollypops to statistics students improves their opinion of statistics. She asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then she gives each student a lollypop at the start of statistics class for 2 weeks. After two weeks of conditioning, Dr. Apriceno asks participants to rate how much they enjoy statistics again.</p>
-<p>‣ Independent variable: Time (before and after)</p>
-<p>PSY 348</p>
-<p>Within subjects AnOVA</p>
-<p>Dr.&nbsp;Apriceno wants to know if giving lollypops to statistics students improves their opinion of statistics. She asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then she gives each student a lollypop at the start of statistics class for 2 weeks. After two weeks of conditioning, Dr. Apriceno asks participants to rate how much they enjoy statistics again.</p>
-<p>‣ Independent variable: Time (before and after)</p>
-<p>‣ Dependent variable:</p>
-<p>PSY 348</p>
-<p>Within subjects AnOVA</p>
-<p>Dr.&nbsp;Apriceno wants to know if giving lollypops to statistics students improves their opinion of statistics. She asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then she gives each student a lollypop at the start of statistics class for 2 weeks. After two weeks of conditioning, Dr. Apriceno asks participants to rate how much they enjoy statistics again.</p>
-<p>‣ Independent variable: Time (before and after)</p>
-<p>‣ Dependent variable: Enjoyment of statistics</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Between subjects ANOVA compares means <strong><u>BETWEEN</u></strong> groups to determine if they differ significantly from one another.</p>
-<p>Within subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference <strong><u>WITHIN</u> </strong>participants over time.</p>
-<p>PSY 348</p>
-<p>Within subjects AnOVA</p>
-<p>Within subjects ANOVA examines differences within participants over time.</p>
-<p>Within subjects ANOVA is also known as Repeated Measures ANOVA, because it looks at one measure repeated over time.</p>
-<p>PSY 348</p>
-<p>Within subjects AnOVA</p>
-<p>The independent variable is time.</p>
-<p>‣ Before intervention: baseline or pre-test</p>
-<p>‣ After intervention: post-test</p>
-<p>PSY 348</p>
-<p>Within Subjects AnOVA</p>
-<p>Within subjects ANOVA can look at 2 or more time points.</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>PSY 348</p>
-<p>Between subjects ANOVA</p>
-<p>In between subjects ANOVA, we analyze two types of variance:</p>
-<p>• Between Group variance: How the data varies between the groups</p>
-<p>• Error variance: How the data varies across all participants</p>
-<p>PSY 348</p>
-<p>Between subjects ANOVA</p>
-<p>• Between Group variance: How the data varies between the groups</p>
-<p>• Error variance: How the data varies across all participants</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Over time: between the time points just like between the groups</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Over time</p>
-<p>‣ Error variance: How the data varies across all participants</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Over time</p>
-<p>‣ Error variance</p>
-<p>‣ Per participant</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Over time: Mood before the Eric Andre Show is more similar to mood before the EAS than it is to mood after the EAS.</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Over time: Mood before the Eric Andre Show is more similar to mood before the EAS than it is to mood after the EAS.</p>
-<p>‣ Error Variance: Mood will have natural variance across participants and time.</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Over time: Mood before the Eric Andre Show is more similar to mood before the EAS than it is to mood after the EAS.</p>
-<p>‣ Error Variance: Mood will have natural variance across participants.</p>
-<p>‣ Per participant: Each participant’s scores will be more like their other scores than they are like the scores of another participant.</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA Example</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<p>‣ Time</p>
-<p>‣ Error</p>
-<p>‣ Subjects</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>PSY 348</p>
-<p>Calculating F</p>
-<p>WITHIN subjects ANOVA</p>
-<p>What is the F ratio in between subjects ANOVA?</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>What is the F ratio in between subjects ANOVA?</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>What is the F ratio in between subjects ANOVA?</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>What is the F ratio in between subjects ANOVA?</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>The F ratio in within subjects ANOVA:</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>We want measure 2 sources of variance:</p>
-<p>▸ SS<strong><sub>Time</sub></strong>: this is just like the SS from between subjects ANOVA</p>
-<p>▸ SS<strong><sub>Error</sub></strong>: this is harder to calculate in within subjects ANOVA, because of the subject variance.</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>SS<strong><sub>WG&nbsp;</sub></strong>= SS<strong><sub>Subjects&nbsp;</sub></strong>+ SS<strong><sub>Error</sub></strong></p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>SS<strong><sub>WG&nbsp;</sub></strong>= SS<strong><sub>Subjects&nbsp;</sub></strong>+ SS<strong><sub>Error</sub></strong></p>
-<p>SS<strong><sub>Error</sub></strong> = SS<strong><sub>WG</sub></strong> - SS<strong><sub>Subjects</sub></strong></p>
-<p>PSY 348</p>
-<p>Calculating means squared (MS)</p>
-<p>▸ We calculate a SS for the variance between the times points (SS<strong><sub>Time</sub></strong>).</p>
-<p>▸ This is just like the SS<strong><sub>BG</sub></strong> from between subjects ANOVA</p>
-<p>▸ We calculate a SS for the within group variance (SS<strong><sub>WG</sub></strong>).</p>
-<p>▸ We calculate a SS for the variance by person (SS<strong><sub>Subject</sub></strong>).</p>
-<p>PSY 348</p>
-<p>Calculating means squared (MS)</p>
-<p>▸ We calculate a SS for the variance between the times points (SS<strong><sub>Time</sub></strong>).</p>
-<p>▸ To find SS<strong><sub>Error</sub></strong>, we subtract SS<strong><sub>Subjects</sub></strong> from SS<strong><sub>WG</sub></strong>.</p>
-<p>PSY 348</p>
-<p>Calculating means squared (MS)</p>
-<p>▸ MS<strong><sub>Time</sub></strong> = SS<strong><sub>Time</sub></strong> / df<strong><sub>Time</sub></strong></p>
-<p>▸ MS<strong><sub>Error&nbsp;</sub></strong>= (SS<strong><sub>WG&nbsp;</sub></strong>- SS<strong><sub>Subject</sub></strong>) / df<strong><sub>Error</sub></strong></p>
-<p>PSY 348</p>
-<p>Degrees of freedom</p>
-<p>The number of observations (data points) in the data that are free to vary when estimating a statistic.</p>
-<p>I own 7 hats. I want to wear a different hat every day of the week.</p>
-<p>‣ On Sunday, I don’t get a choice. On Sunday, I have to wear the Santa hat.</p>
-<p>‣ The degrees of freedom is how many times I get a choice before I’m stuck with what’s left over.</p>
-<p>PSY 348</p>
-<p>Degrees of freedom</p>
-<p>Time (<strong>MS<sub>Time</sub></strong>) = k – 1</p>
-<p>Error (<strong>MS<sub>Error</sub></strong>) = (n – 1) x (k - 1)</p>
-<p>*k is the number of time points</p>
-<p>PSY 348</p>
-<p>Calculating means squared (MS)</p>
-<p>▸ MS<strong><sub>Time</sub></strong> = SS<strong><sub>Time</sub></strong> / df<strong><sub>Time&nbsp;</sub></strong>MS<strong><sub>Time</sub></strong> = SS<strong><sub>Time</sub></strong> / (k - 1)</p>
-<p>▸ MS<strong><sub>Error&nbsp;</sub></strong>= (SS<strong><sub>WG&nbsp;</sub></strong>- SS<strong><sub>Subject</sub></strong>) / df<strong><sub>Error&nbsp;</sub></strong>MS<strong><sub>Error&nbsp;</sub></strong>= (SS<strong><sub>WG&nbsp;</sub></strong>- SS<strong><sub>Subject</sub></strong>) / (n-1)x(k-1)<strong><sub>&nbsp;</sub></strong></p>
-<p>PSY 348</p>
-<p>WITHIN subjects ANOVA</p>
-<p>The F ratio in within subjects ANOVA:</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Dr.&nbsp;Apriceno wants to know if giving lollypops to statistics students improves their opinion of statistics. She asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then she gives each student a lollypop at the start of statistics class for 2 weeks. After two weeks of conditioning, Dr. Apriceno asks participants to rate how much they enjoy statistics again.</p>
-<p>What’s k?</p>
-<p>What’s n?</p>
-<p>PSY 348</p>
-<p>Practice</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Dr.&nbsp;Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.</p>
-<p>What’s k?</p>
-<p>What’s n?</p>
-<p>PSY 348</p>
-<p>Practice</p>
-<p>PSY 348</p>
-<p>AnOVA</p>
-<p>Dr.&nbsp;Apriceno measures the aging anxiety of 500 middle-aged women. She then shows them images from anti-aging advertisements featuring young women. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.</p>
-<p>What’s k?</p>
-<p>What’s n?</p>
-<p>PSY 348</p>
-<p>Practice</p>
-<p>PSY 348</p>
-<p>Interpreting f</p>
-<p>Interpreting f</p>
-<p>The MS<sub>Time&nbsp;</sub>is made up of the MS<sub>Error&nbsp;</sub>+ the theoretical difference over time:</p>
-<p>▸ MS<sub>Time</sub> = <em>change over time</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>PSY 348</p>
-<p>Interpreting f</p>
-<p>The MS<sub>Time&nbsp;</sub>is made up of the MS<sub>Error&nbsp;</sub>+ the theoretical difference over time:</p>
-<p>▸ MS<sub>Time</sub> = <em>change over time</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ MS<sub>Time</sub> = <em>0</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>PSY 348</p>
-<p>Interpreting f</p>
-<p>The MS<sub>Time&nbsp;</sub>is made up of the MS<sub>Error&nbsp;</sub>+ the theoretical difference over time:</p>
-<p>▸ MS<sub>Time</sub> = <em>change over time</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ MS<sub>Time</sub> = <em>0</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ MS<sub>Time</sub> = <strong>MS<sub>Error</sub></strong></p>
-<p>PSY 348</p>
-<p>Interpreting f</p>
-<p>The MS<sub>Time&nbsp;</sub>is made up of the MS<sub>Error&nbsp;</sub>+ the theoretical difference over time:</p>
-<p>▸ MS<sub>Time</sub> = <em>change over time</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ MS<sub>Time</sub> = <em>0</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ MS<sub>Time</sub> = <strong>MS<sub>Error</sub></strong></p>
-<p>▸ F = 1</p>
-<p>PSY 348</p>
-<p>Interpreting f</p>
-<p>When F =&lt; 1, it’s not likely to be significant.</p>
-<p>PSY 348</p>
-<p>Interpreting f</p>
-<p>The MS<sub>Time&nbsp;</sub>is made up of the MS<sub>Error&nbsp;</sub>+ the theoretical difference over time:</p>
-<p>▸ MS<sub>Time</sub> = <em>change over time</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ MS<sub>Time</sub> = <em>effect</em> + <strong>MS<sub>Error</sub></strong></p>
-<p>▸ F &gt; 1</p>
-<p>PSY 348</p>
-<p>Hypothesis testing: ANOVA</p>
-<p>F &lt; = 1 —&gt; Fail to reject the Null Hypothesis</p>
-<p>F &gt; 1 —&gt; Refer to <em>p</em>-value —&gt; Reject the Null Hypothesis</p>
-<p>PSY 348</p>
-<p>How many f’s do Ya Get?</p>
-<p>▸ One-way Between Subjects?</p>
-<p>▸ Two-way Between Subjects with a 2x2 design?</p>
-<p>▸ Within Subjects?</p>
-<p>PSY 348</p>
-<p>How many f’s do Ya get?</p>
-<p>▸ One-way Between Subjects? 1</p>
-<p>▸ Two-way Between Subjectswith a 2x2 design? 3 (one for each IV and one for the interaction)</p>
-<p>▸ Within Subjects? 1</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>Reporting F</p>
-<p>If asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:</p>
-<p>‣ Reject H0, or</p>
-<p>‣ Fail to Reject H0</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>If asked to report findings in general or for publication, you need to report:</p>
-<p>‣ F(df time, df error)</p>
-<p>‣ = F-value</p>
-<p>‣ p-value</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>Mood after watching the Eric Andre Show was not significantly different from mood before watching the Eric Andre Show, <em>F</em> (1, 499) = 1.02, <em>p</em> = 0.07.</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>Mood after watching the Eric Andre Show was not significantly difference from mood before watching the Eric Andre Show, <em>F</em> (1, 499) = 1.02, <em>p</em> = 0.07.</p>
-<p>There was no significant change in mood over time, <em>F</em> (1, 499) = 1.02, <em>p</em> = 0.07.</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>Participants’ mood was significantly better after watching the Eric Andre Show compared to before watching it, <em>F</em>(1, 499) = 7.12, <em>p</em> &lt; 0.05.</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>If asked to report findings in general or for publication, you need to report:</p>
-<p>‣ F(df time, df error)</p>
-<p>‣ = F-value</p>
-<p>‣ p-value</p>
-<p>**If the results are significant, we have to also report the means and standard deviations for each time point.**</p>
-<p>PSY 348</p>
-<p>Reporting F</p>
-<p>Participants’ anxiety differed significant across time, <em>F</em>(2, 198) = 3.744, p = 0.25. Anxiety was highest at pre-test (M= 19.58, s = 0.643). Anxiety was lowest at baseline (M , s ). Anxiety at post test was M= , s.</p>
-<p>PSY 348</p>
-<p>Practice</p>
-<p>▸ Open Ihno’s dataset in SPSS</p>
-<p>PSY 348</p>
-<p>Practice</p>
-<p>▸ Open Ihno’s dataset in SPSS</p>
-<p>▸ Was anxiety just before the Stats Exam significantly higher than baseline anxiety?</p>
-<p>PSY 348</p>
+<section id="using-posit-cloud-for-statistics-students" class="level2">
+<h2 class="anchored" data-anchor-id="using-posit-cloud-for-statistics-students">Using Posit Cloud for Statistics Students</h2>
+<p>Posit Cloud is a web-based platform that allows you to run R and RStudio directly in your browser—no need to install anything on your computer! It’s perfect for statistics courses where you’ll work with data, run analyses, and create visualizations.</p>
+<section id="why-use-posit-cloud" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-posit-cloud">Why Use Posit Cloud?</h3>
+<p>• <strong>No Installation Needed</strong>: Just log in and start coding.</p>
+<p>• <strong>Access Anywhere</strong>: Works on any device with internet access.</p>
+<p>• <strong>Collaborative</strong>: Share projects with classmates or receive assignments from your instructor.</p>
+<p>• <strong>Consistent Environment</strong>: Everyone uses the same setup, reducing tech issues.</p>
+</section>
+<section id="how-to-get-started" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-get-started">How to Get Started</h3>
+<ol type="1">
+<li><p><a href="https://posit.cloud/plans/instructor?option=instructor-student-pay"><strong>Sign Up</strong></a>: Go to posit.cloud and create a free account (use your school email if required).</p></li>
+<li><p><strong>Join Your Class Workspace</strong>: Your instructor may provide a link or invite code to access course projects.</p></li>
+<li><p><strong>Create/Access Projects</strong>: A project is like an RStudio session where you can write code, import data, and save your work.</p></li>
+</ol>
+</section>
+<section id="key-features" class="level3">
+<h3 class="anchored" data-anchor-id="key-features">Key Features</h3>
+<p>• <strong>Script Editor</strong>: Write and save R scripts (.R files).</p>
+<p>• <strong>Console</strong>: Run quick R commands interactively.</p>
+<p>• <strong>Environment Tab</strong>: See your data, variables, and objects.</p>
+<p>• <strong>Files Pane</strong>: Upload datasets (e.g., .csv files) for analysis.</p>
+</section>
+<section id="tips-for-success" class="level3">
+<h3 class="anchored" data-anchor-id="tips-for-success">Tips for Success</h3>
+<p>• <strong>Save Often</strong>: Posit Cloud autosaves, but hitting Ctrl + S helps prevent hiccups.</p>
+<p>• <strong>Organize Projects</strong>: Keep different assignments in separate projects for easy access.</p>
+<p>• <strong>Install Packages Carefully</strong>: If a package isn’t installed, use install.packages(“package_name”)—but check if your instructor has pre-installed them in shared projects.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,6 +1,6 @@
 ---
-title: "Linear Regression"
-subtitle: "Lecture 11"
+title: "One-Sample T-Test"
+subtitle: "Lecture 12"
 author: "Dave Brocker"
 footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢"
 institute: "Farmingdale State College"
@@ -23,664 +23,180 @@ revealjs-plugins:
   - drop
 ---
 
-## Types of Analysis
+# Introduction to Comparing Means
 
--   **Univariate**: One variable, like the mean
+## Why Compare Means?
+- We often want to test whether a sample mean differs from a known population mean.
+- The **one-sample t-test** helps determine if the sample mean is significantly different from the hypothesized population mean.
+- Example scenarios:
+  - Does the average exam score in a class differ from a national average of 75?
+  - Do people’s reaction times differ from a published standard of 250ms?
 
--   **Bivariate**: Two variables, like correlation
+## Assumptions of the One-Sample t-Test
+1. The data are **continuous** (interval or ratio scale).
+2. The sample is **randomly selected**.
+3. The data are **normally distributed** (or the sample size is large enough for the Central Limit Theorem to apply).
 
--   **Multivariate**: More than 2 variables
+## The One-Sample t-Test Formula
 
-## Regression
+The test statistic is calculated as:
 
--   Regression is the **multivariate** version of correlation.
+$$ t = \frac{\bar{X} - \mu}{s / \sqrt{n}} $$
 
--   Correlation is the **bivariate** version of regression.
+Where:
 
--   We're doing the same thing in regression as we do in correlation, **BUT** there are more than 2 variables.
+- $\bar{X}$ = sample mean
 
-## Regression terminology
+- $\mu$ = population mean (null hypothesis value)
 
-In regression we will choose one variable to predict.
+- $s$ = sample standard deviation
 
--   We call this $Y$.
+- $n$ = sample size
 
--   $Y$ is the outcome variable.
+# Example: Exam Scores
 
--   $\hat{Y}$ is the predicted variable.
+## Hypothesis Testing Steps
+1. **Set Hypotheses:**
+   - $H_0$: The average exam score is 75 ($\mu = 75$).
+   - $H_A$: The average exam score is **not** 75 ($\mu \neq 75$).
+2. **Collect Sample Data:**
+   - Sample size: $n = 20$
+   - Sample mean: $\bar{X} = 78$
+   - Sample standard deviation: $s = 5$
+   
+## Hypothesis Testing Steps
+3. **Compute the t-Statistic:**
 
-## Regression terminology
+$$ t = \frac{78 - 75}{5 / \sqrt{20}} = \frac{3}{1.118} = 2.68 $$
 
-In regression we will choose two or more variables we have reason to believe predict y.
+4. **Compare to Critical Value:**
+   - Using a $\alpha = 0.05$ level and df = 19, critical $t_{.025,19} = \pm 2.093$.
+   - Since $2.68 > 2.093$, we reject $H_0$.
 
--   We call these $A$, $B$, etc.
+## Reporting Results
+APA-style:
 
--   $A$ is the predictor variable.
+> A one-sample t-test was conducted to compare exam scores to the national average of 75. Results showed a significant difference, **t(19) = 2.68, p < .05**, indicating that students scored significantly higher than the national average.
 
-## Regression terminology
+# Interpreting Results
+- A **significant** result ($p < .05$) suggests that the sample mean is different from the population mean.
+- A **non-significant** result ($p > .05$) means we fail to reject $H_0$ (no evidence of a difference).
 
-When we predict Y with `X`, we say;
+# Visualizing Data
 
-We regress `y` on the `x`.
+## Sample Summary Table
 
-## Regression Equation
+| Measure        | Value |
+|---------------|-------|
+| Sample Mean   | 78    |
+| Population Mean | 75    |
+| Sample SD     | 5     |
+| Sample Size   | 20    |
+| t-Statistic   | 2.68  |
+| p-Value       | 0.014 |
 
-### Step-by-Step
-
-$$
-\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{blue}{\beta_1(A)}+\color{orange}{e_i}}
-$$
-
-::: fragment
-[1. The predicted value of y for a particular participant (i)]{style="color:red"}
-:::
-
-::: fragment
-[2. Intercept]{style="color:green"}: Value of Y when all other predictors are 0
-:::
-
-::: fragment
-[3. Weight]{style="color:blue"}
-:::
-
-::: fragment
-[4. The Value of a particular participant on the measure of $A$]{style="color:black"}
-:::
-
-::: fragment
-[5. Error. Random, and therefore cannot be predicted]{style="color:orange"}
-:::
-
-## Regression Equation
-
-### A Few Ways to Write the Same Thing!
-
-$$
-\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{blue}{\beta_1(A)}}
-$$
-
-::: fragment
-$$\hat{Y} = \beta_0 + \beta_1(A)$$
-:::
-
-::: fragment
-$$Y = ax + b$$
-:::
-
-## Linear Regression
-
-### Line of Best Fit
-
+## Boxplot Example
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(MASS)
-library(gtsummary)
+data <- data.frame(Scores = c(72, 74, 76, 78, 80, 81, 77, 79, 78, 76,
+                             80, 82, 74, 75, 78, 77, 76, 79, 80, 78))
+ggplot(data, aes(y = Scores)) +
+  geom_boxplot(fill = "lightblue", color = "black") +
+  geom_hline(yintercept = 78, lty = "dashed", color = "red") +
+  theme_minimal() +
+  ggtitle("Exam Scores Distribution") + 
+  annotate("text", x = 1.2, y = median(data$Scores), 
+           label = "Median", hjust = 0, color = "blue") +
 
-generate_correlation <- function(n, rho) {
-  # Define the mean and covariance matrix
-  mean_vector <- c(0, 0)
-  covariance_matrix <- matrix(c(1, rho, rho, 1), nrow = 2)
+  # Annotate IQR (Box)
+  annotate("text", x = 1.2, y = quantile(data$Scores, 3/4), 
+           label = "Q3 (75th percentile)", hjust = 0, color = "red") +
+  annotate("text", x = 1.2, y = quantile(data$Scores, 1/4), 
+           label = "Q1 (25th percentile)", hjust = 0, color = "red") +
   
-  # Generate correlated data using mvrnorm from the MASS package
-  data <- mvrnorm(n = n, mu = mean_vector, Sigma = covariance_matrix)
-  
-  # Convert to a data frame
-  data_frame <- data.frame(X = data[, 1], Y = data[, 2])
-  return(data_frame)
-}
-
-# Example: Generate data with a correlation of 0.7
-as <- generate_correlation(35,.51)
-
-mod1 <- lm(Y~X, data = as)
-
-data <- 
-  as |> 
-  mutate(
-    yhat = predict(mod1) |> as.vector(),
-    res = Y - yhat
-  )
-```
-
-::: panel-tabset
-## Scaterrplot
-
-```{r}
-data |> 
-  ggplot(aes(X, Y)) + 
-  geom_point() + 
-  theme_minimal() + 
-  labs(
-    title = "Simple Linear Regression",
-    x = "\nX",
-    y = "Y\n",
-  ) + 
-  theme(
-    panel.grid = element_blank()
-  )
-```
-
-## Linear Regression
-
-```{r}
-data |> 
-  ggplot(aes(X, Y)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE) +
-  theme_minimal() + 
-  labs(
-    title = "Simple Linear Regression",
-    x = "\nX",
-    y = "Y\n"
-  ) + 
-  theme(
-    panel.grid = element_blank()
-  )
-```
-
-## Residual Plot
-
-```{r}
-data |> 
-  ggplot(aes(X, Y)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE) + 
-  geom_segment(aes(xend = X, yend = yhat),
-               lty = "dashed") + 
-  theme_minimal() + 
-  labs(
-    title = "Simple Linear Regression",
-    x = "\nX",
-    y = "Y\n"
-  ) + 
-  theme(
-    panel.grid = element_blank()
-  )
-```
-:::
-
-## Regression:
-
-### Equation Component Meanings
-
--   $Y$ = theoretical prediction of `y`
-
--   $\hat{Y}$= the actual `y` value for a participant
-
--   $\beta_0$ = the intercept: the average `y` value
-
--   $A$ = the A value for a participant
-
--   $\beta_1$ = a weighted value that is multiplied by `A` and added to $\beta_0$ to estimate `y`.
-
-## Regression Equation:
-
-### More than one X
-
-$\large{\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)}...$
-
-## Regression:
-
-### Equation Component Meanings
-
--   $Y$ = theoretical prediction of `y`
-
--   $\hat{Y}$= the actual `y` value for a participant
-
--   $\beta_0$ = the intercept: the average `y` value
-
--   $A$ = the $A$ value for a participant
-
--   $\beta_1$ = a weighted value that is multiplied by x and added to $\beta_0$ to estimate y.
-
--   $B$ = the $B$ value for a participant
-
--   $\beta_2$ = a weighted value that is multiplied by $B$
-
-## Regression Equation:
-
-## More than one X
-
-$\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
-
-# Interpreting Coefficients
-
-## Regression Model Table
-
-### Two Predictor Variables
-
-```{r}
-test <- 
-  tibble(
-  money = rnorm(100,55,5),
-  x1 = rnorm(100,14,2),
-  x2 = rnorm(100,30,2)
-) 
-
-mod1 <- lm(money ~ x1+x2, data = test) |> summary() 
-  
-mod1 |> tbl_regression()
-```
-
-## Interpreting coefficients
-
--   Beta coefficient
-
--   t-value
-
--   p-value
-
-## Interpreting coefficients
-
-::: nonincremental
--   Beta coefficient
-
--   t-value
-
--   **p-value: is this a significant predictor of y?**
-:::
-
-## Interpreting coefficients
-
-::: nonincremental
--   **Beta coefficient: which predictor of y has the more predictive power?**
-
--   t-value
-
--   p-value
-:::
-
-## $R^2$: Coefficient of Determination
-
-### How much can we account for?
-
--   $R^2$ is the correlation coefficient (`r`) squared.
-
--   $R^2$ is always positive
-
--   In correlation, the amount of `y` accounted for by `x`
-
-## $R^2$: Coefficient of Determination
-
-### How much can we account for?
-
--   In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
-
--   How much of `y` did we account for?
-
--   Did we account for a **significant** amount of the variance in `y`?
-
-## $R^2$: Coefficient of Determination
-
-### How much can we account for?
-
-## Interpreting R Squared
-
-::: nonincremental
--   R Squared
-
--   Adjusted R Squared
-
--   F-value
-
--   **p-value: is this a significant predictor of `y`?**
-:::
-
-## Interpreting R Squared
-
-::: nonincremental
--   **R Squared: The percentage of `y` accounted for by the predictors**
-
--   Adjusted R Squared
-
--   F-value
-
--   p-value
-:::
-
-## Interpreting R Squared
-
-::: nonincremental
--   R Squared
-
--   **Adjusted R Squared: The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
-
--   F-value
-
--   p-value
-:::
-
-# Linear Regression Example
-
-## Linear Regression
-
-### Example
-
-> Professor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.
-
-What are some predictors of social media use?
-
--   Sense of belonging
-
--   Age
-
-## Regression Equation
-
-$$\large{Y_i = \beta_0 + \beta_1A + \beta_2B~ + e_i}$$
-
-## Regression Equation
-
-### Theoretical
-
-$$\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(Age)} + \color{purple}{\beta_2(SOB)}\color{pink}~ + e_i}$$
-
-1.  The predicted degree of social media use for a participant "`i`"
-
-2.  Intercept: Average social media use when all other predictors are 0.
-
-3.  Coefficient for $A$
-
-4.  What is the sense of belonging?
-
-5.  Coefficient for $B$
-
-6.  Age
-
-7.  Randomness
-
-## Regression Equation
-
-### Computational
-
-$\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
-
-## Linear Regression
-
--   This form of regression is called linear regression.
-
-## Example
-
-### Model Coefficients
-
-```{r}
-library(gt)
-library(broom)
-# Set seed for reproducibility
-set.seed(123)
-
-# Generate 30 participants
-participants <- paste0("P", 1:30)
-
-# Age: Randomly sampled from 18 to 50
-age <- sample(18:50, 30, replace = TRUE)
-
-# Sense of Belonging: Continuous scale from 0 to 10
-belonging <- round(runif(30, min = 0, max = 10), 2)
-
-# Generate social media use (hours per day) using a model
-# Assume younger people and those with higher belonging use social media more
-social_media_use <- 5 - (0.1 * age) + (0.3 * belonging) + rnorm(30, mean = 0, sd = 0.5)
-
-# Create data frame
-df_sob <- data.frame(
-  Participant = participants,
-  Age = age,
-  Sense_of_Belonging = belonging,
-  Social_Media_Use = round(social_media_use, 2)
-)
-
-# Create Model
-sm_mod <- 
-  lm(Social_Media_Use ~ 
-     Age + Sense_of_Belonging, 
-   data = df_sob) |> 
-  tbl_regression(
-    intercept = TRUE
-  ) |> 
-  as_gt() |> 
-  tab_header(title = "Social Media Use Model")
-
-# Show Model
-sm_mod
-
-# Show Other Summaries
-model_summary <- 
-  lm(Social_Media_Use ~ 
-     Age + Sense_of_Belonging, 
-   data = df_sob) |> 
-    summary()
-
-# Create a data frame with the desired values
-mod2 <- data.frame(
-  Metric = c("Residual Standard Error", "Multiple R-squared", "Adjusted R-squared", "F-statistic", "p"),
-  Value = c(
-    model_summary$sigma,                        # Residual Standard Error
-    model_summary$r.squared,                    # Multiple R-squared
-    model_summary$adj.r.squared,                # Adjusted R-squared
-    model_summary$fstatistic[1],                # F-statistic
-    pf(model_summary$fstatistic[1], model_summary$fstatistic[2], model_summary$fstatistic[3], lower.tail = FALSE)  # p-value
-  )
-)
-
-# Convert to a gt table
-mod2 |> 
-  gt() |> 
-  fmt_auto() |> 
-  tab_header(
-    title = md("**Regression Model Summary**"),
-    subtitle = md("*Predicting Social Media Use for Age and Sense of Belonging*")
-  )
-```
-
-# Reporting Regression Findings
-
-## Example
-
-First, report adjusted $R^2$ and it's corresponding p:
-
--   Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p\* \< 0.001.
-
--   Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p \< 0.001.
-
-## Example
-
-```{r}
-sm_mod
-```
-
-Then report individual betas and their p's:
-
--   Sense of belonging (*beta = 0.29, p = 0.001*) significantly predicted social media use.
-
--   Age significantly predicted likelihood of social media use (beta = -.10, p \<.001)
-
--   It's common to report betas and p's in text as well as in a table.
-
-# Categorical Variables in Regression
-
-## Multiple Predictors
-
-### Understanding the Factors That Influence Energy Levels
-
-> What determines how energized you feel throughout the day? Is it the number of cups of coffee you drink? The amount of sleep you got the night before? Or maybe even the type of TV shows you watch before bed?
-
-## Multiple Predictors
-
-### Understanding the Factors That Influence Energy Levels
-
-In this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:
-
--   Duration of TV Watching (Continuous) – Does watching more TV affect energy?
--   Cups of Coffee (Continuous) – Does caffeine actually help?
--   Prior Sleep (Continuous) – Does more sleep always mean more energy?
--   TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
-
-## Categorical variables
-
-```{r}
-# Set seed for reproducibility
-set.seed(123)
-
-# Generate 30 participants
-n <- 30
-
-# Continuous predictors
-duration_tv <- round(runif(n, 0.5, 5), 2)  # Hours of TV watched
-cups_of_coffee <- sample(0:5, n, replace = TRUE)  # Cups of coffee
-prior_sleep <- round(rnorm(n, mean = 7, sd = 1.5), 2)  # Hours of sleep
-
-# Categorical predictor: TV Show Genre (Drama, Comedy, Documentary)
-tv_genre <- sample(c("Drama", "Comedy", "Documentary"), n, replace = TRUE)
-
-# Assign numeric values for regression (Dummy coding: Comedy as reference)
-tv_genre_num <- ifelse(tv_genre == "Drama", 1, ifelse(tv_genre == "Documentary", 2, 0))
-
-# Generate energy level using a regression model
-energy_level <- 3.5 + 
-  (1.2 * duration_tv) + 
-  (0.8 * cups_of_coffee) + 
-  (-0.5 * prior_sleep) + 
-  (1.5 * tv_genre_num) +  # Drama increases energy, Documentary increases it more
-  rnorm(n, mean = 0, sd = 1)  # Add some random noise
-
-# Round energy levels for readability
-energy_level <- round(energy_level, 2)
-
-# Create a data frame
-df_cat <- data.frame(
-  Participant = paste0("P", 1:n),
-  Duration_TV = duration_tv,
-  Cups_of_Coffee = cups_of_coffee,
-  Prior_Sleep = prior_sleep,
-  TV_Genre = tv_genre,
-  Energy_Level = energy_level
-)
-```
-
-## Fit the Model
-
-```{r}
-model_3 <- lm(Energy_Level ~ Duration_TV + Cups_of_Coffee + Prior_Sleep + TV_Genre, data = df_cat)
-
-tbl_regression(model_3,intercept = TRUE) |> 
-  as_gt() |> 
-  tab_header(title = md("**Energy Level Model**"),
-             subtitle = md("*What is the best predictor?*"))
-
+  # Annotate Whiskers
+  annotate("text", x = 0.8, y = max(data$Scores), 
+           label = "Max (Upper Whisker)", hjust = 1, color = "black") +
+  annotate("text", x = 0.8, y = min(data$Scores), 
+           label = "Min (Lower Whisker)", hjust = 1, color = "black")
 
 ```
 
-## Horror Movies
+## 📝 **Example 1: Exam Scores vs. National Average**  
 
-```{r}
-library(janitor)
+### **Scenario**  
+A professor wants to test if students in their class scored **differently** from the national average of 75 on an exam. A sample of **25 students** has a mean score of **78** with a standard deviation of **10**.  
 
-hm <- read.csv("Horror Movie Data https___notawfulandboring.blogspot.com_ - Data.csv")
+### **Hypotheses**  
+- **Null Hypothesis (H₀)**: \( \mu = 75 \) (no difference)  
+- **Alternative Hypothesis (H₁)**: \( \mu \neq 75 \) (scores differ)  
 
-hm_cln <- 
-  hm |> 
-  clean_names() |> 
-  dplyr::select(-movie,-avg_resting_heart_rate_bpm)
+### **Calculation**  
+Using the one-sample t-test formula:
 
-lm(scare_score ~ ., data = hm_cln) |> 
-tbl_regression(label = 
-                 list("ranking" = "Ranking",
-                    "avg_movie_heart_rate_bpm" = "Avg. Heart Rate (BPM)",
-                   "overall_difference_bpm" = "Overall Difference (BPM)" ,
-                   "hrv_difference" = "HRV Difference" ,
-                   "highest_spike_bpm" = "Highest Spike",
-                   "this_film_is_a_sequel" = "Sequel",
-                   "this_film_has_at_least_one_sequel" = "At Least One Sequel",
-                  "rotten_tomato_score" = "Rotten Tomato Score" ,
-                   "year" = "Year" )) 
-```
+\[
+t = \frac{\bar{X} - \mu}{s / \sqrt{n}}
+\]
 
-# Review Questions
+Substituting values:
 
-**Multiple-Choice Questions**
+\[
+t = \frac{78 - 75}{10 / \sqrt{25}} = \frac{3}{2} = 1.5
+\]
 
-## **1. What does the slope in a simple linear regression equation represent?**
+For **df = 24**, the critical value at **α = .05** (two-tailed) is **±2.064**. Since **1.5 < 2.064**, we **fail to reject \(H_0\)**.
 
-A\) The value of Y when X = 0
+### **APA Reporting**  
+*A one-sample t-test was conducted to determine whether students’ exam scores differed from the national average (M = 75). Results were not statistically significant, \( t(24) = 1.5, p > .05 \), indicating that students performed similarly to the national average.*  
 
-B\) The predicted change in Y for a one-unit increase in X
+---
 
-C\) The strength of the correlation between X and Y
+## 📝 **Example 2: Daily Coffee Consumption**  
 
-D\) The proportion of variance in Y explained by X
+### **Scenario**  
+A coffee company claims that people drink an average of **3 cups** of coffee per day. A researcher samples **16 individuals**, finding a **mean of 2.5 cups** and a **standard deviation of 1 cup**.  
 
-## **2. If a linear regression model has an R² value of 0.85, what does this mean?**
+### **Hypotheses**  
+- **Null Hypothesis (H₀)**: \( \mu = 3 \)  
+- **Alternative Hypothesis (H₁)**: \( \mu < 3 \) (people drink less)  
 
-A\) 85% of the variability in X is explained by Y
+### **Calculation**  
+\[
+t = \frac{2.5 - 3}{1 / \sqrt{16}} = \frac{-0.5}{0.25} = -2.0
+\]
 
-B\) The regression model is 85% accurate
+For **df = 15**, the critical t-value for a **one-tailed test** at **α = .05** is **-1.753**. Since **-2.0 < -1.753**, we **reject \(H_0\)**.
 
-C\) 85% of the variability in Y is explained by X D) The relationship between X and Y is statistically significant
+### **APA Reporting**  
+*A one-sample t-test was conducted to test whether daily coffee consumption was lower than the reported average of 3 cups. Results showed a significant difference, \( t(15) = -2.0, p < .05 \), suggesting that people consume significantly fewer cups of coffee per day than reported.*  
 
-## **3. A researcher runs a regression model and finds the following equation:**
+---
 
-What does the number **5** represent?
+## 📝 **Example 3: Sleep Duration Among College Students**  
 
-A\) The slope of the regression line
+### **Scenario**  
+A health researcher believes college students sleep **less than 7 hours** per night. A sample of **30 students** reports a mean of **6.5 hours** with a standard deviation of **1.2 hours**.  
 
-B\) The predicted value of Y when X = 0
+### **Hypotheses**  
+- **Null Hypothesis (H₀)**: \( \mu = 7 \)  
+- **Alternative Hypothesis (H₁)**: \( \mu < 7 \)  
 
-C\) The effect size of X on Y
+### **Calculation**  
+\[
+t = \frac{6.5 - 7}{1.2 / \sqrt{30}} = \frac{-0.5}{0.219} = -2.28
+\]
 
-D\) The p-value of the regression
+For **df = 29**, the critical t-value for a **one-tailed test** at **α = .05** is **-1.699**. Since **-2.28 < -1.699**, we **reject \(H_0\)**.
 
-## **4. Which of the following would indicate that a multiple regression model is overfitting?**
+### **APA Reporting**  
+*A one-sample t-test was conducted to test whether college students sleep fewer than 7 hours per night. Results were statistically significant, \( t(29) = -2.28, p < .05 \), indicating that students get significantly less sleep than the recommended amount.*  
 
-A\) A high R² value on the training data but poor performance on new data
 
-B\) A non-significant p-value for the intercept
+## Conclusion
+### One Sample T-Test
+- The one-sample t-test is useful for comparing a sample mean to a known population mean.
+- Always check assumptions before conducting the test.
+- Report results in APA format, including effect size if necessary.
 
-C\) The presence of a negative coefficient in the model D) A low standard error for the slope
 
-## **5. A regression model predicts salary based on years of experience. The p-value for the slope is 0.0003. What does this mean?**
 
-A\) Years of experience does not significantly predict salary
-
-B\) Years of experience significantly predicts salary at the α = 0.05 level
-
-C\) The slope coefficient is 0.0003
-
-D\) The model is not linear
-
-# **Open-Ended Questions (Show Your Work)**
-
-## **6. A multiple regression model is given by:**
-
-$\hat{Y} = 3 + 1.5X_1 - 0.7X_2$
-
-where:
-
-• $X_1$ = Number of hours spent studying
-
-• $X_2$ = Number of hours spent watching TV
-
-**a)** Predict the outcome if a student studies for 6 hours and watches TV for 2 hours.
-
-3 + (1.5*6) + (.7*2)
-
-13.4
-
-**b)** Interpret the coefficient of .
-
-## **7. A researcher runs a simple linear regression and obtains the following output:**
-
-| Predictor | Coefficient | Std. Error | p-value |
-|-----------|-------------|------------|---------|
-| Intercept | 4.2         | .5         | .001    |
-| X         | 1.8         | .3         | .0005   |
-
-**a)** Write the regression equation.
-
-**b)** Interpret the slope in context.
-
-**c)** If X = 10, predict Y.
-
-## **8. A study investigates the relationship between sleep (X) and energy levels (Y). The model output is: \$\\hat{Y} = 2 + 3X\$**
-
-What is the residual for a participant who slept **5 hours** and had an energy level of **18**?
