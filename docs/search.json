@@ -9417,5 +9417,207 @@
       "Exam Review",
       "Exam 1 Review"
     ]
+  },
+  {
+    "objectID": "TAi/testRM.html",
+    "href": "TAi/testRM.html",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Exploratory Data Analysis (EDA) is a crucial step in understanding your dataset, identifying patterns, and detecting any anomalies. This guide will walk you through the EDA process using SPSS.\n\n\n\nOpen SPSS\n\nLaunch the SPSS application.\n\nLoad Your Dataset\n\nGo to File &gt; Open &gt; Data.\nSelect your data file (supporting formats include .sav, .xls, .csv, etc.).\nClick Open.\n\n\n\n\n\n\nView Data\n\nSwitch to the Data View tab to see your dataset.\nSwitch to the Variable View tab to examine variable properties, including name, type, and measurement level.\n\nCheck for Missing Values\n\nUse Data &gt; Describe &gt; Descriptives to get a quick overview of missing and non-missing values.\nAlternatively, use Analyze &gt; Descriptive Statistics &gt; Frequencies for a detailed list.\n\n\n\n\n\n\nDescriptive Statistics\n\nGo to Analyze &gt; Descriptive Statistics &gt; Frequencies or Descriptives.\nSelect variables you want to analyze.\nChoose statistics like mean, median, standard deviation, etc.\nClick OK.\n\nExplore Command\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nChoose your dependent variable(s).\nOptional: Set factor variables for comparative analysis.\nClick Plots and select options such as histograms or normality plots.\nClick OK.\n\n\n\n\n\n\nHistograms\n\nNavigate to Graphs &gt; Legacy Dialogs &gt; Histogram.\nSelect the variable for which you want to create a histogram.\n\nBoxplots\n\nGo to Graphs &gt; Legacy Dialogs &gt; Boxplot.\nCreate boxplots to visualize the distribution and identify outliers.\n\nScatterplots\n\nUse Graphs &gt; Legacy Dialogs &gt; Scatter/Dot to explore relationships between two continuous variables.\n\n\n\n\n\n\nNormality Tests\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nSelect your variable and click Plots.\nEnsure Normality plots with tests is checked.\n\nCollinearity\n\nAnalyze &gt; Regression &gt; Linear.\nCheck Statistics and ensure Collinearity diagnostics is selected.\n\n\n\n\n\n\nOutliers in Boxplots\n\nOutliers will be indicated in boxplots as points outside of the whiskers.\n\nZ-scores\n\nCompute Z-scores using Transform &gt; Compute Variable.\nIf Z-score &gt; 3 or Z-score &lt; -3, consider the data point an outlier.\n\n\n\n\n\n\nCorrelation\n\nAnalyze relationships between two numerical variables using Analyze &gt; Correlate &gt; Bivariate.\nSelect Pearson or Spearman correlation depending on data assumptions.\n\nCrosstabulation\n\nUse Analyze &gt; Descriptive Statistics &gt; Crosstabs for categorical data relationships.\n\n\n\n\n\nAfter completing these steps, you should have a well-rounded understanding of the dataset’s structure, central tendencies, dispersion, relationships, and potential outliers. Use these insights to guide further analysis or modeling.\n\n\n\n\nOverfitting the Data: Be careful not to create overly complex models during the exploration phase, which may not generalize well to unseen data.\nConfirmation Bias: Avoid focusing only on findings that confirm preconceived hypotheses. It’s important to maintain an open mind and consider all exploratory findings.\nMisleading Visualizations: Ensure visualizations accurately represent the data. Avoid distorted scales, cherry-picked data points, or misleading graphics that can give an incorrect impression.\nIgnoring Data Quality: Pay attention to data quality issues such as missing values, outliers, or incorrect data entries which can bias your analysis.\nOverlooking Variable Relationships: Analyze potential interactions and relationships between variables, not just isolated variable distributions or statistics.\nAssuming Causation: Remember that EDA identifies correlations and trends, but does not prove causation.\nIgnoring Statistical Assumptions: Validate statistical assumptions in your exploratory analysis to avoid drawing incorrect conclusions based on those assumptions.\nData Privacy and Ethics: Be vigilant about maintaining data privacy and adhere to ethical guidelines when analyzing data.\nAnalysis Paralysis: Resist the temptation to overanalyze and get stuck in an endless cycle of exploration without moving to the modeling and conclusion phases.\n\nMaintaining awareness of these potential pitfalls will help ensure your EDA is both effective and reliable.\n\n\n\nOpen Your Dataset:\n\nLaunch SPSS and load the dataset containing your paired samples.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; Paired-Samples T Test....\n\nSelect Paired Variables:\n\nIn the dialog box that appears, move your two related variables (e.g., pre-test and post-test) from the list on the left to the Paired Variables section on the right.\n\nSet Options (Optional):\n\nClick on the Options button to set the confidence level and manage any missing data options, then click Continue.\n\nRun the Test:\n\nClick OK to execute the test.\n\nInterpret Results:\n\nThe Output Viewer will show the results, including the mean differences, t-value, degrees of freedom, and significance (p-value).\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset in SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; One-Way ANOVA....\n\nSelect Variables:\n\nMove your dependent variable(s) to the Dependent List.\nMove your factor (independent variable with different groups) to the Factor box.\n\nPost Hoc Tests (If Needed):\n\nClick on Post Hoc... if you want to perform post hoc tests to understand group differences. Select options like Tukey or Bonferroni, then click Continue.\n\nSet Options (Optional):\n\nClick on the Options button to include descriptive statistics or set the homogeneity of variance assumptions, then click Continue.\n\nRun the Test:\n\nClick OK to execute the ANOVA.\n\nInterpret Results:\n\nThe Output Viewer will present ANOVA results, including F-value, degrees of freedom, and significance. Post hoc results are also displayed if selected.\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset into SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; General Linear Model &gt; Univariate....\n\nSelect Variables:\n\nMove your dependent variable to the Dependent Variable box.\nMove your independent variables (factors) to the Fixed Factor(s) box.\n\nModel Specification (Optional):\n\nClick on the Model button to specify custom interactions or main effects if needed, then click Continue.\n\nPost Hoc Tests (For Main Effects):\n\nClick on Post Hoc to select tests for main effects of factors, if needed. Choose options like Tukey or LSD based on your analysis requirements, then click Continue.\n\nSet Options:\n\nClick on Options... to include homogeneity tests, descriptive statistics, etc. Move statistics like Estimates of effect size or Homogeneity tests to the Display Means for section, then click Continue.\n\nRun the Test:\n\nClick OK to perform the ANOVA.\n\nInterpret Results:\n\nAnalyze the Output Viewer for main effects, interaction effects, and significant differences. It will include F-values with significance levels and any post hoc test results.\n\n\nThese steps guide you through conducting each analysis, interpreting the results follows typical inferential statistics insights where you’d look for significant p-values and consider effect sizes."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-1-importing-data",
+    "href": "TAi/testRM.html#step-1-importing-data",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Open SPSS\n\nLaunch the SPSS application.\n\nLoad Your Dataset\n\nGo to File &gt; Open &gt; Data.\nSelect your data file (supporting formats include .sav, .xls, .csv, etc.).\nClick Open."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-2-data-overview",
+    "href": "TAi/testRM.html#step-2-data-overview",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "View Data\n\nSwitch to the Data View tab to see your dataset.\nSwitch to the Variable View tab to examine variable properties, including name, type, and measurement level.\n\nCheck for Missing Values\n\nUse Data &gt; Describe &gt; Descriptives to get a quick overview of missing and non-missing values.\nAlternatively, use Analyze &gt; Descriptive Statistics &gt; Frequencies for a detailed list."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-3-summary-statistics",
+    "href": "TAi/testRM.html#step-3-summary-statistics",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Descriptive Statistics\n\nGo to Analyze &gt; Descriptive Statistics &gt; Frequencies or Descriptives.\nSelect variables you want to analyze.\nChoose statistics like mean, median, standard deviation, etc.\nClick OK.\n\nExplore Command\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nChoose your dependent variable(s).\nOptional: Set factor variables for comparative analysis.\nClick Plots and select options such as histograms or normality plots.\nClick OK."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-4-data-visualization",
+    "href": "TAi/testRM.html#step-4-data-visualization",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Histograms\n\nNavigate to Graphs &gt; Legacy Dialogs &gt; Histogram.\nSelect the variable for which you want to create a histogram.\n\nBoxplots\n\nGo to Graphs &gt; Legacy Dialogs &gt; Boxplot.\nCreate boxplots to visualize the distribution and identify outliers.\n\nScatterplots\n\nUse Graphs &gt; Legacy Dialogs &gt; Scatter/Dot to explore relationships between two continuous variables."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-5-checking-assumptions",
+    "href": "TAi/testRM.html#step-5-checking-assumptions",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Normality Tests\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nSelect your variable and click Plots.\nEnsure Normality plots with tests is checked.\n\nCollinearity\n\nAnalyze &gt; Regression &gt; Linear.\nCheck Statistics and ensure Collinearity diagnostics is selected."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-6-identifying-outliers",
+    "href": "TAi/testRM.html#step-6-identifying-outliers",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Outliers in Boxplots\n\nOutliers will be indicated in boxplots as points outside of the whiskers.\n\nZ-scores\n\nCompute Z-scores using Transform &gt; Compute Variable.\nIf Z-score &gt; 3 or Z-score &lt; -3, consider the data point an outlier."
+  },
+  {
+    "objectID": "TAi/testRM.html#step-7-bivariate-analysis",
+    "href": "TAi/testRM.html#step-7-bivariate-analysis",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Correlation\n\nAnalyze relationships between two numerical variables using Analyze &gt; Correlate &gt; Bivariate.\nSelect Pearson or Spearman correlation depending on data assumptions.\n\nCrosstabulation\n\nUse Analyze &gt; Descriptive Statistics &gt; Crosstabs for categorical data relationships."
+  },
+  {
+    "objectID": "TAi/testRM.html#conclusion",
+    "href": "TAi/testRM.html#conclusion",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "After completing these steps, you should have a well-rounded understanding of the dataset’s structure, central tendencies, dispersion, relationships, and potential outliers. Use these insights to guide further analysis or modeling."
+  },
+  {
+    "objectID": "TAi/testRM.html#things-to-keep-in-mind",
+    "href": "TAi/testRM.html#things-to-keep-in-mind",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Overfitting the Data: Be careful not to create overly complex models during the exploration phase, which may not generalize well to unseen data.\nConfirmation Bias: Avoid focusing only on findings that confirm preconceived hypotheses. It’s important to maintain an open mind and consider all exploratory findings.\nMisleading Visualizations: Ensure visualizations accurately represent the data. Avoid distorted scales, cherry-picked data points, or misleading graphics that can give an incorrect impression.\nIgnoring Data Quality: Pay attention to data quality issues such as missing values, outliers, or incorrect data entries which can bias your analysis.\nOverlooking Variable Relationships: Analyze potential interactions and relationships between variables, not just isolated variable distributions or statistics.\nAssuming Causation: Remember that EDA identifies correlations and trends, but does not prove causation.\nIgnoring Statistical Assumptions: Validate statistical assumptions in your exploratory analysis to avoid drawing incorrect conclusions based on those assumptions.\nData Privacy and Ethics: Be vigilant about maintaining data privacy and adhere to ethical guidelines when analyzing data.\nAnalysis Paralysis: Resist the temptation to overanalyze and get stuck in an endless cycle of exploration without moving to the modeling and conclusion phases.\n\nMaintaining awareness of these potential pitfalls will help ensure your EDA is both effective and reliable.\n\n\n\nOpen Your Dataset:\n\nLaunch SPSS and load the dataset containing your paired samples.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; Paired-Samples T Test....\n\nSelect Paired Variables:\n\nIn the dialog box that appears, move your two related variables (e.g., pre-test and post-test) from the list on the left to the Paired Variables section on the right.\n\nSet Options (Optional):\n\nClick on the Options button to set the confidence level and manage any missing data options, then click Continue.\n\nRun the Test:\n\nClick OK to execute the test.\n\nInterpret Results:\n\nThe Output Viewer will show the results, including the mean differences, t-value, degrees of freedom, and significance (p-value).\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset in SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; One-Way ANOVA....\n\nSelect Variables:\n\nMove your dependent variable(s) to the Dependent List.\nMove your factor (independent variable with different groups) to the Factor box.\n\nPost Hoc Tests (If Needed):\n\nClick on Post Hoc... if you want to perform post hoc tests to understand group differences. Select options like Tukey or Bonferroni, then click Continue.\n\nSet Options (Optional):\n\nClick on the Options button to include descriptive statistics or set the homogeneity of variance assumptions, then click Continue.\n\nRun the Test:\n\nClick OK to execute the ANOVA.\n\nInterpret Results:\n\nThe Output Viewer will present ANOVA results, including F-value, degrees of freedom, and significance. Post hoc results are also displayed if selected.\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset into SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; General Linear Model &gt; Univariate....\n\nSelect Variables:\n\nMove your dependent variable to the Dependent Variable box.\nMove your independent variables (factors) to the Fixed Factor(s) box.\n\nModel Specification (Optional):\n\nClick on the Model button to specify custom interactions or main effects if needed, then click Continue.\n\nPost Hoc Tests (For Main Effects):\n\nClick on Post Hoc to select tests for main effects of factors, if needed. Choose options like Tukey or LSD based on your analysis requirements, then click Continue.\n\nSet Options:\n\nClick on Options... to include homogeneity tests, descriptive statistics, etc. Move statistics like Estimates of effect size or Homogeneity tests to the Display Means for section, then click Continue.\n\nRun the Test:\n\nClick OK to perform the ANOVA.\n\nInterpret Results:\n\nAnalyze the Output Viewer for main effects, interaction effects, and significant differences. It will include F-values with significance levels and any post hoc test results.\n\n\nThese steps guide you through conducting each analysis, interpreting the results follows typical inferential statistics insights where you’d look for significant p-values and consider effect sizes."
+  },
+  {
+    "objectID": "testRM.html",
+    "href": "testRM.html",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Exploratory Data Analysis (EDA) is a crucial step in understanding your dataset, identifying patterns, and detecting any anomalies. This guide will walk you through the EDA process using SPSS.\n\n\n\nOpen SPSS\n\nLaunch the SPSS application.\n\nLoad Your Dataset\n\nGo to File &gt; Open &gt; Data.\nSelect your data file (supporting formats include .sav, .xls, .csv, etc.).\nClick Open.\n\n\n\n\n\n\nView Data\n\nSwitch to the Data View tab to see your dataset.\nSwitch to the Variable View tab to examine variable properties, including name, type, and measurement level.\n\nCheck for Missing Values\n\nUse Data &gt; Describe &gt; Descriptives to get a quick overview of missing and non-missing values.\nAlternatively, use Analyze &gt; Descriptive Statistics &gt; Frequencies for a detailed list.\n\n\n\n\n\n\nDescriptive Statistics\n\nGo to Analyze &gt; Descriptive Statistics &gt; Frequencies or Descriptives.\nSelect variables you want to analyze.\nChoose statistics like mean, median, standard deviation, etc.\nClick OK.\n\nExplore Command\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nChoose your dependent variable(s).\nOptional: Set factor variables for comparative analysis.\nClick Plots and select options such as histograms or normality plots.\nClick OK.\n\n\n\n\n\n\nHistograms\n\nNavigate to Graphs &gt; Legacy Dialogs &gt; Histogram.\nSelect the variable for which you want to create a histogram.\n\nBoxplots\n\nGo to Graphs &gt; Legacy Dialogs &gt; Boxplot.\nCreate boxplots to visualize the distribution and identify outliers.\n\nScatterplots\n\nUse Graphs &gt; Legacy Dialogs &gt; Scatter/Dot to explore relationships between two continuous variables.\n\n\n\n\n\n\nNormality Tests\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nSelect your variable and click Plots.\nEnsure Normality plots with tests is checked.\n\nCollinearity\n\nAnalyze &gt; Regression &gt; Linear.\nCheck Statistics and ensure Collinearity diagnostics is selected.\n\n\n\n\n\n\nOutliers in Boxplots\n\nOutliers will be indicated in boxplots as points outside of the whiskers.\n\nZ-scores\n\nCompute Z-scores using Transform &gt; Compute Variable.\nIf Z-score &gt; 3 or Z-score &lt; -3, consider the data point an outlier.\n\n\n\n\n\n\nCorrelation\n\nAnalyze relationships between two numerical variables using Analyze &gt; Correlate &gt; Bivariate.\nSelect Pearson or Spearman correlation depending on data assumptions.\n\nCrosstabulation\n\nUse Analyze &gt; Descriptive Statistics &gt; Crosstabs for categorical data relationships.\n\n\n\n\n\nAfter completing these steps, you should have a well-rounded understanding of the dataset’s structure, central tendencies, dispersion, relationships, and potential outliers. Use these insights to guide further analysis or modeling.\n\n\n\n\nOverfitting the Data: Be careful not to create overly complex models during the exploration phase, which may not generalize well to unseen data.\nConfirmation Bias: Avoid focusing only on findings that confirm preconceived hypotheses. It’s important to maintain an open mind and consider all exploratory findings.\nMisleading Visualizations: Ensure visualizations accurately represent the data. Avoid distorted scales, cherry-picked data points, or misleading graphics that can give an incorrect impression.\nIgnoring Data Quality: Pay attention to data quality issues such as missing values, outliers, or incorrect data entries which can bias your analysis.\nOverlooking Variable Relationships: Analyze potential interactions and relationships between variables, not just isolated variable distributions or statistics.\nAssuming Causation: Remember that EDA identifies correlations and trends, but does not prove causation.\nIgnoring Statistical Assumptions: Validate statistical assumptions in your exploratory analysis to avoid drawing incorrect conclusions based on those assumptions.\nData Privacy and Ethics: Be vigilant about maintaining data privacy and adhere to ethical guidelines when analyzing data.\nAnalysis Paralysis: Resist the temptation to overanalyze and get stuck in an endless cycle of exploration without moving to the modeling and conclusion phases.\n\nMaintaining awareness of these potential pitfalls will help ensure your EDA is both effective and reliable.\n\n\n\nOpen Your Dataset:\n\nLaunch SPSS and load the dataset containing your paired samples.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; Paired-Samples T Test....\n\nSelect Paired Variables:\n\nIn the dialog box that appears, move your two related variables (e.g., pre-test and post-test) from the list on the left to the Paired Variables section on the right.\n\nSet Options (Optional):\n\nClick on the Options button to set the confidence level and manage any missing data options, then click Continue.\n\nRun the Test:\n\nClick OK to execute the test.\n\nInterpret Results:\n\nThe Output Viewer will show the results, including the mean differences, t-value, degrees of freedom, and significance (p-value).\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset in SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; One-Way ANOVA....\n\nSelect Variables:\n\nMove your dependent variable(s) to the Dependent List.\nMove your factor (independent variable with different groups) to the Factor box.\n\nPost Hoc Tests (If Needed):\n\nClick on Post Hoc... if you want to perform post hoc tests to understand group differences. Select options like Tukey or Bonferroni, then click Continue.\n\nSet Options (Optional):\n\nClick on the Options button to include descriptive statistics or set the homogeneity of variance assumptions, then click Continue.\n\nRun the Test:\n\nClick OK to execute the ANOVA.\n\nInterpret Results:\n\nThe Output Viewer will present ANOVA results, including F-value, degrees of freedom, and significance. Post hoc results are also displayed if selected.\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset into SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; General Linear Model &gt; Univariate....\n\nSelect Variables:\n\nMove your dependent variable to the Dependent Variable box.\nMove your independent variables (factors) to the Fixed Factor(s) box.\n\nModel Specification (Optional):\n\nClick on the Model button to specify custom interactions or main effects if needed, then click Continue.\n\nPost Hoc Tests (For Main Effects):\n\nClick on Post Hoc to select tests for main effects of factors, if needed. Choose options like Tukey or LSD based on your analysis requirements, then click Continue.\n\nSet Options:\n\nClick on Options... to include homogeneity tests, descriptive statistics, etc. Move statistics like Estimates of effect size or Homogeneity tests to the Display Means for section, then click Continue.\n\nRun the Test:\n\nClick OK to perform the ANOVA.\n\nInterpret Results:\n\nAnalyze the Output Viewer for main effects, interaction effects, and significant differences. It will include F-values with significance levels and any post hoc test results.\n\n\nThese steps guide you through conducting each analysis, interpreting the results follows typical inferential statistics insights where you’d look for significant p-values and consider effect sizes.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-1-importing-data",
+    "href": "testRM.html#step-1-importing-data",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Open SPSS\n\nLaunch the SPSS application.\n\nLoad Your Dataset\n\nGo to File &gt; Open &gt; Data.\nSelect your data file (supporting formats include .sav, .xls, .csv, etc.).\nClick Open.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-2-data-overview",
+    "href": "testRM.html#step-2-data-overview",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "View Data\n\nSwitch to the Data View tab to see your dataset.\nSwitch to the Variable View tab to examine variable properties, including name, type, and measurement level.\n\nCheck for Missing Values\n\nUse Data &gt; Describe &gt; Descriptives to get a quick overview of missing and non-missing values.\nAlternatively, use Analyze &gt; Descriptive Statistics &gt; Frequencies for a detailed list.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-3-summary-statistics",
+    "href": "testRM.html#step-3-summary-statistics",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Descriptive Statistics\n\nGo to Analyze &gt; Descriptive Statistics &gt; Frequencies or Descriptives.\nSelect variables you want to analyze.\nChoose statistics like mean, median, standard deviation, etc.\nClick OK.\n\nExplore Command\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nChoose your dependent variable(s).\nOptional: Set factor variables for comparative analysis.\nClick Plots and select options such as histograms or normality plots.\nClick OK.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-4-data-visualization",
+    "href": "testRM.html#step-4-data-visualization",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Histograms\n\nNavigate to Graphs &gt; Legacy Dialogs &gt; Histogram.\nSelect the variable for which you want to create a histogram.\n\nBoxplots\n\nGo to Graphs &gt; Legacy Dialogs &gt; Boxplot.\nCreate boxplots to visualize the distribution and identify outliers.\n\nScatterplots\n\nUse Graphs &gt; Legacy Dialogs &gt; Scatter/Dot to explore relationships between two continuous variables.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-5-checking-assumptions",
+    "href": "testRM.html#step-5-checking-assumptions",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Normality Tests\n\nUse Analyze &gt; Descriptive Statistics &gt; Explore.\nSelect your variable and click Plots.\nEnsure Normality plots with tests is checked.\n\nCollinearity\n\nAnalyze &gt; Regression &gt; Linear.\nCheck Statistics and ensure Collinearity diagnostics is selected.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-6-identifying-outliers",
+    "href": "testRM.html#step-6-identifying-outliers",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Outliers in Boxplots\n\nOutliers will be indicated in boxplots as points outside of the whiskers.\n\nZ-scores\n\nCompute Z-scores using Transform &gt; Compute Variable.\nIf Z-score &gt; 3 or Z-score &lt; -3, consider the data point an outlier.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#step-7-bivariate-analysis",
+    "href": "testRM.html#step-7-bivariate-analysis",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Correlation\n\nAnalyze relationships between two numerical variables using Analyze &gt; Correlate &gt; Bivariate.\nSelect Pearson or Spearman correlation depending on data assumptions.\n\nCrosstabulation\n\nUse Analyze &gt; Descriptive Statistics &gt; Crosstabs for categorical data relationships.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#conclusion",
+    "href": "testRM.html#conclusion",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "After completing these steps, you should have a well-rounded understanding of the dataset’s structure, central tendencies, dispersion, relationships, and potential outliers. Use these insights to guide further analysis or modeling.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "testRM.html#things-to-keep-in-mind",
+    "href": "testRM.html#things-to-keep-in-mind",
+    "title": "Understanding Your Data",
+    "section": "",
+    "text": "Overfitting the Data: Be careful not to create overly complex models during the exploration phase, which may not generalize well to unseen data.\nConfirmation Bias: Avoid focusing only on findings that confirm preconceived hypotheses. It’s important to maintain an open mind and consider all exploratory findings.\nMisleading Visualizations: Ensure visualizations accurately represent the data. Avoid distorted scales, cherry-picked data points, or misleading graphics that can give an incorrect impression.\nIgnoring Data Quality: Pay attention to data quality issues such as missing values, outliers, or incorrect data entries which can bias your analysis.\nOverlooking Variable Relationships: Analyze potential interactions and relationships between variables, not just isolated variable distributions or statistics.\nAssuming Causation: Remember that EDA identifies correlations and trends, but does not prove causation.\nIgnoring Statistical Assumptions: Validate statistical assumptions in your exploratory analysis to avoid drawing incorrect conclusions based on those assumptions.\nData Privacy and Ethics: Be vigilant about maintaining data privacy and adhere to ethical guidelines when analyzing data.\nAnalysis Paralysis: Resist the temptation to overanalyze and get stuck in an endless cycle of exploration without moving to the modeling and conclusion phases.\n\nMaintaining awareness of these potential pitfalls will help ensure your EDA is both effective and reliable.\n\n\n\nOpen Your Dataset:\n\nLaunch SPSS and load the dataset containing your paired samples.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; Paired-Samples T Test....\n\nSelect Paired Variables:\n\nIn the dialog box that appears, move your two related variables (e.g., pre-test and post-test) from the list on the left to the Paired Variables section on the right.\n\nSet Options (Optional):\n\nClick on the Options button to set the confidence level and manage any missing data options, then click Continue.\n\nRun the Test:\n\nClick OK to execute the test.\n\nInterpret Results:\n\nThe Output Viewer will show the results, including the mean differences, t-value, degrees of freedom, and significance (p-value).\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset in SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; Compare Means &gt; One-Way ANOVA....\n\nSelect Variables:\n\nMove your dependent variable(s) to the Dependent List.\nMove your factor (independent variable with different groups) to the Factor box.\n\nPost Hoc Tests (If Needed):\n\nClick on Post Hoc... if you want to perform post hoc tests to understand group differences. Select options like Tukey or Bonferroni, then click Continue.\n\nSet Options (Optional):\n\nClick on the Options button to include descriptive statistics or set the homogeneity of variance assumptions, then click Continue.\n\nRun the Test:\n\nClick OK to execute the ANOVA.\n\nInterpret Results:\n\nThe Output Viewer will present ANOVA results, including F-value, degrees of freedom, and significance. Post hoc results are also displayed if selected.\n\n\n\n\n\n\nOpen Your Dataset:\n\nLoad your dataset into SPSS.\n\nNavigate to the Test:\n\nClick on Analyze &gt; General Linear Model &gt; Univariate....\n\nSelect Variables:\n\nMove your dependent variable to the Dependent Variable box.\nMove your independent variables (factors) to the Fixed Factor(s) box.\n\nModel Specification (Optional):\n\nClick on the Model button to specify custom interactions or main effects if needed, then click Continue.\n\nPost Hoc Tests (For Main Effects):\n\nClick on Post Hoc to select tests for main effects of factors, if needed. Choose options like Tukey or LSD based on your analysis requirements, then click Continue.\n\nSet Options:\n\nClick on Options... to include homogeneity tests, descriptive statistics, etc. Move statistics like Estimates of effect size or Homogeneity tests to the Display Means for section, then click Continue.\n\nRun the Test:\n\nClick OK to perform the ANOVA.\n\nInterpret Results:\n\nAnalyze the Output Viewer for main effects, interaction effects, and significant differences. It will include F-values with significance levels and any post hoc test results.\n\n\nThese steps guide you through conducting each analysis, interpreting the results follows typical inferential statistics insights where you’d look for significant p-values and consider effect sizes.",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Understanding Your Data"
+    ]
+  },
+  {
+    "objectID": "lab3.html",
+    "href": "lab3.html",
+    "title": "Newest Lab",
+    "section": "",
+    "text": "class = \"slide-deck\" \n  src = \"https://davidbrocker.github.io/348SlideDecks/lec2.html\"\n   height=\"200\" \n   width=\"300\"",
+    "crumbs": [
+      "Course Overview",
+      "Labs",
+      "Newest Lab"
+    ]
   }
 ]
