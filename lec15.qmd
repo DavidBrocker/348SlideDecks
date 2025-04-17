@@ -24,40 +24,50 @@ revealjs-plugins:
 ---
 
 ## Introduction to Paired Samples t-Test
-### What is a Paired Samples t-Test?
-- A statistical method used to compare the means of two related groups.
-- Commonly used when measuring the same group before and after an intervention or over two different conditions.
 
+### What is a Paired Samples t-Test?
+
+-   A statistical method used to compare the means of two related groups.
+-   Commonly used when measuring the same group before and after an intervention or over two different conditions.
 
 ## Purpose of Paired Samples t-Test
-### Why Use Paired Samples t-Test?
-- To determine if there is a statistically significant difference between two related group means.
-- Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
 
+### Why Use Paired Samples t-Test?
+
+-   To determine if there is a statistically significant difference between two related group means.
+-   Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
 
 ## Formula for Paired Samples t-Test
+
 ### Mathematical Representation
-- **Formula**: $\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}$
-  - $\bar{D}$: Mean of the differences between paired observations.
-  - $s_D$: Standard deviation of the differences.
-  - $n$: Number of pairs.
+
+-   **Formula**: $\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}$
+    -   $\bar{D}$: Mean of the differences between paired observations.
+    -   $s_D$: Standard deviation of the differences.
+    -   $n$: Number of pairs.
 
 ## Theoretical Formula Explanation
+
 ### Understanding Each Component
-- **Difference Mean** $\bar{D}$: Average of the differences between paired scores.
-- **Standard Deviation of Differences** $s_D$: Indicates how much individual differences deviate from the mean difference.
-- **Sample Size** $n$: Number of pairs, affecting the significance of results.
+
+-   **Difference Mean** $\bar{D}$: Average of the differences between paired scores.
+-   **Standard Deviation of Differences** $s_D$: Indicates how much individual differences deviate from the mean difference.
+-   **Sample Size** $n$: Number of pairs, affecting the significance of results.
 
 ## Application of Paired Samples t-Test
+
 ### When to Apply This Test
-- **Pretest-Posttest Design**: Measure changes in the same group over time.
-- **Matched Pairs**: Compare two related groups, such as twins or matched participants.
-- **Repeated Measures**: Test the same group under different conditions or at different times.
+
+-   **Pretest-Posttest Design**: Measure changes in the same group over time.
+-   **Matched Pairs**: Compare two related groups, such as twins or matched participants.
+-   **Repeated Measures**: Test the same group under different conditions or at different times.
 
 # Paired Samples t-Test Example
 
 ## Paired Samples t-Test
+
 ### Application in Psychology Research
+
 > A psychologist measures stress levels of a group before and after a mindfulness program.
 
 **Steps**:
@@ -67,12 +77,13 @@ revealjs-plugins:
 -   Apply the formula to calculate the t-value and check for significance.
 
 ## Paired Samples t-Test
+
 ### Application in Psychology Research
 
 ```{r}
 library(dplyr)
 library(broom)
-library(huxtable)
+library(gt)
 
 set.seed(20)
 data <- 
@@ -81,7 +92,7 @@ data <-
   score = c(rnorm(30,8,2),rnorm(30,4,1)) |> round(0)
 ) 
 
-t.test(score ~ grp, data = data, paired = TRUE) |> 
+t.test(score ~ grp, data = data) |> 
   tidy() |> 
   rename(
     D = estimate,
@@ -94,13 +105,14 @@ t.test(score ~ grp, data = data, paired = TRUE) |>
   ) |> 
   select(-conf.low:-alternative) |> 
   select(D,t,df,p,`CI[uu,ll]`) |> 
-  huxtable() |> 
-  theme_article()
+  gt()
 
 ```
 
 ## Summary of Paired Samples t-Test
+
 ### Key Takeaways
-- Paired samples t-tests are ideal for comparing two related groups.
-- They help determine if interventions or conditions produce significant changes.
-- Remember to check assumptions: normality of differences and appropriate pairing.
+
+-   Paired samples t-tests are ideal for comparing two related groups.
+-   They help determine if interventions or conditions produce significant changes.
+-   Remember to check assumptions: normality of differences and appropriate pairing.

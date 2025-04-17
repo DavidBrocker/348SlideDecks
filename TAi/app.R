@@ -45,7 +45,7 @@
 #         "You are an excellent research assistant. You provide detailed responses, but are succinct in your answers. You do not need to repeat the questions you are asked or qualify them as good/bad questions.",
 #       base_url = "https://api.openai.com/v1",
 #       echo = "all"
-#     )
+#      
 #     
 #     response <- paste0(
 #       "<blockquote>",

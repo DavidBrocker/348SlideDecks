@@ -1,5 +1,5 @@
 ---
-title: "T-Tests"
+title: "Independent Samples T-Test"
 subtitle: "Lecture 13"
 author: "Dave Brocker"
 footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
@@ -26,10 +26,8 @@ revealjs-plugins:
 ## Sampling Theory
 
 ```{r}
-#| echo: false
 library(ggplot2)
 library(dplyr,warn.conflicts = FALSE)
-library(huxtable)
 library(tidyr)
 
 # Generate data for two normal distributions
@@ -90,8 +88,7 @@ plt +
 
 ## Sampling Theory
 
-Setting alpha to 0.05, puts the critical value at a point where 5% of
-the null distribution's area is to the right of it.
+Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution's area is to the right of it.
 
 ```{r}
 #| echo: false
@@ -126,8 +123,7 @@ plt +
 
 ## Sampling Theory
 
-Setting alpha to 0.05, puts the critical value at a point where 5% of
-the null distribution's area is to the right of it.
+Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution's area is to the right of it.
 
 ```{r}
 #| echo: false
@@ -171,8 +167,7 @@ Each inferential statistic will give us:
 
 ## Sampling Theory
 
-Setting alpha to 0.05, puts the critical value at a point where 5% of
-the null distribution's area is to the right of it.
+Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution's area is to the right of it.
 
 ```{r}
 #| echo: false
@@ -216,17 +211,14 @@ plt +
 
 ### Example
 
-> The experimental group drinks caffeinated coffee. The control group
-> drinks decaf. I ask both groups to complete a survey to measure their
-> happiness on a scale of `1` to `10`.
+> The experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of `1` to `10`.
 
 -   The experimental group has a mean happiness score of `8`
 
 -   The control group mean happiness score of `6`
 
 ::: fragment
-Is the group that drank coffee significantly happier than the control
-group?
+Is the group that drank coffee significantly happier than the control group?
 :::
 
 ## Independent samples t-test
@@ -262,11 +254,9 @@ plt +
 
 To compare the means we need to know:
 
--   Between group variance: how much the answers from the
-    **experimental** group differ from the **control** group.
+-   Between group variance: how much the answers from the **experimental** group differ from the **control** group.
 
--   Within group variance: how much the answers of all participants
-    differ from one another.
+-   Within group variance: how much the answers of all participants differ from one another.
 
 ## Independent samples t-test
 
@@ -282,6 +272,7 @@ To compare the means we need to know:
 #| echo: false
 
 library(dplyr,warn.conflicts = FALSE)
+library(gt)
 
 tibble(
   height =c(rnorm(80,72,5),rnorm(80,62,5)),
@@ -335,18 +326,17 @@ tibble(
 
 To compare the means we need to know:
 
--   **Between group variance**: how much the answers from the
-    experimental group differ from the control group.
+-   **Between group variance**: how much the answers from the experimental group differ from the control group.
 
--   **Within group variance**: how much the answers of all participants
-    differ from one another.
+-   **Within group variance**: how much the answers of all participants differ from one another.
 
 ## Independent samples t-test
 
 ## Theoretical Formula:
 
-$$\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\color{grey}{s^{2}_{pooled}}}}$$ -
-[t]{style="color:blue"}
+$$\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\color{grey}{s^{2}_{pooled}}}}$$
+
+-    [t]{style="color:blue"} = T Statistic
 
 -   [Sample Mean]{style="color:red"}
 
@@ -356,8 +346,7 @@ $$\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\colo
 
 ## Forumlas
 
-Inferential statistics have both **theoretical** and **computational**
-formulas:
+Inferential statistics have both **theoretical** and **computational** formulas:
 
 -   Theoretical
 
@@ -365,8 +354,7 @@ formulas:
 
 -   Computational
 
-    -   Formula for estimating the test statistics based solely on
-        sample data
+    -   Formula for estimating the test statistics based solely on sample data
 
 ## Independent samples t-test
 
@@ -418,31 +406,11 @@ dat <-
 
 t.test(dat$happy ~ dat$grp, var.equal = TRUE) |> 
   broom::tidy() |> 
-  huxtable::hux() |> 
-  huxtable::theme_article()
+  gt() |> 
+  fmt_auto()
 ```
 
 ![](images/Screenshot%202024-11-04%20at%207.50.42%20AM.png)
-
-# SPSS
-
-## The Data
-
--   The main window that opens in SPSS
-
--   **Data view**: every row is a participant
-
--   **Variable view**: every row is a variable
-
--   Click commands from the data file.
-
-## Independent samples t-test: SPSS
-
--   Analyze
-
--   Compare Means
-
--   Independent Samples
 
 # INTERPRETTING T
 
@@ -460,7 +428,7 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 
 -   **Sample size**:
 
-    -   The sample size is adequate\* 
+    -   The sample size is adequate
 
 ## Independent samples t-test:
 
@@ -472,12 +440,22 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 
 -   **Independence**:
 
-    -   The data values are independent, meaning that measurements for
-        one observation do not affect other observations 
+    -   Each group must be made up of independent observations.
 
 -   **Homogeneity of variance**:
 
-    -   The variability of the data in each group is similar 
+    -   Variance should be equal across groups (tested with Levene's Test
+        -   \## Interpreting Levene’s Test
+
+            \- Levene’s Test tells us whether the assumption of equal variances holds.
+
+            \- \*\*If p \> .05\*\* → use the \*\*top row\*\* ("Equal variances assumed")
+
+            \- \*\*If p \< .05\*\* → use the \*\*bottom row\*\* ("Equal variances not assumed")
+
+-   Normality
+
+    -   Each group's distribution should be approximately normal
 
 ## Independent samples t-test
 
@@ -486,8 +464,7 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 ### ![](images/spiderman.png){style="border-radius: 20px;"}
 
 ::: fragment
-If the **Levene's Test** is significant, use the t value from the second
-row and its corresponding significance.
+If the **Levene's Test** is significant, use the t value from the second row and its corresponding significance.
 :::
 
 -   t is the test statistic.
@@ -498,103 +475,177 @@ row and its corresponding significance.
 
 $$\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}$$
 
-## Independent samples t-test: SPSS
 
-### Why Do We Care?
+## Why Do We Care?
 
-We need the **Levene's Test**, because if the variance from the
-experimental group is not equal to the variance of the control group, we
-have to use a different formula for the pooled standard deviation.
+We need the **Levene's Test**, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.
 
--   A significant Levene's Test means a significant difference in the
-    variances.
+-   A significant Levene's Test means a significant difference in the variances.
 
 ## Independent samples t-test: SPSS
 
 ### Interpreting Results
 
-If the **Levene's Test** is significant, use the t value from the second
-row and its corresponding significance
+If the **Levene's Test** is significant, use the t value from the second row and its corresponding significance
 
-![](images/indsamp_lev.png)
+## Does chocolate improve concentration?
 
-## Independent samples t-test: SPSS
+**Design Summary**  
 
-![](images/indsamp.png)
+> 50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0–20 scale.  
 
-## Independent samples t-test: Reporting your findings
+- **IV**: Chocolate (Yes vs. No)  
+- **DV**: Concentration task score  
+- **Design**: Between-subjects, randomized  
 
-![](images/indsamp.png)
+### R Code
 
-::: fragment
-> There was not a significant difference between the groups, t(18) =
-> 1.287, p = 0.215
-:::
+```{r}
+library(ggplot2)
+library(gtsummary)
+library(dplyr)
+library(gt)
+library(broom)
 
-## Independent samples t-test: SPSS
+set.seed(42)
+choco <- data.frame(
+  concentration = c(rnorm(25, 15, 2), rnorm(25, 13.5, 2)),
+  group = rep(c("chocolate", "no_chocolate"), each = 25)
+)
 
-![](images/indsamp.png)
 
-![](images/indsamp_lev.png)
+# Plot
+ggplot(choco, aes(x = group, y = concentration, fill = group)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Chocolate and Concentration",
+       y = "Concentration Score", x = "")
 
-## Independent samples t-test: SPSS
+# Summary Table
+t.test(concentration ~ group, data = choco) %>%
+  tidy() %>%
+  select(-method) |> 
+  rename(
+    Difference = estimate,
+    t = statistic,
+    p = p.value,
+    df = parameter,
+    `95% CI Low` = conf.low,
+    `95% CI High` = conf.high
+  ) |> 
+  gt() |> 
+  fmt_auto()
+```
+## 🎵 Example 2: Music and Study Efficiency
 
-![](images/indsamp_ex.png)
+## Does instrumental music improve studying?
 
--   Step 1: Look at Levene's
+> **Design Summary**  
+40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.  
 
-    -   Smaller than .05 —\> Bottom
+- **IV**: Study condition (Instrumental music vs. Silence)  
+- **DV**: Quiz performance (number of correct answers)  
+- **Design**: Between-subjects, randomized  
 
-    -   Larger than .05 —\> Top
+### R Code
 
-## Independent samples t-test: SPSS
+```{r}
+set.seed(99)
+music <- 
+  data.frame(
+    quiz_score = c(rnorm(20, 18, 1), 
+                   rnorm(20, 16.5, 1.2)),
+    group = rep(c("music", "silence"), each = 20)
+)
 
-![](images/indsamp_ex.png)
+# Plot
+ggplot(music, 
+       aes(x = group, 
+           y = quiz_score, 
+           fill = group)
+       ) +
+  geom_violin(trim = FALSE) +
+  geom_jitter(
+    width = 0.1, 
+    alpha = 0.4
+    ) +
+  theme_minimal() +
+  labs(
+    title = "Music and Study Performance",
+    y = "Quiz Score", 
+    x = "")
 
--   Step Two: Look at p (Sig.)
+# Summary Table
+  t.test(quiz_score ~ group, data = music) %>%
+  tidy() |> 
+  select(-method) |> 
+  rename(
+    Estimate = estimate,
+    t  = statistic,
+    p = p.value,
+    df = parameter,
+    `95% CI Low` = conf.low,
+    `95% CI High` = conf.high
+  ) |> 
+    gt() |> 
+    fmt_auto()
+```
 
-    -   Smaller than .05 —\> Report Full Findings
+## 📱 Example 3: Phone Use and Sleep
 
-    -   Larger than .05 —\> Report only Null
+## Does bedtime phone use affect sleep?
 
-## Independent samples t-test: SPSS
+> **Design Summary**  
+80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.  
 
-![](images/indsamp_ex.png)
+- **IV**: Phone use before bed (Yes vs. No)  
+- **DV**: Sleep quality rating (1 = poor, 10 = excellent)  
+- **Design**: Between-subjects, randomized  
 
-> *t(degrees of freedom) = value, p = value*
+### R Code
 
-## Independent samples t-test: SPSS
+```{r}
 
-![](images/indsamp_ex.png)
+set.seed(77)
 
-> *t(893) = value, p = value*
+sleep <- 
+  data.frame(
+    sleep_quality = 
+      c(rnorm(40, 6.8, 1), rnorm(40, 7.4, 0.9)),
+    group = rep(c("phone", "no_phone"), each = 40)
+    )
 
-## Independent samples t-test: SPSS
+# Plot
+ggplot(sleep, 
+       aes(x = group,
+           y = sleep_quality, 
+           fill = group)) +
+  stat_summary(
+    fun = "mean",
+    geom = "col"
+    ) +
+  geom_errorbar(
+    stat = "summary", 
+    fun.data = mean_se, 
+    width = 0.2) +
+  theme_minimal() +
+  labs(
+    title = "Phone Use and Sleep Quality",
+    y = "Sleep Quality (1–10)", 
+    x = "")
 
-![](images/indsamp_ex.png)
-
-> *t(893) = 5.038, p = value*
-
-## Independent samples t-test: SPSS
-
-![](images/indsamp_ex.png)
-
-> *t(893) = 5.038, p \< .001*
-
-## Independent samples t-test: SPSS
-
-![](images/indsamp_ex.png)
-
-> There was a significant difference in number of hours worked last week between men and women, t (893) = 5.038, p < 0.001.
-
-## Independent samples t-test: SPSS
-
-![](images/indsamp_ex.png)
-
-But who worked more hours?!
-
-## Independent samples t-test: SPSS
-
-![](images/indsamp_ex.png)
-
-> Men (M = 43.92, s = 15.53) worked significantly more hours last week compared to women (M = 38.92, s = 14.085), t (893) = 5.038, p < 0.001. 
+# Summary Table
+t.test(sleep_quality ~ group, data = sleep) %>%
+  tidy() |> 
+  select(-method) |> 
+  rename(
+    Estimate = estimate,
+    t = statistic,
+    p = p.value,
+    df = parameter,
+    `95% CI Low` = conf.low,
+    `95% CI High` = conf.high
+  ) |> 
+  gt() |> 
+  fmt_auto()
+```
