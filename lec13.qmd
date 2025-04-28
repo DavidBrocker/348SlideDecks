@@ -522,7 +522,9 @@ ggplot(choco, aes(x = group, y = concentration, fill = group)) +
        y = "Concentration Score", x = "")
 
 # Summary Table
-t.test(concentration ~ group, data = choco) %>%
+t.test(concentration ~ group, 
+       data = choco,
+       var.equal = TRUE) %>%
   tidy() %>%
   select(-method) |> 
   rename(
@@ -576,7 +578,9 @@ ggplot(music,
     x = "")
 
 # Summary Table
-  t.test(quiz_score ~ group, data = music) %>%
+  t.test(quiz_score ~ group, 
+         data = music,
+         ,var.equal = TRUE) %>%
   tidy() |> 
   select(-method) |> 
   rename(
@@ -635,7 +639,9 @@ ggplot(sleep,
     x = "")
 
 # Summary Table
-t.test(sleep_quality ~ group, data = sleep) %>%
+t.test(sleep_quality ~ group, 
+       data = sleep,
+       var.equal = TRUE) %>%
   tidy() |> 
   select(-method) |> 
   rename(

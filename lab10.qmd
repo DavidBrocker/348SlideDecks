@@ -1,0 +1,109 @@
+---
+title: "Which Study Method Works Best?"
+format: revealjs
+revealjs:
+  theme: simple
+  slide-number: true
+  transition: slide
+  title-slide-attributes: 
+    data-background-image: "images/slideback.png"
+---
+
+
+## 🧪 ANOVA Lab Activity
+### "Which Study Method Works Best?"
+
+---
+
+## 📘 Concept: One-Way ANOVA
+
+- Compares **means across 3+ groups**
+- Used when you want to test if at least one group differs from the others
+- Tests the null hypothesis that all group means are equal
+
+---
+
+## 🧑‍🏫 Scenario
+
+> Three groups of students used different methods to study for a quiz:
+> - **Video lectures**
+> - **Reading the textbook**
+> - **Flashcards**
+>
+> Each student then took the same 10-question quiz.
+
+---
+
+## 📊 Simulated Data in R
+
+```r
+set.seed(123)
+
+study_data <- data.frame(
+  method = rep(c("Video", "Textbook", "Flashcards"), each = 15),
+  score = c(
+    rnorm(15, mean = 7.5, sd = 1),    # Video
+    rnorm(15, mean = 6.5, sd = 1.2),  # Textbook
+    rnorm(15, mean = 8.0, sd = 0.8)   # Flashcards
+  )
+)
+```
+
+---
+
+## 📊 Visualizing Scores
+
+```r
+library(tidyverse)
+
+ggplot(study_data, aes(x = method, y = score, fill = method)) +
+  geom_boxplot() +
+  labs(title = "Quiz Scores by Study Method") +
+  theme_minimal()
+```
+
+---
+
+## 🔬 Running ANOVA
+
+```r
+anova_result <- aov(score ~ method, data = study_data)
+summary(anova_result)
+```
+
+- Look at the **F value** and **p-value**
+- If p < .05 → reject the null hypothesis
+
+---
+
+## 🔍 Post Hoc (Tukey HSD)
+
+```r
+TukeyHSD(anova_result)
+```
+
+- Shows **which pairs** of study methods differ significantly
+- Adjusts for multiple comparisons
+
+---
+
+## 🧠 Discussion Prompts
+
+1. Which group performed best?
+2. Is the difference statistically significant?
+3. Is the difference **practically** meaningful?
+4. What might influence quiz performance beyond method?
+
+---
+
+## 📦 Wrap-up
+
+- One-way ANOVA compares 3+ means
+- Helps determine if study methods influence outcomes
+- Real-world applications: education, psychology, marketing, more
+
+```r
+# End of lab activity
+```
+
+---

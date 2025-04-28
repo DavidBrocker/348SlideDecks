@@ -1,5 +1,5 @@
 ---
-title: "Factorial ANOVA"
+title: "Within Subjects ANOVA"
 subtitle: "Lecture 17"
 author: "Dave Brocker"
 footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
@@ -9,151 +9,32 @@ execute:
 format: 
   revealjs:
     theme: custom.scss
+    mermaid: 
+      theme: dark
     scrollable: true
     incremental: true   
     touch: true
     chalkboard: true
     lightbox: true
     code-fold: true
-    drop:
-      engine: webr
-      webr:
-        packages:
-         - ggplot2
-         - dplyr
-revealjs-plugins:
-  - drop
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
-## AnOVA
+# AnOVA
 
-#### What does ANOVA do?
+ANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another:
 
-ANOVA compares the means of different groups to determine if they differ
-significantly from one another.
+-   Independent variable: Categorical / Nominal
 
--   ANOVA can examine independent variables with **more than 2 groups**.
-
--   ANOVA can also look at multiple independent variables.
-
-## 2-way AnOVA
-
-> Prof Brocker believes the key to happiness involves 2 things: coffee
-> and Dark. He wants to see if drinking coffee makes participants
-> significantly happier than not drinking coffee. He also wants to see
-> if watching Dark show makes them significantly happier than not
-> watching it.
-
--   What kind of design is he using?
--   **2 x 2**
-
-## 2-way AnOVA
-
-We can write the design of a study analyzed using ANOVA as:
-
--   Number of groups "x" the Number of groups
-
--   Conditions in the first independent variable "x" Conditions in the
-    second independent variable, etc.
-
--   2 x 2
-
-## 2-way AnOVA
-
-> Prof Brocker believes the key to happiness involves 2 things: coffee
-> and Dark. He wants to see if drinking coffee makes participants
-> significantly happier than not drinking coffee. He also wants to see
-> if watching Dark show makes them significantly happier than not
-> watching it. This is a **2 x 2** design.
-
--   Number of groups in coffee: 2 (coffee or no coffee)
-
--   Number of groups in Dark: 2 (Dark or No Dark)
-
--   DV
-
-    -   Happiness
-
-## 2-way AnOVA
-
-What are Prof Brocker's Alternative Hypotheses?
-
--   H~1~: Participants who drink coffee will be significantly happier
-    than those who don't.
-
--   H~2~: Participants who watch Dark will be significantly happier than
-    those who don't.
-
-## 2-way AnOVA
-
-> Prof Brocker believes the key to happiness involves 2 things: coffee
-> and Dark. He wants to see if drinking coffee makes participants
-> significantly happier than not drinking coffee. He also wants to see
-> if watching Dark show makes them significantly happier than not
-> watching it. This is a **2 x 2** design.
-
--   Participants who drink coffee will be significantly happier than
-    those who don't.
-
--   Participants who watch Dark will be significantly happier than those
-    who don't.
-
--   H~3~: Participants who drink coffee while watching the Dark will be
-    the happiest.
-
-## ANOVA
-
-### The Three Type
-
--   Between-subjects: \[One-Way or Factorial\]
-
--   Within-subjects: (Repeated Measures ANOVA)
-
--   Mixed-designs: (Between *and* Within)
-
-## 2-way Between subjects ANOVA
-
--   IVs **must be** nominal/categorical
-
--   DV **must be** continuous
-
-## 2-way Between subjects ANOVA
-
--   IVs **must be** nominal/categorical
-
--   DV **must be** continuous
-
-## 2-way ANOVA
-
-### Two types of variance:
-
--   Variance among all of the scores *(error variance).*
-
--   Variance between the groups of the first IV *(between group variance
-    1).*
-
--   Variance between the groups of the second IV *(between group
-    variance 2).*
-
--   Variance between the combination of the groups *(interaction
-    variance).*
+-   Dependent variable: Continuous
 
 ## 2-way ANOVA
 
 ```{r}
 library(gt)
-
-# Load libraries
 library(dplyr)
 library(ggplot2)
-library(gt)
-
-# Load libraries
-library(ggplot2)
-library(dplyr)
+library(afex)
+library(broom)
 
 # Create a 2x2 grid structure for visualization
 matrix_data <- expand.grid(
@@ -184,6 +65,7 @@ fac_mat <-
     plot.title = element_text(size = 16, face = "bold", hjust = 0.5)
   )
 
+fac_mat
 ```
 
 ## 2-way ANOVA
@@ -191,392 +73,692 @@ fac_mat <-
 ```{r}
 fac_mat + 
   annotate(
-    "text", x = 1, y = 1, label = "Coffee"
+    "text", x = 1, y = 1, label = "Coffee\nJeopardy"
   ) +
     annotate(
-    "text", x = 0, y = 1, label = "Coffee"
+    "text", x = 0, y = 1, label = "Coffee\nDark"
   ) +
     annotate(
-    "text", x = 0, y = 0, label = "No Coffee"
+    "text", x = 0, y = 0, label = "Decaf\nDark"
   ) +
     annotate(
-    "text", x = 1, y = 0, label = "No Coffee"
+    "text", x = 1, y = 0, label = "Decaf\nJeopardy"
   ) 
+
 ```
 
 ## 2-way ANOVA
-
-```{r}
-fac_mat + 
-  annotate(
-    "text", x = 1, y = 1, label = "Coffee\nDark"
-  ) +
-    annotate(
-    "text", x = 0, y = 1, label = "Coffee\nNo Dark"
-  ) +
-    annotate(
-    "text", x = 0, y = 0, label = "No Coffee\nDark"
-  ) +
-    annotate(
-    "text", x = 1, y = 0, label = "No Coffee\nNo Dark"
-  ) 
-```
-
-## 2-way ANOVA
-
-To compare the means, we analyzing two types of variance:
-
--   Variance among all of the scores *(within group variance).*
-
--   Variance between the groups of the first IV *(between group variance
-    1).*
-
--   Variance between the groups of the second IV *(between group
-    variance 2).*
-
--   **Variance between the combination of the groups *(interaction
-    variance).***
-
-# Calculating the Fs
-
-## Degrees of freedom
-
-The number of observations (data points) in the data that are free to
-vary when estimating a statistic.
-
--   I own 7 pairs of sock. I want to wear a different pair of socks
-    every day.
-
--   How many times do I get to pick a pair of socks before I get stuck?
-
--   The degrees of freedom is how many times things can vary before we
-    are stuck with what's left over.
-
-## Degrees of freedom
-
--   Between Groups (df~BG~ ) = number of groups (k) - 1
-
--   Error Groups (df~Error~) = number of participants (n) - number of
-    groups (k)
-
--   df~Total~ = n - 1
-
-. . .
-
-\*k is the number of groups in the independent variable.
-
-## Degrees of freedom
-
--   Between Groups 1 (df~BG1~ ) = k~**1**~ - 1
-
--   Between Groups 2 (df~BG2~ ) = k~**2**~ - 1
-
--   Interaction (MS~Interaction~i) = (k~**1**~ - 1) x (k~**2**~ - 1)
-
--   Error (MS~Error~) = n - (k~**1**~ x k~**2**~)
-
--   Total = n - 1
-
--   \*k is the number of groups in each independent variable.
-
-## Calculating the MS in 2-way ANOVA
-
--   Between Group 1 Mean Squared:
-
-    -   $MS_{BG_1} = \frac{SS_{BG_{1}}}{k_1-1}$
-
--   Between Group 2 Mean Squared:
-
-    -   $MS_{BG_{2}} = \frac{SS_{BG_{2}}}{k_2-1}$
-
--   Interaction Mean Squared:
-
-    -   $MS_{Interaction} = \frac{SS_{Interaction}}{(k_1-1) \times (k_2-1)}$
-
--   Error Mean Squared:
-
-    -   $MS_{Error} = \frac{SS{Error}}{n-(k_1 \times k_2)}$
-
-## Calculating 2-way ANOVA anova
-
--   $F = \frac{MS_{BG_{1}}}{MS{Error}}$
-
--   $F = \frac{MS_{BG_{2}}}{MS{Error}}$
-
--   $F = \frac{MS_{Interaction}}{MS{Error}}$
-
-# Interpreting F
-
--   Interpreting the Fs in 2-way ANOVA
-
-![](images/fac_anova2.png)
-
--   Interpreting the Fs in 2-way ANOVA
-
-    -   IV 1 = Gender
-
-    -   IV 2 = Education Level
-
-## Interpreting the Fs in 2-way ANOVA
-
--   F1 = Gender
-
--   F2 = Education Level
-
--   F3 = Interaction of Gender x Education Level
-
-## Interpreting the Fs in 2-way ANOVA
-
-![](images/fac_anov.png)
-
-## Interpreting the Fs in 2-way ANOVA
-
--   F1 =
-
--   F2 =
-
--   F3 =
-
-## Interpreting the Fs in 2-way ANOVA
-
--   F1 = Section
-
--   F2 = Review
-
--   F3 = Section x Review
-
-## 2-way AnOVA
-
-> Prof Brocker believes the key to happiness involves 2 things: coffee
-> and Dark. He wants to see if drinking coffee makes participants
-> significantly happier than not drinking coffee. He also wants to see
-> if watching Dark show makes them significantly happier than not
-> watching it. This is a **2 x 2** design.
-
-She randomly assigns 100 participants to **Coffee** or **No Coffee** x
-**Dark** or **No Dark**.
-
-## Calculating the Fs in 2-way ANOVA
 
 ```{r}
 tribble(
 ~Source, ~SS, ~df, ~MS, ~F,
 "Coffee",432, "","","",
-"Dark",486,"","","",
-"Coffee x Dark",540,"","","",
-"Error",5184,"","",""
+"Dark",480,"","","",
+"Coffee x Dark",576,"","","",
+"Error",14208,"","",""
 ) |> 
   gt() |> 
     cols_align(align = "center",
              columns = SS:F)
 ```
 
-## Calculating the Fs in 2-way ANOVA
+## 2-way ANOVA
+
+```{r}
+tribble(
+~Source, ~SS, ~df, ~MS, ~F, ~p,
+"Coffee",432, "1","432","9",".05",
+"Dark",480,"1","480","10",".02",
+"Coffee x Dark",576,"1","576","12",".001",
+"Error",14208,"296","48","",""
+) |> 
+  gt() |> 
+    cols_align(align = "center",
+             columns = SS:p) |> 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
+
+```
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable:
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable: Time (before and after)
+
+## Within subjects ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable: Time (before and after)
+
+-   Dependent variable:
+
+## Within subjects ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable: Time (before and after)
+
+-   Dependent variable: Enjoyment of statistics
+
+## ANOVA
+
+-   Between subjects ANOVA compares means **BETWEEN** groups to determine if they differ significantly from one another.
+
+-   Within subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference **WITHIN** participants over time.
+
+## Within subjects ANOVA
+
+-   Within subjects ANOVA examines differences within participants over time.
+
+-   Within subjects ANOVA is also known as Repeated Measures ANOVA, because it looks at one measure repeated over time.
+
+## Within subjects ANOVA
+
+The independent variable is time.
+
+-   Before intervention: baseline or pre-test
+
+-   After intervention: post-test
+
+## Within Subjects ANOVA
+
+-   Within subjects ANOVA can look at 2 or more time points.
+
+## WITHIN Subjects ANOVA
+
+```{r}
+# Generate data for two normal distributions
+x <- seq(-6, 6, length=100)
+null_dist <- dnorm(x, mean = 0, sd = 1)
+alt_dist <- dnorm(x, mean = 2, sd = 1)
+
+data <- data.frame(
+  x = rep(x, 2),
+  y = c(null_dist, alt_dist),
+  hypothesis = factor(rep(c("Null Hypothesis", "Alternative Hypothesis"), each=length(x)))
+)
+
+# Create the plot
+
+plt <- 
+  ggplot(data, aes(x = x, y = y, 
+                 lty = rev(hypothesis))) +
+    geom_line(aes(color = "purple")) +
+  theme_linedraw() + 
+  labs(
+    x = "",
+    y = "",
+    lty = "Hypotheses"
+  ) + 
+  theme(
+    panel.grid = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(.2,.5),
+    legend.background = element_rect(color = "black")
+  ) + 
+  scale_color_identity()
+
+plt
+
+```
+
+## Between subjects ANOVA
+
+In between subjects ANOVA, we analyze two types of variance:
+
+-   **Between Group variance**: How the data varies between the groups
+
+-   **Error variance**: How the data varies across all participants
+
+## Between subjects ANOVA
+
+-   **Between Group variance**: How the data varies between the groups
+
+-   **Error variance**: How the data varies across all participants
+
+## WITHIN subjects ANOVA
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   Over time
+
+-   Error variance: How the data varies across all participants
+
+-   Per participant
+
+## WITHIN subjects ANOVA Example
+
+-   In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   **Over time**: Mood before Dark is more similar to mood before Dark than it is to mood after the Dark
+
+## WITHIN subjects ANOVA
+
+## WITHIN subjects ANOVA Example
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   **Over time**: Mood before the Dark is more similar to mood before Dark than it is to mood after the Dark
+
+-   **Error Variance**: Mood will have natural variance across participants and time.
+
+## WITHIN subjects ANOVA Example
+
+## WITHIN subjects ANOVA Example
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   **Over time**: Mood before Dark is more similar to mood before Dark than it is to mood after Dark
+
+-   **Error Variance**: Mood will have natural variance across participants.
+
+-   **Per participant**: Each participant's scores will be more like their other scores than they are like the scores of another participant.
+
+## WITHIN subjects ANOVA Example
+
+## WITHIN subjects ANOVA
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   Time
+
+-   Error
+
+-   Subjects
+
+## WITHIN subjects ANOVA
+
+```{mermaid}
+
+flowchart LR
+      A(Total Variability) --> B(Time Variability)
+      A --> C(Within-Groups Variability)
+      C --> D(Subject Variability)
+      C --> E(Error Variability)
+
+```
+
+# Calculating F
+
+## WITHIN subjects ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+$F = \frac{MS_{BG}}{MS_{Error}}$
+
+## WITHIN subjects ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+$F = \frac{\color{red}{MS_{BG}}}{MS_{Error}}$
+
+$MS_{BG} = \frac{SS_{BG}}{df_{BG}}$
+
+## WITHIN subjects ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+$F = \frac{MS_{BG}}{\color{red}{MS_{Error}}}$
+
+$MS_{Error} = \frac{SS_{Error}}{df_{Error}}$
+
+## WITHIN subjects ANOVA
+
+We want measure 2 sources of variance:
+
+-   $SS_{Time}$: this is just like the SS from between subjects ANOVA
+
+-   $SS_{Error}$: this is harder to calculate in within subjects ANOVA, because of the subject variance.
+
+## WITHIN subjects ANOVA
+
+## WITHIN subjects ANOVA
+
+$SS_{WG} = SS_{Subjects} + SS_{Error}$
+
+## WITHIN subjects ANOVA
+
+$SS_{WG} = SS_{Subjects} + \color{red}{SS_{Error}}$
+
+$SS_{Error} = SS_{WG} - SS_{Subjects}$
+
+## Calculating means squared (MS)
+
+-   We calculate a SS for the variance between the times points ($SS_{Time}$).
+
+-   This is just like the $SS_{BG}$ from between subjects ANOVA
+
+-   We calculate a SS for the within group variance ($SS_{WG}$).
+
+-   We calculate a SS for the variance by person ($SS_{Subject}$).
+
+## Calculating means squared (MS)
+
+-   We calculate a SS for the variance between the times points (SSTime).
+
+-   To find $SS_{Error}$, we subtract $SS_{Subjects}$ from $SS_{WG}$.
+
+## Calculating means squared (MS)
+
+-   $MS_{Time} = \frac{SS_{Time}} {df_{Time}}$
+
+-   $MS_{Error} = \frac{(SS_{WG} - SS_{Subject})}{df_{Error}}$
+
+## Degrees of freedom
+
+-   Time $(MS_{Time}) = k - 1$
+
+-   Error $(MS_{Error}) = (n - 1) \times (k - 1)$
+
+    -   \*k is the number of time points
+
+## Calculating means squared (MS)
+
+-   $MS_{Time} = \frac{SS_{Time}}{df_{Time}} = MS_{Time} = \frac{SS_{Time}}{(k - 1)}$
+
+-   $MS_{Error} = \frac{(SS_{WG} - SS_{Subject})} {df_{Error}} = MS_{Error}\ = \frac{(SS_{WG}\ - SS_{Subject})}{(n-1)\times(k-1)}$
+
+## WITHIN subjects ANOVA
+
+The F ratio in within subjects ANOVA:
+
+$F = \frac{MS_{Time}}{MS_{Error}}$
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   What's k?
+
+-   What's n?
+
+## Practice
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
 
 ```{r}
 tribble(
 ~Source, ~SS, ~df, ~MS, ~F,
-"Coffee",432, 1,432,"8",
-"Dark",486,1,486,"9",
-"Coffee x Dark",540,1,540,"10",
-"Error",5184,96,54,""
+"Time","49", "","","",
+"Within Group","912","","","",
+"Subjects","219","","","",
+"Error","","","",""
 ) |> 
   gt() |> 
     cols_align(align = "center",
              columns = SS:F)
 ```
 
-## 2-way AnOVA
+## Practice
 
-> Prof. Brocker recruit 500 children on Halloween. He assigns half to
-> wear a costume with a mask, and the other half to wear a costume
-> without a mask. He assigns participants to trick-or-treat alone or in
-> groups. Then he measures how much candy each child collects while
-> trick-or-treating.
-
-## Calculating the Fs in 2-way ANOVA
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
 
 ```{r}
 tribble(
 ~Source, ~SS, ~df, ~MS, ~F,
-"IV1",252, "","","",
-"IV2",441,"","","",
-"Interaction",882,"","","",
-"Error",10416,"","",""
+"Time","49", "1","49",".053",
+"Within Group","912","198","","",
+"Subjects","219","99","2.2","",
+"Error","912","","",""
 ) |> 
   gt() |> 
-  cols_align(align = "center",
+    cols_align(align = "center",
              columns = SS:F)
 ```
 
-## Calculating the Fs in 2-way ANOVA
+## ANOVA
 
-```{r}
-tribble(
-~Source, ~SS, ~df, ~MS, ~F,
-"IV1",252, "1","252","12",
-"IV2",441,"1","441","21",
-"Interaction",882,"1","882","42",
-"Error",10416,"496","21",""
-) |> 
-  gt() |> 
-  cols_align(align = "center",
-             columns = SS:F)
-```
+Dr. Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.
 
-## Calculating 2-way ANOVA anova
+-   What's k?
 
--   $F = \frac{MS_{BG_{1}}}{MS{Error}}$
+-   What's n?
 
--   $F = \frac{MS_{BG_{1}}}{MS{Error}}$
+# Practice
 
--   $F = \frac{MS_{Interaction}}{MS{Error}}$
+## ANOVA
 
--   \*All MS are divided by $MS_{Error}$
+Prof. Brocker measures the death anxiety of 500 middle-aged men. He then shows them images from anti-aging advertisements featuring young men. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.
+
+-   What's k?
+
+-   What's n?
+
+# Practice
+
+## Interpreting f
+
+The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
+
+-   $MS_{Time} = \text{change over time} + MS_{Error}$
+-   $MS_{Time} = 0 + MS_{Error}$
+-   $MS_{Time} = MS_{Error}$
+-   $F = 1$
+
+## Interpreting f
+
+When F \<= 1, it's not likely to be significant.
+
+## Interpreting f
+
+The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
+
+-   $MS_{Time} = \text{change over time} + MS_{Error}$
+
+-   $MS_{Time} = \text{effect} + MS_{Error}$
+
+-   $F > 1$
+
+## Hypothesis testing: ANOVA
+
+-   F \< = 1 ---\> Fail to reject the Null Hypothesis
+
+-   F \> 1 ---\> Refer to *p*-value ---\> Reject the Null Hypothesis
+
+## How many F's do you Get?
+
+-   One-way Between Subjects?
+
+    -   1 for 1 IV
+
+-   Two-way Between Subjects with a 2x2 design?
+
+    -   3 (One for each IV and one for the Interaction)
+
+-   Within Subjects?
+
+    -   1
+
+# Reporting F
 
 ## Reporting F
 
-## Reporting F
-
-If asked to report findings in terms of the Null Hypothesis (H~0~), you
-should report findings as:
+If asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:
 
 -   Reject H~0~, or
 
 -   Fail to Reject H~0~
 
-## Reporting F
+Reporting F
 
-If asked to report findings in general or for publication, you need
-**EACH** F-value:
+If asked to report findings in general or for publication, you need to report:
 
--   F(df for the between group MS, df for the error MS)
-
-    -   = F-value
-
-        -   Corresponding p-value
-
-            -   *For significant results: Means and standard deviations
-                of each group*
+-   *F(df time, df error)* = *F-value, p-value*
 
 ## Reporting F
 
-> The group that watched Dark (M=8.43, s=1.02) reported significantly
-> more happiness compared to their peers in the control group who
-> watched Jeopardy (M=6.12, s=0.98), *F(1,496) = 7.12, p \< 0.05*.
+> Mood after watching the Dark was not significantly different from mood before watching Dark, *F* (1, 499) = 1.02, *p* = 0.07.
+
+> There was no significant change in mood over time, *F* (1, 499) = 1.02, *p* = 0.07.
 
 ## Reporting F
 
-Results IV~1~:
-
-::: fragment
-> **If significant**: The group that watched the Eric Andre Show
-> (M=8.43, s=1.02) reported significantly more happiness compared to
-> their peers in the control group who watched Jeopardy (M=6.12,
-> s=0.98), *F (1, 496) = 7.12, p \< 0.05*.
-:::
-
-::: fragment
-> **If NOT significant**: There was not a significant difference in
-> happiness between the groups, F (1, 498) = 1.02, p = 0.07.
-:::
+> Participants' mood was significantly better after watching the Dark compared to before watching it, *F*(1, 499) = 7.12, *p* \< 0.05.
 
 ## Reporting F
 
-Results IV2:
+If asked to report findings in general or for publication, you need to report:
 
-> **If significant**: The group that drank coffee (M=7.35, s=1.01)
-> reported significantly more happiness compared to their peers in the
-> control group who drank decaf (M=4.21, s=0.99), *F (1, 496) = 9.12, p
-> \< 0.05*.
+-   *F(df time, df error) = F-value, p-value*
 
-> **If NOT significant**: There was not a significant difference in
-> happiness between the groups, *F (1, 498) = 1.02, p = 0.07*.
+-   **If the results are significant, we have to also report the means and standard deviations for each time point.**
 
 ## Reporting F
 
-Results Interaction:
+> Participants' anxiety differed significant across time, *F*(2, 198) = 3.744, p = 0.25. Anxiety was highest at pre-test (M= 19.58, s = 0.643). Anxiety was lowest at baseline (M , s ). Anxiety at post test was M= , s.
 
-> **If significant**: The group that drank coffee AND watched Eric Andre
-> (M=7.35, s=1.01) reported significantly more happiness compared to the
-> other groups (M=4.21, s=0.99), F *(1, 496) = 11.14, p \< 0.05.*
+## Practice
 
-> **If NOT significant**: There was not a significant difference in
-> happiness between the groups, *F (1, 498) = 1.02, p = 0.07*.
+-   Was anxiety just before the Stats Exam significantly higher than baseline anxiety?
 
--   <div>
+## Data Manipulation
 
-    ```{r}
-    library(dplyr)
-    library(ggplot2)
+When collected, data can be in either wide or long format.
 
-    # Set seed for reproducibility
-    set.seed(123)
+Below are the first five rows of the same dataset:
 
-    # Create levels for the independent variables
-    coffee <- c("Yes", "No")
-    tv_show <- c("Yes", "No")
-
-    # Create a data frame with all combinations of coffee and tv_show
-    factorial_design <- expand.grid(Coffee = coffee, TV_Show = tv_show)
-
-    # Simulate happiness scores for each group
-    # Adjust means to reflect interaction effects
-    n_per_group <- 30 # Number of participants per condition
-    data <- factorial_design[rep(1:nrow(factorial_design), each = n_per_group), ]
-    data$Happiness <- NA
-
-    # Define mean happiness scores for each condition
-    means <- c(
-      "Yes_Yes" = 8,  # Coffee + TV Show
-      "Yes_No" = 6,   # Coffee + No TV Show
-      "No_Yes" = 5,   # No Coffee + TV Show
-      "No_No" = 3     # No Coffee + No TV Show
-    )
-
-    # Assign happiness scores with some random noise
-    data$Happiness <- rnorm(
-      n = nrow(data),
-      mean = means[paste(data$Coffee, data$TV_Show, sep = "_")],
-      sd = 1.5 # Standard deviation for noise
-    )
-
-    # View the first few rows of the data
-    head(data)
-
-    # Summary of the dataset
-    summary(data)
-
-    # Model
-    fac_mod <- 
-      aov(Happiness ~ Coffee * TV_Show, data  = data)
-
-    data |> 
-      ggplot(aes(Coffee, Happiness, color = TV_Show)) + 
-      geom_jitter(alpha = .4) + 
-       stat_summary(
-        fun.data = "mean_se",
-        geom = "line",
-        color = "black",
-        aes(group = TV_Show,
-            lty = TV_Show)
-      ) + 
-        stat_summary(
-        fun.data = "mean_se",
-        geom = "pointrange",
-        aes(color = TV_Show)
-      ) + 
-      theme_minimal() + 
-      theme(
-        panel.grid = element_blank()
-      )
-      
-
-    plot(TukeyHSD(fac_mod))
+```{r}
+data.frame(
+  Participant = factor(1:5),
+  Immediate = rnorm(5, mean = 8, sd = 1.5),
+  After24Hours = rnorm(5, mean = 6, sd = 1.5),
+  After1Week = rnorm(5, mean = 4, sd = 1.5)
+) |> 
+  gt() |> 
+  tab_header(title = "Wide Data",
+             subtitle = "Each row represents an indivdual participant")
 
 
+data.frame(
+  Participant = factor(1:5),
+  Immediate = rnorm(5, mean = 8, sd = 1.5),
+  Day = rnorm(5, mean = 6, sd = 1.5),
+  Week = rnorm(5, mean = 4, sd = 1.5)
+) |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "Time",
+                      values_to = "Stress") |> 
+  gt() |> 
+  fmt_auto() |> 
+  tab_header(title = "Long Data",
+             subtitle = "Each row represents an indivdual participant's score on each level of the treatment")
+```
 
-     
-    ```
+# More Examples!
 
-    </div>
+## 1. Memory Recall Study
+
+```{r}
+set.seed(100)
+
+# Memory Recall Study
+memory_data <- data.frame(
+  Participant = factor(1:30),
+  Immediate = rnorm(30, mean = 8, sd = 1.5),
+  After24Hours = rnorm(30, mean = 6, sd = 1.5),
+  After1Week = rnorm(30, mean = 4, sd = 1.5)
+)
+
+# Make Data Longer
+memory_data_long <- 
+  memory_data |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "Time",
+                      values_to = "Memory")
+
+aov_ez(
+  "Participant",
+  "Memory",
+  memory_data_long, 
+  within = "Time",
+  anova_table = list(correction = "none")
+)
+
+aov(Memory ~ Time + Error(Participant), data = memory_data_long) |> 
+  tidy() |> 
+  mutate(
+    Source = term,
+    SS = sumsq,
+    MS = meansq,
+    `F` = ifelse(is.na(statistic),"--",statistic |> round(3)),
+    p = ifelse(p.value >.05,"<.05",p.value),
+    p = ifelse(is.na(p),"--",p)
+  ) |> 
+  select(Source, df, SS, MS, `F`, p) |> 
+  gt() |> 
+  fmt_auto()
+
+
+memory_data_long |> 
+  ggplot(aes(Time,Memory, color = Time)) + 
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.data = "mean_se",
+    color = "black"
+  ) + 
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    geom = "errorbar",
+    fun.data = "mean_se",
+    width = .2
+  ) + 
+  theme_minimal()
+```
+
+## 2. Clinical Trial
+
+```{r}
+set.seed(100)
+
+# Clinical Trial Study
+clinical_data <- data.frame(
+  Participant = factor(1:30),
+  LowDose = rnorm(30, mean = 5, sd = 1),
+  MediumDose = rnorm(30, mean = 6.5, sd = 1),
+  HighDose = rnorm(30, mean = 8, sd = 1)
+)
+
+clinical_data_long <- 
+  clinical_data |> 
+  tidyr::pivot_longer(
+    cols = !Participant,
+    names_to = "Dosage",
+    values_to = "DV"
+  )
+
+aov(DV ~ Dosage + Error(Participant), data = clinical_data_long) |> 
+  tidy() |> 
+  gt()
+```
+
+## 3. Behavioral Therapy Progress
+
+```{r}
+set.seed(100)
+
+# Behavioral Therapy Study
+therapy_data <- data.frame(
+  Participant = factor(1:30),
+  Baseline = rnorm(30, mean = 10, sd = 2),
+  MidTreatment = rnorm(30, mean = 7, sd = 2),
+  PostTreatment = rnorm(30, mean = 5, sd = 2)
+)
+
+therapy_data_long <- 
+  therapy_data |> 
+  tidyr::pivot_longer(
+    cols = !Participant,
+    names_to = "Treatment_Group",
+    values_to = "DV"
+  )
+
+aov_ez(
+  "Participant",
+  "DV",
+  therapy_data_long, 
+  within = "Treatment_Group",
+  anova_table = list(correction = "none")
+)
+
+therapy_data_long |> 
+  ggplot(aes(Treatment_Group,DV,color = Treatment_Group)) +
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  theme_minimal()
+```
+
+## 4. Consumer Product Ratings
+
+```{r}
+set.seed(100)
+
+# Consumer Product Study
+product_data <- data.frame(
+  Participant = factor(1:30),
+  ProductA = rnorm(30, mean = 6, sd = 1),
+  ProductB = rnorm(30, mean = 7, sd = 1),
+  ProductC = rnorm(30, mean = 5, sd = 1)
+)
+
+product_data_long <- 
+  product_data |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "products",
+                      values_to = "ratings")
+
+aov(ratings ~ products + Error(Participant), data = product_data_long) |>
+  tidy() |> 
+  gt()
+
+product_data_long |> 
+  ggplot(aes(products,ratings,fill = products)) + 
+  stat_summary(
+    fun = "mean",
+    geom = "bar",
+    width = .5
+  ) +
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  theme_minimal()
+```
+
+## 5. Physiological Stress Study
+
+```{r}
+set.seed(100)
+
+# Physiological Stress Study
+stress_data <- data.frame(
+  Participant = factor(1:30),
+  Rest = rnorm(30, mean = 50, sd = 5),
+  Task = rnorm(30, mean = 70, sd = 5),
+  Recovery = rnorm(30, mean = 55, sd = 5)
+)
+
+stress_data_long <- 
+  stress_data |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "Time",
+                      values_to = "Stress")
+
+aov(Stress ~ Time + Error(Participant), data = stress_data_long) |> 
+  tidy() |> 
+  gt() |> 
+  fmt_auto()
+
+stress_data_long |> 
+  ggplot(aes(Time,Stress,color = Time)) + 
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1) + 
+  theme_minimal()
+```

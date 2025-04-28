@@ -899,9 +899,10 @@ Dave Brocker
 </section>
 <section id="calculating-between-subjects-anova" class="slide level2">
 <h2>Calculating Between subjects anova</h2>
-<p><span class="math display">\[F = \frac{\color{orange}{MS_{BG}}}{\color{grey}{MS_{Error}}}\]</span> - <span class="math inline">\(MS_{BG} = \frac{SS_{BG}}{df_{BG}\)</span></p>
+<p><span class="math display">\[F = \frac{\color{orange}{MS_{BG}}}{\color{grey}{MS_{Error}}}\]</span></p>
 <ul>
-<li class="fragment"><span class="math inline">\(MS_{Error} = \frac{SS_{Error}}{df_{Error}}\)</span></li>
+<li class="fragment"><p><span class="math inline">\(MS_{BG} = \frac{SS_{BG}}{df_{BG}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{SS_{Error}}{df_{Error}}\)</span></p></li>
 </ul>
 </section>
 <section id="between-subjects-anova-12" class="slide level2">
@@ -1187,14 +1188,15 @@ Dave Brocker
 <span id="cb17-9"><a></a>  ) <span class="sc">+</span></span>
 <span id="cb17-10"><a></a>  <span class="fu">stat_summary</span>(</span>
 <span id="cb17-11"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb17-12"><a></a>    <span class="at">geom =</span> <span class="st">"pointrange"</span></span>
-<span id="cb17-13"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb17-14"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb17-15"><a></a>    <span class="fu">labs</span>(</span>
-<span id="cb17-16"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Treatment Group"</span>,</span>
-<span id="cb17-17"><a></a>    <span class="at">y =</span> <span class="st">"Score</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb17-18"><a></a>    <span class="at">color =</span> <span class="st">"Group"</span></span>
-<span id="cb17-19"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-12"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb17-13"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
+<span id="cb17-14"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb17-15"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-16"><a></a>    <span class="fu">labs</span>(</span>
+<span id="cb17-17"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Treatment Group"</span>,</span>
+<span id="cb17-18"><a></a>    <span class="at">y =</span> <span class="st">"Score</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb17-19"><a></a>    <span class="at">color =</span> <span class="st">"Group"</span></span>
+<span id="cb17-20"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>

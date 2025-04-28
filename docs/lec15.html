@@ -6,11 +6,14 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.33">
 
   <meta name="author" content="Dave Brocker">
-  <title>PSY 348: Statistics for Psychology – Paired Samples T-Test</title>
+  <title>PSY 348: Statistics for Psychology – Analysis of Variance</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -131,8 +134,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Paired Samples T-Test</h1>
-  <p class="subtitle">Lecture 14</p>
+  <h1 class="title">Analysis of Variance</h1>
+  <p class="subtitle">Lecture 15</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -146,92 +149,100 @@ Dave Brocker
 </div>
 
 </section>
-<section id="introduction-to-paired-samples-t-test" class="slide level2">
-<h2>Introduction to Paired Samples t-Test</h2>
-<h3 id="what-is-a-paired-samples-t-test">What is a Paired Samples t-Test?</h3>
+<section id="analysis-of-variance" class="slide level2">
+<h2>Analysis of Variance</h2>
+<h3 id="anova">ANOVA</h3>
 <ul>
-<li class="fragment">A statistical method used to compare the means of two related groups.</li>
-<li class="fragment">Commonly used when measuring the same group before and after an intervention or over two different conditions.</li>
+<li class="fragment">ANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another.</li>
 </ul>
 </section>
-<section id="purpose-of-paired-samples-t-test" class="slide level2">
-<h2>Purpose of Paired Samples t-Test</h2>
-<h3 id="why-use-paired-samples-t-test">Why Use Paired Samples t-Test?</h3>
+<section id="t-tests" class="slide level2">
+<h2>T-tests</h2>
 <ul>
-<li class="fragment">To determine if there is a statistically significant difference between two related group means.</li>
-<li class="fragment">Useful in psychology for assessing changes due to an intervention, therapy, or experiment.</li>
+<li class="fragment"><p>IV <u><strong>must be</strong></u> what two things?</p></li>
+<li class="fragment"><p>DV <u><strong>must be</strong></u> what one thing?</p></li>
 </ul>
 </section>
-<section id="formula-for-paired-samples-t-test" class="slide level2">
-<h2>Formula for Paired Samples t-Test</h2>
-<h3 id="mathematical-representation">Mathematical Representation</h3>
+<section id="t-tests-1" class="slide level2">
+<h2>T-tests</h2>
 <ul>
-<li class="fragment"><strong>Formula</strong>: <span class="math inline">\(\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}\)</span>
-<ul>
-<li class="fragment"><span class="math inline">\(\bar{D}\)</span>: Mean of the differences between paired observations.</li>
-<li class="fragment"><span class="math inline">\(s_D\)</span>: Standard deviation of the differences.</li>
-<li class="fragment"><span class="math inline">\(n\)</span>: Number of pairs.</li>
-</ul></li>
+<li class="fragment"><p>IV <u><strong>must be</strong></u> nominal and have only 2 categories</p></li>
+<li class="fragment"><p>DV <u><strong>must be</strong></u> continuous</p></li>
 </ul>
 </section>
-<section id="theoretical-formula-explanation" class="slide level2">
-<h2>Theoretical Formula Explanation</h2>
-<h3 id="understanding-each-component">Understanding Each Component</h3>
+<section id="anova-1" class="slide level2">
+<h2>AnOVA</h2>
+<p>ANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another.</p>
 <ul>
-<li class="fragment"><strong>Difference Mean</strong> <span class="math inline">\(\bar{D}\)</span>: Average of the differences between paired scores.</li>
-<li class="fragment"><strong>Standard Deviation of Differences</strong> <span class="math inline">\(s_D\)</span>: Indicates how much individual differences deviate from the mean difference.</li>
-<li class="fragment"><strong>Sample Size</strong> <span class="math inline">\(n\)</span>: Number of pairs, affecting the significance of results.</li>
+<li class="fragment"><p>ANOVA can examine independent variables with <u><strong>more than 2 groups</strong></u>.</p></li>
+<li class="fragment"><p>ANOVA can also be used for just 2 groups.</p></li>
+<li class="fragment"><p>It’s more robust than t-tests.</p></li>
 </ul>
 </section>
-<section id="application-of-paired-samples-t-test" class="slide level2">
-<h2>Application of Paired Samples t-Test</h2>
-<h3 id="when-to-apply-this-test">When to Apply This Test</h3>
+<section id="anova-2" class="slide level2">
+<h2>ANOVA</h2>
+</section>
+<section id="sampling-theory" class="slide level2">
+<h2>Sampling Theory</h2>
+<p>We set the critical value so that 5% of the null distribution’s area is to the right of it.</p>
+</section>
+<section id="anova-3" class="slide level2">
+<h2>ANOVA</h2>
+<p>There are 3 types of ANOVA:</p>
 <ul>
-<li class="fragment"><strong>Pretest-Posttest Design</strong>: Measure changes in the same group over time.</li>
-<li class="fragment"><strong>Matched Pairs</strong>: Compare two related groups, such as twins or matched participants.</li>
-<li class="fragment"><strong>Repeated Measures</strong>: Test the same group under different conditions or at different times.</li>
+<li class="fragment"><p>Between subjects</p></li>
+<li class="fragment"><p>Within subjects (repeated measures ANOVA)</p></li>
+<li class="fragment"><p>Mixed designs (between and within together)</p></li>
 </ul>
 </section>
-<section>
-<section id="paired-samples-t-test-example" class="title-slide slide level1 center">
-<h1>Paired Samples t-Test Example</h1>
-
-</section>
-<section id="paired-samples-t-test" class="slide level2">
-<h2>Paired Samples t-Test</h2>
-<h3 id="application-in-psychology-research">Application in Psychology Research</h3>
+<section id="between-subjects-anova" class="slide level2">
+<h2>Between subjects ANOVA</h2>
 <blockquote>
-<p>A psychologist measures stress levels of a group before and after a mindfulness program.</p>
+<p>The experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. I ask all <code>3</code> groups to complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
 </blockquote>
-<p><strong>Steps</strong>:</p>
 <ul>
-<li class="fragment">Calculate the difference between pre- and post-intervention scores.</li>
-<li class="fragment">Find the mean <span class="math inline">\(\bar{D}\)</span> and standard deviation <span class="math inline">\(s_D\)</span> of the differences.</li>
-<li class="fragment">Apply the formula to calculate the t-value and check for significance.</li>
+<li class="fragment"><p>The experimental group has a mean happiness score = <code>8</code></p></li>
+<li class="fragment"><p>The placebo group mean happiness score = <code>6</code></p></li>
+<li class="fragment"><p>The control group mean happiness score = <code>5</code></p></li>
+<li class="fragment"><p>Is the group that drank coffee significantly happier than the other groups?</p></li>
 </ul>
 </section>
-<section id="paired-samples-t-test-1" class="slide level2">
-<h2>Paired Samples t-Test</h2>
-<h3 id="application-in-psychology-research-1">Application in Psychology Research</h3>
+<section id="between-subjects-anova-1" class="slide level2">
+<h2>Between subjects ANOVA</h2>
+<ul>
+<li class="fragment">If it’s all about the means, why is it called Analysis of Variance?</li>
+</ul>
+</section>
+<section id="between-subjects-anova-2" class="slide level2">
+<h2>Between subjects ANOVA</h2>
+<ul>
+<li class="fragment"><p>To compare the means, we are analyzing two types of variance:</p></li>
+<li class="fragment"><p>Variance among all of the scores <em>(within group variance)</em></p></li>
+<li class="fragment"><p>Variance <em>between the groups (between group variance).</em></p></li>
+</ul>
+</section>
+<section id="between-subjects-anova-3" class="slide level2">
+<h2>Between subjects ANOVA</h2>
+<p>Is the variance between the green, red, and blue dots greater than the variance across all of the dots?</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rkrfhdamgw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rkrfhdamgw table {
+<div id="gveqnzrjxj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gveqnzrjxj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rkrfhdamgw thead, #rkrfhdamgw tbody, #rkrfhdamgw tfoot, #rkrfhdamgw tr, #rkrfhdamgw td, #rkrfhdamgw th {
+#gveqnzrjxj thead, #gveqnzrjxj tbody, #gveqnzrjxj tfoot, #gveqnzrjxj tr, #gveqnzrjxj td, #gveqnzrjxj th {
   border-style: none;
 }
 
-#rkrfhdamgw p {
+#gveqnzrjxj p {
   margin: 0;
   padding: 0;
 }
 
-#rkrfhdamgw .gt_table {
+#gveqnzrjxj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -257,12 +268,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_caption {
+#gveqnzrjxj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rkrfhdamgw .gt_title {
+#gveqnzrjxj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -274,7 +285,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#rkrfhdamgw .gt_subtitle {
+#gveqnzrjxj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -286,7 +297,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#rkrfhdamgw .gt_heading {
+#gveqnzrjxj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -298,13 +309,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_bottom_border {
+#gveqnzrjxj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_col_headings {
+#gveqnzrjxj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -319,7 +330,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_col_heading {
+#gveqnzrjxj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -339,7 +350,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#rkrfhdamgw .gt_column_spanner_outer {
+#gveqnzrjxj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -351,15 +362,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#rkrfhdamgw .gt_column_spanner_outer:first-child {
+#gveqnzrjxj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rkrfhdamgw .gt_column_spanner_outer:last-child {
+#gveqnzrjxj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rkrfhdamgw .gt_column_spanner {
+#gveqnzrjxj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -371,11 +382,11 @@ Dave Brocker
   width: 100%;
 }
 
-#rkrfhdamgw .gt_spanner_row {
+#gveqnzrjxj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rkrfhdamgw .gt_group_heading {
+#gveqnzrjxj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -401,7 +412,7 @@ Dave Brocker
   text-align: left;
 }
 
-#rkrfhdamgw .gt_empty_group_heading {
+#gveqnzrjxj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -416,15 +427,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#rkrfhdamgw .gt_from_md > :first-child {
+#gveqnzrjxj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rkrfhdamgw .gt_from_md > :last-child {
+#gveqnzrjxj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rkrfhdamgw .gt_row {
+#gveqnzrjxj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -443,7 +454,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#rkrfhdamgw .gt_stub {
+#gveqnzrjxj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -456,7 +467,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#rkrfhdamgw .gt_stub_row_group {
+#gveqnzrjxj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -470,15 +481,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#rkrfhdamgw .gt_row_group_first td {
+#gveqnzrjxj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rkrfhdamgw .gt_row_group_first th {
+#gveqnzrjxj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rkrfhdamgw .gt_summary_row {
+#gveqnzrjxj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -488,16 +499,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#rkrfhdamgw .gt_first_summary_row {
+#gveqnzrjxj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_first_summary_row.thick {
+#gveqnzrjxj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rkrfhdamgw .gt_last_summary_row {
+#gveqnzrjxj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -507,7 +518,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_grand_summary_row {
+#gveqnzrjxj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -517,7 +528,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#rkrfhdamgw .gt_first_grand_summary_row {
+#gveqnzrjxj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -527,7 +538,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_last_grand_summary_row_top {
+#gveqnzrjxj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,11 +548,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_striped {
+#gveqnzrjxj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rkrfhdamgw .gt_table_body {
+#gveqnzrjxj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -550,7 +561,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_footnotes {
+#gveqnzrjxj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -564,7 +575,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_footnote {
+#gveqnzrjxj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -573,7 +584,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#rkrfhdamgw .gt_sourcenotes {
+#gveqnzrjxj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -587,7 +598,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#rkrfhdamgw .gt_sourcenote {
+#gveqnzrjxj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -595,116 +606,369 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#rkrfhdamgw .gt_left {
+#gveqnzrjxj .gt_left {
   text-align: left;
 }
 
-#rkrfhdamgw .gt_center {
+#gveqnzrjxj .gt_center {
   text-align: center;
 }
 
-#rkrfhdamgw .gt_right {
+#gveqnzrjxj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rkrfhdamgw .gt_font_normal {
+#gveqnzrjxj .gt_font_normal {
   font-weight: normal;
 }
 
-#rkrfhdamgw .gt_font_bold {
+#gveqnzrjxj .gt_font_bold {
   font-weight: bold;
 }
 
-#rkrfhdamgw .gt_font_italic {
+#gveqnzrjxj .gt_font_italic {
   font-style: italic;
 }
 
-#rkrfhdamgw .gt_super {
+#gveqnzrjxj .gt_super {
   font-size: 65%;
 }
 
-#rkrfhdamgw .gt_footnote_marks {
+#gveqnzrjxj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rkrfhdamgw .gt_asterisk {
+#gveqnzrjxj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rkrfhdamgw .gt_indent_1 {
+#gveqnzrjxj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rkrfhdamgw .gt_indent_2 {
+#gveqnzrjxj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rkrfhdamgw .gt_indent_3 {
+#gveqnzrjxj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rkrfhdamgw .gt_indent_4 {
+#gveqnzrjxj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rkrfhdamgw .gt_indent_5 {
+#gveqnzrjxj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rkrfhdamgw .katex-display {
+#gveqnzrjxj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rkrfhdamgw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gveqnzrjxj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="gt_col_headings header">
-<th id="D" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">D</th>
-<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">t</th>
-<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">df</th>
-<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
-<th id="CI[uu,ll]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">CI[uu,ll]</th>
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Coffee</strong><br> N = 10<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Control</strong><br> N = 10<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Placebo</strong><br> N = 10<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="D">3.266667</td>
-<td class="gt_row gt_right" headers="t">7.58112</td>
-<td class="gt_row gt_right" headers="df">41.65179</td>
-<td class="gt_row gt_right" headers="p">2.3e-09</td>
-<td class="gt_row gt_left" headers="CI[uu,ll]">[2.4, 4.14]</td>
+<td class="gt_row gt_left" headers="label">score</td>
+<td class="gt_row gt_center" headers="stat_1">7.12(0.99)</td>
+<td class="gt_row gt_center" headers="stat_2">4.78(1.67)</td>
+<td class="gt_row gt_center" headers="stat_3">5.28(1.36)</td>
 </tr>
-</tbody>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean(SD)</td>
+</tr>
+</tfoot>
+
 </table>
 
 </div>
 </div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec15_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec15_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
-<section id="summary-of-paired-samples-t-test" class="slide level2">
-<h2>Summary of Paired Samples t-Test</h2>
-<h3 id="key-takeaways">Key Takeaways</h3>
+<section id="the-f-statistic" class="slide level2">
+<h2>The F Statistic</h2>
 <ul>
-<li class="fragment">Paired samples t-tests are ideal for comparing two related groups.</li>
-<li class="fragment">They help determine if interventions or conditions produce significant changes.</li>
-<li class="fragment">Remember to check assumptions: normality of differences and appropriate pairing.</li>
+<li class="fragment"><p>ANOVA produces what we call the F statistic.</p></li>
+<li class="fragment"><p>Why do we call it F?</p></li>
 </ul>
+</section>
+<section id="between-subjects-anova-4" class="slide level2">
+<h2>Between subjects anova</h2>
+</section>
+<section id="between-subjects-anova-5" class="slide level2">
+<h2>Between subjects anova</h2>
+</section>
+<section id="between-subjects-anova-6" class="slide level2">
+<h2>Between subjects anova</h2>
+<p>Between subjects anova</p>
+<p>Between subjects anova</p>
+<p>Between subjects anova</p>
+<p>Between subjects anova</p>
+</section>
+<section id="calculating-f" class="slide level2">
+<h2>Calculating F</h2>
+<ul>
+<li class="fragment"><p>Calculating the variance</p></li>
+<li class="fragment"><p>ANOVA looks at variance. How do we calculate the Variance?</p></li>
+</ul>
+</section>
+<section id="calculating-the-variance" class="slide level2">
+<h2>Calculating the variance</h2>
+<p>ANOVA looks at variance. To calculate the Variance:</p>
+<ul>
+<li class="fragment"><p>Calculate the mean.</p></li>
+<li class="fragment"><p>Subtract the mean from each x-value - what is this called?</p></li>
+</ul>
+</section>
+<section id="calculating-the-variance-1" class="slide level2">
+<h2>Calculating the variance</h2>
+<p>ANOVA looks at variance. To calculate the Variance:</p>
+<ul>
+<li class="fragment"><p>Calculate the mean.</p></li>
+<li class="fragment"><p>Subtract the mean from each x-value (deviation score).</p></li>
+<li class="fragment"><p>Subtract the mean from each x-value (deviation score).</p></li>
+<li class="fragment"><p>Square the deviation scores.</p></li>
+<li class="fragment"><p>Take the sum of the squared deviations - what is this called?</p></li>
+</ul>
+</section>
+<section id="calculating-the-variance-2" class="slide level2">
+<h2>Calculating the variance</h2>
+<p>ANOVA looks at variance. To calculate the Variance:</p>
+<ul>
+<li class="fragment"><p>Calculate the mean.</p></li>
+<li class="fragment"><p>Subtract the mean from each x-value (deviation score).</p></li>
+<li class="fragment"><p>Square the deviation scores.</p></li>
+<li class="fragment"><p>Take the sum of the squared deviations (Sum of Squared Deviations).</p></li>
+</ul>
+</section>
+<section id="calculating-the-variance-3" class="slide level2">
+<h2>Calculating the variance</h2>
+<p>ANOVA looks at variance. To calculate the Variance:</p>
+<ul>
+<li class="fragment"><p>Calculate the mean.</p></li>
+<li class="fragment"><p>Subtract the mean from each x-value (deviation score).</p></li>
+<li class="fragment"><p>Square the deviation scores.</p></li>
+<li class="fragment"><p>Take the sum of the squared deviations (Sum of Squared Deviations).</p></li>
+<li class="fragment"><p>Divide by (n-1) - what is this called?</p></li>
+</ul>
+</section>
+<section id="calculating-the-variance-in-anova" class="slide level2">
+<h2>Calculating the variance in ANOVA</h2>
+<p>To calculate the Variance in ANOVA:</p>
+<ul>
+<li class="fragment"><p>Calculate the mean.</p></li>
+<li class="fragment"><p>Subtract the mean from each x-value (deviation score).</p></li>
+<li class="fragment"><p>Square the deviation scores.</p></li>
+<li class="fragment"><p>Take the sum of the squared deviations (Sum of Squared Deviations).</p></li>
+<li class="fragment"><p>Divide by (degrees of freedom).</p></li>
+</ul>
+<p><strong>This is the variance</strong>, but in ANOVA we also call it a Mean Squared (MS).</p>
+</section>
+<section id="calculating-means-squared-ms" class="slide level2">
+<h2>Calculating means squared (MS)</h2>
+<ul>
+<li class="fragment"><p>Calculate the SS.</p></li>
+<li class="fragment"><p>Divide the SS by the degrees of freedom.</p></li>
+</ul>
+</section>
+<section id="calculating-means-squared-ms-1" class="slide level2">
+<h2>Calculating means squared (MS)</h2>
+<ul>
+<li class="fragment"><p>We will calculate a SS for the between group variance.</p></li>
+<li class="fragment"><p>How much variance in the data is from group differences?</p></li>
+<li class="fragment"><p>We will calculate a SS for all the data.</p></li>
+<li class="fragment"><p>How much variance in the data is from random error?</p></li>
+</ul>
+</section>
+<section id="between-subjects-anova-7" class="slide level2">
+<h2>Between subjects ANOVA</h2>
+<ul>
+<li class="fragment"><p>SS<sub><strong>BG</strong></sub> = How much variance comes comes from the group differences?</p></li>
+<li class="fragment"><p>SS<sub><strong>Error</strong></sub> = How much variance is there in total among all the data points?</p></li>
+</ul>
+</section>
+<section id="calculating-means-squared-ms-2" class="slide level2">
+<h2>Calculating means squared (MS)</h2>
+<ul>
+<li class="fragment"><p>Calculate the SS<sub><strong>BG</strong></sub>.</p></li>
+<li class="fragment"><p>Calculate the SS<sub><strong>Error</strong></sub>.</p></li>
+<li class="fragment"><p>Divide the SS by their degrees of freedom.</p></li>
+</ul>
+</section>
+<section id="degrees-of-freedom" class="slide level2">
+<h2>Degrees of freedom</h2>
+<p>The number of observations (data points) in the data that are free to vary when estimating a statistic.</p>
+<p>I own 7 hats. I want to wear a different hat every day of the week.</p>
+<ul>
+<li class="fragment"><p>On Monday, I have 7 hats to choose from.</p></li>
+<li class="fragment"><p>On Tuesday, I have 6 hats to choose from.</p></li>
+<li class="fragment"><p>On Wednesday, I have 5 hats to choose from.</p></li>
+<li class="fragment"><p>On Thursday, I have 4 hats to choose from.</p></li>
+<li class="fragment"><p>On Friday, I have 3 hats to choose from.</p></li>
+<li class="fragment"><p>On Saturday, I have 2 hats to choose from.</p></li>
+<li class="fragment"><p>On Sunday, I don’t get a choice. On Sunday, I have to wear the Santa hat.</p></li>
+<li class="fragment"><p>The degrees of freedom is how many times I get a choice before I’m stuck with what’s left over.</p></li>
+</ul>
+</section>
+<section id="degrees-of-freedom-1" class="slide level2">
+<h2>Degrees of freedom</h2>
+<ul>
+<li class="fragment"><p>Between Groups (<strong>MS<sub>BG</sub></strong> ) = k - 1</p></li>
+<li class="fragment"><p>Within Groups (<strong>MS<sub>WG</sub></strong>) = n - k</p></li>
+<li class="fragment"><p>Total = n - 1</p>
+<ul>
+<li class="fragment">k is the number of groups in the independent variable.</li>
+</ul></li>
+</ul>
+</section>
+<section id="calculating-means-squared-ms-3" class="slide level2">
+<h2>Calculating means squared (MS)</h2>
+<ul>
+<li class="fragment"><p>Calculate the SS<sub><strong>BG</strong></sub>.</p></li>
+<li class="fragment"><p>Calculate the SS<sub><strong>Error</strong></sub>.</p></li>
+<li class="fragment"><p>Divide the SS by their degrees of freedom.</p></li>
+</ul>
+</section>
+<section id="calculating-the-ms" class="slide level2">
+<h2>Calculating the ms</h2>
+<ul>
+<li class="fragment"><p>Between Group Mean Squared: MS<sub><strong>BG</strong></sub> = SS<sub><strong>BG</strong></sub> / (k – 1)</p></li>
+<li class="fragment"><p>Error Mean Squared: <strong>MS<sub>Error</sub></strong> = S<strong>S<sub>Error</sub></strong> / (n – k)</p></li>
+</ul>
+</section>
+<section id="calculating-between-subjects-anova" class="slide level2">
+<h2>Calculating Between subjects anova</h2>
+<p><strong>F = MS<sub>BG</sub></strong> / <strong>MS<sub>Error</sub></strong></p>
+</section>
+<section id="calculating-between-subjects-anova-1" class="slide level2">
+<h2>Calculating Between subjects anova</h2>
+<p><strong>F = MS<sub>BG</sub></strong> / <strong>MS<sub>Error</sub></strong></p>
+</section>
+<section id="between-subjects-anova-example" class="slide level2">
+<h2>Between subjects anova Example</h2>
+<blockquote>
+<p>Prof Brocker gives one group of 100 participants the Super Secret Limitless Drug. He gives another group of 100 participants a placebo. He gives the third group of 100 participants nothing. All participants then complete an IQ test. She wants to know if those who took the SSLD has significantly higher IQ than the placebo and the control groups.</p>
+</blockquote>
+</section>
+<section id="between-subjects-anova-example-1" class="slide level2">
+<h2>Between subjects anova Example</h2>
+</section>
+<section id="between-subjects-anova-example-2" class="slide level2">
+<h2>Between subjects anova Example</h2>
+<blockquote>
+<p>Prof Brocker recruits 500 participants. He shows half of them the Netflix Original, Dark and the other half Jeopardy. HHe then measures their happiness on a scale of 1 to 10. He wants to know if Dark participants are significantly happier than the Jeopardy participants.</p>
+</blockquote>
+</section>
+<section id="between-subjects-anova-example-3" class="slide level2">
+<h2>Between subjects anova Example</h2>
+</section>
+<section id="interpreting-f" class="slide level2">
+<h2>Interpreting f</h2>
+</section>
+<section id="interpreting-f-1" class="slide level2">
+<h2>Interpreting f</h2>
+<p>The MS<sub>BG</sub> is made up of the MS<sub>Error</sub> + the theoretical difference between groups:</p>
+<ul>
+<li class="fragment"><p>MS<sub>BG</sub> = <em>group difference</em> + <strong>MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p><strong>MS<sub>BG</sub> = <em>0</em> + MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p><strong>MS<sub>BG</sub> = MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p><strong>F = MS<sub>BG</sub> / MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p><strong>F = 1</strong></p></li>
+</ul>
+</section>
+<section id="interpreting-f-2" class="slide level2">
+<h2>Interpreting f</h2>
+<ul>
+<li class="fragment">When F =&lt; 1, it’s not likely to be significant.</li>
+</ul>
+</section>
+<section id="interpreting-f-3" class="slide level2">
+<h2>Interpreting f</h2>
+<p>The MS<sub>BG</sub> is made up of the MS<sub>Error</sub> + the theoretical difference between groups:</p>
+<ul>
+<li class="fragment"><p>MS<sub>BG</sub> = <em>group difference</em> + <strong>MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p>MS<sub>BG</sub> = <em>NUMBER GREATER THAN 0</em> + <strong>MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p><strong>F = DIFFERENCE + MS<sub>Error</sub> / MS<sub>Error</sub></strong></p></li>
+<li class="fragment"><p><strong>F = DIFFERENCE</strong></p></li>
+</ul>
+</section>
+<section id="hypothesis-testing-anova" class="slide level2">
+<h2>Hypothesis testing: ANOVA</h2>
+<ul>
+<li class="fragment"><p>F &lt; = 1 —&gt; Fail to reject the Null Hypothesis</p></li>
+<li class="fragment"><p>F &gt; 1 —&gt; Refer to <em>p</em>-value —&gt; Reject the Null Hypothesis</p></li>
+</ul>
+</section>
+<section id="reporting-f" class="slide level2">
+<h2>Reporting f</h2>
+</section>
+<section id="reporting-f-1" class="slide level2">
+<h2>Reporting F</h2>
+</section>
+<section id="if-asked-to-report-findings-in-terms-of-the-null-hypothesis-h0-you" class="slide level2">
+<h2>If asked to report findings in terms of the Null Hypothesis (H0), you</h2>
+<p>should report findings as:</p>
+<ul>
+<li class="fragment"><p>Reject H0, or</p></li>
+<li class="fragment"><p>Fail to Reject H0</p></li>
+</ul>
+</section>
+<section id="reporting-f-2" class="slide level2">
+<h2>Reporting F</h2>
+<p>If asked to report findings in general or for publication, you need to report 5 things:</p>
+<ul>
+<li class="fragment"><p>F(df for the between group MS, df for the error MS)</p></li>
+<li class="fragment"><p>F-value</p></li>
+<li class="fragment"><p>p-value</p></li>
+<li class="fragment"><p>Mean and standard deviation of each group</p></li>
+</ul>
+</section>
+<section id="reporting-f-3" class="slide level2">
+<h2>Reporting F</h2>
+<p>The group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F(1,498) = 7.12, p &lt; 0.05.</p>
+</section>
+<section id="reporting-f-4" class="slide level2">
+<h2>Reporting F</h2>
+<p>There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.</p>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
 </div>
 </div></div>
 
@@ -1145,6 +1409,38 @@ Dave Brocker
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
