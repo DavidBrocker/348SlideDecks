@@ -1,0 +1,661 @@
+---
+title: "Measures of Central Tendency"
+subtitle: "PSY 348: Lecture 3"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "⬡⬢⬡"
+format:
+  revealjs:
+    chalkboard: true
+    menu: 
+      numbers: true
+    slide-number: c/t
+    preview-links: auto
+    theme: custom.scss
+    incremental: true   
+    touch: true
+---
+
+
+
+
+## **Review**
+
+### Scales of Measurement
+
+::: {.incremental .highlight-last}
+
+-   What are the 4 scales of measurement
+
+-   What are the only scales of measurement that matter for us?
+:::
+
+## Review
+
+### Scales of Measurement
+
+::: {.incremental .highlight-last}
+
+-   Nominal
+
+-   Ordinal
+
+-   Interval
+
+-   Ratio
+
+:::
+
+## Review
+
+### Statistical Terms
+
+::: {.incremental .highlight-last}
+
+-   n = ?
+
+-   x = ?
+
+:::
+
+## **Review**
+
+### Statistical Terms
+
+::: {.incremental .highlight-last}
+
+-   n = the number of people in the sample
+
+-   x = one participant's score
+
+:::
+
+## **Review**
+
+### Statistical Terms
+
+::: {.incremental .highlight-last}
+
+-   What is a parameter?
+
+-   What is a statistic?
+
+:::
+
+## **Review**
+
+### Statistical Terms
+
+::: {.incremental .highlight-last}
+
+-   What is a parameter?
+
+    -   Information that describes the population.
+
+-   What is a statistic?
+
+    -   Information that describes the sample.
+
+    -   Inferences about the population based on information from the sample.
+
+:::
+
+## **Descriptive Statistics**
+
+### Describe the characteristics of the sample.
+
+::: {.incremental .highlight-last}
+
+-   Think about our data on time spent on Instagram.
+
+-   How could we describe it?
+
+    -   Average
+
+    -   Min & Max
+
+:::
+
+## **Descriptive Statistics**
+
+### Describe the characteristics of a sample in terms of:
+
+::: {.incremental .highlight-last}
+
+-   Central tendency: What most people said
+
+-   Dispersion: How spread out the data are
+
+:::
+
+## **Measures of Central tendency**
+
+::: {.incremental .highlight-last}
+
+-   Tell us about the mid-point (center) of a distribution.
+
+-   Tell us about the mid-point (center) of a distribution.
+
+-   Tell us most participants' answer.
+
+:::
+
+## **Measures of Central tendency**
+
+::: {.incremental .highlight-last}
+
+-   Mean
+
+    -   the average; obtained by summing all values and dividing by the number of values.
+
+    -   $\sum^{n}_{i=1} = x_1 + x_2...$
+    
+:::
+
+## **Measures of Central tendency**
+
+::: {.incremental .highlight-last}
+
+-   Median
+
+    -   The middle number; obtained by ordering all values from lowest to highest and taking the middle (if n is odd or the average of the 2 middle if n is even)
+    
+:::
+
+## **Measures of Central tendency**
+
+::: {.incremental .highlight-last}
+
+-   Mode
+
+    -   the most frequent answer; obtained by counting how many times each answer is given and taking the value that occurs most often
+
+:::
+
+## **Measures of Central tendency**
+
+### Standard Normal Distribution
+
+
+
+
+```{r}
+library(ggplot2)
+x <- seq(5, 15, length=1000)
+
+y <- dnorm(x, mean=10, sd=1)
+
+nm <- data.frame(x,y)
+
+ggplot(data = nm, aes(x,y)) + 
+  geom_point() +
+  theme_minimal() + 
+  labs(
+    x = "",
+    y = "") +
+  theme(
+    axis.text.x = element_blank()
+  ) +
+  geom_vline(xintercept = 10) +
+  geom_label(label = "Mean", y = 0, x = 10) +
+  geom_label(label = "Median", y = 0.15, x = 10) +
+  geom_label(label = "Mode", y = 0.3, x = 10)
+  
+```
+
+
+
+
+## **Measures of Central tendency**
+
+In a normal distribution, the mean, median, and mode are equal to one another.
+
+Mean = Median = Mode
+
+## **Measures of Central tendency**
+
+### The Mean is good for use in normal distributions
+
+
+
+
+```{r}
+ 
+  data.frame(
+    z = rnorm(500,30,sd =10)
+    ) |> 
+  ggplot(aes(z)) + 
+  geom_histogram(
+    binwidth = 10
+  ) + 
+    theme_minimal() +
+    labs(x = "",
+         y = "")
+```
+
+
+
+
+## **The Mean**
+
+::: {.incremental .highlight-last}
+
+-   The mean is only helpful in a [**normal distribution**]{.underline}, which you may have heard called a normal curve or bell curve.
+
+-   We overwhelmingly use the mean, because in the social and behavioral sciences, we nearly always assume the distribution is normal.
+
+:::
+
+## **Measures of Central tendency**
+
+### When should we use the median...
+
+A skewed distribution occurs when one side of the date gets cut off due to measurement limitation.
+
+
+
+
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 1000 random values from a Beta distribution
+left_skewed <- rbeta(1000, shape1 = 2, shape2 = 5)
+
+data.frame(left_skewed) |> 
+  ggplot(aes(left_skewed)) + 
+  geom_histogram(fill = "lightcoral") +
+  labs(
+    title = "Left-Skewed Distribution",
+    x = "",
+    y = ""
+  ) + 
+  theme_minimal() + 
+  geom_vline(xintercept = 
+               median(left_skewed)) +
+  geom_vline(xintercept = 
+               mean(left_skewed)) 
+```
+
+
+
+
+## **The Median**
+
+::: {.incremental .highlight-last}
+
+-   In a skewed distribution, the mean gets pulled out toward the tail, and the mode gets pulled to the cluster.
+
+-   The median is the best measure of central tendency for skewed distributions because it tells us how most people answered.
+
+:::
+
+## **Measures of Central tendency**
+
+### **The Mode**
+
+::: {.incremental .highlight-last}
+
+-   The mode is good for bi-or-tri-modal distributions.
+
+-   When might you have a bi-modal distribution?
+
+:::
+
+## **Measures of Central tendency**
+
+### **The Mode**
+
+
+
+
+```{r}
+exam <- 
+  data.frame(
+    l = c(rnorm(500,80,1),
+          rnorm(500,65,1))
+  )
+
+ggplot(exam,aes(l)) + 
+  geom_histogram(fill = "darkgreen") +
+  labs(
+    x = "",
+    y = "",
+    title = "When half of the class scores high and the other half doesn't"
+  ) + 
+  theme_minimal() +
+  geom_vline(xintercept = 65,
+             color = "red") + 
+  geom_vline(xintercept = 80,
+             color = "red") +
+  theme(
+    plot.title = 
+      element_text(
+        size = 20, 
+        face = "bold")
+  )
+```
+
+
+
+
+## **Measures of Central tendency**
+
+### **The Mode**
+
+
+
+
+```{r}
+exam <- 
+  data.frame(l = c(
+    rnorm(500,1,0.5), 
+    rnorm(500,5,0.5)) 
+    )
+
+ggplot(exam, aes(l)) + 
+  geom_histogram(fill = "maroon") +
+  labs(x = "", 
+       y = "", 
+       title = "When half the class loves something and the other class hates it!",
+       subtitle = "On a scale of 1-7, how much do you like Professor Brocker's jokes?") + 
+  theme_minimal() + 
+  theme(
+    plot.title = 
+      element_text(
+        size = 20, 
+        face = "bold")
+    )
+```
+
+
+
+
+## When should we use...
+
+::: {.incremental .highlight-last}
+
+-   Mean
+
+    -   good for normal distributions
+
+-   Median
+
+    -   good for skewed distributions
+
+-   Mode
+
+    -   good for bimodal distributions
+
+:::
+
+## **Central tendency: Which should we use?**
+
+### Two or More Peaks
+
+
+
+
+```{r}
+  data.frame(l = c(
+    rnorm(500,1,0.5), 
+    rnorm(500,5,0.5)) 
+    ) |> 
+ggplot(aes(l)) + 
+  geom_histogram(fill = "darkblue") +
+  labs(x = "", 
+       y = ""
+       ) + 
+  theme_minimal()
+```
+
+
+
+
+## **Central tendency: Which should we use?**
+
+### Slide to the Left!
+
+
+
+
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 1000 random values from a Beta distribution
+left_skewed <- rbeta(1000, shape1 = 2, shape2 = 5)
+
+data.frame(left_skewed) |> 
+  ggplot(aes(left_skewed)) + 
+  geom_histogram(fill = "grey30") +
+  labs(
+    x = "",
+    y = ""
+  ) + 
+  theme_minimal() 
+```
+
+
+
+
+## **Central tendency: Which should we use?**
+
+### Looks Normal to Me
+
+
+
+
+```{r}
+  
+data.frame(
+  l = rnorm(500,12,1)
+    ) |> 
+ggplot(aes(l)) + 
+  geom_histogram(fill = "darkorange") +
+  labs(x = "", 
+       y = ""
+       ) + 
+  theme_minimal()
+```
+
+
+
+
+## **Measures of Central tendency:**
+
+### **The mean**
+
+::: {.incremental .highlight-last}
+
+-   We use the mean most often in social science, because many of our statistical tests can only be used on normal distributions.
+
+-   We *assume* normality of the distribution, and use the mean.
+
+:::
+
+## Calculating measures of central tendency
+
+### **Calculating The mean**
+
+::: {.incremental .highlight-last}
+
+-   Sum all x values
+
+-   Divide by the number of x values (n).
+
+:::
+
+ . . .
+ 
+`x = 4,2,5,6`
+
+ . . .
+
+$\frac{\Sigma(x)}{n}$
+
+ . . .
+
+$\Sigma(x) = 4 + 2 + 5 + 6 = 17$
+
+ . . .
+
+$\frac{17}{4} = 4.25$
+
+## Calculating measures of central tendency
+
+## **Calculating The median**
+
+::: {.incremental .highlight-last}
+
+-   Put all x values in order from smallest or largest or largest to smallest.
+
+-   Find the middle number.
+
+-   If there are an even number of x values, take the average of the 2 middle numbers.
+
+-   `x = 4,2,5,6,3`
+
+-   `x = 2,3,4,5,6`
+
+:::
+
+## Calculating measures of central tendency
+
+### **Calculating The mode**
+
+::: {.incremental .highlight-last}
+
+-   Put all x values in order from smallest or largest or largest to smallest. $x = [3,2,1,5,3,7,8,3,2,4,1]$
+
+-   Find the number or numbers that repeat the most. $x = [1,1,2,2,3,3,3,4,5,7,8]$
+
+-   There can be more than 1 mode.
+
+:::
+
+## **Using Excel**
+
+### **Excel Practice**
+
+::: {.incremental .highlight-last}
+
+-   Cell
+
+-   Columns
+
+-   Rows
+
+:::
+
+
+![](images/excel.png){fig-align="center" width="301"}
+
+## **Excel Practice**
+
+::: {.incremental .highlight-last}
+
+-   What does each row in this spreadsheet represent?
+
+-   What does each column in this spreadsheet represent?
+
+:::
+
+## **Excel Practice**
+
+::: {.incremental .highlight-last}
+
+-   Adding & Summing
+
+-   Subtracting
+
+-   Multiplying
+
+-   Dividing
+
+-   Squaring
+
+:::
+
+## **Excel Practice**
+
+::: {.incremental .highlight-last}
+
+-   Adding & Sum: `SUM(B2:B10)`
+
+-   Subtracting: `C9 - C2`
+
+-   Multiplying: `B12 * 4`
+
+-   Dividing: `A2/B3`
+
+-   Squaring: `(B2-C2)^2`
+
+-   Average: `AVERAGE(B2:B20)`
+
+:::
+
+## **Excel Practice**
+
+::: {.incremental .highlight-last}
+
+-   Open our Class Data in Microsoft Excel.
+
+-   Calculate the Mean
+
+-   Using (`SUM(x))/n`
+
+-   Using `Average(x)`
+
+-   Calculate the Median
+
+-   Find the `Mode(s)`
+
+:::
+
+## **Review**
+
+::: {.incremental .highlight-last}
+
+### When do we use the...
+
+-   Mean?
+
+-   Median?
+
+-   Mode?
+
+:::
+
+## **Review**
+
+### How do we calculate the...
+
+::: {.incremental .highlight-last}
+
+-   Mean?
+
+-   Median?
+
+-   Mode?
+
+:::
+
+## **Review**
+
+### What is this the formula for?
+
+::: {.incremental .highlight-last}
+
+-   Explain this formula to me.
+
+:::
+
+ . . .
+
+$\sum(x)$
+
+## **Review**
+
+When are the mean, median, and mode the same (equal to one another)?
+

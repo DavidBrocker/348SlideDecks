@@ -441,13 +441,13 @@ mean of x
     Paired t-test
 
 data:  ptt$t1 and ptt$t2
-t = -3.7824, df = 24, p-value = 0.0009113
+t = -6.5829, df = 24, p-value = 8.277e-07
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -3.3592227 -0.9874532
+ -4.332910 -2.264461
 sample estimates:
 mean difference 
-      -2.173338 </code></pre>
+      -3.298686 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Formula Method</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">Pair</span>(t1,t2)  <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> ptt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -456,13 +456,13 @@ mean difference
     Paired t-test
 
 data:  Pair(t1, t2)
-t = -3.7824, df = 24, p-value = 0.0009113
+t = -6.5829, df = 24, p-value = 8.277e-07
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -3.3592227 -0.9874532
+ -4.332910 -2.264461
 sample estimates:
 mean difference 
-      -2.173338 </code></pre>
+      -3.298686 </code></pre>
 </div>
 </div>
 </section>
@@ -482,13 +482,13 @@ mean difference
     Welch Two Sample t-test
 
 data:  t2 and t1
-t = 4.4016, df = 43.647, p-value = 6.835e-05
+t = 6.0093, df = 45.982, p-value = 2.808e-07
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- 1.178001 3.168675
+ 2.193730 4.403642
 sample estimates:
 mean of x mean of y 
- 6.815012  4.641674 </code></pre>
+ 7.578318  4.279632 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function Method</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the Data Wide</span></span>
@@ -504,13 +504,13 @@ mean of x mean of y
     Welch Two Sample t-test
 
 data:  score by time
-t = -4.4016, df = 43.647, p-value = 6.835e-05
+t = -6.0093, df = 45.982, p-value = 2.808e-07
 alternative hypothesis: true difference in means between group t1 and group t2 is not equal to 0
 95 percent confidence interval:
- -3.168675 -1.178001
+ -4.403642 -2.193730
 sample estimates:
 mean in group t1 mean in group t2 
-        4.641674         6.815012 </code></pre>
+        4.279632         7.578318 </code></pre>
 </div>
 </div>
 </section>
@@ -538,8 +538,8 @@ mean in group t1 mean in group t2
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
-grp           2   7346    3673   154.4 &lt;2e-16 ***
-Residuals   297   7067      24                   
+grp           2   6102  3051.2   106.4 &lt;2e-16 ***
+Residuals   297   8519    28.7                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -557,19 +557,19 @@ lm(formula = IQ ~ grp, data = exp)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--13.92  -3.15   0.08   3.85  13.47 
+-17.12  -3.56   0.13   3.13  20.44 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 109.9200     0.4878 225.339   &lt;2e-16 ***
-grpPlacebo    0.2300     0.6899   0.333    0.739    
-grpSSLD      10.6100     0.6899  15.380   &lt;2e-16 ***
+(Intercept) 110.1200     0.5356  205.62   &lt;2e-16 ***
+grpPlacebo   -0.2500     0.7574   -0.33    0.742    
+grpSSLD       9.4400     0.7574   12.46   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.878 on 297 degrees of freedom
-Multiple R-squared:  0.5097,    Adjusted R-squared:  0.5064 
-F-statistic: 154.4 on 2 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 5.356 on 297 degrees of freedom
+Multiple R-squared:  0.4174,    Adjusted R-squared:  0.4135 
+F-statistic: 106.4 on 2 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Follow-Up Tests</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the model, NOT the summary!</span></span>
@@ -582,10 +582,10 @@ F-statistic: 154.4 on 2 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
 Fit: aov(formula = IQ ~ grp, data = exp)
 
 $grp
-                 diff      lwr      upr     p adj
-Placebo-Control  0.23 -1.39496  1.85496 0.9405803
-SSLD-Control    10.61  8.98504 12.23496 0.0000000
-SSLD-Placebo    10.38  8.75504 12.00496 0.0000000</code></pre>
+                 diff       lwr       upr     p adj
+Placebo-Control -0.25 -2.034047  1.534047 0.9417237
+SSLD-Control     9.44  7.655953 11.224047 0.0000000
+SSLD-Placebo     9.69  7.905953 11.474047 0.0000000</code></pre>
 </div>
 </div>
 

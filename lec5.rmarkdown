@@ -1,0 +1,505 @@
+---
+title: "Standard Normal Distribution"
+subtitle: "Lecture 5"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "Standard Normal Distrubution | ⬡⬢⬡⬢⬡"
+format: 
+  revealjs:
+    theme: custom.scss
+    incremental: true   
+    touch: true
+    chalkboard: true
+    lightbox: true
+    drop:
+      engine: webr
+      webr:
+        packages:
+         - ggplot2
+         - dplyr
+revealjs-plugins:
+  - drop
+---
+
+
+
+
+## Standard Normal Distribution
+
+### What do we know about normal distributions?
+
+::: fragment
+![](images/bell.png){fig-align="center"}
+:::
+
+## Standard Normal Distribution
+
+### Properties and Principles
+
+The 4 properties of a standard normal distribution are:
+
+::: {.incremental .highlight-last}
+-   They are shaped like a bell ("bell curve").
+
+-   They are symmetric.
+
+-   They are unimodal.
+
+-   The mean = median = mode.
+:::
+
+## Standard Deviation
+
+### Standard deviation is in the scale of the variable (`x`).
+
+-   A standard deviation of 1 means a distance of 1 on the scale used to measure the variable.
+
+::: fragment
+![](images/bell.png){fig-align="center"}
+:::
+
+## Standard Normal Distribution
+
+### Example 1
+
+> Jonas scores a 98 on the exam. The average grade on the exam was 97 with a standard deviation of 1.
+
+-   Find Jonas' score on the normal distribution.
+
+::: fragment
+![](images/bell.png){fig-align="center"}
+:::
+
+## Standard Normal Distribution
+
+### Where do most scores fall in relation to the mean?
+
+::: {.incremental .highlight-last}
+-   Most scores fall within one standard deviation of the mean.
+
+-   "Within one standard deviation" means +1 as well as -1 standard deviation.
+:::
+
+## Standard Normal Distribution
+
+### Percentages and Proportions
+
+::: columns
+::: {.column width="50%"}
+::: {.incremental .highlight-last}
+-   68.3% of the data will fall within 1 SD of the mean.
+
+-   95.4% of the data will fall within 2 SD of the mean.
+
+-   99.7% of the data will fall within 3 SD of the mean.
+:::
+:::
+
+::: {.column width="50%"}
+![](images/bell_prop2.png)
+:::
+:::
+
+## Standard Normal Distribution
+
+### Example 1
+
+> Students' ratings of the Netflix Original *Dark* (range = 1- 10) form a normal distribution with m = 6 and s = 1.
+
+-   What percentage of Students rate it a 7 or higher?
+
+-   What percentage of Students rate it at least a 4?
+
+-   What percentage of Students rate it an 8 or lower?
+
+## Standard Normal Distribution
+
+### Where should we put the mean?
+
+![](images/bell_prop.png){fig-align="center"}
+
+## Standard Normal Distribution
+
+### Where should we put the mean?
+
+
+
+
+```{r}
+library(ggplot2)
+
+ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm, 
+                n = 101, 
+                args = 
+                  list(mean = 0, 
+                       sd = 1)) + 
+  labs(
+  x = "",
+  y = ""
+  ) +
+  scale_y_continuous(breaks = NULL) + 
+  theme_minimal() +
+  geom_label(label = "Mean: 6",
+            x = 0,
+            y = 0.05)
+```
+
+
+
+
+## Standard Normal Distribution
+
+### Mean: 6 \| Standard Deviation: 1
+
+
+
+
+```{r}
+library(ggplot2)
+
+ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm, 
+                n = 101, 
+                args = 
+                  list(mean = 0, 
+                       sd = 1)) + 
+  labs(
+  x = "",
+  y = ""
+  ) +
+  scale_y_continuous(breaks = NULL) + 
+  theme_minimal() +
+  geom_label(
+            label = "6",
+            x = 0,
+            y = 0.05) +
+  geom_label(
+            label = "5",
+            x = -1,
+            y = .05
+  ) +
+  geom_label(
+            label = "7",
+            x = 1,
+            y = .05
+  ) + 
+  geom_label(
+            label = "4",
+            x = -2,
+            y = .05
+  ) + 
+  geom_label(
+            label = "8",
+            x = 2,
+            y = .05
+  )
+```
+
+
+
+
+## Standard Normal Distribution
+
+### Example 1:
+
+> Students' ratings of the Netflix Original *Dark* form a normal distribution with m = 6 and s = 1.
+
+::: {.incremental .highlight-last}
+-   What percentage of Students rate the Netflix Original *Dark* a 7 or higher?
+
+    -   15.8%
+:::
+
+## Standard Normal Distribution
+
+### Example 1:
+
+> Students' ratings of the Netflix Original *Dark* form a normal distribution with m = 6 and s = 1.
+
+::: {.incremental .highlight-last}
+-   What percentage of Students rate the Netflix Original *Dark* at least a 4?
+
+    -   2.2%
+:::
+
+## Standard Normal Distribution
+
+### Example 1:
+
+> Students' ratings of the Netflix Original *Dark* form a normal distribution with m = 6 and s = 1.
+
+::: {.incremental .highlight-last}
+-   What percentage of Students rate the Netflix Original *Dark* an 8 or lower?
+
+    -   97.6%
+:::
+
+## Z-scores
+
+### What does it do?
+
+A z-score tells you, in standard deviation units how far the x-value is from the mean.
+
+::: {.incremental .highlight-last}
+-   Z-scores are better than using raw SD,
+
+-   When the SD is a decimal, it is hard to find the exact point under the standard normal curve.
+:::
+
+## Z-scores
+
+### Rule of Thumb
+
+::: columns
+::: {.column width="50%"}
+![](images/bell_prop2.png){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+::: {.incremental .highlight-last}
+-   The distance from the mean to the 1 on this standard normal curve is equal to the SD.
+:::
+:::
+:::
+
+## Z-scores
+
+### Rule of Thumb
+
+::: columns
+::: {.column width="50%"}
+![](images/bell_prop2.png){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+::: {.incremental .highlight-last}
+-   The distance from the mean to the 1 on this standard normal curve is equal to z=1.
+:::
+:::
+:::
+
+## Z-scores:
+
+### Find: Z = 1 \| Z = -2 \| Z = 0.5
+
+![](images/bell_prop2.png)
+
+## Z-scores\]
+
+### What do they do!
+
+Z-scores re-express the original data points (the `x`'s) in a way that intuitively lets us know:
+
+::: {.incremental .highlight-last}
+-   How close the `x` is to the mean (AKA how much this particular participant is like the average person in the sample)
+
+-   Where it falls in the dispersion of the distribution (AKA how different this particular participant is from the majority of people in the sample)
+:::
+
+## Calculating
+
+### Z-scores
+
+::: {.incremental .highlight-last}
+-   Subtract the mean from each X value.
+
+-   Divide by the standard deviation.
+:::
+
+::: fragment
+::: callout-tip
+$$
+z = \frac{x-\bar{x}}{s}
+$$
+:::
+:::
+
+## Z-scores
+
+### Z-Scores are calculated by
+
+::: {.incremental .highlight-last}
+-   Centering the X values on the mean: When we center the mean (AKA mean-centering), we set the mean to 0.
+
+-   Dividing by the standard deviation
+
+-   When we divide by the SD, the space from the mean is expressed in standard deviations.
+:::
+
+## Z-scores
+
+### A Familiar Face: $\bar{x} = 20$
+
+
+
+
+```{r}
+library(dplyr)
+library(huxtable)
+
+tibble(
+  x = c(10,10,20,30,30),
+  `x-xbar` = x-mean(x),
+  `(x-xbar)^2` = (x-mean(x))^2
+) |> 
+hux() |> 
+theme_article()
+```
+
+
+
+
+## Z-scores
+
+### Formula in Action
+
+::: callout-tip
+$$z =\frac{x-\bar{x}}{s} =  \frac{20-10}{s}=\frac{-10}{s}$$
+:::
+
+::: callout-tip
+$$s^2 = \frac{\sum(x-\bar{x}^2)}{n-1} = \frac{400}{4} = 100 = \sqrt{100} = s$$
+:::
+
+## Z-scores
+
+
+
+
+```{r}
+tibble(
+  x = c(10,10,20,30,30),
+  `x-xbar` = x-mean(x),
+  `(x-xbar)^2` = (x-mean(x))^2,
+  z = (x-mean(x))/sd(x)
+)
+```
+
+
+
+
+## Z-scores
+
+::: {.incremental .highlight-last}
+-   We made the mean = 0: When you mean-center a distribution, you shift it along the number line.
+
+-   We made the SD = 1: When you divide a distribution by the SD, you shrink the distribution down.
+
+-   **BUT: The shape of the distribution remains the same.**
+:::
+
+## Z-scores
+
+::: {.incremental .highlight-last}
+-   Shift distribution along the number line.
+
+-   Shrink distribution down.
+
+-   **The shape of the distribution remains the same.**
+:::
+
+::: fragment
+
+
+
+```{r}
+#| fig-align: center
+library(ggplot2)
+library(patchwork)
+
+p1 <- 
+  tibble(
+  id = 1:5,
+  score = c(10,10,20,30,30)
+) |> 
+  ggplot(aes(score,id)) + 
+  geom_point(size = 3) + 
+  theme_minimal() + 
+  labs(x = "\nExam Score",
+       y = "Student\n")
+
+
+p2 <- 
+  tibble(
+    id = 1:5,
+    score = c(10,10,20,30,30),
+    `x-xbar` = score - mean(score)
+  ) |> 
+  ggplot(aes(`x-xbar`,id)) + 
+  geom_point(size = 3) + 
+  theme_minimal() + 
+  labs(x = "\nExam Score",
+       y = "Student\n")
+  
+  
+p3 <- 
+  tibble(
+  id =  1:5,
+  score = c(10,10,20,30,30),
+  z = (score-mean(score))/sd(score)
+) |> 
+  ggplot(aes(z,id)) + 
+  geom_point(size = 3) + 
+  theme_minimal() + 
+  labs(x = "\nExam Score",
+       y = "Student\n") +
+  scale_x_continuous(limits = c(-20,20))
+
+p1 + p2 + p3
+```
+
+
+
+:::
+
+## Z-Scores
+
+### Why Do We Care?
+
+::: {.incremental .highlight-last}
+-   A z-score tells me where my score falls in SD units.
+
+-   I can then look at this standard normal curve, and estimate what percentage of people did better or worse than me.
+:::
+
+## Z-Scores
+
+### Why Do We Care?
+
+> The mean score for Exam 1 was a 92 with a standard deviation of 3.
+
+-   Esmeralda scored an 86.
+
+-   What percent of the class scored better than Esmeralda?
+
+## Z-Scores
+
+### Why Do We Care?
+
+::: fragment
+$z=\frac{x-\bar{x}}{s} = \frac{86-92}{3} = -2$
+:::
+
+![](images/bell_prop.png)
+
+-   98% of the class did better than Esmeralda.
+
+## Z-Scores
+
+### The mean score for Exam 1 was a 92 with a standard deviation of 3.
+
+Jonas scored a 95.
+
+-   What percent of the class scored better than Jonas?
+
+::: fragment
+$$
+z = \frac{95-92}{3} = 1
+$$
+:::
+
+::: fragment
+-   16% scored higher than Jonas.
+:::
+

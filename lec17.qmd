@@ -580,13 +580,6 @@ memory_data_long <-
                       names_to = "Time",
                       values_to = "Memory")
 
-aov_ez(
-  "Participant",
-  "Memory",
-  memory_data_long, 
-  within = "Time",
-  anova_table = list(correction = "none")
-)
 
 aov(Memory ~ Time + Error(Participant), data = memory_data_long) |> 
   tidy() |> 
@@ -609,6 +602,12 @@ memory_data_long |>
     geom = "line",
     group = 1,
     fun.data = "mean_se",
+    color = "black"
+  ) + 
+    stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
     color = "black"
   ) + 
   geom_jitter(alpha = .2) + 
@@ -644,6 +643,29 @@ clinical_data_long <-
 aov(DV ~ Dosage + Error(Participant), data = clinical_data_long) |> 
   tidy() |> 
   gt()
+
+
+clinical_data_long |> 
+  ggplot(aes(Dosage,DV, color = Dosage)) + 
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.data = "mean_se",
+    color = "black"
+  ) + 
+    stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
+    color = "black"
+  ) + 
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    geom = "errorbar",
+    fun.data = "mean_se",
+    width = .2
+  ) + 
+  theme_minimal()
 ```
 
 ## 3. Behavioral Therapy Progress
@@ -672,8 +694,9 @@ aov_ez(
   "DV",
   therapy_data_long, 
   within = "Treatment_Group",
-  anova_table = list(correction = "none")
-)
+  anova_table = list(correction = "none"),
+  return = "nice"
+) |> gt()
 
 therapy_data_long |> 
   ggplot(aes(Treatment_Group,DV,color = Treatment_Group)) +
@@ -682,6 +705,12 @@ therapy_data_long |>
     fun.data = "mean_se",
     geom = "errorbar",
     width = .2
+  ) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
+    color = "black"
   ) + 
   theme_minimal()
 ```
@@ -743,7 +772,7 @@ stress_data_long <-
                       names_to = "Time",
                       values_to = "Stress")
 
-aov(Stress ~ Time + Error(Participant), data = stress_data_long) |> 
+aov(Stress ~ Time + Error(Participant), data = stress_data_long) |>
   tidy() |> 
   gt() |> 
   fmt_auto()

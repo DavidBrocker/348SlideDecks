@@ -1,0 +1,878 @@
+---
+title: "Within Subjects ANOVA"
+subtitle: "Lecture 17"
+author: "Dave Brocker"
+footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+institute: "Farmingdale State College"
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: custom.scss
+    mermaid: 
+      theme: dark
+    scrollable: true
+    incremental: true   
+    touch: true
+    chalkboard: true
+    lightbox: true
+    code-fold: true
+---
+
+
+
+
+# AnOVA
+
+ANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another:
+
+-   Independent variable: Categorical / Nominal
+
+-   Dependent variable: Continuous
+
+## 2-way ANOVA
+
+
+
+
+```{r}
+library(gt)
+library(dplyr)
+library(ggplot2)
+library(afex)
+library(broom)
+
+# Create a 2x2 grid structure for visualization
+matrix_data <- expand.grid(
+  Coffee = c("Yes", "No"),
+  TV_Show = c("Yes", "No")
+) %>%
+  mutate(
+    x = as.numeric(Coffee == "Yes"),
+    y = as.numeric(TV_Show == "Yes"),
+    fill_color = c("lightblue", "lightcoral", "lightgreen", "khaki") # Assign colors
+  )
+
+# Visualize the 2x2 matrix
+fac_mat <- 
+  ggplot(matrix_data, aes(xmin = x - 0.5, xmax = x + 0.5, ymin = y - 0.5, ymax = y + 0.5)) +
+  geom_rect(aes(fill = fill_color), color = "black", alpha = 0.8) + # Draw rectangles
+  scale_fill_identity() + # Use fill_color directly
+  labs(
+    title = "2x2 Factorial Matrix",
+    x = "Coffee", y = "TV Show"
+  ) +
+  scale_x_continuous(breaks = c(0, 1), labels = c("No", "Yes"), limits = c(-0.5, 1.5)) +
+  scale_y_continuous(breaks = c(0, 1), labels = c("No", "Yes"), limits = c(-0.5, 1.5)) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 14),
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5)
+  )
+
+fac_mat
+```
+
+
+
+
+## 2-way ANOVA
+
+
+
+
+```{r}
+fac_mat + 
+  annotate(
+    "text", x = 1, y = 1, label = "Coffee\nJeopardy"
+  ) +
+    annotate(
+    "text", x = 0, y = 1, label = "Coffee\nDark"
+  ) +
+    annotate(
+    "text", x = 0, y = 0, label = "Decaf\nDark"
+  ) +
+    annotate(
+    "text", x = 1, y = 0, label = "Decaf\nJeopardy"
+  ) 
+
+```
+
+
+
+
+## 2-way ANOVA
+
+
+
+
+```{r}
+tribble(
+~Source, ~SS, ~df, ~MS, ~F,
+"Coffee",432, "","","",
+"Dark",480,"","","",
+"Coffee x Dark",576,"","","",
+"Error",14208,"","",""
+) |> 
+  gt() |> 
+    cols_align(align = "center",
+             columns = SS:F)
+```
+
+
+
+
+## 2-way ANOVA
+
+
+
+
+```{r}
+tribble(
+~Source, ~SS, ~df, ~MS, ~F, ~p,
+"Coffee",432, "1","432","9",".05",
+"Dark",480,"1","480","10",".02",
+"Coffee x Dark",576,"1","576","12",".001",
+"Error",14208,"296","48","",""
+) |> 
+  gt() |> 
+    cols_align(align = "center",
+             columns = SS:p) |> 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
+
+```
+
+
+
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable:
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable: Time (before and after)
+
+## Within subjects ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable: Time (before and after)
+
+-   Dependent variable:
+
+## Within subjects ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   Independent variable: Time (before and after)
+
+-   Dependent variable: Enjoyment of statistics
+
+## ANOVA
+
+-   Between subjects ANOVA compares means **BETWEEN** groups to determine if they differ significantly from one another.
+
+-   Within subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference **WITHIN** participants over time.
+
+## Within subjects ANOVA
+
+-   Within subjects ANOVA examines differences within participants over time.
+
+-   Within subjects ANOVA is also known as Repeated Measures ANOVA, because it looks at one measure repeated over time.
+
+## Within subjects ANOVA
+
+The independent variable is time.
+
+-   Before intervention: baseline or pre-test
+
+-   After intervention: post-test
+
+## Within Subjects ANOVA
+
+-   Within subjects ANOVA can look at 2 or more time points.
+
+## WITHIN Subjects ANOVA
+
+
+
+
+```{r}
+# Generate data for two normal distributions
+x <- seq(-6, 6, length=100)
+null_dist <- dnorm(x, mean = 0, sd = 1)
+alt_dist <- dnorm(x, mean = 2, sd = 1)
+
+data <- data.frame(
+  x = rep(x, 2),
+  y = c(null_dist, alt_dist),
+  hypothesis = factor(rep(c("Null Hypothesis", "Alternative Hypothesis"), each=length(x)))
+)
+
+# Create the plot
+
+plt <- 
+  ggplot(data, aes(x = x, y = y, 
+                 lty = rev(hypothesis))) +
+    geom_line(aes(color = "purple")) +
+  theme_linedraw() + 
+  labs(
+    x = "",
+    y = "",
+    lty = "Hypotheses"
+  ) + 
+  theme(
+    panel.grid = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(.2,.5),
+    legend.background = element_rect(color = "black")
+  ) + 
+  scale_color_identity()
+
+plt
+
+```
+
+
+
+
+## Between subjects ANOVA
+
+In between subjects ANOVA, we analyze two types of variance:
+
+-   **Between Group variance**: How the data varies between the groups
+
+-   **Error variance**: How the data varies across all participants
+
+## Between subjects ANOVA
+
+-   **Between Group variance**: How the data varies between the groups
+
+-   **Error variance**: How the data varies across all participants
+
+## WITHIN subjects ANOVA
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   Over time
+
+-   Error variance: How the data varies across all participants
+
+-   Per participant
+
+## WITHIN subjects ANOVA Example
+
+-   In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   **Over time**: Mood before Dark is more similar to mood before Dark than it is to mood after the Dark
+
+## WITHIN subjects ANOVA
+
+## WITHIN subjects ANOVA Example
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   **Over time**: Mood before the Dark is more similar to mood before Dark than it is to mood after the Dark
+
+-   **Error Variance**: Mood will have natural variance across participants and time.
+
+## WITHIN subjects ANOVA Example
+
+## WITHIN subjects ANOVA Example
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   **Over time**: Mood before Dark is more similar to mood before Dark than it is to mood after Dark
+
+-   **Error Variance**: Mood will have natural variance across participants.
+
+-   **Per participant**: Each participant's scores will be more like their other scores than they are like the scores of another participant.
+
+## WITHIN subjects ANOVA Example
+
+## WITHIN subjects ANOVA
+
+In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
+
+-   Time
+
+-   Error
+
+-   Subjects
+
+## WITHIN subjects ANOVA
+
+
+
+
+```{mermaid}
+
+flowchart LR
+      A(Total Variability) --> B(Time Variability)
+      A --> C(Within-Groups Variability)
+      C --> D(Subject Variability)
+      C --> E(Error Variability)
+
+```
+
+
+
+
+# Calculating F
+
+## WITHIN subjects ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+$F = \frac{MS_{BG}}{MS_{Error}}$
+
+## WITHIN subjects ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+$F = \frac{\color{red}{MS_{BG}}}{MS_{Error}}$
+
+$MS_{BG} = \frac{SS_{BG}}{df_{BG}}$
+
+## WITHIN subjects ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+$F = \frac{MS_{BG}}{\color{red}{MS_{Error}}}$
+
+$MS_{Error} = \frac{SS_{Error}}{df_{Error}}$
+
+## WITHIN subjects ANOVA
+
+We want measure 2 sources of variance:
+
+-   $SS_{Time}$: this is just like the SS from between subjects ANOVA
+
+-   $SS_{Error}$: this is harder to calculate in within subjects ANOVA, because of the subject variance.
+
+## WITHIN subjects ANOVA
+
+## WITHIN subjects ANOVA
+
+$SS_{WG} = SS_{Subjects} + SS_{Error}$
+
+## WITHIN subjects ANOVA
+
+$SS_{WG} = SS_{Subjects} + \color{red}{SS_{Error}}$
+
+$SS_{Error} = SS_{WG} - SS_{Subjects}$
+
+## Calculating means squared (MS)
+
+-   We calculate a SS for the variance between the times points ($SS_{Time}$).
+
+-   This is just like the $SS_{BG}$ from between subjects ANOVA
+
+-   We calculate a SS for the within group variance ($SS_{WG}$).
+
+-   We calculate a SS for the variance by person ($SS_{Subject}$).
+
+## Calculating means squared (MS)
+
+-   We calculate a SS for the variance between the times points (SSTime).
+
+-   To find $SS_{Error}$, we subtract $SS_{Subjects}$ from $SS_{WG}$.
+
+## Calculating means squared (MS)
+
+-   $MS_{Time} = \frac{SS_{Time}} {df_{Time}}$
+
+-   $MS_{Error} = \frac{(SS_{WG} - SS_{Subject})}{df_{Error}}$
+
+## Degrees of freedom
+
+-   Time $(MS_{Time}) = k - 1$
+
+-   Error $(MS_{Error}) = (n - 1) \times (k - 1)$
+
+    -   \*k is the number of time points
+
+## Calculating means squared (MS)
+
+-   $MS_{Time} = \frac{SS_{Time}}{df_{Time}} = MS_{Time} = \frac{SS_{Time}}{(k - 1)}$
+
+-   $MS_{Error} = \frac{(SS_{WG} - SS_{Subject})} {df_{Error}} = MS_{Error}\ = \frac{(SS_{WG}\ - SS_{Subject})}{(n-1)\times(k-1)}$
+
+## WITHIN subjects ANOVA
+
+The F ratio in within subjects ANOVA:
+
+$F = \frac{MS_{Time}}{MS_{Error}}$
+
+## ANOVA
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+-   What's k?
+
+-   What's n?
+
+## Practice
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+
+
+
+```{r}
+tribble(
+~Source, ~SS, ~df, ~MS, ~F,
+"Time","49", "","","",
+"Within Group","912","","","",
+"Subjects","219","","","",
+"Error","","","",""
+) |> 
+  gt() |> 
+    cols_align(align = "center",
+             columns = SS:F)
+```
+
+
+
+
+## Practice
+
+> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+
+
+
+
+```{r}
+tribble(
+~Source, ~SS, ~df, ~MS, ~F,
+"Time","49", "1","49",".053",
+"Within Group","912","198","","",
+"Subjects","219","99","2.2","",
+"Error","912","","",""
+) |> 
+  gt() |> 
+    cols_align(align = "center",
+             columns = SS:F)
+```
+
+
+
+
+## ANOVA
+
+Dr. Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.
+
+-   What's k?
+
+-   What's n?
+
+# Practice
+
+## ANOVA
+
+Prof. Brocker measures the death anxiety of 500 middle-aged men. He then shows them images from anti-aging advertisements featuring young men. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.
+
+-   What's k?
+
+-   What's n?
+
+# Practice
+
+## Interpreting f
+
+The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
+
+-   $MS_{Time} = \text{change over time} + MS_{Error}$
+-   $MS_{Time} = 0 + MS_{Error}$
+-   $MS_{Time} = MS_{Error}$
+-   $F = 1$
+
+## Interpreting f
+
+When F \<= 1, it's not likely to be significant.
+
+## Interpreting f
+
+The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
+
+-   $MS_{Time} = \text{change over time} + MS_{Error}$
+
+-   $MS_{Time} = \text{effect} + MS_{Error}$
+
+-   $F > 1$
+
+## Hypothesis testing: ANOVA
+
+-   F \< = 1 ---\> Fail to reject the Null Hypothesis
+
+-   F \> 1 ---\> Refer to *p*-value ---\> Reject the Null Hypothesis
+
+## How many F's do you Get?
+
+-   One-way Between Subjects?
+
+    -   1 for 1 IV
+
+-   Two-way Between Subjects with a 2x2 design?
+
+    -   3 (One for each IV and one for the Interaction)
+
+-   Within Subjects?
+
+    -   1
+
+# Reporting F
+
+## Reporting F
+
+If asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:
+
+-   Reject H~0~, or
+
+-   Fail to Reject H~0~
+
+Reporting F
+
+If asked to report findings in general or for publication, you need to report:
+
+-   *F(df time, df error)* = *F-value, p-value*
+
+## Reporting F
+
+> Mood after watching the Dark was not significantly different from mood before watching Dark, *F* (1, 499) = 1.02, *p* = 0.07.
+
+> There was no significant change in mood over time, *F* (1, 499) = 1.02, *p* = 0.07.
+
+## Reporting F
+
+> Participants' mood was significantly better after watching the Dark compared to before watching it, *F*(1, 499) = 7.12, *p* \< 0.05.
+
+## Reporting F
+
+If asked to report findings in general or for publication, you need to report:
+
+-   *F(df time, df error) = F-value, p-value*
+
+-   **If the results are significant, we have to also report the means and standard deviations for each time point.**
+
+## Reporting F
+
+> Participants' anxiety differed significant across time, *F*(2, 198) = 3.744, p = 0.25. Anxiety was highest at pre-test (M= 19.58, s = 0.643). Anxiety was lowest at baseline (M , s ). Anxiety at post test was M= , s.
+
+## Practice
+
+-   Was anxiety just before the Stats Exam significantly higher than baseline anxiety?
+
+## Data Manipulation
+
+When collected, data can be in either wide or long format.
+
+Below are the first five rows of the same dataset:
+
+
+
+
+```{r}
+data.frame(
+  Participant = factor(1:5),
+  Immediate = rnorm(5, mean = 8, sd = 1.5),
+  After24Hours = rnorm(5, mean = 6, sd = 1.5),
+  After1Week = rnorm(5, mean = 4, sd = 1.5)
+) |> 
+  gt() |> 
+  tab_header(title = "Wide Data",
+             subtitle = "Each row represents an indivdual participant")
+
+
+data.frame(
+  Participant = factor(1:5),
+  Immediate = rnorm(5, mean = 8, sd = 1.5),
+  Day = rnorm(5, mean = 6, sd = 1.5),
+  Week = rnorm(5, mean = 4, sd = 1.5)
+) |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "Time",
+                      values_to = "Stress") |> 
+  gt() |> 
+  fmt_auto() |> 
+  tab_header(title = "Long Data",
+             subtitle = "Each row represents an indivdual participant's score on each level of the treatment")
+```
+
+
+
+
+# More Examples!
+
+## 1. Memory Recall Study
+
+
+
+
+```{r}
+set.seed(100)
+
+# Memory Recall Study
+memory_data <- data.frame(
+  Participant = factor(1:30),
+  Immediate = rnorm(30, mean = 8, sd = 1.5),
+  After24Hours = rnorm(30, mean = 6, sd = 1.5),
+  After1Week = rnorm(30, mean = 4, sd = 1.5)
+)
+
+# Make Data Longer
+memory_data_long <- 
+  memory_data |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "Time",
+                      values_to = "Memory")
+
+
+aov(Memory ~ Time + Error(Participant), data = memory_data_long) |> 
+  tidy() |> 
+  mutate(
+    Source = term,
+    SS = sumsq,
+    MS = meansq,
+    `F` = ifelse(is.na(statistic),"--",statistic |> round(3)),
+    p = ifelse(p.value >.05,"<.05",p.value),
+    p = ifelse(is.na(p),"--",p)
+  ) |> 
+  select(Source, df, SS, MS, `F`, p) |> 
+  gt() |> 
+  fmt_auto()
+
+
+memory_data_long |> 
+  ggplot(aes(Time,Memory, color = Time)) + 
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.data = "mean_se",
+    color = "black"
+  ) + 
+    stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
+    color = "black"
+  ) + 
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    geom = "errorbar",
+    fun.data = "mean_se",
+    width = .2
+  ) + 
+  theme_minimal()
+```
+
+
+
+
+## 2. Clinical Trial
+
+
+
+
+```{r}
+set.seed(100)
+
+# Clinical Trial Study
+clinical_data <- data.frame(
+  Participant = factor(1:30),
+  LowDose = rnorm(30, mean = 5, sd = 1),
+  MediumDose = rnorm(30, mean = 6.5, sd = 1),
+  HighDose = rnorm(30, mean = 8, sd = 1)
+)
+
+clinical_data_long <- 
+  clinical_data |> 
+  tidyr::pivot_longer(
+    cols = !Participant,
+    names_to = "Dosage",
+    values_to = "DV"
+  )
+
+aov(DV ~ Dosage + Error(Participant), data = clinical_data_long) |> 
+  tidy() |> 
+  gt()
+
+
+clinical_data_long |> 
+  ggplot(aes(Dosage,DV, color = Dosage)) + 
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.data = "mean_se",
+    color = "black"
+  ) + 
+    stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
+    color = "black"
+  ) + 
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    geom = "errorbar",
+    fun.data = "mean_se",
+    width = .2
+  ) + 
+  theme_minimal()
+```
+
+
+
+
+## 3. Behavioral Therapy Progress
+
+
+
+
+```{r}
+set.seed(100)
+
+# Behavioral Therapy Study
+therapy_data <- data.frame(
+  Participant = factor(1:30),
+  Baseline = rnorm(30, mean = 10, sd = 2),
+  MidTreatment = rnorm(30, mean = 7, sd = 2),
+  PostTreatment = rnorm(30, mean = 5, sd = 2)
+)
+
+therapy_data_long <- 
+  therapy_data |> 
+  tidyr::pivot_longer(
+    cols = !Participant,
+    names_to = "Treatment_Group",
+    values_to = "DV"
+  )
+
+aov_ez(
+  "Participant",
+  "DV",
+  therapy_data_long, 
+  within = "Treatment_Group",
+  anova_table = list(correction = "none"),
+  return = "nice"
+) |> gt()
+
+therapy_data_long |> 
+  ggplot(aes(Treatment_Group,DV,color = Treatment_Group)) +
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1,
+    color = "black"
+  ) + 
+  theme_minimal()
+```
+
+
+
+
+## 4. Consumer Product Ratings
+
+
+
+
+```{r}
+set.seed(100)
+
+# Consumer Product Study
+product_data <- data.frame(
+  Participant = factor(1:30),
+  ProductA = rnorm(30, mean = 6, sd = 1),
+  ProductB = rnorm(30, mean = 7, sd = 1),
+  ProductC = rnorm(30, mean = 5, sd = 1)
+)
+
+product_data_long <- 
+  product_data |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "products",
+                      values_to = "ratings")
+
+aov(ratings ~ products + Error(Participant), data = product_data_long) |>
+  tidy() |> 
+  gt()
+
+product_data_long |> 
+  ggplot(aes(products,ratings,fill = products)) + 
+  stat_summary(
+    fun = "mean",
+    geom = "bar",
+    width = .5
+  ) +
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  theme_minimal()
+```
+
+
+
+
+## 5. Physiological Stress Study
+
+
+
+
+```{r}
+set.seed(100)
+
+# Physiological Stress Study
+stress_data <- data.frame(
+  Participant = factor(1:30),
+  Rest = rnorm(30, mean = 50, sd = 5),
+  Task = rnorm(30, mean = 70, sd = 5),
+  Recovery = rnorm(30, mean = 55, sd = 5)
+)
+
+stress_data_long <- 
+  stress_data |> 
+  tidyr::pivot_longer(cols = !Participant,
+                      names_to = "Time",
+                      values_to = "Stress")
+
+aov(Stress ~ Time + Error(Participant), data = stress_data_long) |>
+  tidy() |> 
+  gt() |> 
+  fmt_auto()
+
+stress_data_long |> 
+  ggplot(aes(Time,Stress,color = Time)) + 
+  geom_jitter(alpha = .2) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "line",
+    group = 1) + 
+  theme_minimal()
+```
+
