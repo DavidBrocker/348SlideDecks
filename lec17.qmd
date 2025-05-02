@@ -19,140 +19,132 @@ format:
     code-fold: true
 ---
 
-# AnOVA
+## What is ANOVA?
 
-ANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another:
+ANOVA (Analysis of Variance), like t-tests, compares the means of different groups to determine if they differ significantly from one another:
 
--   Independent variable: Categorical / Nominal
+- **Independent variable**: Categorical / Nominal  
 
--   Dependent variable: Continuous
+- **Dependent variable**: Continuous
 
-## 2-way ANOVA
+---
+
+# When to Use Repeated Measures ANOVA
+
+Use Repeated Measures ANOVA when:
+
+- You have the **same participants measured more than once** (e.g., pre-test/post-test).
+
+- You're interested in **changes over time** or **under different conditions**.
+
+- Example: Testing whether students' enjoyment of statistics improves after receiving lollipops for 2 weeks.
+
+---
+
+# Between vs. Within Subjects ANOVA
+
+**Between-Subjects ANOVA:**
+
+- Compares means **between groups** (e.g., Group A vs. Group B).
+
+- Error comes from individual differences **between people**.
+
+**Within-Subjects (Repeated Measures) ANOVA:**
+
+- Compares means **within the same participants** over time.
+
+- Controls for individual differences.
+
+
+# 🍕 Pizza and Productivity Study
+
+## A Repeated-Measures Design
+
+- Objective: Test whether productivity changes across **three timepoints**:
+  1. Before lunch
+  2. 10 minutes after pizza
+  3. 1 hour after pizza
+
+- Same participants measured at each timepoint
+- DV = Number of emails written in 10 minutes
+
+> What type of test compares means across more than two repeated timepoints?
+
+
+# 📊 Visualizing the Data
 
 ```{r}
-library(gt)
-library(dplyr)
-library(ggplot2)
-library(afex)
-library(broom)
+library(tidyverse)
 
-# Create a 2x2 grid structure for visualization
-matrix_data <- expand.grid(
-  Coffee = c("Yes", "No"),
-  TV_Show = c("Yes", "No")
-) %>%
-  mutate(
-    x = as.numeric(Coffee == "Yes"),
-    y = as.numeric(TV_Show == "Yes"),
-    fill_color = c("lightblue", "lightcoral", "lightgreen", "khaki") # Assign colors
+set.seed(123)
+data <- tibble(
+  id = rep(1:30, each = 3),
+  time = rep(c("Pre", "10minPost", "1hrPost"), times = 30),
+  productivity = c(
+    rnorm(30, mean = 5, sd = 1),
+    rnorm(30, mean = 7, sd = 1.5),
+    rnorm(30, mean = 4.5, sd = 1)
   )
+)
 
-# Visualize the 2x2 matrix
-fac_mat <- 
-  ggplot(matrix_data, aes(xmin = x - 0.5, xmax = x + 0.5, ymin = y - 0.5, ymax = y + 0.5)) +
-  geom_rect(aes(fill = fill_color), color = "black", alpha = 0.8) + # Draw rectangles
-  scale_fill_identity() + # Use fill_color directly
-  labs(
-    title = "2x2 Factorial Matrix",
-    x = "Coffee", y = "TV Show"
-  ) +
-  scale_x_continuous(breaks = c(0, 1), labels = c("No", "Yes"), limits = c(-0.5, 1.5)) +
-  scale_y_continuous(breaks = c(0, 1), labels = c("No", "Yes"), limits = c(-0.5, 1.5)) +
-  theme_minimal() +
-  theme(
-    axis.text = element_text(size = 12),
-    axis.title = element_text(size = 14),
-    plot.title = element_text(size = 16, face = "bold", hjust = 0.5)
-  )
-
-fac_mat
+data %>%
+  ggplot(aes(x = time, y = productivity, group = id)) +
+  geom_line(alpha = 0.3) +
+  stat_summary(aes(group = 1), fun = mean, geom = "line", color = "red", size = 1.5) +
+  labs(title = "Individual and Mean Productivity Over Time") +
+  theme_minimal()
 ```
 
-## 2-way ANOVA
+---
 
-```{r}
-fac_mat + 
-  annotate(
-    "text", x = 1, y = 1, label = "Coffee\nJeopardy"
-  ) +
-    annotate(
-    "text", x = 0, y = 1, label = "Coffee\nDark"
-  ) +
-    annotate(
-    "text", x = 0, y = 0, label = "Decaf\nDark"
-  ) +
-    annotate(
-    "text", x = 1, y = 0, label = "Decaf\nJeopardy"
-  ) 
+# 🧪 Why Repeated-Measures ANOVA?
 
-```
+- Can't use multiple paired-samples t-tests (increases Type I error)
+- Repeated-Measures ANOVA allows us to:
+  - Compare within-subject changes across time
+  - Control for individual variability
+  - Test for an overall **time effect**
 
-## 2-way ANOVA
+---
 
-```{r}
-tribble(
-~Source, ~SS, ~df, ~MS, ~F,
-"Coffee",432, "","","",
-"Dark",480,"","","",
-"Coffee x Dark",576,"","","",
-"Error",14208,"","",""
-) |> 
-  gt() |> 
-    cols_align(align = "center",
-             columns = SS:F)
-```
+# 📐 Assumptions of RM ANOVA
 
-## 2-way ANOVA
+- **Normality** of differences
+- **Sphericity**: Equal variances of pairwise differences
+  - Test: **Mauchly’s Test**
+- Violation → Use **Greenhouse-Geisser correction**
 
-```{r}
-tribble(
-~Source, ~SS, ~df, ~MS, ~F, ~p,
-"Coffee",432, "1","432","9",".05",
-"Dark",480,"1","480","10",".02",
-"Coffee x Dark",576,"1","576","12",".001",
-"Error",14208,"296","48","",""
-) |> 
-  gt() |> 
-    cols_align(align = "center",
-             columns = SS:p) |> 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_column_labels()
-  )
+> Always check sphericity if more than two levels of the within-subject factor
 
-```
+---
 
-## ANOVA
+# 🧮 Running the Analysis in R
 
-> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
 
-## ANOVA
+---
 
-> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+# ✅ Interpretation
 
--   Independent variable:
+**Example output:**
 
-## ANOVA
+- F(2, 58) = 12.3, p < .001
+- → Significant effect of time on productivity
 
-> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+**Conclusion**: Productivity changes significantly across timepoints
 
--   Independent variable: Time (before and after)
+> What would be your next step?
 
-## Within subjects ANOVA
+---
 
-> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
+# 🔍 Follow-Up: Post-hoc Comparisons
 
--   Independent variable: Time (before and after)
+- Run paired t-tests with **Bonferroni correction**
+- Which timepoints differ?
+  - Pre vs. 10minPost
+  - 10minPost vs. 1hrPost
+  - Pre vs. 1hrPost
 
--   Dependent variable:
-
-## Within subjects ANOVA
-
-> Prof. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.
-
--   Independent variable: Time (before and after)
-
--   Dependent variable: Enjoyment of statistics
+---
 
 ## ANOVA
 
@@ -181,6 +173,13 @@ The independent variable is time.
 ## WITHIN Subjects ANOVA
 
 ```{r}
+library(ggplot2)
+library(dplyr)
+library(gt)
+library(gtsummary)
+library(broom)
+library(afex)
+
 # Generate data for two normal distributions
 x <- seq(-6, 6, length=100)
 null_dist <- dnorm(x, mean = 0, sd = 1)
