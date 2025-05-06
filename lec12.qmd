@@ -1,8 +1,8 @@
 ---
-title: "One-Sample T-Test"
+title: "Analysis of Variance"
 subtitle: "Lecture 12"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢"
+footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
 institute: "Farmingdale State College"
 format: 
   revealjs:
@@ -21,182 +21,401 @@ format:
          - dplyr
 revealjs-plugins:
   - drop
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-# Introduction to Comparing Means
+## Analysis of Variance
 
-## Why Compare Means?
-- We often want to test whether a sample mean differs from a known population mean.
-- The **one-sample t-test** helps determine if the sample mean is significantly different from the hypothesized population mean.
-- Example scenarios:
-  - Does the average exam score in a class differ from a national average of 75?
-  - Do people’s reaction times differ from a published standard of 250ms?
+### ANOVA
 
-## Assumptions of the One-Sample t-Test
-1. The data are **continuous** (interval or ratio scale).
-2. The sample is **randomly selected**.
-3. The data are **normally distributed** (or the sample size is large enough for the Central Limit Theorem to apply).
+-   ANOVA, like t-tests, compares the means of different groups to
+    determine if they differ significantly from one another.
 
-## The One-Sample t-Test Formula
+## T-tests
 
-The test statistic is calculated as:
+-   IV [**must be**]{.underline} what two things?
 
-$$ t = \frac{\bar{X} - \mu}{s / \sqrt{n}} $$
+-   DV [**must be**]{.underline} what one thing?
 
-Where:
+## T-tests
 
-- $\bar{X}$ = sample mean
+-   IV [**must be**]{.underline} nominal and have only 2 categories
 
-- $\mu$ = population mean (null hypothesis value)
+-   DV [**must be**]{.underline} continuous
 
-- $s$ = sample standard deviation
+## AnOVA
 
-- $n$ = sample size
+ANOVA, like t-tests, compares the means of different groups to determine
+if they differ significantly from one another.
 
-# Example: Exam Scores
+-   ANOVA can examine independent variables with [**more than 2
+    groups**]{.underline}.
 
-## Hypothesis Testing Steps
-1. **Set Hypotheses:**
-   - $H_0$: The average exam score is 75 ($\mu = 75$).
-   - $H_A$: The average exam score is **not** 75 ($\mu \neq 75$).
-2. **Collect Sample Data:**
-   - Sample size: $n = 20$
-   - Sample mean: $\bar{X} = 78$
-   - Sample standard deviation: $s = 5$
-   
-## Hypothesis Testing Steps
-3. **Compute the t-Statistic:**
+-   ANOVA can also be used for just 2 groups.
 
-$$ t = \frac{78 - 75}{5 / \sqrt{20}} = \frac{3}{1.118} = 2.68 $$
+-   It's more robust than t-tests.
 
-4. **Compare to Critical Value:**
-   - Using a $\alpha = 0.05$ level and df = 19, critical $t_{.025,19} = \pm 2.093$.
-   - Since $2.68 > 2.093$, we reject $H_0$.
+## ANOVA
 
-## Reporting Results
-APA-style:
+## Sampling Theory
 
-> A one-sample t-test was conducted to compare exam scores to the national average of 75. Results showed a significant difference, **t(19) = 2.68, p < .05**, indicating that students scored significantly higher than the national average.
+We set the critical value so that 5% of the null distribution's area is
+to the right of it.
 
-# Interpreting Results
-- A **significant** result ($p < .05$) suggests that the sample mean is different from the population mean.
-- A **non-significant** result ($p > .05$) means we fail to reject $H_0$ (no evidence of a difference).
+## ANOVA
 
-# Visualizing Data
+There are 3 types of ANOVA:
 
-## Sample Summary Table
+-   Between subjects
 
-| Measure        | Value |
-|---------------|-------|
-| Sample Mean   | 78    |
-| Population Mean | 75    |
-| Sample SD     | 5     |
-| Sample Size   | 20    |
-| t-Statistic   | 2.68  |
-| p-Value       | 0.014 |
+-   Within subjects (repeated measures ANOVA)
 
-## Boxplot Example
+-   Mixed designs (between and within together)
+
+## Between subjects ANOVA
+
+> The experimental group drinks caffeinated coffee. The placebo group
+> drinks decaf. The control group drinks water. I ask all `3` groups to
+> complete a survey to measure their happiness on a scale of `1` to
+> `10`.
+
+-   The experimental group has a mean happiness score = `8`
+
+-   The placebo group mean happiness score = `6`
+
+-   The control group mean happiness score = `5`
+
+-   Is the group that drank coffee significantly happier than the other
+    groups?
+
+## Between subjects ANOVA
+
+-   If it's all about the means, why is it called Analysis of Variance?
+
+## Between subjects ANOVA
+
+-   To compare the means, we are analyzing two types of variance:
+
+-   Variance among all of the scores *(within group variance)*
+
+-   Variance *between the groups (between group variance).*
+
+## Between subjects ANOVA
+
+Is the variance between the green, red, and blue dots greater than the
+variance across all of the dots?
+
 ```{r}
+library(dplyr)
+library(gt)
+library(gtsummary)
 library(ggplot2)
-data <- data.frame(Scores = c(72, 74, 76, 78, 80, 81, 77, 79, 78, 76,
-                             80, 82, 74, 75, 78, 77, 76, 79, 80, 78))
-ggplot(data, aes(y = Scores)) +
-  geom_boxplot(fill = "lightblue", color = "black") +
-  geom_hline(yintercept = 78, lty = "dashed", color = "red") +
-  theme_minimal() +
-  ggtitle("Exam Scores Distribution") + 
-  annotate("text", x = 1.2, y = median(data$Scores), 
-           label = "Median", hjust = 0, color = "blue") +
+cof <- 
+  tibble(
+  condition = 
+    rep(c("Coffee","Placebo","Control"), 
+        each = 10),
+  score = c(rnorm(10,7.5,1),
+            rnorm(10,5,1),
+            rnorm(10,5,2))
+  ) 
+cof |> 
+    tbl_summary(
+      by = "condition",
+      statistic = list(all_continuous() ~ c("{mean}({sd})"))
+      ) 
 
-  # Annotate IQR (Box)
-  annotate("text", x = 1.2, y = quantile(data$Scores, 3/4), 
-           label = "Q3 (75th percentile)", hjust = 0, color = "red") +
-  annotate("text", x = 1.2, y = quantile(data$Scores, 1/4), 
-           label = "Q1 (25th percentile)", hjust = 0, color = "red") +
-  
-  # Annotate Whiskers
-  annotate("text", x = 0.8, y = max(data$Scores), 
-           label = "Max (Upper Whisker)", hjust = 1, color = "black") +
-  annotate("text", x = 0.8, y = min(data$Scores), 
-           label = "Min (Lower Whisker)", hjust = 1, color = "black")
+cof |> 
+  ggplot(aes(condition, score, color = condition)) + 
+  geom_jitter(alpha = .25)  +
+    stat_summary(
+    fun.data = "mean_se",
+    aes(group = 1),
+    geom = "line",
+    color = "black"
+  ) +
+    stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) + 
+  theme_minimal()
 
 ```
 
-## 📝 **Example 1: Exam Scores vs. National Average**  
+## The F Statistic
 
-### **Scenario**  
-A professor wants to test if students in their class scored **differently** from the national average of 75 on an exam. A sample of **25 students** has a mean score of **78** with a standard deviation of **10**.  
+-   ANOVA produces what we call the F statistic.
 
-### **Hypotheses**  
-- **Null Hypothesis (H₀)**: \( \mu = 75 \) (no difference)  
-- **Alternative Hypothesis (H₁)**: \( \mu \neq 75 \) (scores differ)  
+-   Why do we call it F?
 
-### **Calculation**  
-Using the one-sample t-test formula:
+## Between subjects anova
 
-\[
-t = \frac{\bar{X} - \mu}{s / \sqrt{n}}
-\]
+## Between subjects anova
 
-Substituting values:
+## Between subjects anova
 
-\[
-t = \frac{78 - 75}{10 / \sqrt{25}} = \frac{3}{2} = 1.5
-\]
+Between subjects anova
 
-For **df = 24**, the critical value at **α = .05** (two-tailed) is **±2.064**. Since **1.5 < 2.064**, we **fail to reject \(H_0\)**.
+Between subjects anova
 
-### **APA Reporting**  
-*A one-sample t-test was conducted to determine whether students’ exam scores differed from the national average (M = 75). Results were not statistically significant, \( t(24) = 1.5, p > .05 \), indicating that students performed similarly to the national average.*  
+Between subjects anova
 
----
+Between subjects anova
 
-## 📝 **Example 2: Daily Coffee Consumption**  
+## Calculating F
 
-### **Scenario**  
-A coffee company claims that people drink an average of **3 cups** of coffee per day. A researcher samples **16 individuals**, finding a **mean of 2.5 cups** and a **standard deviation of 1 cup**.  
+-   Calculating the variance
 
-### **Hypotheses**  
-- **Null Hypothesis (H₀)**: \( \mu = 3 \)  
-- **Alternative Hypothesis (H₁)**: \( \mu < 3 \) (people drink less)  
+-   ANOVA looks at variance. How do we calculate the Variance?
 
-### **Calculation**  
-\[
-t = \frac{2.5 - 3}{1 / \sqrt{16}} = \frac{-0.5}{0.25} = -2.0
-\]
+## Calculating the variance
 
-For **df = 15**, the critical t-value for a **one-tailed test** at **α = .05** is **-1.753**. Since **-2.0 < -1.753**, we **reject \(H_0\)**.
+ANOVA looks at variance. To calculate the Variance:
 
-### **APA Reporting**  
-*A one-sample t-test was conducted to test whether daily coffee consumption was lower than the reported average of 3 cups. Results showed a significant difference, \( t(15) = -2.0, p < .05 \), suggesting that people consume significantly fewer cups of coffee per day than reported.*  
+-   Calculate the mean.
 
----
+-   Subtract the mean from each x-value - what is this called?
 
-## 📝 **Example 3: Sleep Duration Among College Students**  
+## Calculating the variance
 
-### **Scenario**  
-A health researcher believes college students sleep **less than 7 hours** per night. A sample of **30 students** reports a mean of **6.5 hours** with a standard deviation of **1.2 hours**.  
+ANOVA looks at variance. To calculate the Variance:
 
-### **Hypotheses**  
-- **Null Hypothesis (H₀)**: \( \mu = 7 \)  
-- **Alternative Hypothesis (H₁)**: \( \mu < 7 \)  
+-   Calculate the mean.
 
-### **Calculation**  
-\[
-t = \frac{6.5 - 7}{1.2 / \sqrt{30}} = \frac{-0.5}{0.219} = -2.28
-\]
+-   Subtract the mean from each x-value (deviation score).
 
-For **df = 29**, the critical t-value for a **one-tailed test** at **α = .05** is **-1.699**. Since **-2.28 < -1.699**, we **reject \(H_0\)**.
+-   Subtract the mean from each x-value (deviation score).
 
-### **APA Reporting**  
-*A one-sample t-test was conducted to test whether college students sleep fewer than 7 hours per night. Results were statistically significant, \( t(29) = -2.28, p < .05 \), indicating that students get significantly less sleep than the recommended amount.*  
+-   Square the deviation scores.
 
+-   Take the sum of the squared deviations - what is this called?
 
-## Conclusion
-### One Sample T-Test
-- The one-sample t-test is useful for comparing a sample mean to a known population mean.
-- Always check assumptions before conducting the test.
-- Report results in APA format, including effect size if necessary.
+## Calculating the variance
 
+ANOVA looks at variance. To calculate the Variance:
 
+-   Calculate the mean.
 
+-   Subtract the mean from each x-value (deviation score).
+
+-   Square the deviation scores.
+
+-   Take the sum of the squared deviations (Sum of Squared Deviations).
+
+## Calculating the variance
+
+ANOVA looks at variance. To calculate the Variance:
+
+-   Calculate the mean.
+
+-   Subtract the mean from each x-value (deviation score).
+
+-   Square the deviation scores.
+
+-   Take the sum of the squared deviations (Sum of Squared Deviations).
+
+-   Divide by (n-1) - what is this called?
+
+## Calculating the variance in ANOVA
+
+To calculate the Variance in ANOVA:
+
+-   Calculate the mean.
+
+-   Subtract the mean from each x-value (deviation score).
+
+-   Square the deviation scores.
+
+-   Take the sum of the squared deviations (Sum of Squared Deviations).
+
+-   Divide by (degrees of freedom).
+
+**This is the variance**, but in ANOVA we also call it a Mean Squared
+(MS).
+
+## Calculating means squared (MS)
+
+-   Calculate the SS.
+
+-   Divide the SS by the degrees of freedom.
+
+## Calculating means squared (MS)
+
+-   We will calculate a SS for the between group variance.
+
+-   How much variance in the data is from group differences?
+
+-   We will calculate a SS for all the data.
+
+-   How much variance in the data is from random error?
+
+## Between subjects ANOVA
+
+-   SS~**BG**~ = How much variance comes comes from the group
+    differences?
+
+-   SS~**Error**~ = How much variance is there in total among all the
+    data points?
+
+## Calculating means squared (MS)
+
+-   Calculate the SS~**BG**~.
+
+-   Calculate the SS~**Error**~.
+
+-   Divide the SS by their degrees of freedom.
+
+## Degrees of freedom
+
+The number of observations (data points) in the data that are free to
+vary when estimating a statistic.
+
+I own 7 hats. I want to wear a different hat every day of the week.
+
+-   On Monday, I have 7 hats to choose from.
+
+-   On Tuesday, I have 6 hats to choose from.
+
+-   On Wednesday, I have 5 hats to choose from.
+
+-   On Thursday, I have 4 hats to choose from.
+
+-   On Friday, I have 3 hats to choose from.
+
+-   On Saturday, I have 2 hats to choose from.
+
+-   On Sunday, I don't get a choice. On Sunday, I have to wear the Santa
+    hat.
+
+-   The degrees of freedom is how many times I get a choice before I'm
+    stuck with what's left over.
+
+## Degrees of freedom
+
+-   Between Groups (**MS~BG~** ) = k - 1
+
+-   Within Groups (**MS~WG~**) = n - k
+
+-   Total = n - 1
+
+    -   k is the number of groups in the independent variable.
+
+## Calculating means squared (MS)
+
+-   Calculate the SS~**BG**~.
+
+-   Calculate the SS~**Error**~.
+
+-   Divide the SS by their degrees of freedom.
+
+## Calculating the ms
+
+-   Between Group Mean Squared: MS~**BG**~ = SS~**BG**~ / (k -- 1)
+
+-   Error Mean Squared: **MS~Error~** = S**S~Error~** / (n -- k)
+
+## Calculating Between subjects anova
+
+**F = MS~BG~** / **MS~Error~**
+
+## Calculating Between subjects anova
+
+**F = MS~BG~** / **MS~Error~**
+
+## Between subjects anova Example
+
+> Prof Brocker gives one group of 100 participants the Super Secret
+> Limitless Drug. He gives another group of 100 participants a placebo.
+> He gives the third group of 100 participants nothing. All participants
+> then complete an IQ test. She wants to know if those who took the SSLD
+> has significantly higher IQ than the placebo and the control groups.
+
+## Between subjects anova Example
+
+## Between subjects anova Example
+
+> Prof Brocker recruits 500 participants. He shows half of them the
+> Netflix Original, Dark and the other half Jeopardy. HHe then measures
+> their happiness on a scale of 1 to 10. He wants to know if Dark
+> participants are significantly happier than the Jeopardy participants.
+
+## Between subjects anova Example
+
+## Interpreting f
+
+## Interpreting f
+
+The MS~BG~ is made up of the MS~Error~ + the theoretical difference
+between groups:
+
+-   MS~BG~ = *group difference* + **MS~Error~**
+
+-   **MS~BG~ = *0* + MS~Error~**
+
+-   **MS~BG~ = MS~Error~**
+
+-   **F = MS~BG~ / MS~Error~**
+
+-   **F = 1**
+
+## Interpreting f
+
+-   When F =\< 1, it's not likely to be significant.
+
+## Interpreting f
+
+The MS~BG~ is made up of the MS~Error~ + the theoretical difference
+between groups:
+
+-   MS~BG~ = *group difference* + **MS~Error~**
+
+-   MS~BG~ = *NUMBER GREATER THAN 0* + **MS~Error~**
+
+-   **F = DIFFERENCE + MS~Error~ / MS~Error~**
+
+-   **F = DIFFERENCE**
+
+## Hypothesis testing: ANOVA
+
+-   F \< = 1 ---\> Fail to reject the Null Hypothesis
+
+-   F \> 1 ---\> Refer to *p*-value ---\> Reject the Null Hypothesis
+
+## Reporting f
+
+## Reporting F
+
+## If asked to report findings in terms of the Null Hypothesis (H0), you
+
+should report findings as:
+
+-   Reject H0, or
+
+-   Fail to Reject H0
+
+## Reporting F
+
+If asked to report findings in general or for publication, you need to
+report 5 things:
+
+-   F(df for the between group MS, df for the error MS)
+
+-   F-value
+
+-   p-value
+
+-   Mean and standard deviation of each group
+
+## Reporting F
+
+The group that watched Dark (M=8.43, s=1.02) reported significantly more
+happiness compared to their peers in the control group who watched
+Jeopardy (M=6.12, s=0.98), F(1,498) = 7.12, p \< 0.05.
+
+## Reporting F
+
+There was not a significant difference in happiness between the groups,
+F (1, 498) = 1.02, p = 0.07.

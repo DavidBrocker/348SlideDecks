@@ -1,8 +1,8 @@
 ---
-title: "Analysis of Variance"
+title: "Linear Regression"
 subtitle: "Lecture 15"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢"
 institute: "Farmingdale State College"
 format: 
   revealjs:
@@ -21,401 +21,666 @@ format:
          - dplyr
 revealjs-plugins:
   - drop
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
-## Analysis of Variance
+## Types of Analysis
 
-### ANOVA
+-   **Univariate**: One variable, like the mean
 
--   ANOVA, like t-tests, compares the means of different groups to
-    determine if they differ significantly from one another.
+-   **Bivariate**: Two variables, like correlation
 
-## T-tests
+-   **Multivariate**: More than 2 variables
 
--   IV [**must be**]{.underline} what two things?
+## Regression
 
--   DV [**must be**]{.underline} what one thing?
+-   Regression is the **multivariate** version of correlation.
 
-## T-tests
+-   Correlation is the **bivariate** version of regression.
 
--   IV [**must be**]{.underline} nominal and have only 2 categories
+-   We're doing the same thing in regression as we do in correlation, **BUT** there are more than 2 variables.
 
--   DV [**must be**]{.underline} continuous
+## Regression terminology
 
-## AnOVA
+In regression we will choose one variable to predict.
 
-ANOVA, like t-tests, compares the means of different groups to determine
-if they differ significantly from one another.
+-   We call this $Y$.
 
--   ANOVA can examine independent variables with [**more than 2
-    groups**]{.underline}.
+-   $Y$ is the outcome variable.
 
--   ANOVA can also be used for just 2 groups.
+-   $\hat{Y}$ is the predicted variable.
 
--   It's more robust than t-tests.
+## Regression terminology
 
-## ANOVA
+In regression we will choose two or more variables we have reason to believe predict y.
 
-## Sampling Theory
+-   We call these $A$, $B$, etc.
 
-We set the critical value so that 5% of the null distribution's area is
-to the right of it.
+-   $A$ is the predictor variable.
 
-## ANOVA
+## Regression terminology
 
-There are 3 types of ANOVA:
+When we predict Y with `X`, we say;
 
--   Between subjects
+We regress `y` on the `x`.
 
--   Within subjects (repeated measures ANOVA)
+## Regression Equation
 
--   Mixed designs (between and within together)
+### Step-by-Step
 
-## Between subjects ANOVA
+$$
+\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{blue}{\beta_1(A)}+\color{orange}{e_i}}
+$$
 
-> The experimental group drinks caffeinated coffee. The placebo group
-> drinks decaf. The control group drinks water. I ask all `3` groups to
-> complete a survey to measure their happiness on a scale of `1` to
-> `10`.
+::: fragment
+[1. The predicted value of y for a particular participant (i)]{style="color:red"}
+:::
 
--   The experimental group has a mean happiness score = `8`
+::: fragment
+[2. Intercept]{style="color:green"}: Value of Y when all other predictors are 0
+:::
 
--   The placebo group mean happiness score = `6`
+::: fragment
+[3. Weight]{style="color:blue"}
+:::
 
--   The control group mean happiness score = `5`
+::: fragment
+[4. The Value of a particular participant on the measure of $A$]{style="color:black"}
+:::
 
--   Is the group that drank coffee significantly happier than the other
-    groups?
+::: fragment
+[5. Error. Random, and therefore cannot be predicted]{style="color:orange"}
+:::
 
-## Between subjects ANOVA
+## Regression Equation
 
--   If it's all about the means, why is it called Analysis of Variance?
+### A Few Ways to Write the Same Thing!
 
-## Between subjects ANOVA
+$$
+\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{blue}{\beta_1(A)}}
+$$
 
--   To compare the means, we are analyzing two types of variance:
+::: fragment
+$$\hat{Y} = \beta_0 + \beta_1(A)$$
+:::
 
--   Variance among all of the scores *(within group variance)*
+::: fragment
+$$Y = ax + b$$
+:::
 
--   Variance *between the groups (between group variance).*
+## Linear Regression
 
-## Between subjects ANOVA
-
-Is the variance between the green, red, and blue dots greater than the
-variance across all of the dots?
+### Line of Best Fit
 
 ```{r}
 library(dplyr)
-library(gt)
-library(gtsummary)
 library(ggplot2)
-cof <- 
-  tibble(
-  condition = 
-    rep(c("Coffee","Placebo","Control"), 
-        each = 10),
-  score = c(rnorm(10,7.5,1),
-            rnorm(10,5,1),
-            rnorm(10,5,2))
-  ) 
-cof |> 
-    tbl_summary(
-      by = "condition",
-      statistic = list(all_continuous() ~ c("{mean}({sd})"))
-      ) 
+library(MASS)
+library(gtsummary)
 
-cof |> 
-  ggplot(aes(condition, score, color = condition)) + 
-  geom_jitter(alpha = .25)  +
-    stat_summary(
-    fun.data = "mean_se",
-    aes(group = 1),
-    geom = "line",
-    color = "black"
-  ) +
-    stat_summary(
-    fun.data = "mean_se",
-    geom = "errorbar",
-    width = .2
-  ) + 
-  theme_minimal()
+generate_correlation <- function(n, rho) {
+  # Define the mean and covariance matrix
+  mean_vector <- c(0, 0)
+  covariance_matrix <- matrix(c(1, rho, rho, 1), nrow = 2)
+  
+  # Generate correlated data using mvrnorm from the MASS package
+  data <- mvrnorm(n = n, mu = mean_vector, Sigma = covariance_matrix)
+  
+  # Convert to a data frame
+  data_frame <- data.frame(X = data[, 1], Y = data[, 2])
+  return(data_frame)
+}
 
+# Example: Generate data with a correlation of 0.7
+as <- generate_correlation(35,.51)
+
+mod1 <- lm(Y~X, data = as)
+
+data <- 
+  as |> 
+  mutate(
+    yhat = predict(mod1) |> as.vector(),
+    res = Y - yhat
+  )
 ```
 
-## The F Statistic
+::: panel-tabset
+## Scaterrplot
 
--   ANOVA produces what we call the F statistic.
+```{r}
+data |> 
+  ggplot(aes(X, Y)) + 
+  geom_point() + 
+  theme_minimal() + 
+  labs(
+    title = "Simple Linear Regression",
+    x = "\nX",
+    y = "Y\n",
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+```
 
--   Why do we call it F?
+## Linear Regression
 
-## Between subjects anova
+```{r}
+data |> 
+  ggplot(aes(X, Y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() + 
+  labs(
+    title = "Simple Linear Regression",
+    x = "\nX",
+    y = "Y\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+```
 
-## Between subjects anova
+## Residual Plot
 
-## Between subjects anova
+```{r}
+data |> 
+  ggplot(aes(X, Y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_segment(aes(xend = X, yend = yhat),
+               lty = "dashed") + 
+  theme_minimal() + 
+  labs(
+    title = "Simple Linear Regression",
+    x = "\nX",
+    y = "Y\n"
+  ) + 
+  theme(
+    panel.grid = element_blank()
+  )
+```
+:::
 
-Between subjects anova
+## Regression:
 
-Between subjects anova
+### Equation Component Meanings
 
-Between subjects anova
+-   $Y$ = theoretical prediction of `y`
 
-Between subjects anova
+-   $\hat{Y}$= the actual `y` value for a participant
 
-## Calculating F
+-   $\beta_0$ = the intercept: the average `y` value
 
--   Calculating the variance
+-   $A$ = the A value for a participant
 
--   ANOVA looks at variance. How do we calculate the Variance?
+-   $\beta_1$ = a weighted value that is multiplied by `A` and added to $\beta_0$ to estimate `y`.
 
-## Calculating the variance
+## Regression Equation:
 
-ANOVA looks at variance. To calculate the Variance:
+### More than one X
 
--   Calculate the mean.
+$\large{\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)}...$
 
--   Subtract the mean from each x-value - what is this called?
+## Regression:
 
-## Calculating the variance
+### Equation Component Meanings
 
-ANOVA looks at variance. To calculate the Variance:
+-   $Y$ = theoretical prediction of `y`
 
--   Calculate the mean.
+-   $\hat{Y}$= the actual `y` value for a participant
 
--   Subtract the mean from each x-value (deviation score).
+-   $\beta_0$ = the intercept: the average `y` value
 
--   Subtract the mean from each x-value (deviation score).
+-   $A$ = the $A$ value for a participant
 
--   Square the deviation scores.
+-   $\beta_1$ = a weighted value that is multiplied by x and added to $\beta_0$ to estimate y.
 
--   Take the sum of the squared deviations - what is this called?
+-   $B$ = the $B$ value for a participant
 
-## Calculating the variance
+-   $\beta_2$ = a weighted value that is multiplied by $B$
 
-ANOVA looks at variance. To calculate the Variance:
+## Regression Equation:
 
--   Calculate the mean.
+## More than one X
 
--   Subtract the mean from each x-value (deviation score).
+$\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
 
--   Square the deviation scores.
+# Interpreting Coefficients
 
--   Take the sum of the squared deviations (Sum of Squared Deviations).
+## Regression Model Table
 
-## Calculating the variance
+### Two Predictor Variables
 
-ANOVA looks at variance. To calculate the Variance:
+```{r}
+test <- 
+  tibble(
+  money = rnorm(100,55,5),
+  x1 = rnorm(100,14,2),
+  x2 = rnorm(100,30,2)
+) 
 
--   Calculate the mean.
+mod1 <- lm(money ~ x1+x2, data = test) |> summary() 
+  
+mod1 |> tbl_regression()
+```
 
--   Subtract the mean from each x-value (deviation score).
+## Interpreting coefficients
 
--   Square the deviation scores.
+-   Beta coefficient
 
--   Take the sum of the squared deviations (Sum of Squared Deviations).
+-   t-value
 
--   Divide by (n-1) - what is this called?
+-   p-value
 
-## Calculating the variance in ANOVA
+## Interpreting coefficients
 
-To calculate the Variance in ANOVA:
+::: nonincremental
+-   Beta coefficient
 
--   Calculate the mean.
+-   t-value
 
--   Subtract the mean from each x-value (deviation score).
+-   **p-value: is this a significant predictor of y?**
+:::
 
--   Square the deviation scores.
+## Interpreting coefficients
 
--   Take the sum of the squared deviations (Sum of Squared Deviations).
+::: nonincremental
+-   **Beta coefficient: which predictor of y has the more predictive power?**
 
--   Divide by (degrees of freedom).
+-   t-value
 
-**This is the variance**, but in ANOVA we also call it a Mean Squared
-(MS).
+-   p-value
+:::
 
-## Calculating means squared (MS)
+## $R^2$: Coefficient of Determination
 
--   Calculate the SS.
+### How much can we account for?
 
--   Divide the SS by the degrees of freedom.
+-   $R^2$ is the correlation coefficient (`r`) squared.
 
-## Calculating means squared (MS)
+-   $R^2$ is always positive
 
--   We will calculate a SS for the between group variance.
+-   In correlation, the amount of `y` accounted for by `x`
 
--   How much variance in the data is from group differences?
+## $R^2$: Coefficient of Determination
 
--   We will calculate a SS for all the data.
+### How much can we account for?
 
--   How much variance in the data is from random error?
+-   In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
 
-## Between subjects ANOVA
+-   How much of `y` did we account for?
 
--   SS~**BG**~ = How much variance comes comes from the group
-    differences?
+-   Did we account for a **significant** amount of the variance in `y`?
 
--   SS~**Error**~ = How much variance is there in total among all the
-    data points?
+## $R^2$: Coefficient of Determination
 
-## Calculating means squared (MS)
+### How much can we account for?
 
--   Calculate the SS~**BG**~.
+## Interpreting R Squared
 
--   Calculate the SS~**Error**~.
+::: nonincremental
+-   R Squared
 
--   Divide the SS by their degrees of freedom.
+-   Adjusted R Squared
 
-## Degrees of freedom
+-   F-value
 
-The number of observations (data points) in the data that are free to
-vary when estimating a statistic.
+-   **p-value: is this a significant predictor of `y`?**
+:::
 
-I own 7 hats. I want to wear a different hat every day of the week.
+## Interpreting R Squared
 
--   On Monday, I have 7 hats to choose from.
+::: nonincremental
+-   **R Squared: The percentage of `y` accounted for by the predictors**
 
--   On Tuesday, I have 6 hats to choose from.
-
--   On Wednesday, I have 5 hats to choose from.
-
--   On Thursday, I have 4 hats to choose from.
-
--   On Friday, I have 3 hats to choose from.
-
--   On Saturday, I have 2 hats to choose from.
-
--   On Sunday, I don't get a choice. On Sunday, I have to wear the Santa
-    hat.
-
--   The degrees of freedom is how many times I get a choice before I'm
-    stuck with what's left over.
-
-## Degrees of freedom
-
--   Between Groups (**MS~BG~** ) = k - 1
-
--   Within Groups (**MS~WG~**) = n - k
-
--   Total = n - 1
-
-    -   k is the number of groups in the independent variable.
-
-## Calculating means squared (MS)
-
--   Calculate the SS~**BG**~.
-
--   Calculate the SS~**Error**~.
-
--   Divide the SS by their degrees of freedom.
-
-## Calculating the ms
-
--   Between Group Mean Squared: MS~**BG**~ = SS~**BG**~ / (k -- 1)
-
--   Error Mean Squared: **MS~Error~** = S**S~Error~** / (n -- k)
-
-## Calculating Between subjects anova
-
-**F = MS~BG~** / **MS~Error~**
-
-## Calculating Between subjects anova
-
-**F = MS~BG~** / **MS~Error~**
-
-## Between subjects anova Example
-
-> Prof Brocker gives one group of 100 participants the Super Secret
-> Limitless Drug. He gives another group of 100 participants a placebo.
-> He gives the third group of 100 participants nothing. All participants
-> then complete an IQ test. She wants to know if those who took the SSLD
-> has significantly higher IQ than the placebo and the control groups.
-
-## Between subjects anova Example
-
-## Between subjects anova Example
-
-> Prof Brocker recruits 500 participants. He shows half of them the
-> Netflix Original, Dark and the other half Jeopardy. HHe then measures
-> their happiness on a scale of 1 to 10. He wants to know if Dark
-> participants are significantly happier than the Jeopardy participants.
-
-## Between subjects anova Example
-
-## Interpreting f
-
-## Interpreting f
-
-The MS~BG~ is made up of the MS~Error~ + the theoretical difference
-between groups:
-
--   MS~BG~ = *group difference* + **MS~Error~**
-
--   **MS~BG~ = *0* + MS~Error~**
-
--   **MS~BG~ = MS~Error~**
-
--   **F = MS~BG~ / MS~Error~**
-
--   **F = 1**
-
-## Interpreting f
-
--   When F =\< 1, it's not likely to be significant.
-
-## Interpreting f
-
-The MS~BG~ is made up of the MS~Error~ + the theoretical difference
-between groups:
-
--   MS~BG~ = *group difference* + **MS~Error~**
-
--   MS~BG~ = *NUMBER GREATER THAN 0* + **MS~Error~**
-
--   **F = DIFFERENCE + MS~Error~ / MS~Error~**
-
--   **F = DIFFERENCE**
-
-## Hypothesis testing: ANOVA
-
--   F \< = 1 ---\> Fail to reject the Null Hypothesis
-
--   F \> 1 ---\> Refer to *p*-value ---\> Reject the Null Hypothesis
-
-## Reporting f
-
-## Reporting F
-
-## If asked to report findings in terms of the Null Hypothesis (H0), you
-
-should report findings as:
-
--   Reject H0, or
-
--   Fail to Reject H0
-
-## Reporting F
-
-If asked to report findings in general or for publication, you need to
-report 5 things:
-
--   F(df for the between group MS, df for the error MS)
+-   Adjusted R Squared
 
 -   F-value
 
 -   p-value
+:::
 
--   Mean and standard deviation of each group
+## Interpreting R Squared
 
-## Reporting F
+::: nonincremental
+-   R Squared
 
-The group that watched Dark (M=8.43, s=1.02) reported significantly more
-happiness compared to their peers in the control group who watched
-Jeopardy (M=6.12, s=0.98), F(1,498) = 7.12, p \< 0.05.
+-   **Adjusted R Squared: The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
 
-## Reporting F
+-   F-value
 
-There was not a significant difference in happiness between the groups,
-F (1, 498) = 1.02, p = 0.07.
+-   p-value
+:::
+
+# Linear Regression Example
+
+## Linear Regression
+
+### Example
+
+> Professor Brocker wants to be able to predict social media use. The Social Media Use Scale measures different motivations and reasons for using Social Media platforms.
+
+What are some predictors of social media use?
+
+-   Sense of belonging
+
+-   Age
+
+## Regression Equation
+
+$$\large{Y_i = \beta_0 + \beta_1A + \beta_2B~ + e_i}$$
+
+## Regression Equation
+
+### Theoretical
+
+$$\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\color{blue}{(Age)} + \color{purple}{\beta_2(SOB)}\color{pink}~ + e_i}$$
+
+1.  The predicted degree of social media use for a participant "`i`"
+
+2.  Intercept: Average social media use when all other predictors are 0.
+
+3.  Coefficient for $A$
+
+4.  What is the sense of belonging?
+
+5.  Coefficient for $B$
+
+6.  Age
+
+7.  Randomness
+
+## Regression Equation
+
+### Computational
+
+$\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
+
+## Linear Regression
+
+-   This form of regression is called linear regression.
+
+## Example
+
+### Model Coefficients
+
+```{r}
+library(gt)
+library(broom)
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 30 participants
+participants <- paste0("P", 1:30)
+
+# Age: Randomly sampled from 18 to 50
+age <- sample(18:50, 30, replace = TRUE)
+
+# Sense of Belonging: Continuous scale from 0 to 10
+belonging <- round(runif(30, min = 0, max = 10), 2)
+
+# Generate social media use (hours per day) using a model
+# Assume younger people and those with higher belonging use social media more
+social_media_use <- 5 - (0.1 * age) + (0.3 * belonging) + rnorm(30, mean = 0, sd = 0.5)
+
+# Create data frame
+df_sob <- data.frame(
+  Participant = participants,
+  Age = age,
+  Sense_of_Belonging = belonging,
+  Social_Media_Use = round(social_media_use, 2)
+)
+
+# Create Model
+sm_mod <- 
+  lm(Social_Media_Use ~ 
+     Age + Sense_of_Belonging, 
+   data = df_sob) |> 
+  tbl_regression(
+    intercept = TRUE
+  ) |> 
+  as_gt() |> 
+  tab_header(title = "Social Media Use Model")
+
+# Show Model
+sm_mod
+
+# Show Other Summaries
+model_summary <- 
+  lm(Social_Media_Use ~ 
+     Age + Sense_of_Belonging, 
+   data = df_sob) |> 
+    summary()
+
+# Create a data frame with the desired values
+mod2 <- data.frame(
+  Metric = c("Residual Standard Error", "Multiple R-squared", "Adjusted R-squared", "F-statistic", "p"),
+  Value = c(
+    model_summary$sigma,                        # Residual Standard Error
+    model_summary$r.squared,                    # Multiple R-squared
+    model_summary$adj.r.squared,                # Adjusted R-squared
+    model_summary$fstatistic[1],                # F-statistic
+    pf(model_summary$fstatistic[1], model_summary$fstatistic[2], model_summary$fstatistic[3], lower.tail = FALSE)  # p-value
+  )
+)
+
+# Convert to a gt table
+mod2 |> 
+  gt() |> 
+  fmt_auto() |> 
+  tab_header(
+    title = md("**Regression Model Summary**"),
+    subtitle = md("*Predicting Social Media Use for Age and Sense of Belonging*")
+  )
+```
+
+# Reporting Regression Findings
+
+## Example
+
+First, report adjusted $R^2$ and it's corresponding p:
+
+-   Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p\* \< 0.001.
+
+-   Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p \< 0.001.
+
+## Example
+
+```{r}
+sm_mod
+```
+
+Then report individual betas and their p's:
+
+-   Sense of belonging (*beta = 0.29, p = 0.001*) significantly predicted social media use.
+
+-   Age significantly predicted likelihood of social media use (beta = -.10, p \<.001)
+
+-   It's common to report betas and p's in text as well as in a table.
+
+# Categorical Variables in Regression
+
+## Multiple Predictors
+
+### Understanding the Factors That Influence Energy Levels
+
+> What determines how energized you feel throughout the day? Is it the number of cups of coffee you drink? The amount of sleep you got the night before? Or maybe even the type of TV shows you watch before bed?
+
+## Multiple Predictors
+
+### Understanding the Factors That Influence Energy Levels
+
+In this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:
+
+-   Duration of TV Watching (Continuous) – Does watching more TV affect energy?
+-   Cups of Coffee (Continuous) – Does caffeine actually help?
+-   Prior Sleep (Continuous) – Does more sleep always mean more energy?
+-   TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
+
+## Categorical variables
+
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 30 participants
+n <- 30
+
+# Continuous predictors
+duration_tv <- round(runif(n, 0.5, 5), 2)  # Hours of TV watched
+cups_of_coffee <- sample(0:5, n, replace = TRUE)  # Cups of coffee
+prior_sleep <- round(rnorm(n, mean = 7, sd = 1.5), 2)  # Hours of sleep
+
+# Categorical predictor: TV Show Genre (Drama, Comedy, Documentary)
+tv_genre <- sample(c("Drama", "Comedy", "Documentary"), n, replace = TRUE)
+
+# Assign numeric values for regression (Dummy coding: Comedy as reference)
+tv_genre_num <- ifelse(tv_genre == "Drama", 1, ifelse(tv_genre == "Documentary", 2, 0))
+
+# Generate energy level using a regression model
+energy_level <- 3.5 + 
+  (1.2 * duration_tv) + 
+  (0.8 * cups_of_coffee) + 
+  (-0.5 * prior_sleep) + 
+  (1.5 * tv_genre_num) +  # Drama increases energy, Documentary increases it more
+  rnorm(n, mean = 0, sd = 1)  # Add some random noise
+
+# Round energy levels for readability
+energy_level <- round(energy_level, 2)
+
+# Create a data frame
+df_cat <- data.frame(
+  Participant = paste0("P", 1:n),
+  Duration_TV = duration_tv,
+  Cups_of_Coffee = cups_of_coffee,
+  Prior_Sleep = prior_sleep,
+  TV_Genre = tv_genre,
+  Energy_Level = energy_level
+)
+```
+
+## Fit the Model
+
+```{r}
+model_3 <- lm(Energy_Level ~ Duration_TV + Cups_of_Coffee + Prior_Sleep + TV_Genre, data = df_cat)
+
+tbl_regression(model_3,intercept = TRUE) |> 
+  as_gt() |> 
+  tab_header(title = md("**Energy Level Model**"),
+             subtitle = md("*What is the best predictor?*"))
+
+
+```
+
+## Horror Movies
+
+```{r}
+library(janitor)
+
+hm <- read.csv("Horror Movie Data https___notawfulandboring.blogspot.com_ - Data.csv")
+
+hm_cln <- 
+  hm |> 
+  clean_names() |> 
+  dplyr::select(-movie,-avg_resting_heart_rate_bpm)
+
+lm(scare_score ~ ., data = hm_cln) |> 
+tbl_regression(label = 
+                 list("ranking" = "Ranking",
+                    "avg_movie_heart_rate_bpm" = "Avg. Heart Rate (BPM)",
+                   "overall_difference_bpm" = "Overall Difference (BPM)" ,
+                   "hrv_difference" = "HRV Difference" ,
+                   "highest_spike_bpm" = "Highest Spike",
+                   "this_film_is_a_sequel" = "Sequel",
+                   "this_film_has_at_least_one_sequel" = "At Least One Sequel",
+                  "rotten_tomato_score" = "Rotten Tomato Score" ,
+                   "year" = "Year" )) 
+```
+
+# Review Questions
+
+**Multiple-Choice Questions**
+
+## **1. What does the slope in a simple linear regression equation represent?**
+
+A\) The value of Y when X = 0
+
+B\) The predicted change in Y for a one-unit increase in X
+
+C\) The strength of the correlation between X and Y
+
+D\) The proportion of variance in Y explained by X
+
+## **2. If a linear regression model has an R² value of 0.85, what does this mean?**
+
+A\) 85% of the variability in X is explained by Y
+
+B\) The regression model is 85% accurate
+
+C\) 85% of the variability in Y is explained by X D) The relationship between X and Y is statistically significant
+
+## **3. A researcher runs a regression model and finds the following equation:**
+
+What does the number **5** represent?
+
+A\) The slope of the regression line
+
+B\) The predicted value of Y when X = 0
+
+C\) The effect size of X on Y
+
+D\) The p-value of the regression
+
+## **4. Which of the following would indicate that a multiple regression model is overfitting?**
+
+A\) A high R² value on the training data but poor performance on new data
+
+B\) A non-significant p-value for the intercept
+
+C\) The presence of a negative coefficient in the model D) A low standard error for the slope
+
+## **5. A regression model predicts salary based on years of experience. The p-value for the slope is 0.0003. What does this mean?**
+
+A\) Years of experience does not significantly predict salary
+
+B\) Years of experience significantly predicts salary at the α = 0.05 level
+
+C\) The slope coefficient is 0.0003
+
+D\) The model is not linear
+
+# **Open-Ended Questions (Show Your Work)**
+
+## **6. A multiple regression model is given by:**
+
+$\hat{Y} = 3 + 1.5X_1 - 0.7X_2$
+
+where:
+
+• $X_1$ = Number of hours spent studying
+
+• $X_2$ = Number of hours spent watching TV
+
+**a)** Predict the outcome if a student studies for 6 hours and watches TV for 2 hours.
+
+3 + (1.5*6) + (.7*2)
+
+13.4
+
+**b)** Interpret the coefficient of .
+
+## **7. A researcher runs a simple linear regression and obtains the following output:**
+
+| Predictor | Coefficient | Std. Error | p-value |
+|-----------|-------------|------------|---------|
+| Intercept | 4.2         | .5         | .001    |
+| X         | 1.8         | .3         | .0005   |
+
+**a)** Write the regression equation.
+
+**b)** Interpret the slope in context.
+
+**c)** If X = 10, predict Y.
+
+## **8. A study investigates the relationship between sleep (X) and energy levels (Y). The model output is: \$\\hat{Y} = 2 + 3X\$**
+
+What is the residual for a participant who slept **5 hours** and had an energy level of **18**?

@@ -6,7 +6,10 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.33">
 
   <meta name="author" content="Dave Brocker">
@@ -35,6 +38,7 @@
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -47,6 +51,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -162,8 +167,16 @@ Dave Brocker
 <section id="correlation-1" class="slide level2">
 <h2>Correlation</h2>
 <p>Assesses how two variables move in relation to one another.</p>
-
-<img data-src="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section>
 <section id="ok-but-how" class="title-slide slide level1 center">
 <h1>Ok, but how?!</h1>
@@ -264,7 +277,7 @@ Dave Brocker
 <h2>Covariance</h2>
 <p>Covariance refers to how two continuous variables vary in tandem.</p>
 <div class="fragment">
-<p><img data-src="images/clipboard-3437818122.png" width="498"></p>
+<p><a href="images/clipboard-3437818122.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/clipboard-3437818122.png" width="498"></a></p>
 </div>
 </section>
 <section id="covariance-3" class="slide level2">
@@ -487,8 +500,16 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 </section>
 <section id="correlation-7" class="slide level2">
 <h2>Correlation</h2>
-
-<img data-src="lec10_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="correlation-8" class="slide level2">
 <h2>Correlation</h2>
 <p>This is the Pearson Product-Moment Correlation (Pearson, 1895).</p>
@@ -536,8 +557,8 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 </section>
 <section id="interpreting-correlation" class="slide level2">
 <h2>Interpreting Correlation</h2>
-
-<img data-src="images/clipboard-592522789.png" width="464" class="r-stretch"></section>
+<p><a href="images/clipboard-592522789.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="images/clipboard-592522789.png" width="464"></a></p>
+</section>
 <section id="interpreting-correlation-1" class="slide level2">
 <h2>Interpreting Correlation</h2>
 <div class="highlight-last">
@@ -612,7 +633,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -630,7 +651,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -656,7 +677,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
 </div>
 </div></div>
 
@@ -668,6 +689,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -691,6 +713,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -861,7 +884,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1095,6 +1118,38 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
