@@ -6,11 +6,10 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8b864f0777c60eecff11d75b6b2e1175.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.33">
 
-  <meta name="author" content="Dave Brocker">
-  <title>PSY 348: Statistics for Psychology – What is Statistics?</title>
+  <title>PSY 348: Statistics for Psychology – lec1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,7 +28,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-59cff0dbbfb51e6f850a97b34efc9cfa.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-9e743ff590f687dbf5115e29f016fb8e.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -122,35 +121,229 @@
     }
   </style>
 </head>
-<body class="quarto-light">
+<body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">What is Statistics?</h1>
-  <p class="subtitle">PSY 348: Lecture 1</p>
 
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Dave Brocker 
-</div>
-        <p class="quarto-title-affiliation">
-            Farmingdale State College
-          </p>
-    </div>
-</div>
-
-</section>
 <section class="slide level2">
 
-
+<p><span class="cust-title">What is Statistics?</span> <span class="cust-sub">Lecture 1</span> <span class="cust-author">Dave Brocker</span></p>
+</section>
+<section id="what-do-you-think-of-when-you-hear-statistics" class="slide level2">
+<h2>What do you think of when you hear ‘<em>statistics</em>’?</h2>
+</section>
+<section id="statistics" class="slide level2">
+<h2>Statistics</h2>
+<h3 id="definition-and-terminology">Definition and Terminology</h3>
+<dl>
+<dt class="fragment">Statistics</dt>
+<dd class="fragment">
+<p>The field of <strong>describing</strong>, <strong>analyzing</strong>, and making <strong>inferences</strong> based on <strong>data</strong> either from a <strong>sample</strong> or a <strong>population</strong></p>
+</dd>
+<dt class="fragment">Describing</dt>
+<dd class="fragment">
+<p>What does the data ‘look’ like?</p>
+</dd>
+<dt class="fragment">Analyzing</dt>
+<dd class="fragment">
+<p>A mathematical approach to extracting information about the data</p>
+</dd>
+<dt class="fragment">Inferences</dt>
+<dd class="fragment">
+<p>Applying logical reasoning to predict what might happen in subsequent measurements. Typically, inferences are made from samples and extrapolated into what the population might be ‘expected’ to look like.</p>
+</dd>
+<dt class="fragment">Data</dt>
+<dd class="fragment">
+<p>Qualitative or Quantitative information that consists of measured or manipulated variables</p>
+</dd>
+<dt class="fragment">Sample</dt>
+<dd class="fragment">
+<p>A subset of the population of interest</p>
+</dd>
+<dt class="fragment">Population</dt>
+<dd class="fragment">
+<p>The entire set of interest.</p>
+</dd>
+</dl>
+</section>
+<section id="why-is-it-important" class="slide level2">
+<h2>Why is it Important?</h2>
+<h3 id="when-do-i-use-it">When Do I Use It?</h3>
+<p>Everywhere!</p>
+<p>Statistics makes appearances anywhere you see information being summarized or being used to make decisions.</p>
+<ul>
+<li class="fragment"><p>Purchasing a car</p></li>
+<li class="fragment"><p>Going to a restaurant</p></li>
+<li class="fragment"><p>Voting for a candidate</p></li>
+<li class="fragment"><p>Going to the Movies</p></li>
+</ul>
+</section>
+<section id="why-is-it-important-1" class="slide level2">
+<h2>Why is it Important?</h2>
+<h3 id="when-do-i-use-it-1">When Do I Use It?</h3>
+<p>Everywhere!</p>
+<p>Statistics makes appearances anywhere you see information being summarized or being used to make decisions.</p>
+<ul>
+<li class="fragment"><p>Purchasing a car</p>
+<ul>
+<li class="fragment">You look at reviews and infer the overall takeaway of how ‘good’ or ‘bad’ a car might be.</li>
+</ul></li>
+<li class="fragment"><p>Going to a restaurant</p>
+<ul>
+<li class="fragment">You base your selection on prior experiences or on reviews/opinions from people you trust</li>
+</ul></li>
+<li class="fragment"><p>Voting for a candidate</p>
+<ul>
+<li class="fragment"><p>You look for increases in wages and decreases in taxes</p></li>
+<li class="fragment"><p>You look for promises of pollution reduction and energy increases</p></li>
+</ul></li>
+<li class="fragment"><p>Going to the Movies</p>
+<ul>
+<li class="fragment">You pick a movie based on genre, past experiences, and reviews</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-literacy" class="slide level2">
+<h2>Data Literacy</h2>
+<h3 id="why-do-i-need-it">Why Do I Need It</h3>
+<p>Statistical and data literacy is useful for being able to make informed decisions</p>
+<ul>
+<li class="fragment">If you were told that blueberries could cure Cancer, wouldn’t it be helpful to know how to evaluate that claim?</li>
+</ul>
+<ol type="1">
+<li class="fragment">How many blueberries?</li>
+<li class="fragment">How long do you have to eat them for?</li>
+<li class="fragment">Is it all types of cancer or a specific one?</li>
+<li class="fragment">Is it truly that blueberries cure cancer or are they mixed in with something else?</li>
+</ol>
+</section>
+<section id="too-good-to-be-true" class="slide level2">
+<h2>Too Good to Be True</h2>
+<h3 id="wouldnt-it-be-nice-if">Wouldn’t it be nice if…</h3>
+<ul>
+<li class="fragment"><p>Dogs smiled</p></li>
+<li class="fragment"><p>Birdsong is always beautiful</p></li>
+<li class="fragment"><p>All animals love their children</p></li>
+</ul>
+<p>Our brain is a pattern matching machine</p>
+<ul>
+<li class="fragment"><p>We look for information that confirms our thoughts and surroundings</p></li>
+<li class="fragment"><p>We would (often) prefer that things were nice and pretty, but reality is often not so simple</p></li>
+</ul>
+</section>
+<section>
+<section id="what-is-your-future-career-goal" class="title-slide slide level1 center">
+<h1>What is your future career goal?</h1>
 
 </section>
+<section id="statistics-in-psychology" class="slide level2">
+<h2>Statistics in Psychology</h2>
+<h3 id="how-each-profession-uses-data">How Each Profession Uses Data</h3>
+<ul>
+<li class="fragment"><p>Mental Health Counselors/Social Workers</p>
+<ul>
+<li class="fragment">Knowing that a certain percentage of college students suffer from Anxiety, you can improve your outreach and provide material aimed to address and reduce the impact</li>
+</ul></li>
+<li class="fragment"><p>Human Resources/Training and Development</p>
+<ul>
+<li class="fragment">If 30% of employees report that there are so few incentives and little to no sense of belonging, you can take actionable steps to address those issues</li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li class="fragment"><p>Researchers (Hey That’s What I do!)</p>
+<ul>
+<li class="fragment">Hypotheses are only supported when the data suggests that the findings are unlikely to have occurred by chance.</li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li class="fragment"><p>Academia (Hey That’s What I do!)</p>
+<ul>
+<li class="fragment">If the Average Exam score is an 85 with a Standard Deviation of 20 points, I have reason to believe that the test was either too difficult or the material was not explained well enough</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="raise-your-hand-if-you-dislike-math" class="title-slide slide level1 center">
+<h1>Raise your hand if you dislike math</h1>
+
+</section>
+<section id="goals-for-this-class" class="slide level2">
+<h2>Goals for this Class:</h2>
+<ol type="1">
+<li class="fragment">Be comfortable looking at data and making inferences</li>
+<li class="fragment">Be comfortable looking at graphs and making inferences and gathering takeaways</li>
+<li class="fragment">Reading scientific and popular articles and critically thinking about the claims being made</li>
+<li class="fragment">Understand what constitutes evidence and what it means for hypotheses to be supported</li>
+<li class="fragment">Understand that research is probabilistic</li>
+</ol>
+</section></section>
+<section>
+<section id="why-do-i-even-need-this-course-im-going-to-be-a" class="title-slide slide level1 center">
+<h1>Why Do I Even Need This Course, I’m Going to Be A…</h1>
+
+</section>
+<section id="why-should-you-care" class="slide level2">
+<h2>Why Should You Care?</h2>
+<div class="list-dave">
+<ul>
+<li class="fragment">Therapist:
+<ul>
+<li class="fragment">Your practices need to be informed by evidence-based treatments</li>
+</ul></li>
+<li class="fragment">Researcher:
+<ul>
+<li class="fragment">Your claims need to be supported by evidence that can assert a high probability or relationship or cause and effect.</li>
+</ul></li>
+<li class="fragment">Non-Data Field:
+<ul>
+<li class="fragment">Because data is everywhere, even in your <strong>Netflix</strong> recommendations!</li>
+</ul></li>
+</ul>
+</div>
+<div class="flowpic fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://mermaid.ink/img/pako:eNpVkl9vgjAUxb9Kc5PtiTlQBORhicL-JkvMdFuy4kMDV2gG7VLKnBq_-wrMTPvU5v7Ovacndw-pzBBCWJdykxZMabKME0HMmdLXGhV5ZzotuMhJJIVGoVfk6uqGzGgkyxJTTd44btpyzDRb9cpZh0R0Kli53SGZK1yjQpFi_UdEHRHTF0xlVaHImOZSkFuRc4F_TNwxt_8MZuRZfnOsrxeF3LStevDigswUE71LLtZl04069XJHjzYfeK2l2p45vaf3KBTW5JIsWV6f1R7ogle8ZIq0afwP7d090qX5V3Yaz2n5ic6NRpoY-M64n_P0s16BBbniGYRaNWhBhapi7RP2rTQBXWCFCYTmmjH1mUAiDkbzxcSHlNVRpmSTF8dH82UCxJizXDFDrFlZt0ibmYpkIzSEIzfoekC4hx8IvYETjDw38B3bdyb20PMs2ELou4PAH3veeDgOfN91RwcLdt1UezBx_KE7tMe249vBJBhZgBk3WT73C9Tt0eEXhcW32g?type=png.png"></p>
+<figcaption>Flowchart Visual of Netflix Recommendation System</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="what-youll-learn-this-semester" class="slide level2">
+<h2>What You’ll Learn This Semester</h2>
+<h3 id="introduction-to-research">Introduction to Research</h3>
+<div class="list-dave">
+<ul>
+<li class="fragment">Descriptive Statistics
+<ul>
+<li class="fragment">What does the data ‘look like’?</li>
+</ul></li>
+<li class="fragment">Probability is Paramount
+<ul>
+<li class="fragment">What are the chances this happens and what is the probability this only happens because of chance?</li>
+</ul></li>
+<li class="fragment">Testing hypotheses
+<ul>
+<li class="fragment">If [condition] has this specific attribute, we expect [event] to take place.</li>
+</ul></li>
+<li class="fragment">Correlation, regression, and causation
+<ul>
+<li class="fragment">How are variables related to each other?</li>
+<li class="fragment">How much can variables predict each other?</li>
+<li class="fragment">Does this variable cause a change in this other component?</li>
+</ul></li>
+</ul>
+</div>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>⬡</p>
+<p>PSY 348 - Statistcs for Psychology</p>
 </div>
 </div></div>
 
@@ -328,9 +521,9 @@ Dave Brocker
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1920,
 
-        height: 700,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
