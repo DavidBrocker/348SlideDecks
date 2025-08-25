@@ -1,81 +1,289 @@
 ---
-title: "Welcome!"
-subtitle: "PSY 348 - Statistics"
-author: "Dave Brocker"
-institute: "Farmingdale State College"
 format: 
   revealjs:
-    theme: custom.scss
+    slide-number: c/t
     incremental: true   
+    footer: PSY 348 - Statistics for Psychology
     touch: true
+    height: 900
+    width: 1600
+    lightbox: true
+    theme: custom.scss
 ---
 
-## Meet the Instructor
+##  {#int-title}
 
-![](images/profile.jpeg){.profile style="border-radius:50%;" fig-align="center" width="187" height="187"}
+[Hi, I'm Dave!]{.int-title}
 
-```{=html}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+[Welcome to Statistics for Psychology!]{.int-sub}
 
+[Dave Brocker<br>Lecturer<br>Farmingdale State College]{.int-auth}
 
-<i class="bi bi-mortarboard"></i>
+## Introduction
+
+### Who Am I?
+
+-   **Name**
+
+    -   Professor Dave Brocker
+
+-   **Background**
+
+    -   7+ Years of Teaching Undergraduate Statistics
+    -   Researcher/Laboratory Manager
+    -   Internship Coordinator
+
+-   **Education**
+
+    -   *Graduate*: M.A. in Experimental Psychology, *CUNY Brooklyn College*.
+
+    -   *Undergraduate*: BS in Applied Psychology, *Farmingdale State College*
+
+## Research
+
+### I'm Always Looking for Research Assistants!
+
+-   **Morbid Curiosity**
+
+    -   *Why are we interested in 'weird' and 'negative' things?*
+
+-   **Creepiness**
+
+    -   *What makes a person 'creepy'?*
+
+-   **Emotion and Morality**
+
+    -   *What makes immoral things disgusting?*
+
+## My Teaching Style
+
+### What Can You Expect?
+
+-   **Humor**
+
+    -   I (try) to be funny, I think it makes the class more enjoyable!
+
+-   **Real-World Examples**
+
+    -   We will use a mixture of real and fabricated data to help illustrate ideas and to show how you what we are discussing relates back to your current and potentially future experiences.
+
+-   **Interactive**
+
+    -   Whenever possible, I favor dynamic content over static content. I want you to be able to see how statistical concepts look and move, rather than appear frozen in space.
+
+## What Are Students Saying?
+
+### Course Evaluations
+
+```{r}
+library(readxl)
+library(dplyr)
+library(gt)
+ev <- read_excel("statscomments.xlsx")
 ```
 
-## Info
+::: panel-tabset
+## Instructor Comments
 
-**Name:** Professor Brocker
+```{r}
+ev_c <- 
+  ev |> 
+  filter(Type == "Instructor Comments") |> 
+  select(Comment) |>
+  mutate(Comment = stringr::str_to_sentence(Comment))
 
-**Background:** 7+ years of teaching stats, turning confusion into clarity.
+ev_c |> gt() |> opt_row_striping() |> tab_header("Student Responses to 'Comments about the Instructor")
+```
 
-**Education**: Master's in Experimental Psychology (specializing in Morality and Emotion).
+## Learning Process
 
-**Research**: Morbid Curiosity & Creepiness—let's explore the weird and wonderful!
+```{r}
+ev_lp <- 
+  ev |> 
+  filter(Type == "Learning Process") |> 
+  select(Comment) |> 
+  mutate(Comment = stringr::str_to_sentence(Comment))
 
-## My Teaching Style 
 
--   **Humor:** Statistics can be fun, I promise! Expect some laughs along the way.
--   **Interactive:** I love questions—ask away! \[Add RMP comment\]
--   **Real-World Examples:** We’ll talk about data that actually matters to you.
+ev_lp |> 
+  gt() |> 
+  opt_row_striping() |> tab_header("Student Responses to 'Comments about the Learniong Process")
+```
 
-## Outside of Class 
+## Course Suggestions
 
--   **Hobbies:** When I’m not knee-deep in data, I enjoy making tools to find new music, playing guitar, and finding new food spots with my wife!
+```{r}
+ev_cs <- 
+  ev |> 
+  filter(Type == "Course Suggestions") |> 
+  select(Comment) |> 
+  mutate(Comment = stringr::str_to_sentence(Comment))
 
-## *Why are we here?*
+ev_cs |> gt() |> opt_row_striping() |> tab_header("Student Responses to 'Do you have any suggestions on how to improve the course?")
+```
+:::
 
-### To turn confusion into **confidence** and numbers into **knowledge**!
+## Outside of Class
 
-## What is Statistics? 
+### Media and Music
 
--   The art of turning data into... **more confusing data** (just kidding!).
--   It's the science of making sense of the world through numbers.
+```{r}
+library(bslib)
 
-## But Seriously, What is Statistics?
+c1 <- 
+    card(
+    card_title(
+      "Favorite TV Show"
+      ),
+    card_image(
+      src ="https://resizing.flixster.com/lpJkDxnEFNQT1OWJjnmYfvpAHJ0=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvUlRUVjI2NjgyOS53ZWJw", 
+      border_radius = "all"
+      )
+    )
 
-**Statistics** is the science of collecting, analyzing, and interpreting data to make informed decisions.
+c2 <- 
+  card(
+    card_title("Favorite Movie"),
+    card_image(
+      src ="https://m.media-amazon.com/images/M/MV5BY2VhODM5OTUtZDJhMi00MTc5LThjNjYtZWY1M2NlNWU0N2NjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      border_radius = "all")
+    )
 
-*Translation:*\
-"We help people who hate math feel smart with numbers!"
+c3 <- 
+  card(
+    card_title(
+      "Favorite Book"
+      ),
+    card_image(
+      src = "https://m.media-amazon.com/images/I/91RGlUYwaeL._UF1000,1000_QL80_.jpg", border_radius = "all")
+    )
 
-## Why Should You Care? 
+layout_column_wrap(
+  width = 4,
+  c1,c2,c3
+)
+```
 
--   Because data is everywhere, even in your favorite **Netflix** recommendations!
--   Knowing stats can help you win arguments on the internet with **facts**.
--   It’s like having a superpower—just without the cape.
+## How This Class Works
 
-## What You'll Learn This Semester 
+### Course Structure
 
--   How to describe data like a pro
--   The magic of probability (yes, magic)
--   Testing hypotheses (no rabbits involved)
--   Correlation, regression, and causation—oh my!
+::: list-dave
+-   **Participation:**
+    -   Asking questions helps you understand and will likely help out your classmates!
+-   **Homework:**
+    -   I want you to have practice outside of the classroom (low-stakes)
+-   **InQuizitive**:
+    -   Textbook Component that measures critical thinking and understanding
+-   **Exams:**
+    -   An adequate (not perfect) method of seeing how well you understand and can apply the material
+:::
 
-## How This Class Works 
+## Any Questions About Me?
 
--   **Participation:** Asking questions makes you smart (and makes me happy)!
--   **Homework:** It's like Netflix binging but with numbers.
--   **Exams:** Where you'll show off your new superpowers.
+::: emoji
+❓
+:::
 
-## Any Questions? 
 
-Before we dive into numbers, let’s chat! Any burning questions or random thoughts?
+## Oh No, the Icebreaker...
+
+### I have to, I'm sorry!
+
+```{r}
+layout_column_wrap(
+  card(
+    card_title(
+      "Choice 1: Traditional Icebreaker"
+    ),
+    card_body(
+      "Tell me something about yourself!"
+    ),
+    card_footer(
+      "I am originally from Maine"
+    )
+  ),
+  card(
+    card_title(
+      "Choice 2: Hot Takes"
+    ),
+    card_body(
+      "Tell me a hot take you have"
+    ),
+    card_footer(
+      "I think switching lanes without signalling should be a felony-class crime"
+    )
+  ),
+    card(
+    card_title(
+      "Choice 3: Funeral Hopes and Dreams"
+    ),
+    card_body(
+      "What do you want to be said at your funeral?"
+    ),
+    card_footer(
+      "He made us laugh and feel like we were important"
+    )
+  )
+)
+```
+
+:::::: emoji-row
+::: emoji
+🦞
+:::
+
+::: emoji
+🚔
+:::
+
+::: emoji
+⚰️
+:::
+::::::
+
+## What About AI?
+
+### Use It!
+
+AI tools are everywhere and trying to avoid them or police their use is a bit of a fools errand! This is all I ask:
+
+-   If you use an AI tool (LLM), show me how you used it!
+
+-   Don't let it replace your own thinking\*
+
+-   If you don't know *how* to use it, ask me and we can go over it!
+
+-   There is more than one tool:
+
+    -   ChatGPT
+
+    -   Claude
+
+    -   Perplexity
+
+    -   Gemini
+
+## Syllabus Overview
+
+### Over to Brightspace!
+
+:::::: columns
+:::: {.column width="80%"}
+::: list-dave
+-   **Textbook**: What version/where to buy/do I need it?
+
+-   **Exams**: How many questions/how many
+
+-   **Lab Sessions**: How many, What do we do
+
+-   **InQuizitive**: What does it look like?
+
+-   **Homework**: Students literally asked for this!
+:::
+::::
+
+::: {.column width="20%"}
+![](images/syllabus_thumb.png)
+:::
+::::::

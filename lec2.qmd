@@ -5,7 +5,7 @@ author:
   - name: "Dave Brocker"
     email: brockeda@farmingdale.edu
 institute: "Farmingdale State College"
-footer: "⬡⬢"
+footer: "PSY 348 - Statistics for Psychology"
 format:
   revealjs:
     menu: 
@@ -25,34 +25,4 @@ revealjs-plugins:
   - drop
 ---
 
-## Visualizing Data
-
-### Parts of a Whole
-
--   Pie Charts
-
--   Donut Plots
-
--   Bar Charts
-
-## Pie Charts
-
-### No thank you, I'm Full
-
-```{r}
-
-library(ggplot2)
-
-data.frame(
-  gender = c(rep("Man",44),
-             rep("Female",42),
-             rep("Third-Gender",10),
-             rep("Non-Binary",1))
-) |> 
-  ggplot(aes(x = factor(1), fill = factor(gender))) + 
-  geom_bar(width = 1) +
-  coord_polar(theta = "y") +
-  theme_minimal()
-
-
-```
+## 
