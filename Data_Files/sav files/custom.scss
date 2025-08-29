@@ -1,0 +1,299 @@
+/*-- scss:defaults --*/
+
+//fonts
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+
+$font-family-sans-serif: "Fira Sans","Atkinson Hyperlegible", sans-serif;
+$font-family-monospace: "FiraCode-Regular", monospace;
+
+// colors 
+$body-color: #222;
+$text-muted: lighten($body-color, 50%);
+$body-bg: #0F1620 !default;
+$jet: #131516;
+$accent: rgb(117, 170, 219);
+$accent2: #e07a5f;
+$accent3: #2CA02C;
+$accent3: #808D8E;
+$fsc: #004636;
+$hex: "\2B22";
+$link-color: $jet !default;
+$presentation-title-slide-text-align: left;
+
+/*-- scss:rules --*/
+// Welcome Slide Deck
+.reveal .int-title {
+  color: #d2e3f3;
+  font-size: 3em;
+  position: absolute; 
+  left: 20px; 
+  top: 20px
+}
+
+.reveal .int-sub {
+  color: #d2e3f3;
+  font-size: 1.2em;
+  position: absolute; 
+  left: 20px; 
+  top: 200px
+}
+
+.reveal .int-auth {
+  color: #d2e3f3;
+  position: absolute; 
+  text-align: left;
+  font-size: 1.1em;
+  left: 30px; 
+  bottom: 40px;
+  line-height: 1.5em;
+}
+
+//Lab Slide Deck
+.reveal .cust-title {
+  color: #d2e3f3;
+  font-size: 3em;
+  position: absolute; 
+  left: 20px; 
+  top: 20px
+}
+
+.reveal .cust-sub {
+  color: #d2e3f3;
+  font-size: 1.2em;
+  position: absolute; 
+  left: 20px; 
+  top: 200px
+}
+
+.reveal .cust-author {
+  color: #d2e3f3;
+  position: absolute; 
+  text-align: left;
+  font-size: 1.1em;
+  left: 20px; 
+  bottom: 40px;
+  line-height: 1.5em;
+}
+
+.cust-pic {
+  font-size: 10em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reveal .slide p {
+  color: #fff;
+}
+
+.reveal a{
+  color: #fff;
+}
+
+.reveal .slide ul, li{
+  color: #fff;
+}
+
+.reveal .slide h1 { //Level 1 Heading Slide
+  color: $accent;
+}
+
+.reveal .slide h2 { //Level 2 Heading Slide
+  color: $accent;
+  font-size: 80px;
+}
+
+.reveal .slide h3 { //Level 3 Heading Slide
+  color: #fff;
+}
+
+.highlight-last  {
+  color: grey;
+  .current-fragment {
+    color: #2CA02C;
+  }
+}
+
+.reveal blockquote {
+  background: rgba(255, 255, 255, 0.1); // translucent white
+  color: #e0f7fa; // soft cyan text
+  border-left: 4px solid #00bcd4; // accent line
+  padding: 1em;
+  border-radius: 8px;
+}
+
+.reveal ol, .reveal dl, .reveal ul { //remove margin and bullets
+    display: inline-block;
+    color: #fff;
+    text-align: left;
+    margin: 0;
+    list-style: none;
+}
+
+//.reveal .slide blockquote { //blockquote style
+//  font-style:italic;
+//  color: #555555;
+//  border-left:8px solid #78C0A8 ;
+//  position: relative;
+//  background:#EDEDED;
+//}
+
+//.reveal li {
+//    background-color: $accent;
+//    color: #fff;
+//    border-radius: 20px;
+//    padding: 10px;
+//}
+
+// Callout Tip
+.callout-tip{
+  height: 301px;
+  
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+  .card-header {
+    color: #555;
+  }
+
+  .card-body{
+    font-size: 1em;
+    padding: 10px;
+  }
+  
+  .card-footer{
+    font-style: italic;
+    padding: 10px;
+    font-size: .80em;
+  }
+  
+  .card-img {
+    border-radius: 8px;
+  }
+}
+
+/* Apply styles to the parent <li> */
+
+//.list-dave li {
+//  background-color: $accent;   /* dark background */
+//  color: #fff;              /* light text for contrast */
+//  padding: 12px;
+//  border-radius: 12px;
+//  /*margin-bottom: 10px;*/
+//  margin: 0px;
+//}
+//
+///* Apply different styles to nested child <li> items */
+//.list-dave li li {
+//  background-color: #f5f5f5; /* light background */
+//  color: #333;               /* dark text */
+//  padding: 6px 10px;
+//  border-radius: 12px;
+//  margin: 4px 0;
+//}
+
+.flowpic{
+  border-radius: 20px; 
+  position: absolute; 
+  top: 200;
+}
+
+.ques {
+   text-align: center; 
+   font-size: 3.0em;
+}
+
+.ques img {
+  width: 25%;
+  color: white;
+  stroke: white;
+}
+
+/* Make title text stand out */
+#hello-quarto-title .reveal .title {
+  color: #ffffff; /* bright white */
+  background-color: #444;
+  border-radius: 20px;
+  text-align: center;
+  width: 50%;
+  font-size: 2.8em;
+  font-weight: 700;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);  /* subtle shadow */
+}
+
+/* Subtitle */
+.reveal .sub {
+  color: #f0f0f0;
+  font-size: 1.8em;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  background-color: #444;
+  width: 50%;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/* Author block */
+.reveal .author {
+  background: #444;  /* semi-transparent dark box */
+  color: #ffffff;
+  width: 50%;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 1.2em;
+  position: absolute;
+  bottom: 30px;
+}
+
+/* Emoji container */
+.emoji {
+  font-size: 5em;                /* adjust size */
+  display: flex;                 /* center content */
+  justify-content: center;
+  align-items: center;
+  width: 300px;                  /* circle size */
+  height: 300px;
+  margin: 0 auto;                /* center under cards */
+  border-radius: 50%;            /* makes it a circle */
+  background: #ffffff;           /* white background for clarity */
+  border: 3px solid #333;        /* optional border */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* subtle shadow */
+}
+
+/* Layout for emoji row */
+.emoji-row {
+  display: flex;
+  justify-content: space-around; /* align under the three cards */
+  align-items: center;
+  margin-top: 20px;              /* spacing from cards */
+}
+
+.side-by {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.side-by-con {
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 20px;
+  width: 200px;
+  height: 200px;
+}
+
+#stack-present{
+  color: $accent;
+}
