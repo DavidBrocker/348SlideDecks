@@ -2,7 +2,7 @@
 
 //fonts
 @import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
-
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap';
 $font-family-sans-serif: "Fira Sans","Atkinson Hyperlegible", sans-serif;
 $font-family-monospace: "FiraCode-Regular", monospace;
 
@@ -17,37 +17,35 @@ $accent3: #2CA02C;
 $accent3: #808D8E;
 $fsc: #004636;
 $hex: "\2B22";
-$link-color: $jet !default;
+$link-color: $accent !default;
 $presentation-title-slide-text-align: left;
 
 /*-- scss:rules --*/
-// Welcome Slide Deck
-.reveal .int-title {
+#title-slide {
+  text-align: center;  // keep left-aligned if you like
+  padding: 40px;     // some breathing room
+}
+
+#title-slide .title {
   color: #d2e3f3;
   font-size: 3em;
-  position: absolute; 
-  left: 20px; 
-  top: 20px
+  margin-bottom: 20px;
 }
 
-.reveal .int-sub {
+#title-slide .subtitle {
   color: #d2e3f3;
-  font-size: 1.2em;
-  position: absolute; 
-  left: 20px; 
-  top: 200px
+  font-size: 1.5em;
+  margin-bottom: 20px;
 }
 
-.reveal .int-auth {
+#title-slide .quarto-title-authors {
   color: #d2e3f3;
-  position: absolute; 
-  text-align: left;
   font-size: 1.1em;
-  left: 30px; 
-  bottom: 40px;
-  line-height: 1.5em;
+  line-height: 1.5;
+  text-align: center;
+  margin-left: 40%;
 }
-
+  
 //Lab Slide Deck
 .reveal .cust-title {
   color: #d2e3f3;
@@ -85,6 +83,8 @@ $presentation-title-slide-text-align: left;
 
 .reveal .slide p {
   color: #fff;
+  font-size: 1em;
+  line-height: 1.4;  /* improves readability */
 }
 
 .reveal a{
@@ -127,8 +127,6 @@ $presentation-title-slide-text-align: left;
     display: inline-block;
     color: #fff;
     text-align: left;
-    margin: 0;
-    list-style: none;
 }
 
 //.reveal .slide blockquote { //blockquote style
@@ -175,6 +173,10 @@ $presentation-title-slide-text-align: left;
     font-size: .80em;
   }
   
+  p {
+  font-size: 28px;
+  line-height: 1.4;  /* improves readability */
+}
   .card-img {
     border-radius: 8px;
   }
@@ -296,4 +298,8 @@ $presentation-title-slide-text-align: left;
 
 #stack-present{
   color: $accent;
+}
+
+.material-icons{
+  font-size: 4em;
 }
