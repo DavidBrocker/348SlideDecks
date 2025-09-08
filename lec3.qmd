@@ -6,10 +6,10 @@ institute: "Farmingdale State College"
 footer: "⬡⬡⬡"
 format:
   revealjs:
+    theme: custom.scss
     chalkboard: true
     slide-number: c/t
     preview-links: auto
-    theme: custom.scss
     incremental: true   
     touch: true
     width: 1600
@@ -18,6 +18,8 @@ format:
     menu:
       side: right
       width: wide
+revealjs-plugins:
+  - codewindow
 ---
 
 ## Studying Psychology
@@ -49,6 +51,8 @@ format:
 -   Memory
 :::
 :::::
+
+[Measures of Central Tendency]
 
 ## Studying Psychology
 
@@ -510,7 +514,9 @@ Population:
 
 Scale of Measurement:
 
-## End of Part 1
+## Measures of Central Tendency
+
+### Part 2: What's in the Middle?
 
 ## **Review**
 
@@ -529,11 +535,19 @@ Scale of Measurement:
 ::: {.incremental .highlight-last}
 -   Nominal
 
+    -   Categories, No Equal Gaps
+
 -   Ordinal
+
+    -   Ordered, No Equal Gaps
 
 -   Interval
 
+    -   Quantitative, Equal Gaps, No True 0
+
 -   Ratio
+
+    -   Quantitative, Equal Gaps, True 0
 :::
 
 ## Review
@@ -544,6 +558,8 @@ Scale of Measurement:
 -   n = ?
 
 -   x = ?
+
+-   $\bar{x}$ = ?
 :::
 
 ## **Review**
@@ -554,6 +570,8 @@ Scale of Measurement:
 -   n = the number of people in the sample
 
 -   x = one participant's score
+
+-   $\bar{x}$ = sample mean
 :::
 
 ## **Review**
@@ -594,6 +612,8 @@ Scale of Measurement:
     -   Average
 
     -   Min & Max
+
+    -   Most Frequent/Most Infrequent
 :::
 
 ## **Descriptive Statistics**
@@ -620,39 +640,58 @@ Scale of Measurement:
 
 ### What does that actually mean?
 
+If the class average is a 3.2, it means that if you were to add up every student's class average, you would get 3.2!
+
 ## **Measures of Central tendency**
 
-::: {.incremental .highlight-last}
--   Mean
+### Mean \| Average
 
-    -   the average; obtained by summing all values and dividing by the number of values.
+::: callout-important
+-   The average; obtained by summing all values and dividing by the number of values.
 
-    -   $\sum^{n}_{i=1} = x_1 + x_2...$
+-   $\large{\sum^{n}_{i=1} = x_1 + x_2...}$
 
-    -   $\frac{\sum(x)}{n}$
+-   $\large{\frac{\sum(x)}{n}}$
+
+-   $\large{[3,4,5,2,1] = \frac{\sum(3+4+5+2+1)}{5} = \frac{15}{5} = \bar{x} = 3}$
 :::
 
 ## **Measures of Central tendency**
 
-::: {.incremental .highlight-last}
--   Median
+### Median
 
-    -   The middle number; obtained by ordering all values from lowest to highest and taking the middle (if n is odd or the average of the 2 middle if n is even)
+::: callout-important
+-   The middle number; obtained by ordering all values from lowest to highest and taking the middle (if n is odd or the average of the 2 middle if n is even)
+
+-   $\large{x = \{4,2,5,6,3\}}$
+
+-   $\large{x = \{2,3,4,5,6\}}$
+
+-   $\large{x = \{2,3,\color{blue}{4},5,6\}}$
 :::
 
 ## **Measures of Central tendency**
 
-::: {.incremental .highlight-last}
--   Mode
+### Mode
 
-    -   the most frequent answer; obtained by counting how many times each answer is given and taking the value that occurs most often
+::: callout-important
+-   The most frequent answer; obtained by counting how many times each answer is given and taking the value that occurs most often
+
+-   $x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]$
 :::
 
 ## **Measures of Central tendency**
 
 ### Standard Normal Distribution
 
+::::: columns
+::: {.column width="50%"}
 ```{r}
+#| fig-width: 8
+#| fig-height: 6
+#| fig-align: center
+
+
 library(ggplot2)
 
 x <- seq(5, 15, length=1000)
@@ -671,24 +710,30 @@ ggplot(data = nm, aes(x,y)) +
     axis.text.x = element_blank()
   ) +
   geom_vline(xintercept = 10) +
-  geom_label(label = "Mean", y = 0, x = 10) +
+  geom_label(label = "Mean", y = 0, x = 10, fill = "blue") +
   geom_label(label = "Median", y = 0.15, x = 10) +
-  geom_label(label = "Mode", y = 0.3, x = 10)
+  geom_label(label = "Mode", y = 0.3, x = 10) +
+  theme(
+    panel.grid = element_blank()
+  )
   
 ```
+:::
 
-## **Measures of Central tendency**
-
+::: {.column width="50%"}
 In a normal distribution, the mean, median, and mode are equal to one another.
 
 Mean = Median = Mode
+:::
+:::::
 
-## **Measures of Central tendency**
+## **Measures of Central Tendency**
 
-### The Mean is good for use in normal distributions
+### Mean
 
+::::: columns
+::: {.column width="50%"}
 ```{r}
- 
   data.frame(
     z = rnorm(500,30,sd =10)
     ) |> 
@@ -700,21 +745,75 @@ Mean = Median = Mode
     labs(x = "",
          y = "")
 ```
+:::
 
-## **The Mean**
-
-::: {.incremental .highlight-last}
+::: {.column width="50%"}
 -   The mean is only helpful in a [**normal distribution**]{.underline}, which you may have heard called a normal curve or bell curve.
 
 -   We overwhelmingly use the mean, because in the social and behavioral sciences, we nearly always assume the distribution is normal.
 :::
+:::::
+
+## Why Do We Assume Normality?
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+set.seed(123)
+
+# Population: strongly skewed (exponential distribution)
+pop <- rexp(100000, rate = 1)
+
+# Take many samples of size 30 and compute their means
+sample_means_30 <- replicate(5000, mean(sample(pop, 30, replace = TRUE)))
+
+# Take many samples of size 100 and compute their means
+sample_means_100 <- replicate(5000, mean(sample(pop, 100, replace = TRUE)))
+
+# Plot population vs. sampling distributions
+df <- data.frame(
+  value = c(pop, sample_means_30, sample_means_100),
+  group = rep(c("Population (Skewed)", 
+                "Sampling Dist (n = 30)", 
+                "Sampling Dist (n = 100)"), 
+              times = c(length(pop), length(sample_means_30), length(sample_means_100)))
+)
+
+ggplot(df, aes(x = value, fill = group)) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  facet_wrap(~group, scales = "free_y") +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "Central Limit Theorem in Action",
+    subtitle = "Population is skewed, but sampling distributions of the mean approach normality",
+    x = "Value", y = "Frequency"
+  )
+```
+:::
+
+::: {.column width="50%"}
+-   We assume normality because the math works better
+
+-   The Central Limit Theorem makes it reasonable
+
+-   Many human traits actually do cluster in bell-shaped patterns.
+:::
+:::::
 
 ## **Measures of Central tendency**
 
 ### When should we use the median...
 
-A skewed distribution occurs when one side of the date gets cut off due to measurement limitation.
+::::: columns
+::: {.column width="50%"}
+-   A skewed distribution occurs when one side of the data gets cut off due to measurement limitation.
 
+-   In a skewed distribution, the mean gets pulled out toward the tail, and the mode gets pulled to the cluster.
+
+-   The median is the best measure of central tendency for skewed distributions because it tells us how most people answered.
+:::
+
+::: {.column width="50%"}
 ```{r}
 # Set seed for reproducibility
 set.seed(123)
@@ -736,29 +835,21 @@ data.frame(left_skewed) |>
   geom_vline(xintercept = 
                mean(left_skewed)) 
 ```
-
-## **The Median**
-
-::: {.incremental .highlight-last}
--   In a skewed distribution, the mean gets pulled out toward the tail, and the mode gets pulled to the cluster.
-
--   The median is the best measure of central tendency for skewed distributions because it tells us how most people answered.
 :::
+:::::
 
 ## **Measures of Central tendency**
 
 ### **The Mode**
 
-::: {.incremental .highlight-last}
+::::: columns
+::: {.column width="50%"}
 -   The mode is good for bi-or-tri-modal distributions.
 
 -   When might you have a bi-modal distribution?
 :::
 
-## **Measures of Central tendency**
-
-### **The Mode**
-
+::: {.column width="50%"}
 ```{r}
 exam <- 
   data.frame(
@@ -785,12 +876,17 @@ ggplot(exam,aes(l)) +
         face = "bold")
   )
 ```
+:::
+:::::
 
-## **Measures of Central tendency**
+## **Measures of Central Tendency**
 
-### **The Mode**
+### **Example: Mode**
 
 ```{r}
+#| fig-align: center
+
+
 exam <- 
   data.frame(l = c(
     rnorm(500,1,0.5), 
@@ -825,31 +921,36 @@ ggplot(exam, aes(l)) +
 
 -   Mode
 
-    -   good for bimodal distributions
+    -   good for bi-modal distributions
 :::
 
-## **Central tendency: Which should we use?**
+## Central Tendency
 
-### Two or More Peaks
+### Which should we use?
 
 ```{r}
-  data.frame(l = c(
+#| fig-align: center
+
+data.frame(l = c(
     rnorm(500,1,0.5), 
     rnorm(500,5,0.5)) 
     ) |> 
 ggplot(aes(l)) + 
   geom_histogram(fill = "darkblue") +
   labs(x = "", 
-       y = ""
-       ) + 
-  theme_minimal()
+       y = "",
+       title = "Two or More Peaks") + 
+  theme_minimal(base_size = 15)
 ```
 
-## **Central tendency: Which should we use?**
+## Central Tendency
 
-### Slide to the Left!
+### Which should we use?
 
 ```{r}
+#| fig-align: center
+
+
 # Set seed for reproducibility
 set.seed(123)
 
@@ -861,199 +962,161 @@ data.frame(left_skewed) |>
   geom_histogram(fill = "grey30") +
   labs(
     x = "",
-    y = ""
+    y = "",
+    title = "Slide to the Left!"
   ) + 
-  theme_minimal() 
+  theme_minimal(base_size = 15) 
 ```
 
-## **Central tendency: Which should we use?**
+## Central Tendency: 
 
-### Looks Normal to Me
+### Which should we use?
 
 ```{r}
-  
+#| fig-align: center
+
+
 data.frame(
   l = rnorm(500,12,1)
     ) |> 
 ggplot(aes(l)) + 
   geom_histogram(fill = "darkorange") +
   labs(x = "", 
-       y = ""
+       y = "",
+       title = "Looks Normal to Me"
        ) + 
-  theme_minimal()
+  theme_minimal(base_size = 15)
 ```
 
-## **Measures of Central tendency:**
-
-### **The mean**
-
-::: {.incremental .highlight-last}
--   We use the mean most often in social science, because many of our statistical tests can only be used on normal distributions.
-
--   We *assume* normality of the distribution, and use the mean.
-:::
-
-## Calculating measures of central tendency
+## Calculating measures of central Tendency
 
 ### **Calculating The mean**
 
-::: {.incremental .highlight-last}
--   Sum all x values
+::: callout-tip
 
--   Divide by the number of x values (n).
+1.  Sum all x values
+2.  Divide by the number of x values (n).
+3.  $\large{x = 4,2,5,6}$
+4.  $\large{\frac{\sum(x)}{n}}$
+5.  $\large{\sum(x) = 4 + 2 + 5 + 6 = 17}$
+6.  $\large{\frac{17}{4} = \color{red}{4.25}}$
+
 :::
 
-. . .
+## Calculating measures of central Tendency
 
-`x = 4,2,5,6`
+### **Calculating The median**
 
-. . .
+::: callout-tip
 
-$\frac{\Sigma(x)}{n}$
+1.  Put all x values in order from smallest or largest or largest to smallest.
+2.  Find the middle number.
+3.  If there are an even number of x values, take the average of the 2 middle numbers.
+4.  $\large{x = \{6,2,4,2,8\}}$
+5.  $\large{x = \{2,2,4,6,8\}}$
+6.  $\large{x = \{2,2,\color{blue}{4},6,8\}}$
 
-. . .
-
-$\Sigma(x) = 4 + 2 + 5 + 6 = 17$
-
-. . .
-
-$\frac{17}{4} = 4.25$
-
-## Calculating measures of central tendency
-
-## **Calculating The median**
-
-::: {.incremental .highlight-last}
--   Put all x values in order from smallest or largest or largest to smallest.
-
--   Find the middle number.
-
--   If there are an even number of x values, take the average of the 2 middle numbers.
-
--   `x = 4,2,5,6,3`
-
--   `x = 2,3,4,5,6`
 :::
 
 ## Calculating measures of central tendency
 
 ### **Calculating The mode**
 
-::: {.incremental .highlight-last}
--   Put all x values in order from smallest or largest or largest to smallest. $x = [3,2,1,5,3,7,8,3,2,4,1]$
+::: callout-tip
 
--   Find the number or numbers that repeat the most. $x = [1,1,2,2,3,3,3,4,5,7,8]$
+1.  Put all x values in order from smallest or largest or largest to smallest.
+2.  Find the number or numbers that repeat the most.
+3.  $\large{x = [3,2,1,5,3,7,8,3,2,4,1]}$
+4.  $\large{x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]}$ 
+6. There can be more than 1 mode.
 
--   There can be more than 1 mode.
 :::
 
 ## **Using Excel**
 
 ### **Excel Practice**
 
-::: {.incremental .highlight-last}
--   Cell
+::::: columns
+::: {.column width="50%"}
+<center>
 
--   Columns
+<iframe width="800" height="600" src="https://docs.google.com/spreadsheets/d/1Dy3reM8KfCgOe2YTonTqw0zQ8cvq1rUiwkNVl3J8Tig/edit?usp=sharing&amp;rm=minimal&amp;single=true&amp;">
 
--   Rows
+</iframe>
+
+</center>
 :::
 
-![](images/excel.png){fig-align="center" width="301"}
-
-## **Excel Practice**
-
-::: {.incremental .highlight-last}
+::: {.column width="50%"}
 -   What does each row in this spreadsheet represent?
 
 -   What does each column in this spreadsheet represent?
 :::
+:::::
 
 ## **Excel Practice**
 
-::: {.incremental .highlight-last}
--   Adding & Summing
+::::: columns
+::: {.column width="50%"}
+<center>
 
--   Subtracting
+<iframe width="800" height="600" src="https://docs.google.com/spreadsheets/d/1Dy3reM8KfCgOe2YTonTqw0zQ8cvq1rUiwkNVl3J8Tig/edit?usp=sharing&amp;rm=minimal&amp;single=true&amp;">
 
--   Multiplying
+</iframe>
 
--   Dividing
-
--   Squaring
+</center>
 :::
 
-## **Excel Practice**
-
-::: {.incremental .highlight-last}
+::: {.column width="50%"}
 -   Adding & Sum: `SUM(B2:B10)`
 
--   Subtracting: `C9 - C2`
+-   Subtracting: `=C9 - C2`
 
--   Multiplying: `B12 * 4`
+-   Multiplying: `=B12 * 4`
 
--   Dividing: `A2/B3`
+-   Dividing: `=A2/B3`
 
--   Squaring: `(B2-C2)^2`
+-   Squaring: `=(B2-C2)^2`
 
--   Average: `AVERAGE(B2:B20)`
+-   Average: `=AVERAGE(B2:B20)`
 :::
+:::::
 
 ## **Excel Practice**
 
-::: {.incremental .highlight-last}
--   Open our Class Data in Microsoft Excel.
+::::: columns
+::: {.column width="50%"}
+<center>
 
+<iframe width="800" height="600" src="https://docs.google.com/spreadsheets/d/1Dy3reM8KfCgOe2YTonTqw0zQ8cvq1rUiwkNVl3J8Tig/edit?usp=sharing&amp;rm=minimal&amp;single=true&amp;">
+
+</iframe>
+
+</center>
+:::
+
+::: {.column width="50%"}
 -   Calculate the Mean
 
--   Using (`SUM(x))/n`
+-   Using `=SUM(x)/n`
 
--   Using `Average(x)`
+-   Using `=AVERAGE(x)`
 
 -   Calculate the Median
 
 -   Find the `Mode(s)`
 :::
+:::::
 
 ## **Review**
 
-::: {.incremental .highlight-last}
-### When do we use the...
+### When do we use the and how do we caluclate the...
 
 -   Mean?
 
 -   Median?
 
 -   Mode?
-:::
-
-## **Review**
-
-### How do we calculate the...
-
-::: {.incremental .highlight-last}
--   Mean?
-
--   Median?
-
--   Mode?
-:::
-
-## **Review**
-
-### What is this the formula for?
-
-::: {.incremental .highlight-last}
--   Explain this formula to me.
-:::
-
-. . .
-
-$\sum(x)$
-
-## **Review**
-
-When are the mean, median, and mode the same (equal to one another)?
 
 ## **Key Takeaways Slide**
 
@@ -1063,4 +1126,4 @@ When are the mean, median, and mode the same (equal to one another)?
 
 -   **Mode** → good for categorical or multi-modal
 
--   We assume normality a lot because it lets us use the mean.
+-   We assume normality because it lets us use the mean.

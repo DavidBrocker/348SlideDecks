@@ -1,5 +1,195 @@
 ---
-title: "Newest Lab"
+title: "Measures of Central Tendency"
+subtitle: "Lab 2: Exploring Data"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "⬡⬡⬡"
+format:
+  revealjs:
+    theme: custom.scss
+    chalkboard: true
+    slide-number: c/t
+    preview-links: auto
+    incremental: true   
+    width: 1600
+    height: 900
+    lightbox: true
+    auto-animate: true
+    menu:
+      side: right
+      width: wide
+revealjs-plugins:
+  - codewindow
 ---
 
-<iframe class="slide-deck" style="width:720px; height:540px" src="lec1.html"></iframe>
+## Lab 3
+
+### Top 100 Billboard Hits
+
+::::: columns
+::: {.column width="50%"}
+> This week we are exploring the [Billboard Hot 100 Number Ones Database](https://docs.google.com/spreadsheets/d/1j1AUgtMnjpFTz54UdXgCKZ1i4bNxFjf01ImJ-BqBEt0/edit?gid=1974823090#gid=1974823090). This workbook contains substantial data about every song to ever top the Billboard Hot 100 between August 4, 1958 and January 11, 2025. It was compiled by Chris Dalla Riva as he wrote the book [Uncharted Territory: What Numbers Tell Us about the Biggest Hit Songs and Ourselves](https://bio.site/uncharted_territory).
+:::
+
+::: {.column width="50%"}
+```{r}
+library(gt)
+library(dplyr)
+
+#| echo: true
+
+# Read data file from CSV
+billboard <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv')
+
+billboard |> 
+  names() |> 
+  data.frame(column_names = _) |> 
+  gt() |> 
+  cols_width(everything() ~ px(130)) |> 
+  opt_row_striping() |> 
+  opt_interactive()
+```
+:::
+:::::
+
+## Data Tip #1
+
+### Look for Relevance!
+
+This dataset has 105 columns (wow!) and they might not *all* be needed. Let's focus on the ones that can be useful!
+
+```{r}
+
+library(dplyr)
+library(gt)
+
+# Define columns + descriptions
+library(dplyr)
+library(gt)
+
+col_info <- tribble(
+  ~column,              ~description,                        ~best_central_tendency,
+  "song",               "Title of the song",                               "Mode (most common category)",
+  "artist",             "Performer(s) of the song",                        "Mode (most common category))",
+  "date",               "Date the song charted (or peaked)",               "Mode (most common category))",
+  "weeks_at_number_one","Number of weeks the song was at #1",              "Median (resistant to outliers like very long runs)",
+  "overall_rating",     "Aggregated critical or popularity rating",        "Mean (assume roughly normal distribution)",
+  "divisiveness",       "How polarizing the ratings are across sources",   "Mean or Median (depends on skewness)",
+  "front_person_age",   "Age of the lead performer at release",            "Mean (if approx. normal), Median (if skewed)",
+  "bpm",                "Tempo of the song (beats per minute)",            "Mean (usually symmetric, but check for outliers)",
+  "length_sec",         "Total length of the song in seconds",             "Median (long songs can skew the mean)",
+  "intro_length_sec",   "Length of the song’s introduction (seconds)",     "Median (often skewed by outliers)",
+  "cdr_genre",          "Categorical genre label",                         "Mode (most common genre)",
+  "explicit",           "Flag for explicit lyrical content (1 = yes, 0 = no)", "Mode (most common category)",
+  "artist_male",        "Performer identified as male (1 = yes, 0 = no)",  "Mode (most common category)",
+  "artist_white",       "Performer identified as White (1 = yes, 0 = no)", "Mode (most common category)",
+  "artist_black",       "Performer identified as Black (1 = yes, 0 = no)", "Mode (most common category)"
+)
+
+# Make gt table
+col_info %>%
+  gt() %>%
+  tab_header(
+    title = "Billboard Dataset (Teaching Subset)",
+    subtitle = "Columns, descriptions, and likely best measure of central tendency"
+  ) |> 
+  opt_interactive() |> 
+  opt_row_striping()
+```
+
+```{r}
+library(dplyr)
+library(asciicast)
+
+billboard_clean <- 
+  billboard |> select(
+    song, artist, date,                     weeks_at_number_one, overall_rating, 
+    divisiveness, front_person_age, bpm, length_sec, intro_length_sec, cdr_genre,                  explicit,                   artist_male, artist_white, artist_black
+  )
+```
+
+## Which Artist Has the Most Number 1's?
+
+### Group Exercise
+
+``` {.r code-line-numbers="3,4,5"}
+# Step 1: Read data
+billboard <- 
+  readr::read_csv(
+    'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv',
+    show_col_types = FALSE
+  )
+```
+
+## Which Artist Has the Most Number 1's?
+
+### Group Exercise
+
+``` {.r code-line-numbers="8,9"}
+# Step 1: Read data
+billboard <- 
+  readr::read_csv(
+    'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv',
+    show_col_types = FALSE
+  )
+# Step 2: Group by Artist
+billboard |> 
+  group_by(artist)
+```
+
+## Which Artist Has the Most Number 1's?
+
+### Group Exercise
+
+``` r
+# Step 1: Read data
+billboard <- 
+  readr::read_csv(
+    'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv',
+    show_col_types = FALSE
+  )
+# Step 2: Group by Artist
+billboard |> 
+  group_by(artist)
+# Step 3: Count, ungroup, and select top 10
+  count(sort = TRUE) |> 
+  ungroup() |> 
+  top_n(10)  
+```
+
+## Which Artist Has the Most Number 1's?
+
+### Group Exercise
+
+```{r}
+billboard |> 
+  # Step 3: Count, ungroup, and select top 10
+  group_by(artist) |> 
+  count(sort = TRUE) |> 
+  ungroup() |> 
+  top_n(10) |> 
+  gt() |> 
+  tab_options(
+    table.width = pct(100),
+    table.font.size = px(22)   # increase font size here
+  ) |> 
+  cols_nanoplot(
+    columns = n, 
+    plot_type = "bar",
+    autoscale = TRUE,
+    new_col_name = "Frequency",options = nanoplot_options(interactive_data_values = FALSE)
+  )
+```
+
+## Lab 2 Questions
+
+### Answer 3 and Submit on Brightspace
+
+1.  Which artist had the [most number]{style="background-color: #561818;"} of weeks in the number on spot?
+2.  Which artist is rated [highest]{style="background-color: #561818;"} overall?
+3.  What is the [average]{style="background-color: #561818;"} rating of all the artists?
+4.  What is the [youngest age]{style="background-color: #561818;"} of the lead singer for a band?
+5.  What is the [median]{style="background-color: #561818;"} BPM?
+6.  What is the [percentage]{style="background-color: #561818;"} of explicit songs vs. non-explicit songs?
+7.  What is the [percentage]{style="background-color: #561818;"} of black vs. white artists?
+8.  What is the [percentage]{style="background-color: #561818;"} of male vs. female artists?

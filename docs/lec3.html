@@ -34,12 +34,13 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-475464fd75b6f0a60cd52b037506ef2f.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-c62bc4833d91066491f772da7e0d2f45.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-codewindow/codewindow.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -170,6 +171,7 @@ Dave Brocker
 <li class="fragment"><p>Memory</p></li>
 </ul>
 </div></div>
+<p><a href="#/measures-of-central-tendency">Measures of Central Tendency</a></p>
 </section>
 <section id="studying-psychology-1" class="slide level2">
 <h2>Studying Psychology</h2>
@@ -612,8 +614,9 @@ Dave Brocker
 <p>Population:</p>
 <p>Scale of Measurement:</p>
 </section>
-<section id="end-of-part-1" class="slide level2">
-<h2>End of Part 1</h2>
+<section id="measures-of-central-tendency" class="slide level2">
+<h2>Measures of Central Tendency</h2>
+<h3 id="part-2-whats-in-the-middle">Part 2: What’s in the Middle?</h3>
 </section>
 <section id="review" class="slide level2">
 <h2><strong>Review</strong></h2>
@@ -630,10 +633,22 @@ Dave Brocker
 <h3 id="scales-of-measurement-2">Scales of Measurement</h3>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>Nominal</p></li>
-<li class="fragment"><p>Ordinal</p></li>
-<li class="fragment"><p>Interval</p></li>
-<li class="fragment"><p>Ratio</p></li>
+<li class="fragment"><p>Nominal</p>
+<ul>
+<li class="fragment">Categories, No Equal Gaps</li>
+</ul></li>
+<li class="fragment"><p>Ordinal</p>
+<ul>
+<li class="fragment">Ordered, No Equal Gaps</li>
+</ul></li>
+<li class="fragment"><p>Interval</p>
+<ul>
+<li class="fragment">Quantitative, Equal Gaps, No True 0</li>
+</ul></li>
+<li class="fragment"><p>Ratio</p>
+<ul>
+<li class="fragment">Quantitative, Equal Gaps, True 0</li>
+</ul></li>
 </ul>
 </div>
 </section>
@@ -644,6 +659,7 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>n = ?</p></li>
 <li class="fragment"><p>x = ?</p></li>
+<li class="fragment"><p><span class="math inline">\(\bar{x}\)</span> = ?</p></li>
 </ul>
 </div>
 </section>
@@ -654,6 +670,7 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>n = the number of people in the sample</p></li>
 <li class="fragment"><p>x = one participant’s score</p></li>
+<li class="fragment"><p><span class="math inline">\(\bar{x}\)</span> = sample mean</p></li>
 </ul>
 </div>
 </section>
@@ -694,6 +711,7 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>Average</p></li>
 <li class="fragment"><p>Min &amp; Max</p></li>
+<li class="fragment"><p>Most Frequent/Most Infrequent</p></li>
 </ul></li>
 </ul>
 </div>
@@ -708,7 +726,7 @@ Dave Brocker
 </ul>
 </div>
 </section>
-<section id="measures-of-central-tendency" class="slide level2">
+<section id="measures-of-central-tendency-1" class="slide level2">
 <h2><strong>Measures of Central tendency</strong></h2>
 <div class="highlight-last">
 <ul>
@@ -721,63 +739,96 @@ Dave Brocker
 <section id="the-average-gpa-in-the-class-is-3.2" class="slide level2">
 <h2>The average GPA in the class is 3.2</h2>
 <h3 id="what-does-that-actually-mean">What does that actually mean?</h3>
-</section>
-<section id="measures-of-central-tendency-1" class="slide level2">
-<h2><strong>Measures of Central tendency</strong></h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Mean</p>
-<ul>
-<li class="fragment"><p>the average; obtained by summing all values and dividing by the number of values.</p></li>
-<li class="fragment"><p><span class="math inline">\(\sum^{n}_{i=1} = x_1 + x_2...\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(\frac{\sum(x)}{n}\)</span></p></li>
-</ul></li>
-</ul>
-</div>
+<p>If the class average is a 3.2, it means that if you were to add up every student’s class average, you would get 3.2!</p>
 </section>
 <section id="measures-of-central-tendency-2" class="slide level2">
 <h2><strong>Measures of Central tendency</strong></h2>
-<div class="highlight-last">
+<h3 id="mean-average">Mean | Average</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p>Median</p>
-<ul>
-<li class="fragment">The middle number; obtained by ordering all values from lowest to highest and taking the middle (if n is odd or the average of the 2 middle if n is even)</li>
-</ul></li>
+<li class="fragment"><p>The average; obtained by summing all values and dividing by the number of values.</p></li>
+<li class="fragment"><p><span class="math inline">\(\large{\sum^{n}_{i=1} = x_1 + x_2...}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\large{\frac{\sum(x)}{n}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\large{[3,4,5,2,1] = \frac{\sum(3+4+5+2+1)}{5} = \frac{15}{5} = \bar{x} = 3}\)</span></p></li>
 </ul>
+</div>
+</div>
 </div>
 </section>
 <section id="measures-of-central-tendency-3" class="slide level2">
 <h2><strong>Measures of Central tendency</strong></h2>
-<div class="highlight-last">
+<h3 id="median">Median</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p>Mode</p>
-<ul>
-<li class="fragment">the most frequent answer; obtained by counting how many times each answer is given and taking the value that occurs most often</li>
-</ul></li>
+<li class="fragment"><p>The middle number; obtained by ordering all values from lowest to highest and taking the middle (if n is odd or the average of the 2 middle if n is even)</p></li>
+<li class="fragment"><p><span class="math inline">\(\large{x = \{4,2,5,6,3\}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\large{x = \{2,3,4,5,6\}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\large{x = \{2,3,\color{blue}{4},5,6\}}\)</span></p></li>
 </ul>
+</div>
+</div>
 </div>
 </section>
 <section id="measures-of-central-tendency-4" class="slide level2">
 <h2><strong>Measures of Central tendency</strong></h2>
-<h3 id="standard-normal-distribution">Standard Normal Distribution</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
-</figure>
+<h3 id="mode">Mode</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment"><p>The most frequent answer; obtained by counting how many times each answer is given and taking the value that occurs most often</p></li>
+<li class="fragment"><p><span class="math inline">\(x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]\)</span></p></li>
+</ul>
 </div>
 </div>
 </div>
 </section>
 <section id="measures-of-central-tendency-5" class="slide level2">
 <h2><strong>Measures of Central tendency</strong></h2>
+<h3 id="standard-normal-distribution">Standard Normal Distribution</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <p>In a normal distribution, the mean, median, and mode are equal to one another.</p>
 <p>Mean = Median = Mode</p>
+</div></div>
 </section>
 <section id="measures-of-central-tendency-6" class="slide level2">
-<h2><strong>Measures of Central tendency</strong></h2>
-<h3 id="the-mean-is-good-for-use-in-normal-distributions">The Mean is good for use in normal distributions</h3>
+<h2><strong>Measures of Central Tendency</strong></h2>
+<h3 id="mean">Mean</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -787,20 +838,17 @@ Dave Brocker
 </div>
 </div>
 </div>
-</section>
-<section id="the-mean" class="slide level2">
-<h2><strong>The Mean</strong></h2>
-<div class="highlight-last">
+</div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>The mean is only helpful in a <u><strong>normal distribution</strong></u>, which you may have heard called a normal curve or bell curve.</p></li>
 <li class="fragment"><p>We overwhelmingly use the mean, because in the social and behavioral sciences, we nearly always assume the distribution is normal.</p></li>
 </ul>
-</div>
+</div></div>
 </section>
-<section id="measures-of-central-tendency-7" class="slide level2">
-<h2><strong>Measures of Central tendency</strong></h2>
-<h3 id="when-should-we-use-the-median">When should we use the median…</h3>
-<p>A skewed distribution occurs when one side of the date gets cut off due to measurement limitation.</p>
+<section id="why-do-we-assume-normality" class="slide level2">
+<h2>Why Do We Assume Normality?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -810,29 +858,25 @@ Dave Brocker
 </div>
 </div>
 </div>
-</section>
-<section id="the-median" class="slide level2">
-<h2><strong>The Median</strong></h2>
-<div class="highlight-last">
+</div><div class="column" style="width:50%;">
 <ul>
+<li class="fragment"><p>We assume normality because the math works better</p></li>
+<li class="fragment"><p>The Central Limit Theorem makes it reasonable</p></li>
+<li class="fragment"><p>Many human traits actually do cluster in bell-shaped patterns.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="measures-of-central-tendency-7" class="slide level2">
+<h2><strong>Measures of Central tendency</strong></h2>
+<h3 id="when-should-we-use-the-median">When should we use the median…</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>A skewed distribution occurs when one side of the data gets cut off due to measurement limitation.</p></li>
 <li class="fragment"><p>In a skewed distribution, the mean gets pulled out toward the tail, and the mode gets pulled to the cluster.</p></li>
 <li class="fragment"><p>The median is the best measure of central tendency for skewed distributions because it tells us how most people answered.</p></li>
 </ul>
-</div>
-</section>
-<section id="measures-of-central-tendency-8" class="slide level2">
-<h2><strong>Measures of Central tendency</strong></h2>
-<h3 id="the-mode"><strong>The Mode</strong></h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>The mode is good for bi-or-tri-modal distributions.</p></li>
-<li class="fragment"><p>When might you have a bi-modal distribution?</p></li>
-</ul>
-</div>
-</section>
-<section id="measures-of-central-tendency-9" class="slide level2">
-<h2><strong>Measures of Central tendency</strong></h2>
-<h3 id="the-mode-1"><strong>The Mode</strong></h3>
+</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -842,15 +886,37 @@ Dave Brocker
 </div>
 </div>
 </div>
+</div></div>
 </section>
-<section id="measures-of-central-tendency-10" class="slide level2">
+<section id="measures-of-central-tendency-8" class="slide level2">
 <h2><strong>Measures of Central tendency</strong></h2>
-<h3 id="the-mode-2"><strong>The Mode</strong></h3>
+<h3 id="the-mode"><strong>The Mode</strong></h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>The mode is good for bi-or-tri-modal distributions.</p></li>
+<li class="fragment"><p>When might you have a bi-modal distribution?</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
 <p><a href="lec3_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="measures-of-central-tendency-9" class="slide level2">
+<h2><strong>Measures of Central Tendency</strong></h2>
+<h3 id="example-mode"><strong>Example: Mode</strong></h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -870,203 +936,182 @@ Dave Brocker
 </ul></li>
 <li class="fragment"><p>Mode</p>
 <ul>
-<li class="fragment">good for bimodal distributions</li>
+<li class="fragment">good for bi-modal distributions</li>
 </ul></li>
 </ul>
 </div>
 </section>
-<section id="central-tendency-which-should-we-use" class="slide level2">
-<h2><strong>Central tendency: Which should we use?</strong></h2>
-<h3 id="two-or-more-peaks">Two or More Peaks</h3>
-<div class="cell">
+<section id="central-tendency" class="slide level2">
+<h2>Central Tendency</h2>
+<h3 id="which-should-we-use">Which should we use?</h3>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="central-tendency-which-should-we-use-1" class="slide level2">
-<h2><strong>Central tendency: Which should we use?</strong></h2>
-<h3 id="slide-to-the-left">Slide to the Left!</h3>
-<div class="cell">
+<section id="central-tendency-1" class="slide level2">
+<h2>Central Tendency</h2>
+<h3 id="which-should-we-use-1">Which should we use?</h3>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="central-tendency-which-should-we-use-2" class="slide level2">
-<h2><strong>Central tendency: Which should we use?</strong></h2>
-<h3 id="looks-normal-to-me">Looks Normal to Me</h3>
-<div class="cell">
+<section id="central-tendency-2" class="slide level2">
+<h2>Central Tendency:</h2>
+<h3 id="which-should-we-use-2">Which should we use?</h3>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
-</div>
-</section>
-<section id="measures-of-central-tendency-11" class="slide level2">
-<h2><strong>Measures of Central tendency:</strong></h2>
-<h3 id="the-mean-1"><strong>The mean</strong></h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>We use the mean most often in social science, because many of our statistical tests can only be used on normal distributions.</p></li>
-<li class="fragment"><p>We <em>assume</em> normality of the distribution, and use the mean.</p></li>
-</ul>
 </div>
 </section>
 <section id="calculating-measures-of-central-tendency" class="slide level2">
-<h2>Calculating measures of central tendency</h2>
+<h2>Calculating measures of central Tendency</h2>
 <h3 id="calculating-the-mean"><strong>Calculating The mean</strong></h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Sum all x values</p></li>
-<li class="fragment"><p>Divide by the number of x values (n).</p></li>
-</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>. . .</p>
-<p><code>x = 4,2,5,6</code></p>
-<p>. . .</p>
-<p><span class="math inline">\(\frac{\Sigma(x)}{n}\)</span></p>
-<p>. . .</p>
-<p><span class="math inline">\(\Sigma(x) = 4 + 2 + 5 + 6 = 17\)</span></p>
-<p>. . .</p>
-<p><span class="math inline">\(\frac{17}{4} = 4.25\)</span></p>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment">Sum all x values</li>
+<li class="fragment">Divide by the number of x values (n).</li>
+<li class="fragment"><span class="math inline">\(\large{x = 4,2,5,6}\)</span></li>
+<li class="fragment"><span class="math inline">\(\large{\frac{\sum(x)}{n}}\)</span></li>
+<li class="fragment"><span class="math inline">\(\large{\sum(x) = 4 + 2 + 5 + 6 = 17}\)</span></li>
+<li class="fragment"><span class="math inline">\(\large{\frac{17}{4} = \color{red}{4.25}}\)</span></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="calculating-measures-of-central-tendency-1" class="slide level2">
-<h2>Calculating measures of central tendency</h2>
-</section>
-<section id="calculating-the-median" class="slide level2">
-<h2><strong>Calculating The median</strong></h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Put all x values in order from smallest or largest or largest to smallest.</p></li>
-<li class="fragment"><p>Find the middle number.</p></li>
-<li class="fragment"><p>If there are an even number of x values, take the average of the 2 middle numbers.</p></li>
-<li class="fragment"><p><code>x = 4,2,5,6,3</code></p></li>
-<li class="fragment"><p><code>x = 2,3,4,5,6</code></p></li>
-</ul>
+<h2>Calculating measures of central Tendency</h2>
+<h3 id="calculating-the-median"><strong>Calculating The median</strong></h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment">Put all x values in order from smallest or largest or largest to smallest.</li>
+<li class="fragment">Find the middle number.</li>
+<li class="fragment">If there are an even number of x values, take the average of the 2 middle numbers.</li>
+<li class="fragment"><span class="math inline">\(\large{x = \{6,2,4,2,8\}}\)</span></li>
+<li class="fragment"><span class="math inline">\(\large{x = \{2,2,4,6,8\}}\)</span></li>
+<li class="fragment"><span class="math inline">\(\large{x = \{2,2,\color{blue}{4},6,8\}}\)</span></li>
+</ol>
+</div>
+</div>
 </div>
 </section>
 <section id="calculating-measures-of-central-tendency-2" class="slide level2">
 <h2>Calculating measures of central tendency</h2>
 <h3 id="calculating-the-mode"><strong>Calculating The mode</strong></h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Put all x values in order from smallest or largest or largest to smallest. <span class="math inline">\(x = [3,2,1,5,3,7,8,3,2,4,1]\)</span></p></li>
-<li class="fragment"><p>Find the number or numbers that repeat the most. <span class="math inline">\(x = [1,1,2,2,3,3,3,4,5,7,8]\)</span></p></li>
-<li class="fragment"><p>There can be more than 1 mode.</p></li>
-</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment">Put all x values in order from smallest or largest or largest to smallest.</li>
+<li class="fragment">Find the number or numbers that repeat the most.</li>
+<li class="fragment"><span class="math inline">\(\large{x = [3,2,1,5,3,7,8,3,2,4,1]}\)</span></li>
+<li class="fragment"><span class="math inline">\(\large{x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]}\)</span></li>
+<li class="fragment">There can be more than 1 mode.</li>
+</ol>
+</div>
+</div>
 </div>
 </section>
 <section id="using-excel" class="slide level2">
 <h2><strong>Using Excel</strong></h2>
 <h3 id="excel-practice"><strong>Excel Practice</strong></h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Cell</p></li>
-<li class="fragment"><p>Columns</p></li>
-<li class="fragment"><p>Rows</p></li>
-</ul>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/excel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/excel.png" class="quarto-figure quarto-figure-center" width="301"></a></p>
-</figure>
-</div>
-</section>
-<section id="excel-practice-1" class="slide level2">
-<h2><strong>Excel Practice</strong></h2>
-<div class="highlight-last">
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<iframe width="800" height="600" src="https://docs.google.com/spreadsheets/d/1Dy3reM8KfCgOe2YTonTqw0zQ8cvq1rUiwkNVl3J8Tig/edit?usp=sharing&amp;rm=minimal&amp;single=true&amp;">
+</iframe>
+</center>
+</div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>What does each row in this spreadsheet represent?</p></li>
 <li class="fragment"><p>What does each column in this spreadsheet represent?</p></li>
 </ul>
-</div>
+</div></div>
+</section>
+<section id="excel-practice-1" class="slide level2">
+<h2><strong>Excel Practice</strong></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<iframe width="800" height="600" src="https://docs.google.com/spreadsheets/d/1Dy3reM8KfCgOe2YTonTqw0zQ8cvq1rUiwkNVl3J8Tig/edit?usp=sharing&amp;rm=minimal&amp;single=true&amp;">
+</iframe>
+</center>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Adding &amp; Sum: <code>SUM(B2:B10)</code></p></li>
+<li class="fragment"><p>Subtracting: <code>=C9 - C2</code></p></li>
+<li class="fragment"><p>Multiplying: <code>=B12 * 4</code></p></li>
+<li class="fragment"><p>Dividing: <code>=A2/B3</code></p></li>
+<li class="fragment"><p>Squaring: <code>=(B2-C2)^2</code></p></li>
+<li class="fragment"><p>Average: <code>=AVERAGE(B2:B20)</code></p></li>
+</ul>
+</div></div>
 </section>
 <section id="excel-practice-2" class="slide level2">
 <h2><strong>Excel Practice</strong></h2>
-<div class="highlight-last">
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<iframe width="800" height="600" src="https://docs.google.com/spreadsheets/d/1Dy3reM8KfCgOe2YTonTqw0zQ8cvq1rUiwkNVl3J8Tig/edit?usp=sharing&amp;rm=minimal&amp;single=true&amp;">
+</iframe>
+</center>
+</div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Adding &amp; Summing</p></li>
-<li class="fragment"><p>Subtracting</p></li>
-<li class="fragment"><p>Multiplying</p></li>
-<li class="fragment"><p>Dividing</p></li>
-<li class="fragment"><p>Squaring</p></li>
-</ul>
-</div>
-</section>
-<section id="excel-practice-3" class="slide level2">
-<h2><strong>Excel Practice</strong></h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Adding &amp; Sum: <code>SUM(B2:B10)</code></p></li>
-<li class="fragment"><p>Subtracting: <code>C9 - C2</code></p></li>
-<li class="fragment"><p>Multiplying: <code>B12 * 4</code></p></li>
-<li class="fragment"><p>Dividing: <code>A2/B3</code></p></li>
-<li class="fragment"><p>Squaring: <code>(B2-C2)^2</code></p></li>
-<li class="fragment"><p>Average: <code>AVERAGE(B2:B20)</code></p></li>
-</ul>
-</div>
-</section>
-<section id="excel-practice-4" class="slide level2">
-<h2><strong>Excel Practice</strong></h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Open our Class Data in Microsoft Excel.</p></li>
 <li class="fragment"><p>Calculate the Mean</p></li>
-<li class="fragment"><p>Using (<code>SUM(x))/n</code></p></li>
-<li class="fragment"><p>Using <code>Average(x)</code></p></li>
+<li class="fragment"><p>Using <code>=SUM(x)/n</code></p></li>
+<li class="fragment"><p>Using <code>=AVERAGE(x)</code></p></li>
 <li class="fragment"><p>Calculate the Median</p></li>
 <li class="fragment"><p>Find the <code>Mode(s)</code></p></li>
 </ul>
-</div>
+</div></div>
 </section>
 <section id="review-6" class="slide level2">
 <h2><strong>Review</strong></h2>
-<section id="when-do-we-use-the" class="incremental highlight-last">
-<h3>When do we use the…</h3>
+<h3 id="when-do-we-use-the-and-how-do-we-caluclate-the">When do we use the and how do we caluclate the…</h3>
 <ul>
 <li class="fragment"><p>Mean?</p></li>
 <li class="fragment"><p>Median?</p></li>
 <li class="fragment"><p>Mode?</p></li>
 </ul>
-</section>
-</section>
-<section id="review-7" class="slide level2">
-<h2><strong>Review</strong></h2>
-<h3 id="how-do-we-calculate-the">How do we calculate the…</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Mean?</p></li>
-<li class="fragment"><p>Median?</p></li>
-<li class="fragment"><p>Mode?</p></li>
-</ul>
-</div>
-</section>
-<section id="review-8" class="slide level2">
-<h2><strong>Review</strong></h2>
-<h3 id="what-is-this-the-formula-for">What is this the formula for?</h3>
-<div class="highlight-last">
-<ul>
-<li class="fragment">Explain this formula to me.</li>
-</ul>
-</div>
-<p>. . .</p>
-<p><span class="math inline">\(\sum(x)\)</span></p>
-</section>
-<section id="review-9" class="slide level2">
-<h2><strong>Review</strong></h2>
-<p>When are the mean, median, and mode the same (equal to one another)?</p>
 </section>
 <section id="key-takeaways-slide" class="slide level2">
 <h2><strong>Key Takeaways Slide</strong></h2>
@@ -1074,7 +1119,7 @@ Dave Brocker
 <li class="fragment"><p><strong>Mean</strong> → good for symmetric/normal.</p></li>
 <li class="fragment"><p><strong>Median</strong> → good for skewed/outlier-heavy.</p></li>
 <li class="fragment"><p><strong>Mode</strong> → good for categorical or multi-modal</p></li>
-<li class="fragment"><p>We assume normality a lot because it lets us use the mean.</p></li>
+<li class="fragment"><p>We assume normality because it lets us use the mean.</p></li>
 </ul>
 
 
@@ -1094,6 +1139,7 @@ Dave Brocker
   <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-codewindow/codewindow.js"></script>
   <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -1287,7 +1333,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealCodewindow, QuartoSupport,
 
           RevealMath,
           RevealNotes,
