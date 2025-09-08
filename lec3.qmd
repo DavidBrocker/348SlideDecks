@@ -9,7 +9,7 @@ format:
     theme: custom.scss
     chalkboard: true
     slide-number: c/t
-    preview-links: auto
+    preview-links: true
     incremental: true   
     touch: true
     width: 1600
@@ -566,29 +566,16 @@ Scale of Measurement:
 
 ### Statistical Terms
 
-::: {.incremental .highlight-last}
 -   n = the number of people in the sample
 
 -   x = one participant's score
 
--   $\bar{x}$ = sample mean
-:::
+-   $\bar{x}$ = sample mean (pronounced x-bar)
 
 ## **Review**
 
 ### Statistical Terms
 
-::: {.incremental .highlight-last}
--   What is a parameter?
-
--   What is a statistic?
-:::
-
-## **Review**
-
-### Statistical Terms
-
-::: {.incremental .highlight-last}
 -   What is a parameter?
 
     -   Information that describes the population.
@@ -598,49 +585,48 @@ Scale of Measurement:
     -   Information that describes the sample.
 
     -   Inferences about the population based on information from the sample.
-:::
 
 ## **Descriptive Statistics**
 
 ### Describe the characteristics of the sample.
 
-::: {.incremental .highlight-last}
--   Think about our data on time spent on Instagram.
+-   Think about our data on time spent on Instagram/phones in general.
 
--   How could we describe it?
+-   How could we *describe* it?
 
     -   Average
 
+        -   Overall, what is the typical duration
+
     -   Min & Max
 
+        -   Highest and Lowest
+
     -   Most Frequent/Most Infrequent
-:::
+
+        -   What are the most common durations?
+
+        -   Least common?
 
 ## **Descriptive Statistics**
 
 ### Describe the characteristics of a sample in terms of:
 
-::: {.incremental .highlight-last}
--   Central tendency: What most people said
+-   **Central tendency**: What most people said (mean, median, and mode)
 
--   Dispersion: How spread out the data are
-:::
+-   **Dispersion**: How spread out the data are (standard deviation)
 
 ## **Measures of Central tendency**
 
-::: {.incremental .highlight-last}
 -   Tell us about the mid-point (center) of a distribution.
 
 -   Tell us about the mid-point (center) of a distribution.
 
 -   Tell us most participants' answer.
-:::
 
 ## The average GPA in the class is 3.2
 
 ### What does that actually mean?
-
-If the class average is a 3.2, it means that if you were to add up every student's class average, you would get 3.2!
 
 ## **Measures of Central tendency**
 
@@ -656,6 +642,10 @@ If the class average is a 3.2, it means that if you were to add up every student
 -   $\large{[3,4,5,2,1] = \frac{\sum(3+4+5+2+1)}{5} = \frac{15}{5} = \bar{x} = 3}$
 :::
 
+-   Think about how you calculate your GPA or grade for a class
+
+-   When would you use this in research?
+
 ## **Measures of Central tendency**
 
 ### Median
@@ -670,6 +660,10 @@ If the class average is a 3.2, it means that if you were to add up every student
 -   $\large{x = \{2,3,\color{blue}{4},5,6\}}$
 :::
 
+-   Why is median typically used for income?
+
+-   When would you want this for research?
+
 ## **Measures of Central tendency**
 
 ### Mode
@@ -679,6 +673,10 @@ If the class average is a 3.2, it means that if you were to add up every student
 
 -   $x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]$
 :::
+
+-   What's your favorite genre of music?
+
+-   When would you want this for research?
 
 ## **Measures of Central tendency**
 
@@ -794,11 +792,19 @@ ggplot(df, aes(x = value, fill = group)) +
 ::: {.column width="50%"}
 -   We assume normality because the math works better
 
--   The Central Limit Theorem makes it reasonable
+-   The **Central Limit Theorem** makes it reasonable
 
 -   Many human traits actually do cluster in bell-shaped patterns.
 :::
 :::::
+
+## Central Limit Theorem
+
+### [The Galton Board](https://www.mathsisfun.com/data/quincunx.html)
+
+![](images/galton.png)
+
+[More Examples](https://editor.p5js.org/pazatico/sketches/n_CYcQBIF)
 
 ## **Measures of Central tendency**
 
@@ -862,13 +868,16 @@ ggplot(exam,aes(l)) +
   labs(
     x = "",
     y = "",
-    title = "When half of the class scores high and the other half doesn't"
+    title = "When half of the class scores high and the other half doesn't",
+    subtitle = "Black and Dashed lines represent median and mean"
   ) + 
   theme_minimal() +
   geom_vline(xintercept = 65,
              color = "red") + 
   geom_vline(xintercept = 80,
              color = "red") +
+  geom_vline(aes(xintercept=mean(l)),lty="dashed") +
+  geom_vline(aes(xintercept=median(l)),lty="solid")+
   theme(
     plot.title = 
       element_text(
@@ -959,16 +968,19 @@ left_skewed <- rbeta(1000, shape1 = 2, shape2 = 5)
 
 data.frame(left_skewed) |> 
   ggplot(aes(left_skewed)) + 
-  geom_histogram(fill = "grey30") +
+  geom_histogram(fill = "grey80") +
   labs(
     x = "",
     y = "",
-    title = "Slide to the Left!"
+    title = "Slide to the Left!",
+    subtitle = "Dashed and solid lines represent mean and median"
   ) + 
-  theme_minimal(base_size = 15) 
+  theme_minimal(base_size = 15) +
+  geom_vline(aes(xintercept=mean(left_skewed)), lty="dashed") +
+  geom_vline(aes(xintercept=median(left_skewed))) 
 ```
 
-## Central Tendency: 
+## Central Tendency:
 
 ### Which should we use?
 
@@ -981,9 +993,12 @@ data.frame(
     ) |> 
 ggplot(aes(l)) + 
   geom_histogram(fill = "darkorange") +
+    geom_vline(aes(xintercept=mean(l)), lty="dashed") +
+  geom_vline(aes(xintercept=median(l))) +
   labs(x = "", 
        y = "",
-       title = "Looks Normal to Me"
+       title = "Looks Normal to Me",
+        subtitle = "Dashed and solid lines represent mean and median"
        ) + 
   theme_minimal(base_size = 15)
 ```
@@ -993,14 +1008,12 @@ ggplot(aes(l)) +
 ### **Calculating The mean**
 
 ::: callout-tip
-
 1.  Sum all x values
 2.  Divide by the number of x values (n).
 3.  $\large{x = 4,2,5,6}$
 4.  $\large{\frac{\sum(x)}{n}}$
 5.  $\large{\sum(x) = 4 + 2 + 5 + 6 = 17}$
 6.  $\large{\frac{17}{4} = \color{red}{4.25}}$
-
 :::
 
 ## Calculating measures of central Tendency
@@ -1008,14 +1021,12 @@ ggplot(aes(l)) +
 ### **Calculating The median**
 
 ::: callout-tip
-
 1.  Put all x values in order from smallest or largest or largest to smallest.
 2.  Find the middle number.
 3.  If there are an even number of x values, take the average of the 2 middle numbers.
 4.  $\large{x = \{6,2,4,2,8\}}$
 5.  $\large{x = \{2,2,4,6,8\}}$
 6.  $\large{x = \{2,2,\color{blue}{4},6,8\}}$
-
 :::
 
 ## Calculating measures of central tendency
@@ -1023,13 +1034,11 @@ ggplot(aes(l)) +
 ### **Calculating The mode**
 
 ::: callout-tip
-
 1.  Put all x values in order from smallest or largest or largest to smallest.
 2.  Find the number or numbers that repeat the most.
 3.  $\large{x = [3,2,1,5,3,7,8,3,2,4,1]}$
-4.  $\large{x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]}$ 
-6. There can be more than 1 mode.
-
+4.  $\large{x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]}$
+5.  There can be more than 1 mode.
 :::
 
 ## **Using Excel**
