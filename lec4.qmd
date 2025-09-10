@@ -4,19 +4,28 @@ subtitle: "PSY 348: Lecture 4"
 author: "Dave Brocker"
 institute: "Farmingdale State College"
 footer: "Dispersion | ⬡⬢⬡⬢"
+filters: 
+  - linkate
 format: 
   revealjs:
     theme: custom.scss
+    chalkboard: true
+    slide-number: c/t
+    preview-links: true
     incremental: true   
     touch: true
-    chalkboard: true
+    width: 1600
+    height: 900
+    lightbox: true
+    menu:
+      side: right
+      width: wide
 ---
 
 ## Descriptive Statistics
 
 ### The Old and the New
 
-::: {.incremental .highlight-last}
 -   $x$
 
 -   $\bar{x}$
@@ -24,7 +33,6 @@ format:
 -   $\sum(x)$
 
 -   $x^2$
-:::
 
 ## Descriptive Statistics
 
@@ -44,85 +52,76 @@ format:
 
 ### Examples
 
-::: {.incremental .highlight-last}
--   `data = {1,4,3,2,4,6}`
+-   $data = \{1,4,3,2,4,6\}$
 
--   $x$ = $x = 1 | 4 | 3 | 2 | 4 | 6$
+-   $x$ = $1 | 4 | 3 | 2 | 4 | 6$
 
 -   $\bar{x}$ = $3.33\bar{3}$
 
 -   $\sum(x)$ = $1 + 4 + 3 + 2 + 4 + 6 = 20$
 
 -   $x^2$ = $1 | 16 | 9 | 4 | 16 | 36$
-:::
 
 ## Descriptive Statistics
 
 ### Describe the characteristics of a sample in terms of:
 
-::: {.incremental .highlight-last}
 -   Central tendency
+
+    -   The mid-point of the data
+
+    -   The most typical/frequent answers
 
 -   Dispersion (aka Variability aka Variance)
 
     -   Dispersion: the action or process of distributing things or people over a wide area.
-:::
 
 ## Central tendency: Mean
 
 ### What is it, when should we use it, and how do we calculate it?
 
-::: {.incremental .highlight-last}
 -   Mean
     -   Average of all $x$ values
     -   Normal Distribution
-    -   $\frac{\sum(x)}{n}$
-:::
+    -   Formula: $\frac{\sum(x)}{n}$
 
 ## Central tendency: Median
 
 ### What is it, when should we use it, and how do we calculate it?
 
-::: {.incremental .highlight-last}
 -   Median
     -   Middle value in **sorted** data
     -   Skewed distributions
-    -   $Med(X) = \frac{n + 1}{2}$
-:::
+        -   Is the data pulled to the left or the right?
+        -   $Med(X) = \frac{n + 1}{2}$
 
 ## Central tendency: Mode
 
 ### What is it, when should we use it, and how do we calculate it?
 
-::: {.incremental .highlight-last}
 -   Mode
     -   Most common value
-    -   Bi\|Tri-Modal Distributions
-    -   Most common value
-:::
+    -   Bi/Tri-Modal Distributions
+    -   Most common value(s)
+        -   Shows us that data is clustered
 
 ## Central Tendency
 
 ### What do measures of Central Tendency tell you?
 
-::: {.incremental .highlight-last}
+::::: columns
+::: {.column width="50%"}
 -   The mid-point in the data
 
 -   The answer most of the participants gave.
 :::
 
-## Central Tendency
-
-### What do measures of Central Tendency tell you?
-
+::: {.column width="50%"}
 ```{r}
-#| fig-align: center
 library(dplyr)
 library(ggplot2)
-library(plotly)
 set.seed(348)
 
-ex <- 
 tibble(
   student = 1:30,
   score = rnorm(30,80,10)
@@ -137,20 +136,17 @@ tibble(
   geom_hline(aes(yintercept = mean(score)),
              color = "maroon",
              lty = "dashed") 
-
-ggplotly(ex)
-
 ```
+:::
+:::::
 
 ## Central Tendency
 
 ### What do measures of Central Tendency tell you?
 
 ```{r}
-#| fig-align: center
 set.seed(348)
 
-ex2 <- 
 tibble(
   student = 1:30,
   score = rnorm(30,80,10)
@@ -169,21 +165,17 @@ tibble(
                   y = mean(score),
                   yend = score)
               )
-ggplotly(ex2)
-
 ```
 
 ## Measures of Dispersion
 
 ### What does dispersion mean?
 
-::: {.incremental .highlight-last}
 -   Spread-out-ness
 
 -   How much the participants' responses differ from one another
 
 -   Variance
-:::
 
 ## Measures of Dispersion
 
@@ -208,36 +200,32 @@ p1 <-
     ggplot(aes(student,exam1)) + 
     geom_point() +
     theme_minimal() +
-    ylim(0,100) +
     geom_hline(aes(yintercept = mean(exam1),color = "maroon")) +
 labs(
   x = "\nStudent",
   y = "Exam Score\n"
-  )
-
+  ) + theme(legend.position = "none")
 p2 <- 
   exs |> 
     ggplot(aes(student,exam2)) + 
     geom_point() +
     theme_minimal()+
-    ylim(0,100) +
     geom_hline(aes(yintercept = mean(exam2),color = "maroon")) +
   labs(
   x = "\nStudent",
   y = "Exam Score\n"
-  )
+  )+ theme(legend.position = "none")
 
 p3 <- 
   exs |> 
     ggplot(aes(student,exam3)) + 
     geom_point() +
     theme_minimal() +
-    ylim(0,100) +
     geom_hline(aes(yintercept = mean(exam3)),color = "maroon") +
   labs(
   x = "\nStudent",
   y = "Exam Score\n"
-  )
+  ) + theme(legend.position = "none")
 
 p1 + p2 + p3
 
@@ -248,79 +236,80 @@ p1 + p2 + p3
 
 ### Measures of dispersion tell us about the spread-out-ness of the data, but what does that *actually* mean?
 
-::: {.incremental .highlight-last}
--   If I am measuring , *music popularity* what would low dispersion tell me?
--   If I am measuring *music popularity*, what would high dispersion tell me?
-:::
+-   If I am measuring *phone usage* what would low dispersion tell me?
+-   If I am measuring *phone usage*, what would high dispersion tell me?
 
 ## Measures of Dispersion
 
 ### Measures of dispersion tell us about consensus.
 
-::: {.incremental .highlight-last}
 -   Did participants give similar answers?
 
-    -   `{1,2,2,1,2,2,3,2,1}`
+    -   $\{1,2,2,1,2,2,3,2,1\}$
 
 -   Did participants give wildly different answers?
 
-    -   `{1,3,4,5,8,9,21,33}`
-:::
+    -   $\{1,3,4,5,8,9,21,33\}$
 
 ## Dispersion
 
 ### Measures of dispersion tell us about consensus.
 
-::: {.incremental .highlight-last}
 -   Data should have natural dispersion.
 
 -   If everyone gives a similar answer, it's harder to analyze difference.
-:::
 
 ## Calculating Dispersion
 
 ### How do you think we should calculate dispersion?
 
-::: {.incremental .highlight-last}
--   ON AVERAGE, how far is each X-VALUE from the MIDPOINT.
+-   On average, how far is each x-value from the midpoint
 
-    -   Calculate how far each X-VALUE is from the MIDPOINT.
+    -   Calculate how far each x-value is from the midpoint (mean)
 
-    -   Take the AVERAGE of those distances.
-:::
+    -   Take the average of those distances.
 
 ## Calculating Dispersion
 
 ### How do you think we should calculate dispersion?
 
-In psychology, the mid-point we use will be the [***mean***]{.underline}.
+In psychology, the mid-point we use will be the mean
 
 ## Calculating Dispersion
 
 ### Acquire Data
 
 ```{r}
-library(huxtable)
+library(gt)
 
 data.frame(
-  `Participant ID` = 1:10,
+  Participant = 1:10,
   X = c(1,3,2,2,3,2,1,3,1,2)
-) |> hux() |> 
-  theme_article() |> 
-  set_width(.5) |> 
-  set_align("left")
+) |> gt() |> 
+  opt_row_striping() |> 
+  cols_align(align = "center") |> 
+        tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+  ) |> 
+    tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    )
 ```
 
 ## Deviation Scores
 
-### Calculate how far each X-VALUE is from the MEAN.
+### Calculate how far each x-value is from the mean
 
-::::: {.incremental .highlight-last}
 ::: fragment
 Step 1. Examine Data
 :::
 
--   `data = {1,3,2,2,3,2,1,3,1,2}`
+-   $data = \{1,3,2,2,3,2,1,3,1,2\}$
 
 ::: fragment
 Step 2. Calculate Mean
@@ -329,13 +318,11 @@ Step 2. Calculate Mean
 -   $\bar{x} = \frac{\sum(x)}{n} = 1 + 3 + 2...$
 
 -   $\bar{x} = \frac{20}{10} = 2$
-:::::
 
 ## Deviation Scores
 
-### Calculate how far each X-VALUE is from the MEAN.
+### Calculate how far each x-value is from the mean
 
-::: {.incremental .highlight-last}
 Step 2: Subtract the mean from each X-value.
 
 -   $x - \bar{x}$
@@ -343,23 +330,31 @@ Step 2: Subtract the mean from each X-value.
 -   $(1-2) + (3-2) + (2-2) + (2-2)...$
 
 -   $(-1) + 1 + 0 + 0...$
-:::
 
 ## Calculating Dispersion
 
 ### Visual
 
 ```{r}
-library(dplyr)
 tibble(
   ParticipantID = 1:10,
-  X = c(1,3,2,2,3,2,1,3,1,2),
-  `x-M` = X-mean(X)
-) |> hux() |> 
-  theme_article() |> 
-  set_align("center") |> 
-  set_width(.5) |> 
-  set_height(.5)
+  x = c(1,3,2,2,3,2,1,3,1,2),
+  xM = x-mean(x)
+) |> gt() |> 
+  opt_row_striping() |> 
+  cols_label(xM = md("$x-\\bar{x}$")) |> 
+  cols_align(align = "center") |> 
+  tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+  ) |> 
+  tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    )
 ```
 
 ## Calculating Dispersion
@@ -368,7 +363,7 @@ tibble(
 
 ```{r}
 tibble(
-  ParticipantID = paste0(1:10),
+  ParticipantID = factor(1:10),
   X = c(1,3,2,2,3,2,1,3,1,2),
   `x-M` = X-mean(X)
 ) |> 
@@ -383,7 +378,8 @@ tibble(
   labs(
   x = "\nParticipant ID",
   y = "X Value\n"
-  )
+  ) + 
+  theme(panel.grid.major = element_blank())
 ```
 
 ## Calculating Dispersion
@@ -391,8 +387,10 @@ tibble(
 ### Visual
 
 ```{r}
+library(forcats)
+
 tibble(
-  ParticipantID = paste0(1:10),
+  ParticipantID = factor(1:10,ordered = TRUE),
   X = c(1,3,2,2,3,2,1,3,1,2),
   `x-M` = X-mean(X)
 ) |> 
@@ -407,7 +405,11 @@ tibble(
   labs(
   x = "\nParticipant ID",
   y = "X Value\n"
-  )
+  ) + 
+  theme(
+    panel.grid.major = element_blank(),
+    legend.position = "none"
+    )
 
 ```
 
@@ -415,25 +417,20 @@ tibble(
 
 ### Visual
 
-::: {.incremental .highlight-last}
 -   The average of the deviation scores will always = 0.
 
 -   On average, the x-values = x.
 
 -   So the average distance of x from x is 0.
-:::
 
 ## Calculating Dispersion
 
 ### How do you think we should calculate dispersion?
 
-::: {.incremental .highlight-last}
 1.  Calculate the mean.
 2.  Calculate the deviation scores.
 3.  What can we do to the deviation scores to prevent them from adding up to 0?
-:::
 
-::: {.incremental .highlight-last}
 ## What is the Mean of the Deviation Scores?
 
 ### Stop Being So Negative!
@@ -442,8 +439,7 @@ tibble(
 
 -   How do we get rid of negative numbers
 
--   $(x-\bar{x})^2$
-:::
+-   $(x-\bar{x})^2 = (1-2) = 0 | (1-2)^2 = 1$
 
 ## Calculating Dispersion
 
@@ -452,38 +448,48 @@ tibble(
 ```{r}
 tibble(
   ParticipantID = 1:10,
-  X = c(1,3,2,2,3,2,1,3,1,2),
-  `x-M` = X-mean(X),
+  x = c(1,3,2,2,3,2,1,3,1,2),
+  `x-M` = x-mean(x),
   `(x-M)^2` = `x-M`^2
   ) |> 
   # Bold Last Column
-  hux() |> 
-  theme_article() |> 
-  set_align("center") |> 
-  set_width(.5)
+  gt() |> 
+  opt_row_striping() |> 
+  cols_align(align = "center") |> 
+  cols_label(
+    `x-M` = md("$(x-\\bar{x})$"),
+    `(x-M)^2` = md("$(x-\\bar{x}^2)$")
+  ) |> 
+  tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+  ) |> 
+    tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    )
 ```
 
 ## Calculating Dispersion
 
 ### First 3 Steps
 
-::: {.incremental .highlight-last}
 -   Step 1: Calculate the mean.
 
 -   Step 2: Subtract the mean from each X-value.
 
 -   Step 3: Square each deviation score.
-:::
 
 ## Calculating Dispersion
 
 ### Now what: Calculate the average squared deviation.
 
-::: {.incremental .highlight-last}
 -   Step 4: Add up the Squared Deviations.
 
 -   $1+1+0+1...$
-:::
 
 ## Calculating Dispersion
 
@@ -492,19 +498,35 @@ tibble(
 ```{r}
 tibble(
   ParticipantID = 1:10,
-  X = c(1,3,2,2,3,2,1,3,1,2),
-  `x-M` = X-mean(X),
+  x = c(1,3,2,2,3,2,1,3,1,2),
+  `x-M` = x-mean(x),
   `(x-M)^2` = `x-M`^2
   ) |> 
-  hux() |> 
-  theme_article()
+  # Bold Last Column
+  gt() |> 
+  opt_row_striping() |> 
+  cols_align(align = "center") |> 
+  cols_label(
+    `x-M` = md("$(x-\\bar{x})$"),
+    `(x-M)^2` = md("$(x-\\bar{x}^2)$")
+  ) |> 
+    tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+  ) |> 
+    tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    )
 ```
 
 ## Calculating Dispersion
 
 ### Divide by n-1 to Estimate
 
-::: {.incremental .highlight-last}
 Step 5: Divide by (n-1).
 
 -   (n-1) refers to the *degrees of freedom*... don't worry about it for now.
@@ -514,7 +536,6 @@ Step 5: Divide by (n-1).
 -   Variance
 
     -   The fact or quality of being different, divergent, or inconsistent.
-:::
 
 ## Calculating Dispersion
 
@@ -533,27 +554,53 @@ Step 5: Divide by (n-1).
 ### Inflation
 
 ```{r}
-tibble(
+set.seed(348)
+
+infl <- tibble(
   ParticipantID = 1:6,
   X = runif(6,30,50),
   `x-M` = X-mean(X),
   `(x-M)^2` = `x-M`^2
   ) |> 
-  hux() |> 
-  theme_article()
+  gt() |> 
+    grand_summary_rows(
+    # Specify the single column to summarize
+    columns = `(x-M)^2`,
+    # Provide the aggregation function
+    fns = list(
+      Sum = ~sum(.),
+      Mean = ~sum(.)/5
+    )
+  ) |> 
+  cols_label(
+  `x-M` = md("$(x-\\bar{x})$"),
+  `(x-M)^2` = md("$(x-\\bar{x}^2)$")
+  ) |> fmt_auto() |> 
+      tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+  ) |> 
+    tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    )
+
+infl
 ```
 
 ## Calculating Dispersion
 
 Step 6: Take the square root.
 
--   $\frac{\sum(x-\bar{x})^2}{n-1} = \sqrt{.667} = .816$
+-   $\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$
 
 ## Calculating standard deviation
 
 ### Step-by-Step
 
-::: {.incremental .highlight-last}
 1.  Mean: Calculate the mean.
 
     -   $\bar{x}$
@@ -569,13 +616,11 @@ Step 6: Take the square root.
 4.  Sum of squares: Add up the squared deviations.
 
     -   $\sum(x-\bar{x})^2$
-:::
 
 ## Calculating standard deviation
 
 ### Step-by-Step
 
-::: {.incremental .highlight-last}
 5.  Variance: Divide the sum of squares by (n-1).
 
     -   $\frac{\sum(x-\bar{x})^2}{n-1}$
@@ -583,23 +628,32 @@ Step 6: Take the square root.
 6.  Standard Deviation: Take the square root of the variance.
 
     -   $\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$
-:::
 
 ## Formulas for Dispersion
 
 ### Variance and Standard Deviation
 
+::::::: columns
+:::: {.column width="50%"}
 ::: callout-important
-$$
-s^2 = \frac{\sum(x-\bar{x})^2}{N-1}
-$$
-:::
+## Variance
 
-::: callout-important
 $$
-s = \sqrt{\frac{\sum(x-\bar{x})^2}{N-1}}
+\large{\color{gold}{s^2} = \frac{\sum(x-\bar{x})^2}{n-1}}
 $$
 :::
+::::
+
+:::: {.column width="50%"}
+::: callout-important
+## Standard Deviation
+
+$$
+\large{\color{orange}{s} = \sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}}
+$$
+:::
+::::
+:::::::
 
 ## Formulas for Dispersion
 
@@ -613,12 +667,129 @@ $$
 
     -   This means that a standard deviation of 1 means a distance of 1 on the scale used to measure x.
 
-    -   HYPE scale: 1 to 10: standard deviation of 1 means the distance from one rating to the next, from 1 to 2.
-
-    -   If the mean = 5, SD = 1, most scores fall between 4 and 6.
-
 ## Variance & Standard deviation
 
 -   The Variance is the standard deviation squared: s²
 
 -   The Standard Deviation is the square root of the variance: s
+
+## Practice 1 — Basic mean, deviations, variance, SD
+
+**Problem (do by hand first):**\
+Compute the **sample mean**, each **deviation** from the mean, the **sum of squared deviations**, the **sample variance**, and the **sample standard deviation** for the dataset:
+
+`x = [4, 2, 5, 6, 3]`
+
+## Practice 1
+
+### Solution (steps)
+
+::::: columns
+::: {.column width="50%"}
+1.  Sum: $(\sum x = 4+2+5+6+3 = 20)$
+2.  Sample size: $(n = 5)$
+3.  Mean: $(\bar{x} = \frac{20}{5} = 4)$
+4.  Deviations: $(x_i - \bar{x} = [0, -2, 1, 2, -1])$
+5.  Squared deviations: $([0, 4, 1, 4, 1])$
+6.  Sum of squared deviations: $(0+4+1+4+1 = 10)$
+7.  Sample variance: $(s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5)$
+8.  Sample SD: $(s = \sqrt{2.5} \approx 1.5811)$
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| output-location: column
+
+x <- c(4,2,5,6,3)
+n <- length(x)
+sum_x <- sum(x)
+mean_x <- mean(x)
+deviations <- x - mean_x
+sq_dev <- deviations^2
+ssd <- sum(sq_dev)
+s2 <- var(x)  # sample variance by default (n-1)
+s <- sd(x)
+list(
+  n = n,
+  sum = sum_x,
+  mean = mean_x,
+  deviations = deviations,
+  squared_deviations = sq_dev,
+  sum_squared_deviations = ssd,
+  sample_variance = s2,
+  sample_sd = s
+)
+```
+:::
+:::::
+
+## Problem 2: Comparing dispersion
+
+### Mathematically
+
+> Two instructors have class scores: - Class A: scores_A = $[80, 82, 78, 85, 75]$ - Class B: scores_B = $[60, 90, 75, 85, 85]$ 1. Compute the mean and sample SD for each class. 2. Both classes have similar means. Which class has greater dispersion? What does that imply about reporting a “typical” student score?
+
+## Problem 2: Comparing dispersion
+
+### Mathematically
+
+::::: columns
+::: {.column width="50%"}
+-   **Step 1: Compute the mean**
+
+    -   $\bar{x}_A = \frac{80+82+78+85+75}{5} = \frac{400}{5} = 80$
+
+-   **Step 2: Compute deviations and squared deviations**
+
+-   $x_i - \bar{x}_A = [0, 2, -2, 5, -5]$
+
+-   $(x_i - \bar{x}_A)^2 = [0, 4, 4, 25, 25]$
+
+-   **Step 3: Compute variance and SD**
+
+-   $s_A^2 = \frac{\sum (x_i - \bar{x}_A)^2}{n-1} = \frac{58}{4} = 14.5$
+
+-   $s_A = \sqrt{14.5} \approx 3.81$
+:::
+::: {.column width="50%"}
+-   **Step 1: Compute the mean**
+
+    -   $\bar{x}_B = \frac{60+90+75+85+85}{5} = \frac{395}{5} = 79$
+
+-   **Step 2: Compute deviations and squared deviations**
+
+    -   $x_i - \bar{x}_B = [-19, 11, -4, 6, 6]$
+
+    -   $(x_i - \bar{x}_B)^2 = [361, 121, 16, 36, 36]$
+
+-   **Step 3: Compute variance and SD**
+
+    -   $s_B^2 = \frac{\sum (x_i - \bar{x}_B)^2}{n-1} = \frac{570}{4} = 142.5$
+
+    -   $s_B = \sqrt{142.5} \approx 11.94$
+:::
+:::::
+
+## Interpretation
+
+-   Class A: $\bar{x} = 80, s \approx 3.81$
+-   Class B: $\bar{x} = 79, s \approx 11.94)$
+
+## Problem 2: Comparing dispersion
+
+### Computationally
+
+```{r}
+#| echo: true
+#| output-location: column
+scores_A <- c(80,82,78,85,75)
+scores_B <- c(60,90,75,85,85)
+
+stats_A <- list(mean = mean(scores_A), sd = sd(scores_A), n = length(scores_A))
+stats_B <- list(mean = mean(scores_B), sd = sd(scores_B), n = length(scores_B))
+
+stats_A
+
+stats_B
+```
