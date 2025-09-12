@@ -10,7 +10,10 @@ format:
     incremental: true   
     touch: true
     chalkboard: true
-    lightbox: true
+    width: 1600
+    height: 900
+    filters: 
+      - editable
     drop:
       engine: webr
       webr:
@@ -19,6 +22,7 @@ format:
          - dplyr
 revealjs-plugins:
   - drop
+  - editable
 ---
 
 ## Standard Normal Distribution
@@ -26,7 +30,7 @@ revealjs-plugins:
 ### What do we know about normal distributions?
 
 ::: fragment
-![](images/bell.png){fig-align="center"}
+![](images/bell.png){.editable}
 :::
 
 ## Standard Normal Distribution
@@ -318,28 +322,71 @@ $$
 
 ```{r}
 library(dplyr)
-library(huxtable)
+library(gt)
 
 tibble(
   x = c(10,10,20,30,30),
   `x-xbar` = x-mean(x),
   `(x-xbar)^2` = (x-mean(x))^2
-) |> 
-hux() |> 
-theme_article()
+) |>
+  gt() |> 
+  cols_label(
+    x = md("$x$"),
+    `x-xbar` = md("$x-\\bar{x}$"),
+    `(x-xbar)^2` = md("$(x-\\bar{x})^2$")
+  ) |> 
+  opt_row_striping() |> 
+  tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+  ) |> 
+    tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    ) |> 
+  fmt_auto()
+
 ```
 
 ## Z-scores
 
 ### Formula in Action
 
+::::: columns
+::: {.column width="33%"}
 ::: callout-tip
-$$z =\frac{x-\bar{x}}{s} =  \frac{20-10}{s}=\frac{-10}{s}$$
+## Average
+
+$$\color{red}{\bar{x}} = \frac{\sum{x}}{n}$$
 :::
 
-::: callout-tip
-$$s^2 = \frac{\sum(x-\bar{x}^2)}{n-1} = \frac{400}{4} = 100 = \sqrt{100} = s$$
 :::
+
+::: {.column width="33%"}
+::: callout-tip
+## Standard Deviation
+
+$$s^2 = \sqrt{\frac{\sum(x-\color{red}{\bar{x}})^2}{n-1}} = \frac{400}{4} = \sqrt{100} = s$$
+:::
+:::
+
+::: {.column width="33%"}
+::: callout-tip
+## Z-Score
+
+$$z =\frac{x-\color{red}{\bar{x}}}{s} =  \frac{20-10}{s}=\frac{-10}{s}$$
+:::
+:::
+:::::
+
+
+
+
+
+
 
 ## Z-scores
 
@@ -349,7 +396,26 @@ tibble(
   `x-xbar` = x-mean(x),
   `(x-xbar)^2` = (x-mean(x))^2,
   z = (x-mean(x))/sd(x)
-)
+) |> 
+  gt() |> 
+  cols_label(
+    x = md("$x$"),
+    `x-xbar` = md("$x-\\bar{x}$"),
+    `(x-xbar)^2` = md("$(x-\\bar{x})^2$"),
+    z = md("$z$")
+  ) |> 
+    tab_options(
+    table.font.size = px(25), # Adjust font size
+    table.width = pct(80)   # Set table width as percentage
+    ) |> 
+    tab_style(
+    style = 
+      cell_text(
+        weight = "bold"),
+        locations = 
+      cells_column_labels()
+    ) |> 
+  fmt_auto()
 ```
 
 ## Z-scores
@@ -387,7 +453,9 @@ p1 <-
   geom_point(size = 3) + 
   theme_minimal() + 
   labs(x = "\nExam Score",
-       y = "Student\n")
+       y = "Student\n",
+       title = "Raw Scores") + 
+  theme(panel.grid.major = element_blank())
 
 
 p2 <- 
@@ -400,7 +468,9 @@ p2 <-
   geom_point(size = 3) + 
   theme_minimal() + 
   labs(x = "\nExam Score",
-       y = "Student\n")
+       y = "Student\n",
+       title = "Deviation Scores") + 
+  theme(panel.grid.major = element_blank())
   
   
 p3 <- 
@@ -413,8 +483,10 @@ p3 <-
   geom_point(size = 3) + 
   theme_minimal() + 
   labs(x = "\nExam Score",
-       y = "Student\n") +
-  scale_x_continuous(limits = c(-20,20))
+       y = "Student\n",
+       title = "Z-Scores") +
+  scale_x_continuous(limits = c(-20,20)) + 
+  theme(panel.grid.major = element_blank())
 
 p1 + p2 + p3
 ```
