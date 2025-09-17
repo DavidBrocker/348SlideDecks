@@ -1,6 +1,6 @@
 ---
-title: "Effect Sizes and Confidence Intervals"
-subtitle: "Lecture 7"
+title: "Z-Scores and Probability Under the Normal Curve"
+subtitle: "Lecture 6"
 author: "Dave Brocker"
 institute: "Farmingdale State College"
 format: 
@@ -11,6 +11,9 @@ format:
     chalkboard: true
     scrollable: true
     lightbox: true
+    slide-number: c/t
+    width: 1600
+    height: 900
     drop:
       engine: webr
       webr:
@@ -25,45 +28,31 @@ revealjs-plugins:
 
 ### Proportional Breakdown
 
-::: {.incremental .highlight-last}
 -   `68.3%` of the datapoints (the X's) will fall within `1 SD` of the mean.
 
 -   `95.4%` of the datapoints (the X's) will fall within `2 SD` of the mean.
 
 -   `99.7%` of the datapoints (the X's) will fall within `3 SD` of the mean.
-:::
 
-::: fragment
-Z-scores are expressed in Standard Deviation units.
-:::
+<!-- -->
 
-## Z-scores
-
-### Why do we care?
-
-::: fragment
-Z-scores re-express the original data points (the X's) in a way that intuitively lets us know:
-:::
-
-::: {.incremental .highlight-last}
--   How close the X is to the mean
-
--   Where it falls in the dispersion of the distribution
-
--   How much this participant is like the other person in the sample
-:::
+-   Z-scores are expressed in Standard Deviation units.
 
 ## Z-scores
 
 ### Why do we care?
 
-Z-scores re-express the original data points (the X's) in a way that intuitively lets us know:
+-   Z-scores re-express the original data points (the X's) in a way that intuitively lets us know:
 
-::: {.incremental .highlight-last}
--   Where it falls in the dispersion of the distribution
+    -   How close the X is to the mean
 
--   How different this participant is from the majority of people in the sample
-:::
+    -   Where it falls in the dispersion of the distribution
+
+    -   How much this participant is like the other person in the sample
+
+    -   Where it falls in the dispersion of the distribution
+
+    -   How different this participant is from the majority of people in the sample
 
 ## Z-scores
 
@@ -74,11 +63,13 @@ library(dplyr)
 library(ggplot2)
 
 set.seed(616)
-tibble(
+z1 <- 
+  tibble(
   student = 1:1000,
   x = rnorm(1000,75,2) |> round(2),
   z = (x-mean(x))/sd(x),
-  sca = scale(x)
+  sca = scale(x),
+  norml = dnorm(x, mean(x), sd(x))
 ) |> 
   mutate(
   area = case_when(
@@ -89,12 +80,14 @@ tibble(
     z >= 3 ~ "3SD",
     z <= -3 ~ "3SD"
     )
-  ) |> 
+  )
+
+z1 |> 
   ggplot(aes(z,student, color = area)) + 
   geom_point() + 
   theme_minimal() +
   labs(x = "\nZ-Score",
-       y = "Student\n")
+       y = "Student\n") 
 
 ```
 
@@ -107,22 +100,7 @@ set.seed(616)
 library(dplyr)
 library(ggplot2)
 
-tibble(
-  student = 1:1000,
-  x = rnorm(1000,75,2) |> round(2),
-  z = (x-mean(x))/sd(x),
-  sca = scale(x)
-) |> 
-  mutate(
-  area = case_when(
-    z >= 1 ~ "1SD",
-    z <= -1 ~ "1SD",
-    z >= 2 ~ "2SD",
-    z >= -2 ~ "2SD",
-    z >= 3 ~ "3SD",
-    z <= -3 ~ "3SD"
-    )
-  ) |> 
+z1 |> 
   ggplot(aes(z,student, color = area)) + 
   geom_point(aes(color = ifelse(z <= -2,"red","grey"))) + 
   geom_vline(xintercept = -2, color = "black", lty = "dashed") +
@@ -137,29 +115,27 @@ tibble(
 
 ### Imagine that $s$ = 2 and $\bar{x}$ = 25
 
-Z-scores are expressed in Standard Deviation units.
+-   $z = 1 = 25 + 2 = 27$
 
-::: {.incremental .highlight-last}
--   $$z = 1 = 25 + 2 = 27$$
+-   $z = -2 = 25 - 2 = 23$
 
--   $$z = -2 = 25 - 2 = 23$$
-
--   $$z = 0.5 = 25 - .05 = 24.4$$
-:::
+-   $z = 0.5 = 25 - .05 = 24.4$
 
 ## Calculating A Z-score
 
 ### Step-by-Step
 
-::: {.incremental .highlight-last}
--   Mean-center the X values $x - \bar{x}$
+-   Mean-center the X values:
+
+-   $x - \bar{x}$
 
     -   This makes the Mean = 0.
 
--   Dividing by the standard deviation $\frac{}{s}$
+-   Divide by the standard deviation
+
+-   $\frac{}{s}$
 
     -   Makes the SD = 1.
-:::
 
 ## Calculating Probability
 
@@ -168,23 +144,25 @@ Z-scores are expressed in Standard Deviation units.
 > The average grade on the exam was an 86 with a standard deviation of 4.
 
 ```{r}
-#| fig-align: center
-
 set.seed(200)
-tibble(
+
+z2 <- tibble(
   student = 1:1000,
   x = rnorm(1000,86,4) |> round(2),
   z = (x-mean(x))/sd(x),
   sca = scale(x),
   dn = dnorm(x, mean(x), sd(x))
-) |> 
+) 
+
+z2 |> 
   ggplot(aes(x,dn)) + 
-  geom_point(color = "darkgreen") + 
+  geom_line(color = "darkgreen") + 
   theme_minimal() +
   labs(x = "\n Exam Score: M = 86 | s = 4",
        y = "Student\n") + 
   geom_vline(aes(xintercept = mean(x)), lty = "dashed") +
-  scale_color_identity()
+  scale_color_identity() +
+  scale_x_continuous(breaks = seq(70,102, by = 4))
 ```
 
 ## Calculating Probability
@@ -195,21 +173,16 @@ tibble(
 
 set.seed(200)
 
-tibble(
-  student = 1:1000,
-  x = rnorm(1000,86,4) |> round(2),
-  z = (x-mean(x))/sd(x),
-  sca = scale(x),
-  dn = dnorm(x, mean(x), sd(x))
-) |> 
+z2 |> 
   ggplot(aes(x,dn)) + 
-  geom_point(aes(color = ifelse(x > 94, "red","grey"))) + 
+  geom_line(aes(color = ifelse(x > 94, "red","grey"))) + 
   theme_minimal() +
   labs(x = "\n Exam Score: M = 86 | s = 4",
        y = "Student\n") + 
   geom_vline(aes(xintercept = mean(x)), lty = "dashed") +
-  geom_vline(xintercept = 94, color = "black") +
-  scale_color_identity()
+  geom_vline(xintercept = 94, color = "red") +
+  scale_color_identity() + 
+  scale_x_continuous(breaks = seq(70,102, by = 4))
 ```
 
 ## Calculating Probability
@@ -218,63 +191,58 @@ tibble(
 
 > The average grade on the exam was an `86` with a standard deviation of `4`. What is the probability of scoring a `94` or higher on the exam?
 
-::: {.incremental .highlight-last}
--   $$z = \frac{x-\bar{x}}{s} = \frac{94-86}{4} = \frac{8}{4}=2$$
+-   $z = \frac{x-\bar{x}}{s} = \frac{94-86}{4} = \frac{8}{4}=2$
 
 -   Z = `2` corresponds with `2.1%` and `0.1%` of the curve (`2.2%`) chance.
-:::
 
 ## Example 2
 
 ### Test Time!
 
-> The mean exam score was `86` with a standard deviation of `4`.
+> The mean exam score was `86` with a standard deviation of `4`. What is the probability of scoring between an `82` and a `90`?
 
 ```{r}
-#| fig-align: center
 
 set.seed(200)
-tibble(
-  student = 1:100,
-  x = rnorm(100,86,4) |> round(2),
+z3 <- 
+  tibble(
+  student = 1:1000,
+  x = rnorm(1000,86,4) |> round(2),
   z = (x-mean(x))/sd(x),
   sca = scale(x),
   dn = dnorm(x, mean(x), sd(x))
-) |> 
+) 
+
+z3 |> 
   ggplot(aes(x,dn)) + 
-  geom_point(color = "red") + 
+  geom_line(color = "black") + 
   theme_minimal() +
   labs(x = "\nZ-Score: M = 86 | s = 4",
        y = "Student\n") + 
   geom_vline(aes(xintercept = mean(x)), lty = "dashed") +
-  scale_color_identity()
+  scale_color_identity() + 
+  scale_x_continuous(breaks = seq(70,102, by = 4))
 ```
 
 ## Example 2
 
-### Esmeralda's Second Test
+### Test Time!
 
-What is the probability of scoring between an `82` and a `90`?
+> The mean exam score was `86` with a standard deviation of `4`. What is the probability of scoring between an `82` and a `90`?
 
 ```{r}
 
-set.seed(200)
-tibble(
-  student = 1:100,
-  x = rnorm(100,86,4) |> round(2),
-  z = (x-mean(x))/sd(x),
-  sca = scale(x),
-  dn = dnorm(x, mean(x), sd(x))
-) |> 
+z3 |> 
   ggplot(aes(x,dn)) + 
-  geom_point(aes(color = ifelse(between(x,82,90), "black","grey"))) + 
+  geom_line(aes(color = ifelse(between(x,82,90), "black","grey"))) + 
   theme_minimal() +
   labs(x = "\nZ-Score: M = 86 | s = 4",
        y = "Student\n") + 
   geom_vline(aes(xintercept = mean(x)), lty = "dashed") +
   geom_vline(xintercept = 82, color = "maroon") +
   geom_vline(xintercept = 90, color = "darkgreen")  +
-  scale_color_identity()
+  scale_color_identity() +
+  scale_x_continuous(breaks = seq(70,102, by = 4))
 ```
 
 ## Example 2
@@ -283,67 +251,58 @@ tibble(
 
 What is the probability of scoring between an `82` and a `90`?
 
-::: {.incremental .highlight-last}
 -   $z = \frac{82-86}{4} = \frac{-4}{4} = -1$
 
 -   $z = \frac{90-86}{4} = \frac{4}{4} = 1$
 
 -   There is a 68.3% chance of scoring between `82` and `90`.
-:::
 
 ## Example 3
 
 ### Esmeralda's Second Test
 
-> Esmeralda's stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal.
+> Esmeralda's stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below `60`
 
 ```{r}
 set.seed(200)
-tibble(
+
+z4 <- 
+  tibble(
   student = 1:1000,
   x = rnorm(1000,72,6) |> round(2),
   z = (x-mean(x))/sd(x),
   sca = scale(x),
   dn = dnorm(x, mean(x), sd(x))
-) |> 
+) 
+
+z4 |> 
   ggplot(aes(x,dn)) + 
-  geom_point(color = "red") + 
+  geom_line(color = "black") + 
   theme_minimal() +
   labs(x = "\nZ-Score: M = 72 | s = 6",
        y = "Student\n") + 
   geom_vline(aes(xintercept = mean(x)), lty = "dashed") +
   scale_color_identity() +
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_blank()
-  )
+  scale_x_continuous(breaks = seq(48, 96, by = 6))
 ```
 
 ## Example 3
 
 ### Esmeralda's Second Test
 
-Esmeralda wants to calculate the probability that she scored below `60`
+> Esmeralda's stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below `60`
 
 ```{r}
-set.seed(200)
-tibble(
-  student = 1:1000,
-  x = rnorm(1000,72,6) |> round(2),
-  z = (x-mean(x))/sd(x),
-  sca = scale(x),
-  dn = dnorm(x, mean(x), sd(x))
-) |> 
+z4 |> 
   ggplot(aes(x,dn)) + 
-  geom_point(aes(color = ifelse(x < 60, "black","grey"))) + 
+  geom_line(aes(color = ifelse(x < 60, "black","grey"))) + 
   theme_minimal() +
   labs(x = "\nZ-Score: M = 72 | s = 6",
        y = "Student\n") + 
   geom_vline(aes(xintercept = mean(x)), lty = "dashed") +
   geom_vline(xintercept = 60, color = "maroon") +
   scale_color_identity() +
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_blank()
-  )
+  scale_x_continuous(breaks = seq(48, 96, by = 6))
 ```
 
 ## Example 3
@@ -352,15 +311,13 @@ tibble(
 
 Esmeralda wants to calculate the probability that she scored below `60`
 
-::: fragment
 -   $\frac{60-72}{6} = \frac{-12}{6} = -2$
-:::
 
-::: {.incremental .highlight-last}
 -   `2.2%` chance that she failed.
 
 -   What's the chance she passed?
-:::
+
+-   $100-2.2 = 97.8%$
 
 ## Z-scores and Probability
 
@@ -368,31 +325,32 @@ Esmeralda wants to calculate the probability that she scored below `60`
 
 In real life, we are often working with numbers with long decimal points rather than nice whole numbers.
 
-::: {.incremental .highlight-last}
--   Because the standard normal curve is STANDARD and NORMAL, we can calculate the exact probability of a z-score with a decimal point.
-
--   Calculate the z-score.
-:::
+-   Because the standard normal curve is standard and normal, we can calculate the **exact** probability of a z-score with a decimal point.
 
 ## Z-scores and Probability
 
-### How does it apply?
+### The Z-Table
 
-In real life, we are often working with numbers with long decimal points rather than nice whole numbers.
-
-::: {.incremental .highlight-last}
+::::: columns
+::: {.column width="50%"}
 -   Locate the whole number and first decimal point along the left side of the table.
 
 -   Locate the second decimal point along the top of the table.
 :::
 
+::: {.column width="50%"}
+{{< pdf file="assets/standardnormaltable.pdf" height="500px" download-link="false">}}
+:::
+:::::
+
 ## Z-scores and Probability
 
-The Z-score Probability Table gives you the probability of that z-score or **LESS**.
+### The Z-Table
 
-::: {.incremental .highlight-current-green}
+The Z-score Probability Table gives you the probability of that z-score or **less**.
+
 -   If you need that z-score or higher, you have to subtract the decimal from 1.
-:::
+    -   Esmeralda had a `.022`% chance of failing and and a `1-.022%` chance of passing.
 
 ## Z-scores and Probability:
 
@@ -408,62 +366,64 @@ The Z-score Probability Table gives you the probability of that z-score or **LES
 
 ## Z-scores and Probability:
 
-### Life Satisfaction: $\bar{x} = 5.4 | s = 2.2$
+### Life Satisfaction: $\bar{x} = 5.4 \text{ and } s = 2.2$
 
 -   Find the probability that a randomly selected study participant's response was:
 
-::: {.incremental .highlight-last}
 -   Less than 4
+
+    -   $z = \frac{x-\bar{x}}{s} = \frac{4-5.4}{2.2} = \frac{-1.4}{2.2} = -.63$
 
 -   More than 8
 
--   $$z = \frac{x-\bar{x}}{s} = \frac{4-5.4}{2.2} = \frac{-1.4}{2.2} = -.63$$
-
--   $$z = \frac{x-\bar{x}}{s} = \frac{8-5.4}{2.2} = \frac{2.6}{2.2} = 1.18$$
-:::
+    -   $z = \frac{x-\bar{x}}{s} = \frac{8-5.4}{2.2} = \frac{2.6}{2.2} = 1.18$
 
 ## Z-scores and Probability
 
-### Example 1
+### Example 1: $\bar{x} = 5.4 \text{ and } s = 2.2$
 
-:::: {style="position: relative; display: inline-block;"}
-<!-- Highlighting Vertical Bar -->
-
-::: {style="height: 200px; width: 35px; background:red; opacity: 0.3; position: absolute; top: 50px; left: 30px;"}
+::::: columns
+::: {.column width="50%"}
+<img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
 :::
 
-<!-- Z-table Image -->
+::: {.column width="50%"}
+- Less than 4 (-.63)
 
-<img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
-::::
+- Find .6 on the left size of the table (z column)
+
+- Find .03 column
+
+- Note where they intersect
+
+- Since we want the value less than 4, we need to subtract 1
+
+- Report the value as a percentage ($z\times100$)
+:::
+:::::
 
 ## Example 1
 
 ### Step by Step
 
-::::: {style="position: relative; display: inline-block;"}
-<!-- Highlighting Horizontal Bar -->
-
-::: {style="width: 380px; height: 20px; background:red; opacity: 0.3; position: absolute; top: 230px; left: 65px;"}
-:::
-
-<!-- Highlighting Vertical Bar -->
-
-::: {style="height: 200px; width: 35px; background:red; opacity: 0.3; position: absolute; top: 50px; left: 30px;"}
-:::
-
-<!-- Z-table Image -->
-
+::::: columns
+::: {.column width="50%"}
 <img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
+:::
+
+::: {.column width="50%"}
+- More than 8 (1.18)
+
+- Find 1.1 on the left size of the table (z column)
+
+- Find .08 column
+
+- Note where they intersect
+
+- Report the value as a percentage ($z\times100$)
+:::
 :::::
 
-## Z-scores and Probability:
-
-### Example 2
-
-> The scale of scores for an IQ test are approximately normal with mean `100` and standard deviation `15`. The organization MENSA, which calls itself the "high IQ society", requires a score of `130` or higher.
-
-What percent of adults would qualify for membership?
 
 ## Z-scores and Probability:
 
@@ -471,28 +431,32 @@ What percent of adults would qualify for membership?
 
 > The scale of scores for an IQ test are approximately normal with mean `100` and standard deviation `15`. The organization MENSA, which calls itself the "high IQ society", requires a score of `130` or higher.
 
-What percent of adults would qualify for membership?
+- What percent of adults would qualify for membership?
 
-::: {.incremental .highlight-last}
--   $z = \frac{x-\bar{x}}{s} = z = \frac{130-100}{15}=\frac{30}{15} = 2$
-:::
+    - Find the probability of scores more than 130
+    
+    - $z = \frac{x-\bar{x}}{s} = z = \frac{130-100}{15}=\frac{30}{15} = 2$
 
 ## Example 2
 
-### MENSA
+### MENSA: $\bar{x}=100 \text{ and } s = 15$
 
-::::: {style="position: relative; display: inline-block;"}
-<!-- Highlighting Horizontal Bar -->
-
-::: {style="width: 90px; height: 22px; background:red; opacity: 0.3; position: absolute; top: 610px; left: 65px;"}
-:::
-
-<!-- Highlighting Vertical Bar -->
-
-::: {style="height: 200px; width: 35px; background:red; opacity: 0.3; position: absolute; top: 440px; left: 30px;"}
-:::
-
-<!-- Z-table Image -->
-
+::::: columns
+::: {.column width="50%"}
 <img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"/>
+:::
+
+::: {.column width="50%"}
+- More than 130 (2)
+
+- Find 2.0 on the left size of the table (z column)
+
+- Find .00 column
+
+- Note where they intersect
+
+- Remember we are thinking about 130 or more so we have to subtract 1 from our proportion.
+
+- Report the value as a percentage ($z\times100$)
+:::
 :::::

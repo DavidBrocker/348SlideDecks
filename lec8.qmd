@@ -431,7 +431,7 @@ We each calculate the average response from our own sample of 400.
 ## Sampling Theory as The Basis for Inferential Statistics
 
 ```{r}
-
+library(dplyr)
 # Simulate 25 * 400
 replicate(
   25,
@@ -458,7 +458,7 @@ values_to = "Scores"
 xx <- 
   replicate(
   25,
-  runif(400,1,10) |> round(0)
+  runif(1000,1,10) |> round(0)
 ) |> 
   data.frame() |> 
   rename_with(
@@ -546,7 +546,7 @@ Professor Brocker's Dark Experiment:
 
 ### Example 1
 
-> Dr. Apriceno wants to know if giving her students coffee will improve their exam scores. She **randomly** assigns **13** of her **26** students to drink a doubleshot; she calls this the **experimental** group. The other **13** students drink decaf (a placebo); she calls this the **control** group.
+> Professor Brocker wants to know if giving her students coffee will improve their exam scores. He **randomly** assigns **13** of his **26** students to drink a doubleshot; he calls this the **experimental** group. The other **13** students drink decaf (a placebo); he calls this the **control** group.
 
 $H_0$:
 
@@ -602,21 +602,17 @@ $H_0$: There are no differences in working memory capacity between the experimen
 
 -   If there are **NO differences** between the groups, we **Fail to Reject the** $H_0$.
 
-## Hypothesis testing
-
-\[Include YODA picture or something similar\]
-
 ## Hypothesis Testing
 
 When reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.
 
 -   If the groups differ, we reject the null hypothesis: **Reject** $H_0$.
 
--   If the groups do NOT differ, we fail: **Fail to Reject** $H_0$
+-   If the groups do not differ, we fail: **Fail to Reject** $H_0$
 
 ## Practice
 
-Jonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants' working memory capacity. His test is not significant.
+> Jonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants' working memory capacity. His test is not significant.
 
 -   State Claudio's findings in terms of the null hypothesis:
 

@@ -62,7 +62,11 @@ server <- function(input, output) {
     df |> 
       ggplot(aes(x,y)) + 
       geom_point() + 
-      theme_minimal() +
+      theme_minimal(
+        base_size = 22,
+        paper = "cornsilk",
+        ink = "navy"
+        ) +
       annotate(
         geom = "text",
         x = mean(df$x),
