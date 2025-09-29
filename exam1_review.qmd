@@ -9,6 +9,8 @@ format:
     incremental: true   
     touch: true
     chalkboard: true
+    width: 1600
+    height: 900
     scrollable: true
     lightbox: true
     drop:
@@ -21,74 +23,316 @@ revealjs-plugins:
   - drop
 ---
 
-## **Mean Calculation**
+## Learning Goals
+
+-   Compute sample mean and standard deviation by hand.
+-   Interpret what the mean and SD tell us about data.
+-   Standardize raw scores into Z-scores.
+-   Interpret Z-scores (direction and distance from mean).
+-   Relate Z-scores to probability under a normal curve.
+
+## 1. Mean Calculation
 
 ### Sample Mean Calculation
 
-> A psychology researcher collects the following data on the number of hours five participants spent practicing a task: **3, 5, 8, 2, 7**.
+> A psychology researcher collects the following data on the number of hours five participants spent practicing a task: `3, 5, 8, 2, 7`.
 
-**Question:** What is the mean number of hours spent practicing?
+**Question:** What is the average number of hours spent practicing?
 
-## **Mean Calculation**
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Manual Solution</summary>
+
+<p>$\bar{x} = \frac{\sum(3+5+8+2+7)}{5} = \frac{25}{5} = 5\text{ hours}$</p>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+mean(c(3,5,8,2,7))
+```
+
+</details>
+:::
+:::::
+
+## 2. Mean Calculation
 
 ### Sample Mean Calculation
 
-> A study measures the changes in mood scores before and after an intervention. The changes in mood scores are: **-4, -2, 0, 3, 5**.
+> A study measures the changes in mood scores before and after an intervention. The changes in mood scores are: `-4, -2, 0, 3, 5`.
 
 **Question:** Calculate the mean change in mood score.
 
-## **Standard Deviation Calculation**
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Manual Solution</summary>
+
+<p>$\bar{x} = \frac{\sum(-4 + (-2) + 0 + 3 + 5)}{5} = \frac{2}{5} = 0.4$</p>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+mean(c(-4,-2,0,3,5))
+```
+
+</details>
+:::
+:::::
+
+## 3. Standard Deviation Calculation
 
 ### Sample Standard Deviation
 
-> A psychologist measures the number of stressful events experienced by a small group of participants over a week: **2, 3, 6, 4, 5**.\
+> A psychologist measures the number of stressful events experienced by a small group of participants over a week: `2, 3, 6, 4, 5`.
 
 **Question:** Calculate the standard deviation of stressful events.
 
-## **Standard Deviation Calculation**
+<details>
+
+<summary>Manual Solution</summary>
+
+<p>
+
+<ul>
+
+<li>First compute the sample mean: $\bar{x} = \frac{2+3+6+4+5}{5} = \frac{20}{5} = 4.$</li>
+
+<li>Compute squared deviations: $(2-4)^2=4,\ (3-4)^2=1,\ (6-4)^2=4,\ (4-4)^2=0,\ (5-4)^2=1$</li>
+
+<li>Sum of squares = $4+1+4+0+1 = 10$</li>
+
+<li>Sample variance $s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5)$</li>
+
+<li>Sample SD $s = \sqrt{2.5} \approx 1.58$</li>
+
+</ul>
+
+</p>
+
+</details>
+
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+sd(c(2,3,6,4,5))
+```
+
+</details>
+
+## 4. Standard Deviation Calculation
 
 ### Sample Standard Deviation
 
-> **Sample Standard Deviation** Participants' anxiety scores in a clinical trial are recorded as: **4, 7, 3, 5, 8, 6, 2**.\
+> **Sample Standard Deviation** Participants' anxiety scores in a clinical trial are recorded as: `4, 7, 3, 5, 8, 6, 2`.
 
 **Question:** Compute the standard deviation of these anxiety scores.
 
-## **Standard Deviation Calculation**
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<p>First compute the sample mean: $\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5$<br> Squared deviations: $(4-5)^2=1\\(7-5)^2=4\\ (3-5)^2=4\\(5-5)^2=0\\(8-5)^2=9\\(6-5)^2=1\\ (2-5)^2=9\\$ <br> Sum = $1+4+4+0+9+1+9 = 28$.</p>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+sd(c(4,7,3,5,8,6,2))
+```
+
+</details>
+:::
+:::::
+
+## 5. Standard Deviation Calculation
 
 ### Interpreting Standard Deviation in Psychology
 
-> A researcher finds that the standard deviation of reaction times in a cognitive task is **1.5 seconds**. Another researcher finds a standard deviation of **0.5 seconds** for a similar task.\
+> A researcher finds that the standard deviation of reaction times in a cognitive task is `1.5` seconds. Another researcher finds a standard deviation of `0.5` seconds for a similar task.
 
 **Question:** Which task shows more variability in participants' reaction times, and what might this indicate about task difficulty?
 
-## **Z-Score Calculation**
+<details>
+
+<summary>Solution</summary>
+
+<p>A standard deviation of `1.5` is is larger than `0.5` is, so the first task shows **more variability**.</p>
+
+</details>
+
+## 6. Z-Score Calculation
 
 ### Z-Score for a Single Value
 
-> In a personality study, the average score on an extraversion scale is **50**, with a standard deviation of **10**. One participant scores **70**.
+> In a personality study, the average score on an extraversion scale is `50`, with a standard deviation of `10`. One participant scores `70`.
 
 **Question:** What is the Z-score for this participant?
 
-## **Z-Score Calculation:**
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<p>$z = \frac{X - \mu}{\sigma} = \frac{70 - 50}{10} = \frac{20}{10} = 2$</p>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+
+(70-50)/10
+```
+
+</details>
+:::
+:::::
+
+## 7. Z-Score Calculation:
 
 ### Interpreting Z-Scores
 
-> A participant in a self-esteem survey has a Z-score of **-1.5**. The mean self-esteem score for the survey is **40**, and the standard deviation is **5**.\
+> A participant in a self-esteem survey has a Z-score of `-1.5`. The mean self-esteem score for the survey is `40`, and the standard deviation is `5`.
 
 **Question:** Did this participant score above or below the mean, and by how many standard deviations?
 
-## **Z-Score Calculation**
+<details>
+
+<summary>Solution</summary>
+
+<p>A Z-score of `-1.5` is **below** the mean. In raw score terms: $X = \mu + \frac{z}{\sigma} = 40 + (-1.5)(5) = 40 - 7.5 = 32.5.$ So the participant scored `32.5`, which is `1.5` standard deviations **below** the mean.</p>
+
+</details>
+
+## 8. Z-Score Calculation
 
 ### Z-Score with Negative Value
 
-> The mean stress score of a group is **25**, with a standard deviation of **4**. If a participant has a stress score of **18**,\
+> The mean stress score of a group is `25`, with a standard deviation of `4`. If a participant has a stress score of `18`...
 
 **Question:** Calculate their Z-score and interpret its meaning in the context of stress levels.
 
-## **Z-Score Calculation**
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<p>$z = \frac{18 - 25}{4} = \frac{-7}{4} = -1.75.$ The Z-score is $z \approx -1.75$, meaning this participant's stress score is `1.75` **standard deviations below** the group mean — they have substantially lower stress than average.</p>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+(18-25)/4
+```
+
+</details>
+:::
+:::::
+
+## 9. Z-Score Calculation
 
 ### Multiple Z-Scores
 
-> In a clinical assessment, the average depression score is **60**, with a standard deviation of **8**. Two participants have scores of **72** and **48**.\
+> In a clinical assessment, the average depression score is `60`, with a standard deviation of `8`. Two participants have scores of `72` and `48`.
 
 **Question:** Calculate the Z-scores for both participants and explain what the values tell us about their relative positions in the group.
+
+<details>
+
+<summary>Solution</summary>
+
+<p>
+  <ul>
+    <li>For the first participant (72): $z_1 = \frac{72 - 60}{8} = \frac{12}{8} = 1.5.$</li>
+    <li>For the second participant (48): $z_2 = \frac{48 - 60}{8} = \frac{-12}{8} = -1.5.$</li> <li>Interpretation: the first participant is `1.5` SD **above** the mean (higher depression score than average), while the second is `1.5` SD **below** the mean (lower depression score than average). They are symmetric around the mean.</li>
+  </ul>
+</p>
+
+</details>
+
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+(72-60)/8;(48-60)/8
+```
+
+</details>
+
+## 10. Normal Distribution & Areas
+
+### Probability Beyond a Given Z-Score
+
+> The distribution of scores on a math test is approximately normal with mean $\mu = 100$ and standard deviation $\sigma = 15$.
+
+Question: What is the score of students who scored above $z = 1.2$?
+
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<p>$z = \frac{x-\bar{x}}{s}\\ x = z\times\bar{x} + 100\\ 1.2\times15+100 = 118$</p>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+1.2*15 + 100
+```
+
+</details>
+:::
+:::::

@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-475464fd75b6f0a60cd52b037506ef2f.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-297fbe3b9b15a7776aa5394443b782e0.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -131,7 +131,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Sampling Theory</h1>
-  <p class="subtitle">Lecture 9</p>
+  <p class="subtitle">Lecture 8</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -148,15 +148,25 @@ Dave Brocker
 <section id="standard-normal-distribution" class="slide level2">
 <h2>Standard Normal Distribution</h2>
 <p>The 4 properties of a standard normal distribution are:</p>
-
-<img data-src="images/bell.png" class="r-stretch"><div class="highlight-last">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>They are shaped like a bell (“bell curve”).</p></li>
 <li class="fragment"><p>They are symmetric.</p></li>
 <li class="fragment"><p>They are unimodal.</p></li>
 <li class="fragment"><p>The mean = median = mode.</p></li>
 </ul>
-</div>
+</div></div>
 </section>
 <section id="statistics" class="slide level2">
 <h2>Statistics</h2>
@@ -172,7 +182,9 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>Goal: Use the sample to make inferences about the population</p>
 <ul>
-<li class="fragment">Examples: t-test, ANOVA, Regression</li>
+<li class="fragment">t-test</li>
+<li class="fragment">ANOVA</li>
+<li class="fragment">Regression</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -180,7 +192,7 @@ Dave Brocker
 <section id="sampling-theory" class="slide level2">
 <h2>Sampling theory</h2>
 <blockquote>
-<p>Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, <em>Dark</em>. He has unlimited funds to study this <strong>very</strong> important research question. He hires his 24 students from to collect the data. Each student has to collect 500 responses to the following question:</p>
+<p>Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, <em>Dark</em>. He has unlimited funds to study this <strong>very</strong> important research question. He hires 30 students to collect the data. Each student has to collect 500 responses to the following question:</p>
 </blockquote>
 </section>
 <section id="sampling-theory-1" class="slide level2">
@@ -203,25 +215,507 @@ Dave Brocker
 <section id="sampling-theory-3" class="slide level2">
 <h2>Sampling Theory</h2>
 <p>How many people did each of you ask?</p>
+<p><span class="math inline">\(30 * 500 = 15,000\)</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
-<colgroup><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">S1</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S2</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S3</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S4</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S5</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S6</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S7</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S8</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S9</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S10</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S11</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S12</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S13</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S14</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S15</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S16</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S17</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S18</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S19</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S20</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S21</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S22</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S23</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S24</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S25</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S26</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S27</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S28</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">S29</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">S30</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">5</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">7</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">4</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">3</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">2</td></tr>
-</tbody></table>
+<div id="xqcjjhrwst" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xqcjjhrwst table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+#xqcjjhrwst thead, #xqcjjhrwst tbody, #xqcjjhrwst tfoot, #xqcjjhrwst tr, #xqcjjhrwst td, #xqcjjhrwst th {
+  border-style: none;
+}
+
+#xqcjjhrwst p {
+  margin: 0;
+  padding: 0;
+}
+
+#xqcjjhrwst .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xqcjjhrwst .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xqcjjhrwst .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xqcjjhrwst .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xqcjjhrwst .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xqcjjhrwst .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xqcjjhrwst .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xqcjjhrwst .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xqcjjhrwst .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xqcjjhrwst .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xqcjjhrwst .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xqcjjhrwst .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xqcjjhrwst .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xqcjjhrwst .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xqcjjhrwst .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xqcjjhrwst .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xqcjjhrwst .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xqcjjhrwst .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xqcjjhrwst .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xqcjjhrwst .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xqcjjhrwst .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xqcjjhrwst .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xqcjjhrwst .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xqcjjhrwst .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xqcjjhrwst .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xqcjjhrwst .gt_left {
+  text-align: left;
+}
+
+#xqcjjhrwst .gt_center {
+  text-align: center;
+}
+
+#xqcjjhrwst .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xqcjjhrwst .gt_font_normal {
+  font-weight: normal;
+}
+
+#xqcjjhrwst .gt_font_bold {
+  font-weight: bold;
+}
+
+#xqcjjhrwst .gt_font_italic {
+  font-style: italic;
+}
+
+#xqcjjhrwst .gt_super {
+  font-size: 65%;
+}
+
+#xqcjjhrwst .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xqcjjhrwst .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xqcjjhrwst .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xqcjjhrwst .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xqcjjhrwst .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xqcjjhrwst .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xqcjjhrwst .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xqcjjhrwst .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xqcjjhrwst div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Sample-#" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Sample #</th>
+<th id="Sample-Mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Sample Mean</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 Sample #">S1</td>
+<td class="gt_row gt_right" headers="stub_1_1 Sample Mean">5.064</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 Sample #">S2</td>
+<td class="gt_row gt_right" headers="stub_1_2 Sample Mean">4.630</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 Sample #">S3</td>
+<td class="gt_row gt_right" headers="stub_1_3 Sample Mean">4.958</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 Sample #">S4</td>
+<td class="gt_row gt_right" headers="stub_1_4 Sample Mean">5.036</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 Sample #">S5</td>
+<td class="gt_row gt_right" headers="stub_1_5 Sample Mean">4.966</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..29</td>
+<td class="gt_row gt_left" headers="stub_1_6 Sample #" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Sample Mean" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">30</td>
+<td class="gt_row gt_left" headers="stub_1_7 Sample #">S30</td>
+<td class="gt_row gt_right" headers="stub_1_7 Sample Mean">4.654</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </section>
@@ -231,56 +725,591 @@ Dave Brocker
 <li class="fragment">Once each of you collect <em>500 responses</em>, I ask you to calculate the average answer. So you calculate the mean (you add up all 500 responses, and then divide that number by 500).</li>
 </ul>
 <div class="fragment">
-<p><span class="math display">\[\frac{\sum(x_1...x_{500}}{500}\]</span></p>
-</div>
-</section>
-<section id="sampling-theory-5" class="slide level2">
-<h2>Sampling theory</h2>
-
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="sampling-theory-6" class="slide level2">
-<h2>Sampling theory</h2>
 <ul>
+<li class="fragment"><p><span class="math inline">\(\frac{\sum(x_1 + x_2 + x_3...+ x_{500)}}{500}\)</span></p></li>
 <li class="fragment"><p>They are the means from each of your samples.</p></li>
 <li class="fragment"><p>These are called <strong>Sample Means</strong></p></li>
 </ul>
+</div>
 </section>
-<section id="sampling-theory-7" class="slide level2">
+<section id="sampling-theory-5" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="here-is-our-ratings-data">Here is our Ratings Data</h3>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="sampling-theory-6" class="slide level2">
 <h2>Sampling theory</h2>
 <ul>
-<li class="fragment"><p>We can do lots of cool things with Sample Means. We could calculate the Mean of the Sample Means. We could calculate the standard deviation of the Sample Means.</p></li>
+<li class="fragment"><p>We can do lots of cool things with Sample Means.</p>
+<ul>
+<li class="fragment"><p>We could calculate the Mean of the Sample Means.</p></li>
+<li class="fragment"><p>We could calculate the standard deviation of the Sample Means.</p></li>
+</ul></li>
 <li class="fragment"><p>But…it’s theoretical. It doesn’t really exist, but we imagine it’s existence for the sake of <strong>Sampling Theory</strong>.</p></li>
 </ul>
 </section>
 <section id="sampling-distribution" class="slide level2">
 <h2>Sampling distribution</h2>
-<p>A <u><strong>Sampling Distribution</strong></u> is the theoretical distribution of means across every single possible sample.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Like all the <em>Dark</em> samples.</p></li>
+<li class="fragment"><p>A <strong>Sampling Distribution</strong> is the theoretical distribution of means across every single possible sample.</p></li>
 <li class="fragment"><p>If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:</p></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="sampling-theory-7" class="slide level2">
+<h2>Sampling Theory</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
+<li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
+<ul>
+<li class="fragment">In our case, each value is the average of 30 samples of 500 people.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="new-terminology" class="slide level2">
+<h2>New Terminology</h2>
+<h3 id="sample-mean-and-sample-standard-deviation">Sample Mean and Sample Standard Deviation</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>We previously referred to the average as <span class="math inline">\(\bar{x}\)</span> and the standard deviation as <span class="math inline">\(s\)</span></p></li>
+<li class="fragment"><p>The new terms refer to their specific attributes as a statistic of the sample</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> (pronounced like ‘mew’) represents the population mean</p></li>
+<li class="fragment"><p><span class="math inline">\(\sigma\)</span> represents the population standard deviation</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="gtmwdmqkrk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gtmwdmqkrk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+#gtmwdmqkrk thead, #gtmwdmqkrk tbody, #gtmwdmqkrk tfoot, #gtmwdmqkrk tr, #gtmwdmqkrk td, #gtmwdmqkrk th {
+  border-style: none;
+}
+
+#gtmwdmqkrk p {
+  margin: 0;
+  padding: 0;
+}
+
+#gtmwdmqkrk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gtmwdmqkrk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gtmwdmqkrk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gtmwdmqkrk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gtmwdmqkrk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gtmwdmqkrk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gtmwdmqkrk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gtmwdmqkrk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gtmwdmqkrk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gtmwdmqkrk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gtmwdmqkrk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gtmwdmqkrk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gtmwdmqkrk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gtmwdmqkrk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gtmwdmqkrk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtmwdmqkrk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gtmwdmqkrk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gtmwdmqkrk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gtmwdmqkrk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtmwdmqkrk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gtmwdmqkrk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtmwdmqkrk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gtmwdmqkrk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtmwdmqkrk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gtmwdmqkrk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtmwdmqkrk .gt_left {
+  text-align: left;
+}
+
+#gtmwdmqkrk .gt_center {
+  text-align: center;
+}
+
+#gtmwdmqkrk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gtmwdmqkrk .gt_font_normal {
+  font-weight: normal;
+}
+
+#gtmwdmqkrk .gt_font_bold {
+  font-weight: bold;
+}
+
+#gtmwdmqkrk .gt_font_italic {
+  font-style: italic;
+}
+
+#gtmwdmqkrk .gt_super {
+  font-size: 65%;
+}
+
+#gtmwdmqkrk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gtmwdmqkrk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gtmwdmqkrk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gtmwdmqkrk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gtmwdmqkrk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gtmwdmqkrk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gtmwdmqkrk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gtmwdmqkrk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gtmwdmqkrk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Term</th>
+<th id="Symbol" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Symbol</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
+<th id="Formula" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Formula</th>
+<th id="Relation_to_Sample" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Relation_to_Sample</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">Sample Mean</td>
+<td class="gt_row gt_left" headers="Symbol"><span class="math display">\[\bar{x}\]</span></td>
+<td class="gt_row gt_left" headers="Type">Sample</td>
+<td class="gt_row gt_left" headers="Formula"><span class="math display">\[\frac{\sum x_i}{n}\]</span></td>
+<td class="gt_row gt_left" headers="Relation_to_Sample">Mean of observed sample</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Term">Sample SD</td>
+<td class="gt_row gt_left gt_striped" headers="Symbol"><span class="math display">\[s\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Type">Sample</td>
+<td class="gt_row gt_left gt_striped" headers="Formula"><span class="math display">\[\sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}}\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Relation_to_Sample">SD of sample values</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">Population Mean</td>
+<td class="gt_row gt_left" headers="Symbol"><span class="math display">\[\mu\]</span></td>
+<td class="gt_row gt_left" headers="Type">Population</td>
+<td class="gt_row gt_left" headers="Formula"><span class="math display">\[\frac{\sum X_i}{N}\]</span></td>
+<td class="gt_row gt_left" headers="Relation_to_Sample">True (unknown) mean</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Term">Population SD</td>
+<td class="gt_row gt_left gt_striped" headers="Symbol"><span class="math display">\[\sigma\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Type">Population</td>
+<td class="gt_row gt_left gt_striped" headers="Formula"><span class="math display">\[\sqrt{\frac{\sum (X_i - \mu)^2}{N}}\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Relation_to_Sample">True (unknown) SD</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="sampling-theory-8" class="slide level2">
 <h2>Sampling theory</h2>
 <ul>
-<li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
-<li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p></li>
+<li class="fragment"><p>Each value in this distribution no longer represents 1 person/participant.</p></li>
+<li class="fragment"><p>Each value in this distribution now represents the average of 1 sample, a Sample Mean.</p></li>
 </ul>
 
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="what-does-the-stats-cat-say" class="slide level2">
-<h2>What does the Stats Cat say?</h2>
-
-<img data-src="images/cat.png" class="quarto-figure quarto-figure-center r-stretch" style="border-radius: 15px;"></section>
-<section id="sampling-theory-9" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
-<li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p></li>
-</ul>
-
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
 <ul>
@@ -290,23 +1319,51 @@ Dave Brocker
 <li class="fragment"><p>What does <span class="math inline">\(\sigma\)</span> represent?</p></li>
 </ul>
 </section>
+<section id="review-1" class="slide level2">
+<h2>Review</h2>
+<ul>
+<li class="fragment"><p>What is a sample distribution?</p>
+<ul>
+<li class="fragment">A sample distribution represents how all possible samples from the population would be visualized</li>
+</ul></li>
+<li class="fragment"><p>What does each X value in a sample distribution represent?</p>
+<ul>
+<li class="fragment">That sample’s average</li>
+</ul></li>
+<li class="fragment"><p>What does <span class="math inline">\(\mu\)</span> represent?</p>
+<ul>
+<li class="fragment">The population average</li>
+</ul></li>
+<li class="fragment"><p>What does <span class="math inline">\(\sigma\)</span> represent?</p>
+<ul>
+<li class="fragment">The population standard deviation</li>
+</ul></li>
+</ul>
+</section>
 <section id="probability" class="slide level2">
 <h2>Probability</h2>
 <ul>
-<li class="fragment">What percentage of participants rated Dark with a z-score of 2 or <u><strong>HIGHER</strong></u>?</li>
+<li class="fragment">What percentage of participants rated Dark with a z-score of 2 or higher?</li>
 </ul>
 
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="probability-1" class="slide level2">
 <h2>Probability</h2>
 <ul>
-<li class="fragment"><p>This is the distribution of <strong>sample means</strong> from adults in the US.</p></li>
-<li class="fragment"><p>What is the probability of any sample having a mean that is a z-score of 2 or <u><strong>HIGHER</strong></u>?</p></li>
+<li class="fragment">What percentage of participants rated Dark with a z-score of 2 higher?</li>
 </ul>
 
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="this-is-the-key-point" class="slide level2">
-<h2>THIS IS the key point</h2>
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="probability-2" class="slide level2">
+<h2>Probability</h2>
+<ul>
+<li class="fragment"><p>This is the distribution of <strong>sample means</strong> from adults in the US.</p></li>
+<li class="fragment"><p>What is the probability of any sample having a mean that is a z-score of 2 or higher?</p></li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="assumptions-of-the-normal-curve" class="slide level2">
+<h2>Assumptions of the Normal Curve</h2>
 <ul>
 <li class="fragment"><p>We <em>assume</em> that the distribution of sample means is normal.</p></li>
 <li class="fragment"><p>We use that assumption to gauge the probability of getting a particular mean from a single sample.</p></li>
@@ -315,38 +1372,48 @@ Dave Brocker
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
+<h3 id="let-me-get-uhh.">Let Me Get Uhh….</h3>
 <p>We want to know how much people like pizza.</p>
 <ul>
-<li class="fragment"><p>There are 12,500 people in our population. Each of the 25 of us collects a sample of 500.</p></li>
+<li class="fragment"><p>There are <code>12,500</code> people in our population. Each of the <code>25</code> of us collects a sample of <code>500</code>.</p></li>
 <li class="fragment"><p><span class="math inline">\(500 \times 25 = 12,500\)</span></p></li>
 <li class="fragment"><p>Each of us calculates the mean response from our sample of 500 people.</p></li>
-<li class="fragment"><p>We plot those means and it gives us a normal distribution.</p></li>
-<li class="fragment"><p>What do we call those means?</p></li>
+<li class="fragment"><p>What do we call those means?</p>
+<ul>
+<li class="fragment">What would it look like if we were to plot it?</li>
+</ul></li>
 </ul>
 </section>
 <section id="pizza-plot" class="slide level2">
 <h2>Pizza Plot</h2>
 <h3 id="visual-example">Visual Example</h3>
 
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
 <p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p>
 <p>What is the probability of picking a mean with a z-score of -1 or less?</p>
 
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="sampling-theory-10" class="slide level2">
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p>
+<p>What is the probability of picking a mean with a z-score of -1 or less?</p>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="sampling-theory-9" class="slide level2">
 <h2>Sampling theory</h2>
 <blockquote>
 <p>Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.</p>
 </blockquote>
 </section>
-<section id="sampling-theory-as-the-basis-for-inferential-statistics" class="slide level2">
-<h2>Sampling theory as the basis for inferential statistics</h2>
+<section id="sampling-theory-10" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="the-basis-for-inferential-statistics">The basis for inferential statistics</h3>
 <ul>
 <li class="fragment"><p>Independent variable:</p>
 <ul>
-<li class="fragment">Experimental Group: Super secret limitless drug</li>
+<li class="fragment">Experimental Group: Super Secret Limitless Drug</li>
 </ul></li>
 <li class="fragment"><p>Control Group: Placebo</p>
 <ul>
@@ -360,38 +1427,49 @@ Dave Brocker
 <p>Sampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.</p>
 </blockquote>
 <ul>
-<li class="fragment"><p>And <strong>because</strong> they’d create a normal distribution, we can make guesses about the probability of getting a specific mean.</p></li>
-<li class="fragment"><p>We will use this probability to gauge significance of our inferential statistics.</p></li>
+<li class="fragment"><p>If that is correct, we can then make guesses about the probability of getting a specific mean.</p></li>
+<li class="fragment"><p>We will use this probability to gauge <strong>significance</strong> of our inferential statistics.</p></li>
 </ul>
 </section>
 <section id="sampling-theory-12" class="slide level2">
-<h2>Sampling theory</h2>
+<h2>Sampling Theory</h2>
+<h3 id="new-terminology-again">New Terminology (Again???)</h3>
 <ul>
-<li class="fragment"><p>The mean of a sample is notated as M.</p></li>
+<li class="fragment"><p>The mean of a sample is notated as <code>M</code>.</p></li>
 <li class="fragment"><p>The mean of a population is notated as (<span class="math inline">\(\mu\)</span>).</p></li>
-</ul>
-</section>
-<section id="sampling-theory-13" class="slide level2">
-<h2>Sampling theory</h2>
+<li class="fragment"><p>The dispersion of a sample is known as the standard deviation, or <code>SD</code>, or sometimes just <code>s</code>.</p></li>
+<li class="fragment"><p>The dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).</p>
 <ul>
-<li class="fragment"><p>The dispersion of a sample is known as the standard deviation, or SD, or sometimes just s.</p></li>
-<li class="fragment"><p>The dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).</p></li>
+<li class="fragment"><span class="math inline">\(SE = \frac{s}{\sqrt{n}}\)</span></li>
+</ul></li>
 </ul>
 </section>
 <section id="sampling-theory-but-candy" class="slide level2">
 <h2>Sampling theory, but candy</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://images.unsplash.com/photo-1534706013986-73f676db1790?w=900&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHklMjBqYXJzfGVufDB8fDB8fHww"></p>
+</div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment">This is a jar of 600 pieces of candy.</li>
 </ul>
-
-<img data-src="https://images.unsplash.com/photo-1534706013986-73f676db1790?w=900&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHklMjBqYXJzfGVufDB8fDB8fHww" class="r-stretch"><ul>
-<li class="fragment"><p>If I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?</p></li>
-<li class="fragment"><p>I have a scoop of 25 pieces of candy, and 6 of them are orange.</p></li>
+<!-- -->
+<ul>
+<li class="fragment"><p>If I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?</p>
+<ul>
+<li class="fragment">I take a first scoop and 6 of them are orange.</li>
+</ul></li>
+<li class="fragment"><p>Should I expect to get 6 oranges on average?</p>
+<ul>
+<li class="fragment">Why?</li>
+</ul></li>
 </ul>
+</div></div>
 </section>
 <section id="sampling-theory-but-candy-1" class="slide level2">
 <h2>Sampling theory, but candy</h2>
-<p>[Insert two peaks with MM]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>Did this scoop come from the jar of m&amp;ms?</p>
 <ul>
@@ -403,52 +1481,68 @@ Dave Brocker
 <li class="fragment">Probably not</li>
 </ul></li>
 </ul>
-</section>
-<section id="p-values" class="slide level2">
-<h2>P-values</h2>
-<p>### Hypothesis testing, Pt 1</p>
-</section>
-<section id="sampling-theory-14" class="slide level2">
-<h2>Sampling theory</h2>
-<p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (<strong>I don’t belong at all</strong>) to 10 (<strong>I belong completely</strong>).</p>
-<p>We each calculate the average response from our own sample of 400.</p>
-<ul>
-<li class="fragment"><p>There are about 10,000 students at Farmingdale State College.</p></li>
-<li class="fragment"><p>Each of the 25 of us recruits a sample of 400 students.</p></li>
-</ul>
-</section>
-<section id="sampling-theory-15" class="slide level2">
-<h2>Sampling theory</h2>
-
-<img data-src="images/bell_prop.png" class="r-stretch"></section>
-<section id="sampling-theory-16" class="slide level2">
-<h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>Now we have <code>25</code> samples of <code>400</code> FSC students each, which equals the full student population of <code>10,000</code>.</p></li>
-<li class="fragment"><p>We take <code>25</code> samples of <code>400</code> students each from another college…John Jacob Jinglehymer Smith University. JJJSMU also has <code>10,000</code> students.</p></li>
-<li class="fragment"><p>We ask the JJJSMU students the same question about sense of belonging.</p></li>
-<li class="fragment"><p>We find the mean of each of the <code>25</code> samples from JJJSMU</p></li>
-</ul>
-</section>
-<section id="sampling-theory-as-the-basis-for-inferential-statistics-1" class="slide level2">
-<h2>Sampling Theory as The Basis for Inferential Statistics</h2>
+</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
 </figure>
 </div>
 </div>
+</div>
+</div></div>
+</section>
+<section id="p-values" class="slide level2">
+<h2>P-values</h2>
+<h3 id="hypothesis-testing-pt-1">Hypothesis Testing, Pt 1</h3>
+</section>
+<section id="sampling-theory-13" class="slide level2">
+<h2>Sampling theory</h2>
+<blockquote>
+<p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of <code>1</code> (<strong>I don’t belong at all</strong>) to <code>10</code> (<strong>I belong completely</strong>). We each calculate the average response from our own sample of <code>400</code>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>There are about <code>10,000</code> students at Farmingdale State College.</p></li>
+<li class="fragment"><p>Each of the <code>25</code> of us recruits a sample of <code>400</code> students.</p></li>
+</ul>
+</section>
+<section id="sampling-theory-14" class="slide level2">
+<h2>Sampling theory</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment">Now we have <code>25</code> samples of <code>400</code> FSC students each, which equals the full student population of <code>10,000</code>.</li>
+</ul>
+<!-- -->
+<ul>
+<li class="fragment"><p>We take <code>25</code> samples of <code>400</code> students each from another college…John Jacob Jinglehymer Smith University. JJJSMU also has <code>10,000</code> students.</p></li>
+<li class="fragment"><p>We ask the JJJSMU students the same question about sense of belonging.</p></li>
+<li class="fragment"><p>We find the mean of each of the <code>25</code> samples from JJJSMU</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-9-2.png" width="960"></p>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
+</div></div>
 </section>
+<section id="sampling-theory-15" class="slide level2">
+<h2>Sampling theory</h2>
+</section>
+<section id="the-basis-for-inferential-statistics-1" class="slide level2">
+<h2>The Basis for Inferential Statistics</h2>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="p-real-and-p-null" class="slide level2">
+<h2>P-Real and P-Null</h2>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="what-is-a-hypothesis" class="slide level2">
 <h2>What is a hypothesis?</h2>
 <p>A hypothesis is a testable prediction of what will happen in our experiment that:</p>
@@ -456,98 +1550,105 @@ Dave Brocker
 <li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
 <li class="fragment"><p>Clearly contrasts the groups</p></li>
 </ul>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Remember!</strong></p>
+</div>
+<div class="callout-content">
+<p>Independent Variables are manipulated</p>
+<p>Dependent Variables are measured</p>
+</div>
+</div>
+</div>
 </section>
 <section id="hypothesis" class="slide level2">
 <h2>Hypothesis:</h2>
-<h3 id="example-2">Example</h3>
+<h3 id="example-3">Example</h3>
 <blockquote>
-<p>Professor Brocker wants to know if Millennials enjoy the Netflix Original, <em>Dark</em> significantly more than Gen Z. She recruits 500 Millennials and 500 Zoomers and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).</p>
+<p>Professor Brocker wants to know if Millennials enjoy the Netflix Original, <em>Dark</em> significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).</p>
 </blockquote>
 <ul>
 <li class="fragment">Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</li>
 </ul>
 </section>
-<section id="hypothesis-1" class="slide level2">
-<h2>Hypothesis:</h2>
-<h3 id="example-3">Example</h3>
-<ul>
-<li class="fragment">Hypothesis: <u>Millennials</u> will rate their enjoyment of Dark as significantly higher than their <u>Gen Z</u> peers.</li>
-</ul>
-</section>
 <section id="what-is-a-hypothesis-1" class="slide level2">
 <h2>What is a Hypothesis?</h2>
-<p>An <u><strong>Alternative Hypothesis</strong></u> is a testable prediction of what will happen in our experiment that:</p>
+<p>An <strong>Alternative Hypothesis</strong> is a testable prediction of what will happen in our experiment that:</p>
 <ul>
 <li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
 <li class="fragment"><p>Clearly contrasts the groups.</p></li>
 </ul>
-</section>
-<section id="alternative-hypothesis" class="slide level2">
-<h2>Alternative hypothesis</h2>
-<p>An <u><strong>Alternative Hypothesis</strong></u> is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.</p>
+<!-- -->
 <ul>
-<li class="fragment">The Alternative Hypothesis is written as <span class="math inline">\(H_1\)</span></li>
+<li class="fragment">The Alternative Hypothesis is written as <span class="math inline">\(H_1/H_A\)</span></li>
 </ul>
 </section>
 <section id="null-hypothesis" class="slide level2">
 <h2>Null Hypothesis</h2>
-<p>The Null Hypothesis states that nothing will happen. <span class="math inline">\(H_0\)</span></p>
-<p>Because Null means zero, nothing, nada.</p>
-<p>The <u><strong>Null Hypothesis</strong></u> states that nothing will happen while also:</p>
 <ul>
-<li class="fragment">Naming of the variables (independent and dependent)</li>
+<li class="fragment"><p>The Null Hypothesis states that nothing will happen. <span class="math inline">\(H_0\)</span></p></li>
+<li class="fragment"><p>Because Null means zero, nothing, nada</p></li>
+</ul>
+<!-- -->
+<ul>
+<li class="fragment">Names the variables (independent and dependent)</li>
 </ul>
 </section>
 <section id="alternative-null-hypotheses" class="slide level2">
 <h2>Alternative &amp; Null Hypotheses:</h2>
-<h3 id="example-4">Example</h3>
-<p>Professor Brocker’s Dark Experiment:</p>
-<ul>
-<li class="fragment"><p><strong>Alternative Hypothesis</strong>: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</p></li>
-<li class="fragment"><p><strong>Null Hypothesis</strong>: Millennials and Gen Z will not differ in their rating of enjoyment of the Eric Andre Show.</p></li>
-</ul>
-</section>
-<section id="hypothesis-testing" class="slide level2">
-<h2>Hypothesis testing</h2>
+<h3 id="example-professor-brockers-dark-experiment">Example: Professor Brocker’s Dark Experiment:</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>Null Hypothesis: These is no difference in the DV between the IV groups.</p></li>
 <li class="fragment"><p>Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.</p></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><strong>Alternative Hypothesis</strong>: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</p></li>
+<li class="fragment"><p><strong>Null Hypothesis</strong>: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.</p></li>
+</ul>
+</div></div>
 </section>
-<section id="hypothesis-testing-1" class="slide level2">
+<section id="hypothesis-testing" class="slide level2">
 <h2>Hypothesis Testing</h2>
 <h3 id="example-1-1">Example 1</h3>
 <blockquote>
-<p>Dr.&nbsp;Apriceno wants to know if giving her students coffee will improve their exam scores. She <strong>randomly</strong> assigns <strong>13</strong> of her <strong>26</strong> students to drink a doubleshot; she calls this the <strong>experimental</strong> group. The other <strong>13</strong> students drink decaf (a placebo); she calls this the <strong>control</strong> group.</p>
+<p>Professor Brocker wants to know if giving his students coffee will improve their exam scores. He <strong>randomly</strong> assigns <code>13</code> of his <code>26</code> students to drink a doubleshot; he calls this the <strong>experimental</strong> group. The other <code>13</code> students drink decaf (a placebo); he calls this the <strong>control</strong> group.</p>
 </blockquote>
 <p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
+<p><span class="math inline">\(H_1/H_A\)</span>:</p>
 </section>
-<section id="hypothesis-testing-2" class="slide level2">
+<section id="hypothesis-testing-1" class="slide level2">
 <h2>Hypothesis Testing</h2>
 <h3 id="example-2-1">Example 2</h3>
 <blockquote>
-<p>Esmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.</p>
+<p>Esmeralda gives an anti-depressant to <code>100</code> individuals suffering from depression. She gives another <code>100</code> individuals a placebo. After <code>2</code> months, we measure their depression.</p>
 </blockquote>
 <p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
+<p><span class="math inline">\(H_1/H_A\)</span>:</p>
 </section>
-<section id="hypothesis-testing-3" class="slide level2">
+<section id="hypothesis-testing-2" class="slide level2">
 <h2>Hypothesis Testing</h2>
 <h3 id="practice">Practice</h3>
 <blockquote>
 <p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day 5 days a week for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
 </blockquote>
 <p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
-<p>[Make big text] ## Better to be a reject than a failure</p>
+<p><span class="math inline">\(H_1/H_A\)</span>:</p>
 </section>
 <section id="rejects-and-failures" class="slide level2">
 <h2>Rejects and Failures</h2>
 <ul>
-<li class="fragment"><p>In science, we <strong>do not</strong> say that we proved anything.</p></li>
-<li class="fragment"><p>Nothing is ever really proven.</p></li>
-<li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis.</p></li>
+<li class="fragment"><p>In science, we <strong>do not</strong> say that we proved anything.</p>
+<ul>
+<li class="fragment">Nothing is ever really proven.</li>
+</ul></li>
+<li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis H<sub>0</sub>.</p></li>
 <li class="fragment"><p>The Null Hypothesis is that there are no differences between the groups.</p></li>
 </ul>
 </section>
@@ -557,45 +1658,93 @@ Dave Brocker
 <p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day 5 days a week for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
 </blockquote>
 <p><span class="math inline">\(H_0\)</span>: There are no differences in working memory capacity between the experimental and control groups.</p>
+<p><span class="math inline">\(H_1/H_A\)</span>: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.</p>
 </section>
 <section id="rejects-and-failures-1" class="slide level2">
 <h2>Rejects and Failures</h2>
 <ul>
-<li class="fragment"><p>In science, we do not say that we proved anything.</p></li>
+<li class="fragment"><p>In science, we do not say that we have proven anything.</p></li>
 <li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis.</p></li>
 <li class="fragment"><p>If there are <strong>significant differences</strong> between the groups, we <strong>Reject the</strong> <span class="math inline">\(H_0\)</span>.</p>
 <ul>
-<li class="fragment">Rejecting is good.</li>
+<li class="fragment">Rejecting is ‘good’.</li>
 </ul></li>
-<li class="fragment"><p>If there are <strong>NO differences</strong> between the groups, we <strong>Fail to Reject the</strong> <span class="math inline">\(H_0\)</span>.</p></li>
+<li class="fragment"><p>If there are <strong>NO differences</strong> between the groups, we <strong>Fail to Reject the</strong> <span class="math inline">\(H_0\)</span>.</p>
+<ul>
+<li class="fragment">Failing is ‘bad’</li>
+</ul></li>
 </ul>
 </section>
-<section id="hypothesis-testing-4" class="slide level2">
-<h2>Hypothesis testing</h2>
-<p>[Include YODA picture or something similar]</p>
-</section>
-<section id="hypothesis-testing-5" class="slide level2">
+<section id="hypothesis-testing-3" class="slide level2">
 <h2>Hypothesis Testing</h2>
 <p>When reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.</p>
 <ul>
-<li class="fragment"><p>If the groups differ, we reject the null hypothesis: <strong>Reject</strong> <span class="math inline">\(H_0\)</span>.</p></li>
-<li class="fragment"><p>If the groups do NOT differ, we fail: <strong>Fail to Reject</strong> <span class="math inline">\(H_0\)</span></p></li>
+<li class="fragment"><p>If the groups differ, we reject the null hypothesis:</p>
+<ul>
+<li class="fragment"><strong>Reject</strong> <span class="math inline">\(H_0\)</span>.</li>
+</ul></li>
+<li class="fragment"><p>If the groups do not differ, we fail:</p>
+<ul>
+<li class="fragment"><strong>Fail to Reject</strong> <span class="math inline">\(H_0\)</span></li>
+</ul></li>
 </ul>
 </section>
 <section id="practice-1" class="slide level2">
 <h2>Practice</h2>
-<p>Jonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity. His test is not significant.</p>
+<blockquote>
+<p>Jonas assigns half of the participants to engage in aerobic exercise for one hour a day <code>5</code> days a week for <code>6</code> months. The other half of the participants do not exercise for <code>6</code> months. At the end of the <code>6</code> months, Jonas measures the participants’ working memory capacity. His test is not significant.</p>
+</blockquote>
 <ul>
-<li class="fragment">State Claudio’s findings in terms of the null hypothesis:</li>
+<li class="fragment">State Jonas’ findings in terms of the null hypothesis:</li>
+<li class="fragment"><em>Jonas fails to reject the null hypothesis that there is no difference between the experimental and control group in regards to exercising and its effect on working memory</em></li>
 </ul>
 </section>
 <section id="hypothesis-practice" class="slide level2">
 <h2>Hypothesis Practice</h2>
 <h3 id="practice-2">Practice</h3>
 <blockquote>
-<p>Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look old using an aging filter (experimental condition). Pedro then measures all participants’ anxiety about dying and runs a t-test, which is statistically significant.</p>
+<p>Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look dead using an filter (experimental condition). Brendan then measures all participants’ anxiety about dying and runs a t-test, which is statistically significant.</p>
 </blockquote>
-<p>State Brendan’s findings in terms of the null hypothesis:</p>
+<ul>
+<li class="fragment"><p>State Brendan’s findings in terms of the null hypothesis:</p></li>
+<li class="fragment"><p><em>Brendan rejects the null hypothesis that states there is no difference in death anxiety betwen participants who view their own face as deceased and those who only view a face on a mortuary table.</em></p></li>
+</ul>
+</section>
+<section id="practice-problem" class="slide level2">
+<h2>Practice Problem</h2>
+<div id="example-box">
+<blockquote>
+<p>John scores an <code>87</code> on a test. If the SD is <code>2</code> and the mean is <code>90</code>, what percentage scored higher than John?</p>
+</blockquote>
+</div>
+<button onclick="newExample()">
+<p>New Example</p>
+</button>
+<script>
+const names = ["John","Aisha","Miguel","Sofia","Ethan","Priya","Liam","Zoe","Kai","Amira"];
+const contexts = [
+  "math test","running race","psychology exam","biology quiz",
+  "typing speed challenge","chemistry final","geography test",
+  "coding challenge","swimming competition","history pop quiz"
+];
+
+function newExample(){
+  // pick random name and context
+  const name = names[Math.floor(Math.random() * names.length)];
+  const context = contexts[Math.floor(Math.random() * contexts.length)];
+
+  // pick random mean and sd
+  const mean = Math.floor(Math.random() * (95 - 70 + 1)) + 70; // 70–95
+  const sd = Math.floor(Math.random() * (6 - 2 + 1)) + 2;      // 2–6
+  // pick score close to mean
+  const score = Math.floor(Math.random() * (mean + 10 - (mean - 10) + 1)) + (mean - 10);
+
+  document.getElementById("example-box").innerHTML =
+    `<blockquote>${name} scores <code>${score}</code> on a ${context}. 
+     If the SD is <code>${sd}</code> and the mean is <code>${mean}</code>,
+     what percentage scored higher than ${name}?</blockquote>`;
+}
+</script>
 
 
 </section>
@@ -782,9 +1931,9 @@ Dave Brocker
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1600,
 
-        height: 700,
+        height: 900,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

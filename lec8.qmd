@@ -6,6 +6,8 @@ institute: "Farmingdale State College"
 format: 
   revealjs:
     theme: custom.scss
+    width: 1600
+    height: 900
     incremental: true   
     touch: true
     scrollable: true
@@ -18,9 +20,38 @@ filters:
 
 The 4 properties of a standard normal distribution are:
 
-![](images/bell.png)
+::::: columns
+::: {.column width="50%"}
+```{r}
 
-::: {.incremental .highlight-last}
+library(ggplot2)
+library(dplyr)
+
+ggnorm <- function(n, m, sd) {
+  x <- rnorm(n, m, sd)
+  tibble(
+    x = x,
+    pd = dnorm(x, mean(x), sd(x))
+  ) |>
+    ggplot(aes(x, pd)) +
+    geom_line() +
+    geom_vline(aes(xintercept = mean(x)), 
+               lty = "dashed") +
+    theme_minimal() +
+    scale_x_continuous(
+      breaks = scales::pretty_breaks(n = 8)
+      ) +
+    labs(
+      x = "\nValues",
+      y = "Probability Density\n"
+    )
+}
+
+ggnorm(1000,40,3)
+```
+:::
+
+::: {.column width="50%"}
 -   They are shaped like a bell ("bell curve").
 
 -   They are symmetric.
@@ -29,6 +60,7 @@ The 4 properties of a standard normal distribution are:
 
 -   The mean = median = mode.
 :::
+:::::
 
 ## Statistics
 
@@ -42,11 +74,13 @@ The 4 properties of a standard normal distribution are:
 
     -   Goal: Use the sample to make inferences about the population
 
-        -   Examples: t-test, ANOVA, Regression
+        -   t-test
+        -   ANOVA
+        -   Regression
 
 ## Sampling theory
 
-> Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, *Dark*. He has unlimited funds to study this **very** important research question. He hires his 24 students from to collect the data. Each student has to collect 500 responses to the following question:
+> Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, *Dark*. He has unlimited funds to study this **very** important research question. He hires 30 students to collect the data. Each student has to collect 500 responses to the following question:
 
 ## Sampling theory
 
@@ -68,11 +102,13 @@ The 4 properties of a standard normal distribution are:
 
 How many people did each of you ask?
 
+$30 * 500 = 15,000$
+
 ```{r}
 #| code-fold: true
 library(dplyr)
 library(tibble)
-library(huxtable)
+library(gt)
 library(latex2exp)
 # 30 Students in the class
 n = 30
@@ -81,19 +117,15 @@ n = 30
 full_sample = n*500
 
 # Simulate Results
-all_data <- 
-  replicate(n = 30,
-            sample(x = 1:7,
-                   size = 500,
-                   replace = TRUE)) |> 
+replicate(n = 30,
+            rnorm(500,5,7)) |> round(0) |> 
   data.frame() |> 
-  rename_with(.fn = function(x)
-    paste0("S", 1:30)) 
-
-all_data |> 
-  head() |> 
-  hux() |> 
-  theme_article()
+  rename_with(.fn = function(x) paste0("S", 1:30)) |> 
+  summarize_all(mean) |>
+  tidyr::pivot_longer(cols = everything(),
+                      names_to = "Sample #",
+                      values_to = "Sample Mean") |> 
+  gt_preview()
 
 ```
 
@@ -102,117 +134,211 @@ all_data |>
 -   Once each of you collect *500 responses*, I ask you to calculate the average answer. So you calculate the mean (you add up all 500 responses, and then divide that number by 500).
 
 ::: fragment
-$$\frac{\sum(x_1...x_{500}}{500}$$
+-   $\frac{\sum(x_1 + x_2 + x_3...+ x_{500)}}{500}$
+
+-   They are the means from each of your samples.
+
+-   These are called **Sample Means**
 :::
 
-## Sampling theory
+## Sampling Theory
+
+### Here is our Ratings Data
 
 ```{r}
 #| code-fold: true
 library(ggplot2)
+library(forcats)
 library(gganimate)
 
-all_data |> 
-  summarize_all(mean) |> 
-  tidyr::pivot_longer(cols = everything(),
-                      names_to = "Sample",
-                      values_to = "Sample Mean") |> 
-  ggplot(aes(factor(Sample,ordered = TRUE),`Sample Mean`)) + 
-  geom_point() +
-  coord_flip() +
-  theme_minimal() 
+tibble(
+  ratings = rnorm(15000,6.6,2),
+    dx = dnorm(ratings,mean(ratings),sd(ratings))
+  ) |> 
+  ggplot(aes(ratings, dx)) +
+  geom_line() + 
+  theme_minimal(base_size = 20) +
+  labs(
+    y = "Probability Density\n",
+    x = "\nAverage Ratings for Dark"
+  ) +
+  geom_vline(aes(xintercept = mean(ratings)), lty = "dashed") +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 8))
 
 
 ```
 
 ## Sampling theory
 
--   They are the means from each of your samples.
+-   We can do lots of cool things with Sample Means.
 
--   These are called **Sample Means**
+    -   We could calculate the Mean of the Sample Means.
 
-## Sampling theory
-
--   We can do lots of cool things with Sample Means. We could calculate the Mean of the Sample Means. We could calculate the standard deviation of the Sample Means.
+    -   We could calculate the standard deviation of the Sample Means.
 
 -   But...it's theoretical. It doesn't really exist, but we imagine it's existence for the sake of **Sampling Theory**.
 
 ## Sampling distribution
 
-A [**Sampling Distribution**]{.underline} is the theoretical distribution of means across every single possible sample.
-
--   Like all the *Dark* samples.
+::::: columns
+::: {.column width="50%"}
+-   A **Sampling Distribution** is the theoretical distribution of means across every single possible sample.
 
 -   If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:
+:::
 
+::: {.column width="50%"}
 ```{r}
 tibble(
-  ratings = rnorm(10000,6.6,2)
-) |> 
-  mutate(
-    dx = dnorm(ratings,mean(ratings),sd(ratings)),
-    z = scale(ratings)
+  ratings = rnorm(15000,6.6,2),
+    dx = dnorm(ratings,mean(ratings),sd(ratings))
   ) |> 
-  ggplot(aes(z,dx)) + 
-  geom_point() + 
-  theme_minimal() +
+  ggplot(aes(ratings, dx)) +
+  geom_line() + 
+  theme_minimal(base_size = 20) +
   labs(
     y = "Probability Density\n",
-    x = "\n"
-  )
+    x = "\nAverage Ratings for Dark"
+  ) +
+  geom_vline(aes(xintercept = mean(ratings)), lty = "dashed") +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 8))
 ```
+:::
+:::::
 
-## Sampling theory
+## Sampling Theory
 
+::::: columns
+::: {.column width="50%"}
 -   Except now each value in this distribution no longer represents 1 person/participant.
 
 -   Each value in this distribution represents the average of 1 sample, a Sample Mean.
 
-![](images/bell_prop.png)
+    -   In our case, each value is the average of 30 samples of 500 people.
+:::
 
-## What does the Stats Cat say?
+::: {.column width="50%"}
+```{r}
 
-![](images/cat.png){style="border-radius: 15px;" fig-align="center"}
+new_dat <- tibble(
+  z = seq(-4, 4, length.out = 1000),
+  dx = dnorm(z)
+)
+
+labels <- tibble(
+  x = c(-1, 1, -1.5, 1.5, -2.6, 2.6, -3.5, 3.5),
+  y = c(.36,0.36, 0.25, 0.25, 0.075, 0.075, 0.025, 0.025),
+  label = c("34.1%", "34.1%", "13.6%", "13.6%", "2.1%", "2.1%", "0.1%", "0.1%")
+)
+
+
+p <- 
+  ggplot(new_dat, aes(x = z, y = dx)) +
+  geom_line(size = 1.2) +
+  geom_area(data = filter(new_dat, z >= -1 & z <= 1), fill = "lightblue", alpha = 0.6) +
+  geom_area(data = filter(new_dat, z >=-1 & z <=0), fill = "lightblue", alpha = .6) +
+  geom_area(data = filter(new_dat, z >=-2 & z <=-1), fill = "blue", alpha = .6) +
+  geom_area(data = filter(new_dat, z <=2 & z >=1), fill = "blue", alpha = .6) +
+  geom_area(data = filter(new_dat, z >=-4 & z <= -2), fill = "darkblue", alpha = .6) +
+  geom_area(data = filter(new_dat, z >=2 & z <= 4), fill = "darkblue", alpha = .6) +
+  geom_text(data = labels, aes(x = x, y = y, label = label), size = 4, inherit.aes = FALSE) +
+  theme_minimal(base_size = 13) +
+  labs(
+    x = "\nStandard Deviations",
+    y = "Probability Density\n"
+  ) +
+  scale_x_continuous(breaks = -4:4) +
+  theme_sub_panel(grid = element_blank())
+
+p
+```
+:::
+:::::
+
+## New Terminology
+
+### Sample Mean and Sample Standard Deviation
+
+::::: columns
+::: {.column width="50%"}
+-   We previously referred to the average as $\bar{x}$ and the standard deviation as $s$
+
+-   The new terms refer to their specific attributes as a statistic of the sample
+
+-   $\mu$ (pronounced like 'mew') represents the population mean
+
+-   $\sigma$ represents the population standard deviation
+:::
+
+::: {.column width="50%"}
+```{r}
+
+library(tibble)
+
+tibble(
+  Term = c(
+    "Sample Mean",
+    "Sample SD",
+    "Population Mean",
+    "Population SD"
+  ),
+  Symbol = c(
+    "$$\\bar{x}$$",
+    "$$s$$",
+    "$$\\mu$$",
+    "$$\\sigma$$"
+  ),
+  Type = c(
+    "Sample",
+    "Sample",
+    "Population",
+    "Population"
+  ),
+  Formula = c(
+    "$$\\frac{\\sum x_i}{n}$$",
+    "$$\\sqrt{\\frac{\\sum (x_i - \\bar{x})^2}{n-1}}$$",
+    "$$\\frac{\\sum X_i}{N}$$",
+    "$$\\sqrt{\\frac{\\sum (X_i - \\mu)^2}{N}}$$"
+  ),
+  Relation_to_Sample = c(
+    "Mean of observed sample",
+    "SD of sample values",
+    "True (unknown) mean",
+    "True (unknown) SD"
+  )
+) |> 
+  gt() |> 
+  fmt_markdown(columns = c(Formula,Symbol)) |> 
+  opt_row_striping()
+
+```
+:::
+:::::
 
 ## Sampling theory
 
--   Except now each value in this distribution no longer represents 1 person/participant.
+-   Each value in this distribution no longer represents 1 person/participant.
 
--   Each value in this distribution represents the average of 1 sample, a Sample Mean.
+-   Each value in this distribution now represents the average of 1 sample, a Sample Mean.
 
 ```{r}
+
 tibble(
-  ratings = rnorm(10000,6.6,2)
-) |> 
-  mutate(
-    dx = dnorm(ratings,mean(ratings),sd(ratings)),
-    z = scale(ratings)
+  ratings = rnorm(15000,6.6,2),
+    dx = dnorm(ratings,mean(ratings),sd(ratings))
   ) |> 
-  ggplot(aes(z,dx)) + 
-  geom_point() + 
-  theme_minimal() +
+  ggplot(aes(ratings, dx)) +
+  geom_line() + 
+  theme_minimal(base_size = 20) +
   labs(
     y = "Probability Density\n",
-    x = "\n"
+    x = "\nAverage Ratings for Dark"
   ) +
-  annotate(
-    geom = "text",
-    x = 0, 
-    y = 0,
-    label = TeX("$\\mu$")
-  ) +
-  annotate(
-    geom = "text",
-    x = -1,
-    y = 0,
-    label = TeX("-1$\\sigma$")
-  ) + 
-    annotate(
-    geom = "text",
-    x = 1,
-    y = 0,
-    label = TeX("1$\\sigma$")
-  )
+  geom_vline(aes(xintercept = mean(ratings)), lty = "dashed") +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 8)) +
+  annotate(geom = "point", x = 3, y = .04, color = "maroon") +
+  geom_segment(x = 3, y = 0, xend = 3, yend = .036, size = .8) +
+  theme_sub_panel(grid = element_blank())
 ```
 
 ## Review
@@ -225,57 +351,55 @@ tibble(
 
 -   What does $\sigma$ represent?
 
+## Review
+
+-   What is a sample distribution?
+
+    -   A sample distribution represents how all possible samples from the population would be visualized
+
+-   What does each X value in a sample distribution represent?
+
+    -   That sample's average
+
+-   What does $\mu$ represent?
+
+    -   The population average
+
+-   What does $\sigma$ represent?
+
+    -   The population standard deviation
+
 ## Probability
 
--   What percentage of participants rated Dark with a z-score of 2 or [**HIGHER**]{.underline}?
+-   What percentage of participants rated Dark with a z-score of 2 or higher?
 
 ```{r}
-
-
-# Create a function to calculate the normal distribution
-normal_data <- data.frame(x = seq(-4, 4, by = 0.01))
-normal_data$y <- dnorm(normal_data$x)
-
-# Create the plot
-p <- ggplot(normal_data, aes(x = x, y = y)) + 
-  geom_line(size = 1.2) + 
-  geom_area(data = subset(normal_data, x >= -1 & x <= 1), aes(y = y), fill = "lightblue", alpha = 0.5) +
-  geom_area(data = subset(normal_data, x >= -2 & x <= -1 | x >= 1 & x <= 2), aes(y = y), fill = "blue", alpha = 0.5) +
-  geom_area(data = subset(normal_data, x >= -3 & x <= -2 | x >= 2 & x <= 3), aes(y = y), fill = "darkblue", alpha = 0.5) +
-  
-  # Add vertical lines for standard deviations
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed") +
-  geom_vline(xintercept = c(-2, 2), linetype = "dashed") +
-  geom_vline(xintercept = c(-3, 3), linetype = "dashed") +
-  
-  # Add percentage labels
-  annotate("text", x = 0, y = 0.32, label = "34.1%", size = 5) +
-  annotate("text", x = -1.5, y = 0.05, label = "13.6%", size = 5) +
-  annotate("text", x = 1.5, y = 0.05, label = "13.6%", size = 5) +
-  annotate("text", x = -3, y = 0.02, label = "2.1%", size = 5) +
-  annotate("text", x = 3, y = 0.02, label = "2.1%", size = 5) +
-  annotate("text", x = -4, y = 0, label = "0.1%", size = 5) +
-  annotate("text", x = 4, y = 0, label = "0.1%", size = 5) +
-  
-  # Adjust plot appearance
-  theme_minimal() +
-  labs(title = "Standard Normal Distribution", x = "Standard Deviations", y = "Density") +
-  scale_x_continuous(breaks = seq(-4, 4, 1))
-
 p
+```
+
+## Probability
+
+-   What percentage of participants rated Dark with a z-score of 2 higher?
+
+```{r}
+p + 
+  geom_segment(x = 2, xend = 2, y = 0, yend = .05) +
+  geom_area(data = p$data |> filter(z <= 2), fill = "white")
 ```
 
 ## Probability
 
 -   This is the distribution of **sample means** from adults in the US.
 
--   What is the probability of any sample having a mean that is a z-score of 2 or [**HIGHER**]{.underline}?
+-   What is the probability of any sample having a mean that is a z-score of 2 or higher?
 
 ```{r}
-p
+p + 
+  geom_segment(x = 2, xend = 2, y = 0, yend = .05) +
+  geom_area(data = p$data |> filter(z <= 2), fill = "white")
 ```
 
-## THIS IS the key point
+## Assumptions of the Normal Curve
 
 -   We *assume* that the distribution of sample means is normal.
 
@@ -285,49 +409,55 @@ p
 
 ## Example
 
+### Let Me Get Uhh....
+
 We want to know how much people like pizza.
 
--   There are 12,500 people in our population. Each of the 25 of us collects a sample of 500.
+-   There are `12,500` people in our population. Each of the `25` of us collects a sample of `500`.
 
 -   $500 \times 25 = 12,500$
 
 -   Each of us calculates the mean response from our sample of 500 people.
 
--   We plot those means and it gives us a normal distribution.
-
 -   What do we call those means?
+
+    -   What would it look like if we were to plot it?
 
 ## Pizza Plot
 
 ### Visual Example
 
 ```{r}
-library(dplyr)
-library(ggplot2)
+set.seed(123)
 
-# Collect 500 Random Samples 25 Times
-replicate(
-  25,
-  rnorm(500,4.2,1) |> round(0) 
-) |> 
-  # Coerce into Dataframe
-  data.frame() |> 
-  # Calculate mean
-  summarise_all(mean) |> 
-  tidyr::pivot_longer(
-    everything(),
-    names_to = "sample",
-    values_to = "sample_mean"
-  ) |> 
-  # Plot
-  ggplot(aes(sample_mean)) +
+df <- data.frame(
+  sample_mean = replicate(
+    10000,
+    mean(rnorm(500, 4.2, 1))
+  )
+)
+
+ggplot(df, aes(sample_mean)) +
   geom_histogram(
-    fill = "coral"
-  ) + 
-  theme_minimal() + 
+    aes(y = after_stat(density)),   # density instead of counts
+    fill = "coral",
+    bins = 40,
+    alpha = 0.6
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(
+      mean = 4.2,
+      sd = 1/sqrt(500)      # theoretical SE
+    ),
+    color = "blue",
+    size = 1
+  ) +
+  theme_minimal() +
   labs(
     x = "Sample Mean",
-    y = "Frequency"
+    y = "Density",
+    title = "Sampling Distribution of the Mean (n = 500)"
   )
   
 ```
@@ -342,15 +472,28 @@ What is the probability of picking a mean with a z-score of -1 or less?
 p
 ```
 
+## Example
+
+I randomly choose a mean from our distribution of sample means, about how much people like pizza.
+
+What is the probability of picking a mean with a z-score of -1 or less?
+
+```{r}
+p + 
+  geom_area(data = p$data |> filter(z>=-1), fill = "white")
+```
+
 ## Sampling theory
 
 > Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.
 
-## Sampling theory as the basis for inferential statistics
+## Sampling Theory
+
+### The basis for inferential statistics
 
 -   Independent variable:
 
-    -   Experimental Group: Super secret limitless drug
+    -   Experimental Group: Super Secret Limitless Drug
 
 -   Control Group: Placebo
 
@@ -360,36 +503,50 @@ p
 
 > Sampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.
 
--   And **because** they'd create a normal distribution, we can make guesses about the probability of getting a specific mean.
+-   If that is correct, we can then make guesses about the probability of getting a specific mean.
 
--   We will use this probability to gauge significance of our inferential statistics.
+-   We will use this probability to gauge **significance** of our inferential statistics.
 
-## Sampling theory
+## Sampling Theory
 
--   The mean of a sample is notated as M.
+### New Terminology (Again???)
+
+-   The mean of a sample is notated as `M`.
 
 -   The mean of a population is notated as ($\mu$).
 
-## Sampling theory
-
--   The dispersion of a sample is known as the standard deviation, or SD, or sometimes just s.
+-   The dispersion of a sample is known as the standard deviation, or `SD`, or sometimes just `s`.
 
 -   The dispersion of a population cannot be a "deviation" because we don't actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).
 
+    -   $SE = \frac{s}{\sqrt{n}}$
+
 ## Sampling theory, but candy
 
+::::: columns
+::: {.column width="50%"}
+![](https://images.unsplash.com/photo-1534706013986-73f676db1790?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHklMjBqYXJzfGVufDB8fDB8fHww)
+:::
+
+::: {.column width="50%"}
 -   This is a jar of 600 pieces of candy.
 
-![](https://images.unsplash.com/photo-1534706013986-73f676db1790?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHklMjBqYXJzfGVufDB8fDB8fHww)
+<!-- -->
 
 -   If I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?
 
--   I have a scoop of 25 pieces of candy, and 6 of them are orange.
+    -   I take a first scoop and 6 of them are orange.
+
+-   Should I expect to get 6 oranges on average?
+
+    -   Why?
+:::
+:::::
 
 ## Sampling theory, but candy
 
-\[Insert two peaks with MM\]
-
+::::: columns
+::: {.column width="50%"}
 -   Did this scoop come from the jar of m&ms?
 
     -   Probably!
@@ -399,84 +556,218 @@ p
 -   Did this scoop come from the jar of m&ms?
 
     -   Probably not
+:::
+
+::: {.column width="50%"}
+```{r}
+
+# parameters
+n <- 25
+p_null <- 0.24
+p_real <- 0.60
+cutoff <- 25   # observed oranges in scoop
+
+# x-axis: possible orange counts
+x <- 0:n
+
+# build distributions
+df <- data.frame(
+  x = rep(x, 2),
+  prob = c(dbinom(x, n, p_null), dbinom(x, n, p_real)),
+  dist = rep(c("p-null (mean ≈ 6)", "p-real (mean ≈ 15)"), each = length(x))
+)
+
+# highlight rejection region (p_null, x >= cutoff)
+shade <- df %>%
+  filter(dist == "p-null (mean ≈ 6)", x >= cutoff)
+
+# plot
+ggplot(df, aes(x, prob, color = dist)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  geom_col(
+    data = shade,
+    aes(x, prob),
+    inherit.aes = FALSE,
+    fill = "red",
+    alpha = 0.4
+  ) +
+  scale_x_continuous(breaks = seq(0, n, 5)) +
+  labs(
+    x = "Number of Orange Candies per Scoop (n = 25)",
+    y = "Probability",
+    title = "Sampling Distributions with Rejection Region"
+  ) +
+  theme_minimal() + 
+  theme_sub_legend(position = "bottom")
+```
+:::
+:::::
 
 ## P-values
 
-\### Hypothesis testing, Pt 1
+### Hypothesis Testing, Pt 1
 
 ## Sampling theory
 
-We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of 1 (**I don't belong at all**) to 10 (**I belong completely**).
+> We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of `1` (**I don't belong at all**) to `10` (**I belong completely**). We each calculate the average response from our own sample of `400`.
 
-We each calculate the average response from our own sample of 400.
+-   There are about `10,000` students at Farmingdale State College.
 
--   There are about 10,000 students at Farmingdale State College.
-
--   Each of the 25 of us recruits a sample of 400 students.
+-   Each of the `25` of us recruits a sample of `400` students.
 
 ## Sampling theory
 
-![](images/bell_prop.png)
-
-## Sampling theory
-
+::::: columns
+::: {.column width="50%"}
 -   Now we have `25` samples of `400` FSC students each, which equals the full student population of `10,000`.
+
+<!-- -->
 
 -   We take `25` samples of `400` students each from another college...John Jacob Jinglehymer Smith University. JJJSMU also has `10,000` students.
 
 -   We ask the JJJSMU students the same question about sense of belonging.
 
 -   We find the mean of each of the `25` samples from JJJSMU
+:::
 
-## Sampling Theory as The Basis for Inferential Statistics
+::: {.column width="50%"}
+```{r}
+
+p
+```
+:::
+:::::
+
+## Sampling theory
+
+## The Basis for Inferential Statistics
 
 ```{r}
+
+library(ggplot2)
 library(dplyr)
-# Simulate 25 * 400
-replicate(
-  25,
-  rnorm(400,7,2) |> round(0)
-) |> 
-  data.frame() |> 
-  rename_with(
-    .fn = function(x) as.character(letters[1:25])
-    ) |> 
-  tidyr::pivot_longer(cols = everything(),
-names_to = "Samples",
-values_to = "Scores"
-                    ) |> 
-  ggplot(aes(factor(Samples),Scores)) + 
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "pointrange"
-  ) +
-  theme_minimal()
 
+# parameters
+n <- 500
+sd_pop <- 3
+se <- sd_pop / sqrt(n)   # standard error
 
+mu_fsc <- 7   # "real" mean
+mu_jsmu <- 4  # "null" mean
 
+# x values
+x <- seq(2, 9, length.out = 500)
 
-xx <- 
-  replicate(
-  25,
-  runif(1000,1,10) |> round(0)
-) |> 
-  data.frame() |> 
-  rename_with(
-    .fn = function(x) as.character(letters[1:25])
-    ) |> 
-  tidyr::pivot_longer(cols = everything(),
-names_to = "Samples",
-values_to = "Scores"
-                    )
+# build distributions
+df <- tibble(
+  x = x,
+  fsc = dnorm(x, mean = mu_fsc, sd = se),
+  jsmu = dnorm(x, mean = mu_jsmu, sd = se)
+) |> tidyr::pivot_longer(-x, names_to = "dist", values_to = "density")
 
+# rejection cutoff (example)
+cutoff <- 5.5
 
-tibble(
-  x = xx$Scores,
-  prob = dnorm(x,mean(x),sd(x))
-) |> ggplot(aes(x,prob)) + 
-  geom_point() + 
-  theme_minimal()
+# plot
+ggplot(df, aes(x, density, color = dist, lty = dist)) +
+  geom_line(size = 1.2) +
+  # geom_area(
+  #   data = df |> filter(dist == "jsmu", x >= cutoff),
+  #   aes(x, density),
+  #   inherit.aes = FALSE,
+  #   fill = "red",
+  #   alpha = 0.4
+  # ) +
+  geom_vline(xintercept = cutoff, linetype = "dashed", color = "red") +
+  annotate("text", x = cutoff + 0.1, y = max(df$density)/2,
+           label = "Rejection Region", color = "red", hjust = 0) +
+  theme_minimal() +
+  labs(
+    title = "Sampling Distributions with Rejection Region",
+    x = "Sample Mean",
+    y = "Density"
+  )
+```
 
+## P-Real and P-Null
+
+```{r}
+library(patchwork)
+prpn <- 
+  tibble(
+  z = seq(-4, 4, length.out = 1000),
+  dx = dnorm(z)
+  ) 
+
+pr1 <- 
+  prpn |> 
+  ggplot(aes(x = z, y = dx)) +
+  geom_line() +
+  geom_vline(xintercept = 0, lty = "dashed") + 
+  theme_void() +
+  geom_area(data = filter(new_dat, z <= 2), fill = "darkorange", alpha = 0.6) + 
+  labs(
+  title = TeX("$H_0: \\mu_1 \\leq \\mu_2$")
+  )
+
+pr2 <- 
+  prpn |> 
+  ggplot(aes(x = z, y = dx)) +
+  geom_line() +
+  geom_vline(xintercept = 0, lty = "dashed") + 
+  theme_void() +
+  geom_area(data = filter(new_dat, z >= 2), fill = "steelblue", alpha = 0.6) +
+   labs(
+  title = TeX("$H_0: \\mu_1 > \\mu_2$")
+  )
+
+pr3 <- 
+  prpn |> 
+  ggplot(aes(x = z, y = dx)) +
+  geom_line() +
+  geom_vline(aes(xintercept = mean(z)), lty = "dashed") + 
+  theme_void() +
+  geom_area(data = filter(new_dat, z >= -2), fill = "darkorange", alpha = 0.6) + 
+   labs(
+  title = TeX("$H_0: \\mu_1 \\geq \\mu_2$")
+  )
+
+pr4 <- 
+  prpn |> 
+  ggplot(aes(x = z, y = dx)) +
+  geom_line() +
+  geom_vline(xintercept = 0, lty = "dashed") + 
+  theme_void() +
+  geom_area(data = filter(new_dat, z <= -2), fill = "steelblue", alpha = 0.6) +
+   labs(
+  title = TeX("$H_0: \\mu_1 < \\mu_2$")
+  )
+
+pr5 <- 
+  prpn |> 
+  ggplot(aes(x = z, y = dx)) +
+  geom_line() +
+  geom_vline(xintercept = 0, lty = "dashed") + 
+  theme_void() +
+  geom_area(data = filter(new_dat, z >=-1 & z <= 1), fill = "orange", alpha = 0.6) +
+   labs(
+  title = TeX("$H_0: \\mu_1 = \\mu_2$")
+  )
+
+pr6 <- 
+  prpn |> 
+  ggplot(aes(x = z, y = dx)) +
+  geom_line() +
+  geom_vline(xintercept = 0, lty = "dashed") + 
+  theme_void() +
+  geom_area(data = filter(new_dat, z <=-1), fill = "steelblue", alpha = 0.6) +
+  geom_area(data = filter(new_dat, z >= 1), fill = "steelblue", alpha = 0.6) +
+   labs(
+  title = TeX("$H_0: \\mu_1  \neq \\mu_2$")
+  )
+
+pr1 + pr2 + pr3 + pr4 + pr5 + pr6 + plot_layout(ncol = 2, nrow = 3)
 
 ```
 
@@ -488,79 +779,81 @@ A hypothesis is a testable prediction of what will happen in our experiment that
 
 -   Clearly contrasts the groups
 
+::: callout-important
+## Remember!
+
+Independent Variables are manipulated
+
+Dependent Variables are measured
+:::
+
 ## Hypothesis:
 
 ### Example
 
-> Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. She recruits 500 Millennials and 500 Zoomers and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
+> Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
 
 -   Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
 
-## Hypothesis:
-
-### Example
-
--   Hypothesis: [Millennials]{.underline} will rate their enjoyment of Dark as significantly higher than their [Gen Z]{.underline} peers.
-
 ## What is a Hypothesis?
 
-An [**Alternative Hypothesis**]{.underline} is a testable prediction of what will happen in our experiment that:
+An **Alternative Hypothesis** is a testable prediction of what will happen in our experiment that:
 
 -   Names of the variables (independent and dependent)
 
 -   Clearly contrasts the groups.
 
-## Alternative hypothesis
+<!-- -->
 
-An [**Alternative Hypothesis**]{.underline} is a testable prediction of what will happen in our experiment that names of the variables (independent and dependent) and clearly contrasts the groups.
-
--   The Alternative Hypothesis is written as $H_1$
+-   The Alternative Hypothesis is written as $H_1/H_A$
 
 ## Null Hypothesis
 
-The Null Hypothesis states that nothing will happen. $H_0$
+-   The Null Hypothesis states that nothing will happen. $H_0$
 
-Because Null means zero, nothing, nada.
+-   Because Null means zero, nothing, nada
 
-The [**Null Hypothesis**]{.underline} states that nothing will happen while also:
+<!-- -->
 
--   Naming of the variables (independent and dependent)
+-   Names the variables (independent and dependent)
 
 ## Alternative & Null Hypotheses:
 
-### Example
+### Example: Professor Brocker's Dark Experiment:
 
-Professor Brocker's Dark Experiment:
-
--   **Alternative Hypothesis**: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
-
--   **Null Hypothesis**: Millennials and Gen Z will not differ in their rating of enjoyment of the Eric Andre Show.
-
-## Hypothesis testing
-
+::::: columns
+::: {.column width="50%"}
 -   Null Hypothesis: These is no difference in the DV between the IV groups.
 
 -   Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.
+:::
+
+::: {.column width="50%"}
+-   **Alternative Hypothesis**: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
+
+-   **Null Hypothesis**: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.
+:::
+:::::
 
 ## Hypothesis Testing
 
 ### Example 1
 
-> Professor Brocker wants to know if giving her students coffee will improve their exam scores. He **randomly** assigns **13** of his **26** students to drink a doubleshot; he calls this the **experimental** group. The other **13** students drink decaf (a placebo); he calls this the **control** group.
+> Professor Brocker wants to know if giving his students coffee will improve their exam scores. He **randomly** assigns `13` of his `26` students to drink a doubleshot; he calls this the **experimental** group. The other `13` students drink decaf (a placebo); he calls this the **control** group.
 
 $H_0$:
 
-$H_1$:
+$H_1/H_A$:
 
 ## Hypothesis Testing
 
 ### Example 2
 
-> Esmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.
+> Esmeralda gives an anti-depressant to `100` individuals suffering from depression. She gives another `100` individuals a placebo. After `2` months, we measure their depression.
 
 $H_0$:
 
-$H_1$:
+$H_1/H_A$:
 
 ## Hypothesis Testing
 
@@ -570,17 +863,15 @@ $H_1$:
 
 $H_0$:
 
-$H_1$:
-
-\[Make big text\] \## Better to be a reject than a failure
+$H_1/H_A$:
 
 ## Rejects and Failures
 
 -   In science, we **do not** say that we proved anything.
 
--   Nothing is ever really proven.
+    -   Nothing is ever really proven.
 
--   Our findings will be stated in terms of the Null Hypothesis.
+-   Our findings will be stated in terms of the Null Hypothesis H~0~.
 
 -   The Null Hypothesis is that there are no differences between the groups.
 
@@ -590,36 +881,87 @@ $H_1$:
 
 $H_0$: There are no differences in working memory capacity between the experimental and control groups.
 
+$H_1/H_A$: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.
+
 ## Rejects and Failures
 
--   In science, we do not say that we proved anything.
+-   In science, we do not say that we have proven anything.
 
 -   Our findings will be stated in terms of the Null Hypothesis.
 
 -   If there are **significant differences** between the groups, we **Reject the** $H_0$.
 
-    -   Rejecting is good.
+    -   Rejecting is 'good'.
 
 -   If there are **NO differences** between the groups, we **Fail to Reject the** $H_0$.
+
+    -   Failing is 'bad'
 
 ## Hypothesis Testing
 
 When reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.
 
--   If the groups differ, we reject the null hypothesis: **Reject** $H_0$.
+-   If the groups differ, we reject the null hypothesis:
 
--   If the groups do not differ, we fail: **Fail to Reject** $H_0$
+    -   **Reject** $H_0$.
+
+-   If the groups do not differ, we fail:
+
+    -   **Fail to Reject** $H_0$
 
 ## Practice
 
-> Jonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants' working memory capacity. His test is not significant.
+> Jonas assigns half of the participants to engage in aerobic exercise for one hour a day `5` days a week for `6` months. The other half of the participants do not exercise for `6` months. At the end of the `6` months, Jonas measures the participants' working memory capacity. His test is not significant.
 
--   State Claudio's findings in terms of the null hypothesis:
+-   State Jonas' findings in terms of the null hypothesis:
+-   *Jonas fails to reject the null hypothesis that there is no difference between the experimental and control group in regards to exercising and its effect on working memory*
 
 ## Hypothesis Practice
 
 ### Practice
 
-> Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look old using an aging filter (experimental condition). Pedro then measures all participants' anxiety about dying and runs a t-test, which is statistically significant.
+> Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look dead using an filter (experimental condition). Brendan then measures all participants' anxiety about dying and runs a t-test, which is statistically significant.
 
-State Brendan's findings in terms of the null hypothesis:
+-   State Brendan's findings in terms of the null hypothesis:
+
+-   *Brendan rejects the null hypothesis that states there is no difference in death anxiety betwen participants who view their own face as deceased and those who only view a face on a mortuary table.*
+
+## Practice Problem
+
+::: {#example-box}
+> John scores an `87` on a test. If the SD is `2` and the mean is `90`, what percentage scored higher than John?
+:::
+
+<button onclick="newExample()">
+
+New Example
+
+</button>
+
+```{=html}
+<script>
+const names = ["John","Aisha","Miguel","Sofia","Ethan","Priya","Liam","Zoe","Kai","Amira"];
+const contexts = [
+  "math test","running race","psychology exam","biology quiz",
+  "typing speed challenge","chemistry final","geography test",
+  "coding challenge","swimming competition","history pop quiz"
+];
+
+function newExample(){
+  // pick random name and context
+  const name = names[Math.floor(Math.random() * names.length)];
+  const context = contexts[Math.floor(Math.random() * contexts.length)];
+
+  // pick random mean and sd
+  const mean = Math.floor(Math.random() * (95 - 70 + 1)) + 70; // 70–95
+  const sd = Math.floor(Math.random() * (6 - 2 + 1)) + 2;      // 2–6
+  // pick score close to mean
+  const score = Math.floor(Math.random() * (mean + 10 - (mean - 10) + 1)) + (mean - 10);
+
+  document.getElementById("example-box").innerHTML =
+    `<blockquote>${name} scores <code>${score}</code> on a ${context}. 
+     If the SD is <code>${sd}</code> and the mean is <code>${mean}</code>,
+     what percentage scored higher than ${name}?</blockquote>`;
+}
+</script>
+```
