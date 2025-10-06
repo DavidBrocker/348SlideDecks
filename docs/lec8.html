@@ -28,8 +28,73 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-297fbe3b9b15a7776aa5394443b782e0.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-f7f2f208198edaf8d355037122eea64a.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -47,7 +112,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -124,6 +188,13 @@
       margin-right: 0; 
     }
   </style>
+  <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+  <script src="site_libs/react-18.2.0/react.min.js"></script>
+  <script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+  <script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+  <script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -131,7 +202,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Sampling Theory</h1>
-  <p class="subtitle">Lecture 8</p>
+  <p class="subtitle">Lecture 7</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -190,13 +261,13 @@ Dave Brocker
 </ul>
 </section>
 <section id="sampling-theory" class="slide level2">
-<h2>Sampling theory</h2>
+<h2>Sampling Theory</h2>
 <blockquote>
-<p>Professor Brocker still wants to know how much adults in the US enjoy the Netflix Original, <em>Dark</em>. He has unlimited funds to study this <strong>very</strong> important research question. He hires 30 students to collect the data. Each student has to collect 500 responses to the following question:</p>
+<p>Professor Brocker <em>still</em> wants to know how much adults in the US enjoy the Netflix Original, <em>Dark</em>. He has unlimited funds to study this <strong>very</strong> important research question. He hires 30 students to collect the data. Each student has to collect 500 responses to the following question:</p>
 </blockquote>
 </section>
 <section id="sampling-theory-1" class="slide level2">
-<h2>Sampling theory</h2>
+<h2>Sampling Theory</h2>
 <blockquote>
 <p>On a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?</p>
 </blockquote>
@@ -204,48 +275,75 @@ Dave Brocker
 <img data-src="images/dark.png" class="quarto-figure quarto-figure-center r-stretch" style="border-radius: 15px;" width="419"></section>
 <section id="sampling-theory-2" class="slide level2">
 <h2>Sampling Theory</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Each one of you asks 500 people how much they enjoy the Netflix Original Dark.</p></li>
-<li class="fragment"><p>This is you on the street asking people:</p></li>
+<li class="fragment"><p>Each student asks 500 people how much they enjoy the Netflix Original Dark.</p></li>
+<li class="fragment"><p>How many people did each of you ask?</p>
+<ul>
+<li class="fragment"><span class="math inline">\(30 \times 500 = 15,000\)</span></li>
+</ul></li>
 </ul>
-<div class="fragment">
-<p><img data-src="https://media.tenor.com/xoZUAVXAQuMAAAAM/frantic-running.gif" style="border-radius: 15px;" width="452"></p>
-</div>
-</section>
-<section id="sampling-theory-3" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>How many people did each of you ask?</p>
-<p><span class="math inline">\(30 * 500 = 15,000\)</span></p>
+</div><div class="column" style="width:50%;">
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb1-5"><a></a><span class="co"># 30 Students in the class</span></span>
+<span id="cb1-6"><a></a>n <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="co"># Each student asks 500 people</span></span>
+<span id="cb1-9"><a></a>full_sample <span class="ot">=</span> n<span class="sc">*</span><span class="dv">500</span></span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co"># Simulate Results</span></span>
+<span id="cb1-12"><a></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">30</span>,</span>
+<span id="cb1-13"><a></a>            <span class="fu">rnorm</span>(<span class="dv">500</span>,<span class="dv">5</span>,<span class="dv">7</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-14"><a></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="st">"S"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-16"><a></a>  <span class="fu">summarize_all</span>(mean) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb1-18"><a></a>                      <span class="at">names_to =</span> <span class="st">"Sample"</span>,</span>
+<span id="cb1-19"><a></a>                      <span class="at">values_to =</span> <span class="st">"Sample Mean"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-20"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-21"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb1-22"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">60</span>),</span>
+<span id="cb1-23"><a></a>    <span class="at">table.font.size =</span> <span class="dv">30</span>,</span>
+<span id="cb1-24"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-25"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-26"><a></a>  <span class="fu">opt_interactive</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div id="xqcjjhrwst" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xqcjjhrwst table {
+<div id="zmwkebwqfq" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmwkebwqfq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xqcjjhrwst thead, #xqcjjhrwst tbody, #xqcjjhrwst tfoot, #xqcjjhrwst tr, #xqcjjhrwst td, #xqcjjhrwst th {
+#zmwkebwqfq thead, #zmwkebwqfq tbody, #zmwkebwqfq tfoot, #zmwkebwqfq tr, #zmwkebwqfq td, #zmwkebwqfq th {
   border-style: none;
 }
 
-#xqcjjhrwst p {
+#zmwkebwqfq p {
   margin: 0;
   padding: 0;
 }
 
-#xqcjjhrwst .gt_table {
+#zmwkebwqfq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 16px;
+  font-size: 30px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 60%;
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
@@ -260,12 +358,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_caption {
+#zmwkebwqfq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xqcjjhrwst .gt_title {
+#zmwkebwqfq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -277,7 +375,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#xqcjjhrwst .gt_subtitle {
+#zmwkebwqfq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -289,7 +387,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#xqcjjhrwst .gt_heading {
+#zmwkebwqfq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -301,13 +399,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_bottom_border {
+#zmwkebwqfq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_col_headings {
+#zmwkebwqfq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -322,7 +420,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_col_heading {
+#zmwkebwqfq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -342,7 +440,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#xqcjjhrwst .gt_column_spanner_outer {
+#zmwkebwqfq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -354,15 +452,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#xqcjjhrwst .gt_column_spanner_outer:first-child {
+#zmwkebwqfq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xqcjjhrwst .gt_column_spanner_outer:last-child {
+#zmwkebwqfq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xqcjjhrwst .gt_column_spanner {
+#zmwkebwqfq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -374,11 +472,11 @@ Dave Brocker
   width: 100%;
 }
 
-#xqcjjhrwst .gt_spanner_row {
+#zmwkebwqfq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xqcjjhrwst .gt_group_heading {
+#zmwkebwqfq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -404,7 +502,7 @@ Dave Brocker
   text-align: left;
 }
 
-#xqcjjhrwst .gt_empty_group_heading {
+#zmwkebwqfq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -419,15 +517,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#xqcjjhrwst .gt_from_md > :first-child {
+#zmwkebwqfq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xqcjjhrwst .gt_from_md > :last-child {
+#zmwkebwqfq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xqcjjhrwst .gt_row {
+#zmwkebwqfq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -446,7 +544,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#xqcjjhrwst .gt_stub {
+#zmwkebwqfq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -459,7 +557,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#xqcjjhrwst .gt_stub_row_group {
+#zmwkebwqfq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -473,15 +571,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#xqcjjhrwst .gt_row_group_first td {
+#zmwkebwqfq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xqcjjhrwst .gt_row_group_first th {
+#zmwkebwqfq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xqcjjhrwst .gt_summary_row {
+#zmwkebwqfq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -491,16 +589,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#xqcjjhrwst .gt_first_summary_row {
+#zmwkebwqfq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_first_summary_row.thick {
+#zmwkebwqfq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xqcjjhrwst .gt_last_summary_row {
+#zmwkebwqfq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -510,7 +608,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_grand_summary_row {
+#zmwkebwqfq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -520,7 +618,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#xqcjjhrwst .gt_first_grand_summary_row {
+#zmwkebwqfq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -530,7 +628,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_last_grand_summary_row_top {
+#zmwkebwqfq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,11 +638,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_striped {
+#zmwkebwqfq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xqcjjhrwst .gt_table_body {
+#zmwkebwqfq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -553,7 +651,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_footnotes {
+#zmwkebwqfq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -567,7 +665,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_footnote {
+#zmwkebwqfq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -576,7 +674,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#xqcjjhrwst .gt_sourcenotes {
+#zmwkebwqfq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -590,7 +688,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#xqcjjhrwst .gt_sourcenote {
+#zmwkebwqfq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -598,158 +696,111 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#xqcjjhrwst .gt_left {
+#zmwkebwqfq .gt_left {
   text-align: left;
 }
 
-#xqcjjhrwst .gt_center {
+#zmwkebwqfq .gt_center {
   text-align: center;
 }
 
-#xqcjjhrwst .gt_right {
+#zmwkebwqfq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xqcjjhrwst .gt_font_normal {
+#zmwkebwqfq .gt_font_normal {
   font-weight: normal;
 }
 
-#xqcjjhrwst .gt_font_bold {
+#zmwkebwqfq .gt_font_bold {
   font-weight: bold;
 }
 
-#xqcjjhrwst .gt_font_italic {
+#zmwkebwqfq .gt_font_italic {
   font-style: italic;
 }
 
-#xqcjjhrwst .gt_super {
+#zmwkebwqfq .gt_super {
   font-size: 65%;
 }
 
-#xqcjjhrwst .gt_footnote_marks {
+#zmwkebwqfq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xqcjjhrwst .gt_asterisk {
+#zmwkebwqfq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xqcjjhrwst .gt_indent_1 {
+#zmwkebwqfq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xqcjjhrwst .gt_indent_2 {
+#zmwkebwqfq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xqcjjhrwst .gt_indent_3 {
+#zmwkebwqfq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xqcjjhrwst .gt_indent_4 {
+#zmwkebwqfq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xqcjjhrwst .gt_indent_5 {
+#zmwkebwqfq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xqcjjhrwst .katex-display {
+#zmwkebwqfq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xqcjjhrwst div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zmwkebwqfq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Sample-#" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Sample #</th>
-<th id="Sample-Mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Sample Mean</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
-<td class="gt_row gt_left" headers="stub_1_1 Sample #">S1</td>
-<td class="gt_row gt_right" headers="stub_1_1 Sample Mean">5.064</td>
-</tr>
-<tr class="even">
-<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
-<td class="gt_row gt_left" headers="stub_1_2 Sample #">S2</td>
-<td class="gt_row gt_right" headers="stub_1_2 Sample Mean">4.630</td>
-</tr>
-<tr class="odd">
-<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
-<td class="gt_row gt_left" headers="stub_1_3 Sample #">S3</td>
-<td class="gt_row gt_right" headers="stub_1_3 Sample Mean">4.958</td>
-</tr>
-<tr class="even">
-<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
-<td class="gt_row gt_left" headers="stub_1_4 Sample #">S4</td>
-<td class="gt_row gt_right" headers="stub_1_4 Sample Mean">5.036</td>
-</tr>
-<tr class="odd">
-<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
-<td class="gt_row gt_left" headers="stub_1_5 Sample #">S5</td>
-<td class="gt_row gt_right" headers="stub_1_5 Sample Mean">4.966</td>
-</tr>
-<tr class="even">
-<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..29</td>
-<td class="gt_row gt_left" headers="stub_1_6 Sample #" style="background-color: #E4E4E4"></td>
-<td class="gt_row gt_right" headers="stub_1_6 Sample Mean" style="background-color: #E4E4E4"></td>
-</tr>
-<tr class="odd">
-<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">30</td>
-<td class="gt_row gt_left" headers="stub_1_7 Sample #">S30</td>
-<td class="gt_row gt_right" headers="stub_1_7 Sample Mean">4.654</td>
-</tr>
-</tbody>
-</table>
-
+<div id="zmwkebwqfq" class="reactable html-widget" style="width:60%;height:auto;"></div>
+<script type="application/json" data-for="zmwkebwqfq">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Sample":["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20","S21","S22","S23","S24","S25","S26","S27","S28","S29","S30"],"Sample Mean":[5.038,5.114,4.866,5.08599999999999,5.056,5.356,4.572,4.772,4.926,5.184,5.106,4.79,4.95,4.812,4.9,5.17,5.374,5.038,5.488,4.46,5.108,4.506,4.876,4.912,4.76,5.198,5.354,4.768,5.342,5.074]},"columns":[{"id":"Sample","name":"Sample","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"Sample Mean","name":"Sample Mean","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"right"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"width":"60%","height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"30px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"zmwkebwqfq","dataKey":"4c5f7ea8420bee467ae1553963c97069"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
+</div></div>
 </section>
-<section id="sampling-theory-4" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="sampling-theory-3" class="slide level2">
+<h2>Sampling Theory</h2>
 <ul>
-<li class="fragment">Once each of you collect <em>500 responses</em>, I ask you to calculate the average answer. So you calculate the mean (you add up all 500 responses, and then divide that number by 500).</li>
+<li class="fragment">Once each of you collect <em>500 responses</em>, I ask you to calculate the average answer. So you calculate the mean.</li>
 </ul>
 <div class="fragment">
 <ul>
-<li class="fragment"><p><span class="math inline">\(\frac{\sum(x_1 + x_2 + x_3...+ x_{500)}}{500}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\bar{x}_1 = \frac{\sum(x_1 + x_2 + x_3+x_4...+ x_{500)}}{500}\)</span></p></li>
 <li class="fragment"><p>They are the means from each of your samples.</p></li>
 <li class="fragment"><p>These are called <strong>Sample Means</strong></p></li>
 </ul>
 </div>
 </section>
-<section id="sampling-theory-5" class="slide level2">
+<section id="sampling-theory-4" class="slide level2">
 <h2>Sampling Theory</h2>
 <h3 id="here-is-our-ratings-data">Here is our Ratings Data</h3>
 
 <img data-src="lec8_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="sampling-theory-6" class="slide level2">
+<section id="sampling-theory-5" class="slide level2">
 <h2>Sampling theory</h2>
-<ul>
-<li class="fragment"><p>We can do lots of cool things with Sample Means.</p>
+<h3 id="what-can-we-do-with-sample-means">What can we do with Sample Means?</h3>
 <ul>
 <li class="fragment"><p>We could calculate the Mean of the Sample Means.</p></li>
 <li class="fragment"><p>We could calculate the standard deviation of the Sample Means.</p></li>
-</ul></li>
 <li class="fragment"><p>But…it’s theoretical. It doesn’t really exist, but we imagine it’s existence for the sake of <strong>Sampling Theory</strong>.</p></li>
 </ul>
 </section>
 <section id="sampling-distribution" class="slide level2">
-<h2>Sampling distribution</h2>
+<h2>Sampling Distribution</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -768,7 +819,7 @@ Dave Brocker
 </div>
 </div></div>
 </section>
-<section id="sampling-theory-7" class="slide level2">
+<section id="sampling-theory-6" class="slide level2">
 <h2>Sampling Theory</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -776,7 +827,7 @@ Dave Brocker
 <li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
 <li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
 <ul>
-<li class="fragment">In our case, each value is the average of 30 samples of 500 people.</li>
+<li class="fragment">In our case, each value is the average of <code>30</code> samples of <code>500</code> people.</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -805,23 +856,23 @@ Dave Brocker
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="gtmwdmqkrk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gtmwdmqkrk table {
+<div id="izvnivyvpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#izvnivyvpg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gtmwdmqkrk thead, #gtmwdmqkrk tbody, #gtmwdmqkrk tfoot, #gtmwdmqkrk tr, #gtmwdmqkrk td, #gtmwdmqkrk th {
+#izvnivyvpg thead, #izvnivyvpg tbody, #izvnivyvpg tfoot, #izvnivyvpg tr, #izvnivyvpg td, #izvnivyvpg th {
   border-style: none;
 }
 
-#gtmwdmqkrk p {
+#izvnivyvpg p {
   margin: 0;
   padding: 0;
 }
 
-#gtmwdmqkrk .gt_table {
+#izvnivyvpg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -847,12 +898,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_caption {
+#izvnivyvpg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gtmwdmqkrk .gt_title {
+#izvnivyvpg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -864,7 +915,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#gtmwdmqkrk .gt_subtitle {
+#izvnivyvpg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -876,7 +927,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#gtmwdmqkrk .gt_heading {
+#izvnivyvpg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -888,13 +939,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_bottom_border {
+#izvnivyvpg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_col_headings {
+#izvnivyvpg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -909,7 +960,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_col_heading {
+#izvnivyvpg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,7 +980,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#gtmwdmqkrk .gt_column_spanner_outer {
+#izvnivyvpg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -941,15 +992,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#gtmwdmqkrk .gt_column_spanner_outer:first-child {
+#izvnivyvpg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gtmwdmqkrk .gt_column_spanner_outer:last-child {
+#izvnivyvpg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gtmwdmqkrk .gt_column_spanner {
+#izvnivyvpg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -961,11 +1012,11 @@ Dave Brocker
   width: 100%;
 }
 
-#gtmwdmqkrk .gt_spanner_row {
+#izvnivyvpg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gtmwdmqkrk .gt_group_heading {
+#izvnivyvpg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -991,7 +1042,7 @@ Dave Brocker
   text-align: left;
 }
 
-#gtmwdmqkrk .gt_empty_group_heading {
+#izvnivyvpg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1006,15 +1057,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#gtmwdmqkrk .gt_from_md > :first-child {
+#izvnivyvpg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gtmwdmqkrk .gt_from_md > :last-child {
+#izvnivyvpg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gtmwdmqkrk .gt_row {
+#izvnivyvpg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1033,7 +1084,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#gtmwdmqkrk .gt_stub {
+#izvnivyvpg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1046,7 +1097,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#gtmwdmqkrk .gt_stub_row_group {
+#izvnivyvpg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1060,15 +1111,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#gtmwdmqkrk .gt_row_group_first td {
+#izvnivyvpg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gtmwdmqkrk .gt_row_group_first th {
+#izvnivyvpg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gtmwdmqkrk .gt_summary_row {
+#izvnivyvpg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1078,16 +1129,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#gtmwdmqkrk .gt_first_summary_row {
+#izvnivyvpg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_first_summary_row.thick {
+#izvnivyvpg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gtmwdmqkrk .gt_last_summary_row {
+#izvnivyvpg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1097,7 +1148,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_grand_summary_row {
+#izvnivyvpg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1107,7 +1158,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#gtmwdmqkrk .gt_first_grand_summary_row {
+#izvnivyvpg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1117,7 +1168,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_last_grand_summary_row_top {
+#izvnivyvpg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1127,11 +1178,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_striped {
+#izvnivyvpg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gtmwdmqkrk .gt_table_body {
+#izvnivyvpg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1140,7 +1191,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_footnotes {
+#izvnivyvpg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1154,7 +1205,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_footnote {
+#izvnivyvpg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1163,7 +1214,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#gtmwdmqkrk .gt_sourcenotes {
+#izvnivyvpg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1177,7 +1228,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#gtmwdmqkrk .gt_sourcenote {
+#izvnivyvpg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1185,72 +1236,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#gtmwdmqkrk .gt_left {
+#izvnivyvpg .gt_left {
   text-align: left;
 }
 
-#gtmwdmqkrk .gt_center {
+#izvnivyvpg .gt_center {
   text-align: center;
 }
 
-#gtmwdmqkrk .gt_right {
+#izvnivyvpg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gtmwdmqkrk .gt_font_normal {
+#izvnivyvpg .gt_font_normal {
   font-weight: normal;
 }
 
-#gtmwdmqkrk .gt_font_bold {
+#izvnivyvpg .gt_font_bold {
   font-weight: bold;
 }
 
-#gtmwdmqkrk .gt_font_italic {
+#izvnivyvpg .gt_font_italic {
   font-style: italic;
 }
 
-#gtmwdmqkrk .gt_super {
+#izvnivyvpg .gt_super {
   font-size: 65%;
 }
 
-#gtmwdmqkrk .gt_footnote_marks {
+#izvnivyvpg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gtmwdmqkrk .gt_asterisk {
+#izvnivyvpg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gtmwdmqkrk .gt_indent_1 {
+#izvnivyvpg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gtmwdmqkrk .gt_indent_2 {
+#izvnivyvpg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gtmwdmqkrk .gt_indent_3 {
+#izvnivyvpg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gtmwdmqkrk .gt_indent_4 {
+#izvnivyvpg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gtmwdmqkrk .gt_indent_5 {
+#izvnivyvpg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gtmwdmqkrk .katex-display {
+#izvnivyvpg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gtmwdmqkrk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#izvnivyvpg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1258,11 +1309,11 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Term</th>
-<th id="Symbol" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Symbol</th>
-<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
-<th id="Formula" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Formula</th>
-<th id="Relation_to_Sample" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Relation_to_Sample</th>
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Term</th>
+<th id="Symbol" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Symbol</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Type</th>
+<th id="Formula" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Formula</th>
+<th id="Relation_to_Sample" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Relation to Sample</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1302,44 +1353,14 @@ Dave Brocker
 </div>
 </div></div>
 </section>
-<section id="sampling-theory-8" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="sampling-theory-7" class="slide level2">
+<h2>Sampling Theory</h2>
 <ul>
 <li class="fragment"><p>Each value in this distribution no longer represents 1 person/participant.</p></li>
 <li class="fragment"><p>Each value in this distribution now represents the average of 1 sample, a Sample Mean.</p></li>
 </ul>
 
 <img data-src="lec8_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="review" class="slide level2">
-<h2>Review</h2>
-<ul>
-<li class="fragment"><p>What is a sample distribution?</p></li>
-<li class="fragment"><p>What does each X value in a sample distribution represent?</p></li>
-<li class="fragment"><p>What does <span class="math inline">\(\mu\)</span> represent?</p></li>
-<li class="fragment"><p>What does <span class="math inline">\(\sigma\)</span> represent?</p></li>
-</ul>
-</section>
-<section id="review-1" class="slide level2">
-<h2>Review</h2>
-<ul>
-<li class="fragment"><p>What is a sample distribution?</p>
-<ul>
-<li class="fragment">A sample distribution represents how all possible samples from the population would be visualized</li>
-</ul></li>
-<li class="fragment"><p>What does each X value in a sample distribution represent?</p>
-<ul>
-<li class="fragment">That sample’s average</li>
-</ul></li>
-<li class="fragment"><p>What does <span class="math inline">\(\mu\)</span> represent?</p>
-<ul>
-<li class="fragment">The population average</li>
-</ul></li>
-<li class="fragment"><p>What does <span class="math inline">\(\sigma\)</span> represent?</p>
-<ul>
-<li class="fragment">The population standard deviation</li>
-</ul></li>
-</ul>
-</section>
 <section id="probability" class="slide level2">
 <h2>Probability</h2>
 <ul>
@@ -1377,7 +1398,7 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>There are <code>12,500</code> people in our population. Each of the <code>25</code> of us collects a sample of <code>500</code>.</p></li>
 <li class="fragment"><p><span class="math inline">\(500 \times 25 = 12,500\)</span></p></li>
-<li class="fragment"><p>Each of us calculates the mean response from our sample of 500 people.</p></li>
+<li class="fragment"><p>Each of us calculates the mean response from our sample of <code>500</code> people.</p></li>
 <li class="fragment"><p>What do we call those means?</p>
 <ul>
 <li class="fragment">What would it look like if we were to plot it?</li>
@@ -1391,38 +1412,31 @@ Dave Brocker
 <img data-src="lec8_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
-<p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p>
-<p>What is the probability of picking a mean with a z-score of -1 or less?</p>
+<ul>
+<li class="fragment"><p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p></li>
+<li class="fragment"><p>What is the probability of picking a mean with a z-score of -1 or less?</p></li>
+</ul>
 
 <img data-src="lec8_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="example-2" class="slide level2">
 <h2>Example</h2>
-<p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p>
-<p>What is the probability of picking a mean with a z-score of -1 or less?</p>
+<ul>
+<li class="fragment"><p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p></li>
+<li class="fragment"><p>What is the probability of picking a mean with a z-score of -1 or less?</p></li>
+</ul>
 
 <img data-src="lec8_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
-<section id="sampling-theory-9" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="sampling-theory-8" class="slide level2">
+<h2>Sampling Theory</h2>
 <blockquote>
 <p>Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.</p>
 </blockquote>
-</section>
-<section id="sampling-theory-10" class="slide level2">
-<h2>Sampling Theory</h2>
-<h3 id="the-basis-for-inferential-statistics">The basis for inferential statistics</h3>
 <ul>
-<li class="fragment"><p>Independent variable:</p>
-<ul>
-<li class="fragment">Experimental Group: Super Secret Limitless Drug</li>
-</ul></li>
-<li class="fragment"><p>Control Group: Placebo</p>
-<ul>
-<li class="fragment">Dependent variable: IQ</li>
-</ul></li>
+<li class="fragment">The distribution made up of sample means is <strong>conceptual</strong> and <strong>theoretical</strong></li>
 </ul>
 </section>
-<section id="sampling-theory-11" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="sampling-theory-9" class="slide level2">
+<h2>Sampling Theory</h2>
 <blockquote>
 <p>Sampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.</p>
 </blockquote>
@@ -1431,52 +1445,55 @@ Dave Brocker
 <li class="fragment"><p>We will use this probability to gauge <strong>significance</strong> of our inferential statistics.</p></li>
 </ul>
 </section>
-<section id="sampling-theory-12" class="slide level2">
+<section id="sampling-theory-10" class="slide level2">
 <h2>Sampling Theory</h2>
 <h3 id="new-terminology-again">New Terminology (Again???)</h3>
 <ul>
-<li class="fragment"><p>The mean of a sample is notated as <code>M</code>.</p></li>
+<li class="fragment"><p>The mean of a sample is notated as <span class="math inline">\(M\)</span>.</p></li>
 <li class="fragment"><p>The mean of a population is notated as (<span class="math inline">\(\mu\)</span>).</p></li>
-<li class="fragment"><p>The dispersion of a sample is known as the standard deviation, or <code>SD</code>, or sometimes just <code>s</code>.</p></li>
-<li class="fragment"><p>The dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).</p>
+<li class="fragment"><p>The dispersion of a sample is known as the standard deviation, or <span class="math inline">\(SD\)</span>, or sometimes just <span class="math inline">\(s\)</span>.</p></li>
+</ul>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard Error</h2>
+<h3 id="a-population-deviation">A Population Deviation</h3>
 <ul>
-<li class="fragment"><span class="math inline">\(SE = \frac{s}{\sqrt{n}}\)</span></li>
+<li class="fragment"><p><span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\sigma\)</span> = Population Standard Deviation</p></li>
+<li class="fragment"><p><span class="math inline">\(n\)</span> - Sample Size</p></li>
 </ul></li>
+<li class="fragment"><p>The dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).</p></li>
 </ul>
 </section>
 <section id="sampling-theory-but-candy" class="slide level2">
 <h2>Sampling theory, but candy</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="https://images.unsplash.com/photo-1534706013986-73f676db1790?w=900&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHklMjBqYXJzfGVufDB8fDB8fHww"></p>
+<p><img data-src="images/candyjar.png" style="border-radius: 20px;"></p>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment">This is a jar of 600 pieces of candy.</li>
-</ul>
-<!-- -->
+<li class="fragment"><p>This is a jar of <code>500</code> pieces of candy. There are <code>5</code> flavors of candy.</p></li>
+<li class="fragment"><p>If I took scoops of <code>25</code> pieces of candy at a time, on average how many oranges would I get per scoop?</p>
 <ul>
-<li class="fragment"><p>If I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?</p>
-<ul>
-<li class="fragment">I take a first scoop and 6 of them are orange.</li>
-</ul></li>
-<li class="fragment"><p>Should I expect to get 6 oranges on average?</p>
-<ul>
-<li class="fragment">Why?</li>
+<li class="fragment"><p>I take a first scoop and 5 of them are orange.</p></li>
+<li class="fragment"><p>Should I expect to get 5 oranges on average?</p></li>
 </ul></li>
 </ul>
 </div></div>
 </section>
-<section id="sampling-theory-but-candy-1" class="slide level2">
-<h2>Sampling theory, but candy</h2>
+<section id="sampling-theory-11" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="with-candy">With Candy!</h3>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Did this scoop come from the jar of m&amp;ms?</p>
+<li class="fragment"><p>Is it safe to assume the <code>5</code>-Orange scoop came from the Candy Jar?</p>
 <ul>
 <li class="fragment">Probably!</li>
 </ul></li>
-<li class="fragment"><p>I have a scoop of 25 pieces of candy, and all 25 of them are orange.</p></li>
-<li class="fragment"><p>Did this scoop come from the jar of m&amp;ms?</p>
+<li class="fragment"><p>I take a scoop of <code>25</code> pieces of candy, and all <code>25</code> of them are orange.</p></li>
+<li class="fragment"><p>Did this scoop come from the Candy Jar?</p>
 <ul>
 <li class="fragment">Probably not</li>
 </ul></li>
@@ -1493,32 +1510,70 @@ Dave Brocker
 </div>
 </div></div>
 </section>
-<section id="p-values" class="slide level2">
-<h2>P-values</h2>
-<h3 id="hypothesis-testing-pt-1">Hypothesis Testing, Pt 1</h3>
-</section>
-<section id="sampling-theory-13" class="slide level2">
-<h2>Sampling theory</h2>
-<blockquote>
-<p>We ask every single FSC student to rate their sense of belonging on FSC campus on a scale of <code>1</code> (<strong>I don’t belong at all</strong>) to <code>10</code> (<strong>I belong completely</strong>). We each calculate the average response from our own sample of <code>400</code>.</p>
-</blockquote>
+<section id="null-hypothesis-significance-testing" class="slide level2">
+<h2>Null Hypothesis Significance Testing</h2>
+<h3 id="nhst">NHST</h3>
+<p>A hypothesis is a testable prediction of what will happen in our experiment that:</p>
 <ul>
-<li class="fragment"><p>There are about <code>10,000</code> students at Farmingdale State College.</p></li>
-<li class="fragment"><p>Each of the <code>25</code> of us recruits a sample of <code>400</code> students.</p></li>
+<li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
+<li class="fragment"><p>Clearly contrasts the groups</p></li>
 </ul>
 </section>
-<section id="sampling-theory-14" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="nhst-1" class="slide level2">
+<h2>NHST</h2>
+<h3 id="alternative-hypothesis">Alternative Hypothesis</h3>
+<p>An <strong>Alternative Hypothesis</strong> is a testable prediction of what will happen in our experiment that:</p>
+<ul>
+<li class="fragment"><p>Names the variables (independent and dependent)</p></li>
+<li class="fragment"><p>Clearly contrasts the groups.</p></li>
+<li class="fragment"><p>The Alternative Hypothesis is written as <span class="math inline">\(H_1/H_A\)</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_1 &gt; \mu_2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="nhst-2" class="slide level2">
+<h2>NHST</h2>
+<h3 id="null-hypothesis">Null Hypothesis</h3>
+<ul>
+<li class="fragment"><p>The Null Hypothesis states that nothing will happen or that there is no difference between. <span class="math inline">\(H_0\)</span></p></li>
+<li class="fragment"><p>Null means zero, nothing</p></li>
+<li class="fragment"><p>Names the variables (independent and dependent)</p></li>
+<li class="fragment"><p>Indicates or suggests no difference between the groups</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_1 = \mu_2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-question" class="slide level2">
+<h2><strong>The Question</strong></h2>
+<blockquote>
+<p>Every year we run a huge campus climate survey. We can’t ask all 10,000 students, so we draw a sample. Now imagine each of <em>you</em> is in charge of your own survey, each collecting 400 students’ responses.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>FSC has <strong>10,000 students</strong>.</p></li>
+<li class="fragment"><p>Asking all 10,000 is not practical.</p></li>
+<li class="fragment"><p>Each of the <strong>25 of us</strong> collects a <strong>sample of 400 students</strong>.</p></li>
+<li class="fragment"><p>We calculate the <strong>average belonging score</strong> in each sample.</p>
+<ul>
+<li class="fragment">These averages are called <strong>sample means</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="sampling-variation" class="slide level2">
+<h2><strong>Sampling Variation</strong></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment">Now we have <code>25</code> samples of <code>400</code> FSC students each, which equals the full student population of <code>10,000</code>.</li>
-</ul>
-<!-- -->
+<li class="fragment"><p>Sample means will <strong>not be identical</strong>.</p></li>
+<li class="fragment"><p>Why?</p>
 <ul>
-<li class="fragment"><p>We take <code>25</code> samples of <code>400</code> students each from another college…John Jacob Jinglehymer Smith University. JJJSMU also has <code>10,000</code> students.</p></li>
-<li class="fragment"><p>We ask the JJJSMU students the same question about sense of belonging.</p></li>
-<li class="fragment"><p>We find the mean of each of the <code>25</code> samples from JJJSMU</p></li>
+<li class="fragment">Different mixes of students (e.g., commuters, first-years, club leaders).</li>
+</ul></li>
+<li class="fragment"><p>This variation from sample to sample is called <strong>sampling variation</strong>.</p>
+<ul>
+<li class="fragment">It’s the foundation of <strong>sampling theory</strong>.</li>
+</ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -1532,36 +1587,642 @@ Dave Brocker
 </div>
 </div></div>
 </section>
-<section id="sampling-theory-15" class="slide level2">
-<h2>Sampling theory</h2>
+<section id="sampling-distribution-1" class="slide level2">
+<h2>Sampling Distribution</h2>
+<ul>
+<li class="fragment"><p>If we plot all <strong>25 sample means</strong> from FSC:</p>
+<ul>
+<li class="fragment"><p>Most cluster near the <strong>true population mean</strong>.</p></li>
+<li class="fragment"><p>Some fall higher or lower by chance.</p></li>
+</ul></li>
+<li class="fragment"><p>This plot is the <strong>sampling distribution of the mean</strong>.</p></li>
+<li class="fragment"><p>As samples get larger, the sampling distribution becomes <strong>narrower</strong>.</p></li>
+</ul>
 </section>
-<section id="the-basis-for-inferential-statistics-1" class="slide level2">
-<h2>The Basis for Inferential Statistics</h2>
-
-<img data-src="lec8_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="comparing-two-schools" class="slide level2">
+<h2><strong>Comparing Two Schools</strong></h2>
+<blockquote>
+<p>We want to compare FSC students’ sense of belonging to that at another college. We draw 25 samples of 400 at each school.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>We repeat the study at <strong>John Jacob Jinglehymer Smith University (JJJSMU)</strong>.</p></li>
+<li class="fragment"><p>We now have <strong>two sampling distributions</strong>:</p>
+<ul>
+<li class="fragment"><p>One for FSC</p></li>
+<li class="fragment"><p>One for JJJSMU</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="comparing-two-schools-1" class="slide level2">
+<h2>Comparing Two Schools</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Comparing the two distributions:</p>
+<ul>
+<li class="fragment"><p>Differences in the <strong>centers</strong> suggest differences in population belonging.</p></li>
+<li class="fragment"><p>Differences in the <strong>spread</strong> reflect sampling error.</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="why-it-matters" class="slide level2">
+<h2><strong>Why It Matters</strong></h2>
+<ul>
+<li class="fragment"><p>Sampling distributions let us:</p>
+<ul>
+<li class="fragment"><p>Estimate population parameters.</p></li>
+<li class="fragment"><p>Understand and quantify <strong>sampling error</strong>.</p></li>
+<li class="fragment"><p>Compare populations in a statistically rigorous way.</p></li>
+</ul></li>
+</ul>
+</section>
 <section id="p-real-and-p-null" class="slide level2">
 <h2>P-Real and P-Null</h2>
 
 <img data-src="lec8_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
-<section id="what-is-a-hypothesis" class="slide level2">
-<h2>What is a hypothesis?</h2>
-<p>A hypothesis is a testable prediction of what will happen in our experiment that:</p>
+<section id="the-lady-tasting-tea" class="slide level2">
+<h2>The Lady Tasting Tea</h2>
+<h3 id="the-story">The Story</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
-<li class="fragment"><p>Clearly contrasts the groups</p></li>
+<li class="fragment">A lady claimed she could tell whether <strong>milk or tea was poured first</strong>.</li>
+<li class="fragment">Fisher designed an experiment:
+<ul>
+<li class="fragment">8 cups of tea</li>
+<li class="fragment">4 poured milk-first, 4 tea-first</li>
+<li class="fragment"><strong>Randomized order</strong></li>
+</ul></li>
+<li class="fragment">The lady must classify each cup.</li>
 </ul>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/teaexperiment.png"></p>
+<p>A classic example of hypothesis testing<br>
+<em>Based on R.A. Fisher’s 1935 design</em></p>
+</div></div>
+</section>
+<section id="the-hypotheses" class="slide level2">
+<h2>The Hypotheses</h2>
+<ul>
+<li class="fragment"><p><strong>Null hypothesis (H₀):</strong></p>
+<ul>
+<li class="fragment">The lady has <strong>no special ability</strong> — she is just guessing.</li>
+</ul></li>
+<li class="fragment"><p><strong>Alternative (H₁):</strong></p>
+<ul>
+<li class="fragment">The lady <strong>can tell the difference</strong>.</li>
+</ul></li>
+<li class="fragment"><p><strong>Key idea:</strong></p>
+<ul>
+<li class="fragment"><p>We begin by assuming H₀ is true.</p></li>
+<li class="fragment"><p>We’ll only reject H₀ if the data are <em>too surprising</em> under H₀.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="possible-outcomes" class="slide level2">
+<h2>Possible Outcomes</h2>
+<p>We focus on <strong>how many cups she classifies correctly</strong>.</p>
+<p>For 8 cups (4 of each), under H₀:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/teachoices.png"></p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="nekohcgrzx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nekohcgrzx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nekohcgrzx thead, #nekohcgrzx tbody, #nekohcgrzx tfoot, #nekohcgrzx tr, #nekohcgrzx td, #nekohcgrzx th {
+  border-style: none;
+}
+
+#nekohcgrzx p {
+  margin: 0;
+  padding: 0;
+}
+
+#nekohcgrzx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nekohcgrzx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nekohcgrzx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nekohcgrzx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nekohcgrzx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nekohcgrzx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nekohcgrzx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nekohcgrzx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nekohcgrzx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nekohcgrzx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nekohcgrzx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nekohcgrzx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nekohcgrzx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nekohcgrzx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nekohcgrzx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nekohcgrzx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nekohcgrzx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nekohcgrzx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nekohcgrzx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nekohcgrzx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nekohcgrzx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nekohcgrzx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nekohcgrzx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nekohcgrzx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nekohcgrzx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nekohcgrzx .gt_left {
+  text-align: left;
+}
+
+#nekohcgrzx .gt_center {
+  text-align: center;
+}
+
+#nekohcgrzx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nekohcgrzx .gt_font_normal {
+  font-weight: normal;
+}
+
+#nekohcgrzx .gt_font_bold {
+  font-weight: bold;
+}
+
+#nekohcgrzx .gt_font_italic {
+  font-style: italic;
+}
+
+#nekohcgrzx .gt_super {
+  font-size: 65%;
+}
+
+#nekohcgrzx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nekohcgrzx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nekohcgrzx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nekohcgrzx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nekohcgrzx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nekohcgrzx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nekohcgrzx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#nekohcgrzx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nekohcgrzx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Correct" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Correct</th>
+<th id="Probability" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Probability</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Correct">8</td>
+<td class="gt_row gt_left" headers="Probability">1 / 70 ≈ 1.4%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right gt_striped" headers="Correct">7</td>
+<td class="gt_row gt_left gt_striped" headers="Probability">16 / 70 ≈ 22.9%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Correct">6</td>
+<td class="gt_row gt_left" headers="Probability">36 / 70 ≈ 51.4%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right gt_striped" headers="Correct">5</td>
+<td class="gt_row gt_left gt_striped" headers="Probability">16 / 70 ≈ 22.9%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Correct">4</td>
+<td class="gt_row gt_left" headers="Probability">1 / 70 ≈ 1.4%</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<p><strong>Remember!</strong></p>
 </div>
-<div class="callout-content">
-<p>Independent Variables are manipulated</p>
-<p>Dependent Variables are measured</p>
 </div>
+</div></div>
+</section>
+<section id="the-test" class="slide level2">
+<h2>The Test</h2>
+<ul>
+<li class="fragment">Fisher’s original rule: <strong>Reject H₀ only if she gets all 8 correct.</strong></li>
+<li class="fragment">Under H₀:<br>
+<span class="math inline">\((P(\text{8 correct}) = 1/70 ≈ 0.014)\)</span></li>
+</ul>
+<p>Since this is less than 5%, it’s rare enough to count as evidence against H₀.</p>
+</section>
+<section id="decision-interpretation" class="slide level2">
+<h2>Decision &amp; Interpretation</h2>
+<ul>
+<li class="fragment"><strong>If 8 / 8 correct → Reject H₀</strong> → evidence she can tell the difference.<br>
+</li>
+<li class="fragment"><strong>Otherwise → Fail to reject H₀</strong> → no convincing evidence of ability.</li>
+</ul>
+<blockquote>
+<p>We never <em>prove</em> the alternative; we only judge whether the data are too unlikely under the null.</p>
+</blockquote>
+</section>
+<section id="the-logic" class="slide level2">
+<h2>The Logic</h2>
+<ol type="1">
+<li class="fragment">Assume a <strong>null model</strong>.</li>
+<li class="fragment">Compute how likely the observed data are under that model.</li>
+<li class="fragment">If that probability (p-value) is very small → reject the null.</li>
+</ol>
+<p>This logic is the same for t-tests, z-tests, and many modern methods.</p>
+</section>
+<section id="a-quick-r-peek" class="slide level2">
+<h2>A Quick R Peek</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01428571</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01428571 0.22857143 0.51428571 0.22857143 0.01428571</code></pre>
 </div>
 </div>
 </section>
@@ -1573,29 +2234,6 @@ Dave Brocker
 </blockquote>
 <ul>
 <li class="fragment">Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</li>
-</ul>
-</section>
-<section id="what-is-a-hypothesis-1" class="slide level2">
-<h2>What is a Hypothesis?</h2>
-<p>An <strong>Alternative Hypothesis</strong> is a testable prediction of what will happen in our experiment that:</p>
-<ul>
-<li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
-<li class="fragment"><p>Clearly contrasts the groups.</p></li>
-</ul>
-<!-- -->
-<ul>
-<li class="fragment">The Alternative Hypothesis is written as <span class="math inline">\(H_1/H_A\)</span></li>
-</ul>
-</section>
-<section id="null-hypothesis" class="slide level2">
-<h2>Null Hypothesis</h2>
-<ul>
-<li class="fragment"><p>The Null Hypothesis states that nothing will happen. <span class="math inline">\(H_0\)</span></p></li>
-<li class="fragment"><p>Because Null means zero, nothing, nada</p></li>
-</ul>
-<!-- -->
-<ul>
-<li class="fragment">Names the variables (independent and dependent)</li>
 </ul>
 </section>
 <section id="alternative-null-hypotheses" class="slide level2">
@@ -1620,8 +2258,16 @@ Dave Brocker
 <blockquote>
 <p>Professor Brocker wants to know if giving his students coffee will improve their exam scores. He <strong>randomly</strong> assigns <code>13</code> of his <code>26</code> students to drink a doubleshot; he calls this the <strong>experimental</strong> group. The other <code>13</code> students drink decaf (a placebo); he calls this the <strong>control</strong> group.</p>
 </blockquote>
-<p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_Coffee = \mu_Decaf\)</span></li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_Coffee &gt; \mu_Decaf\)</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="hypothesis-testing-1" class="slide level2">
 <h2>Hypothesis Testing</h2>
@@ -1629,17 +2275,33 @@ Dave Brocker
 <blockquote>
 <p>Esmeralda gives an anti-depressant to <code>100</code> individuals suffering from depression. She gives another <code>100</code> individuals a placebo. After <code>2</code> months, we measure their depression.</p>
 </blockquote>
-<p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_SSRI = \mu_Decaf\)</span></li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_SSRI &lt; \mu_Placebo\)</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="hypothesis-testing-2" class="slide level2">
 <h2>Hypothesis Testing</h2>
 <h3 id="practice">Practice</h3>
 <blockquote>
-<p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day 5 days a week for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
+<p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
 </blockquote>
-<p><span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_Exercise = \mu_NoExercise\)</span></li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_Exercise &gt; \mu_NoExercise\)</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="rejects-and-failures" class="slide level2">
 <h2>Rejects and Failures</h2>
