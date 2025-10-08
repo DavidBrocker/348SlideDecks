@@ -328,7 +328,7 @@
     "href": "lec8.html#nhst-1",
     "title": "Sampling Theory",
     "section": "NHST",
-    "text": "NHST\nAlternative Hypothesis\nAn Alternative Hypothesis is a testable prediction of what will happen in our experiment that:\n\nNames the variables (independent and dependent)\nClearly contrasts the groups.\nThe Alternative Hypothesis is written as \\(H_1/H_A\\)\n\n\\(\\mu_1 &gt; \\mu_2\\)",
+    "text": "NHST\nNull Hypothesis\n\nThe Null Hypothesis states that nothing will happen or that there is no difference between. \\(H_0\\)\nNull means zero, nothing\nNames the variables (independent and dependent)\nIndicates or suggests no difference between the groups\n\n\\(\\mu_1 = \\mu_2\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -340,7 +340,7 @@
     "href": "lec8.html#nhst-2",
     "title": "Sampling Theory",
     "section": "NHST",
-    "text": "NHST\nNull Hypothesis\n\nThe Null Hypothesis states that nothing will happen or that there is no difference between. \\(H_0\\)\nNull means zero, nothing\nNames the variables (independent and dependent)\nIndicates or suggests no difference between the groups\n\n\\(\\mu_1 = \\mu_2\\)",
+    "text": "NHST\nAlternative Hypothesis\nAn Alternative Hypothesis is a testable prediction of what will happen in our experiment that:\n\nNames the variables (independent and dependent)\nClearly contrasts the groups.\nThe Alternative Hypothesis is written as \\(H_1/H_A\\)\n\n\\(\\mu_1 &gt; \\mu_2\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -412,7 +412,7 @@
     "href": "lec8.html#why-it-matters",
     "title": "Sampling Theory",
     "section": "Why It Matters",
-    "text": "Why It Matters\n\nSampling distributions let us:\n\nEstimate population parameters.\nUnderstand and quantify sampling error.\nCompare populations in a statistically rigorous way.",
+    "text": "Why It Matters\nSampling distributions let us:\n\nEstimate population parameters.\n\nWhat is the mean ‘likely’ to be?\n\nUnderstand and quantify sampling error.\n\nHow can we explain sampling variation\n\nCompare populations in a statistically rigorous way.\n\nDid a datapoint (or statistics) come from the same population?",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -424,7 +424,7 @@
     "href": "lec8.html#p-real-and-p-null",
     "title": "Sampling Theory",
     "section": "P-Real and P-Null",
-    "text": "P-Real and P-Null",
+    "text": "P-Real and P-Null\nAlternative and Null",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -436,7 +436,7 @@
     "href": "lec8.html#the-lady-tasting-tea",
     "title": "Sampling Theory",
     "section": "The Lady Tasting Tea",
-    "text": "The Lady Tasting Tea\nThe Story\n\n\n\nA lady claimed she could tell whether milk or tea was poured first.\nFisher designed an experiment:\n\n8 cups of tea\n4 poured milk-first, 4 tea-first\nRandomized order\n\nThe lady must classify each cup.\n\n\n\nA classic example of hypothesis testing\nBased on R.A. Fisher’s 1935 design",
+    "text": "The Lady Tasting Tea\nThe Story\n\n\n\nA lady declares that by tasting a cup of tea made with milk she can discriminate whether the milk or the tea infusion was first added to the cup. We will consider the problem of designing an experiment by means of which this assertion can be tested. […] [It] consists in mixing eight cups of tea, four in one way and four in the other, and presenting them to the subject for judgment in a random order. The subject has been told in advance of that the test will consist, namely, that she will be asked to taste eight cups, that these shall be four of each kind […]. — Fisher, 1935.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -472,7 +472,7 @@
     "href": "lec8.html#the-test",
     "title": "Sampling Theory",
     "section": "The Test",
-    "text": "The Test\n\nFisher’s original rule: Reject H₀ only if she gets all 8 correct.\nUnder H₀:\n\\((P(\\text{8 correct}) = 1/70 ≈ 0.014)\\)\n\nSince this is less than 5%, it’s rare enough to count as evidence against H₀.",
+    "text": "The Test\n\nFisher’s original rule: Reject H₀ only if she gets all 8 correct.\nUnder H₀: \\({8 \\choose 4} = \\frac{8!}{4!(8-4)} = 70\\)\n\nSince this is less than 5%, it’s rare enough to count as evidence against H₀.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -484,7 +484,7 @@
     "href": "lec8.html#decision-interpretation",
     "title": "Sampling Theory",
     "section": "Decision & Interpretation",
-    "text": "Decision & Interpretation\n\nIf 8 / 8 correct → Reject H₀ → evidence she can tell the difference.\n\nOtherwise → Fail to reject H₀ → no convincing evidence of ability.\n\n\nWe never prove the alternative; we only judge whether the data are too unlikely under the null.",
+    "text": "Decision & Interpretation\n\nIf 8 / 8 correct → Reject H₀\n\nSuggests evidence she can tell the difference.\n\n\nOtherwise → Fail to reject H₀\n\nNo convincing evidence of ability.\n\n\n\n\nWe never prove the alternative; we only judge whether the data are too unlikely under the null.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -496,7 +496,7 @@
     "href": "lec8.html#the-logic",
     "title": "Sampling Theory",
     "section": "The Logic",
-    "text": "The Logic\n\nAssume a null model.\nCompute how likely the observed data are under that model.\nIf that probability (p-value) is very small → reject the null.\n\nThis logic is the same for t-tests, z-tests, and many modern methods.",
+    "text": "The Logic\n\nAssume a null model.\nCompute how likely the observed data are under that model.\nIf that probability (p-value) is very small → reject the null.\n\n\nThis logic is the same for t-tests, z-tests, and many modern methods.\n\n\n# Probability of getting all 8 correct under H₀ \nk &lt;- 0:4 \n\ndhyper(k, m = 4, n = 4, k = 4)\n\n[1] 0.01428571 0.22857143 0.51428571 0.22857143 0.01428571",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -544,7 +544,7 @@
     "href": "lec8.html#hypothesis-testing",
     "title": "Sampling Theory",
     "section": "Hypothesis Testing",
-    "text": "Hypothesis Testing\nExample 1\n\nProfessor Brocker wants to know if giving his students coffee will improve their exam scores. He randomly assigns 13 of his 26 students to drink a doubleshot; he calls this the experimental group. The other 13 students drink decaf (a placebo); he calls this the control group.\n\n\n\\(H_0\\):\n\n\\(\\mu_Coffee = \\mu_Decaf\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_Coffee &gt; \\mu_Decaf\\)",
+    "text": "Hypothesis Testing\nExample 1\n\nProfessor Brocker wants to know if giving his students coffee will improve their exam scores. He randomly assigns 13 of his 26 students to drink a doubleshot; he calls this the experimental group. The other 13 students drink decaf (a placebo); he calls this the control group.\n\n\n\\(H_0\\):\n\n\\(\\mu_\\text{Coffee} = \\mu_\\text{Decaf}\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_{\\text{Coffee}} &gt; \\mu_{\\text{Decaf}}\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -556,7 +556,7 @@
     "href": "lec8.html#hypothesis-testing-1",
     "title": "Sampling Theory",
     "section": "Hypothesis Testing",
-    "text": "Hypothesis Testing\nExample 2\n\nEsmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.\n\n\n\\(H_0\\):\n\n\\(\\mu_SSRI = \\mu_Decaf\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_SSRI &lt; \\mu_Placebo\\)",
+    "text": "Hypothesis Testing\nExample 2\n\nEsmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.\n\n\n\\(H_0\\):\n\n\\(\\mu_{\\text{SSRI}} = \\mu_{\\text{Decaf}}\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_{\\text{SSRI}} &lt; \\mu_{\\text{Placebo}}\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -568,7 +568,7 @@
     "href": "lec8.html#hypothesis-testing-2",
     "title": "Sampling Theory",
     "section": "Hypothesis Testing",
-    "text": "Hypothesis Testing\nPractice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\n\\(H_0\\):\n\n\\(\\mu_Exercise = \\mu_NoExercise\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_Exercise &gt; \\mu_NoExercise\\)",
+    "text": "Hypothesis Testing\nPractice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\n\\(H_0\\):\n\n\\(\\mu_{\\text{Exercise}} = \\mu_{\\text{No Exercise}}\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_{\\text{Exercise}} &gt; \\mu_{\\text{No Exercise}}\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -580,7 +580,7 @@
     "href": "lec8.html#rejects-and-failures",
     "title": "Sampling Theory",
     "section": "Rejects and Failures",
-    "text": "Rejects and Failures\n\nIn science, we do not say that we proved anything.\n\nNothing is ever really proven.\n\nOur findings will be stated in terms of the Null Hypothesis H0.\nThe Null Hypothesis is that there are no differences between the groups.",
+    "text": "Rejects and Failures\n\nIn science, we do not say that we proved anything.\n\nNothing is ever really proven.\n\nOur findings will be stated in terms of the Null Hypothesis \\(H_0\\).\nThe Null Hypothesis is that there are no differences between the groups.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -592,7 +592,7 @@
     "href": "lec8.html#hypothesis-testing-practice",
     "title": "Sampling Theory",
     "section": "Hypothesis testing practice",
-    "text": "Hypothesis testing practice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\\(H_0\\): There are no differences in working memory capacity between the experimental and control groups.\n\\(H_1/H_A\\): Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.",
+    "text": "Hypothesis testing practice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\n\\(H_0\\): There are no differences in working memory capacity between the experimental and control groups.\n\\(H_1/H_A\\): Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -604,7 +604,7 @@
     "href": "lec8.html#rejects-and-failures-1",
     "title": "Sampling Theory",
     "section": "Rejects and Failures",
-    "text": "Rejects and Failures\n\nIn science, we do not say that we have proven anything.\nOur findings will be stated in terms of the Null Hypothesis.\nIf there are significant differences between the groups, we Reject the \\(H_0\\).\n\nRejecting is ‘good’.\n\nIf there are NO differences between the groups, we Fail to Reject the \\(H_0\\).\n\nFailing is ‘bad’",
+    "text": "Rejects and Failures\n\nIn science, we do not say that we have proven anything.\nOur findings will be stated in terms of the Null Hypothesis.\nIf there are significant differences between the groups, we Reject the \\(H_0\\).\n\nRejecting is ‘good’.\n\nIf there are No differences between the groups, we Fail to Reject the \\(H_0\\).\n\nFailing is ‘bad’",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -653,6 +653,66 @@
     "title": "Sampling Theory",
     "section": "Practice Problem",
     "text": "Practice Problem\n\n\nJohn scores an 87 on a test. If the SD is 2 and the mean is 90, what percentage scored higher than John?\n\n\n\nNew Example",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#comparing-two-schools-2",
+    "href": "lec8.html#comparing-two-schools-2",
+    "title": "Sampling Theory",
+    "section": "Comparing Two Schools",
+    "text": "Comparing Two Schools\nTwo Distributions",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-1",
+    "href": "lec8.html#hypothesis-1",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nProfessor Brocker wants to know if Millennials enjoy the Netflix Original, Dark significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).\n\n\nNull Hypothesis: These is no difference in the DV between the IV groups.\nAlternative Hypothesis: The experimental group is significantly different from the control group on the DV.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-2",
+    "href": "lec8.html#hypothesis-2",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nProfessor Brocker wants to know if Millennials enjoy the Netflix Original, Dark significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).\n\n\nAlternative Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.\nNull Hypothesis: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-lady-tasting-tea-1",
+    "href": "lec8.html#the-lady-tasting-tea-1",
+    "title": "Sampling Theory",
+    "section": "The Lady Tasting Tea",
+    "text": "The Lady Tasting Tea\nThe Story\n\n\n\nA lady claimed she could tell whether milk or tea was poured first.\nFisher designed an experiment:\n\n8 cups of tea\n4 poured milk-first, 4 tea-first\nRandomized order\n\nThe lady must classify each cup.\n\n\n\nA classic example of hypothesis testing\nBased on R.A. Fisher’s 1935 design",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#probability-3",
+    "href": "lec8.html#probability-3",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\nA Refresher",
     "crumbs": [
       "Course Overview",
       "Lectures",

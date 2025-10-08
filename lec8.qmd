@@ -574,20 +574,6 @@ A hypothesis is a testable prediction of what will happen in our experiment that
 
 ## NHST
 
-### Alternative Hypothesis
-
-An **Alternative Hypothesis** is a testable prediction of what will happen in our experiment that:
-
--   Names the variables (independent and dependent)
-
--   Clearly contrasts the groups.
-
--   The Alternative Hypothesis is written as $H_1/H_A$
-
-    -   $\mu_1 > \mu_2$
-
-## NHST
-
 ### Null Hypothesis
 
 -   The Null Hypothesis states that nothing will happen or that there is no difference between. $H_0$
@@ -599,6 +585,20 @@ An **Alternative Hypothesis** is a testable prediction of what will happen in ou
 -   Indicates or suggests no difference between the groups
 
     -   $\mu_1 = \mu_2$
+
+## NHST
+
+### Alternative Hypothesis
+
+An **Alternative Hypothesis** is a testable prediction of what will happen in our experiment that:
+
+-   Names the variables (independent and dependent)
+
+-   Clearly contrasts the groups.
+
+-   The Alternative Hypothesis is written as $H_1/H_A$
+
+    -   $\mu_1 > \mu_2$
 
 ## **The Question**
 
@@ -692,17 +692,17 @@ ggplot(sample_means, aes(x = mean)) +
 
 ::: {.column width="50%"}
 ```{r}
-
 set.seed(101)
 df_sampling <- tibble(
-  value = c(rnorm(500, mean = 6.4, sd = 1.2),
-            rnorm(500, mean = 6.8, sd = 1.2)),
+  value = c(rnorm(500, mean = 4.4, sd = 1.2),
+            rnorm(500, mean = 8.8, sd = 1.2)),
   group = rep(c("FSC","JJJSMU"), each = 500)
 )
 
 df_sampling |> 
   ggplot(aes(x = value, fill = group)) +
   geom_density(alpha = 0.5) +
+  geom_vline(xintercept = c(4.4,8.8),lty = "dashed") +
   labs(title = "Two Overlapping Distributions as Population Distributions",
        x = "\nValue", y = "Density\n") +
   theme_minimal()
@@ -710,17 +710,72 @@ df_sampling |>
 :::
 :::::
 
+## Comparing Two Schools
+
+### Two Distributions
+
+```{r}
+set.seed(101)
+df_sampling <- tibble(
+  value = c(rnorm(500, mean = 4.4, sd = 1.2),
+            rnorm(500, mean = 8.8, sd = 1.2)),
+  group = rep(c("FSC","JJJSMU"), each = 500)
+)
+
+df_sampling |> 
+  ggplot(aes(x = value, fill = group)) +
+  geom_density(alpha = 0.5) +
+  geom_vline(xintercept = c(4.4,8.8),lty = "dashed") +
+  labs(title = "Two Overlapping Distributions as Population Distributions",
+       x = "\nValue", y = "Density\n") +
+  theme_minimal(paper = "cornsilk",ink = "navy")
+```
+
 ## **Why It Matters**
 
--   Sampling distributions let us:
+### Sampling distributions let us:
 
-    -   Estimate population parameters.
+-   Estimate population parameters.
 
-    -   Understand and quantify **sampling error**.
+    -   What is the mean 'likely' to be?
 
-    -   Compare populations in a statistically rigorous way.
+-   Understand and quantify **sampling error**.
+
+    -   How can we explain sampling variation
+
+-   Compare populations in a statistically rigorous way.
+
+    -   Did a datapoint (or statistics) come from the same population?
+
+## Probability
+
+### A Refresher
+
+```{r}
+library(gganimate)
+library(stringr)
+coin <- c("H","T")
+prob <- c(.5,.5)
+
+map(1:1000, ~sample(coin, size = .x, prob = prob, replace = TRUE)) |>
+  tibble(flip = _) |>
+  mutate(
+    hf = str_count(flip, "H") / row_number(flip),
+    num = row_number()
+  ) |>
+  ggplot(aes(num, hf)) +
+  geom_line() +
+  theme_minimal() +
+  labs(
+    x = "\nNumber of Coin Flips",
+    y = "Proportion of Heads\n"
+  ) +
+  transition_reveal(num)
+```
 
 ## P-Real and P-Null
+
+### Alternative and Null
 
 ```{r}
 library(patchwork)
@@ -810,6 +865,22 @@ pr1 + pr2 + pr3 + pr4 + pr5 + pr6 +
 
 ### The Story
 
+:::::: columns
+:::: {.column width="50%"}
+::: quote
+A lady declares that by tasting a cup of tea made with milk she can discriminate whether the milk or the tea infusion was first added to the cup. We will consider the problem of designing an experiment by means of which this assertion can be tested. \[…\] \[It\] consists in mixing eight cups of tea, four in one way and four in the other, and presenting them to the subject for judgment in a random order. The subject has been told in advance of that the test will consist, namely, that she will be asked to taste eight cups, that these shall be four of each kind \[…\]. — Fisher, 1935.
+:::
+::::
+
+::: {.column width="50%"}
+![](images/teaexperiment.png){style="border-radius: 30px;"}
+:::
+::::::
+
+## The Lady Tasting Tea
+
+### The Story
+
 ::::: columns
 ::: {.column width="50%"}
 -   A lady claimed she could tell whether **milk or tea was poured first**.
@@ -862,7 +933,10 @@ tibble(
   Probability = c("1 / 70 ≈ 1.4%", "16 / 70 ≈ 22.9%", "36 / 70 ≈ 51.4%", "16 / 70 ≈ 22.9%", "1 / 70 ≈ 1.4%")
 ) %>% 
   gt() |> 
-  opt_row_striping()
+  opt_row_striping() |> 
+  tab_options(
+    table.width = pct(80),table.font.size = 22
+    )
 ```
 :::
 :::::
@@ -870,15 +944,21 @@ tibble(
 ## The Test
 
 -   Fisher’s original rule: **Reject H₀ only if she gets all 8 correct.**
--   Under H₀:\
-    $(P(\text{8 correct}) = 1/70 ≈ 0.014)$
+-   Under H₀: ${8 \choose 4} = \frac{8!}{4!(8-4)} = 70$
 
 Since this is less than 5%, it’s rare enough to count as evidence against H₀.
 
 ## Decision & Interpretation
 
--   **If 8 / 8 correct → Reject H₀** → evidence she can tell the difference.\
--   **Otherwise → Fail to reject H₀** → no convincing evidence of ability.
+-   **If 8 / 8 correct → Reject H₀**
+
+    -   Suggests evidence she can tell the difference.\
+
+-   **Otherwise → Fail to reject H₀**
+
+    -   No convincing evidence of ability.
+
+. . .
 
 > We never *prove* the alternative; we only judge whether the data are too unlikely under the null.
 
@@ -888,14 +968,13 @@ Since this is less than 5%, it’s rare enough to count as evidence against H₀
 2.  Compute how likely the observed data are under that model.
 3.  If that probability (p-value) is very small → reject the null.
 
-This logic is the same for t-tests, z-tests, and many modern methods.
-
-## A Quick R Peek
+-   This logic is the same for t-tests, z-tests, and many modern methods.
 
 ```{r}
+#| echo: true
+#| code-fold: false
+
 # Probability of getting all 8 correct under H₀ 
-choose(4,4) / choose(8,4) 
-# = 1/70 ≈ 0.014
 k <- 0:4 
 
 dhyper(k, m = 4, n = 4, k = 4)
@@ -909,23 +988,25 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 -   Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
 
-## Alternative & Null Hypotheses:
+## Hypothesis:
 
-### Example: Professor Brocker's Dark Experiment:
+### Example
 
-::::: columns
-::: {.column width="50%"}
+> Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
+
 -   Null Hypothesis: These is no difference in the DV between the IV groups.
 
 -   Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.
-:::
 
-::: {.column width="50%"}
+## Hypothesis:
+
+### Example
+
+> Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
+
 -   **Alternative Hypothesis**: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
 
 -   **Null Hypothesis**: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.
-:::
-:::::
 
 ## Hypothesis Testing
 
@@ -935,11 +1016,11 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 -   $H_0$:
 
-    -   $\mu_Coffee = \mu_Decaf$
+    -   $\mu_\text{Coffee} = \mu_\text{Decaf}$
 
 -   $H_1/H_A$:
 
-    -   $\mu_Coffee > \mu_Decaf$
+    -   $\mu_{\text{Coffee}} > \mu_{\text{Decaf}}$
 
 ## Hypothesis Testing
 
@@ -949,11 +1030,11 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 -   $H_0$:
 
-    -   $\mu_SSRI = \mu_Decaf$
+    -   $\mu_{\text{SSRI}} = \mu_{\text{Decaf}}$
 
 -   $H_1/H_A$:
 
-    -   $\mu_SSRI < \mu_Placebo$
+    -   $\mu_{\text{SSRI}} < \mu_{\text{Placebo}}$
 
 ## Hypothesis Testing
 
@@ -963,11 +1044,11 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 -   $H_0$:
 
-    -   $\mu_Exercise = \mu_NoExercise$
+    -   $\mu_{\text{Exercise}} = \mu_{\text{No Exercise}}$
 
 -   $H_1/H_A$:
 
-    -   $\mu_Exercise > \mu_NoExercise$
+    -   $\mu_{\text{Exercise}} > \mu_{\text{No Exercise}}$
 
 ## Rejects and Failures
 
@@ -975,7 +1056,7 @@ dhyper(k, m = 4, n = 4, k = 4)
 
     -   Nothing is ever really proven.
 
--   Our findings will be stated in terms of the Null Hypothesis H~0~.
+-   Our findings will be stated in terms of the Null Hypothesis $H_0$.
 
 -   The Null Hypothesis is that there are no differences between the groups.
 
@@ -983,9 +1064,9 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Jonas assigns *half* of the participants to engage in aerobic exercise for **one hour a day 5 days a week for 6 months**. The other half of the participants do not exercise for **6 months**. At the end of the 6 months, Jonas measures the participants' **working memory capacity**.
 
-$H_0$: There are no differences in working memory capacity between the experimental and control groups.
+-   $H_0$: There are no differences in working memory capacity between the experimental and control groups.
 
-$H_1/H_A$: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.
+-   $H_1/H_A$: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.
 
 ## Rejects and Failures
 
@@ -997,7 +1078,7 @@ $H_1/H_A$: Working memory capacity will be higher for participants who exercise 
 
     -   Rejecting is 'good'.
 
--   If there are **NO differences** between the groups, we **Fail to Reject the** $H_0$.
+-   If there are **No differences** between the groups, we **Fail to Reject the** $H_0$.
 
     -   Failing is 'bad'
 
@@ -1030,42 +1111,64 @@ When reporting your findings, you must state them in terms of the Null Hypothesi
 
 -   *Brendan rejects the null hypothesis that states there is no difference in death anxiety betwen participants who view their own face as deceased and those who only view a face on a mortuary table.*
 
-## Practice Problem
+<!-- ## Practice Problem -->
 
-::: {#example-box}
-> John scores an `87` on a test. If the SD is `2` and the mean is `90`, what percentage scored higher than John?
-:::
+<!-- ::: {#example-box} -->
 
-<button onclick="newExample()">
+<!-- > John scores an `87` on a test. If the SD is `2` and the mean is `90`, what percentage scored higher than John? -->
 
-New Example
+<!-- ::: -->
 
-</button>
+<!-- <button onclick="newExample()"> -->
 
-```{=html}
-<script>
-const names = ["John","Aisha","Miguel","Sofia","Ethan","Priya","Liam","Zoe","Kai","Amira"];
-const contexts = [
-  "math test","running race","psychology exam","biology quiz",
-  "typing speed challenge","chemistry final","geography test",
-  "coding challenge","swimming competition","history pop quiz"
-];
+<!-- New Example -->
 
-function newExample(){
-  // pick random name and context
-  const name = names[Math.floor(Math.random() * names.length)];
-  const context = contexts[Math.floor(Math.random() * contexts.length)];
+<!-- </button> -->
 
-  // pick random mean and sd
-  const mean = Math.floor(Math.random() * (95 - 70 + 1)) + 70; // 70–95
-  const sd = Math.floor(Math.random() * (6 - 2 + 1)) + 2;      // 2–6
-  // pick score close to mean
-  const score = Math.floor(Math.random() * (mean + 10 - (mean - 10) + 1)) + (mean - 10);
+<!-- ```{=html} -->
 
-  document.getElementById("example-box").innerHTML =
-    `<blockquote>${name} scores <code>${score}</code> on a ${context}. 
-     If the SD is <code>${sd}</code> and the mean is <code>${mean}</code>,
-     what percentage scored higher than ${name}?</blockquote>`;
-}
-</script>
-```
+<!-- <script> -->
+
+<!-- const names = ["John","Aisha","Miguel","Sofia","Ethan","Priya","Liam","Zoe","Kai","Amira"]; -->
+
+<!-- const contexts = [ -->
+
+<!--   "math test","running race","psychology exam","biology quiz", -->
+
+<!--   "typing speed challenge","chemistry final","geography test", -->
+
+<!--   "coding challenge","swimming competition","history pop quiz" -->
+
+<!-- ]; -->
+
+<!-- function newExample(){ -->
+
+<!--   // pick random name and context -->
+
+<!--   const name = names[Math.floor(Math.random() * names.length)]; -->
+
+<!--   const context = contexts[Math.floor(Math.random() * contexts.length)]; -->
+
+<!--   // pick random mean and sd -->
+
+<!--   const mean = Math.floor(Math.random() * (95 - 70 + 1)) + 70; // 70–95 -->
+
+<!--   const sd = Math.floor(Math.random() * (6 - 2 + 1)) + 2;      // 2–6 -->
+
+<!--   // pick score close to mean -->
+
+<!--   const score = Math.floor(Math.random() * (mean + 10 - (mean - 10) + 1)) + (mean - 10); -->
+
+<!--   document.getElementById("example-box").innerHTML = -->
+
+<!--     `<blockquote>${name} scores <code>${score}</code> on a ${context}.  -->
+
+<!--      If the SD is <code>${sd}</code> and the mean is <code>${mean}</code>, -->
+
+<!--      what percentage scored higher than ${name}?</blockquote>`; -->
+
+<!-- } -->
+
+<!-- </script> -->
+
+<!-- ``` -->
