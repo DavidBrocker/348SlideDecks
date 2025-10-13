@@ -54,5 +54,377 @@
     "title": "Labrador",
     "section": "Deliverable",
     "text": "Deliverable\nA short lab report (or RMarkdown/Quarto doc) including: 1. Stated hypotheses 2. Output and interpretation 3. APA-style results section 4. Visual (optional) 5. Reflection question: “What does your result suggest about your sample?”"
+  },
+  {
+    "objectID": "lec9.html#recap",
+    "href": "lec9.html#recap",
+    "title": "One-Sample T-Test",
+    "section": "Recap",
+    "text": "Recap\nHow Did We Get Here!\n\nWe began the semester by discussing how to define and measure psychological and abstract concepts.\nWe explored different types of variables and scales of measurement, learning how data can be categorized or quantified.\nWe used the normal distribution to examine variability and to understand how scores can be assigned probability values using standardized (z) scores.\nThrough sampling theory, we saw how many possible samples create a distribution of sample means, centered around the true population mean.\nIf we can estimate the probability that a sample mean came from a particular distribution, can we also estimate whether it came from the null or the alternative hypothesis?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#from-probability-to-decision-making",
+    "href": "lec9.html#from-probability-to-decision-making",
+    "title": "One-Sample T-Test",
+    "section": "From Probability to Decision-Making",
+    "text": "From Probability to Decision-Making\n\nOnce we know how likely a sample mean is to occur, we can begin to make decisions about what that likelihood means.\nWe introduced two competing ideas:\n\nNull hypothesis (\\(H_0\\)): No real difference or effect.\nAlternative hypothesis (\\(H_1\\)): A true difference or effect exists.\n\nBecause samples vary, we can never be 100% certain—only confident to a degree.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#errors-in-estimation",
+    "href": "lec9.html#errors-in-estimation",
+    "title": "One-Sample T-Test",
+    "section": "Errors in Estimation",
+    "text": "Errors in Estimation\nType I and II Error\n\nThat degree of confidence is defined by α (alpha), our threshold for error when rejecting \\(H_0\\).\n\\(\\beta\\) (beta) represents the probability of missing a real effect (failing to reject \\(H_0\\) when \\(H_1\\) is true).\nThese lead to two types of decision errors:\n\nType I error (\\(\\alpha\\)): Finding a difference that isn’t really there. (False Positive)\nType II error (\\(\\beta\\)): Missing a difference that actually exists. (False Negative)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#the-truth-table",
+    "href": "lec9.html#the-truth-table",
+    "title": "One-Sample T-Test",
+    "section": "The Truth Table",
+    "text": "The Truth Table\n\n\n\n\n\n\n\n\nDecision Outcomes in Hypothesis Testing\n\n\n\n\\[H_0\\text{ True}\\]\n\\[H_0\\text{ False}\\]\n\n\n\n\n\\[\\text{Reject }H_0\\]\n\\[\\text{Type I Error }(\\alpha)\\]\n\\[\\text{Correct Decision}\\\\1-\\beta\\]\n\n\n\\[\\text{Fail to Reject } H_0\\]\n\\[\\text{Correct Decision}\\\\1-\\alpha\\]\n\\[\\text{Type II Error } (\\beta)\\]",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#r",
+    "href": "lec9.html#r",
+    "title": "One-Sample T-Test",
+    "section": "R",
+    "text": "R",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#before-we-compare-means",
+    "href": "lec9.html#before-we-compare-means",
+    "title": "One-Sample T-Test",
+    "section": "Before We Compare Means…",
+    "text": "Before We Compare Means…\n\nEvery statistical test is about making a decision:\n\nIs our result likely due to chance, or does it reflect a real difference?\n\nTwo key players in this decision:\n\nα (alpha): our threshold for how much error we’ll tolerate (Type I Error)\nβ (beta): the risk of missing a real effect (Type II Error)\n\nBalancing α and β helps us manage:\n\nFalse alarms (rejecting a true null)\nMissed detections (failing to reject a false null)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#why-compare-means",
+    "href": "lec9.html#why-compare-means",
+    "title": "One-Sample T-Test",
+    "section": "Why Compare Means?",
+    "text": "Why Compare Means?\n\nWe often want to test whether a sample mean differs from a known population mean.\nThe one-sample t-test helps determine if the sample mean is significantly different from the hypothesized population mean.\nExample scenarios:\n\nDoes the average exam score in a class differ from a national average of 75?\nDo people’s reaction times differ from a published standard of 250ms?\nTests against the midpoint of a scale",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#the-t-test",
+    "href": "lec9.html#the-t-test",
+    "title": "One-Sample T-Test",
+    "section": "The t-test",
+    "text": "The t-test\nThree Types - Three Cases\n\n\n\nOne-Sample T-Test\n\n\\(t=\\frac{\\bar{x}-\\mu}{\\sigma} |\\frac{\\bar{x}}{s/\\sqrt(n)}\\)\n\n\n\n\nPaired-Samples T Test\n\n\\(t=\\frac{\\bar{D}}{\\sigma_{\\bar{D}}}|\\frac{\\bar{D}}{s_{\\bar{D}}/\\sqrt(n)}\\)\n\n\n\n\nIndependent-Samples T Test\n\n\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\)\n\n\n\n\nWe use the sample standard deviation (\\(s\\)) to estimate the standard error (\\(s/\\sqrt{n}\\)) since population σ is typically unknown.\nIn all cases, variation in statistical significance factors in degrees of freedom (df)\n\nAccounts for variability in sampling",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#the-t-distribution",
+    "href": "lec9.html#the-t-distribution",
+    "title": "One-Sample T-Test",
+    "section": "The t-distribution",
+    "text": "The t-distribution",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#assumptions-of-the-one-sample-t-test",
+    "href": "lec9.html#assumptions-of-the-one-sample-t-test",
+    "title": "One-Sample T-Test",
+    "section": "Assumptions of the One-Sample t-Test",
+    "text": "Assumptions of the One-Sample t-Test\n\nThe data are continuous (interval or ratio scale).\nThe sample is randomly selected.\nThe data are normally distributed (or the sample size is large enough for the Central Limit Theorem to apply).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#the-one-sample-t-test-formula",
+    "href": "lec9.html#the-one-sample-t-test-formula",
+    "title": "One-Sample T-Test",
+    "section": "The One-Sample t-Test Formula",
+    "text": "The One-Sample t-Test Formula\nThe test statistic is calculated as:\n\n\n\n\n\n\nOne Sample T-Test\n\n\n\\(\\large{t = \\frac{\\color{red}{\\bar{x}}-\\color{blue}{\\mu}}{\\color{orange}{\\sigma}}}\\)\n\n\n\nWhere:\n\n\\(\\color{red}{\\bar{x}}\\) = sample mean\n\\(\\color{blue}{\\mu}\\) = population mean (null hypothesis value)\n\\(\\color{orange}{\\sigma}{\\text{ or }}SE\\)\n\n\\(s\\) = sample standard deviation\n\\(\\sqrt{n}\\) = sample size",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#hypothesis-testing-steps",
+    "href": "lec9.html#hypothesis-testing-steps",
+    "title": "One-Sample T-Test",
+    "section": "Hypothesis Testing Steps",
+    "text": "Hypothesis Testing Steps\n\nSet Hypotheses\n\nDefine both the Null and Alternative\n\nCollect Sample Data:\n\nUse the appropriate sampling method and collect needed data*\n\nCompute the t-Statistic:\n\nConduct the correct t-test\n\nCompare to Critical Value:\n\nUse the t-statistic, sample-size, and alpha level to determine statistical significance.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#hypothesis-testing-steps-1",
+    "href": "lec9.html#hypothesis-testing-steps-1",
+    "title": "One-Sample T-Test",
+    "section": "Hypothesis Testing Steps",
+    "text": "Hypothesis Testing Steps\nManual\n\nSet Hypotheses:\n\n\\(H_0\\): The average exam score is 75 (\\(\\mu = 75\\)).\n\\(H_A\\): The average exam score is not 75 (\\(\\mu \\neq 75\\)).\n\nCollect Sample Data:\n\nSample size: \\(n = 20\\)\nSample mean: \\(\\bar{x} = 78\\)\nSample standard deviation: \\(s = 5\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#hypothesis-testing-steps-2",
+    "href": "lec9.html#hypothesis-testing-steps-2",
+    "title": "One-Sample T-Test",
+    "section": "Hypothesis Testing Steps",
+    "text": "Hypothesis Testing Steps\nManual\n\nCompute the t-Statistic:\n\n\\(t = \\frac{78 - 75}{\\frac{5}{\\sqrt{20}}} = \\frac{3}{1.118} = 2.68\\)\n\nCompare to Critical Value:\n\nUsing a \\(\\alpha = 0.05\\) level and df = 19, critical\n\\(t_{critical} = \\pm 2.093\\).\nSince \\(2.68 &gt; 2.093\\), we reject \\(H_0\\).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#hypothesis-testing-steps-3",
+    "href": "lec9.html#hypothesis-testing-steps-3",
+    "title": "One-Sample T-Test",
+    "section": "Hypothesis Testing Steps",
+    "text": "Hypothesis Testing Steps\nProgrammatic\n\n\nCode\nlibrary(dplyr)\nlibrary(broom)\nlibrary(gt)\n\n# Using Functions\nn = 20\nm = 78\nmu = 75\ns = 5\ndat &lt;- rnorm(n,m,s) |&gt; round(0)\nt.test(dat,mu = mu) |&gt; \n  tidy() |&gt; \n  rename(\n    M = estimate,\n    t = statistic,\n    df = parameter,\n    p = p.value\n  ) |&gt;\n  gt(rowname_col = \"method\") |&gt; \n  fmt_auto() |&gt; \n  opt_row_striping()\n\n\n\n\n\n\n\n\n\nM\nt\np\ndf\nconf.low\nconf.high\nalternative\n\n\n\n\nOne Sample t-test\n77.1\n1.712\n0.103\n19 \n74.533\n79.667\ntwo.sided\n\n\n\n\n\n\n\nCode\n# Manually\n(m-mu)/(5/sqrt(n))\n\n\n[1] 2.683282",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#reporting-results",
+    "href": "lec9.html#reporting-results",
+    "title": "One-Sample T-Test",
+    "section": "Reporting Results",
+    "text": "Reporting Results\nAPA-style:\n\nA one-sample t-test was conducted to compare exam scores to the national average of 75. Results showed a significant difference, t(19) = 2.68, p &lt; .05, indicating that students scored significantly higher than the national average.\n\n\nWhat kind of test?\nWhat is being compared?\nIs it significant?\nWhat are the test results?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#reporting-results-1",
+    "href": "lec9.html#reporting-results-1",
+    "title": "One-Sample T-Test",
+    "section": "Reporting Results",
+    "text": "Reporting Results\nAPA-style:\n\nA one-sample t-test was conducted to compare exam scores to the national average of 75. Results showed a significant difference, t(19) = 2.68, p &lt; .05, indicating that students scored significantly higher than the national average.\n\n\nWhat kind of test?\nWhat is being compared?\nIs it significant?\nWhat are the test results?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#interpreting-results",
+    "href": "lec9.html#interpreting-results",
+    "title": "One-Sample T-Test",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\nSample Summary Table\n\nA significant result (\\(p &lt; .05\\)) suggests that the sample mean is different from the population mean.\nA non-significant result (\\(p &gt; .05\\)) means we fail to reject \\(H_0\\) (no evidence of a difference).\n\n\n\n\n\n\n\n\n\n\nM\nt\np\ndf\nconf.low\nconf.high\nalternative\n\n\n\n\nOne Sample t-test\n77.1\n1.712\n0.103\n19 \n74.533\n79.667\ntwo.sided",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#visualizing-data",
+    "href": "lec9.html#visualizing-data",
+    "title": "One-Sample T-Test",
+    "section": "Visualizing Data",
+    "text": "Visualizing Data",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#exam-scores-vs.-national-average",
+    "href": "lec9.html#exam-scores-vs.-national-average",
+    "title": "One-Sample T-Test",
+    "section": "Exam Scores vs. National Average",
+    "text": "Exam Scores vs. National Average\nProgrammatic\n\nA professor wants to test if students in their class scored differently from the national average of 75 on an exam. A sample of 25 students has a mean score of 78 with a standard deviation of 10.\n\n\n\nCode\n# For Reproduceability\nset.seed(131)\n\n# Generate a random dataset with mean of 78, sd of 10\nx &lt;- rnorm(25,78,10)\n\nt.test(\n  x,\n  # Specify that the mean to test against is 75\n  mu = 75\n  )\n\n\n\n    One Sample t-test\n\ndata:  x\nt = 1.1505, df = 24, p-value = 0.2613\nalternative hypothesis: true mean is not equal to 75\n95 percent confidence interval:\n 73.33317 80.86545\nsample estimates:\nmean of x \n 77.09931",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#exam-scores-vs.-national-average-1",
+    "href": "lec9.html#exam-scores-vs.-national-average-1",
+    "title": "One-Sample T-Test",
+    "section": "Exam Scores vs. National Average",
+    "text": "Exam Scores vs. National Average\nManual\n\nA professor wants to test if students in their class scored differently from the national average of 75 on an exam. A sample of 25 students has a mean score of 78 with a standard deviation of 10.\n\n\nHypotheses\n\nNull Hypothesis (\\(H_0\\)): ( \\(\\mu = 75\\) ) (no difference)\nAlternative Hypothesis (\\(H_A\\)): ( \\(\\mu \\neq 75\\) ) (scores differ)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#exam-scores-vs.-national-average-2",
+    "href": "lec9.html#exam-scores-vs.-national-average-2",
+    "title": "One-Sample T-Test",
+    "section": "Exam Scores vs. National Average",
+    "text": "Exam Scores vs. National Average\nManual\n\nUsing the one-sample t-test formula:\n\n\\(t = \\frac{\\bar{x} - \\mu}{\\frac{s}{\\sqrt{n}}} |t = \\frac{78 - 75}{\\frac{10}{\\sqrt{25}}} = \\frac{3}{2} = 1.5\\)\n\nFor df = 24 (25-1), the critical value at α = .05 (two-tailed) is ±2.064.\nSince 1.5 &lt; 2.064, we fail to reject \\(H_0\\).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#apa-reporting",
+    "href": "lec9.html#apa-reporting",
+    "title": "One-Sample T-Test",
+    "section": "APA Reporting",
+    "text": "APA Reporting\n\nA one-sample t-test was conducted to determine whether students’ exam scores differed from the national average (M = 75). Results were not statistically significant, ( t(24) = 1.5, p &gt; .05 ), indicating that students performed similarly to the national average.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#daily-coffee-consumption",
+    "href": "lec9.html#daily-coffee-consumption",
+    "title": "One-Sample T-Test",
+    "section": "Daily Coffee Consumption",
+    "text": "Daily Coffee Consumption\n\nA coffee company claims that people drink an average of 3 cups of coffee per day. A researcher samples 16 individuals, finding a mean of 2.5 cups and a standard deviation of 1 cup.\n\n\nHypotheses\n\nNull Hypothesis (\\(H_0\\)): \\(\\mu = 3\\)\nAlternative Hypothesis (\\(H_A\\)): \\(\\mu &lt; 3\\) (people drink less)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#daily-coffee-consumption-1",
+    "href": "lec9.html#daily-coffee-consumption-1",
+    "title": "One-Sample T-Test",
+    "section": "Daily Coffee Consumption",
+    "text": "Daily Coffee Consumption\nManual\n\nA coffee company claims that people drink an average of 3 cups of coffee per day. A researcher samples 16 individuals, finding a mean of 2.5 cups and a standard deviation of 1 cup.\n\n\nCalculation\n\n\\(t = \\frac{2.5 - 3}{1 / \\sqrt{16}} = \\frac{-0.5}{0.25} = -2.0\\)\n\nFor df = 15 (16-1), the critical t-value for a one-tailed test at α = .05 is -1.753.\nSince -2.0 &lt; -1.753, we reject \\(H_0\\).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#daily-coffee-consumption-2",
+    "href": "lec9.html#daily-coffee-consumption-2",
+    "title": "One-Sample T-Test",
+    "section": "Daily Coffee Consumption",
+    "text": "Daily Coffee Consumption\nProgrammatic\n\nA coffee company claims that people drink an average of 3 cups of coffee per day. A researcher samples 16 individuals, finding a mean of 2.5 cups and a standard deviation of 1 cup.\n\n\n\nCode\n# For Reproduceability\nset.seed(131)\n\n# Generate a random dataset with mean of 78, sd of 10\nx &lt;- rnorm(16,2.5,1)\n\nt.test(\n  x,\n  # Specify that the mean to test against is 75\n  mu = 3\n  )\n\n\n\n    One Sample t-test\n\ndata:  x\nt = -2.2081, df = 15, p-value = 0.04322\nalternative hypothesis: true mean is not equal to 3\n95 percent confidence interval:\n 2.068607 2.983542\nsample estimates:\nmean of x \n 2.526075",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#apa-reporting-1",
+    "href": "lec9.html#apa-reporting-1",
+    "title": "One-Sample T-Test",
+    "section": "APA Reporting",
+    "text": "APA Reporting\n\nA one-sample t-test was conducted to test whether daily coffee consumption was lower than the reported average of 3 cups. Results showed a significant difference, t(15)=-2.0,p&lt; .05, suggesting that people consume significantly fewer cups of coffee per day than reported.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#sleep-duration-among-college-students",
+    "href": "lec9.html#sleep-duration-among-college-students",
+    "title": "One-Sample T-Test",
+    "section": "Sleep Duration Among College Students",
+    "text": "Sleep Duration Among College Students\n\nA health researcher believes college students sleep less than 7 hours per night. A sample of 30 students reports a mean of 6.5 hours with a standard deviation of 1.2 hours.\n\n\nHypotheses\n\nNull Hypothesis \\(H_0\\): \\(\\mu = 7\\)\nAlternative Hypothesis \\(H_1\\): \\(\\mu &lt; 7\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#sleep-duration-among-college-students-1",
+    "href": "lec9.html#sleep-duration-among-college-students-1",
+    "title": "One-Sample T-Test",
+    "section": "Sleep Duration Among College Students",
+    "text": "Sleep Duration Among College Students\nManual\n\nA health researcher believes college students sleep less than 7 hours per night. A sample of 30 students reports a mean of 6.5 hours with a standard deviation of 1.2 hours.\n\n\nCalculation\n\n\\(t = \\frac{6.5 - 7}{1.2 / \\sqrt{30}} = \\frac{-0.5}{0.219} = -2.28\\)\n\nFor df = 29, the critical t-value for a one-tailed test at α = .05 is -1.699.\nSince -2.28 &lt; -1.699, we reject (H_0).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#sleep-duration-among-college-students-2",
+    "href": "lec9.html#sleep-duration-among-college-students-2",
+    "title": "One-Sample T-Test",
+    "section": "Sleep Duration Among College Students",
+    "text": "Sleep Duration Among College Students\nProgrammatic\n\nA health researcher believes college students sleep less than 7 hours per night. A sample of 30 students reports a mean of 6.5 hours with a standard deviation of 1.2 hours.\n\n\n\nCode\n# For Reproduceability\nset.seed(728)\n\n# Generate a random dataset with mean of 78, sd of 10\nx &lt;- rnorm(30,6.5,1.2) |&gt; round(0)\n\nt.test(\n  x,\n  # Specify that the mean to test against is 75\n  mu = 7\n  )\n\n\n\n    One Sample t-test\n\ndata:  x\nt = -2.5381, df = 29, p-value = 0.01678\nalternative hypothesis: true mean is not equal to 7\n95 percent confidence interval:\n 5.976708 6.889959\nsample estimates:\nmean of x \n 6.433333",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
+  },
+  {
+    "objectID": "lec9.html#apa-reporting-2",
+    "href": "lec9.html#apa-reporting-2",
+    "title": "One-Sample T-Test",
+    "section": "APA Reporting",
+    "text": "APA Reporting\n\nA one-sample t-test was conducted to test whether college students sleep fewer than 7 hours per night. Results were statistically significant, t(29) = -2.28, p &lt; .05, indicating that students get significantly less sleep than the recommended amount.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "One-Sample T-Test"
+    ]
   }
 ]
