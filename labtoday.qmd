@@ -1,0 +1,107 @@
+---
+title: "Labrador"
+subtitle: "Lab Today"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+format: 
+  revealjs:
+    theme: custom.scss
+    width: 1600
+    height: 900
+    incremental: true   
+    touch: true
+    chalkboard: true
+filters:
+  - webr
+---
+
+## Statistics Lab: One-Sample t-Test
+
+### Objective
+
+Students will:
+	•	Conduct and interpret a one-sample t-test in R (or another platform you prefer).
+	•	Compare their sample data to a known or hypothesized population mean.
+	•	Communicate their findings in APA-style format.
+
+## 1. Concept Refresher (5–10 minutes)
+
+Prompt:
+“Sometimes we want to know if a group we’re studying is different from the general population — but we only have one group’s data. The one-sample t-test helps us test whether our sample mean differs significantly from a known or hypothesized mean.”
+
+Example questions to warm up:
+	•	What does the t-test compare?
+	•	What does the null hypothesis say in this context?
+	•	How does sample size affect the t statistic?
+
+## 2. Example Scenario Ideas (Pick one or rotate by section)
+
+Each scenario includes a population mean and invites students to test a claim:
+
+Theme	Scenario	Population Mean (μ₀)	Variable Example
+🍫 Fun & Food	The average American eats 12 pounds of chocolate per year. Is our class different?	12	chocolate_pounds
+📱 Technology	On average, college students spend 4 hours/day on their phone. Is our sample higher?	4	hours_per_day
+💤 Sleep	The CDC recommends 8 hours of sleep per night. Does our sample get less?	8	sleep_hours
+😬 Anxiety	National anxiety scale mean = 50 (SD = 10). Is our class more anxious?	50	anxiety_score
+
+## 3. Data Collection (10–15 minutes)
+
+Option 1: Live data collection
+Have students submit quick responses via Google Form or Qualtrics (e.g., “How many hours of sleep did you get last night?”). Export as a .csv.
+
+Option 2: Simulated dataset
+Provide a dataset such as:
+
+```{r}
+set.seed(123)
+sleep_data <- data.frame(
+  sleep_hours = rnorm(30, mean = 7.2, sd = 0.9)
+)
+```
+
+## 4. Analysis (15–20 minutes)
+
+Step 1: State hypotheses
+	•	H₀: μ = μ₀
+	•	H₁: μ ≠ μ₀
+
+Step 2: Run the test in R
+
+```{r}
+t.test(sleep_data$sleep_hours, mu = 8)
+```
+
+Step 3: Interpret the output
+	•	t-value
+	•	df
+	•	p-value
+	•	95% confidence interval
+	•	Direction of difference
+
+Step 4: APA write-up example
+
+Students in our sample (M = 7.2, SD = 0.9) reported significantly less sleep than the CDC’s recommended 8 hours, t(29) = -4.67, p < .001.
+
+## 5. Discussion Questions
+	1.	What does the negative t-value indicate?
+	2.	What would happen if the sample were larger but had the same mean?
+	3.	How does the confidence interval help confirm your conclusion?
+	4.	Can a non-significant result still be meaningful? Why or why not?
+
+## 6. Optional Extension
+	•	Effect Size: Calculate Cohen’s d manually or using:
+
+```{r}
+(mean(sleep_data$sleep_hours) - 8) / sd(sleep_data$sleep_hours)
+```
+
+	•	Visualization: Show how the sample mean compares to the population mean with a density plot or boxplot.
+
+## Deliverable
+
+A short lab report (or RMarkdown/Quarto doc) including:
+	1.	Stated hypotheses
+	2.	Output and interpretation
+	3.	APA-style results section
+	4.	Visual (optional)
+	5.	Reflection question: “What does your result suggest about your sample?”
