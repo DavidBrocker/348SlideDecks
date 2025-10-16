@@ -144,69 +144,613 @@ Dave Brocker
 </div>
 
 </section>
-<section id="statistics-lab-one-sample-t-test" class="slide level2">
-<h2>Statistics Lab: One-Sample t-Test</h2>
-<h3 id="objective">Objective</h3>
-<p>Students will: • Conduct and interpret a one-sample t-test in R (or another platform you prefer). • Compare their sample data to a known or hypothesized population mean. • Communicate their findings in APA-style format.</p>
-</section>
-<section id="concept-refresher-510-minutes" class="slide level2">
-<h2>1. Concept Refresher (5–10 minutes)</h2>
-<p>Prompt: “Sometimes we want to know if a group we’re studying is different from the general population — but we only have one group’s data. The one-sample t-test helps us test whether our sample mean differs significantly from a known or hypothesized mean.”</p>
-<p>Example questions to warm up: • What does the t-test compare? • What does the null hypothesis say in this context? • How does sample size affect the t statistic?</p>
-</section>
-<section id="example-scenario-ideas-pick-one-or-rotate-by-section" class="slide level2">
-<h2>2. Example Scenario Ideas (Pick one or rotate by section)</h2>
-<p>Each scenario includes a population mean and invites students to test a claim:</p>
-<p>Theme Scenario Population Mean (μ₀) Variable Example 🍫 Fun &amp; Food The average American eats 12 pounds of chocolate per year. Is our class different? 12 chocolate_pounds 📱 Technology On average, college students spend 4 hours/day on their phone. Is our sample higher? 4 hours_per_day 💤 Sleep The CDC recommends 8 hours of sleep per night. Does our sample get less? 8 sleep_hours 😬 Anxiety National anxiety scale mean = 50 (SD = 10). Is our class more anxious? 50 anxiety_score</p>
-</section>
-<section id="data-collection-1015-minutes" class="slide level2">
-<h2>3. Data Collection (10–15 minutes)</h2>
-<p>Option 1: Live data collection Have students submit quick responses via Google Form or Qualtrics (e.g., “How many hours of sleep did you get last night?”). Export as a .csv.</p>
-<p>Option 2: Simulated dataset Provide a dataset such as:</p>
-</section>
-<section id="analysis-1520-minutes" class="slide level2">
-<h2>4. Analysis (15–20 minutes)</h2>
-<p>Step 1: State hypotheses • H₀: μ = μ₀ • H₁: μ ≠ μ₀</p>
-<p>Step 2: Run the test in R</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
+<section class="slide level2">
 
-data:  sleep_data$sleep_hours
-t = -5.2258, df = 29, p-value = 1.354e-05
-alternative hypothesis: true mean is not equal to 8
-95 percent confidence interval:
- 6.827916 7.487297
-sample estimates:
-mean of x 
- 7.157607 </code></pre>
-</div>
-</div>
-<p>Step 3: Interpret the output • t-value • df • p-value • 95% confidence interval • Direction of difference</p>
-<p>Step 4: APA write-up example</p>
-<p>Students in our sample (M = 7.2, SD = 0.9) reported significantly less sleep than the CDC’s recommended 8 hours, t(29) = -4.67, p &lt; .001.</p>
-</section>
-<section id="discussion-questions" class="slide level2">
-<h2>5. Discussion Questions</h2>
-<pre><code>1.  What does the negative t-value indicate?
-2.  What would happen if the sample were larger but had the same mean?
-3.  How does the confidence interval help confirm your conclusion?
-4.  Can a non-significant result still be meaningful? Why or why not?</code></pre>
-</section>
-<section id="optional-extension" class="slide level2">
-<h2>6. Optional Extension</h2>
-<pre><code>•   Effect Size: Calculate Cohen’s d manually or using:</code></pre>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.9540911</code></pre>
+<div class="cell-output-display">
+<div id="kpfitbfnjw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kpfitbfnjw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kpfitbfnjw thead, #kpfitbfnjw tbody, #kpfitbfnjw tfoot, #kpfitbfnjw tr, #kpfitbfnjw td, #kpfitbfnjw th {
+  border-style: none;
+}
+
+#kpfitbfnjw p {
+  margin: 0;
+  padding: 0;
+}
+
+#kpfitbfnjw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #D3D3D3;
+  border-right-style: solid;
+  border-right-width: 3px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: solid;
+  border-left-width: 3px;
+  border-left-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kpfitbfnjw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kpfitbfnjw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kpfitbfnjw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kpfitbfnjw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kpfitbfnjw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kpfitbfnjw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kpfitbfnjw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kpfitbfnjw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kpfitbfnjw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #F5F7FB;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kpfitbfnjw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #F5F7FB;
+  font-size: 100%;
+  font-weight: bold;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kpfitbfnjw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kpfitbfnjw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kpfitbfnjw .gt_row {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kpfitbfnjw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpfitbfnjw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kpfitbfnjw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kpfitbfnjw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kpfitbfnjw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpfitbfnjw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kpfitbfnjw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpfitbfnjw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kpfitbfnjw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpfitbfnjw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kpfitbfnjw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpfitbfnjw .gt_left {
+  text-align: left;
+}
+
+#kpfitbfnjw .gt_center {
+  text-align: center;
+}
+
+#kpfitbfnjw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kpfitbfnjw .gt_font_normal {
+  font-weight: normal;
+}
+
+#kpfitbfnjw .gt_font_bold {
+  font-weight: bold;
+}
+
+#kpfitbfnjw .gt_font_italic {
+  font-style: italic;
+}
+
+#kpfitbfnjw .gt_super {
+  font-size: 65%;
+}
+
+#kpfitbfnjw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kpfitbfnjw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kpfitbfnjw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kpfitbfnjw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kpfitbfnjw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kpfitbfnjw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kpfitbfnjw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kpfitbfnjw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kpfitbfnjw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Ideas for One-Sample <em>t</em>-Test Lab Datasets</strong></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="Dataset_Idea" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #005BBB; font-weight: bold" scope="col">Dataset Idea</th>
+<th id="Variable" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #005BBB; font-weight: bold" scope="col">Variable (DV)</th>
+<th id="Comparison_Mean" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #005BBB; font-weight: bold" scope="col">Comparison Mean (H₀)</th>
+<th id="Teaching_Angle" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #005BBB; font-weight: bold" scope="col">Teaching Angle</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row odd">
+<td colspan="4" id="Psychology / Social Science" class="gt_group_heading" data-quarto-table-cell-role="th" style="color: #1D4ED8; font-size: 18px; font-weight: bold" scope="colgroup">Psychology / Social Science</td>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Psychology / Social Science  Dataset_Idea">Perceived stress</td>
+<td class="gt_row gt_left" headers="Psychology / Social Science  Variable">PSS total score</td>
+<td class="gt_row gt_left" headers="Psychology / Social Science  Comparison_Mean">20 (college average)</td>
+<td class="gt_row gt_left" headers="Psychology / Social Science  Teaching_Angle">Introduce psychometric data and assumptions</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Dataset_Idea">Hours of sleep</td>
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Variable">Average nightly sleep</td>
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Comparison_Mean">7 hours</td>
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Teaching_Angle">Highlight normality and how to check it</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Psychology / Social Science  Dataset_Idea">Self-esteem scores</td>
+<td class="gt_row gt_left" headers="Psychology / Social Science  Variable">Mean SE score</td>
+<td class="gt_row gt_left" headers="Psychology / Social Science  Comparison_Mean">25</td>
+<td class="gt_row gt_left" headers="Psychology / Social Science  Teaching_Angle">Show confidence intervals &amp; interpret direction</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Dataset_Idea">Social media use</td>
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Variable">Daily hours</td>
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Comparison_Mean">3 hours</td>
+<td class="gt_row gt_left gt_striped" headers="Psychology / Social Science  Teaching_Angle">Frame nulls from 'claims' or 'recommendations'</td>
+</tr>
+<tr class="gt_group_heading_row even">
+<td colspan="4" id="Campus Life / Student Engagement" class="gt_group_heading" data-quarto-table-cell-role="th" style="color: #1D4ED8; font-size: 18px; font-weight: bold" scope="colgroup">Campus Life / Student Engagement</td>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Dataset_Idea">Sense of belonging</td>
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Variable">Belonging score</td>
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Comparison_Mean">5 (neutral)</td>
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Teaching_Angle">Connect to sampling theory — does this campus differ?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Dataset_Idea">Satisfaction with cafeteria food</td>
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Variable">Rating (1–10)</td>
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Comparison_Mean">6</td>
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Teaching_Angle">Discuss Likert scales as interval data</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Dataset_Idea">Commute time</td>
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Variable">Minutes to campus</td>
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Comparison_Mean">15 minutes</td>
+<td class="gt_row gt_left" headers="Campus Life / Student Engagement  Teaching_Angle">Use skewed data to discuss violations of normality</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Dataset_Idea">Study hours per week</td>
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Variable">Self-reported hours</td>
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Comparison_Mean">10</td>
+<td class="gt_row gt_left gt_striped" headers="Campus Life / Student Engagement  Teaching_Angle">Show one-tailed vs. two-tailed testing</td>
+</tr>
+<tr class="gt_group_heading_row odd">
+<td colspan="4" id="Health &amp;amp; Behavior" class="gt_group_heading" data-quarto-table-cell-role="th" style="color: #1D4ED8; font-size: 18px; font-weight: bold" scope="colgroup">Health &amp; Behavior</td>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Dataset_Idea">Resting heart rate</td>
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Variable">BPM</td>
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Comparison_Mean">70</td>
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Teaching_Angle">Real-world normality checks</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Dataset_Idea">Caffeine consumption</td>
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Variable">mg per day</td>
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Comparison_Mean">200</td>
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Teaching_Angle">Discuss population benchmarks &amp; variability</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Dataset_Idea">Daily steps</td>
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Variable">Steps per day</td>
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Comparison_Mean">10,000</td>
+<td class="gt_row gt_left" headers="Health &amp; Behavior  Teaching_Angle">Contrast statistical vs. practical significance</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Dataset_Idea">Reaction time</td>
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Variable">Milliseconds</td>
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Comparison_Mean">300 ms</td>
+<td class="gt_row gt_left gt_striped" headers="Health &amp; Behavior  Teaching_Angle">Connect to experimental psychology</td>
+</tr>
+<tr class="gt_group_heading_row even">
+<td colspan="4" id="Pop Culture / Fun" class="gt_group_heading" data-quarto-table-cell-role="th" style="color: #1D4ED8; font-size: 18px; font-weight: bold" scope="colgroup">Pop Culture / Fun</td>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Dataset_Idea">Music tempo preference</td>
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Variable">BPM of favorite songs</td>
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Comparison_Mean">120</td>
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Teaching_Angle">Use Spotify or open music data</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Dataset_Idea">Horror tolerance</td>
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Variable">Scary rating (1–10)</td>
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Comparison_Mean">5</td>
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Teaching_Angle">Tie to morbid curiosity and affective science</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Dataset_Idea">Pet cuteness ratings</td>
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Variable">Rating (1–10)</td>
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Comparison_Mean">7</td>
+<td class="gt_row gt_left" headers="Pop Culture / Fun  Teaching_Angle">Teach sampling bias playfully</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Dataset_Idea">TikTok usage</td>
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Variable">Minutes per day</td>
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Comparison_Mean">60</td>
+<td class="gt_row gt_left gt_striped" headers="Pop Culture / Fun  Teaching_Angle">Use real-skew distributions for discussion</td>
+</tr>
+<tr class="gt_group_heading_row odd">
+<td colspan="4" id="Professional Development" class="gt_group_heading" data-quarto-table-cell-role="th" style="color: #1D4ED8; font-size: 18px; font-weight: bold" scope="colgroup">Professional Development</td>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Professional Development  Dataset_Idea">Job satisfaction</td>
+<td class="gt_row gt_left" headers="Professional Development  Variable">Rating (1–10)</td>
+<td class="gt_row gt_left" headers="Professional Development  Comparison_Mean">6</td>
+<td class="gt_row gt_left" headers="Professional Development  Teaching_Angle">Practice effect size interpretation</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left gt_striped" headers="Professional Development  Dataset_Idea">Typing speed</td>
+<td class="gt_row gt_left gt_striped" headers="Professional Development  Variable">Words per minute</td>
+<td class="gt_row gt_left gt_striped" headers="Professional Development  Comparison_Mean">50</td>
+<td class="gt_row gt_left gt_striped" headers="Professional Development  Teaching_Angle">Show parametric assumptions with skill data</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Professional Development  Dataset_Idea">Confidence using AI tools</td>
+<td class="gt_row gt_left" headers="Professional Development  Variable">Rating (1–10)</td>
+<td class="gt_row gt_left" headers="Professional Development  Comparison_Mean">5</td>
+<td class="gt_row gt_left" headers="Professional Development  Teaching_Angle">Discuss modern relevance &amp; comfort with tech</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="4" class="gt_sourcenote">Table generated with <strong>GPT-5 (OpenAI, 2025)</strong></td>
+</tr>
+</tfoot>
+
+</table>
+
 </div>
 </div>
-<pre><code>•   Visualization: Show how the sample mean compares to the population mean with a density plot or boxplot.</code></pre>
-</section>
-<section id="deliverable" class="slide level2">
-<h2>Deliverable</h2>
-<p>A short lab report (or RMarkdown/Quarto doc) including: 1. Stated hypotheses 2. Output and interpretation 3. APA-style results section 4. Visual (optional) 5. Reflection question: “What does your result suggest about your sample?”</p>
+</div>
 
 
 </section>
