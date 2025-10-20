@@ -1192,7 +1192,7 @@
     "href": "lec11.html#theoretical-formula-explanation",
     "title": "Paired Samples T-Test",
     "section": "Theoretical Formula Explanation",
-    "text": "Theoretical Formula Explanation\nUnderstanding Each Component\n\nDifference Mean \\(\\bar{d}\\): Average of the differences between paired scores.\nStandard Deviation of Differences \\(s_d\\): Indicates how much individual differences deviate from the mean difference.\nSample Size \\(n\\): Number of pairs, affecting the significance of results.",
+    "text": "Theoretical Formula Explanation\nUnderstanding Each Component\n\nDifference Mean \\(\\bar{d}\\):\n\nAverage of the differences between paired scores.\n\nStandard Deviation of Differences \\(s_d\\):\n\nIndicates how much individual differences deviate from the mean difference.\n\nSample Size \\(n\\):\n\nNumber of pairs, affecting the significance of results.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1216,7 +1216,7 @@
     "href": "lec11.html#paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program.\n\nSteps:\n\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{d}\\) and standard deviation \\(s_d\\) of the differences.\nApply the formula to calculate the t-value and check for significance.",
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.\n\nSteps:\n\nState the Null and Alternative Hypothesis\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{d}\\) and standard deviation \\(s_d\\) of the differences.\nApply the formula to calculate the t-value and check for significance.",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1228,7 +1228,7 @@
     "href": "lec11.html#paired-samples-t-test-1",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\n\nCode\n# Load Packages\nlibrary(dplyr)\nlibrary(broom)\nlibrary(gt)\n\n# Random Seed\nset.seed(20)\n\n# Create data\ndata &lt;- \n  tibble(\n  # Make a variable, `group` with 30 T1 and 30 T2\n  group = rep(c(\"Time One\",\"Time Two\"), each = 30),\n  # Make a variable, `score` with 60 scores\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n) \n\ndata |&gt; \n  gt_preview() |&gt; \n  opt_row_striping() |&gt; \n  tab_options(\n    table.font.size = 32,\n    table.width = pct(70)\n    )\n\n\n\n\n\n\n\n\n\ngroup\nscore\n\n\n\n\n1\nTime One\n10\n\n\n2\nTime One\n7\n\n\n3\nTime One\n12\n\n\n4\nTime One\n5\n\n\n5\nTime One\n7\n\n\n6..59\n\n\n\n\n60\nTime Two\n4",
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.\n\n\nState the Null and Alternative Hypothesis\n\n\\(H_0\\): There will be no difference in stress before or after the mindfulness exercise\n\n\\(H_0: \\mu_\\text{post} = \\mu_\\text{pre}\\)\n\n\\(H_A\\): There will be a decrease in stress after the mindfulness exercise\n\n\\(H_A: \\mu_\\text{post} &lt; \\mu_\\text{pre}\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1240,7 +1240,7 @@
     "href": "lec11.html#paired-samples-t-test-2",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nCompare Scores\n\n\nCode\ndata_new &lt;- \n  data |&gt; \n  group_by(group) |&gt; \n  mutate(\n    id = paste0(\"Participant \",row_number()),\n    group = ifelse(stringr::str_detect(group,\"One\"),\"T1\",\"T2\")) |&gt; \n  tidyr::pivot_wider(\n                     names_from = group,\n                     values_from = score\n                     ) |&gt; \n  ungroup() |&gt; \n  mutate(\n    D = T2-T1,\n    Dfi = ifelse(stringr::str_detect(D,\"^-\"),paste0(\"(\",D,\")\"),D)\n  )\n\ndata_new |&gt; \n  select(-D) |&gt; \n  gt_preview() |&gt; \n  opt_row_striping() |&gt; \n    tab_options(\n    table.font.size = 32,\n    table.width = pct(70)\n    )\n\n\n\n\n\n\n\n\n\nid\nT1\nT2\nDfi\n\n\n\n\n1\nParticipant 1\n10\n4\n(-6)\n\n\n2\nParticipant 2\n7\n6\n(-1)\n\n\n3\nParticipant 3\n12\n6\n(-6)\n\n\n4\nParticipant 4\n5\n5\n0\n\n\n5\nParticipant 5\n7\n3\n(-4)\n\n\n6..29\n\n\n\n\n\n\n30\nParticipant 30\n7\n4\n(-3)",
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.\n\n\n\nCode\n# Load Packages\nlibrary(dplyr)\nlibrary(broom)\nlibrary(gt)\n\n# Random Seed\nset.seed(20)\n\n# Create data\ndata &lt;- \n  tibble(\n  # Make a variable, `group` with 30 T1 and 30 T2\n  group = rep(c(\"Time One\",\"Time Two\"), each = 30),\n  # Make a variable, `score` with 60 scores\n  score = c(rnorm(30,8,2),rnorm(30,4,1)) |&gt; round(0)\n) \n\ndata |&gt; \n  gt_preview() |&gt; \n  opt_row_striping() |&gt; \n  tab_options(\n    table.font.size = 15,\n    table.width = pct(40)\n    ) |&gt; \n    tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )\n\n\n\n\n\n\n\n\n\ngroup\nscore\n\n\n\n\n1\nTime One\n10\n\n\n2\nTime One\n7\n\n\n3\nTime One\n12\n\n\n4\nTime One\n5\n\n\n5\nTime One\n7\n\n\n6..59\n\n\n\n\n60\nTime Two\n4",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1252,7 +1252,7 @@
     "href": "lec11.html#paired-samples-t-test-3",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\\[\\large{t = \\frac{D}{\\frac{\\sigma}{\\sqrt{n}}} =  \\frac{-3.26}{\\frac{2.083}{\\sqrt{30}}} = (-8.57)}\\]",
+    "text": "Paired Samples t-Test\nCompare Scores\n\nCalculate the difference between pre-mindfullness stress and post-mindfullness scores.\n\n\n\nCode\ndata_new &lt;- \n  data |&gt; \n  group_by(group) |&gt; \n  mutate(\n    id = paste0(\"Participant \",row_number()),\n    group = ifelse(stringr::str_detect(group,\"One\"),\"T1\",\"T2\")) |&gt; \n  tidyr::pivot_wider(\n                     names_from = group,\n                     values_from = score\n                     ) |&gt; \n  ungroup() |&gt; \n  mutate(\n    D = T2-T1,\n    Dfi = ifelse(stringr::str_detect(D,\"^-\"),paste0(\"(\",D,\")\"),D)\n  )\n\ndata_new |&gt; \n  select(-D) |&gt; \n  gt_preview() |&gt; \n  opt_row_striping() |&gt; \n    tab_options(\n    table.font.size = 32,\n    table.width = pct(70)\n    ) |&gt; \n    tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )\n\n\n\n\n\n\n\n\n\nid\nT1\nT2\nDfi\n\n\n\n\n1\nParticipant 1\n10\n4\n(-6)\n\n\n2\nParticipant 2\n7\n6\n(-1)\n\n\n3\nParticipant 3\n12\n6\n(-6)\n\n\n4\nParticipant 4\n5\n5\n0\n\n\n5\nParticipant 5\n7\n3\n(-4)\n\n\n6..29\n\n\n\n\n\n\n30\nParticipant 30\n7\n4\n(-3)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1264,7 +1264,7 @@
     "href": "lec11.html#paired-samples-t-test-4",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\n\nCode\nt.test(data$score~data$group) |&gt; \n  tidy() |&gt; \n  rename(\n    D = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = p |&gt; round(10)\n  ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(D,t,df,p,`CI[ll,uu]`) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  opt_row_striping() |&gt;   \n  tab_options(\n    table.font.size = 32,\n    table.width = pct(70)\n    )\n\n\n\n\n\n\n\n\nD\nt\ndf\np\nCI[ll,uu]\n\n\n\n\n3.267\n7.581\n41.652\n2.300 × 10−9\n[2.4, 4.14]\n\n\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (D)",
+    "text": "Paired Samples t-Test\nConstruct the Formula (Manually)\n\nFind the mean \\(\\bar{d}\\) and standard deviation \\(s_d\\) of the differences.\nApply the formula to calculate the t-value and check for significance.\n\\(\\large{t = \\frac{d}{{s_d}/\\sqrt{n}} =  \\frac{-3.26}{2.083/\\sqrt{30}} = (-8.57)}\\)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1276,7 +1276,7 @@
     "href": "lec11.html#paired-samples-t-test-5",
     "title": "Paired Samples T-Test",
     "section": "Paired Samples t-Test",
-    "text": "Paired Samples t-Test\nConstruct the Formula (\\(\\bar{D}\\) | \\(\\sigma_{\\bar{D}}\\))\n\n\nCode\nt.test(pt_data$score~pt_data$grp) |&gt; \n  tidy() |&gt; \n  rename(\n    D = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = p |&gt; round(10)\n  ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(D,t,df,p,`CI[ll,uu]`) |&gt; \n  gt()\n\n\n\n\n\n\n\n\nD\nt\ndf\np\nCI[ll,uu]\n\n\n\n\n3.266667\n7.58112\n41.65179\n2.3e-09\n[2.4, 4.14]\n\n\n\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (D)",
+    "text": "Paired Samples t-Test\nConstruct the Formula (Computationally)\n\n\nCode\nlibrary(tidyr)\nddata &lt;- \n  data |&gt; \n  mutate(\n    id = rep(paste0(\"p_\",1:30),2),\n    group = factor(group),\n    group = ifelse(group==\"Time One\", \"Time_One\",\"Time_Two\")\n    ) |&gt; \n  pivot_wider(\n    id_cols = \"id\",\n    names_from = \"group\",\n    values_from = \"score\"\n    )\n\n\nwith(ddata, t.test(Time_One,Time_Two,paired = TRUE)) |&gt; \n  tidy() |&gt; \n  rename(\n    d = estimate,\n    t = statistic, \n    p = p.value,\n    df = parameter) |&gt; \n  mutate(\n    `CI[ll,uu]` = paste0(\"[\",conf.low |&gt; round(2),\", \",conf.high |&gt; round(2),\"]\"),\n    p = ifelse(p &lt;.01, \"&lt;.001\",p) \n      ) |&gt; \n  select(-conf.low:-alternative) |&gt; \n  select(d,t,df,p,`CI[ll,uu]`) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  opt_row_striping() |&gt;   \n  tab_options(\n    table.font.size = 32,\n    table.width = pct(70)\n    ) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )\n\n\n\n\n\n\n\n\nd\nt\ndf\np\nCI[ll,uu]\n\n\n\n\n3.267\n8.588\n29 \n&lt;.001\n[2.49, 4.04]\n\n\n\n\n\n\n\n\nD = mean difference of T2-T1\nt = t-test statistic\ndf = n-1 (30-1)\np = probability results came from the Null Distribution\nCI[ll,uu] = 95% CI of Mean Difference (d)",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1288,7 +1288,7 @@
     "href": "lec11.html#paired-t-tests",
     "title": "Paired Samples T-Test",
     "section": "Paired T-Tests",
-    "text": "Paired T-Tests\nVisualizing Results: Option 1\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(group, score, fill = group)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width=.2\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\")\n  ) +\n  scale_fill_viridis(discrete = TRUE, option = \"E\")",
+    "text": "Paired T-Tests\nVisualizing Results\n\n\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(group, score, fill = group)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\",\n    width = .4\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width=.2\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTesting Time\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention and Stress Levels\",\n    subtitle = \"Stress scores decrease after exposure to mindfulness treatment.\\n\",\n    caption = \"t(29) = 8.58, p &lt;.001, 95% CI [2.49, 4.04]\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    panel.grid.major = element_blank()\n  ) +\n  scale_fill_viridis(\n    discrete = TRUE, \n    option = \"H\",\n    alpha = .8\n    )\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(group, score, color = group)) + \n  geom_jitter(aes(alpha = .2)) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .1\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTesting Time\",\n    y = \"Stress Score\\n\",\n    color = \"Time\",\n    title = \"Mindfulness Intervention and Stress Levels\",\n    subtitle = \"Stress scores decrease after exposure to mindfulness treatment.\\n\",\n    caption = \"t(29) = 8.58, p &lt;.001, 95% CI [2.49, 4.04]\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    legend.position = \"none\"\n  ) +\n    scale_color_viridis(\n    discrete = TRUE, \n    option = \"H\",\n    alpha = .8\n    )",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1300,7 +1300,7 @@
     "href": "lec11.html#paired-t-tests-1",
     "title": "Paired Samples T-Test",
     "section": "Paired T-Tests",
-    "text": "Paired T-Tests\nVisualizing Results: Option 2\n\n\nCode\nlibrary(ggplot2)\nlibrary(viridis)\n\ndata |&gt; \n  ggplot(aes(group, score, color = group)) + \n  geom_jitter(aes(alpha = .2)) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\"\n  ) +\n  theme_minimal() +\n  labs(\n    x = \"\\nTreatment Group\",\n    y = \"Stress Score\\n\",\n    fill = \"Time\",\n    title = \"Mindfulness Intervention decreases stress levels\\n\"\n  ) + \n  theme(\n    plot.title.position =  \"plot\",\n    plot.title = element_text(face = \"bold\"),\n    legend.position = \"none\"\n  ) +\n  scale_color_manual(values = c(\"darkgreen\",\"darkred\"))",
+    "text": "Paired T-Tests\nVisualizing Results: Option 2",
     "crumbs": [
       "Course Overview",
       "Lectures",
@@ -1312,7 +1312,67 @@
     "href": "lec11.html#summary-of-paired-samples-t-test",
     "title": "Paired Samples T-Test",
     "section": "Summary of Paired Samples t-Test",
-    "text": "Summary of Paired Samples t-Test\nKey Takeaways\n\nPaired samples t-tests are ideal for comparing two related groups.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check assumptions: normality of differences and appropriate pairing.",
+    "text": "Summary of Paired Samples t-Test\nKey Takeaways\n\nPaired samples t-tests are ideal for comparing two related groups.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check assumptions: normality of differences and appropriate pairing.\n\nDifferences are normally distributed.\n\nCheck using histogram, QQ plot, or Shapiro-Wilk test.\n\nPairs are dependent (related measures).\n\nSame participants or matched pairs.\n\nNo major outliers in the differences.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Paired Samples T-Test"
+    ]
+  },
+  {
+    "objectID": "lec11.html#effect-size-cohens-d",
+    "href": "lec11.html#effect-size-cohens-d",
+    "title": "Paired Samples T-Test",
+    "section": "Effect Size: Cohen’s d",
+    "text": "Effect Size: Cohen’s d\nWhy Report Effect Size?\n\nStatistical significance (p) tells us if there is a difference.\nEffect size tells us how big that difference is.\n\\(d = \\frac{\\bar{d}}{s_d}\\)\n\n\\(\\bar{d}\\) = mean difference between paired scores\n\n\\(s_d\\) = standard deviation of the differences\n\n\n\n\nCode\ntibble(\n    `Cohen's d` = c(0.20, 0.50, 0.80),\n    Interpretation = c(\"Small effect\", \"Medium effect\", \"Large effect\")\n) %&gt;%\n    gt() |&gt; \n  opt_row_striping() |&gt; \n  tab_options(\n    table.width = pct(50),\n    table.font.size = 22\n  )\n\n\n\n\n\n\n\n\nCohen's d\nInterpretation\n\n\n\n\n0.2\nSmall effect\n\n\n0.5\nMedium effect\n\n\n0.8\nLarge effect",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Paired Samples T-Test"
+    ]
+  },
+  {
+    "objectID": "lec11.html#cohens-d",
+    "href": "lec11.html#cohens-d",
+    "title": "Paired Samples T-Test",
+    "section": "Cohen’s d",
+    "text": "Cohen’s d\nMindfulness Example\n\n\n\n\nCode\nrstatix::cohens_d(data,formula = score~group,paired = TRUE) |&gt; \n  gt() |&gt; \n  opt_row_striping() |&gt; \n  fmt_auto() |&gt; \n  tab_options(\n    table.font.size = 22\n  )\n\n\n\n\n\n\n\n\n.y.\ngroup1\ngroup2\neffsize\nn1\nn2\nmagnitude\n\n\n\n\nscore\nTime One\nTime Two\n1.568\n30 \n30 \nlarge\n\n\n\n\n\n\n\n\n\n\nCode\ndata_new |&gt; \n  summarize(\n    avg = mean(D),\n    dsd = sd(D),\n    cohen_d = avg/dsd\n    ) |&gt; \n  gt() |&gt; \n  opt_row_striping() |&gt; \n  fmt_auto() |&gt; \n  tab_options(\n    table.font.size = 22\n  )\n\n\n\n\n\n\n\n\navg\ndsd\ncohen_d\n\n\n\n\n−3.267\n2.083\n−1.568",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Paired Samples T-Test"
+    ]
+  },
+  {
+    "objectID": "lec11.html#interpreting-results",
+    "href": "lec11.html#interpreting-results",
+    "title": "Paired Samples T-Test",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\n\nWe found a statistically significant decrease in stress (p &lt; .001).\n\nThe effect size (d = 1.56) indicates a large change.\n\nCombining significance and effect size gives us a fuller picture of the data.\n\n\nAlways ask: Is this difference not just statistically, but practically meaningful?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Paired Samples T-Test"
+    ]
+  },
+  {
+    "objectID": "lec11.html#connection-to-the-one-sample-t-test",
+    "href": "lec11.html#connection-to-the-one-sample-t-test",
+    "title": "Paired Samples T-Test",
+    "section": "Connection to the One-Sample t-Test",
+    "text": "Connection to the One-Sample t-Test\n\nRecall that the paired-samples t-test is essentially a one-sample t-test on the difference scores.\nWe’re testing whether the **mean difference \\(bar{d}\\) is significantly different from 0.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Paired Samples T-Test"
+    ]
+  },
+  {
+    "objectID": "lec11.html#example-datasets",
+    "href": "lec11.html#example-datasets",
+    "title": "Paired Samples T-Test",
+    "section": "Example Datasets",
+    "text": "Example Datasets\n\n\nCode\nlibrary(tidyverse)\n\nset.seed(101)\n# Paired Samples t-Test: Pre vs. Post Stress Scores\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre = rnorm(30, mean = 20, sd = 4),\n  Stress_Post = rnorm(30, mean = 16, sd = 4)\n)\n\nset.seed(102)\n\n# Example Dataset 2 — Paired Samples t-Test: Reaction Time Before/After Music\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60),\n  RT_Music = rnorm(25, mean = 500, sd = 55)\n)\n\nset.seed(103)\n\n# Example Dataset 3 — Independent Samples t-Test: Caffeine vs. Placebo Alertness\nex_3 &lt;- tibble(\n  Group = rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n  Alertness = c(\n    rnorm(20, mean = 75, sd = 8),\n    rnorm(20, mean = 68, sd = 8)\n  )\n)\n\nset.seed(104)\n\n# Example Dataset 4 — Independent Samples t-Test: Online vs. In-Person Exam Scores\nex_4 &lt;- tibble(\n  Format = rep(c(\"Online\", \"InPerson\"), each = 25),\n  Exam_Score = c(\n    rnorm(25, mean = 82, sd = 5),\n    rnorm(25, mean = 79, sd = 6)\n  )\n)",
     "crumbs": [
       "Course Overview",
       "Lectures",

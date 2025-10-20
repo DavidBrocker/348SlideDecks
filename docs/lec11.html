@@ -97,7 +97,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-f7f2f208198edaf8d355037122eea64a.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-08351ccdea19e4d08afdb98393ad9dd4.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -116,7 +116,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -230,6 +229,13 @@ Dave Brocker
 <li class="fragment">Useful in psychology for assessing changes due to an intervention, therapy, or experiment.</li>
 </ul>
 </section>
+<section id="connection-to-the-one-sample-t-test" class="slide level2">
+<h2>Connection to the One-Sample <em>t</em>-Test</h2>
+<ul>
+<li class="fragment"><p>Recall that the <strong>paired-samples t-test</strong> is essentially a <strong>one-sample t-test</strong> on the difference scores.</p></li>
+<li class="fragment"><p>We’re testing whether the **mean difference <span class="math inline">\(bar{d}\)</span> is significantly different from 0.</p></li>
+</ul>
+</section>
 <section id="formula-for-paired-samples-t-test" class="slide level2">
 <h2>Formula for Paired Samples t-Test</h2>
 <h3 id="mathematical-representation">Mathematical Representation</h3>
@@ -246,9 +252,18 @@ Dave Brocker
 <h2>Theoretical Formula Explanation</h2>
 <h3 id="understanding-each-component">Understanding Each Component</h3>
 <ul>
-<li class="fragment"><strong>Difference Mean</strong> <span class="math inline">\(\bar{d}\)</span>: Average of the differences between paired scores.</li>
-<li class="fragment"><strong>Standard Deviation of Differences</strong> <span class="math inline">\(s_d\)</span>: Indicates how much individual differences deviate from the mean difference.</li>
-<li class="fragment"><strong>Sample Size</strong> <span class="math inline">\(n\)</span>: Number of pairs, affecting the significance of results.</li>
+<li class="fragment"><p><strong>Difference Mean</strong> <span class="math inline">\(\bar{d}\)</span>:</p>
+<ul>
+<li class="fragment">Average of the differences between paired scores.</li>
+</ul></li>
+<li class="fragment"><p><strong>Standard Deviation of Differences</strong> <span class="math inline">\(s_d\)</span>:</p>
+<ul>
+<li class="fragment">Indicates how much individual differences deviate from the mean difference.</li>
+</ul></li>
+<li class="fragment"><p><strong>Sample Size</strong> <span class="math inline">\(n\)</span>:</p>
+<ul>
+<li class="fragment">Number of pairs, affecting the significance of results.</li>
+</ul></li>
 </ul>
 </section>
 <section id="application-of-paired-samples-t-test" class="slide level2">
@@ -269,14 +284,15 @@ Dave Brocker
 </ul></li>
 </ul>
 </section>
-<section id="paired-samples-t-test" class="slide level2 scrollable">
+<section id="paired-samples-t-test" class="slide level2">
 <h2>Paired Samples t-Test</h2>
 <h3 id="application-in-psychology-research">Application in Psychology Research</h3>
 <blockquote>
-<p>A psychologist measures stress levels of a group before and after a mindfulness program.</p>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
 </blockquote>
 <p><strong>Steps</strong>:</p>
 <ol type="1">
+<li class="fragment"><p>State the Null and Alternative Hypothesis</p></li>
 <li class="fragment"><p>Calculate the difference between pre- and post-intervention scores.</p></li>
 <li class="fragment"><p>Find the mean <span class="math inline">\(\bar{d}\)</span> and standard deviation <span class="math inline">\(s_d\)</span> of the differences.</p></li>
 <li class="fragment"><p>Apply the formula to calculate the t-value and check for significance.</p></li>
@@ -285,6 +301,29 @@ Dave Brocker
 <section id="paired-samples-t-test-1" class="slide level2">
 <h2>Paired Samples t-Test</h2>
 <h3 id="application-in-psychology-research-1">Application in Psychology Research</h3>
+<blockquote>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
+</blockquote>
+<ol type="1">
+<li class="fragment">State the Null and Alternative Hypothesis
+<ol type="1">
+<li class="fragment"><span class="math inline">\(H_0\)</span>: There will be no difference in stress before or after the mindfulness exercise
+<ol type="1">
+<li class="fragment"><span class="math inline">\(H_0: \mu_\text{post} = \mu_\text{pre}\)</span></li>
+</ol></li>
+<li class="fragment"><span class="math inline">\(H_A\)</span>: There will be a decrease in stress after the mindfulness exercise
+<ol type="1">
+<li class="fragment"><span class="math inline">\(H_A: \mu_\text{post} &lt; \mu_\text{pre}\)</span></li>
+</ol></li>
+</ol></li>
+</ol>
+</section>
+<section id="paired-samples-t-test-2" class="slide level2">
+<h2>Paired Samples t-Test</h2>
+<h3 id="application-in-psychology-research-2">Application in Psychology Research</h3>
+<blockquote>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
+</blockquote>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -309,9 +348,13 @@ Dave Brocker
 <span id="cb1-19"><a></a>  <span class="fu">gt_preview</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb1-20"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb1-21"><a></a>  <span class="fu">tab_options</span>(</span>
-<span id="cb1-22"><a></a>    <span class="at">table.font.size =</span> <span class="dv">32</span>,</span>
-<span id="cb1-23"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">70</span>)</span>
-<span id="cb1-24"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-22"><a></a>    <span class="at">table.font.size =</span> <span class="dv">15</span>,</span>
+<span id="cb1-23"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">40</span>)</span>
+<span id="cb1-24"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-25"><a></a>    <span class="fu">tab_style</span>(</span>
+<span id="cb1-26"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-27"><a></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb1-28"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="rkrfhdamgw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -337,11 +380,11 @@ Dave Brocker
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 32px;
+  font-size: 15px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
-  width: 70%;
+  width: 40%;
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
@@ -768,8 +811,8 @@ Dave Brocker
 <thead>
 <tr class="gt_col_headings header">
 <th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="group" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">group</th>
-<th id="score" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">score</th>
+<th id="group" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">group</th>
+<th id="score" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">score</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -815,9 +858,12 @@ Dave Brocker
 </div>
 </div>
 </section>
-<section id="paired-samples-t-test-2" class="slide level2">
+<section id="paired-samples-t-test-3" class="slide level2">
 <h2>Paired Samples t-Test</h2>
 <h3 id="compare-scores">Compare Scores</h3>
+<ol type="1">
+<li class="fragment">Calculate the difference between pre-mindfullness stress and post-mindfullness scores.</li>
+</ol>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -844,7 +890,11 @@ Dave Brocker
 <span id="cb2-21"><a></a>    <span class="fu">tab_options</span>(</span>
 <span id="cb2-22"><a></a>    <span class="at">table.font.size =</span> <span class="dv">32</span>,</span>
 <span id="cb2-23"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">70</span>)</span>
-<span id="cb2-24"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-24"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-25"><a></a>    <span class="fu">tab_style</span>(</span>
+<span id="cb2-26"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-27"><a></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb2-28"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="taqfqhckgr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1301,10 +1351,10 @@ Dave Brocker
 <thead>
 <tr class="gt_col_headings header">
 <th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="id" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">id</th>
-<th id="T1" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">T1</th>
-<th id="T2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">T2</th>
-<th id="Dfi" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Dfi</th>
+<th id="id" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">id</th>
+<th id="T1" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">T1</th>
+<th id="T2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">T2</th>
+<th id="Dfi" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Dfi</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1364,37 +1414,60 @@ Dave Brocker
 </div>
 </div>
 </section>
-<section id="paired-samples-t-test-3" class="slide level2">
-<h2>Paired Samples t-Test</h2>
-<h3 id="construct-the-formula-bard-sigma_bard">Construct the Formula (<span class="math inline">\(\bar{D}\)</span> | <span class="math inline">\(\sigma_{\bar{D}}\)</span>)</h3>
-<p><span class="math display">\[\large{t = \frac{D}{\frac{\sigma}{\sqrt{n}}} =  \frac{-3.26}{\frac{2.083}{\sqrt{30}}} = (-8.57)}\]</span></p>
-</section>
 <section id="paired-samples-t-test-4" class="slide level2">
 <h2>Paired Samples t-Test</h2>
-<h3 id="construct-the-formula-bard-sigma_bard-1">Construct the Formula (<span class="math inline">\(\bar{D}\)</span> | <span class="math inline">\(\sigma_{\bar{D}}\)</span>)</h3>
+<h3 id="construct-the-formula-manually">Construct the Formula (Manually)</h3>
+<ol type="1">
+<li class="fragment"><p>Find the mean <span class="math inline">\(\bar{d}\)</span> and standard deviation <span class="math inline">\(s_d\)</span> of the differences.</p></li>
+<li class="fragment"><p>Apply the formula to calculate the t-value and check for significance.</p></li>
+<li class="fragment"><p><span class="math inline">\(\large{t = \frac{d}{{s_d}/\sqrt{n}} =  \frac{-3.26}{2.083/\sqrt{30}} = (-8.57)}\)</span></p></li>
+</ol>
+</section>
+<section id="paired-samples-t-test-5" class="slide level2">
+<h2>Paired Samples t-Test</h2>
+<h3 id="construct-the-formula-computationally">Construct the Formula (Computationally)</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">t.test</span>(data<span class="sc">$</span>score<span class="sc">~</span>data<span class="sc">$</span>group) <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb3-3"><a></a>  <span class="fu">rename</span>(</span>
-<span id="cb3-4"><a></a>    <span class="at">D =</span> estimate,</span>
-<span id="cb3-5"><a></a>    <span class="at">t =</span> statistic, </span>
-<span id="cb3-6"><a></a>    <span class="at">p =</span> p.value,</span>
-<span id="cb3-7"><a></a>    <span class="at">df =</span> parameter) <span class="sc">|&gt;</span> </span>
-<span id="cb3-8"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-9"><a></a>    <span class="st">`</span><span class="at">CI[ll,uu]</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"["</span>,conf.low <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>),<span class="st">", "</span>,conf.high <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>),<span class="st">"]"</span>),</span>
-<span id="cb3-10"><a></a>    <span class="at">p =</span> p <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">10</span>)</span>
-<span id="cb3-11"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb3-12"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>conf.low<span class="sc">:-</span>alternative) <span class="sc">|&gt;</span> </span>
-<span id="cb3-13"><a></a>  <span class="fu">select</span>(D,t,df,p,<span class="st">`</span><span class="at">CI[ll,uu]</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb3-14"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb3-15"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb3-16"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span>   </span>
-<span id="cb3-17"><a></a>  <span class="fu">tab_options</span>(</span>
-<span id="cb3-18"><a></a>    <span class="at">table.font.size =</span> <span class="dv">32</span>,</span>
-<span id="cb3-19"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">70</span>)</span>
-<span id="cb3-20"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb3-2"><a></a>ddata <span class="ot">&lt;-</span> </span>
+<span id="cb3-3"><a></a>  data <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-5"><a></a>    <span class="at">id =</span> <span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"p_"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),<span class="dv">2</span>),</span>
+<span id="cb3-6"><a></a>    <span class="at">group =</span> <span class="fu">factor</span>(group),</span>
+<span id="cb3-7"><a></a>    <span class="at">group =</span> <span class="fu">ifelse</span>(group<span class="sc">==</span><span class="st">"Time One"</span>, <span class="st">"Time_One"</span>,<span class="st">"Time_Two"</span>)</span>
+<span id="cb3-8"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb3-9"><a></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb3-10"><a></a>    <span class="at">id_cols =</span> <span class="st">"id"</span>,</span>
+<span id="cb3-11"><a></a>    <span class="at">names_from =</span> <span class="st">"group"</span>,</span>
+<span id="cb3-12"><a></a>    <span class="at">values_from =</span> <span class="st">"score"</span></span>
+<span id="cb3-13"><a></a>    )</span>
+<span id="cb3-14"><a></a></span>
+<span id="cb3-15"><a></a></span>
+<span id="cb3-16"><a></a><span class="fu">with</span>(ddata, <span class="fu">t.test</span>(Time_One,Time_Two,<span class="at">paired =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-17"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-18"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb3-19"><a></a>    <span class="at">d =</span> estimate,</span>
+<span id="cb3-20"><a></a>    <span class="at">t =</span> statistic, </span>
+<span id="cb3-21"><a></a>    <span class="at">p =</span> p.value,</span>
+<span id="cb3-22"><a></a>    <span class="at">df =</span> parameter) <span class="sc">|&gt;</span> </span>
+<span id="cb3-23"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-24"><a></a>    <span class="st">`</span><span class="at">CI[ll,uu]</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"["</span>,conf.low <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>),<span class="st">", "</span>,conf.high <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>),<span class="st">"]"</span>),</span>
+<span id="cb3-25"><a></a>    <span class="at">p =</span> <span class="fu">ifelse</span>(p <span class="sc">&lt;</span>.<span class="dv">01</span>, <span class="st">"&lt;.001"</span>,p) </span>
+<span id="cb3-26"><a></a>      ) <span class="sc">|&gt;</span> </span>
+<span id="cb3-27"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>conf.low<span class="sc">:-</span>alternative) <span class="sc">|&gt;</span> </span>
+<span id="cb3-28"><a></a>  <span class="fu">select</span>(d,t,df,p,<span class="st">`</span><span class="at">CI[ll,uu]</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-29"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-30"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-31"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span>   </span>
+<span id="cb3-32"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb3-33"><a></a>    <span class="at">table.font.size =</span> <span class="dv">32</span>,</span>
+<span id="cb3-34"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">70</span>)</span>
+<span id="cb3-35"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb3-36"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-37"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb3-38"><a></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb3-39"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="gurjetzkaf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1850,20 +1923,20 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
-<th id="D" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">D</th>
-<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">t</th>
-<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">df</th>
-<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
-<th id="CI[ll,uu]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">CI[ll,uu]</th>
+<th id="d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">d</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">t</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+<th id="CI[ll,uu]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">CI[ll,uu]</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="D">3.267</td>
-<td class="gt_row gt_right" headers="t">7.581</td>
-<td class="gt_row gt_right" headers="df">41.652</td>
-<td class="gt_row gt_right" headers="p">2.300&nbsp;×&nbsp;10<sup>−9</sup></td>
-<td class="gt_row gt_left" headers="CI[ll,uu]">[2.4, 4.14]</td>
+<td class="gt_row gt_right" headers="d">3.267</td>
+<td class="gt_row gt_right" headers="t">8.588</td>
+<td class="gt_row gt_right" headers="df">29&nbsp;</td>
+<td class="gt_row gt_left" headers="p">&lt;.001</td>
+<td class="gt_row gt_left" headers="CI[ll,uu]">[2.49, 4.04]</td>
 </tr>
 </tbody>
 </table>
@@ -1876,104 +1949,1681 @@ Dave Brocker
 <li class="fragment">t = t-test statistic</li>
 <li class="fragment">df = n-1 (30-1)</li>
 <li class="fragment">p = probability results came from the Null Distribution</li>
-<li class="fragment">CI[ll,uu] = 95% CI of Mean Difference (D)</li>
+<li class="fragment">CI[ll,uu] = 95% CI of Mean Difference (d)</li>
 </ul>
+</section>
+<section id="effect-size-cohens-d" class="slide level2">
+<h2>Effect Size: Cohen’s <em>d</em></h2>
+<h3 id="why-report-effect-size">Why Report Effect Size?</h3>
+<ul>
+<li class="fragment"><p>Statistical significance (<em>p</em>) tells us <strong>if</strong> there is a difference.</p></li>
+<li class="fragment"><p>Effect size tells us <strong>how big</strong> that difference is.</p></li>
+<li class="fragment"><p><span class="math inline">\(d = \frac{\bar{d}}{s_d}\)</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(\bar{d}\)</span> = mean difference between paired scores<br>
+</li>
+<li class="fragment"><span class="math inline">\(s_d\)</span> = standard deviation of the differences</li>
+</ul></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">tibble</span>(</span>
+<span id="cb4-2"><a></a>    <span class="st">`</span><span class="at">Cohen's d</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.20</span>, <span class="fl">0.50</span>, <span class="fl">0.80</span>),</span>
+<span id="cb4-3"><a></a>    <span class="at">Interpretation =</span> <span class="fu">c</span>(<span class="st">"Small effect"</span>, <span class="st">"Medium effect"</span>, <span class="st">"Large effect"</span>)</span>
+<span id="cb4-4"><a></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a></a>    <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-7"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb4-8"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">50</span>),</span>
+<span id="cb4-9"><a></a>    <span class="at">table.font.size =</span> <span class="dv">22</span></span>
+<span id="cb4-10"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="cphchdeafh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cphchdeafh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cphchdeafh thead, #cphchdeafh tbody, #cphchdeafh tfoot, #cphchdeafh tr, #cphchdeafh td, #cphchdeafh th {
+  border-style: none;
+}
+
+#cphchdeafh p {
+  margin: 0;
+  padding: 0;
+}
+
+#cphchdeafh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 50%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cphchdeafh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cphchdeafh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cphchdeafh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cphchdeafh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cphchdeafh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cphchdeafh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cphchdeafh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cphchdeafh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cphchdeafh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cphchdeafh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cphchdeafh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cphchdeafh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cphchdeafh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cphchdeafh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cphchdeafh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cphchdeafh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cphchdeafh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cphchdeafh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cphchdeafh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cphchdeafh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cphchdeafh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cphchdeafh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cphchdeafh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cphchdeafh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cphchdeafh .gt_left {
+  text-align: left;
+}
+
+#cphchdeafh .gt_center {
+  text-align: center;
+}
+
+#cphchdeafh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cphchdeafh .gt_font_normal {
+  font-weight: normal;
+}
+
+#cphchdeafh .gt_font_bold {
+  font-weight: bold;
+}
+
+#cphchdeafh .gt_font_italic {
+  font-style: italic;
+}
+
+#cphchdeafh .gt_super {
+  font-size: 65%;
+}
+
+#cphchdeafh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cphchdeafh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cphchdeafh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cphchdeafh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cphchdeafh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cphchdeafh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cphchdeafh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cphchdeafh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cphchdeafh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Cohen's-d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Cohen's d</th>
+<th id="Interpretation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Interpretation</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Cohen's d">0.2</td>
+<td class="gt_row gt_left" headers="Interpretation">Small effect</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right gt_striped" headers="Cohen's d">0.5</td>
+<td class="gt_row gt_left gt_striped" headers="Interpretation">Medium effect</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Cohen's d">0.8</td>
+<td class="gt_row gt_left" headers="Interpretation">Large effect</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="cohens-d" class="slide level2">
+<h2>Cohen’s d</h2>
+<h3 id="mindfulness-example">Mindfulness Example</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>rstatix<span class="sc">::</span><span class="fu">cohens_d</span>(data,<span class="at">formula =</span> score<span class="sc">~</span>group,<span class="at">paired =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb5-6"><a></a>    <span class="at">table.font.size =</span> <span class="dv">22</span></span>
+<span id="cb5-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="wypevuuaeh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wypevuuaeh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wypevuuaeh thead, #wypevuuaeh tbody, #wypevuuaeh tfoot, #wypevuuaeh tr, #wypevuuaeh td, #wypevuuaeh th {
+  border-style: none;
+}
+
+#wypevuuaeh p {
+  margin: 0;
+  padding: 0;
+}
+
+#wypevuuaeh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wypevuuaeh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wypevuuaeh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wypevuuaeh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wypevuuaeh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wypevuuaeh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wypevuuaeh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wypevuuaeh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wypevuuaeh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wypevuuaeh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wypevuuaeh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wypevuuaeh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wypevuuaeh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wypevuuaeh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wypevuuaeh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wypevuuaeh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wypevuuaeh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wypevuuaeh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wypevuuaeh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wypevuuaeh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wypevuuaeh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wypevuuaeh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wypevuuaeh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wypevuuaeh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wypevuuaeh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wypevuuaeh .gt_left {
+  text-align: left;
+}
+
+#wypevuuaeh .gt_center {
+  text-align: center;
+}
+
+#wypevuuaeh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wypevuuaeh .gt_font_normal {
+  font-weight: normal;
+}
+
+#wypevuuaeh .gt_font_bold {
+  font-weight: bold;
+}
+
+#wypevuuaeh .gt_font_italic {
+  font-style: italic;
+}
+
+#wypevuuaeh .gt_super {
+  font-size: 65%;
+}
+
+#wypevuuaeh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wypevuuaeh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wypevuuaeh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wypevuuaeh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wypevuuaeh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wypevuuaeh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wypevuuaeh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wypevuuaeh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wypevuuaeh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a.y." class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">.y.</th>
+<th id="group1" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">group1</th>
+<th id="group2" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">group2</th>
+<th id="effsize" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">effsize</th>
+<th id="n1" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n1</th>
+<th id="n2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n2</th>
+<th id="magnitude" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">magnitude</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers=".y.">score</td>
+<td class="gt_row gt_left" headers="group1">Time One</td>
+<td class="gt_row gt_left" headers="group2">Time Two</td>
+<td class="gt_row gt_right" headers="effsize">1.568</td>
+<td class="gt_row gt_right" headers="n1">30&nbsp;</td>
+<td class="gt_row gt_right" headers="n2">30&nbsp;</td>
+<td class="gt_row gt_center" headers="magnitude">large</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data_new <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb6-3"><a></a>    <span class="at">avg =</span> <span class="fu">mean</span>(D),</span>
+<span id="cb6-4"><a></a>    <span class="at">dsd =</span> <span class="fu">sd</span>(D),</span>
+<span id="cb6-5"><a></a>    <span class="at">cohen_d =</span> avg<span class="sc">/</span>dsd</span>
+<span id="cb6-6"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-7"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-9"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-10"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb6-11"><a></a>    <span class="at">table.font.size =</span> <span class="dv">22</span></span>
+<span id="cb6-12"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="pubpjvbdxu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pubpjvbdxu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pubpjvbdxu thead, #pubpjvbdxu tbody, #pubpjvbdxu tfoot, #pubpjvbdxu tr, #pubpjvbdxu td, #pubpjvbdxu th {
+  border-style: none;
+}
+
+#pubpjvbdxu p {
+  margin: 0;
+  padding: 0;
+}
+
+#pubpjvbdxu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pubpjvbdxu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pubpjvbdxu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pubpjvbdxu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pubpjvbdxu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pubpjvbdxu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pubpjvbdxu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pubpjvbdxu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pubpjvbdxu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pubpjvbdxu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pubpjvbdxu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pubpjvbdxu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pubpjvbdxu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pubpjvbdxu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pubpjvbdxu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pubpjvbdxu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pubpjvbdxu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pubpjvbdxu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pubpjvbdxu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pubpjvbdxu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pubpjvbdxu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pubpjvbdxu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pubpjvbdxu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pubpjvbdxu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pubpjvbdxu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pubpjvbdxu .gt_left {
+  text-align: left;
+}
+
+#pubpjvbdxu .gt_center {
+  text-align: center;
+}
+
+#pubpjvbdxu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pubpjvbdxu .gt_font_normal {
+  font-weight: normal;
+}
+
+#pubpjvbdxu .gt_font_bold {
+  font-weight: bold;
+}
+
+#pubpjvbdxu .gt_font_italic {
+  font-style: italic;
+}
+
+#pubpjvbdxu .gt_super {
+  font-size: 65%;
+}
+
+#pubpjvbdxu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pubpjvbdxu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pubpjvbdxu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pubpjvbdxu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pubpjvbdxu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pubpjvbdxu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pubpjvbdxu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pubpjvbdxu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pubpjvbdxu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="avg" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">avg</th>
+<th id="dsd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">dsd</th>
+<th id="cohen_d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">cohen_d</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="avg">−3.267</td>
+<td class="gt_row gt_right" headers="dsd">2.083</td>
+<td class="gt_row gt_right" headers="cohen_d">−1.568</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="paired-t-tests" class="slide level2">
 <h2>Paired T-Tests</h2>
-<h3 id="visualizing-results-option-1">Visualizing Results: Option 1</h3>
+<h3 id="visualizing-results">Visualizing Results</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a></a><span class="fu">library</span>(viridis)</span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, score, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
-<span id="cb4-6"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb4-7"><a></a>    <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
-<span id="cb4-8"><a></a>    <span class="at">geom =</span> <span class="st">"bar"</span></span>
-<span id="cb4-9"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb4-10"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb4-11"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb4-12"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb4-13"><a></a>    <span class="at">width=</span>.<span class="dv">2</span></span>
-<span id="cb4-14"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb4-15"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb4-16"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-17"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Treatment Group"</span>,</span>
-<span id="cb4-18"><a></a>    <span class="at">y =</span> <span class="st">"Stress Score</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb4-19"><a></a>    <span class="at">fill =</span> <span class="st">"Time"</span>,</span>
-<span id="cb4-20"><a></a>    <span class="at">title =</span> <span class="st">"Mindfulness Intervention decreases stress levels</span><span class="sc">\n</span><span class="st">"</span></span>
-<span id="cb4-21"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb4-22"><a></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-23"><a></a>    <span class="at">plot.title.position =</span>  <span class="st">"plot"</span>,</span>
-<span id="cb4-24"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb4-25"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb4-26"><a></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>, <span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a></a><span class="fu">library</span>(viridis)</span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, score, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb7-6"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb7-7"><a></a>    <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb7-8"><a></a>    <span class="at">geom =</span> <span class="st">"bar"</span>,</span>
+<span id="cb7-9"><a></a>    <span class="at">width =</span> .<span class="dv">4</span></span>
+<span id="cb7-10"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb7-11"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb7-12"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb7-13"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb7-14"><a></a>    <span class="at">width=</span>.<span class="dv">2</span></span>
+<span id="cb7-15"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb7-16"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-17"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-18"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Testing Time"</span>,</span>
+<span id="cb7-19"><a></a>    <span class="at">y =</span> <span class="st">"Stress Score</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb7-20"><a></a>    <span class="at">fill =</span> <span class="st">"Time"</span>,</span>
+<span id="cb7-21"><a></a>    <span class="at">title =</span> <span class="st">"Mindfulness Intervention and Stress Levels"</span>,</span>
+<span id="cb7-22"><a></a>    <span class="at">subtitle =</span> <span class="st">"Stress scores decrease after exposure to mindfulness treatment.</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb7-23"><a></a>    <span class="at">caption =</span> <span class="st">"t(29) = 8.58, p &lt;.001, 95% CI [2.49, 4.04]"</span></span>
+<span id="cb7-24"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb7-25"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-26"><a></a>    <span class="at">plot.title.position =</span>  <span class="st">"plot"</span>,</span>
+<span id="cb7-27"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb7-28"><a></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb7-29"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb7-30"><a></a>  <span class="fu">scale_fill_viridis</span>(</span>
+<span id="cb7-31"><a></a>    <span class="at">discrete =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-32"><a></a>    <span class="at">option =</span> <span class="st">"H"</span>,</span>
+<span id="cb7-33"><a></a>    <span class="at">alpha =</span> .<span class="dv">8</span></span>
+<span id="cb7-34"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec11_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a></a><span class="fu">library</span>(viridis)</span>
+<span id="cb8-3"><a></a></span>
+<span id="cb8-4"><a></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, score, <span class="at">color =</span> group)) <span class="sc">+</span> </span>
+<span id="cb8-6"><a></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">alpha =</span> .<span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb8-7"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb8-8"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb8-9"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb8-10"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb8-11"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb8-12"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb8-13"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb8-14"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb8-15"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb8-16"><a></a>    <span class="at">width =</span> .<span class="dv">1</span></span>
+<span id="cb8-17"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb8-18"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-19"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-20"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Testing Time"</span>,</span>
+<span id="cb8-21"><a></a>    <span class="at">y =</span> <span class="st">"Stress Score</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb8-22"><a></a>    <span class="at">color =</span> <span class="st">"Time"</span>,</span>
+<span id="cb8-23"><a></a>    <span class="at">title =</span> <span class="st">"Mindfulness Intervention and Stress Levels"</span>,</span>
+<span id="cb8-24"><a></a>    <span class="at">subtitle =</span> <span class="st">"Stress scores decrease after exposure to mindfulness treatment.</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb8-25"><a></a>    <span class="at">caption =</span> <span class="st">"t(29) = 8.58, p &lt;.001, 95% CI [2.49, 4.04]"</span></span>
+<span id="cb8-26"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb8-27"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-28"><a></a>    <span class="at">plot.title.position =</span>  <span class="st">"plot"</span>,</span>
+<span id="cb8-29"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb8-30"><a></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb8-31"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb8-32"><a></a>    <span class="fu">scale_color_viridis</span>(</span>
+<span id="cb8-33"><a></a>    <span class="at">discrete =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-34"><a></a>    <span class="at">option =</span> <span class="st">"H"</span>,</span>
+<span id="cb8-35"><a></a>    <span class="at">alpha =</span> .<span class="dv">8</span></span>
+<span id="cb8-36"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="paired-t-tests-1" class="slide level2">
-<h2>Paired T-Tests</h2>
-<h3 id="visualizing-results-option-2">Visualizing Results: Option 2</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a></a><span class="fu">library</span>(viridis)</span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, score, <span class="at">color =</span> group)) <span class="sc">+</span> </span>
-<span id="cb5-6"><a></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">alpha =</span> .<span class="dv">2</span>)) <span class="sc">+</span> </span>
-<span id="cb5-7"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb5-8"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb5-9"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb5-10"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
-<span id="cb5-11"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
-<span id="cb5-12"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb5-13"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb5-14"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb5-15"><a></a>    <span class="at">geom =</span> <span class="st">"pointrange"</span></span>
-<span id="cb5-16"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb5-17"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb5-18"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-19"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Treatment Group"</span>,</span>
-<span id="cb5-20"><a></a>    <span class="at">y =</span> <span class="st">"Stress Score</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-21"><a></a>    <span class="at">fill =</span> <span class="st">"Time"</span>,</span>
-<span id="cb5-22"><a></a>    <span class="at">title =</span> <span class="st">"Mindfulness Intervention decreases stress levels</span><span class="sc">\n</span><span class="st">"</span></span>
-<span id="cb5-23"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb5-24"><a></a>  <span class="fu">theme</span>(</span>
-<span id="cb5-25"><a></a>    <span class="at">plot.title.position =</span>  <span class="st">"plot"</span>,</span>
-<span id="cb5-26"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb5-27"><a></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
-<span id="cb5-28"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb5-29"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>,<span class="st">"darkred"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec11_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="interpreting-results" class="slide level2">
+<h2>Interpreting Results</h2>
+<ul>
+<li class="fragment">We found a <strong>statistically significant</strong> decrease in stress (<em>p</em> &lt; .001).<br>
+</li>
+<li class="fragment">The <strong>effect size (d = 1.56)</strong> indicates a <em>large</em> change.<br>
+</li>
+<li class="fragment">Combining significance and effect size gives us a fuller picture of the data.</li>
+</ul>
+<blockquote>
+<p>Always ask: Is this difference not just <em>statistically</em>, but <em>practically</em> meaningful?</p>
+</blockquote>
 </section>
 <section id="summary-of-paired-samples-t-test" class="slide level2">
 <h2>Summary of Paired Samples t-Test</h2>
 <h3 id="key-takeaways">Key Takeaways</h3>
 <ul>
-<li class="fragment">Paired samples t-tests are ideal for comparing <strong>two related</strong> groups.</li>
-<li class="fragment">They help determine if interventions or conditions produce <strong>significant changes</strong>.</li>
-<li class="fragment">Remember to check <strong>assumptions</strong>: normality of differences and appropriate pairing.</li>
+<li class="fragment"><p>Paired samples t-tests are ideal for comparing <strong>two related</strong> groups.</p></li>
+<li class="fragment"><p>They help determine if interventions or conditions produce <strong>significant changes</strong>.</p></li>
+<li class="fragment"><p>Remember to check <strong>assumptions</strong>: normality of differences and appropriate pairing.</p>
+<ol type="1">
+<li class="fragment"><strong>Differences are normally distributed.</strong>
+<ul>
+<li class="fragment">Check using histogram, QQ plot, or Shapiro-Wilk test.</li>
+</ul></li>
+<li class="fragment"><strong>Pairs are dependent (related measures).</strong>
+<ul>
+<li class="fragment">Same participants or matched pairs.</li>
+</ul></li>
+<li class="fragment"><strong>No major outliers in the differences.</strong></li>
+</ol></li>
 </ul>
+</section>
+<section id="example-datasets" class="slide level2">
+<h2>Example Datasets</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb9-4"><a></a><span class="co"># Paired Samples t-Test: Pre vs. Post Stress Scores</span></span>
+<span id="cb9-5"><a></a>ex_1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-6"><a></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
+<span id="cb9-7"><a></a>  <span class="at">Stress_Pre =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">4</span>),</span>
+<span id="cb9-8"><a></a>  <span class="at">Stress_Post =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">16</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb9-9"><a></a>)</span>
+<span id="cb9-10"><a></a></span>
+<span id="cb9-11"><a></a><span class="fu">set.seed</span>(<span class="dv">102</span>)</span>
+<span id="cb9-12"><a></a></span>
+<span id="cb9-13"><a></a><span class="co"># Example Dataset 2 — Paired Samples t-Test: Reaction Time Before/After Music</span></span>
+<span id="cb9-14"><a></a>ex_2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-15"><a></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,</span>
+<span id="cb9-16"><a></a>  <span class="at">RT_NoMusic =</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">520</span>, <span class="at">sd =</span> <span class="dv">60</span>),</span>
+<span id="cb9-17"><a></a>  <span class="at">RT_Music =</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="dv">55</span>)</span>
+<span id="cb9-18"><a></a>)</span>
+<span id="cb9-19"><a></a></span>
+<span id="cb9-20"><a></a><span class="fu">set.seed</span>(<span class="dv">103</span>)</span>
+<span id="cb9-21"><a></a></span>
+<span id="cb9-22"><a></a><span class="co"># Example Dataset 3 — Independent Samples t-Test: Caffeine vs. Placebo Alertness</span></span>
+<span id="cb9-23"><a></a>ex_3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-24"><a></a>  <span class="at">Group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Caffeine"</span>, <span class="st">"Placebo"</span>), <span class="at">each =</span> <span class="dv">20</span>),</span>
+<span id="cb9-25"><a></a>  <span class="at">Alertness =</span> <span class="fu">c</span>(</span>
+<span id="cb9-26"><a></a>    <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">75</span>, <span class="at">sd =</span> <span class="dv">8</span>),</span>
+<span id="cb9-27"><a></a>    <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">68</span>, <span class="at">sd =</span> <span class="dv">8</span>)</span>
+<span id="cb9-28"><a></a>  )</span>
+<span id="cb9-29"><a></a>)</span>
+<span id="cb9-30"><a></a></span>
+<span id="cb9-31"><a></a><span class="fu">set.seed</span>(<span class="dv">104</span>)</span>
+<span id="cb9-32"><a></a></span>
+<span id="cb9-33"><a></a><span class="co"># Example Dataset 4 — Independent Samples t-Test: Online vs. In-Person Exam Scores</span></span>
+<span id="cb9-34"><a></a>ex_4 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-35"><a></a>  <span class="at">Format =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Online"</span>, <span class="st">"InPerson"</span>), <span class="at">each =</span> <span class="dv">25</span>),</span>
+<span id="cb9-36"><a></a>  <span class="at">Exam_Score =</span> <span class="fu">c</span>(</span>
+<span id="cb9-37"><a></a>    <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">82</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
+<span id="cb9-38"><a></a>    <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">79</span>, <span class="at">sd =</span> <span class="dv">6</span>)</span>
+<span id="cb9-39"><a></a>  )</span>
+<span id="cb9-40"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 </section>
@@ -2014,6 +3664,7 @@ Dave Brocker
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'view': "scroll",
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
 'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},

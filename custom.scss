@@ -9,9 +9,9 @@ $font-family-monospace: "FiraCode-Regular", monospace;
 // colors 
 $body-color: #222;
 $text-muted: lighten($body-color, 50%);
-$body-bg: #0F1620 !default;
+$body-bg: #550000 !default;
 $jet: #131516;
-$accent: rgb(117, 170, 219);
+$accent: #D03D56;
 $accent2: #e07a5f;
 $accent3: #2CA02C;
 $accent3: #808D8E;
@@ -27,19 +27,19 @@ $presentation-title-slide-text-align: left;
 }
 
 #title-slide .title {
-  color: #d2e3f3;
+  color: $accent;
   font-size: 3em;
   margin-bottom: 20px;
 }
 
 #title-slide .subtitle {
-  color: #d2e3f3;
+  color: $accent;
   font-size: 1.5em;
   margin-bottom: 20px;
 }
 
 #title-slide .quarto-title-authors {
-  color: #d2e3f3;
+  color: $accent;
   font-size: 1.1em;
   line-height: 1.5;
   text-align: center;
@@ -118,7 +118,7 @@ $presentation-title-slide-text-align: left;
 .reveal blockquote {
   background: rgba(255, 255, 255, 0.1); // translucent white
   color: #e0f7fa; // soft cyan text
-  border-left: 4px solid #00bcd4; // accent line
+  border-left: 4px solid $accent; // accent line
   padding: 1em;
   border-radius: 8px;
 }

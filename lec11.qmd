@@ -9,9 +9,9 @@ execute:
 format: 
   revealjs:
     theme: custom.scss
+    scroll-view: true
     width: 1600
     height: 900
-    scrollable: true
     incremental: true   
     touch: true
     chalkboard: true
@@ -42,6 +42,12 @@ revealjs-plugins:
 -   To determine if there is a statistically significant difference between two related group means.
 -   Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
 
+## Connection to the One-Sample *t*-Test
+
+- Recall that the **paired-samples t-test** is essentially a **one-sample t-test** on the difference scores.  
+
+- We're testing whether the **mean difference $bar{d}$ is significantly different from 0.
+
 ## Formula for Paired Samples t-Test
 
 ### Mathematical Representation
@@ -55,9 +61,17 @@ revealjs-plugins:
 
 ### Understanding Each Component
 
--   **Difference Mean** $\bar{d}$: Average of the differences between paired scores.
--   **Standard Deviation of Differences** $s_d$: Indicates how much individual differences deviate from the mean difference.
--   **Sample Size** $n$: Number of pairs, affecting the significance of results.
+-   **Difference Mean** $\bar{d}$:
+
+    -   Average of the differences between paired scores.
+
+-   **Standard Deviation of Differences** $s_d$:
+
+    -   Indicates how much individual differences deviate from the mean difference.
+
+-   **Sample Size** $n$:
+
+    -   Number of pairs, affecting the significance of results.
 
 ## Application of Paired Samples t-Test
 
@@ -65,31 +79,49 @@ revealjs-plugins:
 
 -   **Pretest-Posttest Design**
 
-    - Measure changes in the same group over time.
+    -   Measure changes in the same group over time.
+
 -   **Matched Pairs**
 
-    - Compare two related groups, such as twins or matched participants.
+    -   Compare two related groups, such as twins or matched participants.
+
 -   **Repeated Measures**
 
-    - Test the same group under different conditions or at different times.
+    -   Test the same group under different conditions or at different times.
 
 ## Paired Samples t-Test
 
 ### Application in Psychology Research
 
-> A psychologist measures stress levels of a group before and after a mindfulness program.
+> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
 
 **Steps**:
 
-1.   Calculate the difference between pre- and post-intervention scores.
+1.  State the Null and Alternative Hypothesis
 
-2.   Find the mean $\bar{d}$ and standard deviation $s_d$ of the differences.
+2.  Calculate the difference between pre- and post-intervention scores.
 
-3.   Apply the formula to calculate the t-value and check for significance.
+3.  Find the mean $\bar{d}$ and standard deviation $s_d$ of the differences.
+
+4.  Apply the formula to calculate the t-value and check for significance.
 
 ## Paired Samples t-Test
 
 ### Application in Psychology Research
+
+> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
+
+1.  State the Null and Alternative Hypothesis
+    1.  $H_0$: There will be no difference in stress before or after the mindfulness exercise
+        1.  $H_0: \mu_\text{post} = \mu_\text{pre}$
+    2.  $H_A$: There will be a decrease in stress after the mindfulness exercise
+        1.  $H_A: \mu_\text{post} < \mu_\text{pre}$
+
+## Paired Samples t-Test
+
+### Application in Psychology Research
+
+> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
 
 ```{r}
 
@@ -114,14 +146,20 @@ data |>
   gt_preview() |> 
   opt_row_striping() |> 
   tab_options(
-    table.font.size = 32,
-    table.width = pct(70)
-    )
+    table.font.size = 15,
+    table.width = pct(40)
+    ) |> 
+    tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
 ```
 
 ## Paired Samples t-Test
 
 ### Compare Scores
+
+1.  Calculate the difference between pre-mindfullness stress and post-mindfullness scores.
 
 ```{r}
 data_new <- 
@@ -147,53 +185,142 @@ data_new |>
     tab_options(
     table.font.size = 32,
     table.width = pct(70)
-    )
+    ) |> 
+    tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
 ```
 
 ## Paired Samples t-Test
 
-### Construct the Formula ($\bar{D}$ \| $\sigma_{\bar{D}}$)
+### Construct the Formula (Manually)
 
-$$\large{t = \frac{D}{\frac{\sigma}{\sqrt{n}}} =  \frac{-3.26}{\frac{2.083}{\sqrt{30}}} = (-8.57)}$$
+1.  Find the mean $\bar{d}$ and standard deviation $s_d$ of the differences.
+
+2.  Apply the formula to calculate the t-value and check for significance.
+
+3.  $\large{t = \frac{d}{{s_d}/\sqrt{n}} =  \frac{-3.26}{2.083/\sqrt{30}} = (-8.57)}$
 
 ## Paired Samples t-Test
 
-### Construct the Formula ($\bar{D}$ \| $\sigma_{\bar{D}}$)
+### Construct the Formula (Computationally)
 
 ```{r}
+library(tidyr)
+ddata <- 
+  data |> 
+  mutate(
+    id = rep(paste0("p_",1:30),2),
+    group = factor(group),
+    group = ifelse(group=="Time One", "Time_One","Time_Two")
+    ) |> 
+  pivot_wider(
+    id_cols = "id",
+    names_from = "group",
+    values_from = "score"
+    )
 
-t.test(data$group,data$score,paired = TRUE) |> 
+
+with(ddata, t.test(Time_One,Time_Two,paired = TRUE)) |> 
   tidy() |> 
   rename(
-    D = estimate,
+    d = estimate,
     t = statistic, 
     p = p.value,
     df = parameter) |> 
   mutate(
     `CI[ll,uu]` = paste0("[",conf.low |> round(2),", ",conf.high |> round(2),"]"),
-    p = p |> round(10)
-  ) |> 
+    p = ifelse(p <.01, "<.001",p) 
+      ) |> 
   select(-conf.low:-alternative) |> 
-  select(D,t,df,p,`CI[ll,uu]`) |> 
+  select(d,t,df,p,`CI[ll,uu]`) |> 
   gt() |> 
   fmt_auto() |> 
   opt_row_striping() |>   
   tab_options(
     table.font.size = 32,
     table.width = pct(70)
-    )
+    ) |> 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
 ```
+
 -   D = mean difference of T2-T1
 -   t = t-test statistic
 -   df = n-1 (30-1)
 -   p = probability results came from the Null Distribution
--   CI\[ll,uu\] = 95% CI of Mean Difference (D)
+-   CI\[ll,uu\] = 95% CI of Mean Difference (d)
 
+## Effect Size: Cohen's *d*
+
+### Why Report Effect Size?
+
+-   Statistical significance (*p*) tells us **if** there is a difference.
+
+-   Effect size tells us **how big** that difference is.
+
+-   $d = \frac{\bar{d}}{s_d}$
+
+    -   $\bar{d}$ = mean difference between paired scores\
+    -   $s_d$ = standard deviation of the differences
+
+```{r}
+tibble(
+    `Cohen's d` = c(0.20, 0.50, 0.80),
+    Interpretation = c("Small effect", "Medium effect", "Large effect")
+) %>%
+    gt() |> 
+  opt_row_striping() |> 
+  tab_options(
+    table.width = pct(50),
+    table.font.size = 22
+  )
+```
+
+## Cohen's d
+
+### Mindfulness Example
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+rstatix::cohens_d(data,formula = score~group,paired = TRUE) |> 
+  gt() |> 
+  opt_row_striping() |> 
+  fmt_auto() |> 
+  tab_options(
+    table.font.size = 22
+  )
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+data_new |> 
+  summarize(
+    avg = mean(D),
+    dsd = sd(D),
+    cohen_d = avg/dsd
+    ) |> 
+  gt() |> 
+  opt_row_striping() |> 
+  fmt_auto() |> 
+  tab_options(
+    table.font.size = 22
+  )
+```
+:::
+:::::
 
 ## Paired T-Tests
 
-### Visualizing Results: Option 1
+### Visualizing Results
 
+::::: columns
+::: {.column width="50%"}
 ```{r}
 library(ggplot2)
 library(viridis)
@@ -202,7 +329,8 @@ data |>
   ggplot(aes(group, score, fill = group)) + 
   stat_summary(
     fun = "mean",
-    geom = "bar"
+    geom = "bar",
+    width = .4
   ) + 
   stat_summary(
     fun.data = "mean_se",
@@ -211,22 +339,27 @@ data |>
   ) +
   theme_minimal() +
   labs(
-    x = "\nTreatment Group",
+    x = "\nTesting Time",
     y = "Stress Score\n",
     fill = "Time",
-    title = "Mindfulness Intervention decreases stress levels\n"
+    title = "Mindfulness Intervention and Stress Levels",
+    subtitle = "Stress scores decrease after exposure to mindfulness treatment.\n",
+    caption = "t(29) = 8.58, p <.001, 95% CI [2.49, 4.04]"
   ) + 
   theme(
     plot.title.position =  "plot",
-    plot.title = element_text(face = "bold")
+    plot.title = element_text(face = "bold"),
+    panel.grid.major = element_blank()
   ) +
-  scale_fill_viridis(discrete = TRUE, option = "E")
+  scale_fill_viridis(
+    discrete = TRUE, 
+    option = "H",
+    alpha = .8
+    )
 ```
+:::
 
-## Paired T-Tests
-
-### Visualizing Results: Option 2
-
+::: {.column width="50%"}
 ```{r}
 library(ggplot2)
 library(viridis)
@@ -242,22 +375,39 @@ data |>
   ) + 
   stat_summary(
     fun.data = "mean_se",
-    geom = "pointrange"
+    geom = "errorbar",
+    width = .1
   ) +
   theme_minimal() +
   labs(
-    x = "\nTreatment Group",
+    x = "\nTesting Time",
     y = "Stress Score\n",
-    fill = "Time",
-    title = "Mindfulness Intervention decreases stress levels\n"
+    color = "Time",
+    title = "Mindfulness Intervention and Stress Levels",
+    subtitle = "Stress scores decrease after exposure to mindfulness treatment.\n",
+    caption = "t(29) = 8.58, p <.001, 95% CI [2.49, 4.04]"
   ) + 
   theme(
     plot.title.position =  "plot",
     plot.title = element_text(face = "bold"),
     legend.position = "none"
   ) +
-  scale_color_manual(values = c("darkgreen","darkred"))
+    scale_color_viridis(
+    discrete = TRUE, 
+    option = "H",
+    alpha = .8
+    )
 ```
+:::
+:::::
+
+## Interpreting Results
+
+-   We found a **statistically significant** decrease in stress (*p* \< .001).\
+-   The **effect size (d = 1.56)** indicates a *large* change.\
+-   Combining significance and effect size gives us a fuller picture of the data.
+
+> Always ask: Is this difference not just *statistically*, but *practically* meaningful?
 
 ## Summary of Paired Samples t-Test
 
@@ -266,3 +416,55 @@ data |>
 -   Paired samples t-tests are ideal for comparing **two related** groups.
 -   They help determine if interventions or conditions produce **significant changes**.
 -   Remember to check **assumptions**: normality of differences and appropriate pairing.
+
+    1.  **Differences are normally distributed.**
+        -   Check using histogram, QQ plot, or Shapiro-Wilk test.
+    2.  **Pairs are dependent (related measures).**
+        -   Same participants or matched pairs.
+    3.  **No major outliers in the differences.**
+
+## Example Datasets
+
+```{r}
+library(tidyverse)
+
+set.seed(101)
+# Paired Samples t-Test: Pre vs. Post Stress Scores
+ex_1 <- tibble(
+  ID = 1:30,
+  Stress_Pre = rnorm(30, mean = 20, sd = 4),
+  Stress_Post = rnorm(30, mean = 16, sd = 4)
+)
+
+set.seed(102)
+
+# Example Dataset 2 — Paired Samples t-Test: Reaction Time Before/After Music
+ex_2 <- tibble(
+  ID = 1:25,
+  RT_NoMusic = rnorm(25, mean = 520, sd = 60),
+  RT_Music = rnorm(25, mean = 500, sd = 55)
+)
+
+set.seed(103)
+
+# Example Dataset 3 — Independent Samples t-Test: Caffeine vs. Placebo Alertness
+ex_3 <- tibble(
+  Group = rep(c("Caffeine", "Placebo"), each = 20),
+  Alertness = c(
+    rnorm(20, mean = 75, sd = 8),
+    rnorm(20, mean = 68, sd = 8)
+  )
+)
+
+set.seed(104)
+
+# Example Dataset 4 — Independent Samples t-Test: Online vs. In-Person Exam Scores
+ex_4 <- tibble(
+  Format = rep(c("Online", "InPerson"), each = 25),
+  Exam_Score = c(
+    rnorm(25, mean = 82, sd = 5),
+    rnorm(25, mean = 79, sd = 6)
+  )
+)
+
+```
