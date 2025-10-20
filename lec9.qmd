@@ -537,25 +537,3 @@ t.test(
 ## APA Reporting
 
 > A one-sample t-test was conducted to test whether college students sleep fewer than 7 hours per night. Results were statistically significant, t(29) = -2.28, p \< .05, indicating that students get significantly less sleep than the recommended amount.
-
-
-
-```{r}
-
-mn <- 
-  replicate(100,
-            {
-            x  = rnorm(30,6.5,1.2) |> round(0)
-            t.test(x, mu = 7)$estimate
-            }
-  )
-
-t.test(
-  x,
-  # Specify that the mean to test against is 75
-  mu = 7
-  )
-
-
-
-```

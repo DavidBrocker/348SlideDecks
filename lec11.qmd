@@ -1,14 +1,16 @@
 ---
 title: "Paired Samples T-Test"
-subtitle: "Lecture 14"
+subtitle: "Lecture 10"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+footer: "PSY 348 - Statistics for Psychology"
 institute: "Farmingdale State College"
 execute: 
   echo: true
 format: 
   revealjs:
     theme: custom.scss
+    width: 1600
+    height: 900
     scrollable: true
     incremental: true   
     touch: true
@@ -44,28 +46,32 @@ revealjs-plugins:
 
 ### Mathematical Representation
 
--   **Formula**: $\large{t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}}$
-    -   $\bar{D}$: Mean of the differences between paired observations.
-    -   $s_D$: Standard deviation of the differences.
+-   **Formula**: $\large{t = \frac{\bar{d}}{{s_{\bar{d}}}/\sqrt{n}}} = \frac{\bar{d}}{\sigma}$
+    -   $\bar{d}$: Mean of the differences between paired observations.
+    -   $s_d$: Standard deviation of the differences.
     -   $n$: Number of pairs.
 
 ## Theoretical Formula Explanation
 
 ### Understanding Each Component
 
--   **Difference Mean** $\bar{D}$: Average of the differences between paired scores.
--   **Standard Deviation of Differences** $s_D$: Indicates how much individual differences deviate from the mean difference.
+-   **Difference Mean** $\bar{d}$: Average of the differences between paired scores.
+-   **Standard Deviation of Differences** $s_d$: Indicates how much individual differences deviate from the mean difference.
 -   **Sample Size** $n$: Number of pairs, affecting the significance of results.
 
 ## Application of Paired Samples t-Test
 
 ### When to Apply This Test
 
--   **Pretest-Posttest Design**: Measure changes in the same group over time.
--   **Matched Pairs**: Compare two related groups, such as twins or matched participants.
--   **Repeated Measures**: Test the same group under different conditions or at different times.
+-   **Pretest-Posttest Design**
 
-# Paired Samples t-Test Example
+    - Measure changes in the same group over time.
+-   **Matched Pairs**
+
+    - Compare two related groups, such as twins or matched participants.
+-   **Repeated Measures**
+
+    - Test the same group under different conditions or at different times.
 
 ## Paired Samples t-Test
 
@@ -75,9 +81,11 @@ revealjs-plugins:
 
 **Steps**:
 
--   Calculate the difference between pre- and post-intervention scores.
--   Find the mean $\bar{D}$ and standard deviation $s_D$ of the differences.
--   Apply the formula to calculate the t-value and check for significance.
+1.   Calculate the difference between pre- and post-intervention scores.
+
+2.   Find the mean $\bar{d}$ and standard deviation $s_d$ of the differences.
+
+3.   Apply the formula to calculate the t-value and check for significance.
 
 ## Paired Samples t-Test
 
@@ -97,29 +105,18 @@ set.seed(20)
 data <- 
   tibble(
   # Make a variable, `group` with 30 T1 and 30 T2
-  grp = rep(c("T1","T2"), each = 30),
+  group = rep(c("Time One","Time Two"), each = 30),
   # Make a variable, `score` with 60 scores
   score = c(rnorm(30,8,2),rnorm(30,4,1)) |> round(0)
 ) 
-```
 
-## Paired Samples t-Test
-
-### Data Preview
-
-```{r}
-#| echo: true
-
-set.seed(20)
-pt_data <- 
-  tibble(
-  grp = rep(c("T1","T2"), each = 30),
-  score = c(rnorm(30,8,2),rnorm(30,4,1)) |> round(0)
-) 
-
-pt_data|> 
-  slice_sample(n = 5) |> 
-  gt()
+data |> 
+  gt_preview() |> 
+  opt_row_striping() |> 
+  tab_options(
+    table.font.size = 32,
+    table.width = pct(70)
+    )
 ```
 
 ## Paired Samples t-Test
@@ -128,13 +125,13 @@ pt_data|>
 
 ```{r}
 data_new <- 
-  pt_data |> 
-  group_by(grp) |> 
+  data |> 
+  group_by(group) |> 
   mutate(
-    id = row_number()
-  ) |> 
+    id = paste0("Participant ",row_number()),
+    group = ifelse(stringr::str_detect(group,"One"),"T1","T2")) |> 
   tidyr::pivot_wider(
-                     names_from = grp,
+                     names_from = group,
                      values_from = score
                      ) |> 
   ungroup() |> 
@@ -145,7 +142,12 @@ data_new <-
 
 data_new |> 
   select(-D) |> 
-  gt_preview()
+  gt_preview() |> 
+  opt_row_striping() |> 
+    tab_options(
+    table.font.size = 32,
+    table.width = pct(70)
+    )
 ```
 
 ## Paired Samples t-Test
@@ -160,7 +162,7 @@ $$\large{t = \frac{D}{\frac{\sigma}{\sqrt{n}}} =  \frac{-3.26}{\frac{2.083}{\sqr
 
 ```{r}
 
-t.test(pt_data$score~pt_data$grp) |> 
+t.test(data$group,data$score,paired = TRUE) |> 
   tidy() |> 
   rename(
     D = estimate,
@@ -173,16 +175,20 @@ t.test(pt_data$score~pt_data$grp) |>
   ) |> 
   select(-conf.low:-alternative) |> 
   select(D,t,df,p,`CI[ll,uu]`) |> 
-  gt()
+  gt() |> 
+  fmt_auto() |> 
+  opt_row_striping() |>   
+  tab_options(
+    table.font.size = 32,
+    table.width = pct(70)
+    )
 ```
-
-::: {.eq-expl style="font-size: 20px;"}
 -   D = mean difference of T2-T1
 -   t = t-test statistic
 -   df = n-1 (30-1)
 -   p = probability results came from the Null Distribution
 -   CI\[ll,uu\] = 95% CI of Mean Difference (D)
-:::
+
 
 ## Paired T-Tests
 
@@ -193,7 +199,7 @@ library(ggplot2)
 library(viridis)
 
 data |> 
-  ggplot(aes(grp, score, fill = grp)) + 
+  ggplot(aes(group, score, fill = group)) + 
   stat_summary(
     fun = "mean",
     geom = "bar"
@@ -226,7 +232,7 @@ library(ggplot2)
 library(viridis)
 
 data |> 
-  ggplot(aes(grp, score, color = grp)) + 
+  ggplot(aes(group, score, color = group)) + 
   geom_jitter(aes(alpha = .2)) + 
   stat_summary(
     fun.data = "mean_se",
