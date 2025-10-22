@@ -46,6 +46,7 @@ Now, we’ll compare **two unrelated means** — *different participants* in eac
 
 
 library(ggplot2)
+library(gt)
 
 paired <- data.frame(
   condition = rep(c("Pre","Post"), each = 10),
@@ -227,12 +228,16 @@ plt +
 
 ### Within and Between
 
+::::: columns
+::: {.column width="50%"}
 To compare the means we need to know:
 
 -   Between group variance: how much the answers from the **experimental** group differ from the **control** group.
 
 -   Within group variance: how much the **answers of all participants** differ from one another.
+:::
 
+::: {.column width="50%"}
 ```{r}
 df <- tibble(
   treatment = rep(c("Experimental", "Control"), each = 30),
@@ -250,8 +255,9 @@ df %>%
   stat_summary(fun = mean, geom = "point", size = 4, color = "black") +
   stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), geom = "errorbar", width = 0.2, color = "black") + 
   theme_minimal()
-
 ```
+:::
+:::::
 
 ## Independent Samples t-test Overview
 
@@ -268,19 +274,6 @@ Used when we compare **two different groups** on a continuous outcome.
 -   **Goal:**
 
     -   Is the mean difference between groups larger than what we’d expect by chance?
-
-## T-tests
-
--   IV **must be** nominal and have *only* 2 categories
-
-    -   Using experimental versus control
-
-    -   Any two categories (bad/good)
-
--   DV **must be** continuous
-
-    -   Scale of 1 to 10
-    -   Count
 
 ## Independent Samples t-test
 
@@ -327,69 +320,23 @@ plt +
 
 ## Independent samples t-test
 
-```{r}
-#| echo: false
-
-library(dplyr,warn.conflicts = FALSE)
-library(gt)
-
-tibble(
-  height =c(rnorm(80,72,5),rnorm(80,62,5)),
-  weight = c(rnorm(80,190,30),rnorm(80,120,10)),
-  sex = rep(c("M","F"),each = 80)
-) |> 
-  ggplot(aes(height,weight,color = sex)) + 
-  geom_point() + 
-  theme_linedraw() + 
-  labs(
-    x = "\nHeight",
-    y = "Weight\n"
-  ) + 
-  theme(
-    panel.grid = element_blank()
-  )
-```
-
-## Independent samples t-test
-
-To compare the means we need to know:
-
--   Between group variance
-
--   Within group variance
-
-```{r}
-
-#| echo: false
-library(dplyr,warn.conflicts = FALSE)
-
-tibble(
-  write =c(rnorm(100,50,5),rnorm(100,65,5)),
-  read = c(rnorm(100,55,5),rnorm(100,70,10)),
-  sex = rep(c("M","F"),each = 100)
-) |> 
-  ggplot(aes(write,read,color = sex)) + 
-  geom_point(aes(shape = sex)) + 
-  theme_linedraw() + 
-  labs(
-    x = "\nWriting Score",
-    y = "Reading Score\n"
-  ) + 
-  theme(
-    panel.grid = element_blank()
-  ) + 
-  scale_color_manual(values = c("steelblue","darkorange"))
-```
-
-## Independent samples t-test
-
 To compare the means we need to know:
 
 -   **Between group variance**: how much the answers from the experimental group differ from the control group.
 
 -   **Within group variance**: how much the answers of all participants differ from one another.
 
-## Independent samples t-test
+## Formulas
+
+Inferential statistics have both **theoretical** and **computational** formulas:
+
+-   Theoretical
+
+    -   Formula for if we actually knew the population parameters
+
+-   Computational
+
+    -   Formula for estimating the test statistics based solely on sample data
 
 ## Theoretical Formula:
 
@@ -402,18 +349,6 @@ $$\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\colo
 -   [Population Mean]{style="color:orange"}
 
 -   [Pooled Variance]{style="color:grey"}
-
-## Forumlas
-
-Inferential statistics have both **theoretical** and **computational** formulas:
-
--   Theoretical
-
-    -   Formula for if we actually knew the population parameters
-
--   Computational
-
-    -   Formula for estimating the test statistics based solely on sample data
 
 ## Independent samples t-test
 
@@ -465,8 +400,29 @@ dat <-
 
 t.test(dat$happy ~ dat$grp, var.equal = TRUE) |> 
   broom::tidy() |> 
+  rename(
+    mdiff = estimate,
+    t = statistic,
+    Experimental = estimate2,
+    Conrol = estimate1,
+    p = p.value,
+    df = parameter) |> 
+  mutate(
+    `CI[ll,uu]` = paste0("[",conf.low |> round(2),", ",conf.high |> round(2),"]"),
+    p = ifelse(p <.01, "<.001",p)) |> 
+  select(-conf.low, -conf.high,-method) |> 
+  relocate(alternative,.after = last_col()) |> 
   gt() |> 
-  fmt_auto()
+  fmt_auto() |> 
+  opt_row_striping() |> 
+  tab_options(
+    table.font.size = 32,
+    table.width = pct(70)
+  ) |> 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
 ```
 
 ## Independent samples t-test:
@@ -520,10 +476,6 @@ If the **Levene's Test** is significant, use the t value from the second row and
 
 -   Sig (2-tailed) is the p-value.
 
-## Independent samples t-test
-
-$$\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}$$
-
 ## Why Do We Care?
 
 We need the **Levene's Test**, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.
@@ -554,9 +506,16 @@ We’ll test three common between-subjects designs:
 -   **DV**: Concentration task score\
 -   **Design**: Between-subjects, randomized
 
-### R Code
+## Does chocolate improve concentration? 
 
+::::: columns
+::: {.column width="50%"}
+> 50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0–20 scale.
+:::
+
+::: {.column width="50%"}
 ```{r}
+#| echo: true
 library(ggplot2)
 library(gtsummary)
 library(dplyr)
@@ -572,7 +531,8 @@ choco <- data.frame(
 
 # Plot
 ggplot(choco, aes(x = group, y = concentration, fill = group)) +
-  geom_boxplot() +
+  geom_boxplot(alpha = .5) +
+  geom_jitter(alpha = .4) +
   theme_minimal() +
   labs(title = "Chocolate and Concentration",
        y = "Concentration Score", x = "")
@@ -591,11 +551,14 @@ t.test(concentration ~ group,
     `95% CI Low` = conf.low,
     `95% CI High` = conf.high
   ) |> 
+  mutate(p = ifelse(p<.05,"<.05",p)) |> 
   gt() |> 
   fmt_auto()
 ```
+:::
+:::::
 
-## 🎵 Example 2: Music and Study Efficiency
+## Example 2: Music and Study Efficiency
 
 ## Does instrumental music improve studying?
 
@@ -606,9 +569,19 @@ t.test(concentration ~ group,
 -   **DV**: Quiz performance (number of correct answers)\
 -   **Design**: Between-subjects, randomized
 
-### R Code
+## Example 2: Music and Study Efficiency
 
+### Does instrumental music improve studying?
+
+::::: columns
+::: {.column width="50%"}
+> **Design Summary**\
+> 40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.
+:::
+
+::: {.column width="50%"}
 ```{r}
+#| echo: true
 set.seed(99)
 music <- 
   data.frame(
@@ -623,11 +596,16 @@ ggplot(music,
            y = quiz_score, 
            fill = group)
        ) +
-  geom_violin(trim = FALSE) +
+  geom_violin(trim = FALSE,alpha = .4) +
   geom_jitter(
     width = 0.1, 
     alpha = 0.4
     ) +
+  stat_summary(
+    fun.data = "mean_se",
+    geom = "errorbar",
+    width = .2
+  ) +
   theme_minimal() +
   labs(
     title = "Music and Study Performance",
@@ -648,13 +626,16 @@ ggplot(music,
     `95% CI Low` = conf.low,
     `95% CI High` = conf.high
   ) |> 
-    gt() |> 
-    fmt_auto()
+  mutate(p = ifelse(p<.05,"<.05",p)) |> 
+  gt() |> 
+  fmt_auto()
 ```
+:::
+:::::
 
-## 📱 Example 3: Phone Use and Sleep
+## Example 3: Phone Use and Sleep
 
-## Does bedtime phone use affect sleep?
+### Does bedtime phone use affect sleep?
 
 > **Design Summary**\
 > 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.
@@ -663,10 +644,20 @@ ggplot(music,
 -   **DV**: Sleep quality rating (1 = poor, 10 = excellent)\
 -   **Design**: Between-subjects, randomized
 
-### R Code
+## Example 3: Phone Use and Sleep
 
+### Does bedtime phone use affect sleep?
+
+::::: columns
+::: {.column width="50%"}
+> **Design Summary**\
+> 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.
+:::
+
+::: {.column width="50%"}
 ```{r}
 
+#| echo: true
 set.seed(77)
 
 sleep <- 
@@ -683,8 +674,11 @@ ggplot(sleep,
            fill = group)) +
   stat_summary(
     fun = "mean",
-    geom = "col"
+    geom = "col",
+    width = .5,
+    alpha = .8
     ) +
+  geom_jitter(alpha = .4) +
   geom_errorbar(
     stat = "summary", 
     fun.data = mean_se, 
@@ -712,6 +706,8 @@ t.test(sleep_quality ~ group,
   gt() |> 
   fmt_auto()
 ```
+:::
+:::::
 
 ## Summary: Independent Samples t-test
 

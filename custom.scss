@@ -9,14 +9,12 @@ $font-family-monospace: "FiraCode-Regular", monospace;
 // colors 
 $body-color: #222;
 $text-muted: lighten($body-color, 50%);
-$body-bg: #550000 !default;
-$jet: #131516;
-$accent: #D03D56;
-$accent2: #e07a5f;
-$accent3: #2CA02C;
-$accent3: #808D8E;
-$fsc: #004636;
-$hex: "\2B22";
+$body-bg: #E9F1EC !default; // sage pastel background
+$body-color: #1E1E1E;
+$accent: #5C715E;
+$accent2: #8FAF9E;
+$accent3: #A7C7B5;
+$accent4: #DCE8E1;
 $link-color: $accent !default;
 $presentation-title-slide-text-align: left;
 
@@ -46,53 +44,18 @@ $presentation-title-slide-text-align: left;
   margin-left: 40%;
 }
   
-//Lab Slide Deck
-.reveal .cust-title {
-  color: #d2e3f3;
-  font-size: 3em;
-  position: absolute; 
-  left: 20px; 
-  top: 20px
-}
-
-.reveal .cust-sub {
-  color: #d2e3f3;
-  font-size: 1.2em;
-  position: absolute; 
-  left: 20px; 
-  top: 200px
-}
-
-.reveal .cust-author {
-  color: #d2e3f3;
-  position: absolute; 
-  text-align: left;
-  font-size: 1.1em;
-  left: 20px; 
-  bottom: 40px;
-  line-height: 1.5em;
-}
-
-.cust-pic {
-  font-size: 10em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .reveal .slide p {
-  color: #fff;
-  font-size: 1em;
-  line-height: 1.4;  /* improves readability */
+  color: #2F3E46;   /* dark desaturated green-gray */
+  font-size: 1.05em;
+  line-height: 1.5;
 }
 
 .reveal a{
-  color: #fff;
+  color: #2F3E46;
 }
 
 .reveal .slide ul, li{
-  color: #fff;
+  color: #2F3E46;
 }
 
 .reveal .slide h1 { //Level 1 Heading Slide
@@ -105,7 +68,7 @@ $presentation-title-slide-text-align: left;
 }
 
 .reveal .slide h3 { //Level 3 Heading Slide
-  color: #fff;
+  color: #2F3E46;
 }
 
 .highlight-last  {
@@ -116,11 +79,13 @@ $presentation-title-slide-text-align: left;
 }
 
 .reveal blockquote {
-  background: rgba(255, 255, 255, 0.1); // translucent white
-  color: #e0f7fa; // soft cyan text
-  border-left: 4px solid $accent; // accent line
-  padding: 1em;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);   /* soft translucent overlay */
+  color: #2F3E46;                         /* same as your paragraph text */
+  border-left: 4px solid #8FBBAA;         /* muted green accent */
+  padding: 1em 1.5em;
+  border-radius: 10px;
+  font-style: italic;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* gentle lift */
 }
 
 .reveal ol, .reveal dl, .reveal ul { //remove margin and bullets
