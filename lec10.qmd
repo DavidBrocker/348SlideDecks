@@ -24,7 +24,62 @@ revealjs-plugins:
   - drop
 ---
 
-## Sampling Theory
+## From Paired to Independent Samples
+
+Last time, we compared **two related means** — the *same participants* measured twice (e.g., before vs. after caffeine).
+
+Now, we’ll compare **two unrelated means** — *different participants* in each group.
+
+| Paired t-test                          | Independent t-test             |
+|----------------------------------------|--------------------------------|
+| Same people                            | Different people               |
+| Within-subjects                        | Between-subjects               |
+| Reduces error (individual differences) | Must estimate error separately |
+
+## From Paired to Independent Samples
+
+### Visual Comparison
+
+```{r}
+#| echo: false
+#| fig-align: center
+
+
+library(ggplot2)
+
+paired <- data.frame(
+  condition = rep(c("Pre","Post"), each = 10),
+  score = c(rnorm(10, 70, 5), rnorm(10, 75, 5)),
+  id = rep(1:10, 2)
+)
+
+independent <- data.frame(
+  group = rep(c("Control","Experimental"), each = 10),
+  score = c(rnorm(10, 70, 5), rnorm(10, 75, 5))
+)
+
+library(patchwork)
+
+p1 <- ggplot(paired, aes(x = condition, y = score, group = id)) +
+  geom_line(alpha = 0.5) +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(title = "Paired Samples: Same People", y = "Score", x = "") +
+  scale_y_continuous(breaks = seq(60,80,5))
+
+p2 <- ggplot(independent, aes(x = group, y = score, fill = group)) +
+  geom_boxplot(alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Independent Samples: Different People", y = "Score", x = "")
+
+p1 + p2
+```
+
+## Sampling Theory (Recap)
+
+-   Sampling theory allows us to test two unrelated group
+
+-   We can compare the group means
 
 ```{r}
 library(ggplot2)
@@ -66,7 +121,11 @@ plt
 
 ```
 
-## Sampling Theory
+## Sampling Theory (Recap)
+
+-   Sampling theory allows us to test two unrelated group
+
+-   We can compare the group means
 
 ```{r}
 #| echo: false
@@ -76,7 +135,11 @@ plt +
   scale_x_continuous(breaks = c(-6,-4,-2,0,2,4,6))
 ```
 
-## Sampling Theory
+## Sampling Theory (Recap)
+
+-   Sampling theory allows us to test two unrelated group
+
+-   We can compare the group means
 
 ```{r}
 #| echo: false
@@ -87,9 +150,11 @@ plt +
 
 ```
 
-## Sampling Theory
+## Sampling Theory (Recap)
 
-Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution's area is to the right of it.
+-   Sampling theory allows us to test two unrelated group
+
+-   We can compare the group means
 
 ```{r}
 #| echo: false
@@ -118,45 +183,11 @@ plt +
 
 ```
 
-## Probability
+## Sampling Theory (Recap)
 
-```{r}
-new_dat <- tibble(
-  z = seq(-4, 4, length.out = 1000),
-  dx = dnorm(z)
-)
+-   Sampling theory allows us to test two unrelated group
 
-labels <- tibble(
-  x = c(-1, 1, -1.5, 1.5, -2.6, 2.6, -3.5, 3.5),
-  y = c(.36,0.36, 0.25, 0.25, 0.075, 0.075, 0.025, 0.025),
-  label = c("34.1%", "34.1%", "13.6%", "13.6%", "2.1%", "2.1%", "0.1%", "0.1%")
-)
-
-
-p <- 
-  ggplot(new_dat, aes(x = z, y = dx)) +
-  geom_line(size = 1.2) +
-  geom_area(data = filter(new_dat, z >= -1 & z <= 1), fill = "lightblue", alpha = 0.6) +
-  geom_area(data = filter(new_dat, z >=-1 & z <=0), fill = "lightblue", alpha = .6) +
-  geom_area(data = filter(new_dat, z >=-2 & z <=-1), fill = "blue", alpha = .6) +
-  geom_area(data = filter(new_dat, z <=2 & z >=1), fill = "blue", alpha = .6) +
-  geom_area(data = filter(new_dat, z >=-4 & z <= -2), fill = "darkblue", alpha = .6) +
-  geom_area(data = filter(new_dat, z >=2 & z <= 4), fill = "darkblue", alpha = .6) +
-  geom_text(data = labels, aes(x = x, y = y, label = label), size = 4, inherit.aes = FALSE) +
-  theme_minimal(base_size = 13) +
-  labs(
-    x = "\nStandard Deviations",
-    y = "Probability Density\n"
-  ) +
-  scale_x_continuous(breaks = -4:4) +
-  theme_sub_panel(grid = element_blank())
-
-p
-```
-
-## Sampling Theory
-
-Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution's area is to the right of it.
+-   We can compare the group means
 
 ```{r}
 #| echo: false
@@ -186,46 +217,57 @@ plt +
 
 ## Inferential Statistics
 
-Each inferential statistic will give us:
+### **Applied to Independent Groups**
 
--   Test statistic
+-   Our goal is still to test whether a difference is likely due to chance
 
-    -   $r,t,F,\chi^2...$
+-   With independnet samples, chance variation now includes **differences between individuals** in *both* groups.
 
--   p-value: probability of committing a Type 1 Error \< 0.05 or 5%
+## Group Variance
 
-    -   p \> 0.05: Fail to reject the $H_0$
+### Within and Between
 
-    -   p \< 0.05: Reject $H_0$
+To compare the means we need to know:
 
-## Sampling Theory
+-   Between group variance: how much the answers from the **experimental** group differ from the **control** group.
 
-Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution's area is to the right of it.
+-   Within group variance: how much the **answers of all participants** differ from one another.
 
 ```{r}
-#| echo: false
+df <- tibble(
+  treatment = rep(c("Experimental", "Control"), each = 30),
+  score = c(rnorm(30, 30, 2), rnorm(30, 40, 5))
+)
 
-plt + 
-  geom_vline(
-    xintercept = 2,
-    color = "darkblue"
-    ) + 
-  geom_vline(
-    xintercept = 1, 
-    color = "red"
-    ) + 
-  theme(
-    axis.text.x = element_blank()
-  ) + 
-  geom_text(
-    x = 1,
-    y = .05,
-    label = "Critical Value",
-    angle = 90,
-    color = "red",
-    vjust = -1
-  )
+means <- df %>%
+  group_by(treatment) %>%
+  summarise(mean_score = mean(score))
+
+df %>%
+  ggplot(aes(treatment, score, fill = treatment)) +
+  geom_violin(alpha = 0.3, width = 0.8, color = NA) +
+  geom_jitter(width = 0.1, alpha = 0.5, size = 2) +
+  stat_summary(fun = mean, geom = "point", size = 4, color = "black") +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), geom = "errorbar", width = 0.2, color = "black") + 
+  theme_minimal()
+
 ```
+
+## Independent Samples t-test Overview
+
+Used when we compare **two different groups** on a continuous outcome.
+
+-   **Examples:**
+
+    -   Coffee drinkers vs. decaf drinkers on happiness
+
+    -   Students with music vs. silence during study
+
+    -   Phone use vs. no phone use before bed
+
+-   **Goal:**
+
+    -   Is the mean difference between groups larger than what we’d expect by chance?
 
 ## T-tests
 
@@ -282,22 +324,6 @@ plt +
     label = "M_Exp = 8"
   )
 ```
-
-## Independent samples t-test
-
-To compare the means we need to know:
-
--   Between group variance: how much the answers from the **experimental** group differ from the **control** group.
-
--   Within group variance: how much the answers of all participants differ from one another.
-
-## Independent samples t-test
-
-To compare the means we need to know:
-
--   Between group variance
-
--   Within group variance
 
 ## Independent samples t-test
 
@@ -443,29 +469,18 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
   fmt_auto()
 ```
 
-![](images/Screenshot%202024-11-04%20at%207.50.42%20AM.png)
+## Independent samples t-test:
 
-# INTERPRETTING T
+### Assumptions of Independent Samples t-test
+
+1.  **DV is continuous**\
+2.  **Observations are independent**\
+3.  **Normality:** each group’s distribution is approximately normal\
+4.  **Homogeneity of variance:** variances are similar across groups
 
 ## Independent samples t-test:
 
-### Assumptions of the T-Test
-
--   **Data type**:
-
-    -   The data is quantitative and continuous 
-
--   **Distribution**:
-
-    -   The data is approximately normally distributed 
-
--   **Sample size**:
-
-    -   The sample size is adequate
-
-## Independent samples t-test:
-
-### Assumptions of the T-Test
+### Assumptions of Independent Samples t-test
 
 -   **Random sampling**:
 
@@ -477,14 +492,15 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 
 -   **Homogeneity of variance**:
 
-    -   Variance should be equal across groups (tested with Levene's Test
-        -   \## Interpreting Levene’s Test
+    -   Variance should be equal across groups (tested with Levene's Test)
 
-            \- Levene’s Test tells us whether the assumption of equal variances holds.
+## Interpreting Levene’s Test
 
-            \- \*\*If p \> .05\*\* → use the \*\*top row\*\* ("Equal variances assumed")
+-   Levene’s Test tells us whether the assumption of equal variances holds.
 
-            \- \*\*If p \< .05\*\* → use the \*\*bottom row\*\* ("Equal variances not assumed")
+    -   If p \> .05 → use the **top row**\*\* ("Equal variances assumed")
+
+    -   If p \< .05 → use the **bottom row** ("Equal variances not assumed")
 
 -   Normality
 
@@ -519,6 +535,14 @@ We need the **Levene's Test**, because if the variance from the experimental gro
 ### Interpreting Results
 
 If the **Levene's Test** is significant, use the t value from the second row and its corresponding significance
+
+## Let’s Apply It: Three Independent Designs
+
+We’ll test three common between-subjects designs:
+
+1\. **Chocolate and Concentration** – Experimental vs. Control\
+2. **Music and Studying** – Environmental manipulation\
+3. **Phone Use and Sleep** – Behavioral difference
 
 ## Does chocolate improve concentration?
 
@@ -688,3 +712,11 @@ t.test(sleep_quality ~ group,
   gt() |> 
   fmt_auto()
 ```
+
+## Summary: Independent Samples t-test
+
+-   Compares **two independent groups**
+-   Tests whether the difference in means is significant
+-   Uses **pooled variance** as the denominator
+-   Check assumptions: independence, normality, equal variance
+-   Commonly used in **experimental** designs

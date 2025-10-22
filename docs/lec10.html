@@ -32,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-f7f2f208198edaf8d355037122eea64a.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-08351ccdea19e4d08afdb98393ad9dd4.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -148,20 +148,56 @@ Dave Brocker
 </div>
 
 </section>
-<section id="sampling-theory" class="slide level2">
-<h2>Sampling Theory</h2>
-<div class="cell">
+<section id="from-paired-to-independent-samples" class="slide level2">
+<h2>From Paired to Independent Samples</h2>
+<p>Last time, we compared <strong>two related means</strong> — the <em>same participants</em> measured twice (e.g., before vs.&nbsp;after caffeine).</p>
+<p>Now, we’ll compare <strong>two unrelated means</strong> — <em>different participants</em> in each group.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 55%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paired t-test</th>
+<th>Independent t-test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Same people</td>
+<td>Different people</td>
+</tr>
+<tr class="even">
+<td>Within-subjects</td>
+<td>Between-subjects</td>
+</tr>
+<tr class="odd">
+<td>Reduces error (individual differences)</td>
+<td>Must estimate error separately</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="from-paired-to-independent-samples-1" class="slide level2">
+<h2>From Paired to Independent Samples</h2>
+<h3 id="visual-comparison">Visual Comparison</h3>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="sampling-theory-1" class="slide level2">
-<h2>Sampling Theory</h2>
+<section id="sampling-theory-recap" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<ul>
+<li class="fragment"><p>Sampling theory allows us to test two unrelated group</p></li>
+<li class="fragment"><p>We can compare the group means</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -172,8 +208,12 @@ Dave Brocker
 </div>
 </div>
 </section>
-<section id="sampling-theory-2" class="slide level2">
-<h2>Sampling Theory</h2>
+<section id="sampling-theory-recap-1" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<ul>
+<li class="fragment"><p>Sampling theory allows us to test two unrelated group</p></li>
+<li class="fragment"><p>We can compare the group means</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -184,9 +224,12 @@ Dave Brocker
 </div>
 </div>
 </section>
-<section id="sampling-theory-3" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
+<section id="sampling-theory-recap-2" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<ul>
+<li class="fragment"><p>Sampling theory allows us to test two unrelated group</p></li>
+<li class="fragment"><p>We can compare the group means</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -197,18 +240,33 @@ Dave Brocker
 </div>
 </div>
 </section>
-<section id="probability" class="slide level2">
-<h2>Probability</h2>
-<p><a href="images/bell_prop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/bell_prop.png"></a></p>
-</section>
-<section id="sampling-theory-4" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
+<section id="sampling-theory-recap-3" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<ul>
+<li class="fragment"><p>Sampling theory allows us to test two unrelated group</p></li>
+<li class="fragment"><p>We can compare the group means</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-theory-recap-4" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<ul>
+<li class="fragment"><p>Sampling theory allows us to test two unrelated group</p></li>
+<li class="fragment"><p>We can compare the group means</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -216,31 +274,45 @@ Dave Brocker
 </section>
 <section id="inferential-statistics" class="slide level2">
 <h2>Inferential Statistics</h2>
-<p>Each inferential statistic will give us:</p>
+<h3 id="applied-to-independent-groups"><strong>Applied to Independent Groups</strong></h3>
 <ul>
-<li class="fragment"><p>Test statistic</p>
-<ul>
-<li class="fragment"><span class="math inline">\(r,t,F,\chi^2...\)</span></li>
-</ul></li>
-<li class="fragment"><p>p-value: probability of committing a Type 1 Error &lt; 0.05 or 5%</p>
-<ul>
-<li class="fragment"><p>p &gt; 0.05: Fail to reject the <span class="math inline">\(H_0\)</span></p></li>
-<li class="fragment"><p>p &lt; 0.05: Reject <span class="math inline">\(H_0\)</span></p></li>
-</ul></li>
+<li class="fragment"><p>Our goal is still to test whether a difference is likely due to chance</p></li>
+<li class="fragment"><p>With independnet samples, chance variation now includes <strong>differences between individuals</strong> in <em>both</em> groups.</p></li>
 </ul>
 </section>
-<section id="sampling-theory-5" class="slide level2">
-<h2>Sampling Theory</h2>
-<p>Setting alpha to 0.05, puts the critical value at a point where 5% of the null distribution’s area is to the right of it.</p>
+<section id="group-variance" class="slide level2">
+<h2>Group Variance</h2>
+<h3 id="within-and-between">Within and Between</h3>
+<p>To compare the means we need to know:</p>
+<ul>
+<li class="fragment"><p>Between group variance: how much the answers from the <strong>experimental</strong> group differ from the <strong>control</strong> group.</p></li>
+<li class="fragment"><p>Within group variance: how much the <strong>answers of all participants</strong> differ from one another.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="independent-samples-t-test-overview" class="slide level2">
+<h2>Independent Samples t-test Overview</h2>
+<p>Used when we compare <strong>two different groups</strong> on a continuous outcome.</p>
+<ul>
+<li class="fragment"><p><strong>Examples:</strong></p>
+<ul>
+<li class="fragment"><p>Coffee drinkers vs.&nbsp;decaf drinkers on happiness</p></li>
+<li class="fragment"><p>Students with music vs.&nbsp;silence during study</p></li>
+<li class="fragment"><p>Phone use vs.&nbsp;no phone use before bed</p></li>
+</ul></li>
+<li class="fragment"><p><strong>Goal:</strong></p>
+<ul>
+<li class="fragment">Is the mean difference between groups larger than what we’d expect by chance?</li>
+</ul></li>
+</ul>
 </section>
 <section id="t-tests" class="slide level2">
 <h2>T-tests</h2>
@@ -277,7 +349,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -285,11 +357,15 @@ Dave Brocker
 </section>
 <section id="independent-samples-t-test-2" class="slide level2">
 <h2>Independent samples t-test</h2>
-<p>To compare the means we need to know:</p>
-<ul>
-<li class="fragment"><p>Between group variance: how much the answers from the <strong>experimental</strong> group differ from the <strong>control</strong> group.</p></li>
-<li class="fragment"><p>Within group variance: how much the answers of all participants differ from one another.</p></li>
-</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="independent-samples-t-test-3" class="slide level2">
 <h2>Independent samples t-test</h2>
@@ -298,37 +374,17 @@ Dave Brocker
 <li class="fragment"><p>Between group variance</p></li>
 <li class="fragment"><p>Within group variance</p></li>
 </ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="independent-samples-t-test-4" class="slide level2">
-<h2>Independent samples t-test</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="independent-samples-t-test-5" class="slide level2">
-<h2>Independent samples t-test</h2>
-<p>To compare the means we need to know:</p>
-<ul>
-<li class="fragment"><p>Between group variance</p></li>
-<li class="fragment"><p>Within group variance</p></li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="independent-samples-t-test-6" class="slide level2">
 <h2>Independent samples t-test</h2>
 <p>To compare the means we need to know:</p>
 <ul>
@@ -336,7 +392,7 @@ Dave Brocker
 <li class="fragment"><p><strong>Within group variance</strong>: how much the answers of all participants differ from one another.</p></li>
 </ul>
 </section>
-<section id="independent-samples-t-test-7" class="slide level2">
+<section id="independent-samples-t-test-5" class="slide level2">
 <h2>Independent samples t-test</h2>
 </section>
 <section id="theoretical-formula" class="slide level2">
@@ -363,27 +419,27 @@ Dave Brocker
 </ul></li>
 </ul>
 </section>
-<section id="independent-samples-t-test-8" class="slide level2">
+<section id="independent-samples-t-test-6" class="slide level2">
 <h2>Independent samples t-test</h2>
 <p>Theoretical Formula:</p>
 <p><span class="math display">\[t = \frac{\bar{x} - \color{green}{μ}}{\sqrt{s^{2}_{pooled}}}\]</span></p>
 </section>
-<section id="independent-samples-t-test-9" class="slide level2">
+<section id="independent-samples-t-test-7" class="slide level2">
 <h2>Independent samples t-test</h2>
 <h3 id="theoretical-formula-1">Theoretical Formula:</h3>
 <p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{\color{orange}{s^{2}_{pooled}}}}\]</span></p>
 </section>
-<section id="independent-samples-t-test-10" class="slide level2">
+<section id="independent-samples-t-test-8" class="slide level2">
 <h2>Independent samples t-test</h2>
 <h3 id="theoretical-formula-2">Theoretical Formula:</h3>
 <p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}\]</span></p>
 </section>
-<section id="independent-samples-t-test-11" class="slide level2">
+<section id="independent-samples-t-test-9" class="slide level2">
 <h2>Independent samples t-test</h2>
 <h3 id="theoretical-formula-3">Theoretical Formula:</h3>
 <p><span class="math display">\[t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}\]</span></p>
 </section>
-<section id="independent-samples-t-test-12" class="slide level2">
+<section id="independent-samples-t-test-10" class="slide level2">
 <h2>Independent samples t-test</h2>
 <h3 id="computational-formula">Computational Formula:</h3>
 <p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\color{darkblue}{\frac{s1}{n1}+ \frac{s2}{n2}}}}\]</span></p>
@@ -391,7 +447,7 @@ Dave Brocker
 <li class="fragment"><span style="color: darkblue">Pooled Variance</span></li>
 </ul>
 </section>
-<section id="independent-samples-t-test-13" class="slide level2">
+<section id="independent-samples-t-test-11" class="slide level2">
 <h2>Independent samples t-test</h2>
 <h3 id="computational-formula-1">Computational Formula:</h3>
 <p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}\]</span></p>
@@ -400,23 +456,23 @@ Dave Brocker
 <h2>Data Overview</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qgxlzzygdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qgxlzzygdn table {
+<div id="uyfbsbwymd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uyfbsbwymd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qgxlzzygdn thead, #qgxlzzygdn tbody, #qgxlzzygdn tfoot, #qgxlzzygdn tr, #qgxlzzygdn td, #qgxlzzygdn th {
+#uyfbsbwymd thead, #uyfbsbwymd tbody, #uyfbsbwymd tfoot, #uyfbsbwymd tr, #uyfbsbwymd td, #uyfbsbwymd th {
   border-style: none;
 }
 
-#qgxlzzygdn p {
+#uyfbsbwymd p {
   margin: 0;
   padding: 0;
 }
 
-#qgxlzzygdn .gt_table {
+#uyfbsbwymd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -442,12 +498,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_caption {
+#uyfbsbwymd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qgxlzzygdn .gt_title {
+#uyfbsbwymd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -459,7 +515,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#qgxlzzygdn .gt_subtitle {
+#uyfbsbwymd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -471,7 +527,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#qgxlzzygdn .gt_heading {
+#uyfbsbwymd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -483,13 +539,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_bottom_border {
+#uyfbsbwymd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_col_headings {
+#uyfbsbwymd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -504,7 +560,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_col_heading {
+#uyfbsbwymd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,7 +580,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#qgxlzzygdn .gt_column_spanner_outer {
+#uyfbsbwymd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -536,15 +592,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#qgxlzzygdn .gt_column_spanner_outer:first-child {
+#uyfbsbwymd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qgxlzzygdn .gt_column_spanner_outer:last-child {
+#uyfbsbwymd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qgxlzzygdn .gt_column_spanner {
+#uyfbsbwymd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -556,11 +612,11 @@ Dave Brocker
   width: 100%;
 }
 
-#qgxlzzygdn .gt_spanner_row {
+#uyfbsbwymd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qgxlzzygdn .gt_group_heading {
+#uyfbsbwymd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -586,7 +642,7 @@ Dave Brocker
   text-align: left;
 }
 
-#qgxlzzygdn .gt_empty_group_heading {
+#uyfbsbwymd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -601,15 +657,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#qgxlzzygdn .gt_from_md > :first-child {
+#uyfbsbwymd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qgxlzzygdn .gt_from_md > :last-child {
+#uyfbsbwymd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qgxlzzygdn .gt_row {
+#uyfbsbwymd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -628,7 +684,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#qgxlzzygdn .gt_stub {
+#uyfbsbwymd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -641,7 +697,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qgxlzzygdn .gt_stub_row_group {
+#uyfbsbwymd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -655,15 +711,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#qgxlzzygdn .gt_row_group_first td {
+#uyfbsbwymd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qgxlzzygdn .gt_row_group_first th {
+#uyfbsbwymd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qgxlzzygdn .gt_summary_row {
+#uyfbsbwymd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -673,16 +729,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qgxlzzygdn .gt_first_summary_row {
+#uyfbsbwymd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_first_summary_row.thick {
+#uyfbsbwymd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qgxlzzygdn .gt_last_summary_row {
+#uyfbsbwymd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,7 +748,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_grand_summary_row {
+#uyfbsbwymd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -702,7 +758,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qgxlzzygdn .gt_first_grand_summary_row {
+#uyfbsbwymd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -712,7 +768,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_last_grand_summary_row_top {
+#uyfbsbwymd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -722,11 +778,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_striped {
+#uyfbsbwymd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qgxlzzygdn .gt_table_body {
+#uyfbsbwymd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -735,7 +791,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_footnotes {
+#uyfbsbwymd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -749,7 +805,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_footnote {
+#uyfbsbwymd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -758,7 +814,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qgxlzzygdn .gt_sourcenotes {
+#uyfbsbwymd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -772,7 +828,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qgxlzzygdn .gt_sourcenote {
+#uyfbsbwymd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -780,72 +836,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qgxlzzygdn .gt_left {
+#uyfbsbwymd .gt_left {
   text-align: left;
 }
 
-#qgxlzzygdn .gt_center {
+#uyfbsbwymd .gt_center {
   text-align: center;
 }
 
-#qgxlzzygdn .gt_right {
+#uyfbsbwymd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qgxlzzygdn .gt_font_normal {
+#uyfbsbwymd .gt_font_normal {
   font-weight: normal;
 }
 
-#qgxlzzygdn .gt_font_bold {
+#uyfbsbwymd .gt_font_bold {
   font-weight: bold;
 }
 
-#qgxlzzygdn .gt_font_italic {
+#uyfbsbwymd .gt_font_italic {
   font-style: italic;
 }
 
-#qgxlzzygdn .gt_super {
+#uyfbsbwymd .gt_super {
   font-size: 65%;
 }
 
-#qgxlzzygdn .gt_footnote_marks {
+#uyfbsbwymd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qgxlzzygdn .gt_asterisk {
+#uyfbsbwymd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qgxlzzygdn .gt_indent_1 {
+#uyfbsbwymd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qgxlzzygdn .gt_indent_2 {
+#uyfbsbwymd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qgxlzzygdn .gt_indent_3 {
+#uyfbsbwymd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qgxlzzygdn .gt_indent_4 {
+#uyfbsbwymd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qgxlzzygdn .gt_indent_5 {
+#uyfbsbwymd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qgxlzzygdn .katex-display {
+#uyfbsbwymd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qgxlzzygdn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uyfbsbwymd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -867,14 +923,14 @@ Dave Brocker
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="estimate">−2.4</td>
-<td class="gt_row gt_right" headers="estimate1">6&nbsp;</td>
-<td class="gt_row gt_right" headers="estimate2">8.4</td>
-<td class="gt_row gt_right" headers="statistic">−6&nbsp;</td>
-<td class="gt_row gt_right" headers="p.value">1.127&nbsp;×&nbsp;10<sup>−5</sup></td>
+<td class="gt_row gt_right" headers="estimate">−2.6</td>
+<td class="gt_row gt_right" headers="estimate1">5.7</td>
+<td class="gt_row gt_right" headers="estimate2">8.3</td>
+<td class="gt_row gt_right" headers="statistic">−6.128</td>
+<td class="gt_row gt_right" headers="p.value">8.676&nbsp;×&nbsp;10<sup>−6</sup></td>
 <td class="gt_row gt_right" headers="parameter">18&nbsp;</td>
-<td class="gt_row gt_right" headers="conf.low">−3.24</td>
-<td class="gt_row gt_right" headers="conf.high">−1.56</td>
+<td class="gt_row gt_right" headers="conf.low">−3.491</td>
+<td class="gt_row gt_right" headers="conf.high">−1.709</td>
 <td class="gt_row gt_left" headers="method">Two Sample t-test</td>
 <td class="gt_row gt_left" headers="alternative">two.sided</td>
 </tr>
@@ -884,34 +940,23 @@ Dave Brocker
 </div>
 </div>
 </div>
-<p><a href="images/Screenshot 2024-11-04 at 7.50.42 AM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/Screenshot 2024-11-04 at 7.50.42 AM.png"></a></p>
 </section>
-<section>
-<section id="interpretting-t" class="title-slide slide level1 center">
-<h1>INTERPRETTING T</h1>
-
-</section>
-<section id="independent-samples-t-test-14" class="slide level2">
+<section id="independent-samples-t-test-12" class="slide level2">
 <h2>Independent samples t-test:</h2>
-<h3 id="assumptions-of-the-t-test">Assumptions of the T-Test</h3>
-<ul>
-<li class="fragment"><p><strong>Data type</strong>:</p>
-<ul>
-<li class="fragment">The data is quantitative and continuous&nbsp;</li>
-</ul></li>
-<li class="fragment"><p><strong>Distribution</strong>:</p>
-<ul>
-<li class="fragment">The data is approximately normally distributed&nbsp;</li>
-</ul></li>
-<li class="fragment"><p><strong>Sample size</strong>:</p>
-<ul>
-<li class="fragment">The sample size is adequate</li>
-</ul></li>
-</ul>
+<h3 id="assumptions-of-independent-samples-t-test">Assumptions of Independent Samples t-test</h3>
+<ol type="1">
+<li class="fragment"><strong>DV is continuous</strong><br>
+</li>
+<li class="fragment"><strong>Observations are independent</strong><br>
+</li>
+<li class="fragment"><strong>Normality:</strong> each group’s distribution is approximately normal<br>
+</li>
+<li class="fragment"><strong>Homogeneity of variance:</strong> variances are similar across groups</li>
+</ol>
 </section>
-<section id="independent-samples-t-test-15" class="slide level2">
+<section id="independent-samples-t-test-13" class="slide level2">
 <h2>Independent samples t-test:</h2>
-<h3 id="assumptions-of-the-t-test-1">Assumptions of the T-Test</h3>
+<h3 id="assumptions-of-independent-samples-t-test-1">Assumptions of Independent Samples t-test</h3>
 <ul>
 <li class="fragment"><p><strong>Random sampling</strong>:</p>
 <ul>
@@ -923,13 +968,17 @@ Dave Brocker
 </ul></li>
 <li class="fragment"><p><strong>Homogeneity of variance</strong>:</p>
 <ul>
-<li class="fragment">Variance should be equal across groups (tested with Levene’s Test
-<ul>
-<li class="fragment"><p>## Interpreting Levene’s Test</p>
-<p>- Levene’s Test tells us whether the assumption of equal variances holds.</p>
-<p>- **If p &gt; .05** → use the **top row** (“Equal variances assumed”)</p>
-<p>- **If p &lt; .05** → use the **bottom row** (“Equal variances not assumed”)</p></li>
+<li class="fragment">Variance should be equal across groups (tested with Levene’s Test)</li>
 </ul></li>
+</ul>
+</section>
+<section id="interpreting-levenes-test" class="slide level2">
+<h2>Interpreting Levene’s Test</h2>
+<ul>
+<li class="fragment"><p>Levene’s Test tells us whether the assumption of equal variances holds.</p>
+<ul>
+<li class="fragment"><p>If p &gt; .05 → use the <strong>top row</strong>** (“Equal variances assumed”)</p></li>
+<li class="fragment"><p>If p &lt; .05 → use the <strong>bottom row</strong> (“Equal variances not assumed”)</p></li>
 </ul></li>
 <li class="fragment"><p>Normality</p>
 <ul>
@@ -937,7 +986,7 @@ Dave Brocker
 </ul></li>
 </ul>
 </section>
-<section id="independent-samples-t-test-16" class="slide level2">
+<section id="independent-samples-t-test-14" class="slide level2">
 <h2>Independent samples t-test</h2>
 <h3 id="homogeneity-of-variance">Homogeneity of Variance</h3>
 <h3 id="section"><img data-src="images/spiderman.png" style="border-radius: 20px;"></h3>
@@ -949,7 +998,7 @@ Dave Brocker
 <li class="fragment"><p>Sig (2-tailed) is the p-value.</p></li>
 </ul>
 </section>
-<section id="independent-samples-t-test-17" class="slide level2">
+<section id="independent-samples-t-test-15" class="slide level2">
 <h2>Independent samples t-test</h2>
 <p><span class="math display">\[\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}\]</span></p>
 </section>
@@ -964,6 +1013,13 @@ Dave Brocker
 <h2>Independent samples t-test: SPSS</h2>
 <h3 id="interpreting-results">Interpreting Results</h3>
 <p>If the <strong>Levene’s Test</strong> is significant, use the t value from the second row and its corresponding significance</p>
+</section>
+<section id="lets-apply-it-three-independent-designs" class="slide level2">
+<h2>Let’s Apply It: Three Independent Designs</h2>
+<p>We’ll test three common between-subjects designs:</p>
+<p>1. <strong>Chocolate and Concentration</strong> – Experimental vs.&nbsp;Control<br>
+2. <strong>Music and Studying</strong> – Environmental manipulation<br>
+3. <strong>Phone Use and Sleep</strong> – Behavioral difference</p>
 </section>
 <section id="does-chocolate-improve-concentration" class="slide level2">
 <h2>Does chocolate improve concentration?</h2>
@@ -983,7 +1039,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1492,7 +1548,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -2001,7 +2057,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
+<p><a href="lec10_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="lec10_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -2488,9 +2544,19 @@ Dave Brocker
 </div>
 </div>
 </div>
+</section>
+<section id="summary-independent-samples-t-test" class="slide level2">
+<h2>Summary: Independent Samples t-test</h2>
+<ul>
+<li class="fragment">Compares <strong>two independent groups</strong></li>
+<li class="fragment">Tests whether the difference in means is significant</li>
+<li class="fragment">Uses <strong>pooled variance</strong> as the denominator</li>
+<li class="fragment">Check assumptions: independence, normality, equal variance</li>
+<li class="fragment">Commonly used in <strong>experimental</strong> designs</li>
+</ul>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
