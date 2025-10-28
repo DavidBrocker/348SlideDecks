@@ -1594,5 +1594,689 @@
       "Lectures",
       "Independent Samples T-Test"
     ]
+  },
+  {
+    "objectID": "lec8.html#standard-normal-distribution",
+    "href": "lec8.html#standard-normal-distribution",
+    "title": "Sampling Theory",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nThe 4 properties of a standard normal distribution are:\n\n\n\n\n\n\n\n\n\n\n\n\n\nThey are shaped like a bell (“bell curve”).\nThey are symmetric.\nThey are unimodal.\nThe mean = median = mode.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#statistics",
+    "href": "lec8.html#statistics",
+    "title": "Sampling Theory",
+    "section": "Statistics",
+    "text": "Statistics\n\nDescriptive Statistics:\n\nGoal: Describe the sample\n\nExamples: Mean, Standard Deviation\n\n\nInferential Statistics:\n\nGoal: Use the sample to make inferences about the population\n\nt-test\nANOVA\nRegression",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory",
+    "href": "lec8.html#sampling-theory",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\nProfessor Brocker still wants to know how much adults in the US enjoy the Netflix Original, Dark. He has unlimited funds to study this very important research question. He hires 30 students to collect the data. Each student has to collect 500 responses to the following question:",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-1",
+    "href": "lec8.html#sampling-theory-1",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\nOn a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-2",
+    "href": "lec8.html#sampling-theory-2",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\n\n\nEach student asks 500 people how much they enjoy the Netflix Original Dark.\nHow many people did each of you ask?\n\n\\(30 \\times 500 = 15,000\\)\n\n\n\n\n\nCode\nlibrary(dplyr)\nlibrary(tibble)\nlibrary(gt)\nlibrary(latex2exp)\n# 30 Students in the class\nn = 30\n\n# Each student asks 500 people\nfull_sample = n*500\n\n# Simulate Results\nreplicate(n = 30,\n            rnorm(500,5,7)) |&gt; round(0) |&gt; \n  data.frame() |&gt; \n  rename_with(.fn = function(x) paste0(\"S\", 1:30)) |&gt; \n  summarize_all(mean) |&gt;\n  tidyr::pivot_longer(cols = everything(),\n                      names_to = \"Sample\",\n                      values_to = \"Sample Mean\") |&gt; \n  gt() |&gt; \n  tab_options(\n    table.width = pct(60),\n    table.font.size = 30,\n    ) |&gt; \n  opt_row_striping() |&gt; \n  opt_interactive()",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-3",
+    "href": "lec8.html#sampling-theory-3",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\nOnce each of you collect 500 responses, I ask you to calculate the average answer. So you calculate the mean.\n\n\n\n\\(\\bar{x}_1 = \\frac{\\sum(x_1 + x_2 + x_3+x_4...+ x_{500)}}{500}\\)\nThey are the means from each of your samples.\nThese are called Sample Means",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-4",
+    "href": "lec8.html#sampling-theory-4",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\nHere is our Ratings Data",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-5",
+    "href": "lec8.html#sampling-theory-5",
+    "title": "Sampling Theory",
+    "section": "Sampling theory",
+    "text": "Sampling theory\nWhat can we do with Sample Means?\n\nWe could calculate the Mean of the Sample Means.\nWe could calculate the standard deviation of the Sample Means.\nBut…it’s theoretical. It doesn’t really exist, but we imagine it’s existence for the sake of Sampling Theory.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-distribution",
+    "href": "lec8.html#sampling-distribution",
+    "title": "Sampling Theory",
+    "section": "Sampling Distribution",
+    "text": "Sampling Distribution\n\n\n\nA Sampling Distribution is the theoretical distribution of means across every single possible sample.\nIf we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-6",
+    "href": "lec8.html#sampling-theory-6",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\n\n\nExcept now each value in this distribution no longer represents 1 person/participant.\nEach value in this distribution represents the average of 1 sample, a Sample Mean.\n\nIn our case, each value is the average of 30 samples of 500 people.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#new-terminology",
+    "href": "lec8.html#new-terminology",
+    "title": "Sampling Theory",
+    "section": "New Terminology",
+    "text": "New Terminology\nSample Mean and Sample Standard Deviation\n\n\n\nWe previously referred to the average as \\(\\bar{x}\\) and the standard deviation as \\(s\\)\nThe new terms refer to their specific attributes as a statistic of the sample\n\\(\\mu\\) (pronounced like ‘mew’) represents the population mean\n\\(\\sigma\\) represents the population standard deviation\n\n\n\n\n\n\n\n\n\n\nTerm\nSymbol\nType\nFormula\nRelation to Sample\n\n\n\n\nSample Mean\n\\[\\bar{x}\\]\nSample\n\\[\\frac{\\sum x_i}{n}\\]\nMean of observed sample\n\n\nSample SD\n\\[s\\]\nSample\n\\[\\sqrt{\\frac{\\sum (x_i - \\bar{x})^2}{n-1}}\\]\nSD of sample values\n\n\nPopulation Mean\n\\[\\mu\\]\nPopulation\n\\[\\frac{\\sum X_i}{N}\\]\nTrue (unknown) mean\n\n\nPopulation SD\n\\[\\sigma\\]\nPopulation\n\\[\\sqrt{\\frac{\\sum (X_i - \\mu)^2}{N}}\\]\nTrue (unknown) SD",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-7",
+    "href": "lec8.html#sampling-theory-7",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\nEach value in this distribution no longer represents 1 person/participant.\nEach value in this distribution now represents the average of 1 sample, a Sample Mean.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#probability",
+    "href": "lec8.html#probability",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\n\nWhat percentage of participants rated Dark with a z-score of 2 or higher?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#probability-1",
+    "href": "lec8.html#probability-1",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\n\nWhat percentage of participants rated Dark with a z-score of 2 higher?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#probability-2",
+    "href": "lec8.html#probability-2",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\n\nThis is the distribution of sample means from adults in the US.\nWhat is the probability of any sample having a mean that is a z-score of 2 or higher?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#assumptions-of-the-normal-curve",
+    "href": "lec8.html#assumptions-of-the-normal-curve",
+    "title": "Sampling Theory",
+    "section": "Assumptions of the Normal Curve",
+    "text": "Assumptions of the Normal Curve\n\nWe assume that the distribution of sample means is normal.\nWe use that assumption to gauge the probability of getting a particular mean from a single sample.\nWe can literally find that probability, the same way we did with x-values in a normal distribution.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#example",
+    "href": "lec8.html#example",
+    "title": "Sampling Theory",
+    "section": "Example",
+    "text": "Example\nLet Me Get Uhh….\nWe want to know how much people like pizza.\n\nThere are 12,500 people in our population. Each of the 25 of us collects a sample of 500.\n\\(500 \\times 25 = 12,500\\)\nEach of us calculates the mean response from our sample of 500 people.\nWhat do we call those means?\n\nWhat would it look like if we were to plot it?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#pizza-plot",
+    "href": "lec8.html#pizza-plot",
+    "title": "Sampling Theory",
+    "section": "Pizza Plot",
+    "text": "Pizza Plot\nVisual Example",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#example-1",
+    "href": "lec8.html#example-1",
+    "title": "Sampling Theory",
+    "section": "Example",
+    "text": "Example\n\nI randomly choose a mean from our distribution of sample means, about how much people like pizza.\nWhat is the probability of picking a mean with a z-score of -1 or less?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#example-2",
+    "href": "lec8.html#example-2",
+    "title": "Sampling Theory",
+    "section": "Example",
+    "text": "Example\n\nI randomly choose a mean from our distribution of sample means, about how much people like pizza.\nWhat is the probability of picking a mean with a z-score of -1 or less?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-8",
+    "href": "lec8.html#sampling-theory-8",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\nSampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.\n\n\nThe distribution made up of sample means is conceptual and theoretical",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-9",
+    "href": "lec8.html#sampling-theory-9",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\n\nSampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.\n\n\nIf that is correct, we can then make guesses about the probability of getting a specific mean.\nWe will use this probability to gauge significance of our inferential statistics.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-10",
+    "href": "lec8.html#sampling-theory-10",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\nNew Terminology (Again???)\n\nThe mean of a sample is notated as \\(M\\).\nThe mean of a population is notated as (\\(\\mu\\)).\nThe dispersion of a sample is known as the standard deviation, or \\(SD\\), or sometimes just \\(s\\).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#standard-error",
+    "href": "lec8.html#standard-error",
+    "title": "Sampling Theory",
+    "section": "Standard Error",
+    "text": "Standard Error\nA Population Deviation\n\n\\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\n\n\\(\\sigma\\) = Population Standard Deviation\n\\(n\\) - Sample Size\n\nThe dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-but-candy",
+    "href": "lec8.html#sampling-theory-but-candy",
+    "title": "Sampling Theory",
+    "section": "Sampling theory, but candy",
+    "text": "Sampling theory, but candy\n\n\n\n\n\nThis is a jar of 500 pieces of candy. There are 5 flavors of candy.\nIf I took scoops of 25 pieces of candy at a time, on average how many oranges would I get per scoop?\n\nI take a first scoop and 5 of them are orange.\nShould I expect to get 5 oranges on average?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-theory-11",
+    "href": "lec8.html#sampling-theory-11",
+    "title": "Sampling Theory",
+    "section": "Sampling Theory",
+    "text": "Sampling Theory\nWith Candy!\n\n\n\nIs it safe to assume the 5-Orange scoop came from the Candy Jar?\n\nProbably!\n\nI take a scoop of 25 pieces of candy, and all 25 of them are orange.\nDid this scoop come from the Candy Jar?\n\nProbably not",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#null-hypothesis-significance-testing",
+    "href": "lec8.html#null-hypothesis-significance-testing",
+    "title": "Sampling Theory",
+    "section": "Null Hypothesis Significance Testing",
+    "text": "Null Hypothesis Significance Testing\nNHST\nA hypothesis is a testable prediction of what will happen in our experiment that:\n\nNames of the variables (independent and dependent)\nClearly contrasts the groups",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#nhst-1",
+    "href": "lec8.html#nhst-1",
+    "title": "Sampling Theory",
+    "section": "NHST",
+    "text": "NHST\nNull Hypothesis\n\nThe Null Hypothesis states that nothing will happen or that there is no difference between. \\(H_0\\)\nNull means zero, nothing\nNames the variables (independent and dependent)\nIndicates or suggests no difference between the groups\n\n\\(\\mu_1 = \\mu_2\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#nhst-2",
+    "href": "lec8.html#nhst-2",
+    "title": "Sampling Theory",
+    "section": "NHST",
+    "text": "NHST\nAlternative Hypothesis\nAn Alternative Hypothesis is a testable prediction of what will happen in our experiment that:\n\nNames the variables (independent and dependent)\nClearly contrasts the groups.\nThe Alternative Hypothesis is written as \\(H_1/H_A\\)\n\n\\(\\mu_1 &gt; \\mu_2\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-question",
+    "href": "lec8.html#the-question",
+    "title": "Sampling Theory",
+    "section": "The Question",
+    "text": "The Question\n\nEvery year we run a huge campus climate survey. We can’t ask all 10,000 students, so we draw a sample. Now imagine each of you is in charge of your own survey, each collecting 400 students’ responses.\n\n\nFSC has 10,000 students.\nAsking all 10,000 is not practical.\nEach of the 25 of us collects a sample of 400 students.\nWe calculate the average belonging score in each sample.\n\nThese averages are called sample means.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-variation",
+    "href": "lec8.html#sampling-variation",
+    "title": "Sampling Theory",
+    "section": "Sampling Variation",
+    "text": "Sampling Variation\n\n\n\nSample means will not be identical.\nWhy?\n\nDifferent mixes of students (e.g., commuters, first-years, club leaders).\n\nThis variation from sample to sample is called sampling variation.\n\nIt’s the foundation of sampling theory.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#sampling-distribution-1",
+    "href": "lec8.html#sampling-distribution-1",
+    "title": "Sampling Theory",
+    "section": "Sampling Distribution",
+    "text": "Sampling Distribution\n\nIf we plot all 25 sample means from FSC:\n\nMost cluster near the true population mean.\nSome fall higher or lower by chance.\n\nThis plot is the sampling distribution of the mean.\nAs samples get larger, the sampling distribution becomes narrower.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#comparing-two-schools",
+    "href": "lec8.html#comparing-two-schools",
+    "title": "Sampling Theory",
+    "section": "Comparing Two Schools",
+    "text": "Comparing Two Schools\n\nWe want to compare FSC students’ sense of belonging to that at another college. We draw 25 samples of 400 at each school.\n\n\nWe repeat the study at John Jacob Jinglehymer Smith University (JJJSMU).\nWe now have two sampling distributions:\n\nOne for FSC\nOne for JJJSMU",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#comparing-two-schools-1",
+    "href": "lec8.html#comparing-two-schools-1",
+    "title": "Sampling Theory",
+    "section": "Comparing Two Schools",
+    "text": "Comparing Two Schools\n\n\n\nComparing the two distributions:\n\nDifferences in the centers suggest differences in population belonging.\nDifferences in the spread reflect sampling error.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#comparing-two-schools-2",
+    "href": "lec8.html#comparing-two-schools-2",
+    "title": "Sampling Theory",
+    "section": "Comparing Two Schools",
+    "text": "Comparing Two Schools\nTwo Distributions",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#why-it-matters",
+    "href": "lec8.html#why-it-matters",
+    "title": "Sampling Theory",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nSampling distributions let us:\n\nEstimate population parameters.\n\nWhat is the mean ‘likely’ to be?\n\nUnderstand and quantify sampling error.\n\nHow can we explain sampling variation\n\nCompare populations in a statistically rigorous way.\n\nDid a datapoint (or statistics) come from the same population?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#probability-3",
+    "href": "lec8.html#probability-3",
+    "title": "Sampling Theory",
+    "section": "Probability",
+    "text": "Probability\nA Refresher",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#p-real-and-p-null",
+    "href": "lec8.html#p-real-and-p-null",
+    "title": "Sampling Theory",
+    "section": "P-Real and P-Null",
+    "text": "P-Real and P-Null\nAlternative and Null",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-lady-tasting-tea",
+    "href": "lec8.html#the-lady-tasting-tea",
+    "title": "Sampling Theory",
+    "section": "The Lady Tasting Tea",
+    "text": "The Lady Tasting Tea\nThe Story\n\n\n\nA lady declares that by tasting a cup of tea made with milk she can discriminate whether the milk or the tea infusion was first added to the cup. We will consider the problem of designing an experiment by means of which this assertion can be tested. […] [It] consists in mixing eight cups of tea, four in one way and four in the other, and presenting them to the subject for judgment in a random order. The subject has been told in advance of that the test will consist, namely, that she will be asked to taste eight cups, that these shall be four of each kind […]. — Fisher, 1935.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-lady-tasting-tea-1",
+    "href": "lec8.html#the-lady-tasting-tea-1",
+    "title": "Sampling Theory",
+    "section": "The Lady Tasting Tea",
+    "text": "The Lady Tasting Tea\nThe Story\n\n\n\nA lady claimed she could tell whether milk or tea was poured first.\nFisher designed an experiment:\n\n8 cups of tea\n4 poured milk-first, 4 tea-first\nRandomized order\n\nThe lady must classify each cup.\n\n\n\nA classic example of hypothesis testing\nBased on R.A. Fisher’s 1935 design",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-hypotheses",
+    "href": "lec8.html#the-hypotheses",
+    "title": "Sampling Theory",
+    "section": "The Hypotheses",
+    "text": "The Hypotheses\n\nNull hypothesis (H₀):\n\nThe lady has no special ability — she is just guessing.\n\nAlternative (H₁):\n\nThe lady can tell the difference.\n\nKey idea:\n\nWe begin by assuming H₀ is true.\nWe’ll only reject H₀ if the data are too surprising under H₀.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#possible-outcomes",
+    "href": "lec8.html#possible-outcomes",
+    "title": "Sampling Theory",
+    "section": "Possible Outcomes",
+    "text": "Possible Outcomes\nWe focus on how many cups she classifies correctly.\nFor 8 cups (4 of each), under H₀:\n\n\n\n\n\n\n\n\n\n\n\n\nCorrect\nProbability\n\n\n\n\n8\n1 / 70 ≈ 1.4%\n\n\n7\n16 / 70 ≈ 22.9%\n\n\n6\n36 / 70 ≈ 51.4%\n\n\n5\n16 / 70 ≈ 22.9%\n\n\n4\n1 / 70 ≈ 1.4%",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-test",
+    "href": "lec8.html#the-test",
+    "title": "Sampling Theory",
+    "section": "The Test",
+    "text": "The Test\n\nFisher’s original rule: Reject H₀ only if she gets all 8 correct.\nUnder H₀: \\({8 \\choose 4} = \\frac{8!}{4!(8-4)} = 70\\)\n\nSince this is less than 5%, it’s rare enough to count as evidence against H₀.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#decision-interpretation",
+    "href": "lec8.html#decision-interpretation",
+    "title": "Sampling Theory",
+    "section": "Decision & Interpretation",
+    "text": "Decision & Interpretation\n\nIf 8 / 8 correct → Reject H₀\n\nSuggests evidence she can tell the difference.\n\n\nOtherwise → Fail to reject H₀\n\nNo convincing evidence of ability.\n\n\n\n\nWe never prove the alternative; we only judge whether the data are too unlikely under the null.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#the-logic",
+    "href": "lec8.html#the-logic",
+    "title": "Sampling Theory",
+    "section": "The Logic",
+    "text": "The Logic\n\nAssume a null model.\nCompute how likely the observed data are under that model.\nIf that probability (p-value) is very small → reject the null.\n\n\nThis logic is the same for t-tests, z-tests, and many modern methods.\n\n\n# Probability of getting all 8 correct under H₀ \nk &lt;- 0:4 \n\ndhyper(k, m = 4, n = 4, k = 4)\n\n[1] 0.01428571 0.22857143 0.51428571 0.22857143 0.01428571",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis",
+    "href": "lec8.html#hypothesis",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nProfessor Brocker wants to know if Millennials enjoy the Netflix Original, Dark significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).\n\n\nHypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-1",
+    "href": "lec8.html#hypothesis-1",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nProfessor Brocker wants to know if Millennials enjoy the Netflix Original, Dark significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).\n\n\nNull Hypothesis: These is no difference in the DV between the IV groups.\nAlternative Hypothesis: The experimental group is significantly different from the control group on the DV.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-2",
+    "href": "lec8.html#hypothesis-2",
+    "title": "Sampling Theory",
+    "section": "Hypothesis:",
+    "text": "Hypothesis:\nExample\n\nProfessor Brocker wants to know if Millennials enjoy the Netflix Original, Dark significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).\n\n\nAlternative Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.\nNull Hypothesis: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing",
+    "href": "lec8.html#hypothesis-testing",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample 1\n\nProfessor Brocker wants to know if giving his students coffee will improve their exam scores. He randomly assigns 13 of his 26 students to drink a doubleshot; he calls this the experimental group. The other 13 students drink decaf (a placebo); he calls this the control group.\n\n\n\\(H_0\\):\n\n\\(\\mu_\\text{Coffee} = \\mu_\\text{Decaf}\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_{\\text{Coffee}} &gt; \\mu_{\\text{Decaf}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-1",
+    "href": "lec8.html#hypothesis-testing-1",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample 2\n\nEsmeralda gives an anti-depressant to 100 individuals suffering from depression. She gives another 100 individuals a placebo. After 2 months, we measure their depression.\n\n\n\\(H_0\\):\n\n\\(\\mu_{\\text{SSRI}} = \\mu_{\\text{Decaf}}\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_{\\text{SSRI}} &lt; \\mu_{\\text{Placebo}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-2",
+    "href": "lec8.html#hypothesis-testing-2",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nPractice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\n\\(H_0\\):\n\n\\(\\mu_{\\text{Exercise}} = \\mu_{\\text{No Exercise}}\\)\n\n\\(H_1/H_A\\):\n\n\\(\\mu_{\\text{Exercise}} &gt; \\mu_{\\text{No Exercise}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#rejects-and-failures",
+    "href": "lec8.html#rejects-and-failures",
+    "title": "Sampling Theory",
+    "section": "Rejects and Failures",
+    "text": "Rejects and Failures\n\nIn science, we do not say that we proved anything.\n\nNothing is ever really proven.\n\nOur findings will be stated in terms of the Null Hypothesis \\(H_0\\).\nThe Null Hypothesis is that there are no differences between the groups.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-practice",
+    "href": "lec8.html#hypothesis-testing-practice",
+    "title": "Sampling Theory",
+    "section": "Hypothesis testing practice",
+    "text": "Hypothesis testing practice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity.\n\n\n\\(H_0\\): There are no differences in working memory capacity between the experimental and control groups.\n\\(H_1/H_A\\): Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#rejects-and-failures-1",
+    "href": "lec8.html#rejects-and-failures-1",
+    "title": "Sampling Theory",
+    "section": "Rejects and Failures",
+    "text": "Rejects and Failures\n\nIn science, we do not say that we have proven anything.\nOur findings will be stated in terms of the Null Hypothesis.\nIf there are significant differences between the groups, we Reject the \\(H_0\\).\n\nRejecting is ‘good’.\n\nIf there are No differences between the groups, we Fail to Reject the \\(H_0\\).\n\nFailing is ‘bad’",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-testing-3",
+    "href": "lec8.html#hypothesis-testing-3",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nWhen reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.\n\nIf the groups differ, we reject the null hypothesis:\n\nReject \\(H_0\\).\n\nIf the groups do not differ, we fail:\n\nFail to Reject \\(H_0\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#practice-1",
+    "href": "lec8.html#practice-1",
+    "title": "Sampling Theory",
+    "section": "Practice",
+    "text": "Practice\n\nJonas assigns half of the participants to engage in aerobic exercise for one hour a day 5 days a week for 6 months. The other half of the participants do not exercise for 6 months. At the end of the 6 months, Jonas measures the participants’ working memory capacity. His test is not significant.\n\n\nState Jonas’ findings in terms of the null hypothesis:\nJonas fails to reject the null hypothesis that there is no difference between the experimental and control group in regards to exercising and its effect on working memory",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
+  },
+  {
+    "objectID": "lec8.html#hypothesis-practice",
+    "href": "lec8.html#hypothesis-practice",
+    "title": "Sampling Theory",
+    "section": "Hypothesis Practice",
+    "text": "Hypothesis Practice\nPractice\n\nBrendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look dead using an filter (experimental condition). Brendan then measures all participants’ anxiety about dying and runs a t-test, which is statistically significant.\n\n\nState Brendan’s findings in terms of the null hypothesis:\nBrendan rejects the null hypothesis that states there is no difference in death anxiety betwen participants who view their own face as deceased and those who only view a face on a mortuary table.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Sampling Theory"
+    ]
   }
 ]

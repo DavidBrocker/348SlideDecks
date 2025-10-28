@@ -1,0 +1,2897 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.33">
+
+  <meta name="author" content="Dave Brocker">
+  <title>PSY 348: Statistics for Psychology – Sampling Theory</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-b4e53f31c4d54c0186ec1f0192bd1fac.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+  <script src="site_libs/react-18.2.0/react.min.js"></script>
+  <script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+  <script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+  <script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Sampling Theory</h1>
+  <p class="subtitle">Lecture 7</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dave Brocker 
+</div>
+        <p class="quarto-title-affiliation">
+            Farmingdale State College
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="standard-normal-distribution" class="slide level2">
+<h2>Standard Normal Distribution</h2>
+<p>The 4 properties of a standard normal distribution are:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>They are shaped like a bell (“bell curve”).</p></li>
+<li class="fragment"><p>They are symmetric.</p></li>
+<li class="fragment"><p>They are unimodal.</p></li>
+<li class="fragment"><p>The mean = median = mode.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="statistics" class="slide level2">
+<h2>Statistics</h2>
+<ul>
+<li class="fragment"><p>Descriptive Statistics:</p>
+<ul>
+<li class="fragment"><p>Goal: Describe the sample</p>
+<ul>
+<li class="fragment">Examples: Mean, Standard Deviation</li>
+</ul></li>
+</ul></li>
+<li class="fragment"><p>Inferential Statistics:</p>
+<ul>
+<li class="fragment"><p>Goal: Use the sample to make inferences about the population</p>
+<ul>
+<li class="fragment">t-test</li>
+<li class="fragment">ANOVA</li>
+<li class="fragment">Regression</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="sampling-theory" class="slide level2">
+<h2>Sampling Theory</h2>
+<blockquote>
+<p>Professor Brocker <em>still</em> wants to know how much adults in the US enjoy the Netflix Original, <em>Dark</em>. He has unlimited funds to study this <strong>very</strong> important research question. He hires 30 students to collect the data. Each student has to collect 500 responses to the following question:</p>
+</blockquote>
+</section>
+<section id="sampling-theory-1" class="slide level2">
+<h2>Sampling Theory</h2>
+<blockquote>
+<p>On a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?</p>
+</blockquote>
+
+<img data-src="images/dark.png" class="quarto-figure quarto-figure-center r-stretch" style="border-radius: 15px;" width="419"></section>
+<section id="sampling-theory-2" class="slide level2">
+<h2>Sampling Theory</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Each student asks 500 people how much they enjoy the Netflix Original Dark.</p></li>
+<li class="fragment"><p>How many people did each of you ask?</p>
+<ul>
+<li class="fragment"><span class="math inline">\(30 \times 500 = 15,000\)</span></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb1-5"><a></a><span class="co"># 30 Students in the class</span></span>
+<span id="cb1-6"><a></a>n <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="co"># Each student asks 500 people</span></span>
+<span id="cb1-9"><a></a>full_sample <span class="ot">=</span> n<span class="sc">*</span><span class="dv">500</span></span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co"># Simulate Results</span></span>
+<span id="cb1-12"><a></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">30</span>,</span>
+<span id="cb1-13"><a></a>            <span class="fu">rnorm</span>(<span class="dv">500</span>,<span class="dv">5</span>,<span class="dv">7</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-14"><a></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="st">"S"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-16"><a></a>  <span class="fu">summarize_all</span>(mean) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb1-18"><a></a>                      <span class="at">names_to =</span> <span class="st">"Sample"</span>,</span>
+<span id="cb1-19"><a></a>                      <span class="at">values_to =</span> <span class="st">"Sample Mean"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-20"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-21"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb1-22"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">60</span>),</span>
+<span id="cb1-23"><a></a>    <span class="at">table.font.size =</span> <span class="dv">30</span>,</span>
+<span id="cb1-24"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-25"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-26"><a></a>  <span class="fu">opt_interactive</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="pbpmmganfj" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pbpmmganfj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pbpmmganfj thead, #pbpmmganfj tbody, #pbpmmganfj tfoot, #pbpmmganfj tr, #pbpmmganfj td, #pbpmmganfj th {
+  border-style: none;
+}
+
+#pbpmmganfj p {
+  margin: 0;
+  padding: 0;
+}
+
+#pbpmmganfj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 60%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pbpmmganfj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pbpmmganfj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pbpmmganfj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pbpmmganfj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pbpmmganfj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pbpmmganfj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pbpmmganfj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pbpmmganfj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pbpmmganfj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pbpmmganfj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pbpmmganfj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pbpmmganfj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pbpmmganfj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pbpmmganfj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pbpmmganfj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pbpmmganfj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pbpmmganfj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pbpmmganfj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pbpmmganfj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pbpmmganfj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pbpmmganfj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pbpmmganfj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pbpmmganfj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pbpmmganfj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pbpmmganfj .gt_left {
+  text-align: left;
+}
+
+#pbpmmganfj .gt_center {
+  text-align: center;
+}
+
+#pbpmmganfj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pbpmmganfj .gt_font_normal {
+  font-weight: normal;
+}
+
+#pbpmmganfj .gt_font_bold {
+  font-weight: bold;
+}
+
+#pbpmmganfj .gt_font_italic {
+  font-style: italic;
+}
+
+#pbpmmganfj .gt_super {
+  font-size: 65%;
+}
+
+#pbpmmganfj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pbpmmganfj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pbpmmganfj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pbpmmganfj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pbpmmganfj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pbpmmganfj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pbpmmganfj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pbpmmganfj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pbpmmganfj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div id="pbpmmganfj" class="reactable html-widget" style="width:60%;height:auto;"></div>
+<script type="application/json" data-for="pbpmmganfj">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Sample":["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20","S21","S22","S23","S24","S25","S26","S27","S28","S29","S30"],"Sample Mean":[4.864,4.694,5.37,5.12,4.63,5.188,5.006,5.234,4.782,5.076,5.224,5.24,4.714,5.044,5.154,4.832,5,5.28,5.352,5.364,4.766,5.054,5.572,4.68,4.078,4.744,4.392,4.778,4.892,5.09]},"columns":[{"id":"Sample","name":"Sample","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"Sample Mean","name":"Sample Mean","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"right"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"width":"60%","height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"30px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"pbpmmganfj","dataKey":"9bc621d41c0b4775036c9cdf2e68599e"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="sampling-theory-3" class="slide level2">
+<h2>Sampling Theory</h2>
+<ul>
+<li class="fragment">Once each of you collect <em>500 responses</em>, I ask you to calculate the average answer. So you calculate the mean.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li class="fragment"><p><span class="math inline">\(\bar{x}_1 = \frac{\sum(x_1 + x_2 + x_3+x_4...+ x_{500)}}{500}\)</span></p></li>
+<li class="fragment"><p>They are the means from each of your samples.</p></li>
+<li class="fragment"><p>These are called <strong>Sample Means</strong></p></li>
+</ul>
+</div>
+</section>
+<section id="sampling-theory-4" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="here-is-our-ratings-data">Here is our Ratings Data</h3>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="sampling-theory-5" class="slide level2">
+<h2>Sampling theory</h2>
+<h3 id="what-can-we-do-with-sample-means">What can we do with Sample Means?</h3>
+<ul>
+<li class="fragment"><p>We could calculate the Mean of the Sample Means.</p></li>
+<li class="fragment"><p>We could calculate the standard deviation of the Sample Means.</p></li>
+<li class="fragment"><p>But…it’s theoretical. It doesn’t really exist, but we imagine it’s existence for the sake of <strong>Sampling Theory</strong>.</p></li>
+</ul>
+</section>
+<section id="sampling-distribution" class="slide level2">
+<h2>Sampling Distribution</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>A <strong>Sampling Distribution</strong> is the theoretical distribution of means across every single possible sample.</p></li>
+<li class="fragment"><p>If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="sampling-theory-6" class="slide level2">
+<h2>Sampling Theory</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Except now each value in this distribution no longer represents 1 person/participant.</p></li>
+<li class="fragment"><p>Each value in this distribution represents the average of 1 sample, a Sample Mean.</p>
+<ul>
+<li class="fragment">In our case, each value is the average of <code>30</code> samples of <code>500</code> people.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="new-terminology" class="slide level2">
+<h2>New Terminology</h2>
+<h3 id="sample-mean-and-sample-standard-deviation">Sample Mean and Sample Standard Deviation</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>We previously referred to the average as <span class="math inline">\(\bar{x}\)</span> and the standard deviation as <span class="math inline">\(s\)</span></p></li>
+<li class="fragment"><p>The new terms refer to their specific attributes as a statistic of the sample</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> (pronounced like ‘mew’) represents the population mean</p></li>
+<li class="fragment"><p><span class="math inline">\(\sigma\)</span> represents the population standard deviation</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="jdzzewfwzy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jdzzewfwzy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jdzzewfwzy thead, #jdzzewfwzy tbody, #jdzzewfwzy tfoot, #jdzzewfwzy tr, #jdzzewfwzy td, #jdzzewfwzy th {
+  border-style: none;
+}
+
+#jdzzewfwzy p {
+  margin: 0;
+  padding: 0;
+}
+
+#jdzzewfwzy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jdzzewfwzy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jdzzewfwzy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jdzzewfwzy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jdzzewfwzy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jdzzewfwzy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jdzzewfwzy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jdzzewfwzy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jdzzewfwzy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jdzzewfwzy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jdzzewfwzy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jdzzewfwzy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jdzzewfwzy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jdzzewfwzy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jdzzewfwzy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jdzzewfwzy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jdzzewfwzy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jdzzewfwzy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jdzzewfwzy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jdzzewfwzy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jdzzewfwzy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jdzzewfwzy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jdzzewfwzy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jdzzewfwzy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jdzzewfwzy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jdzzewfwzy .gt_left {
+  text-align: left;
+}
+
+#jdzzewfwzy .gt_center {
+  text-align: center;
+}
+
+#jdzzewfwzy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jdzzewfwzy .gt_font_normal {
+  font-weight: normal;
+}
+
+#jdzzewfwzy .gt_font_bold {
+  font-weight: bold;
+}
+
+#jdzzewfwzy .gt_font_italic {
+  font-style: italic;
+}
+
+#jdzzewfwzy .gt_super {
+  font-size: 65%;
+}
+
+#jdzzewfwzy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jdzzewfwzy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jdzzewfwzy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jdzzewfwzy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jdzzewfwzy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jdzzewfwzy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jdzzewfwzy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jdzzewfwzy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jdzzewfwzy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Term</th>
+<th id="Symbol" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Symbol</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Type</th>
+<th id="Formula" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Formula</th>
+<th id="Relation_to_Sample" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Relation to Sample</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">Sample Mean</td>
+<td class="gt_row gt_left" headers="Symbol"><span class="math display">\[\bar{x}\]</span></td>
+<td class="gt_row gt_left" headers="Type">Sample</td>
+<td class="gt_row gt_left" headers="Formula"><span class="math display">\[\frac{\sum x_i}{n}\]</span></td>
+<td class="gt_row gt_left" headers="Relation_to_Sample">Mean of observed sample</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Term">Sample SD</td>
+<td class="gt_row gt_left gt_striped" headers="Symbol"><span class="math display">\[s\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Type">Sample</td>
+<td class="gt_row gt_left gt_striped" headers="Formula"><span class="math display">\[\sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}}\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Relation_to_Sample">SD of sample values</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">Population Mean</td>
+<td class="gt_row gt_left" headers="Symbol"><span class="math display">\[\mu\]</span></td>
+<td class="gt_row gt_left" headers="Type">Population</td>
+<td class="gt_row gt_left" headers="Formula"><span class="math display">\[\frac{\sum X_i}{N}\]</span></td>
+<td class="gt_row gt_left" headers="Relation_to_Sample">True (unknown) mean</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Term">Population SD</td>
+<td class="gt_row gt_left gt_striped" headers="Symbol"><span class="math display">\[\sigma\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Type">Population</td>
+<td class="gt_row gt_left gt_striped" headers="Formula"><span class="math display">\[\sqrt{\frac{\sum (X_i - \mu)^2}{N}}\]</span></td>
+<td class="gt_row gt_left gt_striped" headers="Relation_to_Sample">True (unknown) SD</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="sampling-theory-7" class="slide level2">
+<h2>Sampling Theory</h2>
+<ul>
+<li class="fragment"><p>Each value in this distribution no longer represents 1 person/participant.</p></li>
+<li class="fragment"><p>Each value in this distribution now represents the average of 1 sample, a Sample Mean.</p></li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="probability" class="slide level2">
+<h2>Probability</h2>
+<ul>
+<li class="fragment">What percentage of participants rated Dark with a z-score of 2 or higher?</li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="probability-1" class="slide level2">
+<h2>Probability</h2>
+<ul>
+<li class="fragment">What percentage of participants rated Dark with a z-score of 2 higher?</li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="probability-2" class="slide level2">
+<h2>Probability</h2>
+<ul>
+<li class="fragment"><p>This is the distribution of <strong>sample means</strong> from adults in the US.</p></li>
+<li class="fragment"><p>What is the probability of any sample having a mean that is a z-score of 2 or higher?</p></li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="assumptions-of-the-normal-curve" class="slide level2">
+<h2>Assumptions of the Normal Curve</h2>
+<ul>
+<li class="fragment"><p>We <em>assume</em> that the distribution of sample means is normal.</p></li>
+<li class="fragment"><p>We use that assumption to gauge the probability of getting a particular mean from a single sample.</p></li>
+<li class="fragment"><p>We can literally find that probability, the same way we did with x-values in a normal distribution.</p></li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<h3 id="let-me-get-uhh.">Let Me Get Uhh….</h3>
+<p>We want to know how much people like pizza.</p>
+<ul>
+<li class="fragment"><p>There are <code>12,500</code> people in our population. Each of the <code>25</code> of us collects a sample of <code>500</code>.</p></li>
+<li class="fragment"><p><span class="math inline">\(500 \times 25 = 12,500\)</span></p></li>
+<li class="fragment"><p>Each of us calculates the mean response from our sample of <code>500</code> people.</p></li>
+<li class="fragment"><p>What do we call those means?</p>
+<ul>
+<li class="fragment">What would it look like if we were to plot it?</li>
+</ul></li>
+</ul>
+</section>
+<section id="pizza-plot" class="slide level2">
+<h2>Pizza Plot</h2>
+<h3 id="visual-example">Visual Example</h3>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li class="fragment"><p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p></li>
+<li class="fragment"><p>What is the probability of picking a mean with a z-score of -1 or less?</p></li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li class="fragment"><p>I randomly choose a mean from our distribution of sample means, about how much people like pizza.</p></li>
+<li class="fragment"><p>What is the probability of picking a mean with a z-score of -1 or less?</p></li>
+</ul>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="sampling-theory-8" class="slide level2">
+<h2>Sampling Theory</h2>
+<blockquote>
+<p>Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.</p>
+</blockquote>
+<ul>
+<li class="fragment">The distribution made up of sample means is <strong>conceptual</strong> and <strong>theoretical</strong></li>
+</ul>
+</section>
+<section id="sampling-theory-9" class="slide level2">
+<h2>Sampling Theory</h2>
+<blockquote>
+<p>Sampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>If that is correct, we can then make guesses about the probability of getting a specific mean.</p></li>
+<li class="fragment"><p>We will use this probability to gauge <strong>significance</strong> of our inferential statistics.</p></li>
+</ul>
+</section>
+<section id="sampling-theory-10" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="new-terminology-again">New Terminology (Again???)</h3>
+<ul>
+<li class="fragment"><p>The mean of a sample is notated as <span class="math inline">\(M\)</span>.</p></li>
+<li class="fragment"><p>The mean of a population is notated as (<span class="math inline">\(\mu\)</span>).</p></li>
+<li class="fragment"><p>The dispersion of a sample is known as the standard deviation, or <span class="math inline">\(SD\)</span>, or sometimes just <span class="math inline">\(s\)</span>.</p></li>
+</ul>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard Error</h2>
+<h3 id="a-population-deviation">A Population Deviation</h3>
+<ul>
+<li class="fragment"><p><span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\sigma\)</span> = Population Standard Deviation</p></li>
+<li class="fragment"><p><span class="math inline">\(n\)</span> - Sample Size</p></li>
+</ul></li>
+<li class="fragment"><p>The dispersion of a population cannot be a “deviation” because we don’t actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).</p></li>
+</ul>
+</section>
+<section id="sampling-theory-but-candy" class="slide level2">
+<h2>Sampling theory, but candy</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/candyjar.png" style="border-radius: 20px;"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>This is a jar of <code>500</code> pieces of candy. There are <code>5</code> flavors of candy.</p></li>
+<li class="fragment"><p>If I took scoops of <code>25</code> pieces of candy at a time, on average how many oranges would I get per scoop?</p>
+<ul>
+<li class="fragment"><p>I take a first scoop and 5 of them are orange.</p></li>
+<li class="fragment"><p>Should I expect to get 5 oranges on average?</p></li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section id="sampling-theory-11" class="slide level2">
+<h2>Sampling Theory</h2>
+<h3 id="with-candy">With Candy!</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Is it safe to assume the <code>5</code>-Orange scoop came from the Candy Jar?</p>
+<ul>
+<li class="fragment">Probably!</li>
+</ul></li>
+<li class="fragment"><p>I take a scoop of <code>25</code> pieces of candy, and all <code>25</code> of them are orange.</p></li>
+<li class="fragment"><p>Did this scoop come from the Candy Jar?</p>
+<ul>
+<li class="fragment">Probably not</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="null-hypothesis-significance-testing" class="slide level2">
+<h2>Null Hypothesis Significance Testing</h2>
+<h3 id="nhst">NHST</h3>
+<p>A hypothesis is a testable prediction of what will happen in our experiment that:</p>
+<ul>
+<li class="fragment"><p>Names of the variables (independent and dependent)</p></li>
+<li class="fragment"><p>Clearly contrasts the groups</p></li>
+</ul>
+</section>
+<section id="nhst-1" class="slide level2">
+<h2>NHST</h2>
+<h3 id="null-hypothesis">Null Hypothesis</h3>
+<ul>
+<li class="fragment"><p>The Null Hypothesis states that nothing will happen or that there is no difference between. <span class="math inline">\(H_0\)</span></p></li>
+<li class="fragment"><p>Null means zero, nothing</p></li>
+<li class="fragment"><p>Names the variables (independent and dependent)</p></li>
+<li class="fragment"><p>Indicates or suggests no difference between the groups</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_1 = \mu_2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="nhst-2" class="slide level2">
+<h2>NHST</h2>
+<h3 id="alternative-hypothesis">Alternative Hypothesis</h3>
+<p>An <strong>Alternative Hypothesis</strong> is a testable prediction of what will happen in our experiment that:</p>
+<ul>
+<li class="fragment"><p>Names the variables (independent and dependent)</p></li>
+<li class="fragment"><p>Clearly contrasts the groups.</p></li>
+<li class="fragment"><p>The Alternative Hypothesis is written as <span class="math inline">\(H_1/H_A\)</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_1 &gt; \mu_2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-question" class="slide level2">
+<h2><strong>The Question</strong></h2>
+<blockquote>
+<p>Every year we run a huge campus climate survey. We can’t ask all 10,000 students, so we draw a sample. Now imagine each of <em>you</em> is in charge of your own survey, each collecting 400 students’ responses.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>FSC has <strong>10,000 students</strong>.</p></li>
+<li class="fragment"><p>Asking all 10,000 is not practical.</p></li>
+<li class="fragment"><p>Each of the <strong>25 of us</strong> collects a <strong>sample of 400 students</strong>.</p></li>
+<li class="fragment"><p>We calculate the <strong>average belonging score</strong> in each sample.</p>
+<ul>
+<li class="fragment">These averages are called <strong>sample means</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="sampling-variation" class="slide level2">
+<h2><strong>Sampling Variation</strong></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Sample means will <strong>not be identical</strong>.</p></li>
+<li class="fragment"><p>Why?</p>
+<ul>
+<li class="fragment">Different mixes of students (e.g., commuters, first-years, club leaders).</li>
+</ul></li>
+<li class="fragment"><p>This variation from sample to sample is called <strong>sampling variation</strong>.</p>
+<ul>
+<li class="fragment">It’s the foundation of <strong>sampling theory</strong>.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="sampling-distribution-1" class="slide level2">
+<h2>Sampling Distribution</h2>
+<ul>
+<li class="fragment"><p>If we plot all <strong>25 sample means</strong> from FSC:</p>
+<ul>
+<li class="fragment"><p>Most cluster near the <strong>true population mean</strong>.</p></li>
+<li class="fragment"><p>Some fall higher or lower by chance.</p></li>
+</ul></li>
+<li class="fragment"><p>This plot is the <strong>sampling distribution of the mean</strong>.</p></li>
+<li class="fragment"><p>As samples get larger, the sampling distribution becomes <strong>narrower</strong>.</p></li>
+</ul>
+</section>
+<section id="comparing-two-schools" class="slide level2">
+<h2><strong>Comparing Two Schools</strong></h2>
+<blockquote>
+<p>We want to compare FSC students’ sense of belonging to that at another college. We draw 25 samples of 400 at each school.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>We repeat the study at <strong>John Jacob Jinglehymer Smith University (JJJSMU)</strong>.</p></li>
+<li class="fragment"><p>We now have <strong>two sampling distributions</strong>:</p>
+<ul>
+<li class="fragment"><p>One for FSC</p></li>
+<li class="fragment"><p>One for JJJSMU</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="comparing-two-schools-1" class="slide level2">
+<h2>Comparing Two Schools</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Comparing the two distributions:</p>
+<ul>
+<li class="fragment"><p>Differences in the <strong>centers</strong> suggest differences in population belonging.</p></li>
+<li class="fragment"><p>Differences in the <strong>spread</strong> reflect sampling error.</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec8_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="comparing-two-schools-2" class="slide level2">
+<h2>Comparing Two Schools</h2>
+<h3 id="two-distributions">Two Distributions</h3>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section id="why-it-matters" class="slide level2">
+<h2><strong>Why It Matters</strong></h2>
+<h3 id="sampling-distributions-let-us">Sampling distributions let us:</h3>
+<ul>
+<li class="fragment"><p>Estimate population parameters.</p>
+<ul>
+<li class="fragment">What is the mean ‘likely’ to be?</li>
+</ul></li>
+<li class="fragment"><p>Understand and quantify <strong>sampling error</strong>.</p>
+<ul>
+<li class="fragment">How can we explain sampling variation</li>
+</ul></li>
+<li class="fragment"><p>Compare populations in a statistically rigorous way.</p>
+<ul>
+<li class="fragment">Did a datapoint (or statistics) come from the same population?</li>
+</ul></li>
+</ul>
+</section>
+<section id="probability-3" class="slide level2">
+<h2>Probability</h2>
+<h3 id="a-refresher">A Refresher</h3>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-18-1.gif" class="r-stretch"></section>
+<section id="p-real-and-p-null" class="slide level2">
+<h2>P-Real and P-Null</h2>
+<h3 id="alternative-and-null">Alternative and Null</h3>
+
+<img data-src="lec8_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
+<section id="the-lady-tasting-tea" class="slide level2">
+<h2>The Lady Tasting Tea</h2>
+<h3 id="the-story">The Story</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quote">
+<p>A lady declares that by tasting a cup of tea made with milk she can discriminate whether the milk or the tea infusion was first added to the cup. We will consider the problem of designing an experiment by means of which this assertion can be tested. […] [It] consists in mixing eight cups of tea, four in one way and four in the other, and presenting them to the subject for judgment in a random order. The subject has been told in advance of that the test will consist, namely, that she will be asked to taste eight cups, that these shall be four of each kind […]. — Fisher, 1935.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/teaexperiment.png" style="border-radius: 30px;"></p>
+</div></div>
+</section>
+<section id="the-lady-tasting-tea-1" class="slide level2">
+<h2>The Lady Tasting Tea</h2>
+<h3 id="the-story-1">The Story</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment">A lady claimed she could tell whether <strong>milk or tea was poured first</strong>.</li>
+<li class="fragment">Fisher designed an experiment:
+<ul>
+<li class="fragment">8 cups of tea</li>
+<li class="fragment">4 poured milk-first, 4 tea-first</li>
+<li class="fragment"><strong>Randomized order</strong></li>
+</ul></li>
+<li class="fragment">The lady must classify each cup.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/teaexperiment.png"></p>
+<p>A classic example of hypothesis testing<br>
+<em>Based on R.A. Fisher’s 1935 design</em></p>
+</div></div>
+</section>
+<section id="the-hypotheses" class="slide level2">
+<h2>The Hypotheses</h2>
+<ul>
+<li class="fragment"><p><strong>Null hypothesis (H₀):</strong></p>
+<ul>
+<li class="fragment">The lady has <strong>no special ability</strong> — she is just guessing.</li>
+</ul></li>
+<li class="fragment"><p><strong>Alternative (H₁):</strong></p>
+<ul>
+<li class="fragment">The lady <strong>can tell the difference</strong>.</li>
+</ul></li>
+<li class="fragment"><p><strong>Key idea:</strong></p>
+<ul>
+<li class="fragment"><p>We begin by assuming H₀ is true.</p></li>
+<li class="fragment"><p>We’ll only reject H₀ if the data are <em>too surprising</em> under H₀.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="possible-outcomes" class="slide level2">
+<h2>Possible Outcomes</h2>
+<p>We focus on <strong>how many cups she classifies correctly</strong>.</p>
+<p>For 8 cups (4 of each), under H₀:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/teachoices.png"></p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="ytwrshiady" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ytwrshiady table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ytwrshiady thead, #ytwrshiady tbody, #ytwrshiady tfoot, #ytwrshiady tr, #ytwrshiady td, #ytwrshiady th {
+  border-style: none;
+}
+
+#ytwrshiady p {
+  margin: 0;
+  padding: 0;
+}
+
+#ytwrshiady .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 80%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ytwrshiady .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ytwrshiady .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ytwrshiady .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ytwrshiady .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ytwrshiady .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ytwrshiady .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ytwrshiady .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ytwrshiady .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ytwrshiady .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ytwrshiady .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ytwrshiady .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ytwrshiady .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ytwrshiady .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ytwrshiady .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytwrshiady .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ytwrshiady .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ytwrshiady .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ytwrshiady .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytwrshiady .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ytwrshiady .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytwrshiady .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ytwrshiady .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytwrshiady .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ytwrshiady .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytwrshiady .gt_left {
+  text-align: left;
+}
+
+#ytwrshiady .gt_center {
+  text-align: center;
+}
+
+#ytwrshiady .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ytwrshiady .gt_font_normal {
+  font-weight: normal;
+}
+
+#ytwrshiady .gt_font_bold {
+  font-weight: bold;
+}
+
+#ytwrshiady .gt_font_italic {
+  font-style: italic;
+}
+
+#ytwrshiady .gt_super {
+  font-size: 65%;
+}
+
+#ytwrshiady .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ytwrshiady .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ytwrshiady .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ytwrshiady .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ytwrshiady .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ytwrshiady .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ytwrshiady .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ytwrshiady .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ytwrshiady div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Correct" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Correct</th>
+<th id="Probability" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Probability</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Correct">8</td>
+<td class="gt_row gt_left" headers="Probability">1 / 70 ≈ 1.4%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right gt_striped" headers="Correct">7</td>
+<td class="gt_row gt_left gt_striped" headers="Probability">16 / 70 ≈ 22.9%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Correct">6</td>
+<td class="gt_row gt_left" headers="Probability">36 / 70 ≈ 51.4%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right gt_striped" headers="Correct">5</td>
+<td class="gt_row gt_left gt_striped" headers="Probability">16 / 70 ≈ 22.9%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Correct">4</td>
+<td class="gt_row gt_left" headers="Probability">1 / 70 ≈ 1.4%</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="the-test" class="slide level2">
+<h2>The Test</h2>
+<ul>
+<li class="fragment">Fisher’s original rule: <strong>Reject H₀ only if she gets all 8 correct.</strong></li>
+<li class="fragment">Under H₀: <span class="math inline">\({8 \choose 4} = \frac{8!}{4!(8-4)} = 70\)</span></li>
+</ul>
+<p>Since this is less than 5%, it’s rare enough to count as evidence against H₀.</p>
+</section>
+<section id="decision-interpretation" class="slide level2">
+<h2>Decision &amp; Interpretation</h2>
+<ul>
+<li class="fragment"><p><strong>If 8 / 8 correct → Reject H₀</strong></p>
+<ul>
+<li class="fragment">Suggests evidence she can tell the difference.<br>
+</li>
+</ul></li>
+<li class="fragment"><p><strong>Otherwise → Fail to reject H₀</strong></p>
+<ul>
+<li class="fragment">No convincing evidence of ability.</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>We never <em>prove</em> the alternative; we only judge whether the data are too unlikely under the null.</p>
+</blockquote>
+</div>
+</section>
+<section id="the-logic" class="slide level2">
+<h2>The Logic</h2>
+<ol type="1">
+<li class="fragment">Assume a <strong>null model</strong>.</li>
+<li class="fragment">Compute how likely the observed data are under that model.</li>
+<li class="fragment">If that probability (p-value) is very small → reject the null.</li>
+</ol>
+<ul>
+<li class="fragment">This logic is the same for t-tests, z-tests, and many modern methods.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Probability of getting all 8 correct under H₀ </span></span>
+<span id="cb2-2"><a></a>k <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span> </span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="fu">dhyper</span>(k, <span class="at">m =</span> <span class="dv">4</span>, <span class="at">n =</span> <span class="dv">4</span>, <span class="at">k =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01428571 0.22857143 0.51428571 0.22857143 0.01428571</code></pre>
+</div>
+</div>
+</section>
+<section id="hypothesis" class="slide level2">
+<h2>Hypothesis:</h2>
+<h3 id="example-3">Example</h3>
+<blockquote>
+<p>Professor Brocker wants to know if Millennials enjoy the Netflix Original, <em>Dark</em> significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).</p>
+</blockquote>
+<ul>
+<li class="fragment">Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</li>
+</ul>
+</section>
+<section id="hypothesis-1" class="slide level2">
+<h2>Hypothesis:</h2>
+<h3 id="example-4">Example</h3>
+<blockquote>
+<p>Professor Brocker wants to know if Millennials enjoy the Netflix Original, <em>Dark</em> significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>Null Hypothesis: These is no difference in the DV between the IV groups.</p></li>
+<li class="fragment"><p>Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.</p></li>
+</ul>
+</section>
+<section id="hypothesis-2" class="slide level2">
+<h2>Hypothesis:</h2>
+<h3 id="example-5">Example</h3>
+<blockquote>
+<p>Professor Brocker wants to know if Millennials enjoy the Netflix Original, <em>Dark</em> significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><strong>Alternative Hypothesis</strong>: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.</p></li>
+<li class="fragment"><p><strong>Null Hypothesis</strong>: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.</p></li>
+</ul>
+</section>
+<section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<h3 id="example-1-1">Example 1</h3>
+<blockquote>
+<p>Professor Brocker wants to know if giving his students coffee will improve their exam scores. He <strong>randomly</strong> assigns <code>13</code> of his <code>26</code> students to drink a doubleshot; he calls this the <strong>experimental</strong> group. The other <code>13</code> students drink decaf (a placebo); he calls this the <strong>control</strong> group.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_\text{Coffee} = \mu_\text{Decaf}\)</span></li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_{\text{Coffee}} &gt; \mu_{\text{Decaf}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-1" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<h3 id="example-2-1">Example 2</h3>
+<blockquote>
+<p>Esmeralda gives an anti-depressant to <code>100</code> individuals suffering from depression. She gives another <code>100</code> individuals a placebo. After <code>2</code> months, we measure their depression.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_{\text{SSRI}} = \mu_{\text{Decaf}}\)</span></li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_{\text{SSRI}} &lt; \mu_{\text{Placebo}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-2" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<h3 id="practice">Practice</h3>
+<blockquote>
+<p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_{\text{Exercise}} = \mu_{\text{No Exercise}}\)</span></li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\mu_{\text{Exercise}} &gt; \mu_{\text{No Exercise}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="rejects-and-failures" class="slide level2">
+<h2>Rejects and Failures</h2>
+<ul>
+<li class="fragment"><p>In science, we <strong>do not</strong> say that we proved anything.</p>
+<ul>
+<li class="fragment">Nothing is ever really proven.</li>
+</ul></li>
+<li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis <span class="math inline">\(H_0\)</span>.</p></li>
+<li class="fragment"><p>The Null Hypothesis is that there are no differences between the groups.</p></li>
+</ul>
+</section>
+<section id="hypothesis-testing-practice" class="slide level2">
+<h2>Hypothesis testing practice</h2>
+<blockquote>
+<p>Jonas assigns <em>half</em> of the participants to engage in aerobic exercise for <strong>one hour a day 5 days a week for 6 months</strong>. The other half of the participants do not exercise for <strong>6 months</strong>. At the end of the 6 months, Jonas measures the participants’ <strong>working memory capacity</strong>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0\)</span>: There are no differences in working memory capacity between the experimental and control groups.</p></li>
+<li class="fragment"><p><span class="math inline">\(H_1/H_A\)</span>: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.</p></li>
+</ul>
+</section>
+<section id="rejects-and-failures-1" class="slide level2">
+<h2>Rejects and Failures</h2>
+<ul>
+<li class="fragment"><p>In science, we do not say that we have proven anything.</p></li>
+<li class="fragment"><p>Our findings will be stated in terms of the Null Hypothesis.</p></li>
+<li class="fragment"><p>If there are <strong>significant differences</strong> between the groups, we <strong>Reject the</strong> <span class="math inline">\(H_0\)</span>.</p>
+<ul>
+<li class="fragment">Rejecting is ‘good’.</li>
+</ul></li>
+<li class="fragment"><p>If there are <strong>No differences</strong> between the groups, we <strong>Fail to Reject the</strong> <span class="math inline">\(H_0\)</span>.</p>
+<ul>
+<li class="fragment">Failing is ‘bad’</li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-3" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<p>When reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.</p>
+<ul>
+<li class="fragment"><p>If the groups differ, we reject the null hypothesis:</p>
+<ul>
+<li class="fragment"><strong>Reject</strong> <span class="math inline">\(H_0\)</span>.</li>
+</ul></li>
+<li class="fragment"><p>If the groups do not differ, we fail:</p>
+<ul>
+<li class="fragment"><strong>Fail to Reject</strong> <span class="math inline">\(H_0\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="practice-1" class="slide level2">
+<h2>Practice</h2>
+<blockquote>
+<p>Jonas assigns half of the participants to engage in aerobic exercise for one hour a day <code>5</code> days a week for <code>6</code> months. The other half of the participants do not exercise for <code>6</code> months. At the end of the <code>6</code> months, Jonas measures the participants’ working memory capacity. His test is not significant.</p>
+</blockquote>
+<ul>
+<li class="fragment">State Jonas’ findings in terms of the null hypothesis:</li>
+<li class="fragment"><em>Jonas fails to reject the null hypothesis that there is no difference between the experimental and control group in regards to exercising and its effect on working memory</em></li>
+</ul>
+</section>
+<section id="hypothesis-practice" class="slide level2">
+<h2>Hypothesis Practice</h2>
+<h3 id="practice-2">Practice</h3>
+<blockquote>
+<p>Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look dead using an filter (experimental condition). Brendan then measures all participants’ anxiety about dying and runs a t-test, which is statistically significant.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>State Brendan’s findings in terms of the null hypothesis:</p></li>
+<li class="fragment"><p><em>Brendan rejects the null hypothesis that states there is no difference in death anxiety betwen participants who view their own face as deceased and those who only view a face on a mortuary table.</em></p></li>
+</ul>
+<!-- ## Practice Problem -->
+<!-- ::: {#example-box} -->
+<!-- > John scores an `87` on a test. If the SD is `2` and the mean is `90`, what percentage scored higher than John? -->
+<!-- ::: -->
+<!-- <button onclick="newExample()"> -->
+<!-- New Example -->
+<!-- </button> -->
+<!-- ```{=html} -->
+<!-- <script> -->
+<!-- const names = ["John","Aisha","Miguel","Sofia","Ethan","Priya","Liam","Zoe","Kai","Amira"]; -->
+<!-- const contexts = [ -->
+<!--   "math test","running race","psychology exam","biology quiz", -->
+<!--   "typing speed challenge","chemistry final","geography test", -->
+<!--   "coding challenge","swimming competition","history pop quiz" -->
+<!-- ]; -->
+<!-- function newExample(){ -->
+<!--   // pick random name and context -->
+<!--   const name = names[Math.floor(Math.random() * names.length)]; -->
+<!--   const context = contexts[Math.floor(Math.random() * contexts.length)]; -->
+<!--   // pick random mean and sd -->
+<!--   const mean = Math.floor(Math.random() * (95 - 70 + 1)) + 70; // 70–95 -->
+<!--   const sd = Math.floor(Math.random() * (6 - 2 + 1)) + 2;      // 2–6 -->
+<!--   // pick score close to mean -->
+<!--   const score = Math.floor(Math.random() * (mean + 10 - (mean - 10) + 1)) + (mean - 10); -->
+<!--   document.getElementById("example-box").innerHTML = -->
+<!--     `<blockquote>${name} scores <code>${score}</code> on a ${context}.  -->
+<!--      If the SD is <code>${sd}</code> and the mean is <code>${mean}</code>, -->
+<!--      what percentage scored higher than ${name}?</blockquote>`; -->
+<!-- } -->
+<!-- </script> -->
+<!-- ``` -->
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
