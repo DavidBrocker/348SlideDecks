@@ -2,12 +2,14 @@
 title: "Analysis of Variance"
 subtitle: "Lecture 12"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
+footer: "PSY 348 - Statistics for Psychology"
 institute: "Farmingdale State College"
 format: 
   revealjs:
     theme: custom.scss
     scrollable: true
+    width: 1600
+    height: 900
     incremental: true   
     touch: true
     chalkboard: true
@@ -30,23 +32,6 @@ editor:
 
 ### ANOVA
 
--   ANOVA, like t-tests, compares the means of different groups to
-    determine if they differ significantly from one another.
-
-## T-tests
-
--   IV [**must be**]{.underline} what two things?
-
--   DV [**must be**]{.underline} what one thing?
-
-## T-tests
-
--   IV [**must be**]{.underline} nominal and have only 2 categories
-
--   DV [**must be**]{.underline} continuous
-
-## AnOVA
-
 ANOVA, like t-tests, compares the means of different groups to determine
 if they differ significantly from one another.
 
@@ -59,20 +44,20 @@ if they differ significantly from one another.
 
 ## ANOVA
 
-## Sampling Theory
-
-We set the critical value so that 5% of the null distribution's area is
-to the right of it.
-
-## ANOVA
-
 There are 3 types of ANOVA:
 
 -   Between subjects
 
+    -   Different participants are exposed to different levels of the iV
+
 -   Within subjects (repeated measures ANOVA)
 
+    -   The same participants are exposed to each level of the IV
+
 -   Mixed designs (between and within together)
+
+    -   Participants experience different levels of one IV and multiple
+        levels of another IV
 
 ## Between subjects ANOVA
 
@@ -81,26 +66,14 @@ There are 3 types of ANOVA:
 > complete a survey to measure their happiness on a scale of `1` to
 > `10`.
 
--   The experimental group has a mean happiness score = `8`
+-   The experimental group has a mean happiness score `8`
 
--   The placebo group mean happiness score = `6`
+-   The placebo group mean happiness score `6`
 
--   The control group mean happiness score = `5`
+-   The control group mean happiness score `5`
 
--   Is the group that drank coffee significantly happier than the other
-    groups?
-
-## Between subjects ANOVA
-
--   If it's all about the means, why is it called Analysis of Variance?
-
-## Between subjects ANOVA
-
--   To compare the means, we are analyzing two types of variance:
-
--   Variance among all of the scores *(within group variance)*
-
--   Variance *between the groups (between group variance).*
+    -   Is the group that drank coffee `significantly` happier than the
+        other groups?
 
 ## Between subjects ANOVA
 
@@ -116,16 +89,11 @@ cof <-
   tibble(
   condition = 
     rep(c("Coffee","Placebo","Control"), 
-        each = 10),
-  score = c(rnorm(10,7.5,1),
-            rnorm(10,5,1),
-            rnorm(10,5,2))
+        each = 30),
+  score = c(rnorm(30,7.5,1),
+            rnorm(30,5,1),
+            rnorm(30,5,2))
   ) 
-cof |> 
-    tbl_summary(
-      by = "condition",
-      statistic = list(all_continuous() ~ c("{mean}({sd})"))
-      ) 
 
 cof |> 
   ggplot(aes(condition, score, color = condition)) + 
@@ -134,16 +102,57 @@ cof |>
     fun.data = "mean_se",
     aes(group = 1),
     geom = "line",
-    color = "black"
+    color = "black",
+    show.legend = FALSE
   ) +
     stat_summary(
     fun.data = "mean_se",
     geom = "errorbar",
     width = .2
   ) + 
-  theme_minimal()
-
+  theme_minimal(
+    base_size = 20,
+    paper = "ghostwhite",
+    ink = "black") + 
+  labs(
+    x = "\nCondition",
+    y = "Score\n"
+  ) +
+  theme_sub_panel(
+    grid.major = element_blank()
+  )
 ```
+
+## Between subjects ANOVA
+
+Is the variance between the green, red, and blue dots greater than the
+variance across all of the dots?
+
+```{r}
+cof |> 
+    tbl_summary(
+      by = "condition",
+      statistic = list(all_continuous() ~ c("{mean}({var}, {sd})"))
+      ) |> 
+  as_gt() |> 
+  opt_row_striping() |> 
+  tab_options(
+    table.width = pct(50),
+    table.font.size = 22
+  )
+```
+
+## Between subjects ANOVA
+
+-   If it's all about the means, why is it called Analysis of Variance?
+
+## Between subjects ANOVA
+
+-   To compare the means, we are analyzing two types of variance:
+
+-   Variance among all of the scores *(within group variance)*
+
+-   Variance *between the groups (between group variance).*
 
 ## The F Statistic
 
@@ -151,65 +160,29 @@ cof |>
 
 -   Why do we call it F?
 
-## Between subjects anova
-
-## Between subjects anova
-
-## Between subjects anova
-
-Between subjects anova
-
-Between subjects anova
-
-Between subjects anova
-
-Between subjects anova
+    -   Ronald Fischer ™
 
 ## Calculating F
 
--   Calculating the variance
+-   $\large{F = \frac{MS_B}{MS_W} = \frac{\frac{SS_B}{df_b}}{\frac{SS_W}{df_B}}}$
 
--   ANOVA looks at variance. How do we calculate the Variance?
+-   $\large{SS_B = \sum_{j=1}^{k} n_j\big(\bar{y}{j} - \bar{y}{\cdot\cdot}\big)^2}$
 
-## Calculating the variance
+-   $\large{SS_W = \sum_{j=1}^{k}\sum_{i=1}^{n_j}\big(y_{ij} - \bar{y}_{j}\big)^2}$
 
-ANOVA looks at variance. To calculate the Variance:
+-   $\large{df_B = k-1}$
 
--   Calculate the mean.
+-   $\large{df_W = N - k}$
 
--   Subtract the mean from each x-value - what is this called?
+## Calculating F
 
-## Calculating the variance
-
-ANOVA looks at variance. To calculate the Variance:
-
--   Calculate the mean.
-
--   Subtract the mean from each x-value (deviation score).
-
--   Subtract the mean from each x-value (deviation score).
-
--   Square the deviation scores.
-
--   Take the sum of the squared deviations - what is this called?
-
-## Calculating the variance
+### Calculating the variance
 
 ANOVA looks at variance. To calculate the Variance:
 
 -   Calculate the mean.
 
 -   Subtract the mean from each x-value (deviation score).
-
--   Square the deviation scores.
-
--   Take the sum of the squared deviations (Sum of Squared Deviations).
-
-## Calculating the variance
-
-ANOVA looks at variance. To calculate the Variance:
-
--   Calculate the mean.
 
 -   Subtract the mean from each x-value (deviation score).
 
@@ -219,24 +192,12 @@ ANOVA looks at variance. To calculate the Variance:
 
 -   Divide by (n-1) - what is this called?
 
-## Calculating the variance in ANOVA
-
-To calculate the Variance in ANOVA:
-
--   Calculate the mean.
-
--   Subtract the mean from each x-value (deviation score).
-
--   Square the deviation scores.
-
--   Take the sum of the squared deviations (Sum of Squared Deviations).
-
 -   Divide by (degrees of freedom).
 
-**This is the variance**, but in ANOVA we also call it a Mean Squared
-(MS).
+    -   **This is the variance**, but in ANOVA we also call it a Mean
+        Squared (MS).
 
-## Calculating means squared (MS)
+## Calculating means squared (SS)
 
 -   Calculate the SS.
 
