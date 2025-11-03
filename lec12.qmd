@@ -28,6 +28,78 @@ editor:
     wrap: 72
 ---
 
+## Recap
+
+### How Did We Get Here?
+
+```{dot}
+graph {
+  
+  node[shape = box, style = rounded]
+  bgcolor="#E9F1EC"
+  label="Independent Variable: \nCaffeine Content"
+  labelloc="t"
+
+  subgraph cluster_tt {
+  bgcolor="white"
+  style = rounded
+  label="T Test"
+
+    Coffee_T [label="Coffee"]
+    Decaf_T [label="Decaf"]
+  }
+}
+```
+
+## Recap
+
+### How Did We Get Here?
+
+```{dot}
+graph {
+
+  node[shape = box, style = rounded]
+  bgcolor="#E9F1EC"
+  label="Independent Variable \nCaffeine Content"
+  labelloc="t"
+
+  subgraph cluster_tt {
+    style = rounded
+    bgcolor="white"
+    label="T Test"
+
+    Coffee_T [label="Coffee"]
+    Decaf_T [label="Decaf"]
+    
+    Stress_T[label="Stress"]
+    Stress_T2[label="Stress"]
+    
+    Coffee_T -- Stress_T
+    Decaf_T  -- Stress_T2
+    
+  }
+
+  subgraph cluster_anova {
+    style = rounded
+    label="ANOVA"
+    bgcolor="white"
+    Coffee_A [label="Coffee"]
+    Decaf_A [label="Decaf"]
+    Water [label="Water"]
+    
+    Stress_A1[label="Stress"]
+    Stress_A2[label="Stress"]
+    Stress_A3[label="Stress"]
+    
+    Coffee_A -- Stress_A1
+    Decaf_A -- Stress_A2
+    Water -- Stress_A3
+  }
+
+}
+
+```
+
 ## Analysis of Variance
 
 ### ANOVA
@@ -35,12 +107,44 @@ editor:
 ANOVA, like t-tests, compares the means of different groups to determine
 if they differ significantly from one another.
 
--   ANOVA can examine independent variables with [**more than 2
-    groups**]{.underline}.
+::::: columns
+::: {.column width="50%"}
+-   ANOVA can examine independent variables with \[**more than 2
+    groups**\].
 
 -   ANOVA can also be used for just 2 groups.
+:::
 
--   It's more robust than t-tests.
+::: {.column width="50%"}
+```{dot}
+graph {
+
+  node[shape = box, style = rounded]
+  bgcolor="#E9F1EC"
+  label="Independent Variable \nCaffeine Content"
+  labelloc="t"
+
+  subgraph cluster_anova {
+    style = rounded
+    label="ANOVA"
+    bgcolor="white"
+    Coffee_A [label="Coffee"]
+    Decaf_A [label="Decaf"]
+    Water [label="Water"]
+    
+    Stress_A1[label="Stress"]
+    Stress_A2[label="Stress"]
+    Stress_A3[label="Stress"]
+    
+    Coffee_A -- Stress_A1
+    Decaf_A -- Stress_A2
+    Water -- Stress_A3
+  }
+
+}
+```
+:::
+:::::
 
 ## ANOVA
 
@@ -48,23 +152,175 @@ There are 3 types of ANOVA:
 
 -   Between subjects
 
-    -   Different participants are exposed to different levels of the iV
+    -   Different participants are exposed to different levels of the IV
 
 -   Within subjects (repeated measures ANOVA)
 
     -   The same participants are exposed to each level of the IV
 
--   Mixed designs (between and within together)
+-   Factorial Designs
 
-    -   Participants experience different levels of one IV and multiple
-        levels of another IV
+    -   Participants experience different levels of one IV and levels of
+        another IV
+
+## ANOVA
+
+### Between and Within
+
+```{dot}
+graph {
+
+  node[shape = box, style = rounded]
+  center="t"
+  bgcolor="#E9F1EC"
+  label="ANOVA Types"
+  labelloc="t"
+
+  subgraph cluster_anova {
+    style = rounded
+    label="Between Subjects ANOVA"
+    bgcolor="white"
+    IV
+    
+    Level1[label="IV Level 1"]
+    Level2[label="IV Level 2"]
+    Level3[label="IV Level 3"]
+    
+    Participants1[label = "Participants"]
+    Participants2[label = "Participants"]
+    Participants3[label = "Participants"]
+    
+    IV -- Participants1 -- Level1
+    IV -- Participants2 --Level2
+    IV -- Participants3 --Level3
+    
+  }
+  
+    subgraph cluster_wanova {
+    style = rounded
+    label="Within Subjects ANOVA"
+    bgcolor="white"
+    ParticipantsW [label="Participants"]
+    IVW [label = "IV"]
+    
+    Level1W[label="IV Level 1"]
+    Level2W[label="IV Level 2"]
+    Level3W[label="IV Level 3"]
+    
+    ParticipantsW -- IVW
+    IVW -- Level1W
+    IVW -- Level2W
+    IVW -- Level3W
+    
+  }
+}
+```
+
+## ANOVA
+
+### Factorial (Multiple IV's)
+
+```{dot}
+graph {
+
+  node [shape=box, style=rounded, fontname="Poppins"];
+  bgcolor="#E9F1EC";
+  labelloc="t";
+  label="Factorial ANOVA (3 × 2 Design)";
+
+  # ---- Independent Variable 1 ----
+  subgraph cluster_IV1 {
+    style=rounded;
+    label="IV₁: Type of Beverage";
+    bgcolor="white";
+    
+    IV1_L1 [label="Coffee"];
+    IV1_L2 [label="Decaf"];
+    IV1_L3 [label="Water"];
+  }
+
+  # ---- Independent Variable 2 ----
+  subgraph cluster_IV2 {
+    style=rounded;
+    label="IV₂: Time of Day";
+    bgcolor="white";
+    
+    IV2_L1 [label="Morning"];
+    IV2_L2 [label="Evening"];
+  }
+
+  # ---- Cells (Combinations) ----
+  subgraph cluster_cells {
+    style=rounded;
+    label = ""
+    bgcolor="white";
+    
+    C1 [label="Coffee + Morning"];
+    C2 [label="Coffee + Evening"];
+    C3 [label="Decaf + Morning"];
+    C4 [label="Decaf + Evening"];
+    C5 [label="Water + Morning"];
+    C6 [label="Water + Evening"];
+  }
+
+  # ---- Outcome ----
+  Outcome [label="Stress", shape=ellipse, style=filled, fillcolor="#FFF2CC"];
+
+  # ---- Relationships ----
+  IV1_L1 -- C1;
+  IV1_L1 -- C2;
+  IV1_L2 -- C3;
+  IV1_L2 -- C4;
+  IV1_L3 -- C5;
+  IV1_L3 -- C6;
+  IV2_L2 -- C2;
+  IV2_L1 -- C3;
+  IV2_L2 -- C4;
+  IV2_L1 -- C5;
+  IV2_L2 -- C6;
+
+  # ---- Output Links ----
+  C1 -- Outcome;
+  C2 -- Outcome;
+  C3 -- Outcome;
+  C4 -- Outcome;
+  C5 -- Outcome;
+  C6 -- Outcome;
+
+}
+
+
+```
 
 ## Between subjects ANOVA
 
-> The experimental group drinks caffeinated coffee. The placebo group
-> drinks decaf. The control group drinks water. I ask all `3` groups to
-> complete a survey to measure their happiness on a scale of `1` to
-> `10`.
+### Coffee Example Vol. 2
+
+> A researcher wants to see whether it is the taste of coffee that is
+> causing higher levels of happiness. He assigns 30 people to each
+> condition. The experimental group drinks caffeinated coffee. The
+> placebo group drinks decaf. The control group drinks water. All `3`
+> groups complete a survey to measure their happiness on a scale of `1`
+> to `10`.
+
+-   What is $H_0$?
+
+    -   $H_0: \mu_\text{Coffee} = \mu_\text{Placebo} = \mu_\text{Control}$
+
+-   What is $H_A$?
+
+    -   $H_A: \mu_\text{Coffee} > \mu_{\text{Placebo}} > \mu_\text{Control}$
+
+## Between subjects ANOVA
+
+### Coffee Example Vol. 2
+
+> A researcher wants to see whether it is the taste of coffee that is
+> causing higher levels of happiness. He assigns 30 people to each
+> condition. The experimental group drinks caffeinated coffee. The
+> placebo group drinks decaf. The control group drinks water. All `3`
+> groups complete a survey to measure their happiness on a scale of `1`
+> to `10`.
 
 -   The experimental group has a mean happiness score `8`
 
@@ -72,13 +328,158 @@ There are 3 types of ANOVA:
 
 -   The control group mean happiness score `5`
 
-    -   Is the group that drank coffee `significantly` happier than the
+    -   Is the group that drank coffee significantly happier than the
         other groups?
+
+## Coffee Example Vol. 2
+
+### Visualize
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+tibble(
+  group = c("Coffee","Decaf","Water"),
+  happy = c(8,6,5)
+) |> 
+  ggplot(aes(group,happy, fill = group)) + 
+  geom_col(color = "black") + 
+  theme_minimal() +
+  labs(
+    x = "\nCaffeine Content",
+    y = "Happiness Score\n",
+  )
+```
+
+## Coffee Example Vol. 2
+
+### Why Not Do More T-Tests?
+
+-   Recall that our $\alpha$ level is set at .05.\
+    If we want to find out whether coffee affects happiness, we’d need
+    **three t-tests**:
+
+    -   $t_1: \mu_\text{Coffee} > \mu_\text{Placebo}$
+    -   $t_2: \mu_\text{Coffee} > \mu_\text{Control}$
+    -   $t_3: \mu_\text{Placebo} > \mu_\text{Control}$
+
+## Why Not Do More T-Tests?
+
+### The Problem
+
+-   Each test is done *independently*
+
+-   None accounts for the shared variability across all groups.
+
+-   By running multiple t-tests, we **increase the probability of a
+    false positive (Type I error)** and **ignore the combined
+    structure** of the data.
+
+-   ANOVA solves both problems by analyzing **all groups at once**,
+    partitioning total variance into *between-group variance*
+    (differences due to the treatment)\
+    and *within-group variance* (random variation).
+
+## Why Not Do More T-Tests?
+
+### Alpha Inflation
+
+-   Each hypothesis has a 5% chance of a false positive.
+
+-   When we test them one-by-one, those chances **accumulate**,
+    increasing the overall risk of error.
+
+-   **Familywise Error Rate (FWE):**
+
+    -   $\alpha_\text{FWE} = 1 - (1 - \alpha)^k$
+
+    -   $\alpha_\text{FWE} = 1 - (0.95)^3 = 0.1426 \approx 14\%$
+
+-   Even though each test uses $\alpha(.05)$, the overall chance of
+    finding at least one “significant” difference **by chance** jumps to
+    \~15%.
+
+## Why Not Do More T-Tests?
+
+### The Takeaway
+
+> ANOVA protects against this inflation by giving us one overall test of
+> group differences (F-statistic), keeping our Type I error at the
+> intended 5%.
+
+```{r}
+library(dplyr)
+library(broom)
+library(gt)
+
+cof <- 
+  tibble(
+  condition = 
+    rep(c("Coffee","Placebo","Control"), 
+        each = 30),
+  score = c(rnorm(30,8,1) |> round(0),
+            rnorm(30,6,1) |> round(0),
+            rnorm(30,5,1) |> round(0))
+  ) 
+
+t1 <- t.test(data = cof |> 
+         filter(condition != "Control"), 
+       score~condition, var.equal = TRUE) |> 
+  tidy() |> 
+  rename(
+    Mean1 = estimate1,
+    Mean2 = estimate2
+  )
+
+t2 <- t.test(data = cof |> 
+         filter(condition != "Placebo"), 
+       score~condition, var.equal = TRUE) |> 
+  tidy() |> 
+  rename(
+    Mean1 = estimate1,
+    Mean2 = estimate2
+  )
+
+t3 <- t.test(data = cof |> 
+         filter(condition != "Coffee"), 
+       score~condition, var.equal = TRUE) |> 
+  tidy() |> 
+  rename(
+    Mean1 = estimate1,
+    Mean2 = estimate2
+  )
+
+
+t1 |> 
+  bind_rows(t2,t3) |> 
+  rename(
+    t = statistic,
+    D = estimate,
+    p = p.value,
+    df = parameter
+  ) |> 
+  select(-method, -alternative) |> 
+  mutate(p = ifelse(p<.01, "<.01", p)) |> 
+  gt() |> 
+  fmt_auto() |> 
+  cols_align(align = "center") |> 
+  opt_row_striping() |> 
+  tab_options(
+    table.width = pct(75),
+    table.font.size = 33,
+    table.align = "left"
+  )
+
+```
 
 ## Between subjects ANOVA
 
-Is the variance between the green, red, and blue dots greater than the
-variance across all of the dots?
+-   Is the variance between the green, red, and blue dots greater than
+    the variance across all of the dots?
+
+-   Is the variability between groups large enough, relative to the
+    variability within groups, to suggest that group means truly differ?
 
 ```{r}
 library(dplyr)
@@ -98,18 +499,6 @@ cof <-
 cof |> 
   ggplot(aes(condition, score, color = condition)) + 
   geom_jitter(alpha = .25)  +
-    stat_summary(
-    fun.data = "mean_se",
-    aes(group = 1),
-    geom = "line",
-    color = "black",
-    show.legend = FALSE
-  ) +
-    stat_summary(
-    fun.data = "mean_se",
-    geom = "errorbar",
-    width = .2
-  ) + 
   theme_minimal(
     base_size = 20,
     paper = "ghostwhite",
@@ -137,21 +526,16 @@ cof |>
   as_gt() |> 
   opt_row_striping() |> 
   tab_options(
-    table.width = pct(50),
-    table.font.size = 22
+    table.width = pct(75),
+    table.font.size = 33
   )
 ```
 
 ## Between subjects ANOVA
 
 -   If it's all about the means, why is it called Analysis of Variance?
-
-## Between subjects ANOVA
-
 -   To compare the means, we are analyzing two types of variance:
-
--   Variance among all of the scores *(within group variance)*
-
+-   Variance among all of the scores *(error group variance)*
 -   Variance *between the groups (between group variance).*
 
 ## The F Statistic
@@ -164,15 +548,25 @@ cof |>
 
 ## Calculating F
 
--   $\large{F = \frac{MS_B}{MS_W} = \frac{\frac{SS_B}{df_b}}{\frac{SS_W}{df_B}}}$
+::: callout-tip
+# ANOVA Formula
 
--   $\large{SS_B = \sum_{j=1}^{k} n_j\big(\bar{y}{j} - \bar{y}{\cdot\cdot}\big)^2}$
+$F = \frac{MS_B}{MS_E}\\MS_B = \frac{SS_B}{df_E} = MS_E = \frac{SS_E}{df_E}\\df_B = k-1 = df_E = N - k$
 
--   $\large{SS_W = \sum_{j=1}^{k}\sum_{i=1}^{n_j}\big(y_{ij} - \bar{y}_{j}\big)^2}$
+:::
 
--   $\large{df_B = k-1}$
+-   Where MS - Means Square
 
--   $\large{df_W = N - k}$
+-   $_B$ = Between Group Variance
+
+-   $_E$ = Within Group Variance (Error)
+
+-   $SS$ = Sum of Squares
+
+-   $k$ = Number of groups
+
+-   $N$ = Number of participants
+
 
 ## Calculating F
 
@@ -180,17 +574,12 @@ cof |>
 
 ANOVA looks at variance. To calculate the Variance:
 
--   Calculate the mean.
+::: callout-tip
+# Variance
 
--   Subtract the mean from each x-value (deviation score).
+$\Large{s^2 = \frac{\sum(x-\bar{x})^2}{n-1}}$
 
--   Subtract the mean from each x-value (deviation score).
-
--   Square the deviation scores.
-
--   Take the sum of the squared deviations (Sum of Squared Deviations).
-
--   Divide by (n-1) - what is this called?
+:::
 
 -   Divide by (degrees of freedom).
 
@@ -198,6 +587,8 @@ ANOVA looks at variance. To calculate the Variance:
         Squared (MS).
 
 ## Calculating means squared (SS)
+
+-   $MS = \frac{SS}{df}$
 
 -   Calculate the SS.
 
@@ -207,76 +598,54 @@ ANOVA looks at variance. To calculate the Variance:
 
 -   We will calculate a SS for the between group variance.
 
--   How much variance in the data is from group differences?
+    -   How much variance in the data is from group differences?
 
 -   We will calculate a SS for all the data.
 
--   How much variance in the data is from random error?
+    -   How much variance in the data is from random error?
 
 ## Between subjects ANOVA
 
--   SS~**BG**~ = How much variance comes comes from the group
+-   $SS_{BG}$ = How much variance comes comes from the group
     differences?
 
--   SS~**Error**~ = How much variance is there in total among all the
+-   $SS_{Error}$ = How much variance is there in total among all the
     data points?
 
 ## Calculating means squared (MS)
 
--   Calculate the SS~**BG**~.
-
--   Calculate the SS~**Error**~.
+$MS_B = \frac{SS_B}{df_E} \\ MS_E = \frac{SS_E}{df_E}$
 
 -   Divide the SS by their degrees of freedom.
 
-## Degrees of freedom
+## Degrees of Freedom
 
-The number of observations (data points) in the data that are free to
-vary when estimating a statistic.
+### The Group Project
 
-I own 7 hats. I want to wear a different hat every day of the week.
+> Imagine a group of 5 students is submitting a project, and the total score for the group must be 100 points combined.
 
--   On Monday, I have 7 hats to choose from.
+-   The first `4` students can choose any score they want — say, `15`, `20`, `25`, and `10`.
 
--   On Tuesday, I have 6 hats to choose from.
+-   But the 5th student’s score isn’t free anymore. It must be whatever makes the total = `100`. In other words, only 4 scores are “free to vary.”
 
--   On Wednesday, I have 5 hats to choose from.
+-   That’s `n − 1 = 4` degrees of freedom.
 
--   On Thursday, I have 4 hats to choose from.
+## Degrees of Freedom
 
--   On Friday, I have 3 hats to choose from.
+-   Between Groups ($df_{B}$) = k - 1
 
--   On Saturday, I have 2 hats to choose from.
-
--   On Sunday, I don't get a choice. On Sunday, I have to wear the Santa
-    hat.
-
--   The degrees of freedom is how many times I get a choice before I'm
-    stuck with what's left over.
-
-## Degrees of freedom
-
--   Between Groups (**MS~BG~** ) = k - 1
-
--   Within Groups (**MS~WG~**) = n - k
-
--   Total = n - 1
+-   Within Groups ($df_E$) = N - k
 
     -   k is the number of groups in the independent variable.
 
-## Calculating means squared (MS)
+-   Total $df_{Total}$= N - 1
 
--   Calculate the SS~**BG**~.
 
--   Calculate the SS~**Error**~.
+## Calculating the Means Squared (MS)
 
--   Divide the SS by their degrees of freedom.
+-   $MS_B = \frac{SS_B}{df_E}$
 
-## Calculating the ms
-
--   Between Group Mean Squared: MS~**BG**~ = SS~**BG**~ / (k -- 1)
-
--   Error Mean Squared: **MS~Error~** = S**S~Error~** / (n -- k)
+-   $MS_E = \frac{SS_E}{df_E}$
 
 ## Calculating Between subjects anova
 
@@ -288,26 +657,21 @@ I own 7 hats. I want to wear a different hat every day of the week.
 
 ## Between subjects anova Example
 
-> Prof Brocker gives one group of 100 participants the Super Secret
-> Limitless Drug. He gives another group of 100 participants a placebo.
-> He gives the third group of 100 participants nothing. All participants
-> then complete an IQ test. She wants to know if those who took the SSLD
-> has significantly higher IQ than the placebo and the control groups.
+> Prof Brocker gives one group of `100` participants the Super Secret
+> Limitless Drug. He gives another group of `100` participants a
+> placebo. He gives the third group of `100` participants nothing. All
+> participants then complete an IQ test. He wants to know if those who
+> took the SSLD have significantly higher IQ than the placebo and the
+> control groups.
 
 ## Between subjects anova Example
 
-## Between subjects anova Example
-
-> Prof Brocker recruits 500 participants. He shows half of them the
+> Prof Brocker recruits `500` participants. He shows half of them the
 > Netflix Original, Dark and the other half Jeopardy. HHe then measures
-> their happiness on a scale of 1 to 10. He wants to know if Dark
+> their happiness on a scale of `1` to `10`. He wants to know if Dark
 > participants are significantly happier than the Jeopardy participants.
 
-## Between subjects anova Example
-
-## Interpreting f
-
-## Interpreting f
+## Interpreting F
 
 The MS~BG~ is made up of the MS~Error~ + the theoretical difference
 between groups:
@@ -372,9 +736,9 @@ report 5 things:
 
 ## Reporting F
 
-The group that watched Dark (M=8.43, s=1.02) reported significantly more
-happiness compared to their peers in the control group who watched
-Jeopardy (M=6.12, s=0.98), F(1,498) = 7.12, p \< 0.05.
+The group that watched Dark (`M=8.43`, `s=1.02`) reported significantly
+more happiness compared to their peers in the control group who watched
+Jeopardy (`M=6.12`, `s=0.98`), `F(1,498) = 7.12, p < 0.05`.
 
 ## Reporting F
 
