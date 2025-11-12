@@ -2998,5 +2998,1649 @@
       "Lectures",
       "Analysis of Variance"
     ]
+  },
+  {
+    "objectID": "lec14.html#what-is-anova",
+    "href": "lec14.html#what-is-anova",
+    "title": "Within Subjects ANOVA",
+    "section": "What is ANOVA?",
+    "text": "What is ANOVA?\nANOVA (Analysis of Variance), like t-tests, compares the means of different groups to determine if they differ significantly from one another:\n\nIndependent variable: Categorical / Nominal\nDependent variable: Continuous",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#a-repeated-measures-design",
+    "href": "lec14.html#a-repeated-measures-design",
+    "title": "Within Subjects ANOVA",
+    "section": "A Repeated-Measures Design",
+    "text": "A Repeated-Measures Design\n\nObjective: Test whether productivity changes across three timepoints:\n\nBefore lunch\n10 minutes after pizza\n1 hour after pizza\n\nSame participants measured at each timepoint\nDV = Number of emails written in 10 minutes\n\n\nWhat type of test compares means across more than two repeated timepoints?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#anova",
+    "href": "lec14.html#anova",
+    "title": "Within Subjects ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\n\nBetween subjects ANOVA compares means BETWEEN groups to determine if they differ significantly from one another.\nWithin subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference WITHIN participants over time.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova",
+    "href": "lec14.html#within-subjects-anova",
+    "title": "Within Subjects ANOVA",
+    "section": "Within subjects ANOVA",
+    "text": "Within subjects ANOVA\n\nWithin subjects ANOVA examines differences within participants over time.\nWithin subjects ANOVA is also known as Repeated Measures ANOVA, because it looks at one measure repeated over time.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-1",
+    "href": "lec14.html#within-subjects-anova-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Within subjects ANOVA",
+    "text": "Within subjects ANOVA\nThe independent variable is time.\n\nBefore intervention: baseline or pre-test\nAfter intervention: post-test",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-2",
+    "href": "lec14.html#within-subjects-anova-2",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\n\nWithin subjects ANOVA can look at 2 or more time points.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-3",
+    "href": "lec14.html#within-subjects-anova-3",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\n\n\nCode\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(gt)\nlibrary(gtsummary)\nlibrary(broom)\nlibrary(afex)\n\n# Generate data for two normal distributions\nx &lt;- seq(-6, 6, length=100)\nnull_dist &lt;- dnorm(x, mean = 0, sd = 1)\nalt_dist &lt;- dnorm(x, mean = 2, sd = 1)\n\ndata &lt;- data.frame(\n  x = rep(x, 2),\n  y = c(null_dist, alt_dist),\n  hypothesis = factor(rep(c(\"Null Hypothesis\", \"Alternative Hypothesis\"), each=length(x)))\n)\n\n# Create the plot\n\nplt &lt;- \n  ggplot(data, aes(x = x, y = y, \n                 lty = rev(hypothesis))) +\n    geom_line(aes(color = \"purple\")) +\n  theme_linedraw() + \n  labs(\n    x = \"\",\n    y = \"\",\n    lty = \"Hypotheses\"\n  ) + \n  theme(\n    panel.grid = element_blank(),\n    legend.position = \"inside\",\n    legend.position.inside = c(.2,.5),\n    legend.background = element_rect(color = \"black\")\n  ) + \n  scale_color_identity()\n\nplt",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#between-subjects-anova",
+    "href": "lec14.html#between-subjects-anova",
+    "title": "Within Subjects ANOVA",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nIn between subjects ANOVA, we analyze two types of variance:\n\nBetween Group variance: How the data varies between the groups\nError variance: How the data varies across all participants",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#between-subjects-anova-1",
+    "href": "lec14.html#between-subjects-anova-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\nBetween Group variance: How the data varies between the groups\nError variance: How the data varies across all participants",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-4",
+    "href": "lec14.html#within-subjects-anova-4",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\nIn within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:\n\nOver time\nError variance: How the data varies across all participants\nPer participant",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-example",
+    "href": "lec14.html#within-subjects-anova-example",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA Example",
+    "text": "Within Subjects ANOVA Example\n\nIn within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:\nOver time: Mood before Dark is more similar to mood before Dark than it is to mood after the Dark",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-5",
+    "href": "lec14.html#within-subjects-anova-5",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-example-1",
+    "href": "lec14.html#within-subjects-anova-example-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA Example",
+    "text": "Within Subjects ANOVA Example\nIn within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:\n\nOver time: Mood before the Dark is more similar to mood before Dark than it is to mood after the Dark\nError Variance: Mood will have natural variance across participants and time.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-example-2",
+    "href": "lec14.html#within-subjects-anova-example-2",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA Example",
+    "text": "Within Subjects ANOVA Example",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-example-3",
+    "href": "lec14.html#within-subjects-anova-example-3",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA Example",
+    "text": "Within Subjects ANOVA Example\nIn within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:\n\nOver time: Mood before Dark is more similar to mood before Dark than it is to mood after Dark\nError Variance: Mood will have natural variance across participants.\nPer participant: Each participant’s scores will be more like their other scores than they are like the scores of another participant.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-example-4",
+    "href": "lec14.html#within-subjects-anova-example-4",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA Example",
+    "text": "Within Subjects ANOVA Example",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-6",
+    "href": "lec14.html#within-subjects-anova-6",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\nIn within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:\n\nTime\nError\nSubjects",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-7",
+    "href": "lec14.html#within-subjects-anova-7",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\n\n\nCode\nflowchart LR\n      A(Total Variability) --&gt; B(Time Variability)\n      A --&gt; C(Within-Groups Variability)\n      C --&gt; D(Subject Variability)\n      C --&gt; E(Error Variability)\n\n\n\n\n\nflowchart LR\n      A(Total Variability) --&gt; B(Time Variability)\n      A --&gt; C(Within-Groups Variability)\n      C --&gt; D(Subject Variability)\n      C --&gt; E(Error Variability)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-8",
+    "href": "lec14.html#within-subjects-anova-8",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\nWhat is the F ratio in between subjects ANOVA?\n\n\\(F = \\frac{MS_{BG}}{MS_{Error}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-9",
+    "href": "lec14.html#within-subjects-anova-9",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\nWhat is the F ratio in between subjects ANOVA?\n\n\\(F = \\frac{\\color{red}{MS_{BG}}}{MS_{Error}}\\)\n\\(MS_{BG} = \\frac{SS_{BG}}{df_{BG}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-10",
+    "href": "lec14.html#within-subjects-anova-10",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\nWhat is the F ratio in between subjects ANOVA?\n\n\\(F = \\frac{MS_{BG}}{\\color{red}{MS_{Error}}}\\)\n\\(MS_{Error} = \\frac{SS_{Error}}{df_{Error}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-11",
+    "href": "lec14.html#within-subjects-anova-11",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\nWe want measure 2 sources of variance:\n\n\\(SS_{Time}\\): this is just like the SS from between subjects ANOVA\n\\(SS_{Error}\\): this is harder to calculate in within subjects ANOVA, because of the subject variance.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-12",
+    "href": "lec14.html#within-subjects-anova-12",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\n\n\\(SS_{WG} = SS_{Subjects} + SS_{Error}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-13",
+    "href": "lec14.html#within-subjects-anova-13",
+    "title": "Within Subjects ANOVA",
+    "section": "Within Subjects ANOVA",
+    "text": "Within Subjects ANOVA\n\n\\(SS_{WG} = SS_{Subjects} + \\color{red}{SS_{Error}}\\)\n\\(SS_{Error} = SS_{WG} - SS_{Subjects}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#calculating-means-squared-ms",
+    "href": "lec14.html#calculating-means-squared-ms",
+    "title": "Within Subjects ANOVA",
+    "section": "Calculating means squared (MS)",
+    "text": "Calculating means squared (MS)\n\nWe calculate a SS for the variance between the times points (\\(SS_{Time}\\)).\nThis is just like the \\(SS_{BG}\\) from between subjects ANOVA\nWe calculate a SS for the within group variance (\\(SS_{WG}\\)).\nWe calculate a SS for the variance by person (\\(SS_{Subject}\\)).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#calculating-means-squared-ms-1",
+    "href": "lec14.html#calculating-means-squared-ms-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Calculating means squared (MS)",
+    "text": "Calculating means squared (MS)\n\nWe calculate a SS for the variance between the times points (SSTime).\nTo find \\(SS_{Error}\\), we subtract \\(SS_{Subjects}\\) from \\(SS_{WG}\\).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#calculating-means-squared-ms-2",
+    "href": "lec14.html#calculating-means-squared-ms-2",
+    "title": "Within Subjects ANOVA",
+    "section": "Calculating means squared (MS)",
+    "text": "Calculating means squared (MS)\n\n\\(MS_{Time} = \\frac{SS_{Time}} {df_{Time}}\\)\n\\(MS_{Error} = \\frac{(SS_{WG} - SS_{Subject})}{df_{Error}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#degrees-of-freedom",
+    "href": "lec14.html#degrees-of-freedom",
+    "title": "Within Subjects ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\n\nTime \\((MS_{Time}) = k - 1\\)\nError \\((MS_{Error}) = (n - 1) \\times (k - 1)\\)\n\n*k is the number of time points",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#calculating-means-squared-ms-3",
+    "href": "lec14.html#calculating-means-squared-ms-3",
+    "title": "Within Subjects ANOVA",
+    "section": "Calculating means squared (MS)",
+    "text": "Calculating means squared (MS)\n\n\\(MS_{Time} = \\frac{SS_{Time}}{df_{Time}} = MS_{Time} = \\frac{SS_{Time}}{(k - 1)}\\)\n\\(MS_{Error} = \\frac{(SS_{WG} - SS_{Subject})} {df_{Error}} = MS_{Error}\\ = \\frac{(SS_{WG}\\ - SS_{Subject})}{(n-1)\\times(k-1)}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#within-subjects-anova-14",
+    "href": "lec14.html#within-subjects-anova-14",
+    "title": "Within Subjects ANOVA",
+    "section": "WITHIN subjects ANOVA",
+    "text": "WITHIN subjects ANOVA\nThe F ratio in within subjects ANOVA:\n\\(F = \\frac{MS_{Time}}{MS_{Error}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#anova-1",
+    "href": "lec14.html#anova-1",
+    "title": "Within Subjects ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\n\nProf. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.\n\n\nWhat’s k?\nWhat’s n?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#practice",
+    "href": "lec14.html#practice",
+    "title": "Within Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n\nProf. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.\n\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Time\",\"49\", \"\",\"\",\"\",\n\"Within Group\",\"912\",\"\",\"\",\"\",\n\"Subjects\",\"219\",\"\",\"\",\"\",\n\"Error\",\"\",\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nTime\n49\n\n\n\n\n\nWithin Group\n912\n\n\n\n\n\nSubjects\n219\n\n\n\n\n\nError",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#practice-1",
+    "href": "lec14.html#practice-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n\nProf. Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof. Brocker asks participants to rate how much they enjoy statistics again.\n\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Time\",\"49\", \"1\",\"49\",\".053\",\n\"Within Group\",\"912\",\"198\",\"\",\"\",\n\"Subjects\",\"219\",\"99\",\"2.2\",\"\",\n\"Error\",\"912\",\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nTime\n49\n1\n49\n.053\n\n\nWithin Group\n912\n198\n\n\n\n\nSubjects\n219\n99\n2.2\n\n\n\nError\n912",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#anova-2",
+    "href": "lec14.html#anova-2",
+    "title": "Within Subjects ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\n\nDr. Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.\n\n\nWhat’s k?\nWhat’s n?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#anova-3",
+    "href": "lec14.html#anova-3",
+    "title": "Within Subjects ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\n\nProf. Brocker measures the death anxiety of 500 middle-aged men. He then shows them images from anti-aging advertisements featuring young men. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.\n\n\nWhat’s k?\nWhat’s n?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#interpreting-f",
+    "href": "lec14.html#interpreting-f",
+    "title": "Within Subjects ANOVA",
+    "section": "Interpreting f",
+    "text": "Interpreting f\nThe MSTime is made up of the MSError + the theoretical difference over time:\n\n\\(MS_{Time} = \\text{change over time} + MS_{Error}\\)\n\\(MS_{Time} = 0 + MS_{Error}\\)\n\\(MS_{Time} = MS_{Error}\\)\n\\(F = 1\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#interpreting-f-1",
+    "href": "lec14.html#interpreting-f-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Interpreting f",
+    "text": "Interpreting f\n\nWhen F &lt;= 1, it’s not likely to be significant.\nThe MSTime is made up of the MSError + the theoretical difference over time:\n\n\\(MS_{Time} = \\text{change over time} + MS_{Error}\\)\n\\(MS_{Time} = \\text{effect} + MS_{Error}\\)\n\\(F &gt; 1\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#interpreting-f-2",
+    "href": "lec14.html#interpreting-f-2",
+    "title": "Within Subjects ANOVA",
+    "section": "Interpreting f",
+    "text": "Interpreting f\nThe MSTime is made up of the MSError + the theoretical difference over time:\n\n\\(MS_{Time} = \\text{change over time} + MS_{Error}\\)\n\\(MS_{Time} = \\text{effect} + MS_{Error}\\)\n\\(F &gt; 1\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#hypothesis-testing-anova",
+    "href": "lec14.html#hypothesis-testing-anova",
+    "title": "Within Subjects ANOVA",
+    "section": "Hypothesis testing: ANOVA",
+    "text": "Hypothesis testing: ANOVA\n\nF &lt; = 1 —&gt; Fail to reject the Null Hypothesis\nF &gt; 1 —&gt; Refer to p-value —&gt; Reject the Null Hypothesis",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#how-many-fs-do-you-get",
+    "href": "lec14.html#how-many-fs-do-you-get",
+    "title": "Within Subjects ANOVA",
+    "section": "How many F’s do you Get?",
+    "text": "How many F’s do you Get?\n\nOne-way Between Subjects?\n\n1 for 1 IV\n\nWithin Subjects?\n\n1\n\nTwo-way Between Subjects with a 2x2 design?\n\n3 (One for each IV and one for the Interaction)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#reporting-f-1",
+    "href": "lec14.html#reporting-f-1",
+    "title": "Within Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\nReject H0, or\nFail to Reject H0\n\nReporting F\nIf asked to report findings in general or for publication, you need to report:\n\nF(df time, df error) = F-value, p-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#reporting-f-2",
+    "href": "lec14.html#reporting-f-2",
+    "title": "Within Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nMood after watching the Dark was not significantly different from mood before watching Dark, F (1, 499) = 1.02, p = 0.07.\n\n\nThere was no significant change in mood over time, F (1, 499) = 1.02, p = 0.07.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#reporting-f-3",
+    "href": "lec14.html#reporting-f-3",
+    "title": "Within Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nParticipants’ mood was significantly better after watching the Dark compared to before watching it, F(1, 499) = 7.12, p &lt; 0.05.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#reporting-f-4",
+    "href": "lec14.html#reporting-f-4",
+    "title": "Within Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in general or for publication, you need to report:\n\nF(df time, df error) = F-value, p-value\nIf the results are significant, we have to also report the means and standard deviations for each time point.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#reporting-f-5",
+    "href": "lec14.html#reporting-f-5",
+    "title": "Within Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nParticipants’ anxiety differed significant across time, F(2, 198) = 3.744, p = 0.25. Anxiety was highest at pre-test (M= 19.58, s = 0.643). Anxiety was lowest at baseline (M , s ). Anxiety at post test was M= , s.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#practice-4",
+    "href": "lec14.html#practice-4",
+    "title": "Within Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n\nWas anxiety just before the Stats Exam significantly higher than baseline anxiety?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#data-manipulation",
+    "href": "lec14.html#data-manipulation",
+    "title": "Within Subjects ANOVA",
+    "section": "Data Manipulation",
+    "text": "Data Manipulation\n\nWhen collected, data can be in either wide or long format.\nBelow are the first five rows of the same dataset:\n\n\n\nCode\ndata.frame(\n  Participant = factor(1:5),\n  Immediate = rnorm(5, mean = 8, sd = 1.5),\n  After24Hours = rnorm(5, mean = 6, sd = 1.5),\n  After1Week = rnorm(5, mean = 4, sd = 1.5)\n) |&gt; \n  gt() |&gt; \n  tab_header(title = \"Wide Data\",\n             subtitle = \"Each row represents an indivdual participant\")\n\n\n\n\n\n\n\n\nWide Data\n\n\nEach row represents an indivdual participant\n\n\nParticipant\nImmediate\nAfter24Hours\nAfter1Week\n\n\n\n\n1\n7.629962\n3.498087\n1.573176\n\n\n2\n7.478686\n5.429660\n3.916657\n\n\n3\n6.572572\n7.378495\n4.779111\n\n\n4\n7.932458\n5.136980\n4.451730\n\n\n5\n6.822643\n6.911946\n4.158514\n\n\n\n\n\n\n\nCode\ndata.frame(\n  Participant = factor(1:5),\n  Immediate = rnorm(5, mean = 8, sd = 1.5),\n  Day = rnorm(5, mean = 6, sd = 1.5),\n  Week = rnorm(5, mean = 4, sd = 1.5)\n) |&gt; \n  tidyr::pivot_longer(cols = !Participant,\n                      names_to = \"Time\",\n                      values_to = \"Stress\") |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_header(title = \"Long Data\",\n             subtitle = \"Each row represents an indivdual participant's score on each level of the treatment\")\n\n\n\n\n\n\n\n\nLong Data\n\n\nEach row represents an indivdual participant's score on each level of the treatment\n\n\nParticipant\nTime\nStress\n\n\n\n\n1\nImmediate\n10.807\n\n\n1\nDay\n 5.637\n\n\n1\nWeek\n 3.411\n\n\n2\nImmediate\n 8.904\n\n\n2\nDay\n 7.676\n\n\n2\nWeek\n 4.011\n\n\n3\nImmediate\n 6.851\n\n\n3\nDay\n 7.777\n\n\n3\nWeek\n 0.258\n\n\n4\nImmediate\n 7.07 \n\n\n4\nDay\n 8.47 \n\n\n4\nWeek\n 2.534\n\n\n5\nImmediate\n 9.185\n\n\n5\nDay\n 6.289\n\n\n5\nWeek\n 4.943",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#memory-recall-study",
+    "href": "lec14.html#memory-recall-study",
+    "title": "Within Subjects ANOVA",
+    "section": "1. Memory Recall Study",
+    "text": "1. Memory Recall Study\n\n\nCode\nset.seed(100)\n\n# Memory Recall Study\nmemory_data &lt;- data.frame(\n  Participant = factor(1:30),\n  Immediate = rnorm(30, mean = 8, sd = 1.5),\n  After24Hours = rnorm(30, mean = 6, sd = 1.5),\n  After1Week = rnorm(30, mean = 4, sd = 1.5)\n)\n\n# Make Data Longer\nmemory_data_long &lt;- \n  memory_data |&gt; \n  tidyr::pivot_longer(cols = !Participant,\n                      names_to = \"Time\",\n                      values_to = \"Memory\")\n\n\naov(Memory ~ Time + Error(Participant), data = memory_data_long) |&gt; \n  tidy() |&gt; \n  mutate(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = ifelse(is.na(statistic),\"--\",statistic |&gt; round(3)),\n    p = ifelse(p.value &gt;.05,\"&lt;.05\",p.value),\n    p = ifelse(is.na(p),\"--\",p)\n  ) |&gt; \n  select(Source, df, SS, MS, `F`, p) |&gt; \n  gt() |&gt; \n  fmt_auto()\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nResiduals\n29 \n 60.124\n  2.073\n--\n--\n\n\nTime\n 2 \n253.722\n126.861\n53.001\n8.10477782732907e-14\n\n\nResiduals\n58 \n138.826\n  2.394\n--\n--\n\n\n\n\n\n\n\nCode\nmemory_data_long |&gt; \n  ggplot(aes(Time,Memory, color = Time)) + \n    stat_summary(\n    geom = \"line\",\n    group = 1,\n    fun.data = \"mean_se\",\n    color = \"black\"\n  ) + \n    stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  geom_jitter(alpha = .2) + \n  stat_summary(\n    geom = \"errorbar\",\n    fun.data = \"mean_se\",\n    width = .2\n  ) + \n  theme_minimal()",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#clinical-trial",
+    "href": "lec14.html#clinical-trial",
+    "title": "Within Subjects ANOVA",
+    "section": "2. Clinical Trial",
+    "text": "2. Clinical Trial\n\n\nCode\nset.seed(100)\n\n# Clinical Trial Study\nclinical_data &lt;- data.frame(\n  Participant = factor(1:30),\n  LowDose = rnorm(30, mean = 5, sd = 1),\n  MediumDose = rnorm(30, mean = 6.5, sd = 1),\n  HighDose = rnorm(30, mean = 8, sd = 1)\n)\n\nclinical_data_long &lt;- \n  clinical_data |&gt; \n  tidyr::pivot_longer(\n    cols = !Participant,\n    names_to = \"Dosage\",\n    values_to = \"DV\"\n  )\n\naov(DV ~ Dosage + Error(Participant), data = clinical_data_long) |&gt; \n  tidy() |&gt; \n  gt()\n\n\n\n\n\n\n\n\nstratum\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nParticipant\nResiduals\n29\n26.72174\n0.9214392\nNA\nNA\n\n\nWithin\nDosage\n2\n128.73321\n64.3666071\n60.50637\n6.394066e-15\n\n\nWithin\nResiduals\n58\n61.70033\n1.0637988\nNA\nNA\n\n\n\n\n\n\n\nCode\nclinical_data_long |&gt; \n  ggplot(aes(Dosage,DV, color = Dosage)) + \n    stat_summary(\n    geom = \"line\",\n    group = 1,\n    fun.data = \"mean_se\",\n    color = \"black\"\n  ) + \n    stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  geom_jitter(alpha = .2) + \n  stat_summary(\n    geom = \"errorbar\",\n    fun.data = \"mean_se\",\n    width = .2\n  ) + \n  theme_minimal()",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#behavioral-therapy-progress",
+    "href": "lec14.html#behavioral-therapy-progress",
+    "title": "Within Subjects ANOVA",
+    "section": "3. Behavioral Therapy Progress",
+    "text": "3. Behavioral Therapy Progress\n\n\nCode\nset.seed(100)\n\n# Behavioral Therapy Study\ntherapy_data &lt;- data.frame(\n  Participant = factor(1:30),\n  Baseline = rnorm(30, mean = 10, sd = 2),\n  MidTreatment = rnorm(30, mean = 7, sd = 2),\n  PostTreatment = rnorm(30, mean = 5, sd = 2)\n)\n\ntherapy_data_long &lt;- \n  therapy_data |&gt; \n  tidyr::pivot_longer(\n    cols = !Participant,\n    names_to = \"Treatment_Group\",\n    values_to = \"DV\"\n  )\n\naov_ez(\n  \"Participant\",\n  \"DV\",\n  therapy_data_long, \n  within = \"Treatment_Group\",\n  anova_table = list(correction = \"none\"),\n  return = \"nice\"\n) |&gt; gt()\n\n\n\n\n\n\n\n\nEffect\ndf\nMSE\nF\nges\np.value\n\n\n\n\nTreatment_Group\n2, 58\n4.26\n46.88 ***\n.530\n&lt;.001\n\n\n\n\n\n\n\nCode\ntherapy_data_long |&gt; \n  ggplot(aes(Treatment_Group,DV,color = Treatment_Group)) +\n  geom_jitter(alpha = .2) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1,\n    color = \"black\"\n  ) + \n  theme_minimal()",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#consumer-product-ratings",
+    "href": "lec14.html#consumer-product-ratings",
+    "title": "Within Subjects ANOVA",
+    "section": "4. Consumer Product Ratings",
+    "text": "4. Consumer Product Ratings\n\n\nCode\nset.seed(100)\n\n# Consumer Product Study\nproduct_data &lt;- data.frame(\n  Participant = factor(1:30),\n  ProductA = rnorm(30, mean = 6, sd = 1),\n  ProductB = rnorm(30, mean = 7, sd = 1),\n  ProductC = rnorm(30, mean = 5, sd = 1)\n)\n\nproduct_data_long &lt;- \n  product_data |&gt; \n  tidyr::pivot_longer(cols = !Participant,\n                      names_to = \"products\",\n                      values_to = \"ratings\")\n\naov(ratings ~ products + Error(Participant), data = product_data_long) |&gt;\n  tidy() |&gt; \n  gt()\n\n\n\n\n\n\n\n\nstratum\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nParticipant\nResiduals\n29\n26.72174\n0.9214392\nNA\nNA\n\n\nWithin\nproducts\n2\n68.46662\n34.2333084\n32.18025\n3.961105e-10\n\n\nWithin\nResiduals\n58\n61.70033\n1.0637988\nNA\nNA\n\n\n\n\n\n\n\nCode\nproduct_data_long |&gt; \n  ggplot(aes(products,ratings,fill = products)) + \n  stat_summary(\n    fun = \"mean\",\n    geom = \"bar\",\n    width = .5\n  ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) + \n  theme_minimal()",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#physiological-stress-study",
+    "href": "lec14.html#physiological-stress-study",
+    "title": "Within Subjects ANOVA",
+    "section": "5. Physiological Stress Study",
+    "text": "5. Physiological Stress Study\n\n\nCode\nset.seed(100)\n\n# Physiological Stress Study\nstress_data &lt;- data.frame(\n  Participant = factor(1:30),\n  Rest = rnorm(30, mean = 50, sd = 5),\n  Task = rnorm(30, mean = 70, sd = 5),\n  Recovery = rnorm(30, mean = 55, sd = 5)\n)\n\nstress_data_long &lt;- \n  stress_data |&gt; \n  tidyr::pivot_longer(cols = !Participant,\n                      names_to = \"Time\",\n                      values_to = \"Stress\")\n\naov(Stress ~ Time + Error(Participant), data = stress_data_long) |&gt;\n  tidy() |&gt; \n  gt() |&gt; \n  fmt_auto()\n\n\n\n\n\n\n\n\nstratum\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nParticipant\nResiduals\n29 \n  668.043\n   23.036\nNA\nNA\n\n\nWithin\nTime\n 2 \n6,802.717\n3,401.358\n127.895\n5.456 × 10−22\n\n\nWithin\nResiduals\n58 \n1,542.508\n   26.595\nNA\nNA\n\n\n\n\n\n\n\nCode\nstress_data_long |&gt; \n  ggplot(aes(Time,Stress,color = Time)) + \n  geom_jitter(alpha = .2) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1) + \n  theme_minimal()",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#why-repeated-measures-anova",
+    "href": "lec14.html#why-repeated-measures-anova",
+    "title": "Within Subjects ANOVA",
+    "section": "Why Repeated-Measures ANOVA?",
+    "text": "Why Repeated-Measures ANOVA?\n\nCan’t use multiple paired-samples t-tests (increases Type I error)\nRepeated-Measures ANOVA allows us to:\n\nCompare within-subject changes across time\nControl for individual variability\nTest for an overall time effect",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#assumptions-of-rm-anova",
+    "href": "lec14.html#assumptions-of-rm-anova",
+    "title": "Within Subjects ANOVA",
+    "section": "Assumptions of RM ANOVA",
+    "text": "Assumptions of RM ANOVA\n\nNormality of differences\nSphericity: Equal variances of pairwise differences\n\nTest: Mauchly’s Test\n\nViolation → Use Greenhouse-Geisser correction\n\n\nAlways check sphericity if more than two levels of the within-subject factor",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#interpretation",
+    "href": "lec14.html#interpretation",
+    "title": "Within Subjects ANOVA",
+    "section": "Interpretation",
+    "text": "Interpretation\nExample output:\n\nF(2, 58) = 12.3, p &lt; .001\n→ Significant effect of time on productivity\n\nConclusion: Productivity changes significantly across timepoints\n\nWhat would be your next step?",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#follow-up",
+    "href": "lec14.html#follow-up",
+    "title": "Within Subjects ANOVA",
+    "section": "Follow-Up",
+    "text": "Follow-Up\nPost-hoc Comparisons\n\nRun paired t-tests with Bonferroni correction\nWhich timepoints differ?\n\nPre vs. 10minPost\n10minPost vs. 1hrPost\nPre vs. 1hrPost",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec14.html#reporting-f",
+    "href": "lec14.html#reporting-f",
+    "title": "Within Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nReporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\nReject H0, or\nFail to Reject H0\n\nReporting F\nIf asked to report findings in general or for publication, you need to report:\n\nF(df time, df error) = F-value, p-value",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Within Subjects ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#anova",
+    "href": "lec13.html#anova",
+    "title": "Factorial ANOVA",
+    "section": "AnOVA",
+    "text": "AnOVA\nWhat does ANOVA do?\nANOVA compares the means of different groups to determine if they differ significantly from one another.\n\nANOVA can examine independent variables with more than 2 groups.\nANOVA can also look at multiple independent variables.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova",
+    "href": "lec13.html#way-anova",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: drinking coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it.\n\n\nWhat kind of design is he using?\n2 x 2",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-1",
+    "href": "lec13.html#way-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\nWe can write the design of a study analyzed using ANOVA as:\n\nNumber of groups “x” the Number of groups\nConditions in the first independent variable “x” Conditions in the second independent variable, etc.\n2 x 2",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-2",
+    "href": "lec13.html#way-anova-2",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it. This is a 2 x 2 design.\n\n\nIV1 = Number of groups in coffee: 2 (coffee or no coffee)\nIV2 = Number of groups in Dark: 2 (Dark or No Dark)\nDV\n\nHappiness",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-3",
+    "href": "lec13.html#way-anova-3",
+    "title": "Factorial ANOVA",
+    "section": "2-way Anova",
+    "text": "2-way Anova\nWhat are Prof Brocker’s Alternative Hypotheses?\n\nH1: Participants who drink coffee will be significantly happier than those who don’t.\nH2: Participants who watch Dark will be significantly happier than those who don’t.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-4",
+    "href": "lec13.html#way-anova-4",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it. This is a 2 x 2 design.\n\n\nParticipants who drink coffee will be significantly happier than those who don’t.\nParticipants who watch Dark will be significantly happier than those who don’t.\nH3: Participants who drink coffee while watching the Dark will be the happiest.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#anova-1",
+    "href": "lec13.html#anova-1",
+    "title": "Factorial ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\nThe Three Types\n\nBetween-subjects: [One-Way or Factorial]\nWithin-subjects: (Repeated Measures ANOVA)\nMixed-designs: Combination of Between and Within",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-between-subjects-anova",
+    "href": "lec13.html#way-between-subjects-anova",
+    "title": "Factorial ANOVA",
+    "section": "2-way Between subjects ANOVA",
+    "text": "2-way Between subjects ANOVA\n\nIVs must be nominal/categorical\nDV must be continuous",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-between-subjects-anova-1",
+    "href": "lec13.html#way-between-subjects-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "2-way Between subjects ANOVA",
+    "text": "2-way Between subjects ANOVA\n\nIVs must be nominal/categorical\nDV must be continuous",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-5",
+    "href": "lec13.html#way-anova-5",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\nTwo types of variance:\n\nVariance among all of the scores (error variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-6",
+    "href": "lec13.html#way-anova-6",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\n\n\nCode\n# Load libraries\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(gt)\nlibrary(broom)\n\n# Create a 2x2 grid structure for visualization\nmatrix_data &lt;- expand.grid(\n  Coffee = c(\"Yes\", \"No\"),\n  TV_Show = c(\"Yes\", \"No\")\n) %&gt;%\n  mutate(\n    x = as.numeric(Coffee == \"Yes\"),\n    y = as.numeric(TV_Show == \"Yes\"),\n    fill_color = c(\"lightblue\", \"lightcoral\", \"lightgreen\", \"khaki\") # Assign colors\n  )\n\n# Visualize the 2x2 matrix\nfac_mat &lt;- \n  ggplot(matrix_data, aes(xmin = x - 0.5, xmax = x + 0.5, ymin = y - 0.5, ymax = y + 0.5)) +\n  geom_rect(aes(fill = fill_color), color = \"black\", alpha = 0.8) + # Draw rectangles\n  scale_fill_identity() + # Use fill_color directly\n  labs(\n    title = \"2x2 Factorial Matrix\",\n    x = \"Coffee\", y = \"TV Show\"\n  ) +\n  scale_x_continuous(breaks = c(0, 1), labels = c(\"No\", \"Yes\"), limits = c(-0.5, 1.5)) +\n  scale_y_continuous(breaks = c(0, 1), labels = c(\"No\", \"Yes\"), limits = c(-0.5, 1.5)) +\n  theme_minimal() +\n  theme(\n    axis.text = element_text(size = 12),\n    axis.title = element_text(size = 14),\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5)\n  )",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-7",
+    "href": "lec13.html#way-anova-7",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\n\n\nCode\nfac_mat + \n  annotate(\n    \"text\", x = 1, y = 1, label = \"Coffee\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 1, label = \"Coffee\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 0, label = \"No Coffee\"\n  ) +\n    annotate(\n    \"text\", x = 1, y = 0, label = \"No Coffee\"\n  )",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-8",
+    "href": "lec13.html#way-anova-8",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\n\n\nCode\nfac_mat + \n  annotate(\n    \"text\", x = 1, y = 1, label = \"Coffee\\nDark\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 1, label = \"Coffee\\nNo Dark\"\n  ) +\n    annotate(\n    \"text\", x = 0, y = 0, label = \"No Coffee\\nDark\"\n  ) +\n    annotate(\n    \"text\", x = 1, y = 0, label = \"No Coffee\\nNo Dark\"\n  )",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-9",
+    "href": "lec13.html#way-anova-9",
+    "title": "Factorial ANOVA",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\nTo compare the means, we analyzing two types of variance:\n\nVariance among all of the scores (within group variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance).",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#degrees-of-freedom",
+    "href": "lec13.html#degrees-of-freedom",
+    "title": "Factorial ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\nThe number of observations (data points) in the data that are free to vary when estimating a statistic.\n\nI own 7 pairs of sock. I want to wear a different pair of socks every day.\nHow many times do I get to pick a pair of socks before I get stuck?\nThe degrees of freedom is how many times things can vary before we are stuck with what’s left over.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#degrees-of-freedom-1",
+    "href": "lec13.html#degrees-of-freedom-1",
+    "title": "Factorial ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\n\nBetween Groups (dfBG ) = number of groups (k) - 1\nError Groups (dfError) = number of participants (n) - number of groups (k)\ndfTotal = n - 1\n\n\n*k is the number of groups in the independent variable.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#degrees-of-freedom-2",
+    "href": "lec13.html#degrees-of-freedom-2",
+    "title": "Factorial ANOVA",
+    "section": "Degrees of freedom",
+    "text": "Degrees of freedom\n\nBetween Groups 1 (dfBG1 ) = k1 - 1\nBetween Groups 2 (dfBG2 ) = k2 - 1\nInteraction (MSInteractioni) = (k1 - 1) x (k2 - 1)\nError (MSError) = n - (k1 x k2)\nTotal = n - 1\n*k is the number of groups in each independent variable.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-the-ms-in-2-way-anova",
+    "href": "lec13.html#calculating-the-ms-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the MS in 2-way ANOVA",
+    "text": "Calculating the MS in 2-way ANOVA\n\nBetween Group 1 Mean Squared:\n\n\\(MS_{BG_1} = \\frac{SS_{BG_{1}}}{k_1-1}\\)\n\nBetween Group 2 Mean Squared:\n\n\\(MS_{BG_{2}} = \\frac{SS_{BG_{2}}}{k_2-1}\\)\n\nInteraction Mean Squared:\n\n\\(MS_{Interaction} = \\frac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError Mean Squared:\n\n\\(MS_{Error} = \\frac{SS{Error}}{n-(k_1 \\times k_2)}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-2-way-anova-anova",
+    "href": "lec13.html#calculating-2-way-anova-anova",
+    "title": "Factorial ANOVA",
+    "section": "Calculating 2-way ANOVA anova",
+    "text": "Calculating 2-way ANOVA anova\n\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{BG_{2}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{Interaction}}{MS{Error}}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#interpreting-f",
+    "href": "lec13.html#interpreting-f",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting F",
+    "text": "Interpreting F\n\nTablePlot\n\n\n\n\nCode\nset.seed(123)\nlibrary(dplyr)\nlibrary(afex)\nlibrary(gt)\nlibrary(broom)\nlibrary(forcats)\n\ntwoway &lt;- \n  tibble(\n    id = 1:100,\n    gender = sample(c(\"Male\", \"Female\"), 100, replace = TRUE),\n    education_level = sample(c(\"High School\", \"Bachelor's\", \"Master's\", \"PhD\"), 100, replace = TRUE)\n    ) %&gt;%\n  mutate(\n    # assign numeric values for education level\n    edu_num = case_when(\n      education_level == \"High School\" ~ 1,\n      education_level == \"Bachelor's\"  ~ 2,\n      education_level == \"Master's\"    ~ 3,\n      education_level == \"PhD\"         ~ 4\n    ),\n    # introduce a systematic difference based on gender and education_level interaction\n    political_interest = 5 + \n                         edu_num * 1.2 +                     # main effect of education level\n                         if_else(gender == \"Female\", edu_num * 0.8, edu_num * -0.5) +  # interaction\n                         rnorm(100, mean = 0, sd = 1)        # some noise\n  ) \n\n# Run factorial ANOVA\naov_ez(\n  \"id\",\n  \"political_interest\",\n  twoway,\n  between = c(\"gender\",\"education_level\"),\n  return = \"aov\"\n) |&gt; \n  tidy() |&gt; \n  mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Political Interest*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ngender\n 1 \n216.57 \n216.57 \n244.15\n&lt;.001\n\n\neducation_level\n 3 \n198.312\n 66.104\n74.52\n&lt;.001\n\n\ngender:education_level\n 3 \n 23.648\n  7.883\n8.89\n&lt;.001\n\n\nResiduals\n92 \n 81.608\n  0.887\n--\n--\n\n\n\nDependent Variable: Political Interest\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ntwoway$education_level &lt;- factor(twoway$education_level, labels = c(\"High School\",\"Bachelors\",\"Masters\",\"PhD\"),ordered = TRUE)\n\ntwoway |&gt; \n  ggplot(aes(education_level, political_interest,color = gender, group = gender)) + \n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Political Interest\\n\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpreting the Fs in 2-way ANOVA\n\nIV 1 = Gender\nIV 2 = Education Level",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#interpreting-the-fs-in-2-way-anova",
+    "href": "lec13.html#interpreting-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 = Gender\nF2 = Education Level\nF3 = Interaction of Gender x Education Level",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#interpreting-the-fs-in-2-way-anova-1",
+    "href": "lec13.html#interpreting-the-fs-in-2-way-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nTablePlot\n\n\n\n\nCode\nset.seed(42)\n\n# Create a balanced design\ndf &lt;- expand.grid(\n  diet_type = c(\"Low Carb\", \"Low Fat\"),\n  exercise_regimen = c(\"Cardio\", \"Strength\"),\n  id = 1:25\n) %&gt;%\n  mutate(\n    # simulate main effects: both diet and exercise influence weight loss\n    weight_loss = case_when(\n      diet_type == \"Low Carb\" ~ 6,\n      diet_type == \"Low Fat\" ~ 4\n    ) + case_when(\n      exercise_regimen == \"Cardio\" ~ 5,\n      exercise_regimen == \"Strength\" ~ 3\n    ) +\n    rnorm(n(), mean = 0, sd = 1.5)  # add some noise\n  )\n\n# Run the two-way ANOVA\nanova_result &lt;- aov(weight_loss ~ diet_type * exercise_regimen, data = df)\nanova_result |&gt; \n  tidy() |&gt; \n    mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value |&gt; round(2)),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Political Interest*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ndiet_type\n 1 \n101.266\n101.266\n41.9\n&lt;.001\n\n\nexercise_regimen\n 1 \n114.057\n114.057\n47.19\n&lt;.001\n\n\ndiet_type:exercise_regimen\n 1 \n  9.066\n  9.066\n3.75\n0.06\n\n\nResiduals\n96 \n232.023\n  2.417\n--\n--\n\n\n\nDependent Variable: Political Interest\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ndf |&gt; \n  ggplot(aes(diet_type, weight_loss,color = exercise_regimen, group = exercise_regimen)) + \n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Weight Loss\\n\")",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#interpreting-the-fs-in-2-way-anova-2",
+    "href": "lec13.html#interpreting-the-fs-in-2-way-anova-2",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 =\nF2 =\nF3 =",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#interpreting-the-fs-in-2-way-anova-3",
+    "href": "lec13.html#interpreting-the-fs-in-2-way-anova-3",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 = Diet Type\nF2 = Exercise Regimen\nF3 = Diet Type x Exercise Regimen",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-10",
+    "href": "lec13.html#way-anova-10",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf Brocker believes the key to happiness involves 2 things: Coffee and Dark. He wants to see if drinking coffee makes participants significantly happier than not drinking coffee. He also wants to see if watching Dark show makes them significantly happier than not watching it. This is a 2 x 2 design.\n\nHe randomly assigns 100 participants to Coffee and Dark or No Coffee x Dark or No Coffee and No Dark.\n\nTablePlot\n\n\n\n\nCode\n# Make the Dataset\ncd &lt;- \n  tibble(\n  id = 1:400,\n  coffee = rep(c(\"No Coffee\",\"Yes Coffee\"), each = 200),\n  dark = rep(c(\"No Dark\",\"Yes Dark\"), 200),\n  happiness = c(rnorm(100,4,2) |&gt; round(0),\n                rnorm(100,7,1) |&gt; round(0),\n                rnorm(100,6,2) |&gt; round(0),\n                rnorm(100,8.5,1) |&gt; round(0)\n                )\n  ) \n\n# Calculate ANOVA\naov(happiness ~ coffee * dark, data = cd) |&gt; \n  tidy() |&gt; \n  mutate(\n    Source = term,\n    SS = sumsq, \n    MS = meansq,\n    `F` = ifelse(is.na(statistic),\"--\",statistic |&gt; round(3)),\n    p = ifelse(p.value &lt; .05, \"&lt;.05\",p.value |&gt; round(3)),\n    p = ifelse(is.na(p),\"--\",p)\n  ) |&gt; \n  select(Source,df,SS,MS,`F`,p) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  cols_align(align = \"center\",\n             columns = !Source) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  ) |&gt; \n  tab_footnote(footnote = \"Dependent Variable: Happiness\")\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ncoffee\n  1 \n  322.202\n322.202\n74.543\n&lt;.05\n\n\ndark\n  1 \n    0.722\n  0.722\n0.167\n0.683\n\n\ncoffee:dark\n  1 \n   11.903\n 11.903\n2.754\n0.098\n\n\nResiduals\n396 \n1,711.67 \n  4.322\n--\n--\n\n\n\nDependent Variable: Happiness\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncd |&gt; \n  ggplot(aes(coffee, happiness,color = dark)) + \n  geom_jitter(alpha = .2) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) + \n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    group = 1\n  ) + \n  theme_minimal() + \n  labs(\n    x = \"Coffee Drank\\n\",\n    y = \"Level of Happiness\\n\",\n    color = \"black\"\n  ) + \n  theme(\n    axis.text = element_text(color = \"black\")\n  )",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-the-fs-in-2-way-anova",
+    "href": "lec13.html#calculating-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Coffee\",432, \"\",\"\",\"\",\n\"Dark\",486,\"\",\"\",\"\",\n\"Coffee x Dark\",540,\"\",\"\",\"\",\n\"Error\",5184,\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nCoffee\n432\n\n\n\n\n\nDark\n486\n\n\n\n\n\nCoffee x Dark\n540\n\n\n\n\n\nError\n5184",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-the-fs-in-2-way-anova-1",
+    "href": "lec13.html#calculating-the-fs-in-2-way-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"Coffee\",432, 1,432,\"8\",\n\"Dark\",486,1,486,\"9\",\n\"Coffee x Dark\",540,1,540,\"10\",\n\"Error\",5184,96,54,\"\"\n) |&gt; \n  gt() |&gt; \n    cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nCoffee\n432\n1\n432\n8\n\n\nDark\n486\n1\n486\n9\n\n\nCoffee x Dark\n540\n1\n540\n10\n\n\nError\n5184\n96\n54",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#way-anova-11",
+    "href": "lec13.html#way-anova-11",
+    "title": "Factorial ANOVA",
+    "section": "2-way AnOVA",
+    "text": "2-way AnOVA\n\nProf. Brocker recruit 500 children on Halloween. He assigns half to wear a costume with a mask, and the other half to wear a costume without a mask. He assigns participants to trick-or-treat alone or in groups. Then he measures how much candy each child collects while trick-or-treating.\n\n\nTablePlot\n\n\n\n\nCode\nset.seed(1031)  # Halloween-ish number for reproducibility\n\n# Create a balanced factorial design\nnew_df &lt;- expand.grid(\n  mask_condition = c(\"Mask\", \"No Mask\"),\n  group_condition = c(\"Alone\", \"Group\"),\n  n = 1:125  # 125 per cell → 500 total\n) %&gt;%\n  mutate(\n    # Simulate DV with higher values for Mask + Alone\n    candy_collected = case_when(\n      mask_condition == \"Mask\" & group_condition == \"Alone\" ~ rnorm(n(), mean = 50, sd = 5),\n      mask_condition == \"Mask\" & group_condition == \"Group\" ~ rnorm(n(), mean = 44, sd = 5),\n      mask_condition == \"No Mask\" & group_condition == \"Alone\" ~ rnorm(n(), mean = 42, sd = 5),\n      mask_condition == \"No Mask\" & group_condition == \"Group\" ~ rnorm(n(), mean = 40, sd = 5)\n    )\n  )\n\n# Run a two-way ANOVA\nmodel &lt;- aov(candy_collected ~ mask_condition * group_condition, data = new_df)\n\nmodel |&gt; \n  tidy() |&gt; \n    mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Candy Collected*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nmask_condition\n  1 \n 4,232.488\n4,232.488\n174.05\n&lt;.001\n\n\ngroup_condition\n  1 \n 1,156.661\n1,156.661\n47.56\n&lt;.001\n\n\nmask_condition:group_condition\n  1 \n   897.593\n  897.593\n36.91\n&lt;.001\n\n\nResiduals\n496 \n12,061.683\n   24.318\n--\n--\n\n\n\nDependent Variable: Candy Collected\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nnew_df |&gt; \n  ggplot(aes(mask_condition, candy_collected,color = group_condition, group = group_condition)) + \n  geom_jitter(alpha = .2) + \n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Candy Collected\\n\")",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-the-fs-in-2-way-anova-2",
+    "href": "lec13.html#calculating-the-fs-in-2-way-anova-2",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"IV1\",252, \"\",\"\",\"\",\n\"IV2\",441,\"\",\"\",\"\",\n\"Interaction\",882,\"\",\"\",\"\",\n\"Error\",10416,\"\",\"\",\"\"\n) |&gt; \n  gt() |&gt; \n  cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nIV1\n252\n\n\n\n\n\nIV2\n441\n\n\n\n\n\nInteraction\n882\n\n\n\n\n\nError\n10416",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-the-fs-in-2-way-anova-3",
+    "href": "lec13.html#calculating-the-fs-in-2-way-anova-3",
+    "title": "Factorial ANOVA",
+    "section": "Calculating the Fs in 2-way ANOVA",
+    "text": "Calculating the Fs in 2-way ANOVA\n\n\nCode\ntribble(\n~Source, ~SS, ~df, ~MS, ~F,\n\"IV1\",252, \"1\",\"252\",\"12\",\n\"IV2\",441,\"1\",\"441\",\"21\",\n\"Interaction\",882,\"1\",\"882\",\"42\",\n\"Error\",10416,\"496\",\"21\",\"\"\n) |&gt; \n  gt() |&gt; \n  cols_align(align = \"center\",\n             columns = SS:F)\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nIV1\n252\n1\n252\n12\n\n\nIV2\n441\n1\n441\n21\n\n\nInteraction\n882\n1\n882\n42\n\n\nError\n10416\n496\n21",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#calculating-2-way-anova-anova-1",
+    "href": "lec13.html#calculating-2-way-anova-anova-1",
+    "title": "Factorial ANOVA",
+    "section": "Calculating 2-way ANOVA anova",
+    "text": "Calculating 2-way ANOVA anova\n\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{Interaction}}{MS{Error}}\\)\n*All MS are divided by \\(MS_{Error}\\)",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f",
+    "href": "lec13.html#reporting-f",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f-1",
+    "href": "lec13.html#reporting-f-1",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\nReject H0, or\nFail to Reject H0",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f-2",
+    "href": "lec13.html#reporting-f-2",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in general or for publication, you need EACH F-value:\n\nF(dfBG, dfW )\n\n= F-value\n\nCorresponding p-value\n\nFor significant results: Means and standard deviations of each group",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f-3",
+    "href": "lec13.html#reporting-f-3",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nThe group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F(1,496) = 7.12, p &lt; 0.05.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f-4",
+    "href": "lec13.html#reporting-f-4",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults IV1:\n\n\nIf significant: The group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F (1, 496) = 7.12, p &lt; 0.05.\n\n\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f-5",
+    "href": "lec13.html#reporting-f-5",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults IV2:\n\nIf significant: The group that drank coffee (M=7.35, s=1.01) reported significantly more happiness compared to their peers in the control group who drank decaf (M=4.21, s=0.99), F (1, 496) = 9.12, p &lt; 0.05.\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13.html#reporting-f-6",
+    "href": "lec13.html#reporting-f-6",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults Interaction:\n\nIf significant: The group that drank coffee AND watched Dark (M=7.35, s=1.01) reported significantly more happiness compared to the other groups (M=4.21, s=0.99), F (1, 496) = 11.14, p &lt; 0.05.\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.\n\n\n\n\nCode\nlibrary(dplyr)\nlibrary(ggplot2)\n\n# Set seed for reproducibility\nset.seed(123)\n\n# Create levels for the independent variables\ncoffee &lt;- c(\"Yes\", \"No\")\ntv_show &lt;- c(\"Yes\", \"No\")\n\n# Create a data frame with all combinations of coffee and tv_show\nfactorial_design &lt;- expand.grid(Coffee = coffee, TV_Show = tv_show)\n\n# Simulate happiness scores for each group\n# Adjust means to reflect interaction effects\nn_per_group &lt;- 30 # Number of participants per condition\ndata &lt;- factorial_design[rep(1:nrow(factorial_design), each = n_per_group), ]\ndata$Happiness &lt;- NA\n\n# Define mean happiness scores for each condition\nmeans &lt;- c(\n  \"Yes_Yes\" = 8,  # Coffee + TV Show\n  \"Yes_No\" = 6,   # Coffee + No TV Show\n  \"No_Yes\" = 5,   # No Coffee + TV Show\n  \"No_No\" = 3     # No Coffee + No TV Show\n)\n\n# Assign happiness scores with some random noise\ndata$Happiness &lt;- rnorm(\n  n = nrow(data),\n  mean = means[paste(data$Coffee, data$TV_Show, sep = \"_\")],\n  sd = 1.5 # Standard deviation for noise\n)\n\n# Model\nfac_mod &lt;- \n  aov(Happiness ~ Coffee * TV_Show, data  = data)\n\ndata |&gt; \n  ggplot(aes(Coffee, Happiness, color = TV_Show)) + \n  geom_jitter(alpha = .4) + \n   stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"line\",\n    color = \"black\",\n    aes(group = TV_Show,\n        lty = TV_Show)\n  ) + \n    stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"pointrange\",\n    aes(color = TV_Show)\n  ) + \n  theme_minimal() + \n  theme(\n    panel.grid = element_blank()\n  )\n\n\n\n\n\n\n\n\n\nCode\nplot(TukeyHSD(fac_mod))",
+    "crumbs": [
+      "Course Overview",
+      "Lectures",
+      "Factorial ANOVA"
+    ]
+  },
+  {
+    "objectID": "lec13_REDUX.html#what-is-a-factorial-anova",
+    "href": "lec13_REDUX.html#what-is-a-factorial-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "What is a Factorial ANOVA?",
+    "text": "What is a Factorial ANOVA?\nMore Than 1 Independent Variable\n\nUp to now, we’ve looked at experiments that test one question at a time\nA t-test tells us whether two groups (coffee vs. no coffee) differ significantly.\n\n“Does drinking coffee make people happier than not drinking coffee?”   \n\nA one-way ANOVA lets us test more than two groups for that same question.\n\n“Does drinking coffee make people happier, compared to drinking decaf or water?”  \n\nBut in real life, there’s rarely just one thing influencing behavior."
+  },
+  {
+    "objectID": "lec13_REDUX.html#understanding-main-effects",
+    "href": "lec13_REDUX.html#understanding-main-effects",
+    "title": "Factorial ANOVA Redux",
+    "section": "Understanding Main Effects",
+    "text": "Understanding Main Effects\n\n\n\nThe main effect of Coffee asks:\n\nOn average, does drinking coffee make people happier than not drinking coffee?”\n(Regardless of whether they watched TV or not.)\n\nThe main effect of Watching TV asks:\n\nOn average, does watching TV make people happier than not watching it?”\n(Regardless of whether they had coffee or not.)\n\n\n\n\n\nCode\ndigraph {\n\n  rankdir = RL\n  node [shape = box, style = rounded, fontname = Helvetica]\n  bgcolor = \"#E9F1EC\"\n\n  subgraph cluster_coffee {\n    label = \"Independent Variable 1: Coffee\"\n    bgcolor = \"white\"\n    style = rounded\n\n    C1 [label=\"Coffee\"]\n    C2 [label=\"No Coffee\"]\n    H1 [label=\"Happiness\"]\n    H2 [label=\"Happiness\"]\n\n    H1 -&gt; C1\n    H2 -&gt; C2\n  }\n\n  subgraph cluster_tv {\n    label = \"Independent Variable 2: TV Show\"\n    bgcolor = \"white\"\n    style = rounded\n\n    TV [label=\"TV\"]\n    NTV [label=\"No TV\"]\n    H3 [label=\"Happiness\"]\n    H4 [label=\"Happiness\"]\n\n    H3 -&gt; TV\n    H4 -&gt; NTV\n  }\n}\n\n\n\n\n\n\n\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\n\nC1\n\nCoffee\n\n\n\nC2\n\nNo Coffee\n\n\n\nH1\n\nHappiness\n\n\n\nH1-&gt;C1\n\n\n\n\n\nH2\n\nHappiness\n\n\n\nH2-&gt;C2\n\n\n\n\n\nTV\n\nTV\n\n\n\nNTV\n\nNo TV\n\n\n\nH3\n\nHappiness\n\n\n\nH3-&gt;TV\n\n\n\n\n\nH4\n\nHappiness\n\n\n\nH4-&gt;NTV"
+  },
+  {
+    "objectID": "lec13_REDUX.html#understanding-interactions",
+    "href": "lec13_REDUX.html#understanding-interactions",
+    "title": "Factorial ANOVA Redux",
+    "section": "Understanding Interactions",
+    "text": "Understanding Interactions"
+  },
+  {
+    "objectID": "lec13_REDUX.html#calculating-f-values",
+    "href": "lec13_REDUX.html#calculating-f-values",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating F Values",
+    "text": "Calculating F Values\n\nBetween Groups 1 (dfB1 ) = k1 - 1\nBetween Groups 2 (dfB2 ) = k2 - 1\nInteraction (MSInteractioni) = (k1 - 1) x (k2 - 1)\nError (MSError) = n - (k1 x k2)\nTotal = n - 1"
+  },
+  {
+    "objectID": "lec13_REDUX.html#reporting-results",
+    "href": "lec13_REDUX.html#reporting-results",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting Results",
+    "text": "Reporting Results\n\nBetween Group 1 Mean Squared:\n\n\\(MS_{B_1} = \\frac{SS_{B_{1}}}{k_1-1}\\)\n\nBetween Group 2 Mean Squared:\n\n\\(MS_{B_{2}} = \\frac{SS_{B_{2}}}{k_2-1}\\)\n\nInteraction Mean Squared:\n\n\\(MS_{Interaction} = \\frac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError Mean Squared:\n\n\\(MS_{Error} = \\frac{SS{Error}}{n-(k_1 \\times k_2)}\\)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#practice-example",
+    "href": "lec13_REDUX.html#practice-example",
+    "title": "Factorial ANOVA Redux",
+    "section": "Practice Example",
+    "text": "Practice Example"
+  },
+  {
+    "objectID": "lec13_REDUX.html#factorial-anova-wrap-up",
+    "href": "lec13_REDUX.html#factorial-anova-wrap-up",
+    "title": "Factorial ANOVA Redux",
+    "section": "Factorial ANOVA Wrap-Up",
+    "text": "Factorial ANOVA Wrap-Up\nConnecting the Dots\n\nBig Picture:\n\nA factorial ANOVA lets us test multiple independent variables at once\n\nNot just whether each matters, but whether they matter together."
+  },
+  {
+    "objectID": "lec13_REDUX.html#what-it-tests",
+    "href": "lec13_REDUX.html#what-it-tests",
+    "title": "Factorial ANOVA Redux",
+    "section": "What It Tests",
+    "text": "What It Tests\n\n\n\n\n\n\n\n\nSource\nQuestion\nInterpretation\n\n\n\n\nMain Effect A\nDoes IV1 (e.g., Coffee) affect the DV on average?\n“Coffee drinkers happier?”\n\n\nMain Effect B\nDoes IV2 (e.g., TV Show) affect the DV on average?\n“TV watchers happier?”\n\n\nInteraction (A × B)\nDoes the effect of Coffee depend on watching Dark?\n“Coffee only helps if watching TV?”"
+  },
+  {
+    "objectID": "lec13_REDUX.html#visualizing-interactions",
+    "href": "lec13_REDUX.html#visualizing-interactions",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\nCode\nlibrary(ggplot2) \nset.seed(1) \ninteraction_df &lt;- \n  data.frame(Coffee = rep(c(\"No\", \"Yes\"), each = 4), \n             Show = rep(c(\"No\", \"Yes\"), times = 4), \n             Happiness = c(3, 5, 6, 8) )\n\nggplot(interaction_df, \n       aes(Coffee, Happiness, \n           color = Show, group = Show)) + \n  stat_summary(fun = mean, geom = \"line\", linewidth = 1.2) + \n  stat_summary(fun = mean, geom = \"point\", size = 3) + \n  theme_minimal(base_size = 14) + \n  labs(\n    title = \"Interaction Example\", \n    subtitle = \"Coffee only boosts happiness when watching TV\", \n    x = \"Coffee\", \n    y = \"Happiness\" ) + \n  scale_color_manual(values = c(\"#8b0000\", \"#004488\"))"
+  },
+  {
+    "objectID": "lec13_REDUX.html#way-anova",
+    "href": "lec13_REDUX.html#way-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "2-way ANOVA",
+    "text": "2-way ANOVA\nTwo types of variance:\n\nVariance among all of the scores (error variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance)."
+  },
+  {
+    "objectID": "lec13_REDUX.html#section",
+    "href": "lec13_REDUX.html#section",
+    "title": "Factorial ANOVA Redux",
+    "section": "",
+    "text": "Why Factorial ANOVA?\nA Factorial ANOVA allows us to test more than one independent variable (IV) at the same time.\n\nInstead of asking\n\n“Does coffee make people happier?”\n\nWe can now ask:\n\n“Does coffee and watching a favorite TV show* make people happier?”\n“Does the effect of coffee depend on what you’re watching?”"
+  },
+  {
+    "objectID": "lec13_REDUX.html#the-power-of-two-or-more",
+    "href": "lec13_REDUX.html#the-power-of-two-or-more",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nTesting as Separate IV’s\n\n\nCode\n#| echo: false\n\n\ndigraph {\n  node [shape = box, style = rounded, fontname = Helvetica]\n  bgcolor = \"#E9F1EC\"\n\n  subgraph cluster_coffee {\n    label = \"Independent Variable 1: Coffee\"\n    bgcolor = \"white\"\n    style = rounded\n\n    C1 [label=\"Coffee\"]\n    C2 [label=\"No Coffee\"]\n    H1 [label=\"Happiness\"]\n    H2 [label=\"Happiness\"]\n\n    C1 -&gt; H1\n    C2 -&gt; H2\n  }\n\n  subgraph cluster_tv {\n    label = \"Independent Variable 2: TV Show\"\n    bgcolor = \"white\"\n    style = rounded\n\n    TV [label=\"TV\"]\n    NTV [label=\"No TV\"]\n    H3 [label=\"Happiness\"]\n    H4 [label=\"Happiness\"]\n\n    TV -&gt; H3\n    NTV -&gt; H4\n  }\n}\n\n\n\n\n\n\n\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\n\nC1\n\nCoffee\n\n\n\nH1\n\nHappiness\n\n\n\nC1-&gt;H1\n\n\n\n\n\nC2\n\nNo Coffee\n\n\n\nH2\n\nHappiness\n\n\n\nC2-&gt;H2\n\n\n\n\n\nTV\n\nTV\n\n\n\nH3\n\nHappiness\n\n\n\nTV-&gt;H3\n\n\n\n\n\nNTV\n\nNo TV\n\n\n\nH4\n\nHappiness\n\n\n\nNTV-&gt;H4"
+  },
+  {
+    "objectID": "lec13_REDUX.html#why-factorial-anova",
+    "href": "lec13_REDUX.html#why-factorial-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Why Factorial ANOVA?",
+    "text": "Why Factorial ANOVA?\nA Factorial ANOVA allows us to test more than one independent variable (IV) at the same time.\n\nInstead of asking\n\n“Does coffee make people happier?”\n“Does watching TV make people happier?\n\nWe can now ask:\n\n“Does coffee and watching TV show make people happier?”\n“Does the effect of coffee depend on what you’re watching?”"
+  },
+  {
+    "objectID": "lec13_REDUX.html#why-not-just-run-multiple-t-tests",
+    "href": "lec13_REDUX.html#why-not-just-run-multiple-t-tests",
+    "title": "Factorial ANOVA Redux",
+    "section": "Why Not Just Run Multiple t-tests?",
+    "text": "Why Not Just Run Multiple t-tests?\nYou Could Compare…\n\nCoffee vs. No Coffee\nDark vs. No Dark\nCoffee + Dark vs. everything else\n\nbut each additional t-test increases your Type I error rate (false positives).\n\nA Factorial ANOVA solves that problem by testing all these relationships in one model controlling for shared variance and examining combined effects."
+  },
+  {
+    "objectID": "lec13_REDUX.html#in-other-words",
+    "href": "lec13_REDUX.html#in-other-words",
+    "title": "Factorial ANOVA Redux",
+    "section": "In Other Words…",
+    "text": "In Other Words…\n\n\n\n\n\n\n\n\nTest Type\nQuestion\nExample\n\n\n\n\nt-test\nDo two groups differ?\nCoffee vs. No Coffee\n\n\nOne-Way ANOVA\nDo 3+ groups differ on one IV?\nDecaf, Coffee, Energy Drink\n\n\nFactorial ANOVA\nHow do two or more IVs work together?\nCoffee × TV Show → Happiness"
+  },
+  {
+    "objectID": "lec13_REDUX.html#the-goal-of-research",
+    "href": "lec13_REDUX.html#the-goal-of-research",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Goal of Research",
+    "text": "The Goal of Research\n\nThe goal of good research is to narrow in on the real sources of variation.\nFactorial ANOVA lets us see not just whether variables matter, but how they matter together.\n\n\nIt’s not just what causes an effect, it’s what combinations of causes create patterns we care about."
+  },
+  {
+    "objectID": "lec13_REDUX.html#the-power-of-two-or-more-1",
+    "href": "lec13_REDUX.html#the-power-of-two-or-more-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#combining-ivs",
+    "href": "lec13_REDUX.html#combining-ivs",
+    "title": "Factorial ANOVA Redux",
+    "section": "Combining IV’s",
+    "text": "Combining IV’s\n\n\nCode\ndigraph {\n  node [shape = box, style = rounded, fontname = Helvetica]\n  bgcolor = \"#E9F1EC\"\n\n  Coffee [label=\"Coffee\"]\n  NoCoffee [label=\"No Coffee\"]\n  Dark [label=\"Watch Dark\"]\n  NoDark [label=\"No Dark\"]\n\n  subgraph cluster_design {\n    label = \"2 × 2 Factorial Design\"\n    bgcolor = \"white\"\n    style = rounded\n\n    CoffeeDark [label=\"Coffee + Dark\"]\n    CoffeeNoDark [label=\"Coffee + No Dark\"]\n    NoCoffeeDark [label=\"No Coffee + Dark\"]\n    NoCoffeeNoDark [label=\"No Coffee + No Dark\"]\n\n    Coffee -&gt; CoffeeDark\n    Coffee -&gt; CoffeeNoDark\n    NoCoffee -&gt; NoCoffeeDark\n    NoCoffee -&gt; NoCoffeeNoDark\n\n    Dark -&gt; CoffeeDark\n    Dark -&gt; NoCoffeeDark\n    NoDark -&gt; CoffeeNoDark\n    NoDark -&gt; NoCoffeeNoDark\n  }\n\n  Happiness1 [label=\"Happiness\", style = \"rounded, filled\", color = \"white\"]\n  Happiness2 [label=\"Happiness\", style = \"rounded,filled\", color = \"white\"]\n  Happiness3 [label=\"Happiness\", style = \"rounded,filled\", color = \"white\"]\n  Happiness4 [label=\"Happiness\", style = \"rounded,filled\", color = \"white\"]\n  \n  CoffeeDark -&gt; Happiness1\n  CoffeeNoDark -&gt; Happiness2\n  NoCoffeeDark -&gt; Happiness3\n  NoCoffeeNoDark -&gt; Happiness4\n \n}\n\n\n\n\n\n\n\n\n\ncluster_design\n\n2 × 2 Factorial Design\n\n\n\nCoffee\n\nCoffee\n\n\n\nCoffeeDark\n\nCoffee + Dark\n\n\n\nCoffee-&gt;CoffeeDark\n\n\n\n\n\nCoffeeNoDark\n\nCoffee + No Dark\n\n\n\nCoffee-&gt;CoffeeNoDark\n\n\n\n\n\nNoCoffee\n\nNo Coffee\n\n\n\nNoCoffeeDark\n\nNo Coffee + Dark\n\n\n\nNoCoffee-&gt;NoCoffeeDark\n\n\n\n\n\nNoCoffeeNoDark\n\nNo Coffee + No Dark\n\n\n\nNoCoffee-&gt;NoCoffeeNoDark\n\n\n\n\n\nDark\n\nWatch Dark\n\n\n\nDark-&gt;CoffeeDark\n\n\n\n\n\nDark-&gt;NoCoffeeDark\n\n\n\n\n\nNoDark\n\nNo Dark\n\n\n\nNoDark-&gt;CoffeeNoDark\n\n\n\n\n\nNoDark-&gt;NoCoffeeNoDark\n\n\n\n\n\nHappiness1\n\nHappiness\n\n\n\nCoffeeDark-&gt;Happiness1\n\n\n\n\n\nHappiness2\n\nHappiness\n\n\n\nCoffeeNoDark-&gt;Happiness2\n\n\n\n\n\nHappiness3\n\nHappiness\n\n\n\nNoCoffeeDark-&gt;Happiness3\n\n\n\n\n\nHappiness4\n\nHappiness\n\n\n\nNoCoffeeNoDark-&gt;Happiness4"
+  },
+  {
+    "objectID": "lec13_REDUX.html#the-power-of-two-or-more-2",
+    "href": "lec13_REDUX.html#the-power-of-two-or-more-2",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nFactorial ANOVA helps answer three major questions:\n\nMain Effect 1: Does IV1 alone affect the outcome?\n(Coffee → Happiness)\nMain Effect 2: Does IV2 alone affect the outcome?\n(TV Show → Happiness)\nInteraction Effect: Does the effect of one variable depend on the other?\n(Maybe coffee only helps if you’re watching TV!)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#factorial-anova",
+    "href": "lec13_REDUX.html#factorial-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Factorial ANOVA",
+    "text": "Factorial ANOVA\nTwo types of variance:\n\nVariance among all of the scores (error variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance)."
+  },
+  {
+    "objectID": "lec13_REDUX.html#understanding-main-effects-1",
+    "href": "lec13_REDUX.html#understanding-main-effects-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Understanding Main Effects",
+    "text": "Understanding Main Effects\n2x2 Table\n\n\n\n\nCode\nlibrary(tibble)\nlibrary(dplyr)\nlibrary(gt)\n\nlibrary(tibble)\nlibrary(gt)\n\n# Create a 2x2 factorial table (wide layout)\ndesign_tbl &lt;- tribble(\n  ~Condition,     ~`Coffee`, ~`No Coffee`,\n  \"TV\",               3,           4,\n  \"No TV\",            4,           8\n)\n\n# Display as a 2x2 factorial grid\ndesign_tbl |&gt;\n  gt() |&gt;\n  tab_header(\n    title = md(\"**2 × 2 Factorial Design: Coffee × TV**\"),\n    subtitle = \"Mean Happiness Scores by Condition\"\n  ) |&gt;\n  cols_label(\n    Condition = \"Watched TV?\",\n    `Coffee` = \"Coffee\",\n    `No Coffee` = \"No Coffee\"\n  ) |&gt;\n  fmt_number(\n    columns = c(`Coffee`, `No Coffee`),\n    decimals = 1\n  ) |&gt;\n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  ) |&gt;\n  tab_style(\n    style = cell_fill(color = \"#f8f9fa\"),\n    locations = cells_body(columns = everything())\n  ) |&gt;\n  tab_spanner(\n    label = md(\"**Coffee Condition**\"),\n    columns = c(`Coffee`, `No Coffee`)\n  ) |&gt;\n  tab_footnote(\n    footnote = \"Higher numbers indicate greater happiness.\"\n  ) |&gt; \n  tab_options(\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean Happiness Scores by Condition\n\n\nWatched TV?\n\nCoffee Condition\n\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n\n\nNo TV\n4.0\n8.0\n\n\n\nHigher numbers indicate greater happiness.\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Base 2x2 design with condition means\ndesign_tbl &lt;- tribble(\n  ~Condition, ~`Coffee`, ~`No Coffee`,\n  \"TV\",       3,          4,\n  \"No TV\",    4,          8\n)\n\n# Compute marginal means\ndesign_tbl_extended &lt;- design_tbl |&gt;\n  mutate(Row_Mean = rowMeans(across(c(`Coffee`, `No Coffee`)))) |&gt;\n  bind_rows(\n    tibble(\n      Condition = \"Column Mean\",\n      Coffee = mean(design_tbl$Coffee),\n      `No Coffee` = mean(design_tbl$`No Coffee`),\n      Row_Mean = mean(c(design_tbl$Coffee, design_tbl$`No Coffee`))\n    )\n  )\n\n# Display with gt\ndesign_tbl_extended |&gt;\n  gt() |&gt;\n  tab_header(\n    title = md(\"**2 × 2 Factorial Design: Coffee × TV**\"),\n    subtitle = \"Mean Happiness Scores with Marginal Means\"\n  ) |&gt;\n  cols_label(\n    Condition = \"Watched TV?\",\n    `Coffee` = \"Coffee\",\n    `No Coffee` = \"No Coffee\",\n    Row_Mean = md(\"**Row Mean**\")\n  ) |&gt;\n  fmt_number(\n    columns = c(`Coffee`, `No Coffee`, Row_Mean),\n    decimals = 1\n  ) |&gt;\n  tab_spanner(\n    label = md(\"**Coffee Condition**\"),\n    columns = c(`Coffee`, `No Coffee`)\n  ) |&gt;\n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = list(\n      cells_column_labels(),\n      cells_body(rows = Condition == \"Column Mean\")\n    )\n  ) |&gt;\n  tab_style(\n    style = cell_fill(color = \"#f5f5f5\"),\n    locations = cells_body(\n      rows = Condition == \"Column Mean\" | Condition == \"No TV\"\n    )\n  ) |&gt;\n  tab_footnote(\n    footnote = \"Row and column means illustrate main effects of Coffee and TV.\"\n  ) |&gt; \n   tab_options(\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean Happiness Scores with Marginal Means\n\n\nWatched TV?\n\nCoffee Condition\n\nRow Mean\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n3.5\n\n\nNo TV\n4.0\n8.0\n6.0\n\n\nColumn Mean\n3.5\n6.0\n4.8\n\n\n\nRow and column means illustrate main effects of Coffee and TV."
+  },
+  {
+    "objectID": "lec13_REDUX.html#visualizing-interactions-1",
+    "href": "lec13_REDUX.html#visualizing-interactions-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\n\n\nCode\nlibrary(tibble)\nlibrary(dplyr)\nlibrary(ggplot2)\n\n# Create the 2x2 design with your condition means\nplot_data &lt;- tribble(\n  ~TV,      ~Coffee,        ~Happiness,\n  \"TV\",     \"Coffee\",        3,\n  \"TV\",     \"No Coffee\",     4,\n  \"No TV\",  \"Coffee\",        4,\n  \"No TV\",  \"No Coffee\",     8\n)\n\n# Basic interaction plot\nggplot(plot_data, aes(x = TV, y = Happiness, color = Coffee, group = Coffee)) +\n  geom_point(size = 3) +\n  geom_line(linewidth = 1.2) +\n  scale_color_manual(values = c(\"#3E92CC\", \"#FF6B6B\")) +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Interaction Plot: Coffee × TV on Happiness\",\n    x = \"Watched TV\",\n    y = \"Mean Happiness\",\n    color = \"Coffee Condition\"\n  ) +\n  theme(\n    plot.title = element_text(face = \"bold\", hjust = 0.5),\n    panel.grid = element_blank(),\n    legend.position = \"bottom\"\n  )\n\n\n\n\n\n\n\n\n\n\n\nEach line represents one independent variable, in this case, whether participants drank coffee.\nThe x-axis represents the second independent variable, watching TV or not.\nIf these lines are parallel, there’s no interaction. Tthe effect of one IV doesn’t depend on the other.\nBut here, notice that the lines cross. That means the effect of coffee on happiness depends on whether someone watched TV. Coffee makes people happier unless they watched TV; an interaction effect.”"
+  },
+  {
+    "objectID": "lec13_REDUX.html#visualizing-interactions-2",
+    "href": "lec13_REDUX.html#visualizing-interactions-2",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\nCode\n# Summarize marginal means\nmain_effects &lt;- plot_data %&gt;%\n  group_by(Coffee) %&gt;%\n  summarize(Happiness = mean(Happiness))\n\nggplot(main_effects, aes(Coffee, Happiness, fill = Coffee)) +\n  geom_col(width = 0.5) +\n  scale_fill_manual(values = c(\"#3E92CC\", \"#FF6B6B\")) +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Main Effect of Coffee on Happiness\",\n    x = \"\",\n    y = \"Mean Happiness\"\n  ) +\n  theme(\n    plot.title = element_text(face = \"bold\", hjust = 0.5),\n    legend.position = \"none\"\n  )"
+  },
+  {
+    "objectID": "lec13_REDUX.html#visualizing-interactions-3",
+    "href": "lec13_REDUX.html#visualizing-interactions-3",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions"
+  },
+  {
+    "objectID": "lec13_REDUX.html#from-main-effect-to-interaction",
+    "href": "lec13_REDUX.html#from-main-effect-to-interaction",
+    "title": "Factorial ANOVA Redux",
+    "section": "From Main Effect to Interaction",
+    "text": "From Main Effect to Interaction"
+  },
+  {
+    "objectID": "lec13_REDUX.html#calculating-2-way-anova-anova",
+    "href": "lec13_REDUX.html#calculating-2-way-anova-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating 2-way ANOVA anova",
+    "text": "Calculating 2-way ANOVA anova\n\n\\(F = \\frac{MS_{B_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{B_{2}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{Interaction}}{MS{Error}}\\)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#calculating-ms",
+    "href": "lec13_REDUX.html#calculating-ms",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating MS",
+    "text": "Calculating MS\n\nBetween Group 1 MS:\n\n\\(MS_{B_1} = \\frac{SS_{B_{1}}}{k_1-1}\\)\n\nBetween Group 2 MS:\n\n\\(MS_{B_{2}} = \\frac{SS_{B_{2}}}{k_2-1}\\)\n\nInteraction MS\n\n\\(MS_{Interaction} = \\frac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError MS:\n\n\\(MS_{Error} = \\frac{SS{Error}}{n-(k_1 \\times k_2)}\\)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#calculating-f",
+    "href": "lec13_REDUX.html#calculating-f",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating F",
+    "text": "Calculating F\n\n\\(F_A = \\frac{MS_{B_{1}}}{MS{Error}}\\)\n\\(F_B = \\frac{MS_{B_{2}}}{MS{Error}}\\)\n\\(F_{AB} = \\frac{MS_{Interaction}}{MS{Error}}\\)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#how-many-fs",
+    "href": "lec13_REDUX.html#how-many-fs",
+    "title": "Factorial ANOVA Redux",
+    "section": "How Many F’s?",
+    "text": "How Many F’s?\n\n\nCode\ndigraph F_Tests {\n  size=5\n  rankdir=TB\n  bgcolor=\"#E9F1EC\"\n  node [shape=box, style=\"rounded,filled\", fontname=\"Helvetica\", color = \"white\"]\n\n  # Level 1\n  oneway [label=\"1-Way ANOVA\\n→ 1 F-test\\n(Main Effect Only)\"]\n\n  # Level 2\n  twoway [label=\"2-Way ANOVA (2×2)\\n→ 3 F-tests\\n(2 Main Effects + 1 Interaction)\"]\n\n  # Level 3\n  threeway [label=\"3-Way ANOVA (2×2×2)\\n→ 7 F-tests\\n(3 Main + 3 Two-Way + 1 Three-Way)\"]\n\n  # Level 4\n  fourway [label=\"4-Way ANOVA (2×2×2×2)\\n→ 15 F-tests\\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)\"]\n\n  # Connections\n  oneway -&gt; twoway -&gt; threeway -&gt; fourway\n\n  # Optional: a note on the right\n  note [label=\"General Formula:\\nF = 2ⁿ - 1\\n(where n = # of IVs)\", shape=note, fillcolor=\"#FFF3CD\", color=\"#E0B800\", fontcolor=\"#3B2F00\"]\n  threeway -&gt; note [style=dotted, color=\"#888\"]\n}\n\n\n\n\n\n\n\nF_Tests\n\n\n\noneway\n\n1-Way ANOVA\n→ 1 F-test\n(Main Effect Only)\n\n\n\ntwoway\n\n2-Way ANOVA (2×2)\n→ 3 F-tests\n(2 Main Effects + 1 Interaction)\n\n\n\noneway-&gt;twoway\n\n\n\n\n\nthreeway\n\n3-Way ANOVA (2×2×2)\n→ 7 F-tests\n(3 Main + 3 Two-Way + 1 Three-Way)\n\n\n\ntwoway-&gt;threeway\n\n\n\n\n\nfourway\n\n4-Way ANOVA (2×2×2×2)\n→ 15 F-tests\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)\n\n\n\nthreeway-&gt;fourway\n\n\n\n\n\nnote\n\n\n\nGeneral Formula:\nF = 2ⁿ - 1\n(where n = # of IVs)\n\n\n\nthreeway-&gt;note"
+  },
+  {
+    "objectID": "lec13_REDUX.html#interpreting-results",
+    "href": "lec13_REDUX.html#interpreting-results",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\nANOVA Table\n\n\nCode\nset.seed(123)\nlibrary(dplyr)\nlibrary(afex)\nlibrary(gt)\nlibrary(broom)\nlibrary(forcats)\n\ntwoway &lt;- \n  tibble(\n    id = 1:100,\n    gender = sample(c(\"Male\", \"Female\"), 100, replace = TRUE),\n    education_level = sample(c(\"High School\", \"Bachelor's\", \"Master's\", \"PhD\"), 100, replace = TRUE)\n    ) %&gt;%\n  mutate(\n    # assign numeric values for education level\n    edu_num = case_when(\n      education_level == \"High School\" ~ 1,\n      education_level == \"Bachelor's\"  ~ 2,\n      education_level == \"Master's\"    ~ 3,\n      education_level == \"PhD\"         ~ 4\n    ),\n    # introduce a systematic difference based on gender and education_level interaction\n    political_interest = 5 + \n    edu_num * 1.2 +   # main effect of education level\n    if_else(gender == \"Female\", \n            edu_num * 0.8, \n            edu_num * -0.5) +  # interaction\n    rnorm(100, mean = 0, sd = 1) # some noise\n    ) \n\n# Run factorial ANOVA\naov_ez(\n  \"id\",\n  \"political_interest\",\n  twoway,\n  between = c(\"gender\",\"education_level\"),\n  return = \"aov\"\n) |&gt; \n  tidy() |&gt; \n  mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Political Interest*&lt;br&gt;\n                             *Gende*: Male, Female*&lt;br&gt;\n                             *Education*: High School, Bachelor's, Master's, PhD*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  ) |&gt; \n  opt_row_striping() |&gt; \n  cols_align(align=\"center\") |&gt; \n  tab_options(\n    table.width = pct(75),\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ngender\n 1 \n216.57 \n216.57 \n244.15\n&lt;.001\n\n\neducation_level\n 3 \n198.312\n 66.104\n74.52\n&lt;.001\n\n\ngender:education_level\n 3 \n 23.648\n  7.883\n8.89\n&lt;.001\n\n\nResiduals\n92 \n 81.608\n  0.887\n--\n--\n\n\n\nDependent Variable: Political Interest Gende: Male, Female Education: High School, Bachelor’s, Master’s, PhD\n\n\n\n\n\n\n\n\n\n\\(F(1,92) = 244.15, p &lt;.001\\)\n\\(F(3,92) = 74.52, p &lt;.001\\)\n\\(F(3,92) = 8.89, p&lt;.001\\)"
+  },
+  {
+    "objectID": "lec13_REDUX.html#interpreting-fs",
+    "href": "lec13_REDUX.html#interpreting-fs",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting F’s",
+    "text": "Interpreting F’s\nVisually\n\n\nCode\ntwoway$education_level &lt;- factor(twoway$education_level, labels = c(\"High School\",\"Bachelors\",\"Masters\",\"PhD\"),ordered = TRUE)\n\ntwoway |&gt; \n  ggplot(aes(education_level, political_interest,color = gender, group = gender)) + \n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Political Interest\\n\")"
+  },
+  {
+    "objectID": "lec13_REDUX.html#interpreting-the-fs-in-2-way-anova",
+    "href": "lec13_REDUX.html#interpreting-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nFA (1,96) = 41.9, p &lt; .001\nFB (1,96) = 47.19, p &lt; .001\nFAB (1,96) = 3.75, p = ns"
+  },
+  {
+    "objectID": "lec13_REDUX.html#interpreting-the-fs-in-2-way-anova-1",
+    "href": "lec13_REDUX.html#interpreting-the-fs-in-2-way-anova-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nFA = Diet Type\nFB = Exercise Regimen\nFAB = Diet Type x Exercise Regimen"
+  },
+  {
+    "objectID": "lec13_REDUX.html#interpreting-the-fs-in-2-way-anova-2",
+    "href": "lec13_REDUX.html#interpreting-the-fs-in-2-way-anova-2",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nF1 = Diet Type\nF2 = Exercise Regimen\nF3 = Diet Type x Exercise Regimen"
+  },
+  {
+    "objectID": "lec13_REDUX.html#interpreting-the-fs",
+    "href": "lec13_REDUX.html#interpreting-the-fs",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the F’s",
+    "text": "Interpreting the F’s\nWeight Loss and Exercise Regimen and Diet Type\n\nTablePlot\n\n\n\n\nCode\nset.seed(42)\n\n# Create a balanced design\ndf &lt;- expand.grid(\n  diet_type = c(\"Low Carb\", \"Low Fat\"),\n  exercise_regimen = c(\"Cardio\", \"Strength\"),\n  id = 1:25\n) %&gt;%\n  mutate(\n    # simulate main effects: both diet and exercise influence weight loss\n    weight_loss = case_when(\n      diet_type == \"Low Carb\" ~ 6,\n      diet_type == \"Low Fat\" ~ 4\n    ) + case_when(\n      exercise_regimen == \"Cardio\" ~ 5,\n      exercise_regimen == \"Strength\" ~ 3\n    ) +\n    rnorm(n(), mean = 0, sd = 1.5)  # add some noise\n  )\n\n# Run the two-way ANOVA\nanova_result &lt;- aov(weight_loss ~ diet_type * exercise_regimen, data = df)\nanova_result |&gt; \n  tidy() |&gt; \n    mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value |&gt; round(2)),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Weight Loss*&lt;br&gt;\n                             *Exercise Regimen: Cardio, Strength*&lt;br&gt;\n                             *Diet Type: Low Carb, Low Fat*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )  |&gt; \n  tab_options(\n    table.width = pct(75),\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ndiet_type\n 1 \n101.266\n101.266\n41.9\n&lt;.001\n\n\nexercise_regimen\n 1 \n114.057\n114.057\n47.19\n&lt;.001\n\n\ndiet_type:exercise_regimen\n 1 \n  9.066\n  9.066\n3.75\n0.06\n\n\nResiduals\n96 \n232.023\n  2.417\n--\n--\n\n\n\nDependent Variable: Weight Loss Exercise Regimen: Cardio, Strength Diet Type: Low Carb, Low Fat\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ndf |&gt; \n  ggplot(aes(diet_type, weight_loss,color = exercise_regimen, group = exercise_regimen)) + \n  geom_jitter(alpha = .2) +\n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Weight Loss\\n\")"
+  },
+  {
+    "objectID": "lec13fct.html#what-is-a-factorial-anova",
+    "href": "lec13fct.html#what-is-a-factorial-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "What is a Factorial ANOVA?",
+    "text": "What is a Factorial ANOVA?\nMore Than 1 Independent Variable\n\nUp to now, we’ve looked at experiments that test one question at a time\nA t-test tells us whether two groups (coffee vs. no coffee) differ significantly.\n\n“Does drinking coffee make people happier than not drinking coffee?”   \n\nA one-way ANOVA lets us test more than two groups for that same question.\n\n“Does drinking coffee make people happier, compared to drinking decaf or water?”  \n\nBut in real life, there’s rarely just one thing influencing behavior."
+  },
+  {
+    "objectID": "lec13fct.html#why-factorial-anova",
+    "href": "lec13fct.html#why-factorial-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Why Factorial ANOVA?",
+    "text": "Why Factorial ANOVA?\nA Factorial ANOVA allows us to test more than one independent variable (IV) at the same time.\n\nInstead of asking\n\n“Does coffee make people happier?”\n“Does watching TV make people happier?\n\nWe can now ask:\n\n“Does coffee and watching TV show make people happier?”\n“Does the effect of coffee depend on what you’re watching?”"
+  },
+  {
+    "objectID": "lec13fct.html#the-power-of-two-or-more",
+    "href": "lec13fct.html#the-power-of-two-or-more",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nTesting as Separate IV’s\n\n\nCode\n#| echo: false\n\n\ndigraph {\n  node [shape = box, style = rounded, fontname = Helvetica]\n  bgcolor = \"#E9F1EC\"\n\n  subgraph cluster_coffee {\n    label = \"Independent Variable 1: Coffee\"\n    bgcolor = \"white\"\n    style = rounded\n\n    C1 [label=\"Coffee\"]\n    C2 [label=\"No Coffee\"]\n    H1 [label=\"Happiness\"]\n    H2 [label=\"Happiness\"]\n\n    C1 -&gt; H1\n    C2 -&gt; H2\n  }\n\n  subgraph cluster_tv {\n    label = \"Independent Variable 2: TV Show\"\n    bgcolor = \"white\"\n    style = rounded\n\n    TV [label=\"TV\"]\n    NTV [label=\"No TV\"]\n    H3 [label=\"Happiness\"]\n    H4 [label=\"Happiness\"]\n\n    TV -&gt; H3\n    NTV -&gt; H4\n  }\n}\n\n\n\n\n\n\n\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\n\nC1\n\nCoffee\n\n\n\nH1\n\nHappiness\n\n\n\nC1-&gt;H1\n\n\n\n\n\nC2\n\nNo Coffee\n\n\n\nH2\n\nHappiness\n\n\n\nC2-&gt;H2\n\n\n\n\n\nTV\n\nTV\n\n\n\nH3\n\nHappiness\n\n\n\nTV-&gt;H3\n\n\n\n\n\nNTV\n\nNo TV\n\n\n\nH4\n\nHappiness\n\n\n\nNTV-&gt;H4"
+  },
+  {
+    "objectID": "lec13fct.html#the-power-of-two-or-more-1",
+    "href": "lec13fct.html#the-power-of-two-or-more-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)"
+  },
+  {
+    "objectID": "lec13fct.html#combining-ivs",
+    "href": "lec13fct.html#combining-ivs",
+    "title": "Factorial ANOVA Redux",
+    "section": "Combining IV’s",
+    "text": "Combining IV’s\n\n\nCode\ndigraph {\n  node [shape = box, style = rounded, fontname = Helvetica]\n  bgcolor = \"#E9F1EC\"\n\n  Coffee [label=\"Coffee\"]\n  NoCoffee [label=\"No Coffee\"]\n  Dark [label=\"Watch Dark\"]\n  NoDark [label=\"No Dark\"]\n\n  subgraph cluster_design {\n    label = \"2 × 2 Factorial Design\"\n    bgcolor = \"white\"\n    style = rounded\n\n    CoffeeDark [label=\"Coffee + Dark\"]\n    CoffeeNoDark [label=\"Coffee + No Dark\"]\n    NoCoffeeDark [label=\"No Coffee + Dark\"]\n    NoCoffeeNoDark [label=\"No Coffee + No Dark\"]\n\n    Coffee -&gt; CoffeeDark\n    Coffee -&gt; CoffeeNoDark\n    NoCoffee -&gt; NoCoffeeDark\n    NoCoffee -&gt; NoCoffeeNoDark\n\n    Dark -&gt; CoffeeDark\n    Dark -&gt; NoCoffeeDark\n    NoDark -&gt; CoffeeNoDark\n    NoDark -&gt; NoCoffeeNoDark\n  }\n\n  Happiness1 [label=\"Happiness\", style = \"rounded, filled\", color = \"white\"]\n  Happiness2 [label=\"Happiness\", style = \"rounded,filled\", color = \"white\"]\n  Happiness3 [label=\"Happiness\", style = \"rounded,filled\", color = \"white\"]\n  Happiness4 [label=\"Happiness\", style = \"rounded,filled\", color = \"white\"]\n  \n  CoffeeDark -&gt; Happiness1\n  CoffeeNoDark -&gt; Happiness2\n  NoCoffeeDark -&gt; Happiness3\n  NoCoffeeNoDark -&gt; Happiness4\n \n}\n\n\n\n\n\n\n\n\n\ncluster_design\n\n2 × 2 Factorial Design\n\n\n\nCoffee\n\nCoffee\n\n\n\nCoffeeDark\n\nCoffee + Dark\n\n\n\nCoffee-&gt;CoffeeDark\n\n\n\n\n\nCoffeeNoDark\n\nCoffee + No Dark\n\n\n\nCoffee-&gt;CoffeeNoDark\n\n\n\n\n\nNoCoffee\n\nNo Coffee\n\n\n\nNoCoffeeDark\n\nNo Coffee + Dark\n\n\n\nNoCoffee-&gt;NoCoffeeDark\n\n\n\n\n\nNoCoffeeNoDark\n\nNo Coffee + No Dark\n\n\n\nNoCoffee-&gt;NoCoffeeNoDark\n\n\n\n\n\nDark\n\nWatch Dark\n\n\n\nDark-&gt;CoffeeDark\n\n\n\n\n\nDark-&gt;NoCoffeeDark\n\n\n\n\n\nNoDark\n\nNo Dark\n\n\n\nNoDark-&gt;CoffeeNoDark\n\n\n\n\n\nNoDark-&gt;NoCoffeeNoDark\n\n\n\n\n\nHappiness1\n\nHappiness\n\n\n\nCoffeeDark-&gt;Happiness1\n\n\n\n\n\nHappiness2\n\nHappiness\n\n\n\nCoffeeNoDark-&gt;Happiness2\n\n\n\n\n\nHappiness3\n\nHappiness\n\n\n\nNoCoffeeDark-&gt;Happiness3\n\n\n\n\n\nHappiness4\n\nHappiness\n\n\n\nNoCoffeeNoDark-&gt;Happiness4"
+  },
+  {
+    "objectID": "lec13fct.html#the-power-of-two-or-more-2",
+    "href": "lec13fct.html#the-power-of-two-or-more-2",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nFactorial ANOVA helps answer three major questions:\n\nMain Effect 1: Does IV1 alone affect the outcome?\n(Coffee → Happiness)\nMain Effect 2: Does IV2 alone affect the outcome?\n(TV Show → Happiness)\nInteraction Effect: Does the effect of one variable depend on the other?\n(Maybe coffee only helps if you’re watching TV!)"
+  },
+  {
+    "objectID": "lec13fct.html#why-not-just-run-multiple-t-tests",
+    "href": "lec13fct.html#why-not-just-run-multiple-t-tests",
+    "title": "Factorial ANOVA Redux",
+    "section": "Why Not Just Run Multiple t-tests?",
+    "text": "Why Not Just Run Multiple t-tests?\nYou Could Compare…\n\nCoffee vs. No Coffee\nDark vs. No Dark\nCoffee + Dark vs. everything else\n\nbut each additional t-test increases your Type I error rate (false positives).\n\nA Factorial ANOVA solves that problem by testing all these relationships in one model controlling for shared variance and examining combined effects."
+  },
+  {
+    "objectID": "lec13fct.html#in-other-words",
+    "href": "lec13fct.html#in-other-words",
+    "title": "Factorial ANOVA Redux",
+    "section": "In Other Words…",
+    "text": "In Other Words…\n\n\n\n\n\n\n\n\nTest Type\nQuestion\nExample\n\n\n\n\nt-test\nDo two groups differ?\nCoffee vs. No Coffee\n\n\nOne-Way ANOVA\nDo 3+ groups differ on one IV?\nDecaf, Coffee, Energy Drink\n\n\nFactorial ANOVA\nHow do two or more IVs work together?\nCoffee × TV Show → Happiness"
+  },
+  {
+    "objectID": "lec13fct.html#the-goal-of-research",
+    "href": "lec13fct.html#the-goal-of-research",
+    "title": "Factorial ANOVA Redux",
+    "section": "The Goal of Research",
+    "text": "The Goal of Research\n\nThe goal of good research is to narrow in on the real sources of variation.\nFactorial ANOVA lets us see not just whether variables matter, but how they matter together.\n\n\nIt’s not just what causes an effect, it’s what combinations of causes create patterns we care about."
+  },
+  {
+    "objectID": "lec13fct.html#factorial-anova",
+    "href": "lec13fct.html#factorial-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Factorial ANOVA",
+    "text": "Factorial ANOVA\nTwo types of variance:\n\nVariance among all of the scores (error variance).\nVariance between the groups of the first IV (between group variance 1).\nVariance between the groups of the second IV (between group variance 2).\nVariance between the combination of the groups (interaction variance)."
+  },
+  {
+    "objectID": "lec13fct.html#understanding-main-effects",
+    "href": "lec13fct.html#understanding-main-effects",
+    "title": "Factorial ANOVA Redux",
+    "section": "Understanding Main Effects",
+    "text": "Understanding Main Effects\n\n\n\nThe main effect of Coffee asks:\n\nOn average, does drinking coffee make people happier than not drinking coffee?”\n(Regardless of whether they watched TV or not.)\n\nThe main effect of Watching TV asks:\n\nOn average, does watching TV make people happier than not watching it?”\n(Regardless of whether they had coffee or not.)\n\n\n\n\n\nCode\ndigraph {\n\n  rankdir = RL\n  node [shape = box, style = rounded, fontname = Helvetica]\n  bgcolor = \"#E9F1EC\"\n\n  subgraph cluster_coffee {\n    label = \"Independent Variable 1: Coffee\"\n    bgcolor = \"white\"\n    style = rounded\n\n    C1 [label=\"Coffee\"]\n    C2 [label=\"No Coffee\"]\n    H1 [label=\"Happiness\"]\n    H2 [label=\"Happiness\"]\n\n    H1 -&gt; C1\n    H2 -&gt; C2\n  }\n\n  subgraph cluster_tv {\n    label = \"Independent Variable 2: TV Show\"\n    bgcolor = \"white\"\n    style = rounded\n\n    TV [label=\"TV\"]\n    NTV [label=\"No TV\"]\n    H3 [label=\"Happiness\"]\n    H4 [label=\"Happiness\"]\n\n    H3 -&gt; TV\n    H4 -&gt; NTV\n  }\n}\n\n\n\n\n\n\n\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\n\nC1\n\nCoffee\n\n\n\nC2\n\nNo Coffee\n\n\n\nH1\n\nHappiness\n\n\n\nH1-&gt;C1\n\n\n\n\n\nH2\n\nHappiness\n\n\n\nH2-&gt;C2\n\n\n\n\n\nTV\n\nTV\n\n\n\nNTV\n\nNo TV\n\n\n\nH3\n\nHappiness\n\n\n\nH3-&gt;TV\n\n\n\n\n\nH4\n\nHappiness\n\n\n\nH4-&gt;NTV"
+  },
+  {
+    "objectID": "lec13fct.html#understanding-main-effects-1",
+    "href": "lec13fct.html#understanding-main-effects-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Understanding Main Effects",
+    "text": "Understanding Main Effects\n2x2 Table\n\n\n\n\nCode\nlibrary(tibble)\nlibrary(dplyr)\nlibrary(gt)\n\nlibrary(tibble)\nlibrary(gt)\n\n# Create a 2x2 factorial table (wide layout)\ndesign_tbl &lt;- tribble(\n  ~Condition,     ~`Coffee`, ~`No Coffee`,\n  \"TV\",               3,           4,\n  \"No TV\",            4,           8\n)\n\n# Display as a 2x2 factorial grid\ndesign_tbl |&gt;\n  gt() |&gt;\n  tab_header(\n    title = md(\"**2 × 2 Factorial Design: Coffee × TV**\"),\n    subtitle = \"Mean Happiness Scores by Condition\"\n  ) |&gt;\n  cols_label(\n    Condition = \"Watched TV?\",\n    `Coffee` = \"Coffee\",\n    `No Coffee` = \"No Coffee\"\n  ) |&gt;\n  fmt_number(\n    columns = c(`Coffee`, `No Coffee`),\n    decimals = 1\n  ) |&gt;\n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  ) |&gt;\n  tab_style(\n    style = cell_fill(color = \"#f8f9fa\"),\n    locations = cells_body(columns = everything())\n  ) |&gt;\n  tab_spanner(\n    label = md(\"**Coffee Condition**\"),\n    columns = c(`Coffee`, `No Coffee`)\n  ) |&gt;\n  tab_footnote(\n    footnote = \"Higher numbers indicate greater happiness.\"\n  ) |&gt; \n  tab_options(\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean Happiness Scores by Condition\n\n\nWatched TV?\n\nCoffee Condition\n\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n\n\nNo TV\n4.0\n8.0\n\n\n\nHigher numbers indicate greater happiness.\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Base 2x2 design with condition means\ndesign_tbl &lt;- tribble(\n  ~Condition, ~`Coffee`, ~`No Coffee`,\n  \"TV\",       3,          4,\n  \"No TV\",    4,          8\n)\n\n# Compute marginal means\ndesign_tbl_extended &lt;- design_tbl |&gt;\n  mutate(Row_Mean = rowMeans(across(c(`Coffee`, `No Coffee`)))) |&gt;\n  bind_rows(\n    tibble(\n      Condition = \"Column Mean\",\n      Coffee = mean(design_tbl$Coffee),\n      `No Coffee` = mean(design_tbl$`No Coffee`),\n      Row_Mean = mean(c(design_tbl$Coffee, design_tbl$`No Coffee`))\n    )\n  )\n\n# Display with gt\ndesign_tbl_extended |&gt;\n  gt() |&gt;\n  tab_header(\n    title = md(\"**2 × 2 Factorial Design: Coffee × TV**\"),\n    subtitle = \"Mean Happiness Scores with Marginal Means\"\n  ) |&gt;\n  cols_label(\n    Condition = \"Watched TV?\",\n    `Coffee` = \"Coffee\",\n    `No Coffee` = \"No Coffee\",\n    Row_Mean = md(\"**Row Mean**\")\n  ) |&gt;\n  fmt_number(\n    columns = c(`Coffee`, `No Coffee`, Row_Mean),\n    decimals = 1\n  ) |&gt;\n  tab_spanner(\n    label = md(\"**Coffee Condition**\"),\n    columns = c(`Coffee`, `No Coffee`)\n  ) |&gt;\n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = list(\n      cells_column_labels(),\n      cells_body(rows = Condition == \"Column Mean\")\n    )\n  ) |&gt;\n  tab_style(\n    style = cell_fill(color = \"#f5f5f5\"),\n    locations = cells_body(\n      rows = Condition == \"Column Mean\" | Condition == \"No TV\"\n    )\n  ) |&gt;\n  tab_footnote(\n    footnote = \"Row and column means illustrate main effects of Coffee and TV.\"\n  ) |&gt; \n   tab_options(\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean Happiness Scores with Marginal Means\n\n\nWatched TV?\n\nCoffee Condition\n\nRow Mean\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n3.5\n\n\nNo TV\n4.0\n8.0\n6.0\n\n\nColumn Mean\n3.5\n6.0\n4.8\n\n\n\nRow and column means illustrate main effects of Coffee and TV."
+  },
+  {
+    "objectID": "lec13fct.html#visualizing-interactions",
+    "href": "lec13fct.html#visualizing-interactions",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\nCode\nlibrary(ggplot2) \nset.seed(1) \ninteraction_df &lt;- \n  data.frame(Coffee = rep(c(\"No\", \"Yes\"), each = 4), \n             Show = rep(c(\"No\", \"Yes\"), times = 4), \n             Happiness = c(3, 5, 6, 8) )\n\nggplot(interaction_df, \n       aes(Coffee, Happiness, \n           color = Show, group = Show)) + \n  stat_summary(fun = mean, geom = \"line\", linewidth = 1.2) + \n  stat_summary(fun = mean, geom = \"point\", size = 3) + \n  theme_minimal(base_size = 14) + \n  labs(\n    title = \"Interaction Example\", \n    subtitle = \"Coffee only boosts happiness when watching TV\", \n    x = \"Coffee\", \n    y = \"Happiness\" ) + \n  scale_color_manual(values = c(\"#8b0000\", \"#004488\"))"
+  },
+  {
+    "objectID": "lec13fct.html#visualizing-interactions-1",
+    "href": "lec13fct.html#visualizing-interactions-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\n\n\nCode\nlibrary(tibble)\nlibrary(dplyr)\nlibrary(ggplot2)\n\n# Create the 2x2 design with your condition means\nplot_data &lt;- tribble(\n  ~TV,      ~Coffee,        ~Happiness,\n  \"TV\",     \"Coffee\",        3,\n  \"TV\",     \"No Coffee\",     4,\n  \"No TV\",  \"Coffee\",        4,\n  \"No TV\",  \"No Coffee\",     8\n)\n\n# Basic interaction plot\nggplot(plot_data, aes(x = TV, y = Happiness, color = Coffee, group = Coffee)) +\n  geom_point(size = 3) +\n  geom_line(linewidth = 1.2) +\n  scale_color_manual(values = c(\"#3E92CC\", \"#FF6B6B\")) +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Interaction Plot: Coffee × TV on Happiness\",\n    x = \"Watched TV\",\n    y = \"Mean Happiness\",\n    color = \"Coffee Condition\"\n  ) +\n  theme(\n    plot.title = element_text(face = \"bold\", hjust = 0.5),\n    panel.grid = element_blank(),\n    legend.position = \"bottom\"\n  )\n\n\n\n\n\n\n\n\n\n\n\nEach line represents one independent variable, in this case, whether participants drank coffee.\nThe x-axis represents the second independent variable, watching TV or not.\nIf these lines are parallel, there’s no interaction. Tthe effect of one IV doesn’t depend on the other.\nBut here, notice that the lines cross. That means the effect of coffee on happiness depends on whether someone watched TV. Coffee makes people happier unless they watched TV; an interaction effect.”"
+  },
+  {
+    "objectID": "lec13fct.html#visualizing-interactions-2",
+    "href": "lec13fct.html#visualizing-interactions-2",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\nCode\n# Summarize marginal means\nmain_effects &lt;- plot_data %&gt;%\n  group_by(Coffee) %&gt;%\n  summarize(Happiness = mean(Happiness))\n\nggplot(main_effects, aes(Coffee, Happiness, fill = Coffee)) +\n  geom_col(width = 0.5) +\n  scale_fill_manual(values = c(\"#3E92CC\", \"#FF6B6B\")) +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Main Effect of Coffee on Happiness\",\n    x = \"\",\n    y = \"Mean Happiness\"\n  ) +\n  theme(\n    plot.title = element_text(face = \"bold\", hjust = 0.5),\n    legend.position = \"none\"\n  )"
+  },
+  {
+    "objectID": "lec13fct.html#visualizing-interactions-3",
+    "href": "lec13fct.html#visualizing-interactions-3",
+    "title": "Factorial ANOVA Redux",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions"
+  },
+  {
+    "objectID": "lec13fct.html#from-main-effect-to-interaction",
+    "href": "lec13fct.html#from-main-effect-to-interaction",
+    "title": "Factorial ANOVA Redux",
+    "section": "From Main Effect to Interaction",
+    "text": "From Main Effect to Interaction"
+  },
+  {
+    "objectID": "lec13fct.html#calculating-f-values",
+    "href": "lec13fct.html#calculating-f-values",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating F Values",
+    "text": "Calculating F Values\n\nBetween Groups 1 (dfB1 ) = k1 - 1\nBetween Groups 2 (dfB2 ) = k2 - 1\nInteraction (MSInteractioni) = (k1 - 1) x (k2 - 1)\nError (MSError) = n - (k1 x k2)\nTotal = n - 1"
+  },
+  {
+    "objectID": "lec13fct.html#calculating-ms",
+    "href": "lec13fct.html#calculating-ms",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating MS",
+    "text": "Calculating MS\n\nBetween Group 1 MS:\n\n\\(MS_{B_1} = \\frac{SS_{B_{1}}}{k_1-1}\\)\n\nBetween Group 2 MS:\n\n\\(MS_{B_{2}} = \\frac{SS_{B_{2}}}{k_2-1}\\)\n\nInteraction MS\n\n\\(MS_{Interaction} = \\frac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError MS:\n\n\\(MS_{Error} = \\frac{SS{Error}}{n-(k_1 \\times k_2)}\\)"
+  },
+  {
+    "objectID": "lec13fct.html#calculating-f",
+    "href": "lec13fct.html#calculating-f",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating F",
+    "text": "Calculating F\n\n\\(F_A = \\frac{MS_{B_{1}}}{MS{Error}}\\)\n\\(F_B = \\frac{MS_{B_{2}}}{MS{Error}}\\)\n\\(F_{AB} = \\frac{MS_{Interaction}}{MS{Error}}\\)"
+  },
+  {
+    "objectID": "lec13fct.html#how-many-fs",
+    "href": "lec13fct.html#how-many-fs",
+    "title": "Factorial ANOVA Redux",
+    "section": "How Many F’s?",
+    "text": "How Many F’s?\n\n\nCode\ndigraph F_Tests {\n  size=5\n  rankdir=TB\n  bgcolor=\"#E9F1EC\"\n  node [shape=box, style=\"rounded,filled\", fontname=\"Helvetica\", color = \"white\"]\n\n  # Level 1\n  oneway [label=\"1-Way ANOVA\\n→ 1 F-test\\n(Main Effect Only)\"]\n\n  # Level 2\n  twoway [label=\"2-Way ANOVA (2×2)\\n→ 3 F-tests\\n(2 Main Effects + 1 Interaction)\"]\n\n  # Level 3\n  threeway [label=\"3-Way ANOVA (2×2×2)\\n→ 7 F-tests\\n(3 Main + 3 Two-Way + 1 Three-Way)\"]\n\n  # Level 4\n  fourway [label=\"4-Way ANOVA (2×2×2×2)\\n→ 15 F-tests\\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)\"]\n\n  # Connections\n  oneway -&gt; twoway -&gt; threeway -&gt; fourway\n\n  # Optional: a note on the right\n  note [label=\"General Formula:\\nF = 2ⁿ - 1\\n(where n = # of IVs)\", shape=note, fillcolor=\"#FFF3CD\", color=\"#E0B800\", fontcolor=\"#3B2F00\"]\n  threeway -&gt; note [style=dotted, color=\"#888\"]\n}\n\n\n\n\n\n\n\nF_Tests\n\n\n\noneway\n\n1-Way ANOVA\n→ 1 F-test\n(Main Effect Only)\n\n\n\ntwoway\n\n2-Way ANOVA (2×2)\n→ 3 F-tests\n(2 Main Effects + 1 Interaction)\n\n\n\noneway-&gt;twoway\n\n\n\n\n\nthreeway\n\n3-Way ANOVA (2×2×2)\n→ 7 F-tests\n(3 Main + 3 Two-Way + 1 Three-Way)\n\n\n\ntwoway-&gt;threeway\n\n\n\n\n\nfourway\n\n4-Way ANOVA (2×2×2×2)\n→ 15 F-tests\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)\n\n\n\nthreeway-&gt;fourway\n\n\n\n\n\nnote\n\n\n\nGeneral Formula:\nF = 2ⁿ - 1\n(where n = # of IVs)\n\n\n\nthreeway-&gt;note"
+  },
+  {
+    "objectID": "lec13fct.html#interpreting-results",
+    "href": "lec13fct.html#interpreting-results",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\nANOVA Table\n\n\nCode\nset.seed(123)\nlibrary(dplyr)\nlibrary(afex)\nlibrary(gt)\nlibrary(broom)\nlibrary(forcats)\n\ntwoway &lt;- \n  tibble(\n    id = 1:100,\n    gender = sample(c(\"Male\", \"Female\"), 100, replace = TRUE),\n    education_level = sample(c(\"High School\", \"Bachelor's\", \"Master's\", \"PhD\"), 100, replace = TRUE)\n    ) %&gt;%\n  mutate(\n    # assign numeric values for education level\n    edu_num = case_when(\n      education_level == \"High School\" ~ 1,\n      education_level == \"Bachelor's\"  ~ 2,\n      education_level == \"Master's\"    ~ 3,\n      education_level == \"PhD\"         ~ 4\n    ),\n    # introduce a systematic difference based on gender and education_level interaction\n    political_interest = 5 + \n    edu_num * 1.2 +   # main effect of education level\n    if_else(gender == \"Female\", \n            edu_num * 0.8, \n            edu_num * -0.5) +  # interaction\n    rnorm(100, mean = 0, sd = 1) # some noise\n    ) \n\n# Run factorial ANOVA\naov_ez(\n  \"id\",\n  \"political_interest\",\n  twoway,\n  between = c(\"gender\",\"education_level\"),\n  return = \"aov\"\n) |&gt; \n  tidy() |&gt; \n  mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Political Interest*&lt;br&gt;\n                             *Gende*: Male, Female*&lt;br&gt;\n                             *Education*: High School, Bachelor's, Master's, PhD*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  ) |&gt; \n  opt_row_striping() |&gt; \n  cols_align(align=\"center\") |&gt; \n  tab_options(\n    table.width = pct(75),\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ngender\n 1 \n216.57 \n216.57 \n244.15\n&lt;.001\n\n\neducation_level\n 3 \n198.312\n 66.104\n74.52\n&lt;.001\n\n\ngender:education_level\n 3 \n 23.648\n  7.883\n8.89\n&lt;.001\n\n\nResiduals\n92 \n 81.608\n  0.887\n--\n--\n\n\n\nDependent Variable: Political Interest Gende: Male, Female Education: High School, Bachelor’s, Master’s, PhD\n\n\n\n\n\n\n\n\n\n\\(F(1,92) = 244.15, p &lt;.001\\)\n\\(F(3,92) = 74.52, p &lt;.001\\)\n\\(F(3,92) = 8.89, p&lt;.001\\)"
+  },
+  {
+    "objectID": "lec13fct.html#interpreting-fs",
+    "href": "lec13fct.html#interpreting-fs",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting F’s",
+    "text": "Interpreting F’s\nVisually\n\n\nCode\ntwoway$education_level &lt;- factor(twoway$education_level, labels = c(\"High School\",\"Bachelors\",\"Masters\",\"PhD\"),ordered = TRUE)\n\ntwoway |&gt; \n  ggplot(aes(education_level, political_interest,color = gender, group = gender)) + \n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Political Interest\\n\")"
+  },
+  {
+    "objectID": "lec13fct.html#interpreting-the-fs",
+    "href": "lec13fct.html#interpreting-the-fs",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the F’s",
+    "text": "Interpreting the F’s\nWeight Loss and Exercise Regimen and Diet Type\n\nTablePlot\n\n\n\n\nCode\nset.seed(42)\n\n# Create a balanced design\ndf &lt;- expand.grid(\n  diet_type = c(\"Low Carb\", \"Low Fat\"),\n  exercise_regimen = c(\"Cardio\", \"Strength\"),\n  id = 1:25\n) %&gt;%\n  mutate(\n    # simulate main effects: both diet and exercise influence weight loss\n    weight_loss = case_when(\n      diet_type == \"Low Carb\" ~ 6,\n      diet_type == \"Low Fat\" ~ 4\n    ) + case_when(\n      exercise_regimen == \"Cardio\" ~ 5,\n      exercise_regimen == \"Strength\" ~ 3\n    ) +\n    rnorm(n(), mean = 0, sd = 1.5)  # add some noise\n  )\n\n# Run the two-way ANOVA\nanova_result &lt;- aov(weight_loss ~ diet_type * exercise_regimen, data = df)\nanova_result |&gt; \n  tidy() |&gt; \n    mutate(\n    p.value = ifelse(p.value &lt; .001, \"&lt;.001\",p.value |&gt; round(2)),\n    statistic = ifelse(is.na(statistic),\"--\",statistic |&gt; round(2)),\n    p.value = ifelse(is.na(p.value),\"--\",p.value)\n  ) |&gt; \n  rename(\n    Source = term,\n    SS = sumsq,\n    MS = meansq,\n    `F` = statistic,\n    p = p.value\n  ) |&gt; \n  gt() |&gt; \n  fmt_auto() |&gt; \n  tab_footnote(footnote = md(\"*Dependent Variable: Weight Loss*&lt;br&gt;\n                             *Exercise Regimen: Cardio, Strength*&lt;br&gt;\n                             *Diet Type: Low Carb, Low Fat*\")) |&gt; \n  tab_style(\n    style = cell_text(weight = \"bold\"),\n    locations = cells_column_labels()\n  )  |&gt; \n  tab_options(\n    table.width = pct(75),\n    table.font.size = 30\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ndiet_type\n 1 \n101.266\n101.266\n41.9\n&lt;.001\n\n\nexercise_regimen\n 1 \n114.057\n114.057\n47.19\n&lt;.001\n\n\ndiet_type:exercise_regimen\n 1 \n  9.066\n  9.066\n3.75\n0.06\n\n\nResiduals\n96 \n232.023\n  2.417\n--\n--\n\n\n\nDependent Variable: Weight Loss Exercise Regimen: Cardio, Strength Diet Type: Low Carb, Low Fat\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ndf |&gt; \n  ggplot(aes(diet_type, weight_loss,color = exercise_regimen, group = exercise_regimen)) + \n  geom_jitter(alpha = .2) +\n  stat_summary(fun = \"mean\", geom = \"point\") +\n  stat_summary(fun = \"mean\", geom = \"line\") + \n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = .2) + \n  theme_minimal() + \n  labs(x = \"\", y = \"Weight Loss\\n\")"
+  },
+  {
+    "objectID": "lec13fct.html#interpreting-the-fs-in-2-way-anova",
+    "href": "lec13fct.html#interpreting-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nFA (1,96) = 41.9, p &lt; .001\nFB (1,96) = 47.19, p &lt; .001\nFAB (1,96) = 3.75, p = ns"
+  },
+  {
+    "objectID": "lec13fct.html#interpreting-the-fs-in-2-way-anova-1",
+    "href": "lec13fct.html#interpreting-the-fs-in-2-way-anova-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\nFA = Diet Type\nFB = Exercise Regimen\nFAB = Diet Type x Exercise Regimen"
+  },
+  {
+    "objectID": "lec13fct.html#calculating-2-way-anova-anova",
+    "href": "lec13fct.html#calculating-2-way-anova-anova",
+    "title": "Factorial ANOVA Redux",
+    "section": "Calculating 2-way ANOVA anova",
+    "text": "Calculating 2-way ANOVA anova\n\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{BG_{1}}}{MS{Error}}\\)\n\\(F = \\frac{MS_{Interaction}}{MS{Error}}\\)\n*All MS are divided by \\(MS_{Error}\\)"
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f",
+    "href": "lec13fct.html#reporting-f",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F"
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f-1",
+    "href": "lec13fct.html#reporting-f-1",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\nReject H0, or\nFail to Reject H0"
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f-2",
+    "href": "lec13fct.html#reporting-f-2",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in general or for publication, you need EACH F-value:\n\nF(dfBG, dfW )\n\n= F-value\n\nCorresponding p-value\n\nFor significant results: Means and standard deviations of each group"
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f-3",
+    "href": "lec13fct.html#reporting-f-3",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nThe group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), F(1,496) = 7.12, p &lt; 0.05."
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f-4",
+    "href": "lec13fct.html#reporting-f-4",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults IV1:\n\n\nIf significant: The group that watched TV (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched No TV (M=6.12, s=0.98), F (1, 496) = 7.12, p &lt; 0.05.\n\n\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07."
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f-5",
+    "href": "lec13fct.html#reporting-f-5",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults IV2:\n\nIf significant: The group that drank coffee (M=7.35, s=1.01) reported significantly more happiness compared to their peers in the control group who drank decaf (M=4.21, s=0.99), F (1, 496) = 9.12, p &lt; 0.05.\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07."
+  },
+  {
+    "objectID": "lec13fct.html#reporting-f-6",
+    "href": "lec13fct.html#reporting-f-6",
+    "title": "Factorial ANOVA Redux",
+    "section": "Reporting F",
+    "text": "Reporting F\nResults Interaction:\n\nIf significant: The group that drank coffee AND watched TV (M=7.35, s=1.01) reported significantly more happiness compared to the other groups (M=4.21, s=0.99), F (1, 496) = 11.14, p &lt; 0.05.\n\n\nIf NOT significant: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07."
+  },
+  {
+    "objectID": "lec13fct.html#factorial-anova-wrap-up",
+    "href": "lec13fct.html#factorial-anova-wrap-up",
+    "title": "Factorial ANOVA Redux",
+    "section": "Factorial ANOVA Wrap-Up",
+    "text": "Factorial ANOVA Wrap-Up\nConnecting the Dots\n\nBig Picture:\n\nA factorial ANOVA lets us test multiple independent variables at once\n\nNot just whether each matters, but whether they matter together."
+  },
+  {
+    "objectID": "lec13fct.html#understanding-interactions",
+    "href": "lec13fct.html#understanding-interactions",
+    "title": "Factorial ANOVA Redux",
+    "section": "Understanding Interactions",
+    "text": "Understanding Interactions"
+  },
+  {
+    "objectID": "lec13fct.html#what-it-tests",
+    "href": "lec13fct.html#what-it-tests",
+    "title": "Factorial ANOVA Redux",
+    "section": "What It Tests",
+    "text": "What It Tests\n\n\n\n\n\n\n\n\nSource\nQuestion\nInterpretation\n\n\n\n\nMain Effect A\nDoes IV1 (e.g., Coffee) affect the DV on average?\n“Coffee drinkers happier?”\n\n\nMain Effect B\nDoes IV2 (e.g., TV Show) affect the DV on average?\n“TV watchers happier?”\n\n\nInteraction (A × B)\nDoes the effect of Coffee depend on watching Dark?\n“Coffee only helps if watching TV?”"
   }
 ]

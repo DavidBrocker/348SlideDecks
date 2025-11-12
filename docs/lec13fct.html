@@ -1,0 +1,4082 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.33">
+
+  <meta name="author" content="Dave Brocker">
+  <title>PSY 348: Statistics for Psychology – Factorial ANOVA Redux</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-b4e53f31c4d54c0186ec1f0192bd1fac.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Factorial ANOVA Redux</h1>
+  <p class="subtitle">Lecture 14</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dave Brocker 
+</div>
+        <p class="quarto-title-affiliation">
+            Farmingdale State College
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="what-is-a-factorial-anova" class="slide level2">
+<h2>What is a Factorial ANOVA?</h2>
+<h3 id="more-than-1-independent-variable">More Than 1 Independent Variable</h3>
+<ul>
+<li class="fragment"><p>Up to now, we’ve looked at experiments that test <strong>one question at a time</strong></p></li>
+<li class="fragment"><p>A <strong>t-test</strong> tells us whether <strong>two groups</strong> (coffee vs.&nbsp;no coffee) differ significantly.</p>
+<ul>
+<li class="fragment">“<em>Does drinking coffee make people happier than not drinking coffee</em>?” &nbsp;&nbsp;</li>
+</ul></li>
+<li class="fragment"><p>A <strong>one-way ANOVA</strong> lets us test <strong>more than two groups</strong> for that same question.</p>
+<ul>
+<li class="fragment">“<em>Does drinking coffee make people happier, compared to drinking decaf or water</em>?” &nbsp;</li>
+</ul></li>
+<li class="fragment"><p>But in real life, there’s <em>rarely</em> just one thing influencing behavior.</p></li>
+</ul>
+</section>
+<section id="why-factorial-anova" class="slide level2">
+<h2>Why Factorial ANOVA?</h2>
+<p>A <strong>Factorial ANOVA</strong> allows us to test <strong>more than one independent variable (IV)</strong> <em>at the same time.</em></p>
+<ul>
+<li class="fragment"><p>Instead of asking</p>
+<ul>
+<li class="fragment"><p>“Does coffee make people happier?”</p></li>
+<li class="fragment"><p>“Does watching TV make people happier?</p></li>
+</ul></li>
+<li class="fragment"><p>We can now ask:</p>
+<ul>
+<li class="fragment"><p>“Does coffee <em>and</em> watching TV show make people happier?”</p></li>
+<li class="fragment"><p>“Does the effect of coffee depend on what you’re watching?”</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-power-of-two-or-more" class="slide level2">
+<h2>The Power of Two (or More)</h2>
+<h3 id="testing-as-separate-ivs">Testing as Separate IV’s</h3>
+<div class="cell" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource dot number-lines code-with-copy"><code class="sourceCode dot"><span id="cb1-1"><a></a>#| <span class="va">echo</span>: <span class="va">false</span></span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="kw">digraph</span> <span class="ot">{</span></span>
+<span id="cb1-5"><a></a><span class="co">  </span><span class="kw">node</span><span class="co"> </span><span class="ot">[</span><span class="at">shape</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">box</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span><span class="co">, </span><span class="at">fontname</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">Helvetica</span><span class="ot">]</span></span>
+<span id="cb1-6"><a></a><span class="co">  </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"#E9F1EC"</span></span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="co">  </span><span class="kw">subgraph</span><span class="co"> </span><span class="va">cluster_coffee</span><span class="co"> </span><span class="ot">{</span></span>
+<span id="cb1-9"><a></a><span class="co">    </span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"Independent Variable 1: Coffee"</span></span>
+<span id="cb1-10"><a></a><span class="co">    </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span></span>
+<span id="cb1-11"><a></a><span class="co">    </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span></span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a><span class="co">    </span><span class="va">C1</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Coffee"</span><span class="ot">]</span></span>
+<span id="cb1-14"><a></a><span class="co">    </span><span class="va">C2</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No Coffee"</span><span class="ot">]</span></span>
+<span id="cb1-15"><a></a><span class="co">    </span><span class="va">H1</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb1-16"><a></a><span class="co">    </span><span class="va">H2</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb1-17"><a></a></span>
+<span id="cb1-18"><a></a><span class="co">    </span><span class="va">C1</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">H1</span></span>
+<span id="cb1-19"><a></a><span class="co">    </span><span class="va">C2</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">H2</span></span>
+<span id="cb1-20"><a></a><span class="co">  </span><span class="ot">}</span></span>
+<span id="cb1-21"><a></a></span>
+<span id="cb1-22"><a></a><span class="co">  </span><span class="kw">subgraph</span><span class="co"> </span><span class="va">cluster_tv</span><span class="co"> </span><span class="ot">{</span></span>
+<span id="cb1-23"><a></a><span class="co">    </span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"Independent Variable 2: TV Show"</span></span>
+<span id="cb1-24"><a></a><span class="co">    </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span></span>
+<span id="cb1-25"><a></a><span class="co">    </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span></span>
+<span id="cb1-26"><a></a></span>
+<span id="cb1-27"><a></a><span class="co">    </span><span class="va">TV</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"TV"</span><span class="ot">]</span></span>
+<span id="cb1-28"><a></a><span class="co">    </span><span class="va">NTV</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No TV"</span><span class="ot">]</span></span>
+<span id="cb1-29"><a></a><span class="co">    </span><span class="va">H3</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb1-30"><a></a><span class="co">    </span><span class="va">H4</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb1-31"><a></a></span>
+<span id="cb1-32"><a></a><span class="co">    </span><span class="va">TV</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">H3</span></span>
+<span id="cb1-33"><a></a><span class="co">    </span><span class="va">NTV</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">H4</span></span>
+<span id="cb1-34"><a></a><span class="co">  </span><span class="ot">}</span></span>
+<span id="cb1-35"><a></a><span class="ot">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 438.00 172.80" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 168.8)">
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-168.8 434,-168.8 434,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>cluster_coffee</title>
+<path fill="white" stroke="black" d="M20,-8C20,-8 194,-8 194,-8 200,-8 206,-14 206,-20 206,-20 206,-144.8 206,-144.8 206,-150.8 200,-156.8 194,-156.8 194,-156.8 20,-156.8 20,-156.8 14,-156.8 8,-150.8 8,-144.8 8,-144.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="107" y="-140.2" font-family="Times,serif" font-size="14.00">Independent Variable 1: Coffee</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_tv</title>
+<path fill="white" stroke="black" d="M226,-8C226,-8 410,-8 410,-8 416,-8 422,-14 422,-20 422,-20 422,-144.8 422,-144.8 422,-150.8 416,-156.8 410,-156.8 410,-156.8 226,-156.8 226,-156.8 220,-156.8 214,-150.8 214,-144.8 214,-144.8 214,-20 214,-20 214,-14 220,-8 226,-8"></path>
+<text text-anchor="middle" x="318" y="-140.2" font-family="Times,serif" font-size="14.00">Independent Variable 2: TV Show</text>
+</g>
+<!-- C1 -->
+<g id="node1" class="node">
+<title>C1</title>
+<path fill="none" stroke="black" d="M173.75,-124C173.75,-124 140.25,-124 140.25,-124 134.25,-124 128.25,-118 128.25,-112 128.25,-112 128.25,-100 128.25,-100 128.25,-94 134.25,-88 140.25,-88 140.25,-88 173.75,-88 173.75,-88 179.75,-88 185.75,-94 185.75,-100 185.75,-100 185.75,-112 185.75,-112 185.75,-118 179.75,-124 173.75,-124"></path>
+<text text-anchor="middle" x="157" y="-101.8" font-family="Helvetica,sans-Serif" font-size="14.00">Coffee</text>
+</g>
+<!-- H1 -->
+<g id="node3" class="node">
+<title>H1</title>
+<path fill="none" stroke="black" d="M186.15,-52C186.15,-52 127.85,-52 127.85,-52 121.85,-52 115.85,-46 115.85,-40 115.85,-40 115.85,-28 115.85,-28 115.85,-22 121.85,-16 127.85,-16 127.85,-16 186.15,-16 186.15,-16 192.15,-16 198.15,-22 198.15,-28 198.15,-28 198.15,-40 198.15,-40 198.15,-46 192.15,-52 186.15,-52"></path>
+<text text-anchor="middle" x="157" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- C1&#45;&gt;H1 -->
+<g id="edge1" class="edge">
+<title>C1-&gt;H1</title>
+<path fill="none" stroke="black" d="M157,-87.7C157,-79.98 157,-70.71 157,-62.11"></path>
+<polygon fill="black" stroke="black" points="160.5,-62.1 157,-52.1 153.5,-62.1 160.5,-62.1"></polygon>
+</g>
+<!-- C2 -->
+<g id="node2" class="node">
+<title>C2</title>
+<path fill="none" stroke="black" d="M84.53,-124C84.53,-124 29.47,-124 29.47,-124 23.47,-124 17.47,-118 17.47,-112 17.47,-112 17.47,-100 17.47,-100 17.47,-94 23.47,-88 29.47,-88 29.47,-88 84.53,-88 84.53,-88 90.53,-88 96.53,-94 96.53,-100 96.53,-100 96.53,-112 96.53,-112 96.53,-118 90.53,-124 84.53,-124"></path>
+<text text-anchor="middle" x="57" y="-101.8" font-family="Helvetica,sans-Serif" font-size="14.00">No Coffee</text>
+</g>
+<!-- H2 -->
+<g id="node4" class="node">
+<title>H2</title>
+<path fill="none" stroke="black" d="M86.15,-52C86.15,-52 27.85,-52 27.85,-52 21.85,-52 15.85,-46 15.85,-40 15.85,-40 15.85,-28 15.85,-28 15.85,-22 21.85,-16 27.85,-16 27.85,-16 86.15,-16 86.15,-16 92.15,-16 98.15,-22 98.15,-28 98.15,-28 98.15,-40 98.15,-40 98.15,-46 92.15,-52 86.15,-52"></path>
+<text text-anchor="middle" x="57" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- C2&#45;&gt;H2 -->
+<g id="edge2" class="edge">
+<title>C2-&gt;H2</title>
+<path fill="none" stroke="black" d="M57,-87.7C57,-79.98 57,-70.71 57,-62.11"></path>
+<polygon fill="black" stroke="black" points="60.5,-62.1 57,-52.1 53.5,-62.1 60.5,-62.1"></polygon>
+</g>
+<!-- TV -->
+<g id="node5" class="node">
+<title>TV</title>
+<path fill="none" stroke="black" d="M385,-124C385,-124 355,-124 355,-124 349,-124 343,-118 343,-112 343,-112 343,-100 343,-100 343,-94 349,-88 355,-88 355,-88 385,-88 385,-88 391,-88 397,-94 397,-100 397,-100 397,-112 397,-112 397,-118 391,-124 385,-124"></path>
+<text text-anchor="middle" x="370" y="-101.8" font-family="Helvetica,sans-Serif" font-size="14.00">TV</text>
+</g>
+<!-- H3 -->
+<g id="node7" class="node">
+<title>H3</title>
+<path fill="none" stroke="black" d="M399.15,-52C399.15,-52 340.85,-52 340.85,-52 334.85,-52 328.85,-46 328.85,-40 328.85,-40 328.85,-28 328.85,-28 328.85,-22 334.85,-16 340.85,-16 340.85,-16 399.15,-16 399.15,-16 405.15,-16 411.15,-22 411.15,-28 411.15,-28 411.15,-40 411.15,-40 411.15,-46 405.15,-52 399.15,-52"></path>
+<text text-anchor="middle" x="370" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- TV&#45;&gt;H3 -->
+<g id="edge3" class="edge">
+<title>TV-&gt;H3</title>
+<path fill="none" stroke="black" d="M370,-87.7C370,-79.98 370,-70.71 370,-62.11"></path>
+<polygon fill="black" stroke="black" points="373.5,-62.1 370,-52.1 366.5,-62.1 373.5,-62.1"></polygon>
+</g>
+<!-- NTV -->
+<g id="node6" class="node">
+<title>NTV</title>
+<path fill="none" stroke="black" d="M283.68,-124C283.68,-124 252.32,-124 252.32,-124 246.32,-124 240.32,-118 240.32,-112 240.32,-112 240.32,-100 240.32,-100 240.32,-94 246.32,-88 252.32,-88 252.32,-88 283.68,-88 283.68,-88 289.68,-88 295.68,-94 295.68,-100 295.68,-100 295.68,-112 295.68,-112 295.68,-118 289.68,-124 283.68,-124"></path>
+<text text-anchor="middle" x="268" y="-101.8" font-family="Helvetica,sans-Serif" font-size="14.00">No TV</text>
+</g>
+<!-- H4 -->
+<g id="node8" class="node">
+<title>H4</title>
+<path fill="none" stroke="black" d="M297.15,-52C297.15,-52 238.85,-52 238.85,-52 232.85,-52 226.85,-46 226.85,-40 226.85,-40 226.85,-28 226.85,-28 226.85,-22 232.85,-16 238.85,-16 238.85,-16 297.15,-16 297.15,-16 303.15,-16 309.15,-22 309.15,-28 309.15,-28 309.15,-40 309.15,-40 309.15,-46 303.15,-52 297.15,-52"></path>
+<text text-anchor="middle" x="268" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- NTV&#45;&gt;H4 -->
+<g id="edge4" class="edge">
+<title>NTV-&gt;H4</title>
+<path fill="none" stroke="black" d="M268,-87.7C268,-79.98 268,-70.71 268,-62.11"></path>
+<polygon fill="black" stroke="black" points="271.5,-62.1 268,-52.1 264.5,-62.1 271.5,-62.1"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-power-of-two-or-more-1" class="slide level2">
+<h2>The Power of Two (or More)</h2>
+</section>
+<section id="combining-ivs" class="slide level2">
+<h2>Combining IV’s</h2>
+<div class="cell" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource dot number-lines code-with-copy"><code class="sourceCode dot"><span id="cb2-1"><a></a><span class="kw">digraph</span> <span class="ot">{</span></span>
+<span id="cb2-2"><a></a><span class="co">  </span><span class="kw">node</span><span class="co"> </span><span class="ot">[</span><span class="at">shape</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">box</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span><span class="co">, </span><span class="at">fontname</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">Helvetica</span><span class="ot">]</span></span>
+<span id="cb2-3"><a></a><span class="co">  </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"#E9F1EC"</span></span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a><span class="co">  </span><span class="va">Coffee</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Coffee"</span><span class="ot">]</span></span>
+<span id="cb2-6"><a></a><span class="co">  </span><span class="va">NoCoffee</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No Coffee"</span><span class="ot">]</span></span>
+<span id="cb2-7"><a></a><span class="co">  </span><span class="va">Dark</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Watch Dark"</span><span class="ot">]</span></span>
+<span id="cb2-8"><a></a><span class="co">  </span><span class="va">NoDark</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No Dark"</span><span class="ot">]</span></span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="co">  </span><span class="kw">subgraph</span><span class="co"> </span><span class="va">cluster_design</span><span class="co"> </span><span class="ot">{</span></span>
+<span id="cb2-11"><a></a><span class="co">    </span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"2 × 2 Factorial Design"</span></span>
+<span id="cb2-12"><a></a><span class="co">    </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span></span>
+<span id="cb2-13"><a></a><span class="co">    </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span></span>
+<span id="cb2-14"><a></a></span>
+<span id="cb2-15"><a></a><span class="co">    </span><span class="va">CoffeeDark</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Coffee + Dark"</span><span class="ot">]</span></span>
+<span id="cb2-16"><a></a><span class="co">    </span><span class="va">CoffeeNoDark</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Coffee + No Dark"</span><span class="ot">]</span></span>
+<span id="cb2-17"><a></a><span class="co">    </span><span class="va">NoCoffeeDark</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No Coffee + Dark"</span><span class="ot">]</span></span>
+<span id="cb2-18"><a></a><span class="co">    </span><span class="va">NoCoffeeNoDark</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No Coffee + No Dark"</span><span class="ot">]</span></span>
+<span id="cb2-19"><a></a></span>
+<span id="cb2-20"><a></a><span class="co">    </span><span class="va">Coffee</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">CoffeeDark</span></span>
+<span id="cb2-21"><a></a><span class="co">    </span><span class="va">Coffee</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">CoffeeNoDark</span></span>
+<span id="cb2-22"><a></a><span class="co">    </span><span class="va">NoCoffee</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">NoCoffeeDark</span></span>
+<span id="cb2-23"><a></a><span class="co">    </span><span class="va">NoCoffee</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">NoCoffeeNoDark</span></span>
+<span id="cb2-24"><a></a></span>
+<span id="cb2-25"><a></a><span class="co">    </span><span class="va">Dark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">CoffeeDark</span></span>
+<span id="cb2-26"><a></a><span class="co">    </span><span class="va">Dark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">NoCoffeeDark</span></span>
+<span id="cb2-27"><a></a><span class="co">    </span><span class="va">NoDark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">CoffeeNoDark</span></span>
+<span id="cb2-28"><a></a><span class="co">    </span><span class="va">NoDark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">NoCoffeeNoDark</span></span>
+<span id="cb2-29"><a></a><span class="co">  </span><span class="ot">}</span></span>
+<span id="cb2-30"><a></a></span>
+<span id="cb2-31"><a></a><span class="co">  </span><span class="va">Happiness1</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"rounded, filled"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span><span class="ot">]</span></span>
+<span id="cb2-32"><a></a><span class="co">  </span><span class="va">Happiness2</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"rounded,filled"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span><span class="ot">]</span></span>
+<span id="cb2-33"><a></a><span class="co">  </span><span class="va">Happiness3</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"rounded,filled"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span><span class="ot">]</span></span>
+<span id="cb2-34"><a></a><span class="co">  </span><span class="va">Happiness4</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"rounded,filled"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span><span class="ot">]</span></span>
+<span id="cb2-35"><a></a><span class="co">  </span></span>
+<span id="cb2-36"><a></a><span class="co">  </span><span class="va">CoffeeDark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">Happiness1</span></span>
+<span id="cb2-37"><a></a><span class="co">  </span><span class="va">CoffeeNoDark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">Happiness2</span></span>
+<span id="cb2-38"><a></a><span class="co">  </span><span class="va">NoCoffeeDark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">Happiness3</span></span>
+<span id="cb2-39"><a></a><span class="co">  </span><span class="va">NoCoffeeNoDark</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">Happiness4</span></span>
+<span id="cb2-40"><a></a><span class="co"> </span></span>
+<span id="cb2-41"><a></a><span class="ot">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 592.00 228.80" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 224.8)">
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-224.8 588,-224.8 588,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>cluster_design</title>
+<path fill="white" stroke="black" d="M20,-64C20,-64 564,-64 564,-64 570,-64 576,-70 576,-76 576,-76 576,-200.8 576,-200.8 576,-206.8 570,-212.8 564,-212.8 564,-212.8 20,-212.8 20,-212.8 14,-212.8 8,-206.8 8,-200.8 8,-200.8 8,-76 8,-76 8,-70 14,-64 20,-64"></path>
+<text text-anchor="middle" x="292" y="-196.2" font-family="Times,serif" font-size="14.00">2 × 2 Factorial Design</text>
+</g>
+<!-- Coffee -->
+<g id="node1" class="node">
+<title>Coffee</title>
+<path fill="none" stroke="black" d="M92.75,-180C92.75,-180 59.25,-180 59.25,-180 53.25,-180 47.25,-174 47.25,-168 47.25,-168 47.25,-156 47.25,-156 47.25,-150 53.25,-144 59.25,-144 59.25,-144 92.75,-144 92.75,-144 98.75,-144 104.75,-150 104.75,-156 104.75,-156 104.75,-168 104.75,-168 104.75,-174 98.75,-180 92.75,-180"></path>
+<text text-anchor="middle" x="76" y="-157.8" font-family="Helvetica,sans-Serif" font-size="14.00">Coffee</text>
+</g>
+<!-- CoffeeDark -->
+<g id="node5" class="node">
+<title>CoffeeDark</title>
+<path fill="none" stroke="black" d="M106.26,-108C106.26,-108 27.74,-108 27.74,-108 21.74,-108 15.74,-102 15.74,-96 15.74,-96 15.74,-84 15.74,-84 15.74,-78 21.74,-72 27.74,-72 27.74,-72 106.26,-72 106.26,-72 112.26,-72 118.26,-78 118.26,-84 118.26,-84 118.26,-96 118.26,-96 118.26,-102 112.26,-108 106.26,-108"></path>
+<text text-anchor="middle" x="67" y="-85.8" font-family="Helvetica,sans-Serif" font-size="14.00">Coffee + Dark</text>
+</g>
+<!-- Coffee&#45;&gt;CoffeeDark -->
+<g id="edge1" class="edge">
+<title>Coffee-&gt;CoffeeDark</title>
+<path fill="none" stroke="black" d="M73.78,-143.7C72.78,-135.98 71.59,-126.71 70.49,-118.11"></path>
+<polygon fill="black" stroke="black" points="73.95,-117.58 69.2,-108.1 67,-118.47 73.95,-117.58"></polygon>
+</g>
+<!-- CoffeeNoDark -->
+<g id="node6" class="node">
+<title>CoffeeNoDark</title>
+<path fill="none" stroke="black" d="M249.05,-108C249.05,-108 148.95,-108 148.95,-108 142.95,-108 136.95,-102 136.95,-96 136.95,-96 136.95,-84 136.95,-84 136.95,-78 142.95,-72 148.95,-72 148.95,-72 249.05,-72 249.05,-72 255.05,-72 261.05,-78 261.05,-84 261.05,-84 261.05,-96 261.05,-96 261.05,-102 255.05,-108 249.05,-108"></path>
+<text text-anchor="middle" x="199" y="-85.8" font-family="Helvetica,sans-Serif" font-size="14.00">Coffee + No Dark</text>
+</g>
+<!-- Coffee&#45;&gt;CoffeeNoDark -->
+<g id="edge2" class="edge">
+<title>Coffee-&gt;CoffeeNoDark</title>
+<path fill="none" stroke="black" d="M104.84,-144.59C121.28,-135.23 142.12,-123.37 160.01,-113.19"></path>
+<polygon fill="black" stroke="black" points="162.1,-116.03 169.06,-108.04 158.64,-109.94 162.1,-116.03"></polygon>
+</g>
+<!-- NoCoffee -->
+<g id="node2" class="node">
+<title>NoCoffee</title>
+<path fill="none" stroke="black" d="M512.53,-180C512.53,-180 457.47,-180 457.47,-180 451.47,-180 445.47,-174 445.47,-168 445.47,-168 445.47,-156 445.47,-156 445.47,-150 451.47,-144 457.47,-144 457.47,-144 512.53,-144 512.53,-144 518.53,-144 524.53,-150 524.53,-156 524.53,-156 524.53,-168 524.53,-168 524.53,-174 518.53,-180 512.53,-180"></path>
+<text text-anchor="middle" x="485" y="-157.8" font-family="Helvetica,sans-Serif" font-size="14.00">No Coffee</text>
+</g>
+<!-- NoCoffeeDark -->
+<g id="node7" class="node">
+<title>NoCoffeeDark</title>
+<path fill="none" stroke="black" d="M392.05,-108C392.05,-108 291.95,-108 291.95,-108 285.95,-108 279.95,-102 279.95,-96 279.95,-96 279.95,-84 279.95,-84 279.95,-78 285.95,-72 291.95,-72 291.95,-72 392.05,-72 392.05,-72 398.05,-72 404.05,-78 404.05,-84 404.05,-84 404.05,-96 404.05,-96 404.05,-102 398.05,-108 392.05,-108"></path>
+<text text-anchor="middle" x="342" y="-85.8" font-family="Helvetica,sans-Serif" font-size="14.00">No Coffee + Dark</text>
+</g>
+<!-- NoCoffee&#45;&gt;NoCoffeeDark -->
+<g id="edge3" class="edge">
+<title>NoCoffee-&gt;NoCoffeeDark</title>
+<path fill="none" stroke="black" d="M450.02,-143.88C430.8,-134.47 406.77,-122.71 386.26,-112.67"></path>
+<polygon fill="black" stroke="black" points="387.64,-109.44 377.12,-108.19 384.56,-115.73 387.64,-109.44"></polygon>
+</g>
+<!-- NoCoffeeNoDark -->
+<g id="node8" class="node">
+<title>NoCoffeeNoDark</title>
+<path fill="none" stroke="black" d="M556.33,-108C556.33,-108 433.67,-108 433.67,-108 427.67,-108 421.67,-102 421.67,-96 421.67,-96 421.67,-84 421.67,-84 421.67,-78 427.67,-72 433.67,-72 433.67,-72 556.33,-72 556.33,-72 562.33,-72 568.33,-78 568.33,-84 568.33,-84 568.33,-96 568.33,-96 568.33,-102 562.33,-108 556.33,-108"></path>
+<text text-anchor="middle" x="495" y="-85.8" font-family="Helvetica,sans-Serif" font-size="14.00">No Coffee + No Dark</text>
+</g>
+<!-- NoCoffee&#45;&gt;NoCoffeeNoDark -->
+<g id="edge4" class="edge">
+<title>NoCoffee-&gt;NoCoffeeNoDark</title>
+<path fill="none" stroke="black" d="M487.47,-143.7C488.57,-135.98 489.9,-126.71 491.13,-118.11"></path>
+<polygon fill="black" stroke="black" points="494.61,-118.5 492.56,-108.1 487.68,-117.51 494.61,-118.5"></polygon>
+</g>
+<!-- Dark -->
+<g id="node3" class="node">
+<title>Dark</title>
+<path fill="none" stroke="black" d="M274.62,-180C274.62,-180 209.38,-180 209.38,-180 203.38,-180 197.38,-174 197.38,-168 197.38,-168 197.38,-156 197.38,-156 197.38,-150 203.38,-144 209.38,-144 209.38,-144 274.62,-144 274.62,-144 280.62,-144 286.62,-150 286.62,-156 286.62,-156 286.62,-168 286.62,-168 286.62,-174 280.62,-180 274.62,-180"></path>
+<text text-anchor="middle" x="242" y="-157.8" font-family="Helvetica,sans-Serif" font-size="14.00">Watch Dark</text>
+</g>
+<!-- Dark&#45;&gt;CoffeeDark -->
+<g id="edge5" class="edge">
+<title>Dark-&gt;CoffeeDark</title>
+<path fill="none" stroke="black" d="M199.19,-143.88C175.05,-134.22 144.72,-122.09 119.19,-111.88"></path>
+<polygon fill="black" stroke="black" points="120.26,-108.53 109.67,-108.07 117.66,-115.03 120.26,-108.53"></polygon>
+</g>
+<!-- Dark&#45;&gt;NoCoffeeDark -->
+<g id="edge6" class="edge">
+<title>Dark-&gt;NoCoffeeDark</title>
+<path fill="none" stroke="black" d="M266.46,-143.88C279.3,-134.89 295.2,-123.76 309.09,-114.03"></path>
+<polygon fill="black" stroke="black" points="311.26,-116.79 317.44,-108.19 307.24,-111.06 311.26,-116.79"></polygon>
+</g>
+<!-- NoDark -->
+<g id="node4" class="node">
+<title>NoDark</title>
+<path fill="none" stroke="black" d="M396.85,-180C396.85,-180 353.15,-180 353.15,-180 347.15,-180 341.15,-174 341.15,-168 341.15,-168 341.15,-156 341.15,-156 341.15,-150 347.15,-144 353.15,-144 353.15,-144 396.85,-144 396.85,-144 402.85,-144 408.85,-150 408.85,-156 408.85,-156 408.85,-168 408.85,-168 408.85,-174 402.85,-180 396.85,-180"></path>
+<text text-anchor="middle" x="375" y="-157.8" font-family="Helvetica,sans-Serif" font-size="14.00">No Dark</text>
+</g>
+<!-- NoDark&#45;&gt;CoffeeNoDark -->
+<g id="edge7" class="edge">
+<title>NoDark-&gt;CoffeeNoDark</title>
+<path fill="none" stroke="black" d="M341.07,-147.5C315.67,-137.4 280.46,-123.4 251.45,-111.86"></path>
+<polygon fill="black" stroke="black" points="252.46,-108.49 241.87,-108.05 249.87,-115 252.46,-108.49"></polygon>
+</g>
+<!-- NoDark&#45;&gt;NoCoffeeNoDark -->
+<g id="edge8" class="edge">
+<title>NoDark-&gt;NoCoffeeNoDark</title>
+<path fill="none" stroke="black" d="M404.36,-143.88C420.05,-134.72 439.56,-123.34 456.45,-113.48"></path>
+<polygon fill="black" stroke="black" points="458.66,-116.25 465.53,-108.19 455.13,-110.21 458.66,-116.25"></polygon>
+</g>
+<!-- Happiness1 -->
+<g id="node9" class="node">
+<title>Happiness1</title>
+<path fill="white" stroke="white" d="M96.15,-36C96.15,-36 37.85,-36 37.85,-36 31.85,-36 25.85,-30 25.85,-24 25.85,-24 25.85,-12 25.85,-12 25.85,-6 31.85,0 37.85,0 37.85,0 96.15,0 96.15,0 102.15,0 108.15,-6 108.15,-12 108.15,-12 108.15,-24 108.15,-24 108.15,-30 102.15,-36 96.15,-36"></path>
+<text text-anchor="middle" x="67" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- CoffeeDark&#45;&gt;Happiness1 -->
+<g id="edge9" class="edge">
+<title>CoffeeDark-&gt;Happiness1</title>
+<path fill="none" stroke="black" d="M67,-71.7C67,-63.98 67,-54.71 67,-46.11"></path>
+<polygon fill="black" stroke="black" points="70.5,-46.1 67,-36.1 63.5,-46.1 70.5,-46.1"></polygon>
+</g>
+<!-- Happiness2 -->
+<g id="node10" class="node">
+<title>Happiness2</title>
+<path fill="white" stroke="white" d="M228.15,-36C228.15,-36 169.85,-36 169.85,-36 163.85,-36 157.85,-30 157.85,-24 157.85,-24 157.85,-12 157.85,-12 157.85,-6 163.85,0 169.85,0 169.85,0 228.15,0 228.15,0 234.15,0 240.15,-6 240.15,-12 240.15,-12 240.15,-24 240.15,-24 240.15,-30 234.15,-36 228.15,-36"></path>
+<text text-anchor="middle" x="199" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- CoffeeNoDark&#45;&gt;Happiness2 -->
+<g id="edge10" class="edge">
+<title>CoffeeNoDark-&gt;Happiness2</title>
+<path fill="none" stroke="black" d="M199,-71.7C199,-63.98 199,-54.71 199,-46.11"></path>
+<polygon fill="black" stroke="black" points="202.5,-46.1 199,-36.1 195.5,-46.1 202.5,-46.1"></polygon>
+</g>
+<!-- Happiness3 -->
+<g id="node11" class="node">
+<title>Happiness3</title>
+<path fill="white" stroke="white" d="M371.15,-36C371.15,-36 312.85,-36 312.85,-36 306.85,-36 300.85,-30 300.85,-24 300.85,-24 300.85,-12 300.85,-12 300.85,-6 306.85,0 312.85,0 312.85,0 371.15,0 371.15,0 377.15,0 383.15,-6 383.15,-12 383.15,-12 383.15,-24 383.15,-24 383.15,-30 377.15,-36 371.15,-36"></path>
+<text text-anchor="middle" x="342" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- NoCoffeeDark&#45;&gt;Happiness3 -->
+<g id="edge11" class="edge">
+<title>NoCoffeeDark-&gt;Happiness3</title>
+<path fill="none" stroke="black" d="M342,-71.7C342,-63.98 342,-54.71 342,-46.11"></path>
+<polygon fill="black" stroke="black" points="345.5,-46.1 342,-36.1 338.5,-46.1 345.5,-46.1"></polygon>
+</g>
+<!-- Happiness4 -->
+<g id="node12" class="node">
+<title>Happiness4</title>
+<path fill="white" stroke="white" d="M524.15,-36C524.15,-36 465.85,-36 465.85,-36 459.85,-36 453.85,-30 453.85,-24 453.85,-24 453.85,-12 453.85,-12 453.85,-6 459.85,0 465.85,0 465.85,0 524.15,0 524.15,0 530.15,0 536.15,-6 536.15,-12 536.15,-12 536.15,-24 536.15,-24 536.15,-30 530.15,-36 524.15,-36"></path>
+<text text-anchor="middle" x="495" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- NoCoffeeNoDark&#45;&gt;Happiness4 -->
+<g id="edge12" class="edge">
+<title>NoCoffeeNoDark-&gt;Happiness4</title>
+<path fill="none" stroke="black" d="M495,-71.7C495,-63.98 495,-54.71 495,-46.11"></path>
+<polygon fill="black" stroke="black" points="498.5,-46.1 495,-36.1 491.5,-46.1 498.5,-46.1"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-power-of-two-or-more-2" class="slide level2 scrollable">
+<h2>The Power of Two (or More)</h2>
+<p>Factorial ANOVA helps answer three major questions:</p>
+<ol type="1">
+<li class="fragment"><p><strong>Main Effect 1:</strong> Does IV1 alone affect the outcome?<br>
+(Coffee → Happiness)</p></li>
+<li class="fragment"><p><strong>Main Effect 2:</strong> Does IV2 alone affect the outcome?<br>
+(TV Show → Happiness)</p></li>
+<li class="fragment"><p><strong>Interaction Effect:</strong> Does the effect of one variable depend on the other?<br>
+(Maybe coffee <em>only</em> helps if you’re watching <em>TV!</em>)</p></li>
+</ol>
+</section>
+<section id="why-not-just-run-multiple-t-tests" class="slide level2">
+<h2>Why Not Just Run Multiple t-tests?</h2>
+<h3 id="you-could-compare">You Could Compare…</h3>
+<ul>
+<li class="fragment"><p>Coffee vs.&nbsp;No Coffee</p></li>
+<li class="fragment"><p>Dark vs.&nbsp;No Dark</p></li>
+<li class="fragment"><p>Coffee + Dark vs.&nbsp;everything else</p>
+<ul>
+<li class="fragment">but each additional t-test increases your <strong>Type I error rate</strong> (false positives).</li>
+</ul></li>
+<li class="fragment"><p>A Factorial ANOVA solves that problem by testing all these relationships <strong>in one model</strong> controlling for shared variance and examining combined effects.</p></li>
+</ul>
+</section>
+<section id="in-other-words" class="slide level2">
+<h2>In Other Words…</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 33%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Test Type</th>
+<th style="text-align: left;">Question</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>t-test</strong></td>
+<td style="text-align: left;">Do two groups differ?</td>
+<td style="text-align: left;">Coffee vs.&nbsp;No Coffee</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>One-Way ANOVA</strong></td>
+<td style="text-align: left;">Do 3+ groups differ on one IV?</td>
+<td style="text-align: left;">Decaf, Coffee, Energy Drink</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Factorial ANOVA</strong></td>
+<td style="text-align: left;">How do <strong>two or more IVs</strong> work together?</td>
+<td style="text-align: left;">Coffee × TV Show → Happiness</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-goal-of-research" class="slide level2">
+<h2>The Goal of Research</h2>
+<ul>
+<li class="fragment"><p>The goal of good research is to <strong>narrow in on the real sources of variation.</strong></p></li>
+<li class="fragment"><p>Factorial ANOVA lets us see <em>not just whether variables matter,</em> but <em>how they matter together.</em></p></li>
+</ul>
+<blockquote>
+<p>It’s not just what causes an effect, it’s what combinations of causes create patterns we care about.</p>
+</blockquote>
+</section>
+<section id="factorial-anova" class="slide level2">
+<h2>Factorial ANOVA</h2>
+<h3 id="two-types-of-variance">Two types of variance:</h3>
+<ul>
+<li class="fragment"><p>Variance among all of the scores (error variance).</p></li>
+<li class="fragment"><p>Variance between the groups of the first IV (between group variance 1).</p></li>
+<li class="fragment"><p>Variance between the groups of the second IV (between group variance 2).</p></li>
+<li class="fragment"><p>Variance between the combination of the groups (interaction variance).</p></li>
+</ul>
+</section>
+<section id="understanding-main-effects" class="slide level2">
+<h2>Understanding Main Effects</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>The <strong>main effect of Coffee</strong> asks:</p>
+<ul>
+<li class="fragment"><em>On average, does drinking coffee make people happier than not drinking coffee?”<br>
+</em>(Regardless of whether they watched <em>TV</em> or not.)</li>
+</ul></li>
+<li class="fragment"><p>The <strong>main effect of Watching TV</strong> asks:</p>
+<ul>
+<li class="fragment"><em>On average, does watching TV make people happier than not watching it?”<br>
+</em>(Regardless of whether they had coffee or not.)</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource dot number-lines code-with-copy"><code class="sourceCode dot"><span id="cb3-1"><a></a><span class="kw">digraph</span> <span class="ot">{</span></span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="co">  </span><span class="at">rankdir</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">RL</span></span>
+<span id="cb3-4"><a></a><span class="co">  </span><span class="kw">node</span><span class="co"> </span><span class="ot">[</span><span class="at">shape</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">box</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span><span class="co">, </span><span class="at">fontname</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">Helvetica</span><span class="ot">]</span></span>
+<span id="cb3-5"><a></a><span class="co">  </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"#E9F1EC"</span></span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a><span class="co">  </span><span class="kw">subgraph</span><span class="co"> </span><span class="va">cluster_coffee</span><span class="co"> </span><span class="ot">{</span></span>
+<span id="cb3-8"><a></a><span class="co">    </span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"Independent Variable 1: Coffee"</span></span>
+<span id="cb3-9"><a></a><span class="co">    </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span></span>
+<span id="cb3-10"><a></a><span class="co">    </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span></span>
+<span id="cb3-11"><a></a></span>
+<span id="cb3-12"><a></a><span class="co">    </span><span class="va">C1</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Coffee"</span><span class="ot">]</span></span>
+<span id="cb3-13"><a></a><span class="co">    </span><span class="va">C2</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No Coffee"</span><span class="ot">]</span></span>
+<span id="cb3-14"><a></a><span class="co">    </span><span class="va">H1</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb3-15"><a></a><span class="co">    </span><span class="va">H2</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb3-16"><a></a></span>
+<span id="cb3-17"><a></a><span class="co">    </span><span class="va">H1</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">C1</span></span>
+<span id="cb3-18"><a></a><span class="co">    </span><span class="va">H2</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">C2</span></span>
+<span id="cb3-19"><a></a><span class="co">  </span><span class="ot">}</span></span>
+<span id="cb3-20"><a></a></span>
+<span id="cb3-21"><a></a><span class="co">  </span><span class="kw">subgraph</span><span class="co"> </span><span class="va">cluster_tv</span><span class="co"> </span><span class="ot">{</span></span>
+<span id="cb3-22"><a></a><span class="co">    </span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"Independent Variable 2: TV Show"</span></span>
+<span id="cb3-23"><a></a><span class="co">    </span><span class="at">bgcolor</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span></span>
+<span id="cb3-24"><a></a><span class="co">    </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rounded</span></span>
+<span id="cb3-25"><a></a></span>
+<span id="cb3-26"><a></a><span class="co">    </span><span class="va">TV</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"TV"</span><span class="ot">]</span></span>
+<span id="cb3-27"><a></a><span class="co">    </span><span class="va">NTV</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"No TV"</span><span class="ot">]</span></span>
+<span id="cb3-28"><a></a><span class="co">    </span><span class="va">H3</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb3-29"><a></a><span class="co">    </span><span class="va">H4</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Happiness"</span><span class="ot">]</span></span>
+<span id="cb3-30"><a></a></span>
+<span id="cb3-31"><a></a><span class="co">    </span><span class="va">H3</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">TV</span></span>
+<span id="cb3-32"><a></a><span class="co">    </span><span class="va">H4</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">NTV</span></span>
+<span id="cb3-33"><a></a><span class="co">  </span><span class="ot">}</span></span>
+<span id="cb3-34"><a></a><span class="ot">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 237.19 294.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 290)">
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-290 233.19,-290 233.19,4 -4,4"></polygon>
+<g id="clust2" class="cluster">
+<title>cluster_tv</title>
+<path fill="white" stroke="black" d="M27.68,-147C27.68,-147 212.19,-147 212.19,-147 218.19,-147 224.19,-153 224.19,-159 224.19,-159 224.19,-266 224.19,-266 224.19,-272 218.19,-278 212.19,-278 212.19,-278 27.68,-278 27.68,-278 21.68,-278 15.68,-272 15.68,-266 15.68,-266 15.68,-159 15.68,-159 15.68,-153 21.68,-147 27.68,-147"></path>
+<text text-anchor="middle" x="119.93" y="-261.4" font-family="Times,serif" font-size="14.00">Independent Variable 2: TV Show</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_coffee</title>
+<path fill="white" stroke="black" d="M20,-8C20,-8 209.19,-8 209.19,-8 215.19,-8 221.19,-14 221.19,-20 221.19,-20 221.19,-127 221.19,-127 221.19,-133 215.19,-139 209.19,-139 209.19,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="114.59" y="-122.4" font-family="Times,serif" font-size="14.00">Independent Variable 1: Coffee</text>
+</g>
+<!-- C1 -->
+<g id="node1" class="node">
+<title>C1</title>
+<path fill="none" stroke="black" d="M72.27,-106C72.27,-106 38.77,-106 38.77,-106 32.77,-106 26.77,-100 26.77,-94 26.77,-94 26.77,-82 26.77,-82 26.77,-76 32.77,-70 38.77,-70 38.77,-70 72.27,-70 72.27,-70 78.27,-70 84.27,-76 84.27,-82 84.27,-82 84.27,-94 84.27,-94 84.27,-100 78.27,-106 72.27,-106"></path>
+<text text-anchor="middle" x="55.52" y="-83.8" font-family="Helvetica,sans-Serif" font-size="14.00">Coffee</text>
+</g>
+<!-- C2 -->
+<g id="node2" class="node">
+<title>C2</title>
+<path fill="none" stroke="black" d="M83.05,-52C83.05,-52 27.98,-52 27.98,-52 21.98,-52 15.98,-46 15.98,-40 15.98,-40 15.98,-28 15.98,-28 15.98,-22 21.98,-16 27.98,-16 27.98,-16 83.05,-16 83.05,-16 89.05,-16 95.05,-22 95.05,-28 95.05,-28 95.05,-40 95.05,-40 95.05,-46 89.05,-52 83.05,-52"></path>
+<text text-anchor="middle" x="55.52" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">No Coffee</text>
+</g>
+<!-- H1 -->
+<g id="node3" class="node">
+<title>H1</title>
+<path fill="none" stroke="black" d="M201.26,-106C201.26,-106 142.96,-106 142.96,-106 136.96,-106 130.96,-100 130.96,-94 130.96,-94 130.96,-82 130.96,-82 130.96,-76 136.96,-70 142.96,-70 142.96,-70 201.26,-70 201.26,-70 207.26,-70 213.26,-76 213.26,-82 213.26,-82 213.26,-94 213.26,-94 213.26,-100 207.26,-106 201.26,-106"></path>
+<text text-anchor="middle" x="172.11" y="-83.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- H1&#45;&gt;C1 -->
+<g id="edge1" class="edge">
+<title>H1-&gt;C1</title>
+<path fill="none" stroke="black" d="M131.03,-88C119.17,-88 106.23,-88 94.5,-88"></path>
+<polygon fill="black" stroke="black" points="94.15,-84.5 84.15,-88 94.15,-91.5 94.15,-84.5"></polygon>
+</g>
+<!-- H2 -->
+<g id="node4" class="node">
+<title>H2</title>
+<path fill="none" stroke="black" d="M201.26,-52C201.26,-52 142.96,-52 142.96,-52 136.96,-52 130.96,-46 130.96,-40 130.96,-40 130.96,-28 130.96,-28 130.96,-22 136.96,-16 142.96,-16 142.96,-16 201.26,-16 201.26,-16 207.26,-16 213.26,-22 213.26,-28 213.26,-28 213.26,-40 213.26,-40 213.26,-46 207.26,-52 201.26,-52"></path>
+<text text-anchor="middle" x="172.11" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- H2&#45;&gt;C2 -->
+<g id="edge2" class="edge">
+<title>H2-&gt;C2</title>
+<path fill="none" stroke="black" d="M131.03,-34C122.77,-34 113.99,-34 105.45,-34"></path>
+<polygon fill="black" stroke="black" points="105.22,-30.5 95.22,-34 105.22,-37.5 105.22,-30.5"></polygon>
+</g>
+<!-- TV -->
+<g id="node5" class="node">
+<title>TV</title>
+<path fill="none" stroke="black" d="M70.52,-245C70.52,-245 40.52,-245 40.52,-245 34.52,-245 28.52,-239 28.52,-233 28.52,-233 28.52,-221 28.52,-221 28.52,-215 34.52,-209 40.52,-209 40.52,-209 70.52,-209 70.52,-209 76.52,-209 82.52,-215 82.52,-221 82.52,-221 82.52,-233 82.52,-233 82.52,-239 76.52,-245 70.52,-245"></path>
+<text text-anchor="middle" x="55.52" y="-222.8" font-family="Helvetica,sans-Serif" font-size="14.00">TV</text>
+</g>
+<!-- NTV -->
+<g id="node6" class="node">
+<title>NTV</title>
+<path fill="none" stroke="black" d="M71.19,-191C71.19,-191 39.84,-191 39.84,-191 33.84,-191 27.84,-185 27.84,-179 27.84,-179 27.84,-167 27.84,-167 27.84,-161 33.84,-155 39.84,-155 39.84,-155 71.19,-155 71.19,-155 77.19,-155 83.19,-161 83.19,-167 83.19,-167 83.19,-179 83.19,-179 83.19,-185 77.19,-191 71.19,-191"></path>
+<text text-anchor="middle" x="55.52" y="-168.8" font-family="Helvetica,sans-Serif" font-size="14.00">No TV</text>
+</g>
+<!-- H3 -->
+<g id="node7" class="node">
+<title>H3</title>
+<path fill="none" stroke="black" d="M201.26,-245C201.26,-245 142.96,-245 142.96,-245 136.96,-245 130.96,-239 130.96,-233 130.96,-233 130.96,-221 130.96,-221 130.96,-215 136.96,-209 142.96,-209 142.96,-209 201.26,-209 201.26,-209 207.26,-209 213.26,-215 213.26,-221 213.26,-221 213.26,-233 213.26,-233 213.26,-239 207.26,-245 201.26,-245"></path>
+<text text-anchor="middle" x="172.11" y="-222.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- H3&#45;&gt;TV -->
+<g id="edge3" class="edge">
+<title>H3-&gt;TV</title>
+<path fill="none" stroke="black" d="M131.03,-227C118.65,-227 105.09,-227 92.97,-227"></path>
+<polygon fill="black" stroke="black" points="92.75,-223.5 82.75,-227 92.75,-230.5 92.75,-223.5"></polygon>
+</g>
+<!-- H4 -->
+<g id="node8" class="node">
+<title>H4</title>
+<path fill="none" stroke="black" d="M201.26,-191C201.26,-191 142.96,-191 142.96,-191 136.96,-191 130.96,-185 130.96,-179 130.96,-179 130.96,-167 130.96,-167 130.96,-161 136.96,-155 142.96,-155 142.96,-155 201.26,-155 201.26,-155 207.26,-155 213.26,-161 213.26,-167 213.26,-167 213.26,-179 213.26,-179 213.26,-185 207.26,-191 201.26,-191"></path>
+<text text-anchor="middle" x="172.11" y="-168.8" font-family="Helvetica,sans-Serif" font-size="14.00">Happiness</text>
+</g>
+<!-- H4&#45;&gt;NTV -->
+<g id="edge4" class="edge">
+<title>H4-&gt;NTV</title>
+<path fill="none" stroke="black" d="M131.03,-173C118.85,-173 105.53,-173 93.56,-173"></path>
+<polygon fill="black" stroke="black" points="93.45,-169.5 83.45,-173 93.45,-176.5 93.45,-169.5"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="understanding-main-effects-1" class="slide level2">
+<h2>Understanding Main Effects</h2>
+<h3 id="x2-table">2x2 Table</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(tibble)</span>
+<span id="cb4-2"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-3"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="fu">library</span>(tibble)</span>
+<span id="cb4-6"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb4-7"><a></a></span>
+<span id="cb4-8"><a></a><span class="co"># Create a 2x2 factorial table (wide layout)</span></span>
+<span id="cb4-9"><a></a>design_tbl <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb4-10"><a></a>  <span class="sc">~</span>Condition,     <span class="sc">~</span><span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>,</span>
+<span id="cb4-11"><a></a>  <span class="st">"TV"</span>,               <span class="dv">3</span>,           <span class="dv">4</span>,</span>
+<span id="cb4-12"><a></a>  <span class="st">"No TV"</span>,            <span class="dv">4</span>,           <span class="dv">8</span></span>
+<span id="cb4-13"><a></a>)</span>
+<span id="cb4-14"><a></a></span>
+<span id="cb4-15"><a></a><span class="co"># Display as a 2x2 factorial grid</span></span>
+<span id="cb4-16"><a></a>design_tbl <span class="sc">|&gt;</span></span>
+<span id="cb4-17"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-18"><a></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb4-19"><a></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**2 × 2 Factorial Design: Coffee × TV**"</span>),</span>
+<span id="cb4-20"><a></a>    <span class="at">subtitle =</span> <span class="st">"Mean Happiness Scores by Condition"</span></span>
+<span id="cb4-21"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-22"><a></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb4-23"><a></a>    <span class="at">Condition =</span> <span class="st">"Watched TV?"</span>,</span>
+<span id="cb4-24"><a></a>    <span class="st">`</span><span class="at">Coffee</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Coffee"</span>,</span>
+<span id="cb4-25"><a></a>    <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"No Coffee"</span></span>
+<span id="cb4-26"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-27"><a></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb4-28"><a></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>),</span>
+<span id="cb4-29"><a></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
+<span id="cb4-30"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-31"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb4-32"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb4-33"><a></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb4-34"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-35"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb4-36"><a></a>    <span class="at">style =</span> <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#f8f9fa"</span>),</span>
+<span id="cb4-37"><a></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="fu">everything</span>())</span>
+<span id="cb4-38"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-39"><a></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb4-40"><a></a>    <span class="at">label =</span> <span class="fu">md</span>(<span class="st">"**Coffee Condition**"</span>),</span>
+<span id="cb4-41"><a></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>)</span>
+<span id="cb4-42"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-43"><a></a>  <span class="fu">tab_footnote</span>(</span>
+<span id="cb4-44"><a></a>    <span class="at">footnote =</span> <span class="st">"Higher numbers indicate greater happiness."</span></span>
+<span id="cb4-45"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb4-46"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb4-47"><a></a>    <span class="at">table.font.size =</span> <span class="dv">30</span></span>
+<span id="cb4-48"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="hanklmknbh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hanklmknbh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hanklmknbh thead, #hanklmknbh tbody, #hanklmknbh tfoot, #hanklmknbh tr, #hanklmknbh td, #hanklmknbh th {
+  border-style: none;
+}
+
+#hanklmknbh p {
+  margin: 0;
+  padding: 0;
+}
+
+#hanklmknbh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hanklmknbh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hanklmknbh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hanklmknbh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hanklmknbh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hanklmknbh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hanklmknbh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hanklmknbh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hanklmknbh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hanklmknbh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hanklmknbh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hanklmknbh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hanklmknbh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hanklmknbh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hanklmknbh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hanklmknbh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hanklmknbh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hanklmknbh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hanklmknbh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hanklmknbh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hanklmknbh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hanklmknbh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hanklmknbh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hanklmknbh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hanklmknbh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hanklmknbh .gt_left {
+  text-align: left;
+}
+
+#hanklmknbh .gt_center {
+  text-align: center;
+}
+
+#hanklmknbh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hanklmknbh .gt_font_normal {
+  font-weight: normal;
+}
+
+#hanklmknbh .gt_font_bold {
+  font-weight: bold;
+}
+
+#hanklmknbh .gt_font_italic {
+  font-style: italic;
+}
+
+#hanklmknbh .gt_super {
+  font-size: 65%;
+}
+
+#hanklmknbh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hanklmknbh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hanklmknbh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hanklmknbh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hanklmknbh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hanklmknbh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hanklmknbh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hanklmknbh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hanklmknbh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="gt_heading header">
+<th colspan="3" class="gt_heading gt_title gt_font_normal"><strong>2 × 2 Factorial Design: Coffee × TV</strong></th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Mean Happiness Scores by Condition</th>
+</tr>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="Condition" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Watched TV?</th>
+<th colspan="2" id="**Coffee Condition**" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+<strong>Coffee Condition</strong>
+</div></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="Coffee" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Coffee</th>
+<th id="No-Coffee" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">No Coffee</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Condition" style="background-color: #F8F9FA">TV</td>
+<td class="gt_row gt_right" headers="Coffee" style="background-color: #F8F9FA">3.0</td>
+<td class="gt_row gt_right" headers="No Coffee" style="background-color: #F8F9FA">4.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Condition" style="background-color: #F8F9FA">No TV</td>
+<td class="gt_row gt_right" headers="Coffee" style="background-color: #F8F9FA">4.0</td>
+<td class="gt_row gt_right" headers="No Coffee" style="background-color: #F8F9FA">8.0</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="3" class="gt_footnote">Higher numbers indicate greater happiness.</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Base 2x2 design with condition means</span></span>
+<span id="cb5-2"><a></a>design_tbl <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb5-3"><a></a>  <span class="sc">~</span>Condition, <span class="sc">~</span><span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>,</span>
+<span id="cb5-4"><a></a>  <span class="st">"TV"</span>,       <span class="dv">3</span>,          <span class="dv">4</span>,</span>
+<span id="cb5-5"><a></a>  <span class="st">"No TV"</span>,    <span class="dv">4</span>,          <span class="dv">8</span></span>
+<span id="cb5-6"><a></a>)</span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a><span class="co"># Compute marginal means</span></span>
+<span id="cb5-9"><a></a>design_tbl_extended <span class="ot">&lt;-</span> design_tbl <span class="sc">|&gt;</span></span>
+<span id="cb5-10"><a></a>  <span class="fu">mutate</span>(<span class="at">Row_Mean =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>)))) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb5-12"><a></a>    <span class="fu">tibble</span>(</span>
+<span id="cb5-13"><a></a>      <span class="at">Condition =</span> <span class="st">"Column Mean"</span>,</span>
+<span id="cb5-14"><a></a>      <span class="at">Coffee =</span> <span class="fu">mean</span>(design_tbl<span class="sc">$</span>Coffee),</span>
+<span id="cb5-15"><a></a>      <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(design_tbl<span class="sc">$</span><span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>),</span>
+<span id="cb5-16"><a></a>      <span class="at">Row_Mean =</span> <span class="fu">mean</span>(<span class="fu">c</span>(design_tbl<span class="sc">$</span>Coffee, design_tbl<span class="sc">$</span><span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>))</span>
+<span id="cb5-17"><a></a>    )</span>
+<span id="cb5-18"><a></a>  )</span>
+<span id="cb5-19"><a></a></span>
+<span id="cb5-20"><a></a><span class="co"># Display with gt</span></span>
+<span id="cb5-21"><a></a>design_tbl_extended <span class="sc">|&gt;</span></span>
+<span id="cb5-22"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-23"><a></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb5-24"><a></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**2 × 2 Factorial Design: Coffee × TV**"</span>),</span>
+<span id="cb5-25"><a></a>    <span class="at">subtitle =</span> <span class="st">"Mean Happiness Scores with Marginal Means"</span></span>
+<span id="cb5-26"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-27"><a></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb5-28"><a></a>    <span class="at">Condition =</span> <span class="st">"Watched TV?"</span>,</span>
+<span id="cb5-29"><a></a>    <span class="st">`</span><span class="at">Coffee</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Coffee"</span>,</span>
+<span id="cb5-30"><a></a>    <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"No Coffee"</span>,</span>
+<span id="cb5-31"><a></a>    <span class="at">Row_Mean =</span> <span class="fu">md</span>(<span class="st">"**Row Mean**"</span>)</span>
+<span id="cb5-32"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-33"><a></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb5-34"><a></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>, Row_Mean),</span>
+<span id="cb5-35"><a></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
+<span id="cb5-36"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-37"><a></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb5-38"><a></a>    <span class="at">label =</span> <span class="fu">md</span>(<span class="st">"**Coffee Condition**"</span>),</span>
+<span id="cb5-39"><a></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">Coffee</span><span class="st">`</span>, <span class="st">`</span><span class="at">No Coffee</span><span class="st">`</span>)</span>
+<span id="cb5-40"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-41"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb5-42"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb5-43"><a></a>    <span class="at">locations =</span> <span class="fu">list</span>(</span>
+<span id="cb5-44"><a></a>      <span class="fu">cells_column_labels</span>(),</span>
+<span id="cb5-45"><a></a>      <span class="fu">cells_body</span>(<span class="at">rows =</span> Condition <span class="sc">==</span> <span class="st">"Column Mean"</span>)</span>
+<span id="cb5-46"><a></a>    )</span>
+<span id="cb5-47"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-48"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb5-49"><a></a>    <span class="at">style =</span> <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#f5f5f5"</span>),</span>
+<span id="cb5-50"><a></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb5-51"><a></a>      <span class="at">rows =</span> Condition <span class="sc">==</span> <span class="st">"Column Mean"</span> <span class="sc">|</span> Condition <span class="sc">==</span> <span class="st">"No TV"</span></span>
+<span id="cb5-52"><a></a>    )</span>
+<span id="cb5-53"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-54"><a></a>  <span class="fu">tab_footnote</span>(</span>
+<span id="cb5-55"><a></a>    <span class="at">footnote =</span> <span class="st">"Row and column means illustrate main effects of Coffee and TV."</span></span>
+<span id="cb5-56"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb5-57"><a></a>   <span class="fu">tab_options</span>(</span>
+<span id="cb5-58"><a></a>    <span class="at">table.font.size =</span> <span class="dv">30</span></span>
+<span id="cb5-59"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="samrnxmzsw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#samrnxmzsw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#samrnxmzsw thead, #samrnxmzsw tbody, #samrnxmzsw tfoot, #samrnxmzsw tr, #samrnxmzsw td, #samrnxmzsw th {
+  border-style: none;
+}
+
+#samrnxmzsw p {
+  margin: 0;
+  padding: 0;
+}
+
+#samrnxmzsw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#samrnxmzsw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#samrnxmzsw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#samrnxmzsw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#samrnxmzsw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#samrnxmzsw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#samrnxmzsw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#samrnxmzsw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#samrnxmzsw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#samrnxmzsw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#samrnxmzsw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#samrnxmzsw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#samrnxmzsw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#samrnxmzsw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#samrnxmzsw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#samrnxmzsw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#samrnxmzsw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#samrnxmzsw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#samrnxmzsw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#samrnxmzsw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#samrnxmzsw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#samrnxmzsw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#samrnxmzsw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#samrnxmzsw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#samrnxmzsw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#samrnxmzsw .gt_left {
+  text-align: left;
+}
+
+#samrnxmzsw .gt_center {
+  text-align: center;
+}
+
+#samrnxmzsw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#samrnxmzsw .gt_font_normal {
+  font-weight: normal;
+}
+
+#samrnxmzsw .gt_font_bold {
+  font-weight: bold;
+}
+
+#samrnxmzsw .gt_font_italic {
+  font-style: italic;
+}
+
+#samrnxmzsw .gt_super {
+  font-size: 65%;
+}
+
+#samrnxmzsw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#samrnxmzsw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#samrnxmzsw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#samrnxmzsw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#samrnxmzsw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#samrnxmzsw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#samrnxmzsw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#samrnxmzsw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#samrnxmzsw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_heading header">
+<th colspan="4" class="gt_heading gt_title gt_font_normal"><strong>2 × 2 Factorial Design: Coffee × TV</strong></th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Mean Happiness Scores with Marginal Means</th>
+</tr>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="Condition" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Watched TV?</th>
+<th colspan="2" id="**Coffee Condition**" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+<strong>Coffee Condition</strong>
+</div></th>
+<th rowspan="2" id="Row_Mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><strong>Row Mean</strong></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="Coffee" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Coffee</th>
+<th id="No-Coffee" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">No Coffee</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Condition">TV</td>
+<td class="gt_row gt_right" headers="Coffee">3.0</td>
+<td class="gt_row gt_right" headers="No Coffee">4.0</td>
+<td class="gt_row gt_right" headers="Row_Mean">3.5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Condition" style="background-color: #F5F5F5">No TV</td>
+<td class="gt_row gt_right" headers="Coffee" style="background-color: #F5F5F5">4.0</td>
+<td class="gt_row gt_right" headers="No Coffee" style="background-color: #F5F5F5">8.0</td>
+<td class="gt_row gt_right" headers="Row_Mean" style="background-color: #F5F5F5">6.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Condition" style="font-weight: bold; background-color: #F5F5F5">Column Mean</td>
+<td class="gt_row gt_right" headers="Coffee" style="font-weight: bold; background-color: #F5F5F5">3.5</td>
+<td class="gt_row gt_right" headers="No Coffee" style="font-weight: bold; background-color: #F5F5F5">6.0</td>
+<td class="gt_row gt_right" headers="Row_Mean" style="font-weight: bold; background-color: #F5F5F5">4.8</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="4" class="gt_footnote">Row and column means illustrate main effects of Coffee and TV.</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="visualizing-interactions" class="slide level2">
+<h2>Visualizing Interactions</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb6-2"><a></a><span class="fu">set.seed</span>(<span class="dv">1</span>) </span>
+<span id="cb6-3"><a></a>interaction_df <span class="ot">&lt;-</span> </span>
+<span id="cb6-4"><a></a>  <span class="fu">data.frame</span>(<span class="at">Coffee =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">each =</span> <span class="dv">4</span>), </span>
+<span id="cb6-5"><a></a>             <span class="at">Show =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">times =</span> <span class="dv">4</span>), </span>
+<span id="cb6-6"><a></a>             <span class="at">Happiness =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>) )</span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a><span class="fu">ggplot</span>(interaction_df, </span>
+<span id="cb6-9"><a></a>       <span class="fu">aes</span>(Coffee, Happiness, </span>
+<span id="cb6-10"><a></a>           <span class="at">color =</span> Show, <span class="at">group =</span> Show)) <span class="sc">+</span> </span>
+<span id="cb6-11"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span> </span>
+<span id="cb6-12"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb6-13"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span> </span>
+<span id="cb6-14"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-15"><a></a>    <span class="at">title =</span> <span class="st">"Interaction Example"</span>, </span>
+<span id="cb6-16"><a></a>    <span class="at">subtitle =</span> <span class="st">"Coffee only boosts happiness when watching TV"</span>, </span>
+<span id="cb6-17"><a></a>    <span class="at">x =</span> <span class="st">"Coffee"</span>, </span>
+<span id="cb6-18"><a></a>    <span class="at">y =</span> <span class="st">"Happiness"</span> ) <span class="sc">+</span> </span>
+<span id="cb6-19"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8b0000"</span>, <span class="st">"#004488"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13fct_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec13fct_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-interactions-1" class="slide level2">
+<h2>Visualizing Interactions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(tibble)</span>
+<span id="cb7-2"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-3"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-4"><a></a></span>
+<span id="cb7-5"><a></a><span class="co"># Create the 2x2 design with your condition means</span></span>
+<span id="cb7-6"><a></a>plot_data <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb7-7"><a></a>  <span class="sc">~</span>TV,      <span class="sc">~</span>Coffee,        <span class="sc">~</span>Happiness,</span>
+<span id="cb7-8"><a></a>  <span class="st">"TV"</span>,     <span class="st">"Coffee"</span>,        <span class="dv">3</span>,</span>
+<span id="cb7-9"><a></a>  <span class="st">"TV"</span>,     <span class="st">"No Coffee"</span>,     <span class="dv">4</span>,</span>
+<span id="cb7-10"><a></a>  <span class="st">"No TV"</span>,  <span class="st">"Coffee"</span>,        <span class="dv">4</span>,</span>
+<span id="cb7-11"><a></a>  <span class="st">"No TV"</span>,  <span class="st">"No Coffee"</span>,     <span class="dv">8</span></span>
+<span id="cb7-12"><a></a>)</span>
+<span id="cb7-13"><a></a></span>
+<span id="cb7-14"><a></a><span class="co"># Basic interaction plot</span></span>
+<span id="cb7-15"><a></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> TV, <span class="at">y =</span> Happiness, <span class="at">color =</span> Coffee, <span class="at">group =</span> Coffee)) <span class="sc">+</span></span>
+<span id="cb7-16"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-17"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb7-18"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#3E92CC"</span>, <span class="st">"#FF6B6B"</span>)) <span class="sc">+</span></span>
+<span id="cb7-19"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb7-20"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-21"><a></a>    <span class="at">title =</span> <span class="st">"Interaction Plot: Coffee × TV on Happiness"</span>,</span>
+<span id="cb7-22"><a></a>    <span class="at">x =</span> <span class="st">"Watched TV"</span>,</span>
+<span id="cb7-23"><a></a>    <span class="at">y =</span> <span class="st">"Mean Happiness"</span>,</span>
+<span id="cb7-24"><a></a>    <span class="at">color =</span> <span class="st">"Coffee Condition"</span></span>
+<span id="cb7-25"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb7-26"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-27"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb7-28"><a></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-29"><a></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb7-30"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13fct_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec13fct_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Each line represents one independent variable, in this case, whether participants drank coffee.</p></li>
+<li class="fragment"><p>The x-axis represents the second independent variable, watching TV or not.</p></li>
+<li class="fragment"><p>If these lines are <strong>parallel</strong>, there’s <strong>no interaction</strong>. Tthe effect of one IV doesn’t depend on the other.</p></li>
+<li class="fragment"><p>But here, notice that the lines <strong>cross</strong>. That means the effect of coffee on happiness depends on whether someone watched TV. Coffee makes people happier <em>unless</em> they watched TV; an interaction effect.”</p></li>
+</ul>
+</div></div>
+</section>
+<section id="visualizing-interactions-2" class="slide level2">
+<h2>Visualizing Interactions</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Summarize marginal means</span></span>
+<span id="cb8-2"><a></a>main_effects <span class="ot">&lt;-</span> plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a></a>  <span class="fu">group_by</span>(Coffee) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">summarize</span>(<span class="at">Happiness =</span> <span class="fu">mean</span>(Happiness))</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a><span class="fu">ggplot</span>(main_effects, <span class="fu">aes</span>(Coffee, Happiness, <span class="at">fill =</span> Coffee)) <span class="sc">+</span></span>
+<span id="cb8-7"><a></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#3E92CC"</span>, <span class="st">"#FF6B6B"</span>)) <span class="sc">+</span></span>
+<span id="cb8-9"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-11"><a></a>    <span class="at">title =</span> <span class="st">"Main Effect of Coffee on Happiness"</span>,</span>
+<span id="cb8-12"><a></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb8-13"><a></a>    <span class="at">y =</span> <span class="st">"Mean Happiness"</span></span>
+<span id="cb8-14"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb8-15"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-16"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb8-17"><a></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb8-18"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13fct_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec13fct_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-interactions-3" class="slide level2">
+<h2>Visualizing Interactions</h2>
+</section>
+<section id="from-main-effect-to-interaction" class="slide level2">
+<h2>From Main Effect to Interaction</h2>
+<p><a href="inx.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="inx.gif"></a></p>
+</section>
+<section id="calculating-f-values" class="slide level2">
+<h2>Calculating F Values</h2>
+<ul>
+<li class="fragment"><p>Between Groups 1 (df<sub>B1</sub> ) = k<sub><strong>1</strong></sub> - 1</p></li>
+<li class="fragment"><p>Between Groups 2 (df<sub>B2</sub> ) = k<sub><strong>2</strong></sub> - 1</p></li>
+<li class="fragment"><p>Interaction (MS<sub>Interaction</sub>i) = (k<sub><strong>1</strong></sub> - 1) x (k<sub><strong>2</strong></sub> - 1)</p></li>
+<li class="fragment"><p>Error (MS<sub>Error</sub>) = n - (k<sub><strong>1</strong></sub> x k<sub><strong>2</strong></sub>)</p></li>
+<li class="fragment"><p>Total = n - 1</p></li>
+</ul>
+</section>
+<section id="calculating-ms" class="slide level2">
+<h2>Calculating MS</h2>
+<ul>
+<li class="fragment"><p>Between Group 1 MS:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(MS_{B_1} = \frac{SS_{B_{1}}}{k_1-1}\)</span></li>
+</ul></li>
+<li class="fragment"><p>Between Group 2 MS:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(MS_{B_{2}} = \frac{SS_{B_{2}}}{k_2-1}\)</span></li>
+</ul></li>
+<li class="fragment"><p>Interaction MS</p>
+<ul>
+<li class="fragment"><span class="math inline">\(MS_{Interaction} = \frac{SS_{Interaction}}{(k_1-1) \times (k_2-1)}\)</span></li>
+</ul></li>
+<li class="fragment"><p>Error MS:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(MS_{Error} = \frac{SS{Error}}{n-(k_1 \times k_2)}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="calculating-f" class="slide level2">
+<h2>Calculating F</h2>
+<ul>
+<li class="fragment"><p><span class="math inline">\(F_A = \frac{MS_{B_{1}}}{MS{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F_B = \frac{MS_{B_{2}}}{MS{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F_{AB} = \frac{MS_{Interaction}}{MS{Error}}\)</span></p></li>
+</ul>
+</section>
+<section id="how-many-fs" class="slide level2">
+<h2>How Many F’s?</h2>
+<div class="cell" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource dot number-lines code-with-copy"><code class="sourceCode dot"><span id="cb9-1"><a></a><span class="kw">digraph</span> <span class="va">F_Tests</span> <span class="ot">{</span></span>
+<span id="cb9-2"><a></a><span class="co">  </span><span class="at">size</span><span class="ot">=</span><span class="dv">5</span></span>
+<span id="cb9-3"><a></a><span class="co">  </span><span class="at">rankdir</span><span class="ot">=</span><span class="va">TB</span></span>
+<span id="cb9-4"><a></a><span class="co">  </span><span class="at">bgcolor</span><span class="ot">=</span><span class="st">"#E9F1EC"</span></span>
+<span id="cb9-5"><a></a><span class="co">  </span><span class="kw">node</span><span class="co"> </span><span class="ot">[</span><span class="at">shape</span><span class="ot">=</span><span class="va">box</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded,filled"</span><span class="co">, </span><span class="at">fontname</span><span class="ot">=</span><span class="st">"Helvetica"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"white"</span><span class="ot">]</span></span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a><span class="co">  # </span><span class="va">Level</span><span class="co"> </span><span class="dv">1</span></span>
+<span id="cb9-8"><a></a><span class="co">  </span><span class="va">oneway</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"1-Way ANOVA\n→ 1 F-test\n(Main Effect Only)"</span><span class="ot">]</span></span>
+<span id="cb9-9"><a></a></span>
+<span id="cb9-10"><a></a><span class="co">  # </span><span class="va">Level</span><span class="co"> </span><span class="dv">2</span></span>
+<span id="cb9-11"><a></a><span class="co">  </span><span class="va">twoway</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"2-Way ANOVA (2×2)\n→ 3 F-tests\n(2 Main Effects + 1 Interaction)"</span><span class="ot">]</span></span>
+<span id="cb9-12"><a></a></span>
+<span id="cb9-13"><a></a><span class="co">  # </span><span class="va">Level</span><span class="co"> </span><span class="dv">3</span></span>
+<span id="cb9-14"><a></a><span class="co">  </span><span class="va">threeway</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"3-Way ANOVA (2×2×2)\n→ 7 F-tests\n(3 Main + 3 Two-Way + 1 Three-Way)"</span><span class="ot">]</span></span>
+<span id="cb9-15"><a></a></span>
+<span id="cb9-16"><a></a><span class="co">  # </span><span class="va">Level</span><span class="co"> </span><span class="dv">4</span></span>
+<span id="cb9-17"><a></a><span class="co">  </span><span class="va">fourway</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"4-Way ANOVA (2×2×2×2)\n→ 15 F-tests\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)"</span><span class="ot">]</span></span>
+<span id="cb9-18"><a></a></span>
+<span id="cb9-19"><a></a><span class="co">  # </span><span class="va">Connections</span></span>
+<span id="cb9-20"><a></a><span class="co">  </span><span class="va">oneway</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">twoway</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">threeway</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">fourway</span></span>
+<span id="cb9-21"><a></a></span>
+<span id="cb9-22"><a></a><span class="co">  # </span><span class="va">Optional</span><span class="co">: </span><span class="va">a</span><span class="co"> </span><span class="va">note</span><span class="co"> </span><span class="va">on</span><span class="co"> </span><span class="va">the</span><span class="co"> </span><span class="va">right</span></span>
+<span id="cb9-23"><a></a><span class="co">  </span><span class="va">note</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"General Formula:\nF = 2ⁿ - 1\n(where n = # of IVs)"</span><span class="co">, </span><span class="at">shape</span><span class="ot">=</span><span class="va">note</span><span class="co">, </span><span class="at">fillcolor</span><span class="ot">=</span><span class="st">"#FFF3CD"</span><span class="co">, </span><span class="at">color</span><span class="ot">=</span><span class="st">"#E0B800"</span><span class="co">, </span><span class="at">fontcolor</span><span class="ot">=</span><span class="st">"#3B2F00"</span><span class="ot">]</span></span>
+<span id="cb9-24"><a></a><span class="co">  </span><span class="va">threeway</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">note</span><span class="co"> </span><span class="ot">[</span><span class="at">style</span><span class="ot">=</span><span class="va">dotted</span><span class="co">, </span><span class="at">color</span><span class="ot">=</span><span class="st">"#888"</span><span class="ot">]</span></span>
+<span id="cb9-25"><a></a><span class="ot">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 360.00 249.57" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(0.713871 0.713871) rotate(0) translate(4 345.6)">
+<title>F_Tests</title>
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-345.6 500.29,-345.6 500.29,4 -4,4"></polygon>
+<!-- oneway -->
+<g id="node1" class="node">
+<title>oneway</title>
+<path fill="white" stroke="white" d="M350.04,-341.8C350.04,-341.8 245.99,-341.8 245.99,-341.8 239.99,-341.8 233.99,-335.8 233.99,-329.8 233.99,-329.8 233.99,-295 233.99,-295 233.99,-289 239.99,-283 245.99,-283 245.99,-283 350.04,-283 350.04,-283 356.04,-283 362.04,-289 362.04,-295 362.04,-295 362.04,-329.8 362.04,-329.8 362.04,-335.8 356.04,-341.8 350.04,-341.8"></path>
+<text text-anchor="middle" x="298.02" y="-325" font-family="Helvetica,sans-Serif" font-size="14.00">1-Way ANOVA</text>
+<text text-anchor="middle" x="298.02" y="-308.2" font-family="Helvetica,sans-Serif" font-size="14.00">→ 1 F-test</text>
+<text text-anchor="middle" x="298.02" y="-291.4" font-family="Helvetica,sans-Serif" font-size="14.00">(Main Effect Only)</text>
+</g>
+<!-- twoway -->
+<g id="node2" class="node">
+<title>twoway</title>
+<path fill="white" stroke="white" d="M389.55,-247.4C389.55,-247.4 206.48,-247.4 206.48,-247.4 200.48,-247.4 194.48,-241.4 194.48,-235.4 194.48,-235.4 194.48,-200.6 194.48,-200.6 194.48,-194.6 200.48,-188.6 206.48,-188.6 206.48,-188.6 389.55,-188.6 389.55,-188.6 395.55,-188.6 401.55,-194.6 401.55,-200.6 401.55,-200.6 401.55,-235.4 401.55,-235.4 401.55,-241.4 395.55,-247.4 389.55,-247.4"></path>
+<text text-anchor="middle" x="298.02" y="-230.6" font-family="Helvetica,sans-Serif" font-size="14.00">2-Way ANOVA (2×2)</text>
+<text text-anchor="middle" x="298.02" y="-213.8" font-family="Helvetica,sans-Serif" font-size="14.00">→ 3 F-tests</text>
+<text text-anchor="middle" x="298.02" y="-197" font-family="Helvetica,sans-Serif" font-size="14.00">(2 Main Effects + 1 Interaction)</text>
+</g>
+<!-- oneway&#45;&gt;twoway -->
+<g id="edge1" class="edge">
+<title>oneway-&gt;twoway</title>
+<path fill="none" stroke="black" d="M298.02,-283.17C298.02,-275.1 298.02,-266.16 298.02,-257.58"></path>
+<polygon fill="black" stroke="black" points="301.52,-257.37 298.02,-247.37 294.52,-257.37 301.52,-257.37"></polygon>
+</g>
+<!-- threeway -->
+<g id="node3" class="node">
+<title>threeway</title>
+<path fill="white" stroke="white" d="M411.47,-153C411.47,-153 184.56,-153 184.56,-153 178.56,-153 172.56,-147 172.56,-141 172.56,-141 172.56,-106.2 172.56,-106.2 172.56,-100.2 178.56,-94.2 184.56,-94.2 184.56,-94.2 411.47,-94.2 411.47,-94.2 417.47,-94.2 423.47,-100.2 423.47,-106.2 423.47,-106.2 423.47,-141 423.47,-141 423.47,-147 417.47,-153 411.47,-153"></path>
+<text text-anchor="middle" x="298.02" y="-136.2" font-family="Helvetica,sans-Serif" font-size="14.00">3-Way ANOVA (2×2×2)</text>
+<text text-anchor="middle" x="298.02" y="-119.4" font-family="Helvetica,sans-Serif" font-size="14.00">→ 7 F-tests</text>
+<text text-anchor="middle" x="298.02" y="-102.6" font-family="Helvetica,sans-Serif" font-size="14.00">(3 Main + 3 Two-Way + 1 Three-Way)</text>
+</g>
+<!-- twoway&#45;&gt;threeway -->
+<g id="edge2" class="edge">
+<title>twoway-&gt;threeway</title>
+<path fill="none" stroke="black" d="M298.02,-188.77C298.02,-180.7 298.02,-171.76 298.02,-163.18"></path>
+<polygon fill="black" stroke="black" points="301.52,-162.97 298.02,-152.97 294.52,-162.97 301.52,-162.97"></polygon>
+</g>
+<!-- fourway -->
+<g id="node4" class="node">
+<title>fourway</title>
+<path fill="white" stroke="white" d="M328.05,-58.6C328.05,-58.6 11.98,-58.6 11.98,-58.6 5.98,-58.6 -0.02,-52.6 -0.02,-46.6 -0.02,-46.6 -0.02,-11.8 -0.02,-11.8 -0.02,-5.8 5.98,0.2 11.98,0.2 11.98,0.2 328.05,0.2 328.05,0.2 334.05,0.2 340.05,-5.8 340.05,-11.8 340.05,-11.8 340.05,-46.6 340.05,-46.6 340.05,-52.6 334.05,-58.6 328.05,-58.6"></path>
+<text text-anchor="middle" x="170.02" y="-41.8" font-family="Helvetica,sans-Serif" font-size="14.00">4-Way ANOVA (2×2×2×2)</text>
+<text text-anchor="middle" x="170.02" y="-25" font-family="Helvetica,sans-Serif" font-size="14.00">→ 15 F-tests</text>
+<text text-anchor="middle" x="170.02" y="-8.2" font-family="Helvetica,sans-Serif" font-size="14.00">(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)</text>
+</g>
+<!-- threeway&#45;&gt;fourway -->
+<g id="edge3" class="edge">
+<title>threeway-&gt;fourway</title>
+<path fill="none" stroke="black" d="M258.92,-94.37C245.89,-84.97 231.23,-74.39 217.62,-64.57"></path>
+<polygon fill="black" stroke="black" points="219.47,-61.59 209.32,-58.57 215.38,-67.26 219.47,-61.59"></polygon>
+</g>
+<!-- note -->
+<g id="node5" class="node">
+<title>note</title>
+<polygon fill="#fff3cd" stroke="#e0b800" points="490.07,-58.6 357.96,-58.6 357.96,0.2 496.07,0.2 496.07,-52.6 490.07,-58.6"></polygon>
+<polyline fill="none" stroke="#e0b800" points="490.07,-58.6 490.07,-52.6 "></polyline>
+<polyline fill="none" stroke="#e0b800" points="496.07,-52.6 490.07,-52.6 "></polyline>
+<text text-anchor="middle" x="427.02" y="-41.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#3b2f00">General Formula:</text>
+<text text-anchor="middle" x="427.02" y="-25" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#3b2f00">F = 2ⁿ - 1</text>
+<text text-anchor="middle" x="427.02" y="-8.2" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#3b2f00">(where n = # of IVs)</text>
+</g>
+<!-- threeway&#45;&gt;note -->
+<g id="edge4" class="edge">
+<title>threeway-&gt;note</title>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M337.42,-94.37C350.55,-84.97 365.33,-74.39 379.03,-64.57"></path>
+<polygon fill="#000000" stroke="#000000" points="381.32,-67.24 387.41,-58.57 377.24,-61.55 381.32,-67.24"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-results" class="slide level2">
+<h2>Interpreting Results</h2>
+<h3 id="anova-table">ANOVA Table</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb10-2"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-3"><a></a><span class="fu">library</span>(afex)</span>
+<span id="cb10-4"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb10-5"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb10-6"><a></a><span class="fu">library</span>(forcats)</span>
+<span id="cb10-7"><a></a></span>
+<span id="cb10-8"><a></a>twoway <span class="ot">&lt;-</span> </span>
+<span id="cb10-9"><a></a>  <span class="fu">tibble</span>(</span>
+<span id="cb10-10"><a></a>    <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
+<span id="cb10-11"><a></a>    <span class="at">gender =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-12"><a></a>    <span class="at">education_level =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>, <span class="st">"PhD"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-13"><a></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-15"><a></a>    <span class="co"># assign numeric values for education level</span></span>
+<span id="cb10-16"><a></a>    <span class="at">edu_num =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-17"><a></a>      education_level <span class="sc">==</span> <span class="st">"High School"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-18"><a></a>      education_level <span class="sc">==</span> <span class="st">"Bachelor's"</span>  <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-19"><a></a>      education_level <span class="sc">==</span> <span class="st">"Master's"</span>    <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb10-20"><a></a>      education_level <span class="sc">==</span> <span class="st">"PhD"</span>         <span class="sc">~</span> <span class="dv">4</span></span>
+<span id="cb10-21"><a></a>    ),</span>
+<span id="cb10-22"><a></a>    <span class="co"># introduce a systematic difference based on gender and education_level interaction</span></span>
+<span id="cb10-23"><a></a>    <span class="at">political_interest =</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb10-24"><a></a>    edu_num <span class="sc">*</span> <span class="fl">1.2</span> <span class="sc">+</span>   <span class="co"># main effect of education level</span></span>
+<span id="cb10-25"><a></a>    <span class="fu">if_else</span>(gender <span class="sc">==</span> <span class="st">"Female"</span>, </span>
+<span id="cb10-26"><a></a>            edu_num <span class="sc">*</span> <span class="fl">0.8</span>, </span>
+<span id="cb10-27"><a></a>            edu_num <span class="sc">*</span> <span class="sc">-</span><span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># interaction</span></span>
+<span id="cb10-28"><a></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># some noise</span></span>
+<span id="cb10-29"><a></a>    ) </span>
+<span id="cb10-30"><a></a></span>
+<span id="cb10-31"><a></a><span class="co"># Run factorial ANOVA</span></span>
+<span id="cb10-32"><a></a><span class="fu">aov_ez</span>(</span>
+<span id="cb10-33"><a></a>  <span class="st">"id"</span>,</span>
+<span id="cb10-34"><a></a>  <span class="st">"political_interest"</span>,</span>
+<span id="cb10-35"><a></a>  twoway,</span>
+<span id="cb10-36"><a></a>  <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"gender"</span>,<span class="st">"education_level"</span>),</span>
+<span id="cb10-37"><a></a>  <span class="at">return =</span> <span class="st">"aov"</span></span>
+<span id="cb10-38"><a></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-39"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-40"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-41"><a></a>    <span class="at">p.value =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> .<span class="dv">001</span>, <span class="st">"&lt;.001"</span>,p.value),</span>
+<span id="cb10-42"><a></a>    <span class="at">statistic =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(statistic),<span class="st">"--"</span>,statistic <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)),</span>
+<span id="cb10-43"><a></a>    <span class="at">p.value =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(p.value),<span class="st">"--"</span>,p.value)</span>
+<span id="cb10-44"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb10-45"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb10-46"><a></a>    <span class="at">Source =</span> term,</span>
+<span id="cb10-47"><a></a>    <span class="at">SS =</span> sumsq,</span>
+<span id="cb10-48"><a></a>    <span class="at">MS =</span> meansq,</span>
+<span id="cb10-49"><a></a>    <span class="st">`</span><span class="at">F</span><span class="st">`</span> <span class="ot">=</span> statistic,</span>
+<span id="cb10-50"><a></a>    <span class="at">p =</span> p.value</span>
+<span id="cb10-51"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb10-52"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-53"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-54"><a></a>  <span class="fu">tab_footnote</span>(<span class="at">footnote =</span> <span class="fu">md</span>(<span class="st">"*Dependent Variable: Political Interest*&lt;br&gt;</span></span>
+<span id="cb10-55"><a></a><span class="st">                             *Gende*: Male, Female*&lt;br&gt;</span></span>
+<span id="cb10-56"><a></a><span class="st">                             *Education*: High School, Bachelor's, Master's, PhD*"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-57"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb10-58"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb10-59"><a></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb10-60"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb10-61"><a></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-62"><a></a>  <span class="fu">cols_align</span>(<span class="at">align=</span><span class="st">"center"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-63"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb10-64"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">75</span>),</span>
+<span id="cb10-65"><a></a>    <span class="at">table.font.size =</span> <span class="dv">30</span></span>
+<span id="cb10-66"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="owcigidbvz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#owcigidbvz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#owcigidbvz thead, #owcigidbvz tbody, #owcigidbvz tfoot, #owcigidbvz tr, #owcigidbvz td, #owcigidbvz th {
+  border-style: none;
+}
+
+#owcigidbvz p {
+  margin: 0;
+  padding: 0;
+}
+
+#owcigidbvz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 75%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#owcigidbvz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#owcigidbvz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#owcigidbvz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#owcigidbvz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#owcigidbvz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#owcigidbvz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#owcigidbvz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#owcigidbvz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#owcigidbvz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#owcigidbvz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#owcigidbvz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#owcigidbvz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#owcigidbvz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#owcigidbvz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#owcigidbvz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#owcigidbvz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#owcigidbvz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#owcigidbvz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#owcigidbvz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#owcigidbvz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#owcigidbvz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#owcigidbvz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#owcigidbvz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#owcigidbvz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#owcigidbvz .gt_left {
+  text-align: left;
+}
+
+#owcigidbvz .gt_center {
+  text-align: center;
+}
+
+#owcigidbvz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#owcigidbvz .gt_font_normal {
+  font-weight: normal;
+}
+
+#owcigidbvz .gt_font_bold {
+  font-weight: bold;
+}
+
+#owcigidbvz .gt_font_italic {
+  font-style: italic;
+}
+
+#owcigidbvz .gt_super {
+  font-size: 65%;
+}
+
+#owcigidbvz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#owcigidbvz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#owcigidbvz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#owcigidbvz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#owcigidbvz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#owcigidbvz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#owcigidbvz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#owcigidbvz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#owcigidbvz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" style="width:100%;" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Source</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">SS</th>
+<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">MS</th>
+<th id="F" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">F</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="Source">gender</td>
+<td class="gt_row gt_center" headers="df"> 1&nbsp;</td>
+<td class="gt_row gt_center" headers="SS">216.57 </td>
+<td class="gt_row gt_center" headers="MS">216.57 </td>
+<td class="gt_row gt_center" headers="F">244.15</td>
+<td class="gt_row gt_center" headers="p">&lt;.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center gt_striped" headers="Source">education_level</td>
+<td class="gt_row gt_center gt_striped" headers="df"> 3&nbsp;</td>
+<td class="gt_row gt_center gt_striped" headers="SS">198.312</td>
+<td class="gt_row gt_center gt_striped" headers="MS"> 66.104</td>
+<td class="gt_row gt_center gt_striped" headers="F">74.52</td>
+<td class="gt_row gt_center gt_striped" headers="p">&lt;.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="Source">gender:education_level</td>
+<td class="gt_row gt_center" headers="df"> 3&nbsp;</td>
+<td class="gt_row gt_center" headers="SS"> 23.648</td>
+<td class="gt_row gt_center" headers="MS">  7.883</td>
+<td class="gt_row gt_center" headers="F">8.89</td>
+<td class="gt_row gt_center" headers="p">&lt;.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center gt_striped" headers="Source">Residuals</td>
+<td class="gt_row gt_center gt_striped" headers="df">92&nbsp;</td>
+<td class="gt_row gt_center gt_striped" headers="SS"> 81.608</td>
+<td class="gt_row gt_center gt_striped" headers="MS">  0.887</td>
+<td class="gt_row gt_center gt_striped" headers="F">--</td>
+<td class="gt_row gt_center gt_striped" headers="p">--</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="6" class="gt_footnote"><em>Dependent Variable: Political Interest</em><br> <em>Gende</em>: Male, Female<em><br> </em>Education<em>: High School, Bachelor’s, Master’s, PhD</em></td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><span class="math inline">\(F(1,92) = 244.15, p &lt;.001\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F(3,92) = 74.52, p &lt;.001\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F(3,92) = 8.89, p&lt;.001\)</span></p></li>
+</ul>
+</section>
+<section id="interpreting-fs" class="slide level2">
+<h2>Interpreting F’s</h2>
+<h3 id="visually">Visually</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>twoway<span class="sc">$</span>education_level <span class="ot">&lt;-</span> <span class="fu">factor</span>(twoway<span class="sc">$</span>education_level, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"High School"</span>,<span class="st">"Bachelors"</span>,<span class="st">"Masters"</span>,<span class="st">"PhD"</span>),<span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a></a></span>
+<span id="cb11-3"><a></a>twoway <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(education_level, political_interest,<span class="at">color =</span> gender, <span class="at">group =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb11-5"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"line"</span>) <span class="sc">+</span> </span>
+<span id="cb11-7"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb11-8"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb11-9"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Political Interest</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13fct_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec13fct_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-the-fs" class="slide level2">
+<h2>Interpreting the F’s</h2>
+<h3 id="weight-loss-and-exercise-regimen-and-diet-type">Weight Loss and Exercise Regimen and Diet Type</h3>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Table</a></li><li><a href="#tabset-1-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a><span class="co"># Create a balanced design</span></span>
+<span id="cb12-4"><a></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb12-5"><a></a>  <span class="at">diet_type =</span> <span class="fu">c</span>(<span class="st">"Low Carb"</span>, <span class="st">"Low Fat"</span>),</span>
+<span id="cb12-6"><a></a>  <span class="at">exercise_regimen =</span> <span class="fu">c</span>(<span class="st">"Cardio"</span>, <span class="st">"Strength"</span>),</span>
+<span id="cb12-7"><a></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span></span>
+<span id="cb12-8"><a></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-10"><a></a>    <span class="co"># simulate main effects: both diet and exercise influence weight loss</span></span>
+<span id="cb12-11"><a></a>    <span class="at">weight_loss =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-12"><a></a>      diet_type <span class="sc">==</span> <span class="st">"Low Carb"</span> <span class="sc">~</span> <span class="dv">6</span>,</span>
+<span id="cb12-13"><a></a>      diet_type <span class="sc">==</span> <span class="st">"Low Fat"</span> <span class="sc">~</span> <span class="dv">4</span></span>
+<span id="cb12-14"><a></a>    ) <span class="sc">+</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-15"><a></a>      exercise_regimen <span class="sc">==</span> <span class="st">"Cardio"</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb12-16"><a></a>      exercise_regimen <span class="sc">==</span> <span class="st">"Strength"</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb12-17"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb12-18"><a></a>    <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)  <span class="co"># add some noise</span></span>
+<span id="cb12-19"><a></a>  )</span>
+<span id="cb12-20"><a></a></span>
+<span id="cb12-21"><a></a><span class="co"># Run the two-way ANOVA</span></span>
+<span id="cb12-22"><a></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight_loss <span class="sc">~</span> diet_type <span class="sc">*</span> exercise_regimen, <span class="at">data =</span> df)</span>
+<span id="cb12-23"><a></a>anova_result <span class="sc">|&gt;</span> </span>
+<span id="cb12-24"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-25"><a></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-26"><a></a>    <span class="at">p.value =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> .<span class="dv">001</span>, <span class="st">"&lt;.001"</span>,p.value <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)),</span>
+<span id="cb12-27"><a></a>    <span class="at">statistic =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(statistic),<span class="st">"--"</span>,statistic <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)),</span>
+<span id="cb12-28"><a></a>    <span class="at">p.value =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(p.value),<span class="st">"--"</span>,p.value)</span>
+<span id="cb12-29"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb12-30"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb12-31"><a></a>    <span class="at">Source =</span> term,</span>
+<span id="cb12-32"><a></a>    <span class="at">SS =</span> sumsq,</span>
+<span id="cb12-33"><a></a>    <span class="at">MS =</span> meansq,</span>
+<span id="cb12-34"><a></a>    <span class="st">`</span><span class="at">F</span><span class="st">`</span> <span class="ot">=</span> statistic,</span>
+<span id="cb12-35"><a></a>    <span class="at">p =</span> p.value</span>
+<span id="cb12-36"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb12-37"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-38"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-39"><a></a>  <span class="fu">tab_footnote</span>(<span class="at">footnote =</span> <span class="fu">md</span>(<span class="st">"*Dependent Variable: Weight Loss*&lt;br&gt;</span></span>
+<span id="cb12-40"><a></a><span class="st">                             *Exercise Regimen: Cardio, Strength*&lt;br&gt;</span></span>
+<span id="cb12-41"><a></a><span class="st">                             *Diet Type: Low Carb, Low Fat*"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-42"><a></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb12-43"><a></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-44"><a></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb12-45"><a></a>  )  <span class="sc">|&gt;</span> </span>
+<span id="cb12-46"><a></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb12-47"><a></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">75</span>),</span>
+<span id="cb12-48"><a></a>    <span class="at">table.font.size =</span> <span class="dv">30</span></span>
+<span id="cb12-49"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="xbyknbbjyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xbyknbbjyv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xbyknbbjyv thead, #xbyknbbjyv tbody, #xbyknbbjyv tfoot, #xbyknbbjyv tr, #xbyknbbjyv td, #xbyknbbjyv th {
+  border-style: none;
+}
+
+#xbyknbbjyv p {
+  margin: 0;
+  padding: 0;
+}
+
+#xbyknbbjyv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 75%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xbyknbbjyv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xbyknbbjyv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xbyknbbjyv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xbyknbbjyv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xbyknbbjyv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xbyknbbjyv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xbyknbbjyv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xbyknbbjyv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xbyknbbjyv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xbyknbbjyv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xbyknbbjyv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xbyknbbjyv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xbyknbbjyv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xbyknbbjyv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xbyknbbjyv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xbyknbbjyv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xbyknbbjyv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xbyknbbjyv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xbyknbbjyv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xbyknbbjyv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xbyknbbjyv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xbyknbbjyv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xbyknbbjyv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xbyknbbjyv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xbyknbbjyv .gt_left {
+  text-align: left;
+}
+
+#xbyknbbjyv .gt_center {
+  text-align: center;
+}
+
+#xbyknbbjyv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xbyknbbjyv .gt_font_normal {
+  font-weight: normal;
+}
+
+#xbyknbbjyv .gt_font_bold {
+  font-weight: bold;
+}
+
+#xbyknbbjyv .gt_font_italic {
+  font-style: italic;
+}
+
+#xbyknbbjyv .gt_super {
+  font-size: 65%;
+}
+
+#xbyknbbjyv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xbyknbbjyv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xbyknbbjyv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xbyknbbjyv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xbyknbbjyv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xbyknbbjyv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xbyknbbjyv .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xbyknbbjyv .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xbyknbbjyv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" style="width:100%;" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Source</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">SS</th>
+<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">MS</th>
+<th id="F" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">F</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Source">diet_type</td>
+<td class="gt_row gt_right" headers="df"> 1&nbsp;</td>
+<td class="gt_row gt_right" headers="SS">101.266</td>
+<td class="gt_row gt_right" headers="MS">101.266</td>
+<td class="gt_row gt_right" headers="F">41.9</td>
+<td class="gt_row gt_left" headers="p">&lt;.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Source">exercise_regimen</td>
+<td class="gt_row gt_right" headers="df"> 1&nbsp;</td>
+<td class="gt_row gt_right" headers="SS">114.057</td>
+<td class="gt_row gt_right" headers="MS">114.057</td>
+<td class="gt_row gt_right" headers="F">47.19</td>
+<td class="gt_row gt_left" headers="p">&lt;.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Source">diet_type:exercise_regimen</td>
+<td class="gt_row gt_right" headers="df"> 1&nbsp;</td>
+<td class="gt_row gt_right" headers="SS">  9.066</td>
+<td class="gt_row gt_right" headers="MS">  9.066</td>
+<td class="gt_row gt_right" headers="F">3.75</td>
+<td class="gt_row gt_left" headers="p">0.06</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Source">Residuals</td>
+<td class="gt_row gt_right" headers="df">96&nbsp;</td>
+<td class="gt_row gt_right" headers="SS">232.023</td>
+<td class="gt_row gt_right" headers="MS">  2.417</td>
+<td class="gt_row gt_right" headers="F">--</td>
+<td class="gt_row gt_left" headers="p">--</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="6" class="gt_footnote"><em>Dependent Variable: Weight Loss</em><br> <em>Exercise Regimen: Cardio, Strength</em><br> <em>Diet Type: Low Carb, Low Fat</em></td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(diet_type, weight_loss,<span class="at">color =</span> exercise_regimen, <span class="at">group =</span> exercise_regimen)) <span class="sc">+</span> </span>
+<span id="cb13-3"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"line"</span>) <span class="sc">+</span> </span>
+<span id="cb13-6"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb13-7"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb13-8"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Weight Loss</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec13fct_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec13fct_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-the-fs-in-2-way-anova" class="slide level2">
+<h2>Interpreting the Fs in 2-way ANOVA</h2>
+<ul>
+<li class="fragment"><p>F<sub>A</sub> (1,96) = 41.9, p &lt; .001</p></li>
+<li class="fragment"><p>F<sub>B</sub> (1,96) = 47.19, p &lt; .001</p></li>
+<li class="fragment"><p>F<sub>AB</sub> (1,96) = 3.75, p = <em>ns</em></p></li>
+</ul>
+</section>
+<section id="interpreting-the-fs-in-2-way-anova-1" class="slide level2">
+<h2>Interpreting the Fs in 2-way ANOVA</h2>
+<ul>
+<li class="fragment"><p>F<sub>A</sub> = Diet Type</p></li>
+<li class="fragment"><p>F<sub>B</sub> = Exercise Regimen</p></li>
+<li class="fragment"><p>F<sub>AB</sub> = Diet Type x Exercise Regimen</p></li>
+</ul>
+</section>
+<section id="calculating-2-way-anova-anova" class="slide level2">
+<h2>Calculating 2-way ANOVA anova</h2>
+<ul>
+<li class="fragment"><p><span class="math inline">\(F = \frac{MS_{BG_{1}}}{MS{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F = \frac{MS_{BG_{1}}}{MS{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F = \frac{MS_{Interaction}}{MS{Error}}\)</span></p></li>
+<li class="fragment"><p>*All MS are divided by <span class="math inline">\(MS_{Error}\)</span></p></li>
+</ul>
+</section>
+<section id="reporting-f" class="slide level2">
+<h2>Reporting F</h2>
+</section>
+<section id="reporting-f-1" class="slide level2">
+<h2>Reporting F</h2>
+<p>If asked to report findings in terms of the Null Hypothesis (H<sub>0</sub>), you should report findings as:</p>
+<ul>
+<li class="fragment"><p>Reject H<sub>0</sub>, or</p></li>
+<li class="fragment"><p>Fail to Reject H<sub>0</sub></p></li>
+</ul>
+</section>
+<section id="reporting-f-2" class="slide level2">
+<h2>Reporting F</h2>
+<p>If asked to report findings in general or for publication, you need <strong>EACH</strong> F-value:</p>
+<ul>
+<li class="fragment"><p>F<em>(df<sub>BG</sub>, df<sub>W</sub> )</em></p>
+<ul>
+<li class="fragment"><p>= F-value</p>
+<ul>
+<li class="fragment"><p>Corresponding p-value</p>
+<ul>
+<li class="fragment"><em>For significant results: Means and standard deviations of each group</em></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="reporting-f-3" class="slide level2">
+<h2>Reporting F</h2>
+<blockquote>
+<p>The group that watched Dark (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched Jeopardy (M=6.12, s=0.98), <em>F(1,496) = 7.12, p &lt; 0.05</em>.</p>
+</blockquote>
+</section>
+<section id="reporting-f-4" class="slide level2">
+<h2>Reporting F</h2>
+<p>Results IV<sub>1</sub>:</p>
+<div class="fragment">
+<blockquote>
+<p><strong>If significant</strong>: The group that watched TV (M=8.43, s=1.02) reported significantly more happiness compared to their peers in the control group who watched No TV (M=6.12, s=0.98), <em>F (1, 496) = 7.12, p &lt; 0.05</em>.</p>
+</blockquote>
+</div>
+<div class="fragment">
+<blockquote>
+<p><strong>If NOT significant</strong>: There was not a significant difference in happiness between the groups, F (1, 498) = 1.02, p = 0.07.</p>
+</blockquote>
+</div>
+</section>
+<section id="reporting-f-5" class="slide level2">
+<h2>Reporting F</h2>
+<p>Results IV<sub>2</sub>:</p>
+<blockquote>
+<p><strong>If significant</strong>: The group that drank coffee (M=7.35, s=1.01) reported significantly more happiness compared to their peers in the control group who drank decaf (M=4.21, s=0.99), <em>F (1, 496) = 9.12, p &lt; 0.05</em>.</p>
+</blockquote>
+<blockquote>
+<p><strong>If NOT significant</strong>: There was not a significant difference in happiness between the groups, <em>F (1, 498) = 1.02, p = 0.07</em>.</p>
+</blockquote>
+</section>
+<section id="reporting-f-6" class="slide level2">
+<h2>Reporting F</h2>
+<p>Results Interaction:</p>
+<blockquote>
+<p><strong>If significant</strong>: The group that drank coffee AND watched TV (M=7.35, s=1.01) reported significantly more happiness compared to the other groups (M=4.21, s=0.99), F <em>(1, 496) = 11.14, p &lt; 0.05.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>If NOT significant</strong>: There was not a significant difference in happiness between the groups, <em>F (1, 498) = 1.02, p = 0.07</em>.</p>
+</blockquote>
+</section>
+<section id="factorial-anova-wrap-up" class="slide level2">
+<h2>Factorial ANOVA Wrap-Up</h2>
+<h3 id="connecting-the-dots">Connecting the Dots</h3>
+<ul>
+<li class="fragment"><p><strong>Big Picture:</strong></p>
+<ul>
+<li class="fragment"><p>A factorial ANOVA lets us test <strong>multiple independent variables</strong> at once</p>
+<ul>
+<li class="fragment">Not just whether each matters, but <em>whether they matter together.</em></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="understanding-interactions" class="slide level2">
+<h2>Understanding Interactions</h2>
+</section>
+<section id="what-it-tests" class="slide level2">
+<h2>What It Tests</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 31%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Source</th>
+<th style="text-align: left;">Question</th>
+<th style="text-align: left;">Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Main Effect A</strong></td>
+<td style="text-align: left;">Does IV1 (e.g., Coffee) affect the DV on average?</td>
+<td style="text-align: left;">“Coffee drinkers happier?”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Main Effect B</strong></td>
+<td style="text-align: left;">Does IV2 (e.g., TV Show) affect the DV on average?</td>
+<td style="text-align: left;">“TV watchers happier?”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Interaction (A × B)</strong></td>
+<td style="text-align: left;">Does the effect of Coffee <em>depend</em> on watching Dark?</td>
+<td style="text-align: left;">“Coffee only helps if watching TV?”</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

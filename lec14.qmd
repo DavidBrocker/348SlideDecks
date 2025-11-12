@@ -12,22 +12,14 @@ format:
     mermaid: 
       theme: dark
     scrollable: true
+    width: 1600
+    height: 900
     incremental: true   
     touch: true
     chalkboard: true
     lightbox: true
     code-fold: true
 ---
-
-## What is ANOVA?
-
-ANOVA (Analysis of Variance), like t-tests, compares the means of different groups to determine if they differ significantly from one another:
-
--   **Independent variable**: Categorical / Nominal
-
--   **Dependent variable**: Continuous
-
-------------------------------------------------------------------------
 
 # When to Use Repeated Measures ANOVA
 
@@ -37,25 +29,23 @@ Use Repeated Measures ANOVA when:
 
 -   You're interested in **changes over time** or **under different conditions**.
 
--   Example: Testing whether students' enjoyment of statistics improves after receiving lollipops for 2 weeks.
-
-------------------------------------------------------------------------
+    -   Testing whether students' enjoyment of statistics improves after receiving lollipops for 2 weeks.
 
 # Between vs. Within Subjects ANOVA
 
-**Between-Subjects ANOVA:**
+-   **Between-Subjects ANOVA:**
 
--   Compares means **between groups** (e.g., Group A vs. Group B).
+    -   Compares means **between groups** (e.g., Group A vs. Group B).
 
--   Error comes from individual differences **between people**.
+    -   Error comes from individual differences **between people**.
 
-**Within-Subjects (Repeated Measures) ANOVA:**
+-   **Within-Subjects (Repeated Measures) ANOVA:**
 
--   Compares means **within the same participants** over time.
+    -   Compares means **within the same participants** over time.
 
--   Controls for individual differences.
+    -   Controls for individual differences.
 
-# 🍕 Pizza and Productivity Study
+# Pizza and Productivity Study
 
 ## A Repeated-Measures Design
 
@@ -68,7 +58,7 @@ Use Repeated Measures ANOVA when:
 
 > What type of test compares means across more than two repeated timepoints?
 
-# 📊 Visualizing the Data
+# Visualizing the Data
 
 ```{r}
 library(tidyverse)
@@ -86,15 +76,14 @@ data <- tibble(
 
 data %>%
   ggplot(aes(x = time, y = productivity, group = id)) +
+  geom_point() +
   geom_line(alpha = 0.3) +
   stat_summary(aes(group = 1), fun = mean, geom = "line", color = "red", size = 1.5) +
   labs(title = "Individual and Mean Productivity Over Time") +
   theme_minimal()
 ```
 
-------------------------------------------------------------------------
-
-# 🧪 Why Repeated-Measures ANOVA?
+## Why Repeated-Measures ANOVA?
 
 -   Can't use multiple paired-samples t-tests (increases Type I error)
 -   Repeated-Measures ANOVA allows us to:
@@ -102,9 +91,7 @@ data %>%
     -   Control for individual variability
     -   Test for an overall **time effect**
 
-------------------------------------------------------------------------
-
-# 📐 Assumptions of RM ANOVA
+## Assumptions of RM ANOVA
 
 -   **Normality** of differences
 -   **Sphericity**: Equal variances of pairwise differences
@@ -113,13 +100,7 @@ data %>%
 
 > Always check sphericity if more than two levels of the within-subject factor
 
-------------------------------------------------------------------------
-
-# 🧮 Running the Analysis in R
-
-------------------------------------------------------------------------
-
-# ✅ Interpretation
+## Interpretation
 
 **Example output:**
 
@@ -130,17 +111,15 @@ data %>%
 
 > What would be your next step?
 
-------------------------------------------------------------------------
+## Follow-Up
 
-# 🔍 Follow-Up: Post-hoc Comparisons
+### Post-hoc Comparisons
 
 -   Run paired t-tests with **Bonferroni correction**
 -   Which timepoints differ?
     -   Pre vs. 10minPost
     -   10minPost vs. 1hrPost
     -   Pre vs. 1hrPost
-
-------------------------------------------------------------------------
 
 ## ANOVA
 
@@ -166,7 +145,7 @@ The independent variable is time.
 
 -   Within subjects ANOVA can look at 2 or more time points.
 
-## WITHIN Subjects ANOVA
+## Within Subjects ANOVA
 
 ```{r}
 library(ggplot2)
@@ -225,7 +204,7 @@ In between subjects ANOVA, we analyze two types of variance:
 
 -   **Error variance**: How the data varies across all participants
 
-## WITHIN subjects ANOVA
+## Within Subjects ANOVA
 
 In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
 
@@ -235,15 +214,15 @@ In within subjects ANOVA the variance is more complicated, because data will dif
 
 -   Per participant
 
-## WITHIN subjects ANOVA Example
+## Within Subjects  ANOVA Example
 
 -   In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
 
 -   **Over time**: Mood before Dark is more similar to mood before Dark than it is to mood after the Dark
 
-## WITHIN subjects ANOVA
+## Within Subjects ANOVA
 
-## WITHIN subjects ANOVA Example
+## Within Subjects ANOVA Example
 
 In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
 
@@ -251,9 +230,9 @@ In within subjects ANOVA the variance is more complicated, because data will dif
 
 -   **Error Variance**: Mood will have natural variance across participants and time.
 
-## WITHIN subjects ANOVA Example
+## Within Subjects ANOVA Example
 
-## WITHIN subjects ANOVA Example
+## Within Subjects ANOVA Example
 
 In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
 
@@ -263,9 +242,9 @@ In within subjects ANOVA the variance is more complicated, because data will dif
 
 -   **Per participant**: Each participant's scores will be more like their other scores than they are like the scores of another participant.
 
-## WITHIN subjects ANOVA Example
+## Within Subjects ANOVA Example
 
-## WITHIN subjects ANOVA
+## Within Subjects ANOVA
 
 In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
 
@@ -275,7 +254,7 @@ In within subjects ANOVA the variance is more complicated, because data will dif
 
 -   Subjects
 
-## WITHIN subjects ANOVA
+## Within Subjects ANOVA
 
 ```{mermaid}
 
@@ -287,31 +266,29 @@ flowchart LR
 
 ```
 
-# Calculating F
-
-## WITHIN subjects ANOVA
+## Within Subjects  ANOVA
 
 What is the F ratio in between subjects ANOVA?
 
-$F = \frac{MS_{BG}}{MS_{Error}}$
+-   $F = \frac{MS_{BG}}{MS_{Error}}$
 
-## WITHIN subjects ANOVA
-
-What is the F ratio in between subjects ANOVA?
-
-$F = \frac{\color{red}{MS_{BG}}}{MS_{Error}}$
-
-$MS_{BG} = \frac{SS_{BG}}{df_{BG}}$
-
-## WITHIN subjects ANOVA
+## Within Subjects  ANOVA
 
 What is the F ratio in between subjects ANOVA?
 
-$F = \frac{MS_{BG}}{\color{red}{MS_{Error}}}$
+-   $F = \frac{\color{red}{MS_{BG}}}{MS_{Error}}$
 
-$MS_{Error} = \frac{SS_{Error}}{df_{Error}}$
+-   $MS_{BG} = \frac{SS_{BG}}{df_{BG}}$
 
-## WITHIN subjects ANOVA
+## Within Subjects  ANOVA
+
+What is the F ratio in between subjects ANOVA?
+
+-   $F = \frac{MS_{BG}}{\color{red}{MS_{Error}}}$
+
+-   $MS_{Error} = \frac{SS_{Error}}{df_{Error}}$
+
+## Within Subjects ANOVA
 
 We want measure 2 sources of variance:
 
@@ -319,17 +296,15 @@ We want measure 2 sources of variance:
 
 -   $SS_{Error}$: this is harder to calculate in within subjects ANOVA, because of the subject variance.
 
-## WITHIN subjects ANOVA
+## Within Subjects ANOVA
 
-## WITHIN subjects ANOVA
+-   $SS_{WG} = SS_{Subjects} + SS_{Error}$
 
-$SS_{WG} = SS_{Subjects} + SS_{Error}$
+## Within Subjects ANOVA
 
-## WITHIN subjects ANOVA
+-   $SS_{WG} = SS_{Subjects} + \color{red}{SS_{Error}}$
 
-$SS_{WG} = SS_{Subjects} + \color{red}{SS_{Error}}$
-
-$SS_{Error} = SS_{WG} - SS_{Subjects}$
+-   $SS_{Error} = SS_{WG} - SS_{Subjects}$
 
 ## Calculating means squared (MS)
 
@@ -417,7 +392,7 @@ tribble(
 
 ## ANOVA
 
-Dr. Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.
+> Dr. Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.
 
 -   What's k?
 
@@ -427,7 +402,7 @@ Dr. Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers t
 
 ## ANOVA
 
-Prof. Brocker measures the death anxiety of 500 middle-aged men. He then shows them images from anti-aging advertisements featuring young men. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.
+> Prof. Brocker measures the death anxiety of 500 middle-aged men. He then shows them images from anti-aging advertisements featuring young men. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.
 
 -   What's k?
 
@@ -446,17 +421,15 @@ The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
 
 ## Interpreting f
 
-When F \<= 1, it's not likely to be significant.
+-   When F \<= 1, it's not likely to be significant.
 
-## Interpreting f
+-   The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
 
-The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
+    -   $MS_{Time} = \text{change over time} + MS_{Error}$
 
--   $MS_{Time} = \text{change over time} + MS_{Error}$
+    -   $MS_{Time} = \text{effect} + MS_{Error}$
 
--   $MS_{Time} = \text{effect} + MS_{Error}$
-
--   $F > 1$
+    -   $F > 1$
 
 ## Hypothesis testing: ANOVA
 
@@ -470,17 +443,17 @@ The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
 
     -   1 for 1 IV
 
--   Two-way Between Subjects with a 2x2 design?
-
-    -   3 (One for each IV and one for the Interaction)
-
 -   Within Subjects?
 
     -   1
 
-# Reporting F
+-   Two-way Between Subjects with a 2x2 design?
+
+    -   3 (One for each IV and one for the Interaction)
 
 ## Reporting F
+
+### Reporting F
 
 If asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:
 
@@ -522,9 +495,9 @@ If asked to report findings in general or for publication, you need to report:
 
 ## Data Manipulation
 
-When collected, data can be in either wide or long format.
+-   When collected, data can be in either wide or long format.
 
-Below are the first five rows of the same dataset:
+-   Below are the first five rows of the same dataset:
 
 ```{r}
 data.frame(
