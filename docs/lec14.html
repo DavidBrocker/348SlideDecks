@@ -192,10 +192,6 @@
       margin-right: 0; 
     }
   </style>
-  <meta name="mermaid-theme" content="dark">
-  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -234,7 +230,7 @@ Dave Brocker
 <ul>
 <li class="fragment"><p><strong>Between-Subjects ANOVA:</strong></p>
 <ul>
-<li class="fragment"><p>Compares means <strong>between groups</strong> (e.g., Group A vs.&nbsp;Group B).</p></li>
+<li class="fragment"><p>Compares means <strong>between groups</strong> (e.g., Group A vs.&nbsp;Group B vs.&nbsp;Group C).</p></li>
 <li class="fragment"><p>Error comes from individual differences <strong>between people</strong>.</p></li>
 </ul></li>
 <li class="fragment"><p><strong>Within-Subjects (Repeated Measures) ANOVA:</strong></p>
@@ -253,18 +249,19 @@ Dave Brocker
 <section id="a-repeated-measures-design" class="slide level2 scrollable">
 <h2>A Repeated-Measures Design</h2>
 <ul>
-<li class="fragment">Objective: Test whether productivity changes across <strong>three timepoints</strong>:
+<li class="fragment">Objective: Test whether productivity changes over time</li>
+<li class="fragment">IV:
 <ol type="1">
 <li class="fragment">Before lunch</li>
 <li class="fragment">10 minutes after pizza</li>
 <li class="fragment">1 hour after pizza</li>
 </ol></li>
 <li class="fragment">Same participants measured at each timepoint</li>
-<li class="fragment">DV = Number of emails written in 10 minutes</li>
+<li class="fragment">DV:
+<ul>
+<li class="fragment">Number of emails written in 10 minutes</li>
+</ul></li>
 </ul>
-<blockquote>
-<p>What type of test compares means across more than two repeated timepoints?</p>
-</blockquote>
 </section></section>
 <section>
 <section id="visualizing-the-data" class="title-slide slide level1 center">
@@ -273,25 +270,37 @@ Dave Brocker
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb1-4"><a></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-5"><a></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb1-6"><a></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"10minPost"</span>, <span class="st">"1hrPost"</span>), <span class="at">times =</span> <span class="dv">30</span>),</span>
-<span id="cb1-7"><a></a>  <span class="at">productivity =</span> <span class="fu">c</span>(</span>
-<span id="cb1-8"><a></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb1-9"><a></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb1-10"><a></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">4.5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb1-11"><a></a>  )</span>
-<span id="cb1-12"><a></a>)</span>
-<span id="cb1-13"><a></a></span>
-<span id="cb1-14"><a></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb1-15"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> productivity, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb1-16"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb1-17"><a></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb1-18"><a></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb1-19"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Individual and Mean Productivity Over Time"</span>) <span class="sc">+</span></span>
-<span id="cb1-20"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a></a><span class="fu">library</span>(forcats)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-5"><a></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-6"><a></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb1-7"><a></a>  <span class="at">time =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Post10"</span>, <span class="st">"Post60"</span>), <span class="at">times =</span> <span class="dv">30</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-8"><a></a>  <span class="at">productivity =</span> <span class="fu">c</span>(</span>
+<span id="cb1-9"><a></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb1-10"><a></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb1-11"><a></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">4.5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-12"><a></a>  )</span>
+<span id="cb1-13"><a></a>)</span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">fct_inorder</span>(time), productivity, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb1-17"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-18"><a></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb1-19"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb1-20"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), </span>
+<span id="cb1-21"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb1-22"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb1-23"><a></a>    <span class="at">color =</span> <span class="st">"red"</span>, </span>
+<span id="cb1-24"><a></a>    <span class="at">lty =</span> <span class="st">"dashed"</span></span>
+<span id="cb1-25"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb1-26"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-27"><a></a>    <span class="at">title =</span> <span class="st">"Individual and Mean Productivity Over Time"</span>,</span>
+<span id="cb1-28"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Time"</span>,</span>
+<span id="cb1-29"><a></a>    <span class="at">y =</span> <span class="st">"Productivity (Emails Sent)</span><span class="sc">\n</span><span class="st">"</span></span>
+<span id="cb1-30"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb1-31"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb1-32"><a></a>  <span class="fu">theme_sub_panel</span>(<span class="at">grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -305,7 +314,10 @@ Dave Brocker
 <section id="why-repeated-measures-anova" class="slide level2">
 <h2>Why Repeated-Measures ANOVA?</h2>
 <ul>
-<li class="fragment">Can’t use multiple paired-samples t-tests (increases Type I error)</li>
+<li class="fragment">Can’t use multiple paired-samples t-tests
+<ul>
+<li class="fragment">Alpha inflation - increases Type I error</li>
+</ul></li>
 <li class="fragment">Repeated-Measures ANOVA allows us to:
 <ul>
 <li class="fragment">Compare within-subject changes across time</li>
@@ -314,31 +326,34 @@ Dave Brocker
 </ul></li>
 </ul>
 </section>
-<section id="assumptions-of-rm-anova" class="slide level2">
-<h2>Assumptions of RM ANOVA</h2>
+<section id="repeated-measures-anova" class="slide level2">
+<h2>Repeated-Measures ANOVA</h2>
+<h3 id="assumptions">Assumptions</h3>
 <ul>
 <li class="fragment"><strong>Normality</strong> of differences</li>
 <li class="fragment"><strong>Sphericity</strong>: Equal variances of pairwise differences
 <ul>
 <li class="fragment">Test: <strong>Mauchly’s Test</strong></li>
 </ul></li>
-<li class="fragment">Violation → Use <strong>Greenhouse-Geisser correction</strong></li>
-</ul>
-<blockquote>
-<p>Always check sphericity if more than two levels of the within-subject factor</p>
-</blockquote>
-</section>
-<section id="interpretation" class="slide level2">
-<h2>Interpretation</h2>
-<p><strong>Example output:</strong></p>
+<li class="fragment">If assumption is violated, use <strong>Greenhouse-Geisser correction</strong>
 <ul>
-<li class="fragment">F(2, 58) = 12.3, p &lt; .001</li>
-<li class="fragment">→ Significant effect of time on productivity</li>
+<li class="fragment">Always check sphericity if more than two levels of the within-subject factor</li>
+</ul></li>
 </ul>
-<p><strong>Conclusion</strong>: Productivity changes significantly across timepoints</p>
-<blockquote>
-<p>What would be your next step?</p>
-</blockquote>
+</section>
+<section id="repeated-measures-anova-1" class="slide level2">
+<h2>Repeated-Measures ANOVA</h2>
+<h3 id="interpretation">Interpretation</h3>
+<ul>
+<li class="fragment">F(2, 58) = 12.3, p &lt; .001
+<ul>
+<li class="fragment">Main effect of time on productivity</li>
+<li class="fragment">Productivity changes significantly across timepoints
+<ul>
+<li class="fragment">What would be your next step?</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="follow-up" class="slide level2">
 <h2>Follow-Up</h2>
@@ -347,28 +362,28 @@ Dave Brocker
 <li class="fragment">Run paired t-tests with <strong>Bonferroni correction</strong></li>
 <li class="fragment">Which timepoints differ?
 <ul>
-<li class="fragment">Pre vs.&nbsp;10minPost</li>
-<li class="fragment">10minPost vs.&nbsp;1hrPost</li>
-<li class="fragment">Pre vs.&nbsp;1hrPost</li>
+<li class="fragment">Pre vs.&nbsp;Post-10 Minutes</li>
+<li class="fragment">Post-10 Minutes vs.&nbsp;Post-60 Minutes</li>
+<li class="fragment">Pre vs.&nbsp;Post-60 Minutes</li>
 </ul></li>
 </ul>
 </section>
 <section id="anova" class="slide level2">
 <h2>ANOVA</h2>
 <ul>
-<li class="fragment"><p>Between subjects ANOVA compares means <strong>BETWEEN</strong> groups to determine if they differ significantly from one another.</p></li>
-<li class="fragment"><p>Within subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference <strong>WITHIN</strong> participants over time.</p></li>
+<li class="fragment"><p>Between subjects ANOVA compares means <strong>between</strong> groups to determine if they differ significantly from one another.</p></li>
+<li class="fragment"><p>Within subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference <strong>within</strong> participants over time.</p></li>
 </ul>
 </section>
 <section id="within-subjects-anova" class="slide level2">
-<h2>Within subjects ANOVA</h2>
+<h2>Within Subjects ANOVA</h2>
 <ul>
 <li class="fragment"><p>Within subjects ANOVA examines differences within participants over time.</p></li>
 <li class="fragment"><p>Within subjects ANOVA is also known as Repeated Measures ANOVA, because it looks at one measure repeated over time.</p></li>
 </ul>
 </section>
 <section id="within-subjects-anova-1" class="slide level2">
-<h2>Within subjects ANOVA</h2>
+<h2>Within Subjects ANOVA</h2>
 <p>The independent variable is time.</p>
 <ul>
 <li class="fragment"><p>Before intervention: baseline or pre-test</p></li>
@@ -378,7 +393,10 @@ Dave Brocker
 <section id="within-subjects-anova-2" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
 <ul>
-<li class="fragment">Within subjects ANOVA can look at 2 or more time points.</li>
+<li class="fragment">Within subjects ANOVA can look at 2 or more time points.
+<ul>
+<li class="fragment">Think about this as <strong>conditions</strong></li>
+</ul></li>
 </ul>
 </section>
 <section id="within-subjects-anova-3" class="slide level2">
@@ -436,15 +454,8 @@ Dave Brocker
 </div>
 </section>
 <section id="between-subjects-anova" class="slide level2">
-<h2>Between subjects ANOVA</h2>
+<h2>Between Subjects ANOVA</h2>
 <p>In between subjects ANOVA, we analyze two types of variance:</p>
-<ul>
-<li class="fragment"><p><strong>Between Group variance</strong>: How the data varies between the groups</p></li>
-<li class="fragment"><p><strong>Error variance</strong>: How the data varies across all participants</p></li>
-</ul>
-</section>
-<section id="between-subjects-anova-1" class="slide level2">
-<h2>Between subjects ANOVA</h2>
 <ul>
 <li class="fragment"><p><strong>Between Group variance</strong>: How the data varies between the groups</p></li>
 <li class="fragment"><p><strong>Error variance</strong>: How the data varies across all participants</p></li>
@@ -454,75 +465,124 @@ Dave Brocker
 <h2>Within Subjects ANOVA</h2>
 <p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
 <ul>
-<li class="fragment"><p>Over time</p></li>
-<li class="fragment"><p>Error variance: How the data varies across all participants</p></li>
-<li class="fragment"><p>Per participant</p></li>
-</ul>
-</section>
-<section id="within-subjects-anova-example" class="slide level2">
-<h2>Within Subjects ANOVA Example</h2>
+<li class="fragment"><p>Over time</p>
 <ul>
-<li class="fragment"><p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p></li>
-<li class="fragment"><p><strong>Over time</strong>: Mood before Dark is more similar to mood before Dark than it is to mood after the Dark</p></li>
+<li class="fragment">How the data varies across time-points</li>
+</ul></li>
+<li class="fragment"><p>Error variance:</p>
+<ul>
+<li class="fragment">How the data varies across all participants</li>
+</ul></li>
+<li class="fragment"><p>Per participant</p>
+<ul>
+<li class="fragment">How the data varies between each person</li>
+</ul></li>
 </ul>
 </section>
 <section id="within-subjects-anova-5" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
-</section>
-<section id="within-subjects-anova-example-1" class="slide level2">
-<h2>Within Subjects ANOVA Example</h2>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<ul>
-<li class="fragment"><p><strong>Over time</strong>: Mood before the Dark is more similar to mood before Dark than it is to mood after the Dark</p></li>
-<li class="fragment"><p><strong>Error Variance</strong>: Mood will have natural variance across participants and time.</p></li>
-</ul>
-</section>
-<section id="within-subjects-anova-example-2" class="slide level2">
-<h2>Within Subjects ANOVA Example</h2>
-</section>
-<section id="within-subjects-anova-example-3" class="slide level2">
-<h2>Within Subjects ANOVA Example</h2>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<ul>
-<li class="fragment"><p><strong>Over time</strong>: Mood before Dark is more similar to mood before Dark than it is to mood after Dark</p></li>
-<li class="fragment"><p><strong>Error Variance</strong>: Mood will have natural variance across participants.</p></li>
-<li class="fragment"><p><strong>Per participant</strong>: Each participant’s scores will be more like their other scores than they are like the scores of another participant.</p></li>
-</ul>
-</section>
-<section id="within-subjects-anova-example-4" class="slide level2">
-<h2>Within Subjects ANOVA Example</h2>
+<h3 id="over-time">Over Time</h3>
+<blockquote>
+<p>A person’s mood measured <strong>before TV,</strong> <strong>during TV</strong>, and <strong>after TV</strong> are correlated because they come from the same person</p>
+</blockquote>
 </section>
 <section id="within-subjects-anova-6" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
-<p>In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:</p>
-<ul>
-<li class="fragment"><p>Time</p></li>
-<li class="fragment"><p>Error</p></li>
-<li class="fragment"><p>Subjects</p></li>
-</ul>
+<h3 id="error">Error</h3>
+<blockquote>
+<p>Mood will have natural variance across participants and time.</p>
+</blockquote>
+</section>
+<section id="within-subjects-anova-example" class="slide level2">
+<h2>Within Subjects ANOVA Example</h2>
+<h3 id="per-participant"><strong>Per participant</strong></h3>
+<blockquote>
+<p>Each participant’s scores will be more like <em>their</em> other scores than they are like the scores of another participant.</p>
+</blockquote>
 </section>
 <section id="within-subjects-anova-7" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell" data-layout-align="default">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a></a>flowchart LR</span>
-<span id="cb3-2"><a></a>      A(Total Variability) --&gt; B(Time Variability)</span>
-<span id="cb3-3"><a></a>      A --&gt; C(Within-Groups Variability)</span>
-<span id="cb3-4"><a></a>      C --&gt; D(Subject Variability)</span>
-<span id="cb3-5"><a></a>      C --&gt; E(Error Variability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource dot number-lines code-with-copy"><code class="sourceCode dot"><span id="cb3-1"><a></a><span class="kw">digraph</span> <span class="ot">{</span><span class="co">     </span></span>
+<span id="cb3-2"><a></a><span class="co">    </span><span class="kw">node</span><span class="ot">[</span><span class="at">shape</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"box"</span><span class="co">, </span><span class="at">style</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"rounded"</span><span class="ot">]</span></span>
+<span id="cb3-3"><a></a><span class="co">    </span></span>
+<span id="cb3-4"><a></a><span class="co">      </span><span class="va">A</span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Total Variability"</span><span class="ot">]</span></span>
+<span id="cb3-5"><a></a><span class="co">      </span><span class="va">B</span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Time Variability"</span><span class="ot">]</span></span>
+<span id="cb3-6"><a></a><span class="co">      </span><span class="va">C</span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Within-Groups Variability"</span><span class="ot">]</span></span>
+<span id="cb3-7"><a></a><span class="co">      </span><span class="va">D</span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Subject Variability"</span><span class="ot">]</span></span>
+<span id="cb3-8"><a></a><span class="co">      </span><span class="va">E</span><span class="ot">[</span><span class="at">label</span><span class="ot">=</span><span class="st">"Error Variability"</span><span class="ot">]</span></span>
+<span id="cb3-9"><a></a><span class="co">      </span></span>
+<span id="cb3-10"><a></a><span class="co">      </span><span class="va">A</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">B</span></span>
+<span id="cb3-11"><a></a><span class="co">      </span><span class="va">A</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">C</span></span>
+<span id="cb3-12"><a></a><span class="co">      </span><span class="va">C</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">D</span></span>
+<span id="cb3-13"><a></a><span class="co">      </span><span class="va">C</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">E</span></span>
+<span id="cb3-14"><a></a><span class="ot">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
-      A(Total Variability) --&gt; B(Time Variability)
-      A --&gt; C(Within-Groups Variability)
-      C --&gt; D(Subject Variability)
-      C --&gt; E(Error Variability)
-
-</pre>
+<svg width="960" height="480" viewbox="0.00 0.00 339.69 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 335.69,-184 335.69,4 -4,4"></polygon>
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<path fill="none" stroke="black" d="M174.54,-180C174.54,-180 89.15,-180 89.15,-180 83.15,-180 77.15,-174 77.15,-168 77.15,-168 77.15,-156 77.15,-156 77.15,-150 83.15,-144 89.15,-144 89.15,-144 174.54,-144 174.54,-144 180.54,-144 186.54,-150 186.54,-156 186.54,-156 186.54,-168 186.54,-168 186.54,-174 180.54,-180 174.54,-180"></path>
+<text text-anchor="middle" x="131.85" y="-157.8" font-family="Times,serif" font-size="14.00">Total Variability</text>
+</g>
+<!-- B -->
+<g id="node2" class="node">
+<title>B</title>
+<path fill="none" stroke="black" d="M97.54,-108C97.54,-108 12.15,-108 12.15,-108 6.15,-108 0.15,-102 0.15,-96 0.15,-96 0.15,-84 0.15,-84 0.15,-78 6.15,-72 12.15,-72 12.15,-72 97.54,-72 97.54,-72 103.54,-72 109.54,-78 109.54,-84 109.54,-84 109.54,-96 109.54,-96 109.54,-102 103.54,-108 97.54,-108"></path>
+<text text-anchor="middle" x="54.85" y="-85.8" font-family="Times,serif" font-size="14.00">Time Variability</text>
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A-&gt;B</title>
+<path fill="none" stroke="black" d="M112.81,-143.7C103.3,-135.05 91.64,-124.45 81.28,-115.03"></path>
+<polygon fill="black" stroke="black" points="83.42,-112.24 73.66,-108.1 78.71,-117.42 83.42,-112.24"></polygon>
+</g>
+<!-- C -->
+<g id="node3" class="node">
+<title>C</title>
+<path fill="none" stroke="black" d="M280.26,-108C280.26,-108 139.43,-108 139.43,-108 133.43,-108 127.43,-102 127.43,-96 127.43,-96 127.43,-84 127.43,-84 127.43,-78 133.43,-72 139.43,-72 139.43,-72 280.26,-72 280.26,-72 286.26,-72 292.26,-78 292.26,-84 292.26,-84 292.26,-96 292.26,-96 292.26,-102 286.26,-108 280.26,-108"></path>
+<text text-anchor="middle" x="209.85" y="-85.8" font-family="Times,serif" font-size="14.00">Within-Groups Variability</text>
+</g>
+<!-- A&#45;&gt;C -->
+<g id="edge2" class="edge">
+<title>A-&gt;C</title>
+<path fill="none" stroke="black" d="M151.13,-143.7C160.76,-135.05 172.58,-124.45 183.07,-115.03"></path>
+<polygon fill="black" stroke="black" points="185.68,-117.39 190.79,-108.1 181.01,-112.18 185.68,-117.39"></polygon>
+</g>
+<!-- D -->
+<g id="node4" class="node">
+<title>D</title>
+<path fill="none" stroke="black" d="M191.99,-36C191.99,-36 93.7,-36 93.7,-36 87.7,-36 81.7,-30 81.7,-24 81.7,-24 81.7,-12 81.7,-12 81.7,-6 87.7,0 93.7,0 93.7,0 191.99,0 191.99,0 197.99,0 203.99,-6 203.99,-12 203.99,-12 203.99,-24 203.99,-24 203.99,-30 197.99,-36 191.99,-36"></path>
+<text text-anchor="middle" x="142.85" y="-13.8" font-family="Times,serif" font-size="14.00">Subject Variability</text>
+</g>
+<!-- C&#45;&gt;D -->
+<g id="edge3" class="edge">
+<title>C-&gt;D</title>
+<path fill="none" stroke="black" d="M193.28,-71.7C185.17,-63.22 175.26,-52.86 166.38,-43.58"></path>
+<polygon fill="black" stroke="black" points="168.66,-40.91 159.22,-36.1 163.6,-45.75 168.66,-40.91"></polygon>
+</g>
+<!-- E -->
+<g id="node5" class="node">
+<title>E</title>
+<path fill="none" stroke="black" d="M319.53,-36C319.53,-36 234.16,-36 234.16,-36 228.16,-36 222.16,-30 222.16,-24 222.16,-24 222.16,-12 222.16,-12 222.16,-6 228.16,0 234.16,0 234.16,0 319.53,0 319.53,0 325.53,0 331.53,-6 331.53,-12 331.53,-12 331.53,-24 331.53,-24 331.53,-30 325.53,-36 319.53,-36"></path>
+<text text-anchor="middle" x="276.85" y="-13.8" font-family="Times,serif" font-size="14.00">Error Variability</text>
+</g>
+<!-- C&#45;&gt;E -->
+<g id="edge4" class="edge">
+<title>C-&gt;E</title>
+<path fill="none" stroke="black" d="M226.41,-71.7C234.52,-63.22 244.43,-52.86 253.32,-43.58"></path>
+<polygon fill="black" stroke="black" points="256.09,-45.75 260.48,-36.1 251.03,-40.91 256.09,-45.75"></polygon>
+</g>
+</g>
+</svg>
 </div>
 <p></p></figure><p></p>
 </div>
@@ -533,67 +593,55 @@ Dave Brocker
 <h2>Within Subjects ANOVA</h2>
 <p>What is the F ratio in between subjects ANOVA?</p>
 <ul>
-<li class="fragment"><span class="math inline">\(F = \frac{MS_{BG}}{MS_{Error}}\)</span></li>
+<li class="fragment"><p><span class="math inline">\(F = \frac{{MS_{BG}}}{MS_{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(MS_{BG} = \frac{SS_{BG}}{df_{BG}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{SS_{Error}}{df_{Error}}\)</span></p></li>
 </ul>
 </section>
 <section id="within-subjects-anova-9" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
-<p>What is the F ratio in between subjects ANOVA?</p>
+<p>We want measure 2 sources of variance:</p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(F = \frac{\color{red}{MS_{BG}}}{MS_{Error}}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(MS_{BG} = \frac{SS_{BG}}{df_{BG}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(SS_{Time}\)</span></p>
+<ul>
+<li class="fragment">Similar to SS<sub>Between</sub> from between subjects ANOVA</li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(SS_{Error}\)</span></p>
+<ul>
+<li class="fragment">Harder to calculate in within subjects ANOVA, because of the subject variance.</li>
+</ul></li>
 </ul>
 </section>
 <section id="within-subjects-anova-10" class="slide level2">
-<h2>Within Subjects ANOVA</h2>
-<p>What is the F ratio in between subjects ANOVA?</p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(F = \frac{MS_{BG}}{\color{red}{MS_{Error}}}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{SS_{Error}}{df_{Error}}\)</span></p></li>
-</ul>
-</section>
-<section id="within-subjects-anova-11" class="slide level2">
-<h2>Within Subjects ANOVA</h2>
-<p>We want measure 2 sources of variance:</p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(SS_{Time}\)</span>: this is just like the SS from between subjects ANOVA</p></li>
-<li class="fragment"><p><span class="math inline">\(SS_{Error}\)</span>: this is harder to calculate in within subjects ANOVA, because of the subject variance.</p></li>
-</ul>
-</section>
-<section id="within-subjects-anova-12" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
 <ul>
 <li class="fragment"><span class="math inline">\(SS_{WG} = SS_{Subjects} + SS_{Error}\)</span></li>
 </ul>
 </section>
-<section id="within-subjects-anova-13" class="slide level2">
+<section id="within-subjects-anova-11" class="slide level2">
 <h2>Within Subjects ANOVA</h2>
 <ul>
-<li class="fragment"><p><span class="math inline">\(SS_{WG} = SS_{Subjects} + \color{red}{SS_{Error}}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(SS_{Error} = SS_{WG} - SS_{Subjects}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(SS_{W} = SS_{Subjects} + \color{red}{SS_{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(SS_{Error} = SS_{W} - SS_{Subjects}\)</span></p></li>
 </ul>
 </section>
 <section id="calculating-means-squared-ms" class="slide level2">
-<h2>Calculating means squared (MS)</h2>
+<h2>Calculating Means Squared (MS)</h2>
 <ul>
-<li class="fragment"><p>We calculate a SS for the variance between the times points (<span class="math inline">\(SS_{Time}\)</span>).</p></li>
-<li class="fragment"><p>This is just like the <span class="math inline">\(SS_{BG}\)</span> from between subjects ANOVA</p></li>
-<li class="fragment"><p>We calculate a SS for the within group variance (<span class="math inline">\(SS_{WG}\)</span>).</p></li>
+<li class="fragment"><p>We calculate a SS for the variance between the times points (<span class="math inline">\(SS_{Time}\)</span>).</p>
+<ul>
+<li class="fragment">This is just like the <span class="math inline">\(SS_{BG}\)</span> from between subjects ANOVA</li>
+</ul></li>
+<li class="fragment"><p>We calculate a SS for the within group variance (<span class="math inline">\(SS_{W}\)</span>).</p></li>
 <li class="fragment"><p>We calculate a SS for the variance by person (<span class="math inline">\(SS_{Subject}\)</span>).</p></li>
+<li class="fragment"><p>To find <span class="math inline">\(SS_{Error}\)</span>, we subtract <span class="math inline">\(SS_{Subjects}\)</span> from <span class="math inline">\(SS_{WG}\)</span>.</p></li>
 </ul>
 </section>
 <section id="calculating-means-squared-ms-1" class="slide level2">
 <h2>Calculating means squared (MS)</h2>
 <ul>
-<li class="fragment"><p>We calculate a SS for the variance between the times points (SSTime).</p></li>
-<li class="fragment"><p>To find <span class="math inline">\(SS_{Error}\)</span>, we subtract <span class="math inline">\(SS_{Subjects}\)</span> from <span class="math inline">\(SS_{WG}\)</span>.</p></li>
-</ul>
-</section>
-<section id="calculating-means-squared-ms-2" class="slide level2">
-<h2>Calculating means squared (MS)</h2>
-<ul>
 <li class="fragment"><p><span class="math inline">\(MS_{Time} = \frac{SS_{Time}} {df_{Time}}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{(SS_{WG} - SS_{Subject})}{df_{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{(SS_{W} - SS_{Subject})}{df_{Error}}\)</span></p></li>
 </ul>
 </section>
 <section id="degrees-of-freedom" class="slide level2">
@@ -602,585 +650,148 @@ Dave Brocker
 <li class="fragment"><p>Time <span class="math inline">\((MS_{Time}) = k - 1\)</span></p></li>
 <li class="fragment"><p>Error <span class="math inline">\((MS_{Error}) = (n - 1) \times (k - 1)\)</span></p>
 <ul>
-<li class="fragment">*k is the number of time points</li>
+<li class="fragment">k is the number of time points</li>
 </ul></li>
 </ul>
 </section>
-<section id="calculating-means-squared-ms-3" class="slide level2">
-<h2>Calculating means squared (MS)</h2>
+<section id="degrees-of-freedom-1" class="slide level2">
+<h2>Degrees of Freedom</h2>
+<h3 id="examples">Examples</h3>
+<blockquote>
+<p>A researcher measures students’ <strong>stress levels</strong> at <strong>three time points</strong> during finals week:</p>
+<p>a) Three days before the exam b) The night before the exam c) After the exam. A total of <strong>20 students</strong> provided stress ratings at all three times.</p>
+</blockquote>
+<p>What are the df’s for a one-way repeated-measures ANOVA on Time?</p>
+</section>
+<section id="degrees-of-freedom-2" class="slide level2 scrollable">
+<h2>Degrees of Freedom</h2>
+<h3 id="examples-1">Examples</h3>
+<blockquote>
+<p>A researcher measures students’ <strong>stress levels</strong> at <strong>three time points</strong> during finals week:</p>
+<p>a) Three days before the exam b) The night before the exam c) After the exam. A total of <strong>20 students</strong> provided stress ratings at all three times.</p>
+</blockquote>
+<ol type="1">
+<li class="fragment">df<sub>Time</sub> = 3 - 1 = 2</li>
+<li class="fragment">df<sub>Error</sub> = 19*2 = 38</li>
+<li class="fragment">df<sub>Subjects</sub> = 20-1 = 19</li>
+</ol>
+</section>
+<section id="calculating-repeated-measures-anvoa" class="slide level2">
+<h2>Calculating Repeated-Measures ANVOA</h2>
 <ul>
-<li class="fragment"><p><span class="math inline">\(MS_{Time} = \frac{SS_{Time}}{df_{Time}} = MS_{Time} = \frac{SS_{Time}}{(k - 1)}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{(SS_{WG} - SS_{Subject})} {df_{Error}} = MS_{Error}\ = \frac{(SS_{WG}\ - SS_{Subject})}{(n-1)\times(k-1)}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F = \frac{MS_{Time}}{MS_{Error}}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(MS_{Time} = \frac{SS_{Time}}{df_{Time}} = \frac{SS_{Time}}{(k - 1)}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(MS_{Error} = \frac{(SS_{W} - SS_{Subject})} {df_{Error}} = \frac{(SS_{W}\ - SS_{Subject})}{(n-1)\times(k-1)}\)</span></p></li>
 </ul>
 </section>
-<section id="within-subjects-anova-14" class="slide level2">
-<h2>WITHIN subjects ANOVA</h2>
-<p>The F ratio in within subjects ANOVA:</p>
-<p><span class="math inline">\(F = \frac{MS_{Time}}{MS_{Error}}\)</span></p>
-</section>
-<section id="anova-1" class="slide level2">
-<h2>ANOVA</h2>
+<section id="repeated-measures-anova-2" class="slide level2">
+<h2>Repeated-Measures ANOVA</h2>
+<h3 id="example">Example</h3>
 <blockquote>
-<p>Prof.&nbsp;Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof.&nbsp;Brocker asks participants to rate how much they enjoy statistics again.</p>
+<p>Prof.&nbsp;Brocker wants to evaluate whether a new <strong>engagement intervention</strong> improves students’ attitudes toward statistics. At the beginning of the semester, <strong>100 students</strong> complete a survey rating how much they enjoy statistics on a scale from <code>1 (not at all)</code> to <code>10 (extremely)</code>.He then implements a two-week intervention in which each class begins with a brief <strong>statistics-related warm-up activity</strong> designed to increase interest and reduce anxiety. After the first week of the intervention, students rate their enjoyment of statistics again. At the end of the second week, they complete the rating a third time.</p>
 </blockquote>
 <ul>
-<li class="fragment"><p>What’s k?</p></li>
-<li class="fragment"><p>What’s n?</p></li>
+<li class="fragment"><p>df<sub>Time</sub> =</p></li>
+<li class="fragment"><p>df<sub>Subjects</sub> =</p></li>
+<li class="fragment"><p>df<sub>Error</sub> =</p></li>
+<li class="fragment"><p>n =</p></li>
 </ul>
 </section>
 <section id="practice" class="slide level2">
 <h2>Practice</h2>
 <blockquote>
-<p>Prof.&nbsp;Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof.&nbsp;Brocker asks participants to rate how much they enjoy statistics again.</p>
+<p>Prof.&nbsp;Brocker wants to evaluate whether a new <strong>engagement intervention</strong> improves students’ attitudes toward statistics. At the beginning of the semester, <strong>100 students</strong> complete a survey rating how much they enjoy statistics on a scale from <code>1 (not at all)</code> to <code>10 (extremely)</code>.He then implements a two-week intervention in which each class begins with a brief <strong>statistics-related warm-up activity</strong> designed to increase interest and reduce anxiety. After the first week of the intervention, students rate their enjoyment of statistics again. At the end of the second week, they complete the rating a third time.</p>
 </blockquote>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">tribble</span>(</span>
-<span id="cb4-2"><a></a><span class="sc">~</span>Source, <span class="sc">~</span>SS, <span class="sc">~</span>df, <span class="sc">~</span>MS, <span class="sc">~</span>F,</span>
-<span id="cb4-3"><a></a><span class="st">"Time"</span>,<span class="st">"49"</span>, <span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span>,</span>
-<span id="cb4-4"><a></a><span class="st">"Within Group"</span>,<span class="st">"912"</span>,<span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span>,</span>
-<span id="cb4-5"><a></a><span class="st">"Subjects"</span>,<span class="st">"219"</span>,<span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span>,</span>
-<span id="cb4-6"><a></a><span class="st">"Error"</span>,<span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span></span>
-<span id="cb4-7"><a></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb4-8"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-9"><a></a>    <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"center"</span>,</span>
-<span id="cb4-10"><a></a>             <span class="at">columns =</span> SS<span class="sc">:</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="sygvzigbpm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sygvzigbpm table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#sygvzigbpm thead, #sygvzigbpm tbody, #sygvzigbpm tfoot, #sygvzigbpm tr, #sygvzigbpm td, #sygvzigbpm th {
-  border-style: none;
-}
-
-#sygvzigbpm p {
-  margin: 0;
-  padding: 0;
-}
-
-#sygvzigbpm .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#sygvzigbpm .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#sygvzigbpm .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#sygvzigbpm .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#sygvzigbpm .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#sygvzigbpm .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#sygvzigbpm .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#sygvzigbpm .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#sygvzigbpm .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#sygvzigbpm .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#sygvzigbpm .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#sygvzigbpm .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#sygvzigbpm .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#sygvzigbpm .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#sygvzigbpm .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sygvzigbpm .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#sygvzigbpm .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#sygvzigbpm .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#sygvzigbpm .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sygvzigbpm .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#sygvzigbpm .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sygvzigbpm .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#sygvzigbpm .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sygvzigbpm .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#sygvzigbpm .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sygvzigbpm .gt_left {
-  text-align: left;
-}
-
-#sygvzigbpm .gt_center {
-  text-align: center;
-}
-
-#sygvzigbpm .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#sygvzigbpm .gt_font_normal {
-  font-weight: normal;
-}
-
-#sygvzigbpm .gt_font_bold {
-  font-weight: bold;
-}
-
-#sygvzigbpm .gt_font_italic {
-  font-style: italic;
-}
-
-#sygvzigbpm .gt_super {
-  font-size: 65%;
-}
-
-#sygvzigbpm .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#sygvzigbpm .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#sygvzigbpm .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#sygvzigbpm .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#sygvzigbpm .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#sygvzigbpm .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#sygvzigbpm .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#sygvzigbpm .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#sygvzigbpm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source</th>
-<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">SS</th>
-<th id="df" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">df</th>
-<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">MS</th>
-<th id="F" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">F</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Source">Time</td>
-<td class="gt_row gt_center" headers="SS">49</td>
-<td class="gt_row gt_center" headers="df"></td>
-<td class="gt_row gt_center" headers="MS"></td>
-<td class="gt_row gt_center" headers="F"></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Source">Within Group</td>
-<td class="gt_row gt_center" headers="SS">912</td>
-<td class="gt_row gt_center" headers="df"></td>
-<td class="gt_row gt_center" headers="MS"></td>
-<td class="gt_row gt_center" headers="F"></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Source">Subjects</td>
-<td class="gt_row gt_center" headers="SS">219</td>
-<td class="gt_row gt_center" headers="df"></td>
-<td class="gt_row gt_center" headers="MS"></td>
-<td class="gt_row gt_center" headers="F"></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Source">Error</td>
-<td class="gt_row gt_center" headers="SS"></td>
-<td class="gt_row gt_center" headers="df"></td>
-<td class="gt_row gt_center" headers="MS"></td>
-<td class="gt_row gt_center" headers="F"></td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<ul>
+<li class="fragment"><p>df<sub>Time</sub> = <code>3 - 1 = 2</code></p></li>
+<li class="fragment"><p>df<sub>Subjects</sub> = <code>100-1 = 99</code></p></li>
+<li class="fragment"><p>df<sub>Error</sub> = <code>(100 - 1) * (3-1) = 198</code></p></li>
+<li class="fragment"><p>n = <code>100</code></p></li>
+</ul>
 </section>
 <section id="practice-1" class="slide level2">
 <h2>Practice</h2>
 <blockquote>
-<p>Prof.&nbsp;Brocker wants to know if giving lollipops to statistics students improves their opinion of statistics. He asks 100 students to rate how much they enjoy statistics on a scale of 1 (not at all) to 10 (extremely). Then he gives each student a lollipop at the start of statistics class for 2 weeks. After two weeks of conditioning, Prof.&nbsp;Brocker asks participants to rate how much they enjoy statistics again.</p>
+<p>Prof.&nbsp;Brocker wants to evaluate whether a new <strong>engagement intervention</strong> improves students’ attitudes toward statistics.</p>
 </blockquote>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">tribble</span>(</span>
-<span id="cb5-2"><a></a><span class="sc">~</span>Source, <span class="sc">~</span>SS, <span class="sc">~</span>df, <span class="sc">~</span>MS, <span class="sc">~</span>F,</span>
-<span id="cb5-3"><a></a><span class="st">"Time"</span>,<span class="st">"49"</span>, <span class="st">"1"</span>,<span class="st">"49"</span>,<span class="st">".053"</span>,</span>
-<span id="cb5-4"><a></a><span class="st">"Within Group"</span>,<span class="st">"912"</span>,<span class="st">"198"</span>,<span class="st">""</span>,<span class="st">""</span>,</span>
-<span id="cb5-5"><a></a><span class="st">"Subjects"</span>,<span class="st">"219"</span>,<span class="st">"99"</span>,<span class="st">"2.2"</span>,<span class="st">""</span>,</span>
-<span id="cb5-6"><a></a><span class="st">"Error"</span>,<span class="st">"912"</span>,<span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span></span>
-<span id="cb5-7"><a></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-8"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb5-9"><a></a>    <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"center"</span>,</span>
-<span id="cb5-10"><a></a>             <span class="at">columns =</span> SS<span class="sc">:</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a></a><span class="fu">library</span>(ez)</span>
+<span id="cb4-3"><a></a><span class="fu">library</span>(afex)</span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb4-8"><a></a></span>
+<span id="cb4-9"><a></a><span class="co"># Baseline: lower enjoyment, more variability</span></span>
+<span id="cb4-10"><a></a>baseline <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">4.8</span>, <span class="at">sd =</span> <span class="fl">1.6</span>)</span>
+<span id="cb4-11"><a></a></span>
+<span id="cb4-12"><a></a><span class="co"># After Week 1: slight increase</span></span>
+<span id="cb4-13"><a></a>week1 <span class="ot">&lt;-</span> baseline <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">0.7</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-14"><a></a></span>
+<span id="cb4-15"><a></a><span class="co"># After Week 2: additional increase</span></span>
+<span id="cb4-16"><a></a>week2 <span class="ot">&lt;-</span> week1 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">0.8</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-17"><a></a></span>
+<span id="cb4-18"><a></a><span class="co"># Keep scores bounded between 1 and 10</span></span>
+<span id="cb4-19"><a></a>clip <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">pmin</span>(<span class="fu">pmax</span>(x, <span class="dv">1</span>), <span class="dv">10</span>)</span>
+<span id="cb4-20"><a></a>baseline <span class="ot">&lt;-</span> <span class="fu">clip</span>(baseline)</span>
+<span id="cb4-21"><a></a>week1    <span class="ot">&lt;-</span> <span class="fu">clip</span>(week1)</span>
+<span id="cb4-22"><a></a>week2    <span class="ot">&lt;-</span> <span class="fu">clip</span>(week2)</span>
+<span id="cb4-23"><a></a></span>
+<span id="cb4-24"><a></a><span class="co"># Construct long dataset</span></span>
+<span id="cb4-25"><a></a>data_long <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-26"><a></a>  <span class="at">id =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
+<span id="cb4-27"><a></a>  <span class="at">baseline =</span> baseline,</span>
+<span id="cb4-28"><a></a>  <span class="at">week1 =</span> week1,</span>
+<span id="cb4-29"><a></a>  <span class="at">week2 =</span> week2</span>
+<span id="cb4-30"><a></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-31"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> baseline<span class="sc">:</span>week2,</span>
+<span id="cb4-32"><a></a>               <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
+<span id="cb4-33"><a></a>               <span class="at">values_to =</span> <span class="st">"enjoyment"</span>)</span>
+<span id="cb4-34"><a></a></span>
+<span id="cb4-35"><a></a><span class="fu">aov_ez</span>(</span>
+<span id="cb4-36"><a></a>  <span class="at">data =</span> data_long,</span>
+<span id="cb4-37"><a></a>  <span class="at">dv =</span> <span class="st">"enjoyment"</span>,</span>
+<span id="cb4-38"><a></a>  <span class="at">id =</span> <span class="st">"id"</span>,</span>
+<span id="cb4-39"><a></a>  <span class="at">within =</span> <span class="st">"time"</span>,</span>
+<span id="cb4-40"><a></a>  <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"ges"</span>),</span>
+<span id="cb4-41"><a></a>  <span class="at">return =</span> <span class="st">"aov"</span></span>
+<span id="cb4-42"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-43"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-44"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb4-45"><a></a>    <span class="at">Source =</span> term,</span>
+<span id="cb4-46"><a></a>    <span class="at">SS =</span> sumsq,</span>
+<span id="cb4-47"><a></a>    <span class="at">MS =</span> meansq,</span>
+<span id="cb4-48"><a></a>    <span class="st">`</span><span class="at">F</span><span class="st">`</span> <span class="ot">=</span> statistic, </span>
+<span id="cb4-49"><a></a>    <span class="at">p =</span> p.value</span>
+<span id="cb4-50"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb4-51"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>stratum) <span class="sc">|&gt;</span> </span>
+<span id="cb4-52"><a></a>  <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">"time"</span> <span class="sc">|</span> df <span class="sc">==</span> <span class="dv">198</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-53"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-54"><a></a>  <span class="fu">fmt_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="sxtogdahty" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sxtogdahty table {
+<div id="rgekufeskj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rgekufeskj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sxtogdahty thead, #sxtogdahty tbody, #sxtogdahty tfoot, #sxtogdahty tr, #sxtogdahty td, #sxtogdahty th {
+#rgekufeskj thead, #rgekufeskj tbody, #rgekufeskj tfoot, #rgekufeskj tr, #rgekufeskj td, #rgekufeskj th {
   border-style: none;
 }
 
-#sxtogdahty p {
+#rgekufeskj p {
   margin: 0;
   padding: 0;
 }
 
-#sxtogdahty .gt_table {
+#rgekufeskj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1206,12 +817,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_caption {
+#rgekufeskj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sxtogdahty .gt_title {
+#rgekufeskj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1223,7 +834,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#sxtogdahty .gt_subtitle {
+#rgekufeskj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1235,7 +846,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#sxtogdahty .gt_heading {
+#rgekufeskj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1247,13 +858,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_bottom_border {
+#rgekufeskj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_col_headings {
+#rgekufeskj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1268,7 +879,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_col_heading {
+#rgekufeskj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1288,7 +899,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#sxtogdahty .gt_column_spanner_outer {
+#rgekufeskj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1300,15 +911,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#sxtogdahty .gt_column_spanner_outer:first-child {
+#rgekufeskj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sxtogdahty .gt_column_spanner_outer:last-child {
+#rgekufeskj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sxtogdahty .gt_column_spanner {
+#rgekufeskj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1320,11 +931,11 @@ Dave Brocker
   width: 100%;
 }
 
-#sxtogdahty .gt_spanner_row {
+#rgekufeskj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sxtogdahty .gt_group_heading {
+#rgekufeskj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1350,7 +961,7 @@ Dave Brocker
   text-align: left;
 }
 
-#sxtogdahty .gt_empty_group_heading {
+#rgekufeskj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1365,15 +976,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#sxtogdahty .gt_from_md > :first-child {
+#rgekufeskj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sxtogdahty .gt_from_md > :last-child {
+#rgekufeskj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sxtogdahty .gt_row {
+#rgekufeskj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1392,7 +1003,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#sxtogdahty .gt_stub {
+#rgekufeskj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1405,7 +1016,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#sxtogdahty .gt_stub_row_group {
+#rgekufeskj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1419,15 +1030,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#sxtogdahty .gt_row_group_first td {
+#rgekufeskj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sxtogdahty .gt_row_group_first th {
+#rgekufeskj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sxtogdahty .gt_summary_row {
+#rgekufeskj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1437,16 +1048,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#sxtogdahty .gt_first_summary_row {
+#rgekufeskj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_first_summary_row.thick {
+#rgekufeskj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sxtogdahty .gt_last_summary_row {
+#rgekufeskj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1456,7 +1067,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_grand_summary_row {
+#rgekufeskj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1466,7 +1077,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#sxtogdahty .gt_first_grand_summary_row {
+#rgekufeskj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1476,7 +1087,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_last_grand_summary_row_top {
+#rgekufeskj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1486,11 +1097,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_striped {
+#rgekufeskj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sxtogdahty .gt_table_body {
+#rgekufeskj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1499,7 +1110,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_footnotes {
+#rgekufeskj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1513,7 +1124,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_footnote {
+#rgekufeskj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1522,7 +1133,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#sxtogdahty .gt_sourcenotes {
+#rgekufeskj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1536,7 +1147,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#sxtogdahty .gt_sourcenote {
+#rgekufeskj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1544,72 +1155,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#sxtogdahty .gt_left {
+#rgekufeskj .gt_left {
   text-align: left;
 }
 
-#sxtogdahty .gt_center {
+#rgekufeskj .gt_center {
   text-align: center;
 }
 
-#sxtogdahty .gt_right {
+#rgekufeskj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sxtogdahty .gt_font_normal {
+#rgekufeskj .gt_font_normal {
   font-weight: normal;
 }
 
-#sxtogdahty .gt_font_bold {
+#rgekufeskj .gt_font_bold {
   font-weight: bold;
 }
 
-#sxtogdahty .gt_font_italic {
+#rgekufeskj .gt_font_italic {
   font-style: italic;
 }
 
-#sxtogdahty .gt_super {
+#rgekufeskj .gt_super {
   font-size: 65%;
 }
 
-#sxtogdahty .gt_footnote_marks {
+#rgekufeskj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sxtogdahty .gt_asterisk {
+#rgekufeskj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sxtogdahty .gt_indent_1 {
+#rgekufeskj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sxtogdahty .gt_indent_2 {
+#rgekufeskj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sxtogdahty .gt_indent_3 {
+#rgekufeskj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sxtogdahty .gt_indent_4 {
+#rgekufeskj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sxtogdahty .gt_indent_5 {
+#rgekufeskj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sxtogdahty .katex-display {
+#rgekufeskj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sxtogdahty div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rgekufeskj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1618,40 +1229,29 @@ Dave Brocker
 <thead>
 <tr class="gt_col_headings header">
 <th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source</th>
-<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">SS</th>
-<th id="df" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">df</th>
-<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">MS</th>
-<th id="F" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">F</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">df</th>
+<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SS</th>
+<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">MS</th>
+<th id="F" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="Source">Time</td>
-<td class="gt_row gt_center" headers="SS">49</td>
-<td class="gt_row gt_center" headers="df">1</td>
-<td class="gt_row gt_center" headers="MS">49</td>
-<td class="gt_row gt_center" headers="F">.053</td>
+<td class="gt_row gt_left" headers="Source">time</td>
+<td class="gt_row gt_right" headers="df">  2&nbsp;</td>
+<td class="gt_row gt_right" headers="SS">111.716</td>
+<td class="gt_row gt_right" headers="MS">55.858</td>
+<td class="gt_row gt_right" headers="F">343.599</td>
+<td class="gt_row gt_right" headers="p">4.101&nbsp;×&nbsp;10<sup>−65</sup></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="Source">Within Group</td>
-<td class="gt_row gt_center" headers="SS">912</td>
-<td class="gt_row gt_center" headers="df">198</td>
-<td class="gt_row gt_center" headers="MS"></td>
-<td class="gt_row gt_center" headers="F"></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Source">Subjects</td>
-<td class="gt_row gt_center" headers="SS">219</td>
-<td class="gt_row gt_center" headers="df">99</td>
-<td class="gt_row gt_center" headers="MS">2.2</td>
-<td class="gt_row gt_center" headers="F"></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Source">Error</td>
-<td class="gt_row gt_center" headers="SS">912</td>
-<td class="gt_row gt_center" headers="df"></td>
-<td class="gt_row gt_center" headers="MS"></td>
-<td class="gt_row gt_center" headers="F"></td>
+<td class="gt_row gt_left" headers="Source">Residuals</td>
+<td class="gt_row gt_right" headers="df">198&nbsp;</td>
+<td class="gt_row gt_right" headers="SS"> 32.188</td>
+<td class="gt_row gt_right" headers="MS"> 0.163</td>
+<td class="gt_row gt_right" headers="F">NA</td>
+<td class="gt_row gt_right" headers="p">NA</td>
 </tr>
 </tbody>
 </table>
@@ -1659,49 +1259,670 @@ Dave Brocker
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data_long <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(enjoyment), <span class="at">se =</span> <span class="fu">sd</span>(enjoyment)<span class="sc">/</span><span class="fu">sqrt</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> mean, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb5-5"><a></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Enjoyment of Statistics Across Intervention"</span>,</span>
+<span id="cb5-9"><a></a>       <span class="at">x =</span> <span class="st">"Time Point"</span>,</span>
+<span id="cb5-10"><a></a>       <span class="at">y =</span> <span class="st">"Mean Enjoyment (1–10)"</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="anova-2" class="slide level2">
+<section id="anova-1" class="slide level2 scrollable">
 <h2>ANOVA</h2>
 <blockquote>
-<p>Dr.&nbsp;Grace believes watching Shameless makes Zoomers happy. She asks 50 Zoomers to rate their happiness on a scale of 1 (no happies) to 10 (all the happies). Then she shows them an episode of Shameless. After each Zoomer watches one episode of Shameless, she asks them to rate their happiness again on the same scale of 1 to 10.</p>
+<p>Professor Brocker is interested in whether structured <strong>active-learning practices</strong> improve <code>80</code>students’ attitudes toward statistics over time. He administers a <code>1–10</code> enjoyment rating at three points:</p>
+<ol type="1">
+<li class="fragment"><p><strong>Beginning of the semester</strong> (before any intervention).</p></li>
+<li class="fragment"><p><strong>After four active-learning modules</strong> (mid-semester).</p></li>
+<li class="fragment"><p><strong>After eight active-learning modules</strong> (end of the semester).</p></li>
+</ol>
 </blockquote>
-<ul>
-<li class="fragment"><p>What’s k?</p></li>
-<li class="fragment"><p>What’s n?</p></li>
-</ul>
-</section></section>
-<section>
-<section id="practice-2" class="title-slide slide level1 center">
-<h1>Practice</h1>
-
+<ol type="1">
+<li class="fragment">df<sub>Time</sub> =</li>
+<li class="fragment">df<sub>Participants</sub> =</li>
+<li class="fragment">df<sub>Error</sub> =</li>
+</ol>
 </section>
-<section id="anova-3" class="slide level2">
-<h2>ANOVA</h2>
+<section id="practice-2" class="slide level2 scrollable">
+<h2>Practice</h2>
 <blockquote>
-<p>Prof.&nbsp;Brocker measures the death anxiety of 500 middle-aged men. He then shows them images from anti-aging advertisements featuring young men. After they view the images, participants report their aging anxiety once again. Two weeks later, participants are asked to report their aging anxiety one last time.</p>
+<p>Professor Brocker is interested in whether structured <strong>active-learning practices</strong> improve 80 students’ attitudes toward statistics over time. He administers a <code>1–10</code> enjoyment rating at three points:</p>
+<ol type="1">
+<li class="fragment"><p><strong>Beginning of the semester</strong> (before any intervention).</p></li>
+<li class="fragment"><p><strong>After four active-learning modules</strong> (mid-semester).</p></li>
+<li class="fragment"><p><strong>After eight active-learning modules</strong> (end of the semester).</p></li>
+</ol>
 </blockquote>
-<ul>
-<li class="fragment"><p>What’s k?</p></li>
-<li class="fragment"><p>What’s n?</p></li>
-</ul>
-</section></section>
-<section>
-<section id="practice-3" class="title-slide slide level1 center">
-<h1>Practice</h1>
-
+<ol type="1">
+<li class="fragment">df<sub>Time</sub> = 3 - 1 = 2</li>
+<li class="fragment">df<sub>Participants</sub> = 80 - 1 = 79</li>
+<li class="fragment">df<sub>Error</sub> = 158</li>
+</ol>
 </section>
-<section id="interpreting-f" class="slide level2">
-<h2>Interpreting f</h2>
-<p>The MS<sub>Time</sub> is made up of the MS<sub>Error</sub> + the theoretical difference over time:</p>
+<section id="practice-3" class="slide level2">
+<h2>Practice</h2>
+<blockquote>
+<p>Professor Brocker is interested in whether structured <strong>active-learning practices</strong> improve 80 students’ attitudes toward statistics over time. He administers a <code>1–10</code> enjoyment rating at three points:</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a>n <span class="ot">&lt;-</span> <span class="dv">80</span></span>
+<span id="cb6-4"><a></a></span>
+<span id="cb6-5"><a></a><span class="co"># Attitude ratings (1–10 scale)</span></span>
+<span id="cb6-6"><a></a>beginning <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">4.5</span>, <span class="at">sd =</span> <span class="fl">1.4</span>)   <span class="co"># before any modules</span></span>
+<span id="cb6-7"><a></a>mid       <span class="ot">&lt;-</span> beginning <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">1.0</span>, <span class="at">sd =</span> <span class="fl">0.6</span>)  <span class="co"># after 4 modules</span></span>
+<span id="cb6-8"><a></a>end       <span class="ot">&lt;-</span> mid <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">0.8</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)        <span class="co"># after 8 modules</span></span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a><span class="co"># Bound values between 1 and 10</span></span>
+<span id="cb6-11"><a></a>clip <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">pmin</span>(<span class="fu">pmax</span>(x, <span class="dv">1</span>), <span class="dv">10</span>)</span>
+<span id="cb6-12"><a></a></span>
+<span id="cb6-13"><a></a>beginning <span class="ot">&lt;-</span> <span class="fu">clip</span>(beginning)</span>
+<span id="cb6-14"><a></a>mid       <span class="ot">&lt;-</span> <span class="fu">clip</span>(mid)</span>
+<span id="cb6-15"><a></a>end       <span class="ot">&lt;-</span> <span class="fu">clip</span>(end)</span>
+<span id="cb6-16"><a></a></span>
+<span id="cb6-17"><a></a><span class="co"># Create long dataset</span></span>
+<span id="cb6-18"><a></a>data_long2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb6-19"><a></a>  <span class="at">id =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
+<span id="cb6-20"><a></a>  <span class="at">beginning =</span> beginning,</span>
+<span id="cb6-21"><a></a>  <span class="at">mid =</span> mid,</span>
+<span id="cb6-22"><a></a>  <span class="at">end =</span> end</span>
+<span id="cb6-23"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb6-24"><a></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb6-25"><a></a>    <span class="at">cols =</span> beginning<span class="sc">:</span>end,</span>
+<span id="cb6-26"><a></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
+<span id="cb6-27"><a></a>    <span class="at">values_to =</span> <span class="st">"attitude"</span></span>
+<span id="cb6-28"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-29"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-30"><a></a>    <span class="at">time =</span> <span class="fu">factor</span>(time, </span>
+<span id="cb6-31"><a></a>                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"beginning"</span>,<span class="st">"mid"</span>,<span class="st">"end"</span>))</span>
+<span id="cb6-32"><a></a>    )</span>
+<span id="cb6-33"><a></a></span>
+<span id="cb6-34"><a></a><span class="co"># ------------------------------</span></span>
+<span id="cb6-35"><a></a><span class="co"># Repeated-Measures ANOVA</span></span>
+<span id="cb6-36"><a></a><span class="co"># ------------------------------</span></span>
+<span id="cb6-37"><a></a></span>
+<span id="cb6-38"><a></a>rm_aov <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(</span>
+<span id="cb6-39"><a></a>  <span class="at">id =</span> <span class="st">"id"</span>,</span>
+<span id="cb6-40"><a></a>  <span class="at">dv =</span> <span class="st">"attitude"</span>,</span>
+<span id="cb6-41"><a></a>  <span class="at">within =</span> <span class="st">"time"</span>,</span>
+<span id="cb6-42"><a></a>  <span class="at">data =</span> data_long2,</span>
+<span id="cb6-43"><a></a>  <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"ges"</span>),</span>
+<span id="cb6-44"><a></a>  <span class="at">return =</span> <span class="st">"aov"</span></span>
+<span id="cb6-45"><a></a>)</span>
+<span id="cb6-46"><a></a></span>
+<span id="cb6-47"><a></a><span class="co"># Clean table for display</span></span>
+<span id="cb6-48"><a></a>rm_aov <span class="sc">|&gt;</span></span>
+<span id="cb6-49"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-50"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb6-51"><a></a>    <span class="at">Source =</span> term,</span>
+<span id="cb6-52"><a></a>    <span class="at">SS =</span> sumsq,</span>
+<span id="cb6-53"><a></a>    <span class="at">MS =</span> meansq,</span>
+<span id="cb6-54"><a></a>    <span class="st">`</span><span class="at">F</span><span class="st">`</span> <span class="ot">=</span> statistic, </span>
+<span id="cb6-55"><a></a>    <span class="at">p =</span> p.value</span>
+<span id="cb6-56"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-57"><a></a>  <span class="fu">select</span>(<span class="sc">!</span>stratum) <span class="sc">|&gt;</span></span>
+<span id="cb6-58"><a></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="deaplhbeht" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#deaplhbeht table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#deaplhbeht thead, #deaplhbeht tbody, #deaplhbeht tfoot, #deaplhbeht tr, #deaplhbeht td, #deaplhbeht th {
+  border-style: none;
+}
+
+#deaplhbeht p {
+  margin: 0;
+  padding: 0;
+}
+
+#deaplhbeht .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#deaplhbeht .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#deaplhbeht .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#deaplhbeht .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#deaplhbeht .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#deaplhbeht .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#deaplhbeht .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#deaplhbeht .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#deaplhbeht .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#deaplhbeht .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#deaplhbeht .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#deaplhbeht .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#deaplhbeht .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#deaplhbeht .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#deaplhbeht .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#deaplhbeht .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#deaplhbeht .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#deaplhbeht .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#deaplhbeht .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#deaplhbeht .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#deaplhbeht .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#deaplhbeht .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#deaplhbeht .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#deaplhbeht .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#deaplhbeht .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#deaplhbeht .gt_left {
+  text-align: left;
+}
+
+#deaplhbeht .gt_center {
+  text-align: center;
+}
+
+#deaplhbeht .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#deaplhbeht .gt_font_normal {
+  font-weight: normal;
+}
+
+#deaplhbeht .gt_font_bold {
+  font-weight: bold;
+}
+
+#deaplhbeht .gt_font_italic {
+  font-style: italic;
+}
+
+#deaplhbeht .gt_super {
+  font-size: 65%;
+}
+
+#deaplhbeht .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#deaplhbeht .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#deaplhbeht .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#deaplhbeht .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#deaplhbeht .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#deaplhbeht .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#deaplhbeht .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#deaplhbeht .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#deaplhbeht div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">df</th>
+<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SS</th>
+<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">MS</th>
+<th id="F" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Source">Residuals</td>
+<td class="gt_row gt_right" headers="df">79</td>
+<td class="gt_row gt_right" headers="SS">552.89748</td>
+<td class="gt_row gt_right" headers="MS">6.998702</td>
+<td class="gt_row gt_right" headers="F">NA</td>
+<td class="gt_row gt_right" headers="p">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Source">time</td>
+<td class="gt_row gt_right" headers="df">2</td>
+<td class="gt_row gt_right" headers="SS">116.75497</td>
+<td class="gt_row gt_right" headers="MS">58.377487</td>
+<td class="gt_row gt_right" headers="F">281.961</td>
+<td class="gt_row gt_right" headers="p">7.467537e-53</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Source">Residuals</td>
+<td class="gt_row gt_right" headers="df">158</td>
+<td class="gt_row gt_right" headers="SS">32.71248</td>
+<td class="gt_row gt_right" headers="MS">0.207041</td>
+<td class="gt_row gt_right" headers="F">NA</td>
+<td class="gt_row gt_right" headers="p">NA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data_long2 <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a></a>  <span class="fu">group_by</span>(time) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb7-4"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(attitude),</span>
+<span id="cb7-5"><a></a>    <span class="at">se =</span> <span class="fu">sd</span>(attitude) <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb7-6"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">fct_inorder</span>(time, <span class="at">ordered =</span> <span class="cn">TRUE</span>), mean, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb7-8"><a></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb7-11"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-12"><a></a>    <span class="at">title =</span> <span class="st">"Attitudes Toward Statistics Across the Semester"</span>,</span>
+<span id="cb7-13"><a></a>    <span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Time Point"</span>,</span>
+<span id="cb7-14"><a></a>    <span class="at">y =</span> <span class="st">"Mean Attitude Rating (1–10)</span><span class="sc">\n</span><span class="st">"</span></span>
+<span id="cb7-15"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb7-16"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="practice-4" class="slide level2">
+<h2>Practice</h2>
+<h3 id="interpreting-f">Interpreting F</h3>
+<p>MS<sub>Time</sub> is made up of MS<sub>Error</sub> + the theoretical difference over time:</p>
 <ul>
 <li class="fragment"><span class="math inline">\(MS_{Time} = \text{change over time} + MS_{Error}\)</span></li>
 <li class="fragment"><span class="math inline">\(MS_{Time} = 0 + MS_{Error}\)</span></li>
 <li class="fragment"><span class="math inline">\(MS_{Time} = MS_{Error}\)</span></li>
-<li class="fragment"><span class="math inline">\(F = 1\)</span></li>
+<li class="fragment"><span class="math inline">\(F = \frac{MS_{Error}}{MS_{Error}} = 1\)</span></li>
 </ul>
 </section>
 <section id="interpreting-f-1" class="slide level2">
-<h2>Interpreting f</h2>
+<h2>Interpreting F</h2>
 <ul>
 <li class="fragment"><p>When F &lt;= 1, it’s not likely to be significant.</p></li>
 <li class="fragment"><p>The MS<sub>Time</sub> is made up of the MS<sub>Error</sub> + the theoretical difference over time:</p>
@@ -1715,75 +1936,40 @@ Dave Brocker
 <section id="hypothesis-testing-anova" class="slide level2">
 <h2>Hypothesis testing: ANOVA</h2>
 <ul>
-<li class="fragment"><p>F &lt; = 1 —&gt; Fail to reject the Null Hypothesis</p></li>
-<li class="fragment"><p>F &gt; 1 —&gt; Refer to <em>p</em>-value —&gt; Reject the Null Hypothesis</p></li>
-</ul>
-</section>
-<section id="how-many-fs-do-you-get" class="slide level2">
-<h2>How many F’s do you Get?</h2>
+<li class="fragment"><p><span class="math inline">\(F \leq 1\)</span></p>
 <ul>
-<li class="fragment"><p>One-way Between Subjects?</p>
-<ul>
-<li class="fragment">1 for 1 IV</li>
+<li class="fragment">Fail to reject the Null Hypothesis</li>
 </ul></li>
-<li class="fragment"><p>Within Subjects?</p>
+<li class="fragment"><p><span class="math inline">\(F &gt; 1\)</span></p>
 <ul>
-<li class="fragment">1</li>
-</ul></li>
-<li class="fragment"><p>Two-way Between Subjects with a 2x2 design?</p>
-<ul>
-<li class="fragment">3 (One for each IV and one for the Interaction)</li>
+<li class="fragment"><p>Refer to <em>p</em>-value</p></li>
+<li class="fragment"><p>Reject the Null Hypothesis</p></li>
 </ul></li>
 </ul>
 </section>
 <section id="reporting-f" class="slide level2">
 <h2>Reporting F</h2>
-<h3 id="reporting-f-1">Reporting F</h3>
 <p>If asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:</p>
 <ul>
 <li class="fragment"><p>Reject H<sub>0</sub>, or</p></li>
 <li class="fragment"><p>Fail to Reject H<sub>0</sub></p></li>
-</ul>
-<p>Reporting F</p>
-<p>If asked to report findings in general or for publication, you need to report:</p>
+<li class="fragment"><p>If asked to report findings in general or for publication, you need to report:</p>
 <ul>
-<li class="fragment"><em>F(df time, df error)</em> = <em>F-value, p-value</em></li>
+<li class="fragment"><span class="math inline">\(F(df_{Time}, df_{Error}) = F, p\)</span></li>
+</ul></li>
 </ul>
 </section>
-<section id="reporting-f-2" class="slide level2">
+<section id="reporting-f-1" class="slide level2">
 <h2>Reporting F</h2>
 <blockquote>
-<p>Mood after watching the Dark was not significantly different from mood before watching Dark, <em>F</em> (1, 499) = 1.02, <em>p</em> = 0.07.</p>
+<p>Enjoyment of statistics after three weeks was significantly higher compared to enjoyment of statistics at the start of measurement, <em>F</em> (2, 158) = 281.96, <em>p</em> &lt;.001</p>
 </blockquote>
-<blockquote>
-<p>There was no significant change in mood over time, <em>F</em> (1, 499) = 1.02, <em>p</em> = 0.07.</p>
-</blockquote>
-</section>
-<section id="reporting-f-3" class="slide level2">
-<h2>Reporting F</h2>
-<blockquote>
-<p>Participants’ mood was significantly better after watching the Dark compared to before watching it, <em>F</em>(1, 499) = 7.12, <em>p</em> &lt; 0.05.</p>
-</blockquote>
-</section>
-<section id="reporting-f-4" class="slide level2">
-<h2>Reporting F</h2>
-<p>If asked to report findings in general or for publication, you need to report:</p>
 <ul>
-<li class="fragment"><p><em>F(df time, df error) = F-value, p-value</em></p></li>
-<li class="fragment"><p><strong>If the results are significant, we have to also report the means and standard deviations for each time point.</strong></p></li>
+<li class="fragment">If the results are significant, we have to also report the means and standard deviations for each time point.</li>
 </ul>
-</section>
-<section id="reporting-f-5" class="slide level2">
-<h2>Reporting F</h2>
 <blockquote>
-<p>Participants’ anxiety differed significant across time, <em>F</em>(2, 198) = 3.744, p = 0.25. Anxiety was highest at pre-test (M= 19.58, s = 0.643). Anxiety was lowest at baseline (M , s ). Anxiety at post test was M= , s.</p>
+<p>Participants’ enjoyment of statistics differed significant across time, <em><code>F</code></em><code>(2, 158) = 281.96, p &lt;.001</code>. Enjoyment was highest at week 2 (<code>M= 6.61, s = 1.77</code>). Enjoyment was lowest at baseline (<code>M  = 5.14, s  = 1.62</code>). Anxiety at week 1 test was <code>M= 5.86, s = 1.67</code>.</p>
 </blockquote>
-</section>
-<section id="practice-4" class="slide level2">
-<h2>Practice</h2>
-<ul>
-<li class="fragment">Was anxiety just before the Stats Exam significantly higher than baseline anxiety?</li>
-</ul>
 </section>
 <section id="data-manipulation" class="slide level2">
 <h2>Data Manipulation</h2>
@@ -1794,34 +1980,34 @@ Dave Brocker
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">data.frame</span>(</span>
-<span id="cb6-2"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
-<span id="cb6-3"><a></a>  <span class="at">Immediate =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb6-4"><a></a>  <span class="at">After24Hours =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb6-5"><a></a>  <span class="at">After1Week =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb6-6"><a></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-7"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb6-8"><a></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Wide Data"</span>,</span>
-<span id="cb6-9"><a></a>             <span class="at">subtitle =</span> <span class="st">"Each row represents an indivdual participant"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">data.frame</span>(</span>
+<span id="cb8-2"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb8-3"><a></a>  <span class="at">Immediate =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb8-4"><a></a>  <span class="at">After24Hours =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb8-5"><a></a>  <span class="at">After1Week =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb8-6"><a></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-7"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb8-8"><a></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Wide Data"</span>,</span>
+<span id="cb8-9"><a></a>             <span class="at">subtitle =</span> <span class="st">"Each row represents an indivdual participant"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="hlzdmnupwa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hlzdmnupwa table {
+<div id="qpwsixhcby" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qpwsixhcby table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hlzdmnupwa thead, #hlzdmnupwa tbody, #hlzdmnupwa tfoot, #hlzdmnupwa tr, #hlzdmnupwa td, #hlzdmnupwa th {
+#qpwsixhcby thead, #qpwsixhcby tbody, #qpwsixhcby tfoot, #qpwsixhcby tr, #qpwsixhcby td, #qpwsixhcby th {
   border-style: none;
 }
 
-#hlzdmnupwa p {
+#qpwsixhcby p {
   margin: 0;
   padding: 0;
 }
 
-#hlzdmnupwa .gt_table {
+#qpwsixhcby .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1847,12 +2033,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_caption {
+#qpwsixhcby .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hlzdmnupwa .gt_title {
+#qpwsixhcby .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1864,7 +2050,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#hlzdmnupwa .gt_subtitle {
+#qpwsixhcby .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1876,7 +2062,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#hlzdmnupwa .gt_heading {
+#qpwsixhcby .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1888,13 +2074,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_bottom_border {
+#qpwsixhcby .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_col_headings {
+#qpwsixhcby .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1909,7 +2095,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_col_heading {
+#qpwsixhcby .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1929,7 +2115,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#hlzdmnupwa .gt_column_spanner_outer {
+#qpwsixhcby .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1941,15 +2127,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#hlzdmnupwa .gt_column_spanner_outer:first-child {
+#qpwsixhcby .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hlzdmnupwa .gt_column_spanner_outer:last-child {
+#qpwsixhcby .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hlzdmnupwa .gt_column_spanner {
+#qpwsixhcby .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1961,11 +2147,11 @@ Dave Brocker
   width: 100%;
 }
 
-#hlzdmnupwa .gt_spanner_row {
+#qpwsixhcby .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hlzdmnupwa .gt_group_heading {
+#qpwsixhcby .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1991,7 +2177,7 @@ Dave Brocker
   text-align: left;
 }
 
-#hlzdmnupwa .gt_empty_group_heading {
+#qpwsixhcby .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2006,15 +2192,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#hlzdmnupwa .gt_from_md > :first-child {
+#qpwsixhcby .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hlzdmnupwa .gt_from_md > :last-child {
+#qpwsixhcby .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hlzdmnupwa .gt_row {
+#qpwsixhcby .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2033,7 +2219,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#hlzdmnupwa .gt_stub {
+#qpwsixhcby .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2046,7 +2232,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#hlzdmnupwa .gt_stub_row_group {
+#qpwsixhcby .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2060,15 +2246,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#hlzdmnupwa .gt_row_group_first td {
+#qpwsixhcby .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hlzdmnupwa .gt_row_group_first th {
+#qpwsixhcby .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hlzdmnupwa .gt_summary_row {
+#qpwsixhcby .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2078,16 +2264,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#hlzdmnupwa .gt_first_summary_row {
+#qpwsixhcby .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_first_summary_row.thick {
+#qpwsixhcby .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hlzdmnupwa .gt_last_summary_row {
+#qpwsixhcby .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2097,7 +2283,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_grand_summary_row {
+#qpwsixhcby .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2107,7 +2293,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#hlzdmnupwa .gt_first_grand_summary_row {
+#qpwsixhcby .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2117,7 +2303,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_last_grand_summary_row_top {
+#qpwsixhcby .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2127,11 +2313,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_striped {
+#qpwsixhcby .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hlzdmnupwa .gt_table_body {
+#qpwsixhcby .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2140,7 +2326,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_footnotes {
+#qpwsixhcby .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2154,7 +2340,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_footnote {
+#qpwsixhcby .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2163,7 +2349,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#hlzdmnupwa .gt_sourcenotes {
+#qpwsixhcby .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2177,7 +2363,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#hlzdmnupwa .gt_sourcenote {
+#qpwsixhcby .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2185,72 +2371,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#hlzdmnupwa .gt_left {
+#qpwsixhcby .gt_left {
   text-align: left;
 }
 
-#hlzdmnupwa .gt_center {
+#qpwsixhcby .gt_center {
   text-align: center;
 }
 
-#hlzdmnupwa .gt_right {
+#qpwsixhcby .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hlzdmnupwa .gt_font_normal {
+#qpwsixhcby .gt_font_normal {
   font-weight: normal;
 }
 
-#hlzdmnupwa .gt_font_bold {
+#qpwsixhcby .gt_font_bold {
   font-weight: bold;
 }
 
-#hlzdmnupwa .gt_font_italic {
+#qpwsixhcby .gt_font_italic {
   font-style: italic;
 }
 
-#hlzdmnupwa .gt_super {
+#qpwsixhcby .gt_super {
   font-size: 65%;
 }
 
-#hlzdmnupwa .gt_footnote_marks {
+#qpwsixhcby .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hlzdmnupwa .gt_asterisk {
+#qpwsixhcby .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hlzdmnupwa .gt_indent_1 {
+#qpwsixhcby .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hlzdmnupwa .gt_indent_2 {
+#qpwsixhcby .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hlzdmnupwa .gt_indent_3 {
+#qpwsixhcby .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hlzdmnupwa .gt_indent_4 {
+#qpwsixhcby .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hlzdmnupwa .gt_indent_5 {
+#qpwsixhcby .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hlzdmnupwa .katex-display {
+#qpwsixhcby .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hlzdmnupwa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qpwsixhcby div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2273,33 +2459,33 @@ Dave Brocker
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">1</td>
-<td class="gt_row gt_right" headers="Immediate">7.629962</td>
-<td class="gt_row gt_right" headers="After24Hours">3.498087</td>
-<td class="gt_row gt_right" headers="After1Week">1.573176</td>
+<td class="gt_row gt_right" headers="Immediate">8.705734</td>
+<td class="gt_row gt_right" headers="After24Hours">5.686030</td>
+<td class="gt_row gt_right" headers="After1Week">5.851281</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">2</td>
-<td class="gt_row gt_right" headers="Immediate">7.478686</td>
-<td class="gt_row gt_right" headers="After24Hours">5.429660</td>
-<td class="gt_row gt_right" headers="After1Week">3.916657</td>
+<td class="gt_row gt_right" headers="Immediate">6.397846</td>
+<td class="gt_row gt_right" headers="After24Hours">7.113822</td>
+<td class="gt_row gt_right" headers="After1Week">3.414249</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">3</td>
-<td class="gt_row gt_right" headers="Immediate">6.572572</td>
-<td class="gt_row gt_right" headers="After24Hours">7.378495</td>
-<td class="gt_row gt_right" headers="After1Week">4.779111</td>
+<td class="gt_row gt_right" headers="Immediate">5.571551</td>
+<td class="gt_row gt_right" headers="After24Hours">8.255040</td>
+<td class="gt_row gt_right" headers="After1Week">4.175469</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">4</td>
-<td class="gt_row gt_right" headers="Immediate">7.932458</td>
-<td class="gt_row gt_right" headers="After24Hours">5.136980</td>
-<td class="gt_row gt_right" headers="After1Week">4.451730</td>
+<td class="gt_row gt_right" headers="Immediate">6.417572</td>
+<td class="gt_row gt_right" headers="After24Hours">5.461643</td>
+<td class="gt_row gt_right" headers="After1Week">2.616414</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">5</td>
-<td class="gt_row gt_right" headers="Immediate">6.822643</td>
-<td class="gt_row gt_right" headers="After24Hours">6.911946</td>
-<td class="gt_row gt_right" headers="After1Week">4.158514</td>
+<td class="gt_row gt_right" headers="Immediate">6.597311</td>
+<td class="gt_row gt_right" headers="After24Hours">4.543876</td>
+<td class="gt_row gt_right" headers="After1Week">2.219887</td>
 </tr>
 </tbody>
 </table>
@@ -2308,38 +2494,38 @@ Dave Brocker
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">data.frame</span>(</span>
-<span id="cb7-2"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
-<span id="cb7-3"><a></a>  <span class="at">Immediate =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb7-4"><a></a>  <span class="at">Day =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb7-5"><a></a>  <span class="at">Week =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb7-6"><a></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-7"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
-<span id="cb7-8"><a></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
-<span id="cb7-9"><a></a>                      <span class="at">values_to =</span> <span class="st">"Stress"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-10"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-11"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-12"><a></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Long Data"</span>,</span>
-<span id="cb7-13"><a></a>             <span class="at">subtitle =</span> <span class="st">"Each row represents an indivdual participant's score on each level of the treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb9-3"><a></a>  <span class="at">Immediate =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb9-4"><a></a>  <span class="at">Day =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb9-5"><a></a>  <span class="at">Week =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb9-6"><a></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
+<span id="cb9-8"><a></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
+<span id="cb9-9"><a></a>                      <span class="at">values_to =</span> <span class="st">"Stress"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-10"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-11"><a></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-12"><a></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Long Data"</span>,</span>
+<span id="cb9-13"><a></a>             <span class="at">subtitle =</span> <span class="st">"Each row represents an indivdual participant's score on each level of the treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="kkytzgywzt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kkytzgywzt table {
+<div id="vbspqdplen" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vbspqdplen table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kkytzgywzt thead, #kkytzgywzt tbody, #kkytzgywzt tfoot, #kkytzgywzt tr, #kkytzgywzt td, #kkytzgywzt th {
+#vbspqdplen thead, #vbspqdplen tbody, #vbspqdplen tfoot, #vbspqdplen tr, #vbspqdplen td, #vbspqdplen th {
   border-style: none;
 }
 
-#kkytzgywzt p {
+#vbspqdplen p {
   margin: 0;
   padding: 0;
 }
 
-#kkytzgywzt .gt_table {
+#vbspqdplen .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2365,12 +2551,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_caption {
+#vbspqdplen .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kkytzgywzt .gt_title {
+#vbspqdplen .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2382,7 +2568,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#kkytzgywzt .gt_subtitle {
+#vbspqdplen .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2394,7 +2580,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#kkytzgywzt .gt_heading {
+#vbspqdplen .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2406,13 +2592,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_bottom_border {
+#vbspqdplen .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_col_headings {
+#vbspqdplen .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2427,7 +2613,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_col_heading {
+#vbspqdplen .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2447,7 +2633,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#kkytzgywzt .gt_column_spanner_outer {
+#vbspqdplen .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2459,15 +2645,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#kkytzgywzt .gt_column_spanner_outer:first-child {
+#vbspqdplen .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kkytzgywzt .gt_column_spanner_outer:last-child {
+#vbspqdplen .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kkytzgywzt .gt_column_spanner {
+#vbspqdplen .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2479,11 +2665,11 @@ Dave Brocker
   width: 100%;
 }
 
-#kkytzgywzt .gt_spanner_row {
+#vbspqdplen .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kkytzgywzt .gt_group_heading {
+#vbspqdplen .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2509,7 +2695,7 @@ Dave Brocker
   text-align: left;
 }
 
-#kkytzgywzt .gt_empty_group_heading {
+#vbspqdplen .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2524,15 +2710,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#kkytzgywzt .gt_from_md > :first-child {
+#vbspqdplen .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kkytzgywzt .gt_from_md > :last-child {
+#vbspqdplen .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kkytzgywzt .gt_row {
+#vbspqdplen .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2551,7 +2737,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#kkytzgywzt .gt_stub {
+#vbspqdplen .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2564,7 +2750,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#kkytzgywzt .gt_stub_row_group {
+#vbspqdplen .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2578,15 +2764,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#kkytzgywzt .gt_row_group_first td {
+#vbspqdplen .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kkytzgywzt .gt_row_group_first th {
+#vbspqdplen .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kkytzgywzt .gt_summary_row {
+#vbspqdplen .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2596,16 +2782,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#kkytzgywzt .gt_first_summary_row {
+#vbspqdplen .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_first_summary_row.thick {
+#vbspqdplen .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kkytzgywzt .gt_last_summary_row {
+#vbspqdplen .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2615,7 +2801,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_grand_summary_row {
+#vbspqdplen .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2625,7 +2811,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#kkytzgywzt .gt_first_grand_summary_row {
+#vbspqdplen .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2635,7 +2821,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_last_grand_summary_row_top {
+#vbspqdplen .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2645,11 +2831,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_striped {
+#vbspqdplen .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kkytzgywzt .gt_table_body {
+#vbspqdplen .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2658,7 +2844,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_footnotes {
+#vbspqdplen .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2672,7 +2858,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_footnote {
+#vbspqdplen .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2681,7 +2867,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#kkytzgywzt .gt_sourcenotes {
+#vbspqdplen .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2695,7 +2881,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#kkytzgywzt .gt_sourcenote {
+#vbspqdplen .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2703,72 +2889,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#kkytzgywzt .gt_left {
+#vbspqdplen .gt_left {
   text-align: left;
 }
 
-#kkytzgywzt .gt_center {
+#vbspqdplen .gt_center {
   text-align: center;
 }
 
-#kkytzgywzt .gt_right {
+#vbspqdplen .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kkytzgywzt .gt_font_normal {
+#vbspqdplen .gt_font_normal {
   font-weight: normal;
 }
 
-#kkytzgywzt .gt_font_bold {
+#vbspqdplen .gt_font_bold {
   font-weight: bold;
 }
 
-#kkytzgywzt .gt_font_italic {
+#vbspqdplen .gt_font_italic {
   font-style: italic;
 }
 
-#kkytzgywzt .gt_super {
+#vbspqdplen .gt_super {
   font-size: 65%;
 }
 
-#kkytzgywzt .gt_footnote_marks {
+#vbspqdplen .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kkytzgywzt .gt_asterisk {
+#vbspqdplen .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kkytzgywzt .gt_indent_1 {
+#vbspqdplen .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kkytzgywzt .gt_indent_2 {
+#vbspqdplen .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kkytzgywzt .gt_indent_3 {
+#vbspqdplen .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kkytzgywzt .gt_indent_4 {
+#vbspqdplen .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kkytzgywzt .gt_indent_5 {
+#vbspqdplen .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kkytzgywzt .katex-display {
+#vbspqdplen .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kkytzgywzt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vbspqdplen div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2791,77 +2977,77 @@ Dave Brocker
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">1</td>
 <td class="gt_row gt_left" headers="Time">Immediate</td>
-<td class="gt_row gt_right" headers="Stress">10.807</td>
+<td class="gt_row gt_right" headers="Stress">6.566</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">1</td>
 <td class="gt_row gt_left" headers="Time">Day</td>
-<td class="gt_row gt_right" headers="Stress"> 5.637</td>
+<td class="gt_row gt_right" headers="Stress">6.58 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">1</td>
 <td class="gt_row gt_left" headers="Time">Week</td>
-<td class="gt_row gt_right" headers="Stress"> 3.411</td>
+<td class="gt_row gt_right" headers="Stress">1.127</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">2</td>
 <td class="gt_row gt_left" headers="Time">Immediate</td>
-<td class="gt_row gt_right" headers="Stress"> 8.904</td>
+<td class="gt_row gt_right" headers="Stress">7.219</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">2</td>
 <td class="gt_row gt_left" headers="Time">Day</td>
-<td class="gt_row gt_right" headers="Stress"> 7.676</td>
+<td class="gt_row gt_right" headers="Stress">7.573</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">2</td>
 <td class="gt_row gt_left" headers="Time">Week</td>
-<td class="gt_row gt_right" headers="Stress"> 4.011</td>
+<td class="gt_row gt_right" headers="Stress">3.645</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">3</td>
 <td class="gt_row gt_left" headers="Time">Immediate</td>
-<td class="gt_row gt_right" headers="Stress"> 6.851</td>
+<td class="gt_row gt_right" headers="Stress">8.333</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">3</td>
 <td class="gt_row gt_left" headers="Time">Day</td>
-<td class="gt_row gt_right" headers="Stress"> 7.777</td>
+<td class="gt_row gt_right" headers="Stress">7.335</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">3</td>
 <td class="gt_row gt_left" headers="Time">Week</td>
-<td class="gt_row gt_right" headers="Stress"> 0.258</td>
+<td class="gt_row gt_right" headers="Stress">1.699</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">4</td>
 <td class="gt_row gt_left" headers="Time">Immediate</td>
-<td class="gt_row gt_right" headers="Stress"> 7.07 </td>
+<td class="gt_row gt_right" headers="Stress">9.193</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">4</td>
 <td class="gt_row gt_left" headers="Time">Day</td>
-<td class="gt_row gt_right" headers="Stress"> 8.47 </td>
+<td class="gt_row gt_right" headers="Stress">6.733</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">4</td>
 <td class="gt_row gt_left" headers="Time">Week</td>
-<td class="gt_row gt_right" headers="Stress"> 2.534</td>
+<td class="gt_row gt_right" headers="Stress">2.172</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">5</td>
 <td class="gt_row gt_left" headers="Time">Immediate</td>
-<td class="gt_row gt_right" headers="Stress"> 9.185</td>
+<td class="gt_row gt_right" headers="Stress">8.013</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Participant">5</td>
 <td class="gt_row gt_left" headers="Time">Day</td>
-<td class="gt_row gt_right" headers="Stress"> 6.289</td>
+<td class="gt_row gt_right" headers="Stress">7.256</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Participant">5</td>
 <td class="gt_row gt_left" headers="Time">Week</td>
-<td class="gt_row gt_right" headers="Stress"> 4.943</td>
+<td class="gt_row gt_right" headers="Stress">4.629</td>
 </tr>
 </tbody>
 </table>
@@ -2869,48 +3055,43 @@ Dave Brocker
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="more-examples" class="title-slide slide level1 center">
-<h1>More Examples!</h1>
-
 </section>
 <section id="memory-recall-study" class="slide level2">
-<h2>1. Memory Recall Study</h2>
+<h2>Memory Recall Study</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb8-2"><a></a></span>
-<span id="cb8-3"><a></a><span class="co"># Memory Recall Study</span></span>
-<span id="cb8-4"><a></a>memory_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb8-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb8-6"><a></a>  <span class="at">Immediate =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb8-7"><a></a>  <span class="at">After24Hours =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb8-8"><a></a>  <span class="at">After1Week =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb8-9"><a></a>)</span>
-<span id="cb8-10"><a></a></span>
-<span id="cb8-11"><a></a><span class="co"># Make Data Longer</span></span>
-<span id="cb8-12"><a></a>memory_data_long <span class="ot">&lt;-</span> </span>
-<span id="cb8-13"><a></a>  memory_data <span class="sc">|&gt;</span> </span>
-<span id="cb8-14"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
-<span id="cb8-15"><a></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
-<span id="cb8-16"><a></a>                      <span class="at">values_to =</span> <span class="st">"Memory"</span>)</span>
-<span id="cb8-17"><a></a></span>
-<span id="cb8-18"><a></a></span>
-<span id="cb8-19"><a></a><span class="fu">aov</span>(Memory <span class="sc">~</span> Time <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> memory_data_long) <span class="sc">|&gt;</span> </span>
-<span id="cb8-20"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb8-21"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-22"><a></a>    <span class="at">Source =</span> term,</span>
-<span id="cb8-23"><a></a>    <span class="at">SS =</span> sumsq,</span>
-<span id="cb8-24"><a></a>    <span class="at">MS =</span> meansq,</span>
-<span id="cb8-25"><a></a>    <span class="st">`</span><span class="at">F</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(statistic),<span class="st">"--"</span>,statistic <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)),</span>
-<span id="cb8-26"><a></a>    <span class="at">p =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&gt;</span>.<span class="dv">05</span>,<span class="st">"&lt;.05"</span>,p.value),</span>
-<span id="cb8-27"><a></a>    <span class="at">p =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(p),<span class="st">"--"</span>,p)</span>
-<span id="cb8-28"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-29"><a></a>  <span class="fu">select</span>(Source, df, SS, MS, <span class="st">`</span><span class="at">F</span><span class="st">`</span>, p) <span class="sc">|&gt;</span> </span>
-<span id="cb8-30"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb8-31"><a></a>  <span class="fu">fmt_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb10-2"><a></a></span>
+<span id="cb10-3"><a></a><span class="co"># Memory Recall Study</span></span>
+<span id="cb10-4"><a></a>memory_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
+<span id="cb10-6"><a></a>  <span class="at">Immediate =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb10-7"><a></a>  <span class="at">After24Hours =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb10-8"><a></a>  <span class="at">After1Week =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb10-9"><a></a>)</span>
+<span id="cb10-10"><a></a></span>
+<span id="cb10-11"><a></a><span class="co"># Make Data Longer</span></span>
+<span id="cb10-12"><a></a>memory_data_long <span class="ot">&lt;-</span> </span>
+<span id="cb10-13"><a></a>  memory_data <span class="sc">|&gt;</span> </span>
+<span id="cb10-14"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
+<span id="cb10-15"><a></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
+<span id="cb10-16"><a></a>                      <span class="at">values_to =</span> <span class="st">"Memory"</span>)</span>
+<span id="cb10-17"><a></a></span>
+<span id="cb10-18"><a></a></span>
+<span id="cb10-19"><a></a><span class="fu">aov</span>(Memory <span class="sc">~</span> Time <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> memory_data_long) <span class="sc">|&gt;</span> </span>
+<span id="cb10-20"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-21"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-22"><a></a>    <span class="at">Source =</span> term,</span>
+<span id="cb10-23"><a></a>    <span class="at">SS =</span> sumsq,</span>
+<span id="cb10-24"><a></a>    <span class="at">MS =</span> meansq,</span>
+<span id="cb10-25"><a></a>    <span class="st">`</span><span class="at">F</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(statistic),<span class="st">"--"</span>,statistic <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)),</span>
+<span id="cb10-26"><a></a>    <span class="at">p =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&gt;</span>.<span class="dv">05</span>,<span class="st">"&lt;.05"</span>,p.value),</span>
+<span id="cb10-27"><a></a>    <span class="at">p =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(p),<span class="st">"--"</span>,p)</span>
+<span id="cb10-28"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb10-29"><a></a>  <span class="fu">select</span>(Source, df, SS, MS, <span class="st">`</span><span class="at">F</span><span class="st">`</span>, p) <span class="sc">|&gt;</span> </span>
+<span id="cb10-30"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-31"><a></a>  <span class="fu">fmt_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="jddizngugi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3406,63 +3587,63 @@ Dave Brocker
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>memory_data_long <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Time,Memory, <span class="at">color =</span> Time)) <span class="sc">+</span> </span>
-<span id="cb9-3"><a></a>    <span class="fu">stat_summary</span>(</span>
-<span id="cb9-4"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb9-5"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
-<span id="cb9-6"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb9-7"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
-<span id="cb9-8"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb9-9"><a></a>    <span class="fu">stat_summary</span>(</span>
-<span id="cb9-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb9-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb9-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
-<span id="cb9-13"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
-<span id="cb9-14"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb9-15"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb9-16"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb9-17"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb9-18"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb9-19"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
-<span id="cb9-20"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb9-21"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>memory_data_long <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Time,Memory, <span class="at">color =</span> Time)) <span class="sc">+</span> </span>
+<span id="cb11-3"><a></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb11-4"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb11-5"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb11-6"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb11-7"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb11-8"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb11-9"><a></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb11-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb11-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb11-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb11-13"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb11-14"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb11-15"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb11-16"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb11-17"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb11-18"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb11-19"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
+<span id="cb11-20"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb11-21"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec14_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="clinical-trial" class="slide level2">
-<h2>2. Clinical Trial</h2>
+<h2>Clinical Trial</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb10-2"><a></a></span>
-<span id="cb10-3"><a></a><span class="co"># Clinical Trial Study</span></span>
-<span id="cb10-4"><a></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb10-6"><a></a>  <span class="at">LowDose =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb10-7"><a></a>  <span class="at">MediumDose =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">6.5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb10-8"><a></a>  <span class="at">HighDose =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb10-9"><a></a>)</span>
-<span id="cb10-10"><a></a></span>
-<span id="cb10-11"><a></a>clinical_data_long <span class="ot">&lt;-</span> </span>
-<span id="cb10-12"><a></a>  clinical_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-13"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
-<span id="cb10-14"><a></a>    <span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
-<span id="cb10-15"><a></a>    <span class="at">names_to =</span> <span class="st">"Dosage"</span>,</span>
-<span id="cb10-16"><a></a>    <span class="at">values_to =</span> <span class="st">"DV"</span></span>
-<span id="cb10-17"><a></a>  )</span>
-<span id="cb10-18"><a></a></span>
-<span id="cb10-19"><a></a><span class="fu">aov</span>(DV <span class="sc">~</span> Dosage <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> clinical_data_long) <span class="sc">|&gt;</span> </span>
-<span id="cb10-20"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb10-21"><a></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a><span class="co"># Clinical Trial Study</span></span>
+<span id="cb12-4"><a></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
+<span id="cb12-6"><a></a>  <span class="at">LowDose =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb12-7"><a></a>  <span class="at">MediumDose =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">6.5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb12-8"><a></a>  <span class="at">HighDose =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb12-9"><a></a>)</span>
+<span id="cb12-10"><a></a></span>
+<span id="cb12-11"><a></a>clinical_data_long <span class="ot">&lt;-</span> </span>
+<span id="cb12-12"><a></a>  clinical_data <span class="sc">|&gt;</span> </span>
+<span id="cb12-13"><a></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb12-14"><a></a>    <span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
+<span id="cb12-15"><a></a>    <span class="at">names_to =</span> <span class="st">"Dosage"</span>,</span>
+<span id="cb12-16"><a></a>    <span class="at">values_to =</span> <span class="st">"DV"</span></span>
+<span id="cb12-17"><a></a>  )</span>
+<span id="cb12-18"><a></a></span>
+<span id="cb12-19"><a></a><span class="fu">aov</span>(DV <span class="sc">~</span> Dosage <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> clinical_data_long) <span class="sc">|&gt;</span> </span>
+<span id="cb12-20"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-21"><a></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="jddizngugi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3962,68 +4143,68 @@ Dave Brocker
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>clinical_data_long <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Dosage,DV, <span class="at">color =</span> Dosage)) <span class="sc">+</span> </span>
-<span id="cb11-3"><a></a>    <span class="fu">stat_summary</span>(</span>
-<span id="cb11-4"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb11-5"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
-<span id="cb11-6"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb11-7"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
-<span id="cb11-8"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb11-9"><a></a>    <span class="fu">stat_summary</span>(</span>
-<span id="cb11-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb11-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb11-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
-<span id="cb11-13"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
-<span id="cb11-14"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb11-15"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb11-16"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb11-17"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb11-18"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb11-19"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
-<span id="cb11-20"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb11-21"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>clinical_data_long <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Dosage,DV, <span class="at">color =</span> Dosage)) <span class="sc">+</span> </span>
+<span id="cb13-3"><a></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb13-4"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb13-5"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb13-6"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb13-7"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb13-8"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb13-9"><a></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb13-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb13-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb13-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb13-13"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb13-14"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb13-15"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb13-16"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb13-17"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb13-18"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb13-19"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
+<span id="cb13-20"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb13-21"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec14_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="behavioral-therapy-progress" class="slide level2">
-<h2>3. Behavioral Therapy Progress</h2>
+<h2>Behavioral Therapy Progress</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb12-2"><a></a></span>
-<span id="cb12-3"><a></a><span class="co"># Behavioral Therapy Study</span></span>
-<span id="cb12-4"><a></a>therapy_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb12-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb12-6"><a></a>  <span class="at">Baseline =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
-<span id="cb12-7"><a></a>  <span class="at">MidTreatment =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
-<span id="cb12-8"><a></a>  <span class="at">PostTreatment =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb12-9"><a></a>)</span>
-<span id="cb12-10"><a></a></span>
-<span id="cb12-11"><a></a>therapy_data_long <span class="ot">&lt;-</span> </span>
-<span id="cb12-12"><a></a>  therapy_data <span class="sc">|&gt;</span> </span>
-<span id="cb12-13"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
-<span id="cb12-14"><a></a>    <span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
-<span id="cb12-15"><a></a>    <span class="at">names_to =</span> <span class="st">"Treatment_Group"</span>,</span>
-<span id="cb12-16"><a></a>    <span class="at">values_to =</span> <span class="st">"DV"</span></span>
-<span id="cb12-17"><a></a>  )</span>
-<span id="cb12-18"><a></a></span>
-<span id="cb12-19"><a></a><span class="fu">aov_ez</span>(</span>
-<span id="cb12-20"><a></a>  <span class="st">"Participant"</span>,</span>
-<span id="cb12-21"><a></a>  <span class="st">"DV"</span>,</span>
-<span id="cb12-22"><a></a>  therapy_data_long, </span>
-<span id="cb12-23"><a></a>  <span class="at">within =</span> <span class="st">"Treatment_Group"</span>,</span>
-<span id="cb12-24"><a></a>  <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">"none"</span>),</span>
-<span id="cb12-25"><a></a>  <span class="at">return =</span> <span class="st">"nice"</span></span>
-<span id="cb12-26"><a></a>) <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb14-2"><a></a></span>
+<span id="cb14-3"><a></a><span class="co"># Behavioral Therapy Study</span></span>
+<span id="cb14-4"><a></a>therapy_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
+<span id="cb14-6"><a></a>  <span class="at">Baseline =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb14-7"><a></a>  <span class="at">MidTreatment =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb14-8"><a></a>  <span class="at">PostTreatment =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb14-9"><a></a>)</span>
+<span id="cb14-10"><a></a></span>
+<span id="cb14-11"><a></a>therapy_data_long <span class="ot">&lt;-</span> </span>
+<span id="cb14-12"><a></a>  therapy_data <span class="sc">|&gt;</span> </span>
+<span id="cb14-13"><a></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb14-14"><a></a>    <span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
+<span id="cb14-15"><a></a>    <span class="at">names_to =</span> <span class="st">"Treatment_Group"</span>,</span>
+<span id="cb14-16"><a></a>    <span class="at">values_to =</span> <span class="st">"DV"</span></span>
+<span id="cb14-17"><a></a>  )</span>
+<span id="cb14-18"><a></a></span>
+<span id="cb14-19"><a></a><span class="fu">aov_ez</span>(</span>
+<span id="cb14-20"><a></a>  <span class="st">"Participant"</span>,</span>
+<span id="cb14-21"><a></a>  <span class="st">"DV"</span>,</span>
+<span id="cb14-22"><a></a>  therapy_data_long, </span>
+<span id="cb14-23"><a></a>  <span class="at">within =</span> <span class="st">"Treatment_Group"</span>,</span>
+<span id="cb14-24"><a></a>  <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">"none"</span>),</span>
+<span id="cb14-25"><a></a>  <span class="at">return =</span> <span class="st">"nice"</span></span>
+<span id="cb14-26"><a></a>) <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="jddizngugi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4503,26 +4684,26 @@ Dave Brocker
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>therapy_data_long <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Treatment_Group,DV,<span class="at">color =</span> Treatment_Group)) <span class="sc">+</span></span>
-<span id="cb13-3"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb13-4"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb13-5"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb13-6"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb13-7"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
-<span id="cb13-8"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb13-9"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb13-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb13-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb13-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
-<span id="cb13-13"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
-<span id="cb13-14"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb13-15"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>therapy_data_long <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Treatment_Group,DV,<span class="at">color =</span> Treatment_Group)) <span class="sc">+</span></span>
+<span id="cb15-3"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb15-4"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb15-5"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb15-6"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb15-7"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
+<span id="cb15-8"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb15-9"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb15-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb15-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb15-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb15-13"><a></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb15-14"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb15-15"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec14_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -4533,25 +4714,25 @@ Dave Brocker
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb14-2"><a></a></span>
-<span id="cb14-3"><a></a><span class="co"># Consumer Product Study</span></span>
-<span id="cb14-4"><a></a>product_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb14-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb14-6"><a></a>  <span class="at">ProductA =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb14-7"><a></a>  <span class="at">ProductB =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb14-8"><a></a>  <span class="at">ProductC =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb14-9"><a></a>)</span>
-<span id="cb14-10"><a></a></span>
-<span id="cb14-11"><a></a>product_data_long <span class="ot">&lt;-</span> </span>
-<span id="cb14-12"><a></a>  product_data <span class="sc">|&gt;</span> </span>
-<span id="cb14-13"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
-<span id="cb14-14"><a></a>                      <span class="at">names_to =</span> <span class="st">"products"</span>,</span>
-<span id="cb14-15"><a></a>                      <span class="at">values_to =</span> <span class="st">"ratings"</span>)</span>
-<span id="cb14-16"><a></a></span>
-<span id="cb14-17"><a></a><span class="fu">aov</span>(ratings <span class="sc">~</span> products <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> product_data_long) <span class="sc">|&gt;</span></span>
-<span id="cb14-18"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb14-19"><a></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb16-2"><a></a></span>
+<span id="cb16-3"><a></a><span class="co"># Consumer Product Study</span></span>
+<span id="cb16-4"><a></a>product_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
+<span id="cb16-6"><a></a>  <span class="at">ProductA =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb16-7"><a></a>  <span class="at">ProductB =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb16-8"><a></a>  <span class="at">ProductC =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb16-9"><a></a>)</span>
+<span id="cb16-10"><a></a></span>
+<span id="cb16-11"><a></a>product_data_long <span class="ot">&lt;-</span> </span>
+<span id="cb16-12"><a></a>  product_data <span class="sc">|&gt;</span> </span>
+<span id="cb16-13"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
+<span id="cb16-14"><a></a>                      <span class="at">names_to =</span> <span class="st">"products"</span>,</span>
+<span id="cb16-15"><a></a>                      <span class="at">values_to =</span> <span class="st">"ratings"</span>)</span>
+<span id="cb16-16"><a></a></span>
+<span id="cb16-17"><a></a><span class="fu">aov</span>(ratings <span class="sc">~</span> products <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> product_data_long) <span class="sc">|&gt;</span></span>
+<span id="cb16-18"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb16-19"><a></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="jddizngugi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -5051,24 +5232,24 @@ Dave Brocker
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>product_data_long <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(products,ratings,<span class="at">fill =</span> products)) <span class="sc">+</span> </span>
-<span id="cb15-3"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb15-4"><a></a>    <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
-<span id="cb15-5"><a></a>    <span class="at">geom =</span> <span class="st">"bar"</span>,</span>
-<span id="cb15-6"><a></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
-<span id="cb15-7"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb15-8"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb15-9"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb15-10"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb15-11"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
-<span id="cb15-12"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb15-13"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>product_data_long <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(products,ratings,<span class="at">fill =</span> products)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb17-4"><a></a>    <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb17-5"><a></a>    <span class="at">geom =</span> <span class="st">"bar"</span>,</span>
+<span id="cb17-6"><a></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
+<span id="cb17-7"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb17-8"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb17-9"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb17-10"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb17-11"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
+<span id="cb17-12"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb17-13"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec14_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -5079,26 +5260,26 @@ Dave Brocker
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb16-2"><a></a></span>
-<span id="cb16-3"><a></a><span class="co"># Physiological Stress Study</span></span>
-<span id="cb16-4"><a></a>stress_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb16-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb16-6"><a></a>  <span class="at">Rest =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
-<span id="cb16-7"><a></a>  <span class="at">Task =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">70</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
-<span id="cb16-8"><a></a>  <span class="at">Recovery =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb16-9"><a></a>)</span>
-<span id="cb16-10"><a></a></span>
-<span id="cb16-11"><a></a>stress_data_long <span class="ot">&lt;-</span> </span>
-<span id="cb16-12"><a></a>  stress_data <span class="sc">|&gt;</span> </span>
-<span id="cb16-13"><a></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
-<span id="cb16-14"><a></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
-<span id="cb16-15"><a></a>                      <span class="at">values_to =</span> <span class="st">"Stress"</span>)</span>
-<span id="cb16-16"><a></a></span>
-<span id="cb16-17"><a></a><span class="fu">aov</span>(Stress <span class="sc">~</span> Time <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> stress_data_long) <span class="sc">|&gt;</span></span>
-<span id="cb16-18"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb16-19"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb16-20"><a></a>  <span class="fu">fmt_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a><span class="co"># Physiological Stress Study</span></span>
+<span id="cb18-4"><a></a>stress_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-5"><a></a>  <span class="at">Participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
+<span id="cb18-6"><a></a>  <span class="at">Rest =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
+<span id="cb18-7"><a></a>  <span class="at">Task =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">70</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
+<span id="cb18-8"><a></a>  <span class="at">Recovery =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb18-9"><a></a>)</span>
+<span id="cb18-10"><a></a></span>
+<span id="cb18-11"><a></a>stress_data_long <span class="ot">&lt;-</span> </span>
+<span id="cb18-12"><a></a>  stress_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-13"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Participant,</span>
+<span id="cb18-14"><a></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
+<span id="cb18-15"><a></a>                      <span class="at">values_to =</span> <span class="st">"Stress"</span>)</span>
+<span id="cb18-16"><a></a></span>
+<span id="cb18-17"><a></a><span class="fu">aov</span>(Stress <span class="sc">~</span> Time <span class="sc">+</span> <span class="fu">Error</span>(Participant), <span class="at">data =</span> stress_data_long) <span class="sc">|&gt;</span></span>
+<span id="cb18-18"><a></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb18-19"><a></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb18-20"><a></a>  <span class="fu">fmt_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="jddizngugi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -5598,24 +5779,24 @@ Dave Brocker
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>stress_data_long <span class="sc">|&gt;</span> </span>
-<span id="cb17-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Time,Stress,<span class="at">color =</span> Time)) <span class="sc">+</span> </span>
-<span id="cb17-3"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb17-4"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb17-5"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb17-6"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb17-7"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
-<span id="cb17-8"><a></a>  ) <span class="sc">+</span> </span>
-<span id="cb17-9"><a></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb17-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
-<span id="cb17-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb17-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb17-13"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>stress_data_long <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Time,Stress,<span class="at">color =</span> Time)) <span class="sc">+</span> </span>
+<span id="cb19-3"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb19-4"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb19-5"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb19-6"><a></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb19-7"><a></a>    <span class="at">width =</span> .<span class="dv">2</span></span>
+<span id="cb19-8"><a></a>  ) <span class="sc">+</span> </span>
+<span id="cb19-9"><a></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb19-10"><a></a>    <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb19-11"><a></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb19-12"><a></a>    <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb19-13"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec14_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
+<p><a href="lec14_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec14_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
