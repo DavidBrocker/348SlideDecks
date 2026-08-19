@@ -507,8 +507,8 @@ cof |>
     x = "\nCondition",
     y = "Score\n"
   ) +
-  theme_sub_panel(
-    grid.major = element_blank()
+  theme(
+    panel.grid.major = element_blank()
   )
 ```
 
@@ -551,7 +551,7 @@ cof |>
 ::: callout-tip
 # ANOVA Formula
 
-$F = \frac{MS_B}{MS_E}\\MS_B = \frac{SS_B}{df_E} = MS_E = \frac{SS_E}{df_E}\\df_B = k-1 = df_E = N - k$
+$F = \frac{MS_B}{MS_E} \\ MS_B = \frac{SS_B}{df_B} \quad MS_E = \frac{SS_E}{df_E} \\ df_B = k-1 \quad df_E = N - k$
 :::
 
 -   Where MS - Means Square
@@ -611,7 +611,7 @@ $\Large{s^2 = \frac{\sum(x-\bar{x})^2}{n-1}}$
 
 ## Calculating means squared (MS)
 
-$MS_B = \frac{SS_B}{df_E} \\ MS_E = \frac{SS_E}{df_E}$
+$MS_B = \frac{SS_B}{df_B} \\ MS_E = \frac{SS_E}{df_E}$
 
 -   Divide the SS by their degrees of freedom.
 
@@ -643,7 +643,7 @@ $MS_B = \frac{SS_B}{df_E} \\ MS_E = \frac{SS_E}{df_E}$
 
 ## Calculating the Means Squared (MS)
 
--   $MS_B = \frac{SS_B}{df_E}$
+-   $MS_B = \frac{SS_B}{df_B}$
 
 -   $MS_E = \frac{SS_E}{df_E}$
 

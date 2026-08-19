@@ -1,0 +1,156 @@
+---
+title: "Lab: Z-Scores & Probability in Practice"
+subtitle: "Standardizing Data and Finding Probabilities"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "PSY 348 - Statistics for Psychology"
+format:
+  revealjs:
+    theme: custom.scss
+    width: 1600
+    height: 900
+    incremental: true
+    touch: true
+    chalkboard: true
+---
+
+## Quick Recap
+
+$$z = \frac{x - \bar{x}}{s}$$
+
+::: highlight-last
+-   A z-score tells you how many standard deviations a value is from the mean
+
+-   Once we have a z-score, we can find **probabilities** — what percentage of scores fall above, below, or between values
+:::
+
+## Scenario
+
+> Professor Brocker's PSY 348 midterm had `40` students. The exam scores were approximately normally distributed with a mean of `76` and a standard deviation of `8`.
+
+::: highlight-last
+-   Nadia scored an `88`.
+
+-   Before we calculate anything — do you think that's a good score relative to the class? Great? Just okay?
+:::
+
+## By Hand First
+
+$$z = \frac{x - \bar{x}}{s} = \frac{88 - 76}{8} = 1.5$$
+
+::: highlight-last
+-   Nadia's score is **1.5 standard deviations above the mean**
+
+-   Using the 68/95/99.7 rule: roughly 93% of students scored *below* Nadia
+:::
+
+## Now in R
+
+```{r}
+#| echo: true
+library(dplyr)
+
+# Simulate a class of 40 exam scores
+set.seed(348)
+exam_scores <- rnorm(40, mean = 76, sd = 8) |> round(1)
+
+# Nadia's score
+nadia <- 88
+
+# Z-score by hand vs. by function
+z_hand <- (nadia - mean(exam_scores)) / sd(exam_scores)
+z_hand
+```
+
+::: highlight-last
+-   Notice: this won't be *exactly* 1.5 — why not? (Hint: think about what `set.seed()` and `rnorm()` are actually doing.)
+:::
+
+## Standardizing an Entire Dataset
+
+R can convert every score to a z-score at once with `scale()`:
+
+```{r}
+#| echo: true
+z_scores <- scale(exam_scores)[,1] |> round(2)
+
+data.frame(
+  score = exam_scores,
+  z = z_scores
+) |>
+  head(8)
+```
+
+-   What do you notice about the *mean* of `z_scores`? The *standard deviation*?
+
+## From Z-Score to Probability
+
+R's `pnorm()` gives the probability of scoring *at or below* a given z-score, using the theoretical normal curve (not just our 40 students).
+
+```{r}
+#| echo: true
+# Probability of scoring 88 or LOWER
+pnorm(88, mean = 76, sd = 8)
+```
+
+::: highlight-last
+-   About `pnorm(1.5)` = 93.3% of the theoretical distribution falls at or below a z of 1.5
+
+-   So only about **6.7%** of students would be expected to outscore Nadia
+:::
+
+## Visualizing It
+
+```{r}
+library(ggplot2)
+
+dat <- data.frame(x = seq(50, 102, by = 0.1))
+dat$y <- dnorm(dat$x, mean = 76, sd = 8)
+
+ggplot(dat, aes(x, y)) +
+  geom_line(linewidth = 1.1) +
+  geom_area(
+    data = subset(dat, x >= 88),
+    fill = "orange", alpha = 0.6
+  ) +
+  geom_vline(xintercept = 88, lty = "dashed") +
+  theme_minimal(base_size = 18) +
+  labs(
+    title = "Probability of Scoring 88 or Higher",
+    x = "\nExam Score",
+    y = "Density\n"
+  ) +
+  theme(panel.grid = element_blank())
+```
+
+## Going the Other Direction
+
+`qnorm()` does the reverse — give it a probability, get back a score.
+
+```{r}
+#| echo: true
+# What score marks the top 10% of the class?
+qnorm(0.90, mean = 76, sd = 8)
+```
+
+::: highlight-last
+-   A student would need roughly an `86` to be in the top 10% of this class
+:::
+
+## Your Turn
+
+Using `exam_scores` from earlier in this lab:
+
+1.  Calculate the z-score for a student who scored a `70`. Is that above or below average?
+
+2.  Using `pnorm()`, what percentage of the theoretical distribution scored below a `70`?
+
+3.  Using `qnorm()`, what raw score marks the bottom 25% of the distribution?
+
+4.  In your own words: what's the difference between using `mean(exam_scores)`/`sd(exam_scores)` (our actual class) versus plugging in `76` and `8` directly into `pnorm()`/`qnorm()`?
+
+## Submit on Brightspace
+
+-   Your answers to the four questions above (show your R code and output)
+
+-   One sentence: is a z-score of 0 a "good" or "bad" score? Explain.

@@ -1,6 +1,6 @@
 ---
 title: "Sampling Theory"
-subtitle: "Lecture 7"
+subtitle: "Lecture 8"
 author: "Dave Brocker"
 institute: "Farmingdale State College"
 format: 
@@ -167,7 +167,7 @@ tibble(
   ) +
   geom_vline(aes(xintercept = mean(ratings)), lty = "dashed") +
   scale_x_continuous(breaks = scales::pretty_breaks(n = 8)) + 
-  theme_sub_panel(grid = element_blank())
+  theme(panel.grid = element_blank())
 
 
 ```
@@ -252,7 +252,7 @@ p <-
     y = "Probability Density\n"
   ) +
   scale_x_continuous(breaks = -4:4) +
-  theme_sub_panel(grid = element_blank())
+  theme(panel.grid = element_blank())
 
 p
 ```
@@ -349,7 +349,7 @@ tibble(
   scale_x_continuous(breaks = scales::pretty_breaks(n = 8)) +
   annotate(geom = "point", x = 3, y = .04, color = "maroon") +
   geom_segment(x = 3, y = 0, xend = 3, yend = .036, size = .8) +
-  theme_sub_panel(grid = element_blank())
+  theme(panel.grid = element_blank())
 ```
 
 ## Probability
@@ -557,7 +557,7 @@ tibble(
     title = "Distribution of Oranges in 20 Scoops of 25"
   ) + 
   geom_vline(aes(xintercept = mean(n_orange)), lty = "dashed") + 
-  theme_sub_panel(grid.major = element_blank())
+  theme(panel.grid.major = element_blank())
 ```
 :::
 :::::
@@ -649,7 +649,7 @@ ggplot(sample_means, aes(x = mean)) +
     subtitle = "We don’t get the exact same answer each time — but the sample means cluster around the true mean."
   ) +
   theme_minimal() + 
-  theme_sub_panel(grid.major = element_blank())
+  theme(panel.grid.major = element_blank())
 
 ```
 :::

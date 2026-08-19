@@ -1,24 +1,169 @@
 ---
-footer: "PSY 348 - Statistcs for Psychology"
-from: markdown+emoji
-format: 
+title: "Welcome to Statistics for Psychology!"
+subtitle: "PSY 348: Lecture 1"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "PSY 348 - Statistics for Psychology"
+format:
   revealjs:
     theme: custom.scss
     incremental: true
     touch: true
-    width: 1920
-    height: 1080
+    width: 1600
+    height: 900
+    chalkboard: true
+    drop:
+      engine: webr
+      webr:
+        packages:
+         - ggplot2
+         - dplyr
+revealjs-plugins:
+  - drop
 ---
 
-[What is Statistics?]{.cust-title}
-[Lecture 1]{.cust-sub}
-[Dave Brocker]{.cust-author}
+## Hi, I'm Dave! ✋
+
+::::: columns
+::: {.column width="40%"}
+![](images/dave_about_me.jpeg){fig-align="center" style="border-radius: 15px;" height="500"}
+:::
+
+::: {.column width="60%"}
+**Name:** Professor Brocker
+
+**Background:** 7+ years teaching undergraduate statistics, researcher and laboratory manager
+
+**Education:** M.A. in Experimental Psychology (specializing in Morality and Emotion)
+
+**Current Research:** Morbid curiosity, creepiness, disgust and anger, and dehumanization
+:::
+:::::
+
+## My Teaching Style
+
+### What Can You Expect?
+
+-   **Humor:** I (try) to be funny
+
+-   **Interactive:** Whenever possible, I favor dynamic content over static content
+
+-   **Real-World Examples:** We will use a mixture of real and fabricated data to help illustrate ideas
+
+## What Have You Disliked About Past Stats Courses? 👎
+
+::: highlight-last
+-   Turn to a neighbor (or shout it out) — what made a past math/stats class miserable?
+
+-   I can't fix what I don't know about.
+:::
+
+## What Are Students Saying?
+
+### My Course Evaluations
+
+```{r}
+library(readxl)
+library(dplyr)
+library(gt)
+ev <- read_excel("Data_Files/Excel Files/statscomments.xlsx")
+```
+
+::: panel-tabset
+## Instructor Comments
+
+```{r}
+ev_c <-
+  ev |>
+  filter(Type == "Instructor Comments") |>
+  select(Type,Comment)
+
+ev_c |> gt(rowname_col = "Type")
+```
+
+```{=html}
+<ul>
+<li>Smart and funny guy. Answered questions to the best of his ability. Made 9am class feel like a mid-day/evening class, not boring. Weirdly made me think statistics was fun and interesting. And that research is cool. Excited to take classes with him in the future.</li>
+<li>this professor likes telling jokes and telling people to leave class which is cringey. he talks too fast and it’s very hard to keep up. very friendly, nice, caring, and accommodating but the jokes and talking speed is a bit much for me personally, not really my taste.</li>
+<li>Professor Brocker is in tune with the class and meets us at the level we are at and tries to pull us up to the level we are supposed to be. The only suggestion is that we need homework to reinforce what we have learned. Overall, Prof. Brocker was inspiring, I never thought I would understand anything related to Statistics, but he made it clear. He was ALWAYS PREPARED, made time for us and helped us any way he could. He has such great energy, approachable, knows his material, finds ways to deliver the material. Really great experience, in spite of my grade. It was me, NOT him.</li>
+<li>The professor is greatly appreciated. He made the course interesting and was very funny. I think his fun personality definitely helped keep us awake and interested in the course regardless of the time.</li>
+<li>Very knowledgeable and professional, very engaging with students and available for extra help</li>
+<li>He is a great instructor but if you are not a stats lover you it can be very confusing, he is funny and has a personality.</li>
+<li>Prof. Brocker is a wonderful professor and I am so happy I had this class with him. He could slow down in how he speaks as I don’t get every word he says cuz he speaks like the flash. His jokes are so funny and makes me now want to kill myself in math as much</li>
+<li>i love how fun you made the class, funny guy great teacher.  material was great and you explained things very well.</li>
+<li>With peace and love, he can slow down while he teaches</li>
+<li>Great instructor hate statistics</li>
+<li>Professor is very nice and calm man. He teaches the class very well and it shows how much he cares for his students. Is very lenient and easy going. Always can ask him any question when needed. I would take him again.</li>
+<li>Prior to taking this course, I strongly disliked math of any kind, but I have found a genuine love for statistics after this class. The class was taught well, and Professor Brocker was extremely helpful in teaching the material. Thanks for a great semester!</li>
+<li>Best professor I’ve ever had</li>
+<li>Overall you're a great person and your jokes were actually funny. You were available after class and was really generous with points for the exams.</li>
+<li>Awesome professor, did a great job teaching this class. Also loves riffing a lot.</li>
+<li>Super approachable, understanding and just overall cares about his students. I would absolutely have him as a professor again.</li>
+<li>Professor Brocker is amazing. He truly takes his time to make sure the students understand the material, even if that means that he has to go over the same thing over and over again. Math is not my best subject, but he helped me understand statistics more than I ever knew before.</li>
+<li>I genuinely appreciated having professor Brocker this semester. Even though the subject wasn't something I was particularly interested in, he made the class engaging and enjoyable. He has a great sense of humor and a very caring, approachable personality that made students feel comfortable participating and asking questions.</li>
+<li>What stood out most was how understanding and supportive he was, he always made time to help. His ability to connect with students and bring a positive energy to the classroom really made a difference. Overall, he's one of the most personable and helpful professors I've had, and I would definitely recommend his class to others.</li>
+<li>Dr. Brocker was a very cool, down-to-earth professor.  He utilizes his knowledge for our gain.  I appreciated him as a professor.</li>
+<li>I was so nervous going into this class because math is very difficult for me. My anxiety was immediately relieved when I met professor Brocker. He will do anything he can to make sure you actually understand the information. He cares about every student and will go to lengths to help every single student excel.</li>
+<li>David Brocker has a genuine passion for teaching and a strong commitment to helping his students succeed. Despite me growing up disliking math, he has managed to make the subject interesting and approachable. He is truly the best professor I have ever had; I cannot say anything negative about him as both a professor and a person.</li>
+<li>Favorite professor I have had so far.</li>
+<li>Prof. Brocker really cares about his students and it is obvious. He goes out of his way to get his students to understand the material. The material is hard and confusing at times but he tries to get you to understand using different approaches. </li>
+<li>Great instructor</li>
+<li>He took his time in teaching and made the lectures and labs very understandable. Before his exams, he always provided great reviews such as Kahoot and review sheets.</li>
+<li>I'm not sure how I felt while learning but am thankful for what I've retained.</li>
+<li>Professor Brocker ensured that we demonstrated competence before progressing to the next topic. He welcomed all questions and provided thorough answers to ensure everyone understood before moving on. His slides were simplified to their most essential form, offering a clear understanding of each topic. He also included additional resources in his slides for students to reference after class. Overall, his teaching was very organized and beneficial for students.</li>
+<li>Learning was easy in this class. Professor made really took the the time to make sure we all understood the material.</li>
+<li>This class is difficult. I spent most of the semester frustrated and confused. Then at the end of semester I was shocked that things were actually making sense. I am very pleased with the result. </li>
+<li>great</li>
+</ul>
+```
+:::
+
+## Outside of Class
+
+### Media and Music
+
+```{r}
+library(bslib)
+
+c1 <-
+    card(
+    card_header("Favorite TV Show"),
+    card_image(src ="https://resizing.flixster.com/lpJkDxnEFNQT1OWJjnmYfvpAHJ0=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvUlRUVjI2NjgyOS53ZWJw")
+    )
+
+c2 <-
+  card(
+    card_header("Favorite Movie"),
+    card_image(src ="https://m.media-amazon.com/images/M/MV5BY2VhODM5OTUtZDJhMi00MTc5LThjNjYtZWY1M2NlNWU0N2NjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg")
+    )
+
+c3 <-
+      card(
+    card_header("Favorite Music"),
+    card_image(src ="https://f4.bcbits.com/img/a0356251795_16.jpg")
+    )
 
 
-
-## What do you think of when you hear '*statistics*'?
+layout_column_wrap(
+  c1,c2,c3
+)
+```
 
 ## Statistics
+
+### About the Course
+
+**Statistics** is the science of collecting, analyzing, and interpreting data to make informed decisions.
+
+::: highlight-last
+-   As a practitioner, your practices need to be informed by evidence-based treatments
+
+-   As a researcher, your claims need to be supported by evidence that can assert a high probability of a relationship or cause and effect
+
+-   Because data is everywhere, even in your **Netflix** recommendations!
+:::
+
+## What is Statistics?
 
 ### Definition and Terminology
 
@@ -49,22 +194,6 @@ Sample
 Population
 
 :   The entire set of interest.
-
-## Why is it Important?
-
-### When Do I Use It?
-
-Everywhere!
-
-Statistics makes appearances anywhere you see information being summarized or being used to make decisions.
-
--   Purchasing a car
-
--   Going to a restaurant
-
--   Voting for a candidate
-
--   Going to the Movies
 
 ## Why is it Important?
 
@@ -161,7 +290,7 @@ Our brain is a pattern matching machine
 
 ## Why Should You Care?
 
-::: list-dave
+::: highlight-last
 -   Therapist:
     -   Your practices need to be informed by evidence-based treatments
 -   Researcher:
@@ -178,7 +307,7 @@ Our brain is a pattern matching machine
 
 ### Introduction to Research
 
-::: list-dave
+::: highlight-last
 -   Descriptive Statistics
     -   What does the data 'look like'?
 -   Probability is Paramount
@@ -190,3 +319,90 @@ Our brain is a pattern matching machine
     -   How much can variables predict each other?
     -   Does this variable cause a change in this other component?
 :::
+
+## Syllabus
+
+### How This Class Works
+
+-   **Participation:** Asking questions helps you understand and will likely help out your classmates!
+
+-   **Homework:** I want you to have practice outside of the classroom (low-stakes)
+
+-   **Exams:** This is a decent (not perfect) method of seeing how well you understand and can apply the material
+
+-   Full syllabus, grading breakdown, and office hours are posted on Brightspace — take a few minutes to skim it before next class.
+
+# Research Design
+
+### Lecture 1
+
+## What is Research?
+
+Research is a **systematic process** of asking a question about the world and collecting evidence to answer it — as opposed to relying on intuition, anecdote, or "everybody knows that..."
+
+::: highlight-last
+-   It's **systematic**: it follows a planned, repeatable process (not a one-off guess).
+
+-   It's **testable**: it produces a claim that data could, in principle, prove wrong.
+
+-   It's **shareable**: the methods and data are reported clearly enough that someone else could check your work.
+:::
+
+## What is Research?
+
+### The Basic Cycle
+
+1.  Observe something interesting or puzzling
+2.  Ask a specific, answerable question about it
+3.  Form a **hypothesis** — a testable prediction
+4.  Collect data designed to test that prediction
+5.  Analyze the data (this is where *statistics* comes in!)
+6.  Draw a conclusion — and often, ask the next question
+
+## What Kinds of Research is there?
+
+### Descriptive Research
+
+-   Goal: **describe** what's happening, without testing cause and effect
+
+-   Examples: case studies, naturalistic observation, surveys
+
+-   Tells you *what* is going on, but not *why*
+
+## What Kinds of Research is there?
+
+### Correlational Research
+
+-   Goal: measure whether two variables are **related** to one another
+
+-   You observe variables as they naturally occur — nothing is manipulated
+
+-   Lets you predict one variable from another, but **cannot** establish that one causes the other
+
+## What Kinds of Research is there?
+
+### Experimental Research
+
+-   Goal: test whether one variable **causes** a change in another
+
+-   The researcher **manipulates** an independent variable (IV) and measures a dependent variable (DV)
+
+-   Participants are (ideally) **randomly assigned** to conditions, and other variables are controlled
+
+-   This is the *only* design type that can support a causal claim
+
+## What Kinds of Research is there?
+
+### Putting the Vocabulary Together
+
+-   **Independent Variable (IV):** what the researcher manipulates (or the grouping variable)
+
+-   **Dependent Variable (DV):** what the researcher measures — the outcome
+
+-   **Participants, Materials, Procedure, Design:** the four building blocks you'll use to describe *how* a study was run
+
+-   You'll get hands-on practice with this vocabulary in **Lab 1**, when we write a Method section together.
+
+## Any Questions?
+
+### I Am an Open Book!

@@ -1,6 +1,6 @@
 ---
 title: "Measures of Central Tendency"
-subtitle: "Lab 2: Exploring Data"
+subtitle: "Lab 3: Exploring Data"
 author: "Dave Brocker"
 institute: "Farmingdale State College"
 footer: "⬡⬡⬡"
@@ -33,10 +33,9 @@ revealjs-plugins:
 
 ::: {.column width="50%"}
 ```{r}
+#| echo: true
 library(gt)
 library(dplyr)
-
-#| echo: true
 
 # Read data file from CSV
 billboard <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv')
@@ -70,8 +69,8 @@ library(gt)
 col_info <- tribble(
   ~column,              ~description,                        ~best_central_tendency,
   "song",               "Title of the song",                               "Mode (most common category)",
-  "artist",             "Performer(s) of the song",                        "Mode (most common category))",
-  "date",               "Date the song charted (or peaked)",               "Mode (most common category))",
+  "artist",             "Performer(s) of the song",                        "Mode (most common category)",
+  "date",               "Date the song charted (or peaked)",               "Mode (most common category)",
   "weeks_at_number_one","Number of weeks the song was at #1",              "Median (resistant to outliers like very long runs)",
   "overall_rating",     "Aggregated critical or popularity rating",        "Mean (assume roughly normal distribution)",
   "divisiveness",       "How polarizing the ratings are across sources",   "Mean or Median (depends on skewness)",
@@ -99,9 +98,8 @@ col_info %>%
 
 ```{r}
 library(dplyr)
-library(asciicast)
 
-billboard_clean <- 
+billboard_clean <-
   billboard |> select(
     song, artist, date,                     weeks_at_number_one, overall_rating, 
     divisiveness, front_person_age, bpm, length_sec, intro_length_sec, cdr_genre,                  explicit,                   artist_male, artist_white, artist_black
@@ -152,9 +150,9 @@ billboard <-
 billboard |> 
   group_by(artist)
 # Step 3: Count, ungroup, and select top 10
-  count(sort = TRUE) |> 
-  ungroup() |> 
-  top_n(10)  
+  count(sort = TRUE) |>
+  ungroup() |>
+  slice_max(n, n = 10)
 ```
 
 ## Which Artist Has the Most Number 1's?
@@ -165,10 +163,10 @@ billboard |>
 billboard |> 
   # Step 3: Count, ungroup, and select top 10
   group_by(artist) |> 
-  count(sort = TRUE) |> 
-  ungroup() |> 
-  top_n(10) |> 
-  gt() |> 
+  count(sort = TRUE) |>
+  ungroup() |>
+  slice_max(n, n = 10) |>
+  gt() |>
   tab_options(
     table.width = pct(100),
     table.font.size = px(22)   # increase font size here
@@ -181,20 +179,20 @@ billboard |>
   )
 ```
 
-## Lab 2 Questions
+## Lab 3 Questions
 
 ### Answer 3 and Submit on Brightspace
 
-1.  Which artist had the [most number]{style="background-color: #561818;"} of weeks in the number on spot?
-2.  Which artist is rated [highest]{style="background-color: #561818;"} overall?
-3.  What is the [average]{style="background-color: #561818;"} rating of all the artists?
-4.  What is the [youngest age]{style="background-color: #561818;"} of the lead singer for a band?
-5.  What is the [median]{style="background-color: #561818;"} BPM?
-6.  What is the [percentage]{style="background-color: #561818;"} of explicit songs vs. non-explicit songs?
-7.  What is the [percentage]{style="background-color: #561818;"} of black vs. white artists?
-8.  What is the [percentage]{style="background-color: #561818;"} of male vs. female artists?
+1.  Which artist had the [most number]{style="background-color: orange;"} of weeks in the number on spot?
+2.  Which artist is rated [highest]{style="background-color: orange;"} overall?
+3.  What is the [average]{style="background-color: orange;"} rating of all the artists?
+4.  What is the [youngest age]{style="background-color: orange;"} of the lead singer for a band?
+5.  What is the [median]{style="background-color: orange;"} BPM?
+6.  What is the [percentage]{style="background-color: orange;"} of explicit songs vs. non-explicit songs?
+7.  What is the [percentage]{style="background-color: orange;"} of black vs. white artists?
+8.  What is the [percentage]{style="background-color: orange;"} of male vs. female artists?
 
-## Lab 2 Question
+## Lab 3 Question
 
 Given the following dataset, find the mean:
 
