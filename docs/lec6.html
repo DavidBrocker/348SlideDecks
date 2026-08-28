@@ -38,7 +38,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-853d1865fe7d3a2b78c77e097ade8890.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-7c5eeda1931b1808d1df291e81c810aa.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -212,9 +212,9 @@ Dave Brocker
 <h2>Z-scores</h2>
 <h3 id="imagine-that-s-2-and-barx-25">Imagine that <span class="math inline">\(s\)</span> = 2 and <span class="math inline">\(\bar{x}\)</span> = 25</h3>
 <ul>
-<li class="fragment"><p><span class="math inline">\(z = 1 = 25 + 2 = 27\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(z = -2 = 25 - 2 = 23\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(z = 0.5 = 25 - .05 = 24.4\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(z = 1 \Rightarrow x = 25 + (1)(2) = 27\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(z = -2 \Rightarrow x = 25 + (-2)(2) = 21\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(z = 0.5 \Rightarrow x = 25 + (0.5)(2) = 26\)</span></p></li>
 </ul>
 </section>
 <section id="calculating-a-z-score" class="slide level2">
@@ -391,7 +391,7 @@ Dave Brocker
 <ul>
 <li class="fragment">If you need that z-score or higher, you have to subtract the decimal from 1.
 <ul>
-<li class="fragment">Esmeralda had a <code>.022</code>% chance of failing and and a <code>1-.022%</code> chance of passing.</li>
+<li class="fragment">Esmeralda had a <code>2.2</code>% chance of failing and a <code>1-.022 = 97.8%</code> chance of passing.</li>
 </ul></li>
 </ul>
 </section>
@@ -432,11 +432,10 @@ Dave Brocker
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>Less than 4 (-.63)</p></li>
-<li class="fragment"><p>Find .6 on the left size of the table (z column)</p></li>
+<li class="fragment"><p>Find -0.6 on the left side of the table (z column) — use the negative-z page</p></li>
 <li class="fragment"><p>Find .03 column</p></li>
-<li class="fragment"><p>Note where they intersect</p></li>
-<li class="fragment"><p>Since we want the value less than 4, we need to subtract 1</p></li>
-<li class="fragment"><p>Report the value as a percentage (<span class="math inline">\(z\times100\)</span>)</p></li>
+<li class="fragment"><p>Note where they intersect — since the table already gives “area to the left,” this <strong>is</strong> the probability we want</p></li>
+<li class="fragment"><p>Report the value as a percentage (the proportion <span class="math inline">\(\times 100\)</span>)</p></li>
 </ul>
 </div></div>
 </section>
@@ -449,10 +448,11 @@ Dave Brocker
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>More than 8 (1.18)</p></li>
-<li class="fragment"><p>Find 1.1 on the left size of the table (z column)</p></li>
+<li class="fragment"><p>Find 1.1 on the left side of the table (z column)</p></li>
 <li class="fragment"><p>Find .08 column</p></li>
 <li class="fragment"><p>Note where they intersect</p></li>
-<li class="fragment"><p>Report the value as a percentage (<span class="math inline">\(z\times100\)</span>)</p></li>
+<li class="fragment"><p>Remember we are thinking about 8 or more, so we have to subtract that proportion from 1</p></li>
+<li class="fragment"><p>Report the value as a percentage (the proportion <span class="math inline">\(\times 100\)</span>)</p></li>
 </ul>
 </div></div>
 </section>
@@ -479,11 +479,11 @@ Dave Brocker
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>More than 130 (2)</p></li>
-<li class="fragment"><p>Find 2.0 on the left size of the table (z column)</p></li>
+<li class="fragment"><p>Find 2.0 on the left side of the table (z column)</p></li>
 <li class="fragment"><p>Find .00 column</p></li>
 <li class="fragment"><p>Note where they intersect</p></li>
 <li class="fragment"><p>Remember we are thinking about 130 or more so we have to subtract 1 from our proportion.</p></li>
-<li class="fragment"><p>Report the value as a percentage (<span class="math inline">\(z\times100\)</span>)</p></li>
+<li class="fragment"><p>Report the value as a percentage (the proportion <span class="math inline">\(\times 100\)</span>)</p></li>
 </ul>
 </div></div>
 

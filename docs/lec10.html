@@ -104,7 +104,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-853d1865fe7d3a2b78c77e097ade8890.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-7c5eeda1931b1808d1df291e81c810aa.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -240,14 +240,14 @@ Dave Brocker
 <h2>Connection to the One-Sample <em>t</em>-Test</h2>
 <ul>
 <li class="fragment"><p>Recall that the <strong>paired-samples t-test</strong> is essentially a <strong>one-sample t-test</strong> on the difference scores.</p></li>
-<li class="fragment"><p>We’re testing whether the **mean difference <span class="math inline">\(bar{d}\)</span> is significantly different from 0.</p></li>
+<li class="fragment"><p>We’re testing whether the <strong>mean difference</strong> <span class="math inline">\(\bar{d}\)</span> is significantly different from 0.</p></li>
 </ul>
 </section>
 <section id="formula-for-paired-samples-t-test" class="slide level2">
 <h2>Formula for Paired Samples t-Test</h2>
 <h3 id="mathematical-representation">Mathematical Representation</h3>
 <ul>
-<li class="fragment"><strong>Formula</strong>: <span class="math inline">\(\large{t = \frac{\bar{d}}{{s_{\bar{d}}}/\sqrt{n}}} = \frac{\bar{d}}{\sigma}\)</span>
+<li class="fragment"><strong>Formula</strong>: <span class="math inline">\(\large{t = \frac{\bar{d}}{s_d/\sqrt{n}}}\)</span>
 <ul>
 <li class="fragment"><span class="math inline">\(\bar{d}\)</span>: Mean of the differences between paired observations.</li>
 <li class="fragment"><span class="math inline">\(s_d\)</span>: Standard deviation of the differences.</li>
@@ -295,7 +295,7 @@ Dave Brocker
 <h2>Paired Samples t-Test</h2>
 <h3 id="application-in-psychology-research">Application in Psychology Research</h3>
 <blockquote>
-<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
 </blockquote>
 <p><strong>Steps</strong>:</p>
 <ol type="1">
@@ -309,7 +309,7 @@ Dave Brocker
 <h2>Paired Samples t-Test</h2>
 <h3 id="application-in-psychology-research-1">Application in Psychology Research</h3>
 <blockquote>
-<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
 </blockquote>
 <ol type="1">
 <li class="fragment">State the Null and Alternative Hypothesis
@@ -329,7 +329,7 @@ Dave Brocker
 <h2>Paired Samples t-Test</h2>
 <h3 id="application-in-psychology-research-2">Application in Psychology Research</h3>
 <blockquote>
-<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
+<p>A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.</p>
 </blockquote>
 <div class="cell">
 <details class="code-fold">
@@ -1427,7 +1427,7 @@ Dave Brocker
 <ol type="1">
 <li class="fragment"><p>Find the mean <span class="math inline">\(\bar{d}\)</span> and standard deviation <span class="math inline">\(s_d\)</span> of the differences.</p></li>
 <li class="fragment"><p>Apply the formula to calculate the t-value and check for significance.</p></li>
-<li class="fragment"><p><span class="math inline">\(\large{t = \frac{d}{{s_d}/\sqrt{n}} =  \frac{-3.26}{2.083/\sqrt{30}} = (-8.57)}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\large{t = \frac{\bar{d}}{{s_d}/\sqrt{n}} =  \frac{-3.26}{2.083/\sqrt{30}} = (-8.57)}\)</span></p></li>
 </ol>
 </section>
 <section id="paired-samples-t-test-5" class="slide level2">
@@ -1956,7 +1956,7 @@ Dave Brocker
 <li class="fragment">t = t-test statistic</li>
 <li class="fragment">df = n-1 (30-1)</li>
 <li class="fragment">p = probability results came from the Null Distribution</li>
-<li class="fragment">CI[ll,uu] = 95% CI of Mean Difference (d)</li>
+<li class="fragment">CI[ll,uu] = 95% CI of Mean Difference (<span class="math inline">\(\bar{d}\)</span>)</li>
 </ul>
 </section>
 <section id="effect-size-cohens-d" class="slide level2">
@@ -1965,7 +1965,8 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>Statistical significance (<em>p</em>) tells us <strong>if</strong> there is a difference.</p></li>
 <li class="fragment"><p>Effect size tells us <strong>how big</strong> that difference is.</p></li>
-<li class="fragment"><p><span class="math inline">\(d = \frac{\bar{d}}{s_d}\)</span></p>
+<li class="fragment"><p>For a paired-samples design, this version of Cohen’s <em>d</em> is written <span class="math inline">\(d_z\)</span> to keep it distinct from <span class="math inline">\(\bar{d}\)</span> (mean difference) and <span class="math inline">\(s_d\)</span> (SD of the differences):</p></li>
+<li class="fragment"><p><span class="math inline">\(d_z = \frac{\bar{d}}{s_d}\)</span></p>
 <ul>
 <li class="fragment"><span class="math inline">\(\bar{d}\)</span> = mean difference between paired scores<br>
 </li>
@@ -2963,12 +2964,12 @@ Dave Brocker
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>data_new <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>data_new <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a aria-label="2"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb6-3"><a aria-label="3"></a>    <span class="at">avg =</span> <span class="fu">mean</span>(D),</span>
 <span id="cb6-4"><a aria-label="4"></a>    <span class="at">dsd =</span> <span class="fu">sd</span>(D),</span>
-<span id="cb6-5"><a aria-label="5"></a>    <span class="at">cohen_d =</span> avg<span class="sc">/</span>dsd</span>
-<span id="cb6-6"><a aria-label="6"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a aria-label="5"></a>    <span class="at">d_z =</span> avg<span class="sc">/</span>dsd</span>
+<span id="cb6-6"><a aria-label="6"></a>    ) <span class="sc">|&gt;</span></span>
 <span id="cb6-7"><a aria-label="7"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb6-8"><a aria-label="8"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb6-9"><a aria-label="9"></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span> </span>
@@ -3432,14 +3433,14 @@ Dave Brocker
 <tr class="gt_col_headings header">
 <th id="avg" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">avg</th>
 <th id="dsd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">dsd</th>
-<th id="cohen_d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">cohen_d</th>
+<th id="d_z" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">d_z</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_right" headers="avg">−3.267</td>
 <td class="gt_row gt_right" headers="dsd">2.083</td>
-<td class="gt_row gt_right" headers="cohen_d">−1.568</td>
+<td class="gt_row gt_right" headers="d_z">−1.568</td>
 </tr>
 </tbody>
 </table>
@@ -3556,7 +3557,7 @@ Dave Brocker
 <ul>
 <li class="fragment">We found a <strong>statistically significant</strong> decrease in stress (<em>p</em> &lt; .001).<br>
 </li>
-<li class="fragment">The <strong>effect size (d = 1.56)</strong> indicates a <em>large</em> change.<br>
+<li class="fragment">The <strong>effect size (<span class="math inline">\(d_z\)</span> = 1.56)</strong> indicates a <em>large</em> change.<br>
 </li>
 <li class="fragment">Combining significance and effect size gives us a fuller picture of the data.</li>
 </ul>
