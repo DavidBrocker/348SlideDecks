@@ -46,13 +46,13 @@ revealjs-plugins:
 
 - Recall that the **paired-samples t-test** is essentially a **one-sample t-test** on the difference scores.  
 
-- We're testing whether the **mean difference $bar{d}$ is significantly different from 0.
+- We're testing whether the **mean difference** $\bar{d}$ is significantly different from 0.
 
 ## Formula for Paired Samples t-Test
 
 ### Mathematical Representation
 
--   **Formula**: $\large{t = \frac{\bar{d}}{{s_{\bar{d}}}/\sqrt{n}}} = \frac{\bar{d}}{\sigma}$
+-   **Formula**: $\large{t = \frac{\bar{d}}{s_d/\sqrt{n}}}$
     -   $\bar{d}$: Mean of the differences between paired observations.
     -   $s_d$: Standard deviation of the differences.
     -   $n$: Number of pairs.
@@ -93,7 +93,7 @@ revealjs-plugins:
 
 ### Application in Psychology Research
 
-> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
+> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
 
 **Steps**:
 
@@ -109,7 +109,7 @@ revealjs-plugins:
 
 ### Application in Psychology Research
 
-> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
+> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
 
 1.  State the Null and Alternative Hypothesis
     1.  $H_0$: There will be no difference in stress before or after the mindfulness exercise
@@ -121,7 +121,7 @@ revealjs-plugins:
 
 ### Application in Psychology Research
 
-> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress suvrvey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
+> A psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.
 
 ```{r}
 
@@ -200,7 +200,7 @@ data_new |>
 
 2.  Apply the formula to calculate the t-value and check for significance.
 
-3.  $\large{t = \frac{d}{{s_d}/\sqrt{n}} =  \frac{-3.26}{2.083/\sqrt{30}} = (-8.57)}$
+3.  $\large{t = \frac{\bar{d}}{{s_d}/\sqrt{n}} =  \frac{-3.26}{2.083/\sqrt{30}} = (-8.57)}$
 
 ## Paired Samples t-Test
 
@@ -252,7 +252,7 @@ with(ddata, t.test(Time_One,Time_Two,paired = TRUE)) |>
 -   t = t-test statistic
 -   df = n-1 (30-1)
 -   p = probability results came from the Null Distribution
--   CI\[ll,uu\] = 95% CI of Mean Difference (d)
+-   CI\[ll,uu\] = 95% CI of Mean Difference ($\bar{d}$)
 
 ## Effect Size: Cohen's *d*
 
@@ -262,7 +262,9 @@ with(ddata, t.test(Time_One,Time_Two,paired = TRUE)) |>
 
 -   Effect size tells us **how big** that difference is.
 
--   $d = \frac{\bar{d}}{s_d}$
+-   For a paired-samples design, this version of Cohen's *d* is written $d_z$ to keep it distinct from $\bar{d}$ (mean difference) and $s_d$ (SD of the differences):
+
+-   $d_z = \frac{\bar{d}}{s_d}$
 
     -   $\bar{d}$ = mean difference between paired scores\
     -   $s_d$ = standard deviation of the differences
@@ -299,12 +301,12 @@ rstatix::cohens_d(data,formula = score~group,paired = TRUE) |>
 
 ::: {.column width="50%"}
 ```{r}
-data_new |> 
+data_new |>
   summarize(
     avg = mean(D),
     dsd = sd(D),
-    cohen_d = avg/dsd
-    ) |> 
+    d_z = avg/dsd
+    ) |>
   gt() |> 
   opt_row_striping() |> 
   fmt_auto() |> 
@@ -404,7 +406,7 @@ data |>
 ## Interpreting Results
 
 -   We found a **statistically significant** decrease in stress (*p* \< .001).\
--   The **effect size (d = 1.56)** indicates a *large* change.\
+-   The **effect size ($d_z$ = 1.56)** indicates a *large* change.\
 -   Combining significance and effect size gives us a fuller picture of the data.
 
 > Always ask: Is this difference not just *statistically*, but *practically* meaningful?

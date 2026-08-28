@@ -362,7 +362,7 @@ p
 
 ## Probability
 
--   What percentage of participants rated Dark with a z-score of 2 higher?
+-   What percentage of participants rated Dark with a z-score of 2 or higher?
 
 ```{r}
 p + 
@@ -484,9 +484,11 @@ p +
 
 ### New Terminology (Again???)
 
--   The mean of a sample is notated as $M$.
+-   We've been writing the sample mean as $\bar{x}$ — you'll keep using that.
 
--   The mean of a population is notated as ($\mu$).
+-   You'll also see the sample mean written as $M$ in published papers — that's the [APA style](https://apastyle.apa.org/) convention for reporting results, not a different calculation. $\bar{x}$ and $M$ mean the same thing.
+
+-   The mean of a population is notated as $\mu$.
 
 -   The dispersion of a sample is known as the standard deviation, or $SD$, or sometimes just $s$.
 
@@ -500,7 +502,9 @@ p +
 
     -   $n$ - Sample Size
 
--   The dispersion of a population cannot be a "deviation" because we don't actually know it. So instead, we call it the Standard Error, or SE, or most often (sigma).
+-   The Standard Error is **not** just another name for $\sigma$ — it's the standard deviation of the *distribution of sample means*, which is why it shrinks as $n$ grows ($SE = \sigma / \sqrt{n}$).
+
+-   In other words: $\sigma$ describes how spread out individual scores are; $SE$ describes how spread out sample means are.
 
 ## Sampling theory, but candy
 
@@ -944,9 +948,10 @@ tibble(
 ## The Test
 
 -   Fisher’s original rule: **Reject H₀ only if she gets all 8 correct.**
--   Under H₀: ${8 \choose 4} = \frac{8!}{4!(8-4)} = 70$
+-   Under H₀, there are ${8 \choose 4} = \frac{8!}{4!(8-4)!} = 70$ equally likely ways to guess which 4 cups are milk-first.
+-   So the probability of guessing all 8 correctly by chance is $\frac{1}{70} \approx 1.4\%$.
 
-Since this is less than 5%, it’s rare enough to count as evidence against H₀.
+Since 1.4% is less than 5%, it’s rare enough to count as evidence against H₀.
 
 ## Decision & Interpretation
 
@@ -994,7 +999,7 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
 
--   Null Hypothesis: These is no difference in the DV between the IV groups.
+-   Null Hypothesis: There is no difference in the DV between the IV groups.
 
 -   Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.
 
@@ -1030,7 +1035,7 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 -   $H_0$:
 
-    -   $\mu_{\text{SSRI}} = \mu_{\text{Decaf}}$
+    -   $\mu_{\text{SSRI}} = \mu_{\text{Placebo}}$
 
 -   $H_1/H_A$:
 
@@ -1109,7 +1114,7 @@ When reporting your findings, you must state them in terms of the Null Hypothesi
 
 -   State Brendan's findings in terms of the null hypothesis:
 
--   *Brendan rejects the null hypothesis that states there is no difference in death anxiety betwen participants who view their own face as deceased and those who only view a face on a mortuary table.*
+-   *Brendan rejects the null hypothesis that states there is no difference in death anxiety between participants who view their own face as deceased and those who only view a face on a mortuary table.*
 
 <!-- ## Practice Problem -->
 

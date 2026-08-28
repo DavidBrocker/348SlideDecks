@@ -222,7 +222,7 @@ plt +
 
 -   Our goal is still to test whether a difference is likely due to chance
 
--   With independnet samples, chance variation now includes **differences between individuals** in *both* groups.
+-   With independent samples, chance variation now includes **differences between individuals** in *both* groups.
 
 ## Group Variance
 
@@ -309,12 +309,12 @@ plt +
   geom_text(
     x = -4,
     y = .1,
-    label = "M_Control = 6"
+    label = "x̄_Control = 6"
   ) +
     geom_text(
     x = -4.3,
     y = .05,
-    label = "M_Exp = 8"
+    label = "x̄_Exp = 8"
   )
 ```
 
@@ -340,45 +340,45 @@ Inferential statistics have both **theoretical** and **computational** formulas:
 
 ## Theoretical Formula:
 
-$$\color{blue}{t} = \frac{\color{red}{\bar{x}} -\color{orange}{\mu}}{\sqrt{\color{grey}{s^{2}_{pooled}}}}$$
+$$\color{blue}{t} = \frac{\color{red}{\bar{x}_1} -\color{orange}{\bar{x}_2}}{\sqrt{\color{grey}{\sigma^{2}_{pooled}}}}$$
 
 -   [t]{style="color:blue"} = T Statistic
 
--   [Sample Mean]{style="color:red"}
+-   [Sample Mean, Group 1]{style="color:red"}
 
--   [Population Mean]{style="color:orange"}
+-   [Sample Mean, Group 2]{style="color:orange"}
 
--   [Pooled Variance]{style="color:grey"}
+-   [Population Pooled Variance]{style="color:grey"}
 
 ## Independent samples t-test
 
 Theoretical Formula:
 
-$$t = \frac{\bar{x} - \color{green}{μ}}{\sqrt{s^{2}_{pooled}}}$$
+$$t = \frac{\bar{x}_1 - \color{green}{\bar{x}_2}}{\sqrt{\sigma^{2}_{pooled}}}$$
 
 ## Independent samples t-test
 
 ### Theoretical Formula:
 
-$$t = \frac{\bar{x} - μ}{\sqrt{\color{orange}{s^{2}_{pooled}}}}$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{orange}{\sigma^{2}_{pooled}}}}$$
 
 ## Independent samples t-test
 
 ### Theoretical Formula:
 
-$$t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\sigma^{2}_{pooled}}}$$
 
 ## Independent samples t-test
 
 ### Theoretical Formula:
 
-$$t = \frac{\bar{x} - μ}{\sqrt{s^{2}_{pooled}}}$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\sigma^{2}_{pooled}}}$$
 
 ## Independent samples t-test
 
 ### Computational Formula:
 
-$$\frac{M_{Experimental}-M_{Control}}{\sqrt{\color{darkblue}{\frac{s1}{n1}+ \frac{s2}{n2}}}}$$
+$$\frac{\bar{x}_{Experimental}-\bar{x}_{Control}}{\sqrt{\color{darkblue}{\frac{s_1^2}{n_1}+ \frac{s_2^2}{n_2}}}}$$
 
 -   [Pooled Variance]{style="color: darkblue"}
 
@@ -386,7 +386,7 @@ $$\frac{M_{Experimental}-M_{Control}}{\sqrt{\color{darkblue}{\frac{s1}{n1}+ \fra
 
 ### Computational Formula:
 
-$$\frac{M_{Experimental}-M_{Control}}{\sqrt{\frac{s1}{n1}+ \frac{s2}{n2}}}$$
+$$\frac{\bar{x}_{Experimental}-\bar{x}_{Control}}{\sqrt{\frac{s_1^2}{n_1}+ \frac{s_2^2}{n_2}}}$$
 
 ## Data Overview
 
@@ -404,7 +404,7 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
     mdiff = estimate,
     t = statistic,
     Experimental = estimate2,
-    Conrol = estimate1,
+    Control = estimate1,
     p = p.value,
     df = parameter) |> 
   mutate(
@@ -454,7 +454,7 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 
 -   Levene’s Test tells us whether the assumption of equal variances holds.
 
-    -   If p \> .05 → use the **top row**\*\* ("Equal variances assumed")
+    -   If p \> .05 → use the **top row** ("Equal variances assumed")
 
     -   If p \< .05 → use the **bottom row** ("Equal variances not assumed")
 
@@ -613,9 +613,9 @@ ggplot(music,
     x = "")
 
 # Summary Table
-  t.test(quiz_score ~ group, 
+  t.test(quiz_score ~ group,
          data = music,
-         ,var.equal = TRUE) %>%
+         var.equal = TRUE) %>%
   tidy() |> 
   select(-method) |> 
   rename(

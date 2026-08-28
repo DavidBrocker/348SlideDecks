@@ -142,12 +142,12 @@ df_sampling |>
 :::::: columns
 ::: {.column width="33%"}
 -   One-Sample T-Test
-    -   $t=\frac{\bar{x}-\mu}{\sigma} |\frac{\bar{x}}{s/\sqrt(n)}$
+    -   $t=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}} | \frac{\bar{x}-\mu}{s/\sqrt{n}}$
 :::
 
 ::: {.column width="33%"}
 -   Paired-Samples T Test
-    -   $t=\frac{\bar{D}}{\sigma_{\bar{D}}}|\frac{\bar{D}}{s_{\bar{D}}/\sqrt(n)}$
+    -   $t=\frac{\bar{D}}{\sigma_{\bar{D}}}|\frac{\bar{D}}{s_{\bar{D}}/\sqrt{n}}$
 :::
 
 ::: {.column width="33%"}
@@ -209,7 +209,7 @@ The test statistic is calculated as:
 ::: callout-tip
 ## One Sample T-Test
 
-$\large{t = \frac{\color{red}{\bar{x}}-\color{blue}{\mu}}{\color{orange}{\sigma}}}$
+$\large{t = \frac{\color{red}{\bar{x}}-\color{blue}{\mu}}{\color{orange}{s/\sqrt{n}}}}$
 :::
 
 Where:
@@ -218,11 +218,11 @@ Where:
 
 -   $\color{blue}{\mu}$ = population mean (null hypothesis value)
 
--   $\color{orange}{\sigma}{\text{ or }}SE$
+-   $\color{orange}{s/\sqrt{n}}$ = the standard error (SE) — estimated from the sample, since population $\sigma$ is typically unknown
 
     -   $s$ = sample standard deviation
 
-    -   $\sqrt{n}$ = sample size
+    -   $n$ = sample size
 
 ## Hypothesis Testing Steps
 
@@ -271,6 +271,9 @@ Where:
 library(dplyr)
 library(broom)
 library(gt)
+
+# For Reproducibility
+set.seed(20)
 
 # Using Functions
 n = 20
@@ -397,7 +400,7 @@ ggplot(data, aes(x = "", y = scores)) +
 ```{r}
 #| echo: true
 
-# For Reproduceability
+# For Reproducibility
 set.seed(131)
 
 # Generate a random dataset with mean of 78, sd of 10
@@ -437,7 +440,7 @@ t.test(
 
 ## APA Reporting
 
-> A one-sample t-test was conducted to determine whether students’ exam scores differed from the national average (M = 75). Results were not statistically significant, ( t(24) = 1.5, p \> .05 ), indicating that students performed similarly to the national average.
+> A one-sample t-test was conducted to determine whether students’ exam scores differed from the national average ($\mu$ = 75). Results were not statistically significant, ( t(24) = 1.5, p \> .05 ), indicating that students performed similarly to the national average.
 
 ## Daily Coffee Consumption
 
@@ -471,7 +474,7 @@ t.test(
 ```{r}
 #| echo: true
 
-# For Reproduceability
+# For Reproducibility
 set.seed(131)
 
 # Generate a random dataset with mean of 78, sd of 10
@@ -510,7 +513,7 @@ t.test(
 
 -   For df = `29`, the critical t-value for a one-tailed test at α = .05 is `-1.699`.
 
--   Since `-2.28` \< -1.699, we reject (H_0).
+-   Since `-2.28` \< -1.699, we reject $H_0$.
 
 ## Sleep Duration Among College Students
 
@@ -521,7 +524,7 @@ t.test(
 ```{r}
 #| echo: true
 
-# For Reproduceability
+# For Reproducibility
 set.seed(728)
 
 # Generate a random dataset with mean of 78, sd of 10
