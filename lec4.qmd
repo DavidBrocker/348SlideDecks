@@ -1,5 +1,5 @@
 ---
-title: "Standard Normal Distribution"
+title: "Dispersion"
 subtitle: "PSY 348: Lecture 4"
 author: "Dave Brocker"
 institute: "Farmingdale State College"
@@ -79,7 +79,7 @@ revealjs-plugins:
 
     -   Dispersion: the action or process of distributing things or people over a wide area.
 
-## Central tendency: Mean
+## Central Tendency: Mean
 
 ### What is it, when should we use it, and how do we calculate it?
 
@@ -88,7 +88,7 @@ revealjs-plugins:
     -   Normal Distribution
     -   Formula: $\frac{\sum(x)}{n}$
 
-## Central tendency: Median
+## Central Tendency: Median
 
 ### What is it, when should we use it, and how do we calculate it?
 
@@ -98,7 +98,7 @@ revealjs-plugins:
         -   Is the data pulled to the left or the right?
         -   $Med(X) = \frac{n + 1}{2}$
 
-## Central tendency: Mode
+## Central Tendency: Mode
 
 ### What is it, when should we use it, and how do we calculate it?
 
@@ -239,8 +239,8 @@ p1 + p2 + p3
 
 ### Measures of dispersion tell us about the spread-out-ness of the data, but what does that *actually* mean?
 
--   If I am measuring *phone usage* what would low dispersion tell me?
--   If I am measuring *phone usage*, what would high dispersion tell me?
+-   If I am measuring **phone usage** what would low dispersion tell me?
+-   If I am measuring **phone usage**, what would high dispersion tell me?
 
 ## Measures of Dispersion
 
@@ -256,7 +256,7 @@ p1 + p2 + p3
 
 ## Dispersion
 
-### Measures of dispersion tell us about consensus.
+### What does that tell us about consensus?
 
 -   Data should have natural dispersion.
 
@@ -289,6 +289,10 @@ data.frame(
   Participant = 1:10,
   X = c(1,3,2,2,3,2,1,3,1,2)
 ) |> gt() |> 
+  tab_header(
+    title = "Sample Data",
+    subtitle = "X values for 10 participants"
+  ) |> 
   opt_row_striping() |> 
   cols_align(align = "center") |> 
         tab_options(
@@ -344,6 +348,10 @@ tibble(
   x = c(1,3,2,2,3,2,1,3,1,2),
   xM = x-mean(x)
 ) |> gt() |> 
+  tab_header(
+    title = "Deviation Scores",
+    subtitle = "Each x value's distance from the mean"
+  ) |> 
   opt_row_striping() |> 
   cols_label(xM = md("$x-\\bar{x}$")) |> 
   cols_align(align = "center") |> 
@@ -457,6 +465,10 @@ tibble(
   ) |> 
   # Bold Last Column
   gt() |> 
+  tab_header(
+    title = "Squared Deviations",
+    subtitle = "Removing the negative signs"
+  ) |> 
   opt_row_striping() |> 
   cols_align(align = "center") |> 
   cols_label(
@@ -488,7 +500,7 @@ tibble(
 
 ## Calculating Dispersion
 
-### Now what: Calculate the average squared deviation.
+### Continuing: Calculate the average squared deviation.
 
 -   Step 4: Add up the Squared Deviations.
 
@@ -496,7 +508,7 @@ tibble(
 
 ## Calculating Dispersion
 
-### Now what: Calculate the average squared deviation.
+### Continuing: Calculate the average squared deviation.
 
 ```{r}
 tibble(
@@ -507,6 +519,9 @@ tibble(
   ) |> 
   # Bold Last Column
   gt() |> 
+  tab_header(
+    title = "Sum of Squared Deviations"
+  ) |> 
   opt_row_striping() |> 
   cols_align(align = "center") |> 
   cols_label(
@@ -566,6 +581,10 @@ infl <- tibble(
   `(x-M)^2` = `x-M`^2
   ) |> 
   gt() |> 
+  tab_header(
+    title = "Why We Divide by n − 1",
+    subtitle = "Correcting the inflation from squaring"
+  ) |> 
     grand_summary_rows(
     # Specify the single column to summarize
     columns = `(x-M)^2`,
@@ -600,7 +619,7 @@ Step 6: Take the square root.
 
 -   $\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$
 
-## Calculating standard deviation
+## Calculating Standard Deviation
 
 ### Step-by-Step
 
@@ -620,7 +639,7 @@ Step 6: Take the square root.
 
     -   $\sum(x-\bar{x})^2$
 
-## Calculating standard deviation
+## Calculating Standard Deviation
 
 ### Step-by-Step
 

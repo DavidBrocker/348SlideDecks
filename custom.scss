@@ -97,7 +97,20 @@ $presentation-title-slide-text-align: left;
 // Callout Tip
 .callout-tip{
   padding:10px;
-  
+
+}
+
+// Callout Important -- default Bootstrap/Quarto styling is red/orange,
+// which reads as an error/warning rather than "pay attention, definition
+// here." Restyle it in the theme's own sage palette instead.
+.callout-important {
+  border-left-color: $accent !important;
+  .callout-icon::before {
+    background-color: $accent !important;
+  }
+  .callout-title-container {
+    color: $accent;
+  }
 }
 
 .card {
@@ -246,4 +259,12 @@ details > summary {
 details[open] summary {
   border-bottom: 1px solid #aaaaaa;
   margin-bottom: 0.5em;
+}
+
+.ans-txt {
+  display: none;
+}
+
+.ans-txt:hover {
+  display: inline-block;
 }
