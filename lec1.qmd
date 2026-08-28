@@ -24,8 +24,6 @@ revealjs-plugins:
 
 ## Hi, I'm Dave! ✋
 
-C - Maybe we can make this more profile-y with 7 in a circle, school icon with Brooklyn next to it and maybe FSC as well to add that tie-in, for research let's add a coffin icon
-
 ::::: columns
 ::: {.column width="40%"}
 ![](images/dave_about_me.jpeg){fig-align="center" style="border-radius: 15px;" height="500"}
@@ -42,15 +40,31 @@ C - Maybe we can make this more profile-y with 7 in a circle, school icon with B
 :::
 :::::
 
+::::::: emoji-row
+::: emoji
+7+
+:::
+
+::: emoji
+🎓
+:::
+
+::: emoji
+🗽
+:::
+
+::: emoji
+⚰️
+:::
+:::::::
+
 ## My Teaching Style
 
 ### What Can You Expect?
 
 - **Humor:** I (try) to be funny
 
-- **Interactive:** Whenever possible, I favor dynamic content over static content
-
-  - C - this should have something that emphasizes that, maybe even a :hover effect for that specific point
+- [**Interactive:** Whenever possible, I favor dynamic content over static content]{.hover-emphasize} (hover over this line!)
 
 - **Real-World Examples:** We will use a mixture of real and fabricated data to help illustrate ideas
 
@@ -66,7 +80,11 @@ C - Maybe we can make this more profile-y with 7 in a circle, school icon with B
 
 ### My Course Evaluations
 
-C - I wonder if adding in the same marquee effect from my website would work or just adding it as an iframe
+:::: marquee-wrap
+::: marquee-track
+"Best professor I've ever had" "Made 9am class feel like a mid-day class, not boring" "Awesome professor, did a great job teaching this class" "Favorite professor I have had so far" "Super approachable, understanding, and cares about his students" "Great instructor — hate statistics"
+:::
+::::
 
 ```{r}
 library(readxl)
@@ -128,32 +146,29 @@ ev_c |> gt(rowname_col = "Type")
 
 ### Media and Music
 
--c I'd like to redo this so that it looks a bit more coherent, modern, etc.
-
 ```{r}
 library(bslib)
 
 c1 <-
-    card(
+  card(
     card_header("Favorite TV Show"),
-    card_image(src ="https://resizing.flixster.com/lpJkDxnEFNQT1OWJjnmYfvpAHJ0=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvUlRUVjI2NjgyOS53ZWJw")
+    card_image(src = "https://resizing.flixster.com/lpJkDxnEFNQT1OWJjnmYfvpAHJ0=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvUlRUVjI2NjgyOS53ZWJw")
     )
 
 c2 <-
   card(
     card_header("Favorite Movie"),
-    card_image(src ="https://m.media-amazon.com/images/M/MV5BY2VhODM5OTUtZDJhMi00MTc5LThjNjYtZWY1M2NlNWU0N2NjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg")
+    card_image(src = "https://m.media-amazon.com/images/M/MV5BY2VhODM5OTUtZDJhMi00MTc5LThjNjYtZWY1M2NlNWU0N2NjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg")
     )
 
 c3 <-
-      card(
+  card(
     card_header("Favorite Music"),
-    card_image(src ="https://f4.bcbits.com/img/a0356251795_16.jpg")
+    card_image(src = "https://f4.bcbits.com/img/a0356251795_16.jpg")
     )
 
-
 layout_column_wrap(
-  c1,c2,c3
+  c1, c2, c3
 )
 ```
 
@@ -171,7 +186,23 @@ layout_column_wrap(
 - Because data is everywhere, even in your **Netflix** recommendations!
 :::
 
-C - lets include a more detailed chart or use Mermaid Viz
+```{dot}
+//| fig-align: center
+digraph {
+  graph [rankdir=LR, bgcolor="transparent"]
+  node [shape="box", style="rounded,filled", fillcolor="#DCE8E1", color="#5C715E", fontname="Fira Sans", fontcolor="#2F3E46"]
+  edge [color="#5C715E", penwidth=1.5]
+
+  Stats[label="Statistics", fillcolor="#8FAF9E", fontcolor="white", style="rounded,filled"]
+  Prac[label="Practitioner\n(evidence-based treatment)"]
+  Res[label="Researcher\n(cause & effect claims)"]
+  Every[label="Everyday Life\n(Netflix, reviews, news)"]
+
+  Stats -> Prac
+  Stats -> Res
+  Stats -> Every
+}
+```
 
 ## What is Statistics?
 
@@ -235,28 +266,30 @@ Statistics makes appearances anywhere you see information being summarized or be
 
 ### Why Do I Need It
 
-C- Maybe let's try and find a better example of this
+Statistical and data literacy is useful for being able to make informed decisions — especially when a claim is designed to grab your attention before you've had a chance to think it through.
 
-Statistical and data literacy is useful for being able to make informed decisions
+- If you saw a headline claiming that blueberries could cure cancer, wouldn't it be helpful to know how to evaluate that claim before sharing it?
 
-- If you were told that blueberries could cure Cancer, wouldn't it be helpful to know how to evaluate that claim?
-
-1.  How many blueberries?
+1.  How many blueberries, and how "cancer" was even measured?
 2.  How long do you have to eat them for?
 3.  Is it all types of cancer or a specific one?
-4.  Is it truly that blueberries cure cancer or are they mixed in with something else?
+4.  Is it truly that blueberries cure cancer, or are they mixed in with something else (diet, exercise, a specific compound at a dose no one eats naturally)?
+
+::: fragment
+This is the same skill you'll use on every "coffee causes/cures \_\_\_" headline for the rest of your life.
+:::
 
 ## Too Good to Be True
 
 ### Wouldn't it be nice if...
 
-C - I like these points but I think they might need some more context, I do cover it in class but at first glance it can be difficult to know what I mean
+We tend to describe the world the way we *wish* it were, not always the way it actually is. A few examples of that:
 
-- Dogs smiled
+- Dogs smiled *(that "smile" is often a stress signal, not happiness)*
 
-- Birdsong is always beautiful
+- Birdsong is always beautiful *(some of it is territorial alarm-calling)*
 
-- All animals love their children
+- All animals love their children *(infanticide is documented across many species)*
 
 Our brain is a pattern matching machine
 
@@ -342,7 +375,7 @@ Our brain is a pattern matching machine
 
 - **Homework:** I want you to have practice outside of the classroom (low-stakes)
 
-- **Labs: Let's add in a descriptor about labs, aim, goal, etc.**
+- **Labs:** A weekly hands-on session right after Monday lecture, where you apply that week's concepts in R using real (or realistic) data
 
 - **Exams:** This is a decent (not perfect) method of seeing how well you understand and can apply the material
 
@@ -368,14 +401,24 @@ Research is a **systematic process** of asking a question about the world and co
 
 ### The Basic Cycle
 
-C - Let's convert this to a flow chart or something that 'moves' from step to step
+```{dot}
+//| fig-align: center
+digraph {
+  graph [bgcolor="transparent"]
+  node [shape="box", style="rounded,filled", fillcolor="#DCE8E1", color="#5C715E", fontname="Fira Sans", fontcolor="#2F3E46"]
+  edge [color="#5C715E", penwidth=1.5]
 
-1.  Observe something interesting or puzzling
-2.  Ask a specific, answerable question about it
-3.  Form a **hypothesis** — a testable prediction
-4.  Collect data designed to test that prediction
-5.  Analyze the data (this is where *statistics* comes in!)
-6.  Draw a conclusion — and often, ask the next question
+  A[label="1. Observe\nsomething interesting"]
+  B[label="2. Ask a specific,\nanswerable question"]
+  C[label="3. Form a\nhypothesis"]
+  D[label="4. Collect\ndata"]
+  E[label="5. Analyze the data\n(this is where statistics comes in!)"]
+  F[label="6. Draw a\nconclusion"]
+
+  A -> B -> C -> D -> E -> F
+  F -> A [label="often leads to\nthe next question", style=dashed, fontsize=11]
+}
+```
 
 ## What Kinds of Research are there?
 
@@ -425,6 +468,6 @@ C - Let's convert this to a flow chart or something that 'moves' from step to st
 
 ### I Am an Open Book!
 
-C - aim to add an animation of a book opening
-
-Overall Comments: I think this lecture just needs a bit of polishing. I don't think there are any content gaps or areas that need amending.
+::: book-anim
+📕📖
+:::
