@@ -20,36 +20,39 @@ format:
 
 ### How Did We Get Here!
 
--   We began the semester by discussing how to define and measure psychological and abstract concepts.
+- We began the semester by discussing how to define and measure psychological and abstract concepts.
 
--   We explored different types of variables and scales of measurement, learning how data can be categorized or quantified.
+- We explored different types of variables and scales of measurement, learning how data can be categorized or quantified.
 
--   We used the normal distribution to examine variability and to understand how scores can be assigned probability values using standardized (z) scores.
+- We used the normal distribution to examine variability and to understand how scores can be assigned probability values using standardized (z) scores.
 
--   Through sampling theory, we saw how many possible samples create a distribution of sample means, centered around the true population mean.
+- Through sampling theory, we saw how many possible samples create a distribution of sample means, centered around the true population mean.
 
--   If we can estimate the probability that a sample mean came from a particular distribution, can we also estimate whether it came from the null or the alternative hypothesis?
+- If we can estimate the probability that a sample mean came from a particular distribution, can we also estimate whether it came from the null or the alternative hypothesis?
 
 ## From Probability to Decision-Making
--   Once we know how likely a sample mean is to occur, we can begin to make decisions about what that likelihood means.
 
--   We introduced two competing ideas:
+- Once we know how likely a sample mean is to occur, we can begin to make decisions about what that likelihood means.
 
-    -   Null hypothesis ($H_0$): No real difference or effect.
-    -   Alternative hypothesis ($H_1$): A true difference or effect exists.
+- We introduced two competing ideas:
 
--   Because samples vary, we can never be 100% certain—only confident to a degree.
+  - Null hypothesis ($H_0$): No real difference or effect.
+  - Alternative hypothesis ($H_1$): A true difference or effect exists.
+
+- Because samples vary, we can never be 100% certain—only confident to a degree.
 
 ## Errors in Estimation
+
 ### Type I and II Error
 
--   That degree of confidence is defined by α (alpha), our threshold for error when rejecting $H_0$.
+- That degree of confidence is defined by α (alpha), our threshold for error when rejecting $H_0$.
 
--   $\beta$ (beta) represents the probability of missing a real effect (failing to reject $H_0$ when $H_1$ is true).
--   These lead to two types of decision errors:
-      
-    -   Type I error ($\alpha$): Finding a difference that isn’t really there. (False Positive)
-    -   Type II error ($\beta$): Missing a difference that actually exists. (False Negative)
+- $\beta$ (beta) represents the probability of missing a real effect (failing to reject $H_0$ when $H_1$ is true).
+
+- These lead to two types of decision errors:
+
+  - Type I error ($\alpha$): Finding a difference that isn’t really there. (False Positive)
+  - Type II error ($\beta$): Missing a difference that actually exists. (False Negative)
 
 ## The Truth Table
 
@@ -111,29 +114,29 @@ df_sampling |>
 
 ## Before We Compare Means…
 
--   Every statistical test is about making a decision:
+- Every statistical test is about making a decision:
 
-    -   Is our result likely due to chance, or does it reflect a real difference?
+  - Is our result likely due to chance, or does it reflect a real difference?
 
--   Two key players in this decision:
+- Two key players in this decision:
 
-    -   α (alpha): our threshold for how much error we’ll tolerate (Type I Error)
+  - α (alpha): our threshold for how much error we’ll tolerate (Type I Error)
 
-    -   β (beta): the risk of missing a real effect (Type II Error)
+  - β (beta): the risk of missing a real effect (Type II Error)
 
--   Balancing α and β helps us manage:
+- Balancing α and β helps us manage:
 
-    -   False alarms (rejecting a true null)
-    -   Missed detections (failing to reject a false null)
+  - False alarms (rejecting a true null)
+  - Missed detections (failing to reject a false null)
 
 ## Why Compare Means?
 
--   We often want to test whether a sample mean differs from a known population mean.
--   The one-sample t-test helps determine if the sample mean is significantly different from the hypothesized population mean.
--   Example scenarios:
-    -   Does the average exam score in a class differ from a national average of 75?
-    -   Do people’s reaction times differ from a published standard of 250ms?
-    -   Tests against the midpoint of a scale
+- We often want to test whether a sample mean differs from a known population mean.
+- The one-sample t-test helps determine if the sample mean is significantly different from the hypothesized population mean.
+- Example scenarios:
+  - Does the average exam score in a class differ from a national average of 75?
+  - Do people’s reaction times differ from a published standard of 250ms?
+  - Tests against the midpoint of a scale
 
 ## The t-test
 
@@ -141,24 +144,24 @@ df_sampling |>
 
 :::::: columns
 ::: {.column width="33%"}
--   One-Sample T-Test
-    -   $t=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}} | \frac{\bar{x}-\mu}{s/\sqrt{n}}$
+- One-Sample T-Test
+  - $t=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}} | \frac{\bar{x}-\mu}{s/\sqrt{n}}$
 :::
 
 ::: {.column width="33%"}
--   Paired-Samples T Test
-    -   $t=\frac{\bar{D}}{\sigma_{\bar{D}}}|\frac{\bar{D}}{s_{\bar{D}}/\sqrt{n}}$
+- Paired-Samples T Test
+  - $t=\frac{\bar{D}}{\sigma_{\bar{D}}}|\frac{\bar{D}}{s_{\bar{D}}/\sqrt{n}}$
 :::
 
 ::: {.column width="33%"}
--   Independent-Samples T Test
-    -   $t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
+- Independent-Samples T Test
+  - $t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
 :::
 ::::::
 
--   We use the sample standard deviation ($s$) to estimate the standard error ($s/\sqrt{n}$) since population σ is typically unknown.
--   In all cases, variation in statistical significance factors in degrees of freedom (df)
-    -   Accounts for variability in sampling
+- We use the sample standard deviation ($s$) to estimate the standard error ($s/\sqrt{n}$) since population σ is typically unknown.
+- In all cases, variation in statistical significance factors in degrees of freedom (df)
+  - Accounts for variability in sampling
 
 ## The t-distribution
 
@@ -214,15 +217,15 @@ $\large{t = \frac{\color{red}{\bar{x}}-\color{blue}{\mu}}{\color{orange}{s/\sqrt
 
 Where:
 
--   $\color{red}{\bar{x}}$ = sample mean
+- $\color{red}{\bar{x}}$ = sample mean
 
--   $\color{blue}{\mu}$ = population mean (null hypothesis value)
+- $\color{blue}{\mu}$ = population mean (null hypothesis value)
 
--   $\color{orange}{s/\sqrt{n}}$ = the standard error (SE) — estimated from the sample, since population $\sigma$ is typically unknown
+- $\color{orange}{s/\sqrt{n}}$ = the standard error (SE) — estimated from the sample, since population $\sigma$ is typically unknown
 
-    -   $s$ = sample standard deviation
+  - $s$ = sample standard deviation
 
-    -   $n$ = sample size
+  - $n$ = sample size
 
 ## Hypothesis Testing Steps
 
@@ -240,12 +243,12 @@ Where:
 ### Manual
 
 1.  Set Hypotheses:
-    -   $H_0$: The average exam score is 75 ($\mu = 75$).
-    -   $H_A$: The average exam score is not 75 ($\mu \neq 75$).
+    - $H_0$: The average exam score is 75 ($\mu = 75$).
+    - $H_A$: The average exam score is not 75 ($\mu \neq 75$).
 2.  Collect Sample Data:
-    -   Sample size: $n = 20$
-    -   Sample mean: $\bar{x} = 78$
-    -   Sample standard deviation: $s = 5$
+    - Sample size: $n = 20$
+    - Sample mean: $\bar{x} = 78$
+    - Sample standard deviation: $s = 5$
 
 ## Hypothesis Testing Steps
 
@@ -253,13 +256,13 @@ Where:
 
 3.  Compute the t-Statistic:
 
-    -   $t = \frac{78 - 75}{\frac{5}{\sqrt{20}}} = \frac{3}{1.118} = 2.68$
+    - $t = \frac{78 - 75}{\frac{5}{\sqrt{20}}} = \frac{3}{1.118} = 2.68$
 
 4.  Compare to Critical Value:
 
-    -   Using a $\alpha = 0.05$ level and df = 19, critical
-    -   $t_{critical} = \pm 2.093$.
-    -   Since $2.68 > 2.093$, we reject $H_0$.
+    - Using a $\alpha = 0.05$ level and df = 19, critical
+    - $t_{critical} = \pm 2.093$.
+    - Since $2.68 > 2.093$, we reject $H_0$.
 
 ## Hypothesis Testing Steps
 
@@ -303,10 +306,10 @@ t.test(dat,mu = mu) |>
 
 > A one-sample t-test was conducted to compare exam scores to the national average of `75`. Results showed a significant difference, `t(19) = 2.68, p < .05`, indicating that students scored significantly higher than the national average.
 
--   What kind of test?
--   What is being compared?
--   Is it significant?
--   What are the test results?
+- What kind of test?
+- What is being compared?
+- Is it significant?
+- What are the test results?
 
 ## Reporting Results
 
@@ -314,17 +317,17 @@ t.test(dat,mu = mu) |>
 
 > A [one-sample t-test]{style="background-color: orange;"} was conducted to [compare exam scores to the national average]{style="background-color:orange;"} of `75`. Results showed a [significant difference]{style="background-color:orange;"}, `t(19) = 2.68, p < .05`, indicating that students scored significantly higher than the national average.
 
--   What kind of test?
--   What is being compared?
--   Is it significant?
--   What are the test results?
+- What kind of test?
+- What is being compared?
+- Is it significant?
+- What are the test results?
 
 ## Interpreting Results
 
 ### Sample Summary Table
 
--   A significant result ($p < .05$) suggests that the sample mean is different from the population mean.
--   A non-significant result ($p > .05$) means we fail to reject $H_0$ (no evidence of a difference).
+- A significant result ($p < .05$) suggests that the sample mean is different from the population mean.
+- A non-significant result ($p > .05$) means we fail to reject $H_0$ (no evidence of a difference).
 
 ```{r}
 t.test(dat,mu = mu) |> 
@@ -420,23 +423,23 @@ t.test(
 
 > A professor wants to test if students in their class scored differently from the national average of `75` on an exam. A sample of `25` students has a mean score of `78` with a standard deviation of `10`.
 
--   Hypotheses
+- Hypotheses
 
-    -   Null Hypothesis ($H_0$): ( $\mu = 75$ ) (no difference)
+  - Null Hypothesis ($H_0$): ( $\mu = 75$ ) (no difference)
 
-    -   Alternative Hypothesis ($H_A$): ( $\mu \neq 75$ ) (scores differ)
+  - Alternative Hypothesis ($H_A$): ( $\mu \neq 75$ ) (scores differ)
 
 ## Exam Scores vs. National Average
 
 ### Manual
 
--   Using the one-sample t-test formula:
+- Using the one-sample t-test formula:
 
-    -   $t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}} |t = \frac{78 - 75}{\frac{10}{\sqrt{25}}} = \frac{3}{2} = 1.5$
+  - $t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}} |t = \frac{78 - 75}{\frac{10}{\sqrt{25}}} = \frac{3}{2} = 1.5$
 
--   For df = 24 (25-1), the critical value at α = .05 (two-tailed) is ±2.064.
+- For df = 24 (25-1), the critical value at α = .05 (two-tailed) is ±2.064.
 
--   Since 1.5 \< 2.064, we fail to reject $H_0$.
+- Since 1.5 \< 2.064, we fail to reject $H_0$.
 
 ## APA Reporting
 
@@ -446,10 +449,10 @@ t.test(
 
 > A coffee company claims that people drink an average of `3 cups` of coffee per day. A researcher samples `16 individuals`, finding a mean of `2.5 cups` and a standard deviation of `1 cup`.
 
--   Hypotheses
+- Hypotheses
 
-    -   Null Hypothesis ($H_0$): $\mu = 3$
-    -   Alternative Hypothesis ($H_A$): $\mu < 3$ (people drink less)
+  - Null Hypothesis ($H_0$): $\mu = 3$
+  - Alternative Hypothesis ($H_A$): $\mu < 3$ (people drink less)
 
 ## Daily Coffee Consumption
 
@@ -457,13 +460,13 @@ t.test(
 
 > A coffee company claims that people drink an average of `3 cups` of coffee per day. A researcher samples `16 individuals`, finding a mean of `2.5 cups` and a standard deviation of `1 cup`.
 
--   Calculation
+- Calculation
 
-    -   $t = \frac{2.5 - 3}{1 / \sqrt{16}} = \frac{-0.5}{0.25} = -2.0$
+  - $t = \frac{2.5 - 3}{1 / \sqrt{16}} = \frac{-0.5}{0.25} = -2.0$
 
--   For df = 15 (16-1), the critical t-value for a one-tailed test at α = .05 is -1.753.
+- For df = 15 (16-1), the critical t-value for a one-tailed test at α = .05 is -1.753.
 
--   Since -2.0 \< -1.753, we reject $H_0$.
+- Since -2.0 \< -1.753, we reject $H_0$.
 
 ## Daily Coffee Consumption
 
@@ -496,10 +499,10 @@ t.test(
 
 > A health researcher believes college students sleep less than `7 hours` per night. A sample of `30 students` reports a mean of `6.5` hours with a standard deviation of `1.2` hours.
 
--   Hypotheses
+- Hypotheses
 
-    -   Null Hypothesis $H_0$: $\mu = 7$
-    -   Alternative Hypothesis $H_1$: $\mu < 7$
+  - Null Hypothesis $H_0$: $\mu = 7$
+  - Alternative Hypothesis $H_1$: $\mu < 7$
 
 ## Sleep Duration Among College Students
 
@@ -507,13 +510,13 @@ t.test(
 
 > A health researcher believes college students sleep less than `7 hours` per night. A sample of `30 students` reports a mean of `6.5` hours with a standard deviation of `1.2` hours.
 
--   Calculation
+- Calculation
 
-    -   $t = \frac{6.5 - 7}{1.2 / \sqrt{30}} = \frac{-0.5}{0.219} = -2.28$
+  - $t = \frac{6.5 - 7}{1.2 / \sqrt{30}} = \frac{-0.5}{0.219} = -2.28$
 
--   For df = `29`, the critical t-value for a one-tailed test at α = .05 is `-1.699`.
+- For df = `29`, the critical t-value for a one-tailed test at α = .05 is `-1.699`.
 
--   Since `-2.28` \< -1.699, we reject $H_0$.
+- Since `-2.28` \< -1.699, we reject $H_0$.
 
 ## Sleep Duration Among College Students
 

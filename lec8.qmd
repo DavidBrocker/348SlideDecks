@@ -51,31 +51,31 @@ ggnorm(1000,40,3)
 :::
 
 ::: {.column width="50%"}
--   They are shaped like a bell ("bell curve").
+- They are shaped like a bell ("bell curve").
 
--   They are symmetric.
+- They are symmetric.
 
--   They are unimodal.
+- They are unimodal.
 
--   The mean = median = mode.
+- The mean = median = mode.
 :::
 :::::
 
 ## Statistics
 
--   Descriptive Statistics:
+- Descriptive Statistics:
 
-    -   Goal: Describe the sample
+  - Goal: Describe the sample
 
-        -   Examples: Mean, Standard Deviation
+    - Examples: Mean, Standard Deviation
 
--   Inferential Statistics:
+- Inferential Statistics:
 
-    -   Goal: Use the sample to make inferences about the population
+  - Goal: Use the sample to make inferences about the population
 
-        -   t-test
-        -   ANOVA
-        -   Regression
+    - t-test
+    - ANOVA
+    - Regression
 
 ## Sampling Theory
 
@@ -91,11 +91,11 @@ ggnorm(1000,40,3)
 
 ::::: columns
 ::: {.column width="50%"}
--   Each student asks 500 people how much they enjoy the Netflix Original Dark.
+- Each student asks 500 people how much they enjoy the Netflix Original Dark.
 
--   How many people did each of you ask?
+- How many people did each of you ask?
 
-    -   $30 \times 500 = 15,000$
+  - $30 \times 500 = 15,000$
 :::
 
 ::: {.column width="50%"}
@@ -134,14 +134,14 @@ replicate(n = 30,
 
 ## Sampling Theory
 
--   Once each of you collect *500 responses*, I ask you to calculate the average answer. So you calculate the mean.
+- Once each of you collect *500 responses*, I ask you to calculate the average answer. So you calculate the mean.
 
 ::: fragment
--   $\bar{x}_1 = \frac{\sum(x_1 + x_2 + x_3+x_4...+ x_{500)}}{500}$
+- $\bar{x}_1 = \frac{\sum(x_1 + x_2 + x_3+x_4...+ x_{500)}}{500}$
 
--   They are the means from each of your samples.
+- They are the means from each of your samples.
 
--   These are called **Sample Means**
+- These are called **Sample Means**
 :::
 
 ## Sampling Theory
@@ -176,19 +176,19 @@ tibble(
 
 ### What can we do with Sample Means?
 
--   We could calculate the Mean of the Sample Means.
+- We could calculate the Mean of the Sample Means.
 
--   We could calculate the standard deviation of the Sample Means.
+- We could calculate the standard deviation of the Sample Means.
 
--   But...it's theoretical. It doesn't really exist, but we imagine it's existence for the sake of **Sampling Theory**.
+- But...it's theoretical. It doesn't really exist, but we imagine it's existence for the sake of **Sampling Theory**.
 
 ## Sampling Distribution
 
 ::::: columns
 ::: {.column width="50%"}
--   A **Sampling Distribution** is the theoretical distribution of means across every single possible sample.
+- A **Sampling Distribution** is the theoretical distribution of means across every single possible sample.
 
--   If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:
+- If we took samples of the population until we got every single person in the population, then calculated the mean for each sample, they would distribute like this:
 :::
 
 ::: {.column width="50%"}
@@ -214,11 +214,11 @@ tibble(
 
 ::::: columns
 ::: {.column width="50%"}
--   Except now each value in this distribution no longer represents 1 person/participant.
+- Except now each value in this distribution no longer represents 1 person/participant.
 
--   Each value in this distribution represents the average of 1 sample, a Sample Mean.
+- Each value in this distribution represents the average of 1 sample, a Sample Mean.
 
-    -   In our case, each value is the average of `30` samples of `500` people.
+  - In our case, each value is the average of `30` samples of `500` people.
 :::
 
 ::: {.column width="50%"}
@@ -265,13 +265,13 @@ p
 
 ::::: columns
 ::: {.column width="50%"}
--   We previously referred to the average as $\bar{x}$ and the standard deviation as $s$
+- We previously referred to the average as $\bar{x}$ and the standard deviation as $s$
 
--   The new terms refer to their specific attributes as a statistic of the sample
+- The new terms refer to their specific attributes as a statistic of the sample
 
--   $\mu$ (pronounced like 'mew') represents the population mean
+- $\mu$ (pronounced like 'mew') represents the population mean
 
--   $\sigma$ represents the population standard deviation
+- $\sigma$ represents the population standard deviation
 :::
 
 ::: {.column width="50%"}
@@ -328,9 +328,9 @@ tibble(
 
 ## Sampling Theory
 
--   Each value in this distribution no longer represents 1 person/participant.
+- Each value in this distribution no longer represents 1 person/participant.
 
--   Each value in this distribution now represents the average of 1 sample, a Sample Mean.
+- Each value in this distribution now represents the average of 1 sample, a Sample Mean.
 
 ```{r}
 
@@ -354,7 +354,7 @@ tibble(
 
 ## Probability
 
--   What percentage of participants rated Dark with a z-score of 2 or higher?
+- What percentage of participants rated Dark with a z-score of 2 or higher?
 
 ```{r}
 p
@@ -362,7 +362,7 @@ p
 
 ## Probability
 
--   What percentage of participants rated Dark with a z-score of 2 or higher?
+- What percentage of participants rated Dark with a z-score of 2 or higher?
 
 ```{r}
 p + 
@@ -372,9 +372,9 @@ p +
 
 ## Probability
 
--   This is the distribution of **sample means** from adults in the US.
+- This is the distribution of **sample means** from adults in the US.
 
--   What is the probability of any sample having a mean that is a z-score of 2 or higher?
+- What is the probability of any sample having a mean that is a z-score of 2 or higher?
 
 ```{r}
 p + 
@@ -384,11 +384,11 @@ p +
 
 ## Assumptions of the Normal Curve
 
--   We *assume* that the distribution of sample means is normal.
+- We *assume* that the distribution of sample means is normal.
 
--   We use that assumption to gauge the probability of getting a particular mean from a single sample.
+- We use that assumption to gauge the probability of getting a particular mean from a single sample.
 
--   We can literally find that probability, the same way we did with x-values in a normal distribution.
+- We can literally find that probability, the same way we did with x-values in a normal distribution.
 
 ## Example
 
@@ -396,15 +396,15 @@ p +
 
 We want to know how much people like pizza.
 
--   There are `12,500` people in our population. Each of the `25` of us collects a sample of `500`.
+- There are `12,500` people in our population. Each of the `25` of us collects a sample of `500`.
 
--   $500 \times 25 = 12,500$
+- $500 \times 25 = 12,500$
 
--   Each of us calculates the mean response from our sample of `500` people.
+- Each of us calculates the mean response from our sample of `500` people.
 
--   What do we call those means?
+- What do we call those means?
 
-    -   What would it look like if we were to plot it?
+  - What would it look like if we were to plot it?
 
 ## Pizza Plot
 
@@ -447,9 +447,9 @@ ggplot(df, aes(sample_mean)) +
 
 ## Example
 
--   I randomly choose a mean from our distribution of sample means, about how much people like pizza.
+- I randomly choose a mean from our distribution of sample means, about how much people like pizza.
 
--   What is the probability of picking a mean with a z-score of -1 or less?
+- What is the probability of picking a mean with a z-score of -1 or less?
 
 ```{r}
 p
@@ -457,9 +457,9 @@ p
 
 ## Example
 
--   I randomly choose a mean from our distribution of sample means, about how much people like pizza.
+- I randomly choose a mean from our distribution of sample means, about how much people like pizza.
 
--   What is the probability of picking a mean with a z-score of -1 or less?
+- What is the probability of picking a mean with a z-score of -1 or less?
 
 ```{r}
 p + 
@@ -470,41 +470,41 @@ p +
 
 > Sampling Theory is the body of principles underlying the drawing of infinite samples that accurately represent the population from which they are taken and to which inferences can be made.
 
--   The distribution made up of sample means is **conceptual** and **theoretical**
+- The distribution made up of sample means is **conceptual** and **theoretical**
 
 ## Sampling Theory
 
 > Sampling Theory is the idea that if we took infinite samples of a population, they would create a normal distribution.
 
--   If that is correct, we can then make guesses about the probability of getting a specific mean.
+- If that is correct, we can then make guesses about the probability of getting a specific mean.
 
--   We will use this probability to gauge **significance** of our inferential statistics.
+- We will use this probability to gauge **significance** of our inferential statistics.
 
 ## Sampling Theory
 
 ### New Terminology (Again???)
 
--   We've been writing the sample mean as $\bar{x}$ — you'll keep using that.
+- We've been writing the sample mean as $\bar{x}$ — you'll keep using that.
 
--   You'll also see the sample mean written as $M$ in published papers — that's the [APA style](https://apastyle.apa.org/) convention for reporting results, not a different calculation. $\bar{x}$ and $M$ mean the same thing.
+- You'll also see the sample mean written as $M$ in published papers — that's the [APA style](https://apastyle.apa.org/) convention for reporting results, not a different calculation. $\bar{x}$ and $M$ mean the same thing.
 
--   The mean of a population is notated as $\mu$.
+- The mean of a population is notated as $\mu$.
 
--   The dispersion of a sample is known as the standard deviation, or $SD$, or sometimes just $s$.
+- The dispersion of a sample is known as the standard deviation, or $SD$, or sometimes just $s$.
 
 ## Standard Error
 
 ### A Population Deviation
 
--   $SE = \frac{\sigma}{\sqrt{n}}$
+- $SE = \frac{\sigma}{\sqrt{n}}$
 
-    -   $\sigma$ = Population Standard Deviation
+  - $\sigma$ = Population Standard Deviation
 
-    -   $n$ - Sample Size
+  - $n$ - Sample Size
 
--   The Standard Error is **not** just another name for $\sigma$ — it's the standard deviation of the *distribution of sample means*, which is why it shrinks as $n$ grows ($SE = \sigma / \sqrt{n}$).
+- The Standard Error is **not** just another name for $\sigma$ — it's the standard deviation of the *distribution of sample means*, which is why it shrinks as $n$ grows ($SE = \sigma / \sqrt{n}$).
 
--   In other words: $\sigma$ describes how spread out individual scores are; $SE$ describes how spread out sample means are.
+- In other words: $\sigma$ describes how spread out individual scores are; $SE$ describes how spread out sample means are.
 
 ## Sampling theory, but candy
 
@@ -514,13 +514,13 @@ p +
 :::
 
 ::: {.column width="50%"}
--   This is a jar of `500` pieces of candy. There are `5` flavors of candy.
+- This is a jar of `500` pieces of candy. There are `5` flavors of candy.
 
--   If I took scoops of `25` pieces of candy at a time, on average how many oranges would I get per scoop?
+- If I took scoops of `25` pieces of candy at a time, on average how many oranges would I get per scoop?
 
-    -   I take a first scoop and 5 of them are orange.
+  - I take a first scoop and 5 of them are orange.
 
-    -   Should I expect to get 5 oranges on average?
+  - Should I expect to get 5 oranges on average?
 :::
 :::::
 
@@ -530,15 +530,15 @@ p +
 
 ::::: columns
 ::: {.column width="50%"}
--   Is it safe to assume the `5`-Orange scoop came from the Candy Jar?
+- Is it safe to assume the `5`-Orange scoop came from the Candy Jar?
 
-    -   Probably!
+  - Probably!
 
--   I take a scoop of `25` pieces of candy, and all `25` of them are orange.
+- I take a scoop of `25` pieces of candy, and all `25` of them are orange.
 
--   Did this scoop come from the Candy Jar?
+- Did this scoop come from the Candy Jar?
 
-    -   Probably not
+  - Probably not
 :::
 
 ::: {.column width="50%"}
@@ -572,23 +572,23 @@ tibble(
 
 A hypothesis is a testable prediction of what will happen in our experiment that:
 
--   Names of the variables (independent and dependent)
+- Names of the variables (independent and dependent)
 
--   Clearly contrasts the groups
+- Clearly contrasts the groups
 
 ## NHST
 
 ### Null Hypothesis
 
--   The Null Hypothesis states that nothing will happen or that there is no difference between. $H_0$
+- The Null Hypothesis states that nothing will happen or that there is no difference between. $H_0$
 
--   Null means zero, nothing
+- Null means zero, nothing
 
--   Names the variables (independent and dependent)
+- Names the variables (independent and dependent)
 
--   Indicates or suggests no difference between the groups
+- Indicates or suggests no difference between the groups
 
-    -   $\mu_1 = \mu_2$
+  - $\mu_1 = \mu_2$
 
 ## NHST
 
@@ -596,41 +596,41 @@ A hypothesis is a testable prediction of what will happen in our experiment that
 
 An **Alternative Hypothesis** is a testable prediction of what will happen in our experiment that:
 
--   Names the variables (independent and dependent)
+- Names the variables (independent and dependent)
 
--   Clearly contrasts the groups.
+- Clearly contrasts the groups.
 
--   The Alternative Hypothesis is written as $H_1/H_A$
+- The Alternative Hypothesis is written as $H_1/H_A$
 
-    -   $\mu_1 > \mu_2$
+  - $\mu_1 > \mu_2$
 
 ## **The Question**
 
 > Every year we run a huge campus climate survey. We can’t ask all 10,000 students, so we draw a sample. Now imagine each of *you* is in charge of your own survey, each collecting 400 students’ responses.
 
--   FSC has **10,000 students**.
+- FSC has **10,000 students**.
 
--   Asking all 10,000 is not practical.
+- Asking all 10,000 is not practical.
 
--   Each of the **25 of us** collects a **sample of 400 students**.
+- Each of the **25 of us** collects a **sample of 400 students**.
 
--   We calculate the **average belonging score** in each sample.
+- We calculate the **average belonging score** in each sample.
 
-    -   These averages are called **sample means**.
+  - These averages are called **sample means**.
 
 ## **Sampling Variation**
 
 ::::: columns
 ::: {.column width="50%"}
--   Sample means will **not be identical**.
+- Sample means will **not be identical**.
 
--   Why?
+- Why?
 
-    -   Different mixes of students (e.g., commuters, first-years, club leaders).
+  - Different mixes of students (e.g., commuters, first-years, club leaders).
 
--   This variation from sample to sample is called **sampling variation**.
+- This variation from sample to sample is called **sampling variation**.
 
-    -   It’s the foundation of **sampling theory**.
+  - It’s the foundation of **sampling theory**.
 :::
 
 ::: {.column width="50%"}
@@ -661,37 +661,37 @@ ggplot(sample_means, aes(x = mean)) +
 
 ## Sampling Distribution
 
--   If we plot all **25 sample means** from FSC:
+- If we plot all **25 sample means** from FSC:
 
-    -   Most cluster near the **true population mean**.
+  - Most cluster near the **true population mean**.
 
-    -   Some fall higher or lower by chance.
+  - Some fall higher or lower by chance.
 
--   This plot is the **sampling distribution of the mean**.
+- This plot is the **sampling distribution of the mean**.
 
--   As samples get larger, the sampling distribution becomes **narrower**.
+- As samples get larger, the sampling distribution becomes **narrower**.
 
 ## **Comparing Two Schools**
 
 > We want to compare FSC students’ sense of belonging to that at another college. We draw 25 samples of 400 at each school.
 
--   We repeat the study at **John Jacob Jinglehymer Smith University (JJJSMU)**.
+- We repeat the study at **John Jacob Jinglehymer Smith University (JJJSMU)**.
 
--   We now have **two sampling distributions**:
+- We now have **two sampling distributions**:
 
-    -   One for FSC
+  - One for FSC
 
-    -   One for JJJSMU
+  - One for JJJSMU
 
 ## Comparing Two Schools
 
 ::::: columns
 ::: {.column width="50%"}
--   Comparing the two distributions:
+- Comparing the two distributions:
 
-    -   Differences in the **centers** suggest differences in population belonging.
+  - Differences in the **centers** suggest differences in population belonging.
 
-    -   Differences in the **spread** reflect sampling error.
+  - Differences in the **spread** reflect sampling error.
 :::
 
 ::: {.column width="50%"}
@@ -739,17 +739,17 @@ df_sampling |>
 
 ### Sampling distributions let us:
 
--   Estimate population parameters.
+- Estimate population parameters.
 
-    -   What is the mean 'likely' to be?
+  - What is the mean 'likely' to be?
 
--   Understand and quantify **sampling error**.
+- Understand and quantify **sampling error**.
 
-    -   How can we explain sampling variation
+  - How can we explain sampling variation
 
--   Compare populations in a statistically rigorous way.
+- Compare populations in a statistically rigorous way.
 
-    -   Did a datapoint (or statistics) come from the same population?
+  - Did a datapoint (or statistics) come from the same population?
 
 ## Probability
 
@@ -887,12 +887,12 @@ A lady declares that by tasting a cup of tea made with milk she can discriminate
 
 ::::: columns
 ::: {.column width="50%"}
--   A lady claimed she could tell whether **milk or tea was poured first**.
--   Fisher designed an experiment:
-    -   8 cups of tea
-    -   4 poured milk-first, 4 tea-first
-    -   **Randomized order**
--   The lady must classify each cup.
+- A lady claimed she could tell whether **milk or tea was poured first**.
+- Fisher designed an experiment:
+  - 8 cups of tea
+  - 4 poured milk-first, 4 tea-first
+  - **Randomized order**
+- The lady must classify each cup.
 :::
 
 ::: {.column width="50%"}
@@ -905,19 +905,19 @@ A classic example of hypothesis testing\
 
 ## The Hypotheses
 
--   **Null hypothesis (H₀):**
+- **Null hypothesis (H₀):**
 
-    -   The lady has **no special ability** — she is just guessing.
+  - The lady has **no special ability** — she is just guessing.
 
--   **Alternative (H₁):**
+- **Alternative (H₁):**
 
-    -   The lady **can tell the difference**.
+  - The lady **can tell the difference**.
 
--   **Key idea:**
+- **Key idea:**
 
-    -   We begin by assuming H₀ is true.
+  - We begin by assuming H₀ is true.
 
-    -   We’ll only reject H₀ if the data are *too surprising* under H₀.
+  - We’ll only reject H₀ if the data are *too surprising* under H₀.
 
 ## Possible Outcomes
 
@@ -947,21 +947,21 @@ tibble(
 
 ## The Test
 
--   Fisher’s original rule: **Reject H₀ only if she gets all 8 correct.**
--   Under H₀, there are ${8 \choose 4} = \frac{8!}{4!(8-4)!} = 70$ equally likely ways to guess which 4 cups are milk-first.
--   So the probability of guessing all 8 correctly by chance is $\frac{1}{70} \approx 1.4\%$.
+- Fisher’s original rule: **Reject H₀ only if she gets all 8 correct.**
+- Under H₀, there are ${8 \choose 4} = \frac{8!}{4!(8-4)!} = 70$ equally likely ways to guess which 4 cups are milk-first.
+- So the probability of guessing all 8 correctly by chance is $\frac{1}{70} \approx 1.4\%$.
 
 Since 1.4% is less than 5%, it’s rare enough to count as evidence against H₀.
 
 ## Decision & Interpretation
 
--   **If 8 / 8 correct → Reject H₀**
+- **If 8 / 8 correct → Reject H₀**
 
-    -   Suggests evidence she can tell the difference.\
+  - Suggests evidence she can tell the difference.\
 
--   **Otherwise → Fail to reject H₀**
+- **Otherwise → Fail to reject H₀**
 
-    -   No convincing evidence of ability.
+  - No convincing evidence of ability.
 
 . . .
 
@@ -973,7 +973,7 @@ Since 1.4% is less than 5%, it’s rare enough to count as evidence against H₀
 2.  Compute how likely the observed data are under that model.
 3.  If that probability (p-value) is very small → reject the null.
 
--   This logic is the same for t-tests, z-tests, and many modern methods.
+- This logic is the same for t-tests, z-tests, and many modern methods.
 
 ```{r}
 #| echo: true
@@ -991,7 +991,7 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
 
--   Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
+- Hypothesis: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
 
 ## Hypothesis:
 
@@ -999,9 +999,9 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
 
--   Null Hypothesis: There is no difference in the DV between the IV groups.
+- Null Hypothesis: There is no difference in the DV between the IV groups.
 
--   Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.
+- Alternative Hypothesis: The experimental group is significantly different from the control group on the DV.
 
 ## Hypothesis:
 
@@ -1009,9 +1009,9 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Professor Brocker wants to know if Millennials enjoy the Netflix Original, *Dark* significantly more than Gen Z. He recruits 500 Millennials and 500 Gen-Z students and asks them to rate Dark on a scale of 1 to 10 (10 being fantastic).
 
--   **Alternative Hypothesis**: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
+- **Alternative Hypothesis**: Millennials will rate their enjoyment of Dark as significantly higher than their Gen Z peers.
 
--   **Null Hypothesis**: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.
+- **Null Hypothesis**: Millennials and Gen Z will not differ in their rating of enjoyment of the Dark.
 
 ## Hypothesis Testing
 
@@ -1019,13 +1019,13 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Professor Brocker wants to know if giving his students coffee will improve their exam scores. He **randomly** assigns `13` of his `26` students to drink a doubleshot; he calls this the **experimental** group. The other `13` students drink decaf (a placebo); he calls this the **control** group.
 
--   $H_0$:
+- $H_0$:
 
-    -   $\mu_\text{Coffee} = \mu_\text{Decaf}$
+  - $\mu_\text{Coffee} = \mu_\text{Decaf}$
 
--   $H_1/H_A$:
+- $H_1/H_A$:
 
-    -   $\mu_{\text{Coffee}} > \mu_{\text{Decaf}}$
+  - $\mu_{\text{Coffee}} > \mu_{\text{Decaf}}$
 
 ## Hypothesis Testing
 
@@ -1033,13 +1033,13 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Esmeralda gives an anti-depressant to `100` individuals suffering from depression. She gives another `100` individuals a placebo. After `2` months, we measure their depression.
 
--   $H_0$:
+- $H_0$:
 
-    -   $\mu_{\text{SSRI}} = \mu_{\text{Placebo}}$
+  - $\mu_{\text{SSRI}} = \mu_{\text{Placebo}}$
 
--   $H_1/H_A$:
+- $H_1/H_A$:
 
-    -   $\mu_{\text{SSRI}} < \mu_{\text{Placebo}}$
+  - $\mu_{\text{SSRI}} < \mu_{\text{Placebo}}$
 
 ## Hypothesis Testing
 
@@ -1047,64 +1047,64 @@ dhyper(k, m = 4, n = 4, k = 4)
 
 > Jonas assigns *half* of the participants to engage in aerobic exercise for **one hour a day for 6 months**. The other half of the participants do not exercise for **6 months**. At the end of the 6 months, Jonas measures the participants' **working memory capacity**.
 
--   $H_0$:
+- $H_0$:
 
-    -   $\mu_{\text{Exercise}} = \mu_{\text{No Exercise}}$
+  - $\mu_{\text{Exercise}} = \mu_{\text{No Exercise}}$
 
--   $H_1/H_A$:
+- $H_1/H_A$:
 
-    -   $\mu_{\text{Exercise}} > \mu_{\text{No Exercise}}$
+  - $\mu_{\text{Exercise}} > \mu_{\text{No Exercise}}$
 
 ## Rejects and Failures
 
--   In science, we **do not** say that we proved anything.
+- In science, we **do not** say that we proved anything.
 
-    -   Nothing is ever really proven.
+  - Nothing is ever really proven.
 
--   Our findings will be stated in terms of the Null Hypothesis $H_0$.
+- Our findings will be stated in terms of the Null Hypothesis $H_0$.
 
--   The Null Hypothesis is that there are no differences between the groups.
+- The Null Hypothesis is that there are no differences between the groups.
 
 ## Hypothesis testing practice
 
 > Jonas assigns *half* of the participants to engage in aerobic exercise for **one hour a day 5 days a week for 6 months**. The other half of the participants do not exercise for **6 months**. At the end of the 6 months, Jonas measures the participants' **working memory capacity**.
 
--   $H_0$: There are no differences in working memory capacity between the experimental and control groups.
+- $H_0$: There are no differences in working memory capacity between the experimental and control groups.
 
--   $H_1/H_A$: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.
+- $H_1/H_A$: Working memory capacity will be higher for participants who exercise for one hour compared to the group that does not.
 
 ## Rejects and Failures
 
--   In science, we do not say that we have proven anything.
+- In science, we do not say that we have proven anything.
 
--   Our findings will be stated in terms of the Null Hypothesis.
+- Our findings will be stated in terms of the Null Hypothesis.
 
--   If there are **significant differences** between the groups, we **Reject the** $H_0$.
+- If there are **significant differences** between the groups, we **Reject the** $H_0$.
 
-    -   Rejecting is 'good'.
+  - Rejecting is 'good'.
 
--   If there are **No differences** between the groups, we **Fail to Reject the** $H_0$.
+- If there are **No differences** between the groups, we **Fail to Reject the** $H_0$.
 
-    -   Failing is 'bad'
+  - Failing is 'bad'
 
 ## Hypothesis Testing
 
 When reporting your findings, you must state them in terms of the Null Hypothesis. We do not mention the Alternative Hypothesis.
 
--   If the groups differ, we reject the null hypothesis:
+- If the groups differ, we reject the null hypothesis:
 
-    -   **Reject** $H_0$.
+  - **Reject** $H_0$.
 
--   If the groups do not differ, we fail:
+- If the groups do not differ, we fail:
 
-    -   **Fail to Reject** $H_0$
+  - **Fail to Reject** $H_0$
 
 ## Practice
 
 > Jonas assigns half of the participants to engage in aerobic exercise for one hour a day `5` days a week for `6` months. The other half of the participants do not exercise for `6` months. At the end of the `6` months, Jonas measures the participants' working memory capacity. His test is not significant.
 
--   State Jonas' findings in terms of the null hypothesis:
--   *Jonas fails to reject the null hypothesis that there is no difference between the experimental and control group in regards to exercising and its effect on working memory*
+- State Jonas' findings in terms of the null hypothesis:
+- *Jonas fails to reject the null hypothesis that there is no difference between the experimental and control group in regards to exercising and its effect on working memory*
 
 ## Hypothesis Practice
 
@@ -1112,9 +1112,9 @@ When reporting your findings, you must state them in terms of the Null Hypothesi
 
 > Brendan assigns half of the participants to view a picture of a face on a mortuary table (control condition). The other half of the participants view an image of their own face made to look dead using an filter (experimental condition). Brendan then measures all participants' anxiety about dying and runs a t-test, which is statistically significant.
 
--   State Brendan's findings in terms of the null hypothesis:
+- State Brendan's findings in terms of the null hypothesis:
 
--   *Brendan rejects the null hypothesis that states there is no difference in death anxiety between participants who view their own face as deceased and those who only view a face on a mortuary table.*
+- *Brendan rejects the null hypothesis that states there is no difference in death anxiety between participants who view their own face as deceased and those who only view a face on a mortuary table.*
 
 <!-- ## Practice Problem -->
 

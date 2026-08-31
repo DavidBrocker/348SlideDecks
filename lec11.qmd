@@ -78,9 +78,9 @@ p1 + p2
 
 ## Sampling Theory (Recap)
 
--   Sampling theory allows us to test two unrelated group
+- Sampling theory allows us to test two unrelated group
 
--   We can compare the group means
+- We can compare the group means
 
 ```{r}
 library(ggplot2)
@@ -124,9 +124,9 @@ plt
 
 ## Sampling Theory (Recap)
 
--   Sampling theory allows us to test two unrelated group
+- Sampling theory allows us to test two unrelated group
 
--   We can compare the group means
+- We can compare the group means
 
 ```{r}
 #| echo: false
@@ -138,9 +138,9 @@ plt +
 
 ## Sampling Theory (Recap)
 
--   Sampling theory allows us to test two unrelated group
+- Sampling theory allows us to test two unrelated group
 
--   We can compare the group means
+- We can compare the group means
 
 ```{r}
 #| echo: false
@@ -153,9 +153,9 @@ plt +
 
 ## Sampling Theory (Recap)
 
--   Sampling theory allows us to test two unrelated group
+- Sampling theory allows us to test two unrelated group
 
--   We can compare the group means
+- We can compare the group means
 
 ```{r}
 #| echo: false
@@ -186,9 +186,9 @@ plt +
 
 ## Sampling Theory (Recap)
 
--   Sampling theory allows us to test two unrelated group
+- Sampling theory allows us to test two unrelated group
 
--   We can compare the group means
+- We can compare the group means
 
 ```{r}
 #| echo: false
@@ -220,9 +220,9 @@ plt +
 
 ### **Applied to Independent Groups**
 
--   Our goal is still to test whether a difference is likely due to chance
+- Our goal is still to test whether a difference is likely due to chance
 
--   With independent samples, chance variation now includes **differences between individuals** in *both* groups.
+- With independent samples, chance variation now includes **differences between individuals** in *both* groups.
 
 ## Group Variance
 
@@ -232,9 +232,9 @@ plt +
 ::: {.column width="50%"}
 To compare the means we need to know:
 
--   Between group variance: how much the answers from the **experimental** group differ from the **control** group.
+- Between group variance: how much the answers from the **experimental** group differ from the **control** group.
 
--   Within group variance: how much the **answers of all participants** differ from one another.
+- Within group variance: how much the **answers of all participants** differ from one another.
 :::
 
 ::: {.column width="50%"}
@@ -263,17 +263,17 @@ df %>%
 
 Used when we compare **two different groups** on a continuous outcome.
 
--   **Examples:**
+- **Examples:**
 
-    -   Coffee drinkers vs. decaf drinkers on happiness
+  - Coffee drinkers vs. decaf drinkers on happiness
 
-    -   Students with music vs. silence during study
+  - Students with music vs. silence during study
 
-    -   Phone use vs. no phone use before bed
+  - Phone use vs. no phone use before bed
 
--   **Goal:**
+- **Goal:**
 
-    -   Is the mean difference between groups larger than what we’d expect by chance?
+  - Is the mean difference between groups larger than what we’d expect by chance?
 
 ## Independent Samples t-test
 
@@ -281,9 +281,9 @@ Used when we compare **two different groups** on a continuous outcome.
 
 > The experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of `1` to `10`.
 
--   The experimental group has a mean happiness score of `8`
+- The experimental group has a mean happiness score of `8`
 
--   The control group mean happiness score of `6`
+- The control group mean happiness score of `6`
 
 ::: fragment
 Is the group that drank coffee significantly happier than the control group?
@@ -322,33 +322,33 @@ plt +
 
 To compare the means we need to know:
 
--   **Between group variance**: how much the answers from the experimental group differ from the control group.
+- **Between group variance**: how much the answers from the experimental group differ from the control group.
 
--   **Within group variance**: how much the answers of all participants differ from one another.
+- **Within group variance**: how much the answers of all participants differ from one another.
 
 ## Formulas
 
 Inferential statistics have both **theoretical** and **computational** formulas:
 
--   Theoretical
+- Theoretical
 
-    -   Formula for if we actually knew the population parameters
+  - Formula for if we actually knew the population parameters
 
--   Computational
+- Computational
 
-    -   Formula for estimating the test statistics based solely on sample data
+  - Formula for estimating the test statistics based solely on sample data
 
 ## Theoretical Formula:
 
 $$\color{blue}{t} = \frac{\color{red}{\bar{x}_1} -\color{orange}{\bar{x}_2}}{\sqrt{\color{grey}{\sigma^{2}_{pooled}}}}$$
 
--   [t]{style="color:blue"} = T Statistic
+- [t]{style="color:blue"} = T Statistic
 
--   [Sample Mean, Group 1]{style="color:red"}
+- [Sample Mean, Group 1]{style="color:red"}
 
--   [Sample Mean, Group 2]{style="color:orange"}
+- [Sample Mean, Group 2]{style="color:orange"}
 
--   [Population Pooled Variance]{style="color:grey"}
+- [Population Pooled Variance]{style="color:grey"}
 
 ## Independent samples t-test
 
@@ -380,7 +380,7 @@ $$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\sigma^{2}_{pooled}}}$$
 
 $$\frac{\bar{x}_{Experimental}-\bar{x}_{Control}}{\sqrt{\color{darkblue}{\frac{s_1^2}{n_1}+ \frac{s_2^2}{n_2}}}}$$
 
--   [Pooled Variance]{style="color: darkblue"}
+- [Pooled Variance]{style="color: darkblue"}
 
 ## Independent samples t-test
 
@@ -438,29 +438,29 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 
 ### Assumptions of Independent Samples t-test
 
--   **Random sampling**:
+- **Random sampling**:
 
-    -   The data is randomly sampled from a population 
+  - The data is randomly sampled from a population 
 
--   **Independence**:
+- **Independence**:
 
-    -   Each group must be made up of independent observations.
+  - Each group must be made up of independent observations.
 
--   **Homogeneity of variance**:
+- **Homogeneity of variance**:
 
-    -   Variance should be equal across groups (tested with Levene's Test)
+  - Variance should be equal across groups (tested with Levene's Test)
 
 ## Interpreting Levene’s Test
 
--   Levene’s Test tells us whether the assumption of equal variances holds.
+- Levene’s Test tells us whether the assumption of equal variances holds.
 
-    -   If p \> .05 → use the **top row** ("Equal variances assumed")
+  - If p \> .05 → use the **top row** ("Equal variances assumed")
 
-    -   If p \< .05 → use the **bottom row** ("Equal variances not assumed")
+  - If p \< .05 → use the **bottom row** ("Equal variances not assumed")
 
--   Normality
+- Normality
 
-    -   Each group's distribution should be approximately normal
+  - Each group's distribution should be approximately normal
 
 ## Independent samples t-test
 
@@ -472,15 +472,15 @@ t.test(dat$happy ~ dat$grp, var.equal = TRUE) |>
 If the **Levene's Test** is significant, use the t value from the second row and its corresponding significance.
 :::
 
--   t is the test statistic.
+- t is the test statistic.
 
--   Sig (2-tailed) is the p-value.
+- Sig (2-tailed) is the p-value.
 
 ## Why Do We Care?
 
 We need the **Levene's Test**, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.
 
--   A significant Levene's Test means a significant difference in the variances.
+- A significant Levene's Test means a significant difference in the variances.
 
 ## Independent samples t-test: SPSS
 
@@ -502,9 +502,9 @@ We’ll test three common between-subjects designs:
 
 > 50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0–20 scale.
 
--   **IV**: Chocolate (Yes vs. No)\
--   **DV**: Concentration task score\
--   **Design**: Between-subjects, randomized
+- **IV**: Chocolate (Yes vs. No)\
+- **DV**: Concentration task score\
+- **Design**: Between-subjects, randomized
 
 ## Does chocolate improve concentration?
 
@@ -565,9 +565,9 @@ t.test(concentration ~ group,
 > **Design Summary**\
 > 40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.
 
--   **IV**: Study condition (Instrumental music vs. Silence)\
--   **DV**: Quiz performance (number of correct answers)\
--   **Design**: Between-subjects, randomized
+- **IV**: Study condition (Instrumental music vs. Silence)\
+- **DV**: Quiz performance (number of correct answers)\
+- **Design**: Between-subjects, randomized
 
 ## Example 2: Music and Study Efficiency
 
@@ -640,9 +640,9 @@ ggplot(music,
 > **Design Summary**\
 > 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.
 
--   **IV**: Phone use before bed (Yes vs. No)\
--   **DV**: Sleep quality rating (1 = poor, 10 = excellent)\
--   **Design**: Between-subjects, randomized
+- **IV**: Phone use before bed (Yes vs. No)\
+- **DV**: Sleep quality rating (1 = poor, 10 = excellent)\
+- **Design**: Between-subjects, randomized
 
 ## Example 3: Phone Use and Sleep
 
@@ -711,8 +711,8 @@ t.test(sleep_quality ~ group,
 
 ## Summary: Independent Samples t-test
 
--   Compares **two independent groups**
--   Tests whether the difference in means is significant
--   Uses **pooled variance** as the denominator
--   Check assumptions: independence, normality, equal variance
--   Commonly used in **experimental** designs
+- Compares **two independent groups**
+- Tests whether the difference in means is significant
+- Uses **pooled variance** as the denominator
+- Check assumptions: independence, normality, equal variance
+- Commonly used in **experimental** designs

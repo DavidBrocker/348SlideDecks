@@ -32,19 +32,19 @@ revealjs-plugins:
 
 ### What is a Paired Samples t-Test?
 
--   A statistical method used to compare the means of two related groups.
--   Commonly used when measuring the same group before and after an intervention or over two different conditions.
+- A statistical method used to compare the means of two related groups.
+- Commonly used when measuring the same group before and after an intervention or over two different conditions.
 
 ## Purpose of Paired Samples t-Test
 
 ### Why Use Paired Samples t-Test?
 
--   To determine if there is a statistically significant difference between two related group means.
--   Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
+- To determine if there is a statistically significant difference between two related group means.
+- Useful in psychology for assessing changes due to an intervention, therapy, or experiment.
 
 ## Connection to the One-Sample *t*-Test
 
-- Recall that the **paired-samples t-test** is essentially a **one-sample t-test** on the difference scores.  
+- Recall that the **paired-samples t-test** is essentially a **one-sample t-test** on the difference scores.
 
 - We're testing whether the **mean difference** $\bar{d}$ is significantly different from 0.
 
@@ -52,42 +52,42 @@ revealjs-plugins:
 
 ### Mathematical Representation
 
--   **Formula**: $\large{t = \frac{\bar{d}}{s_d/\sqrt{n}}}$
-    -   $\bar{d}$: Mean of the differences between paired observations.
-    -   $s_d$: Standard deviation of the differences.
-    -   $n$: Number of pairs.
+- **Formula**: $\large{t = \frac{\bar{d}}{s_d/\sqrt{n}}}$
+  - $\bar{d}$: Mean of the differences between paired observations.
+  - $s_d$: Standard deviation of the differences.
+  - $n$: Number of pairs.
 
 ## Theoretical Formula Explanation
 
 ### Understanding Each Component
 
--   **Difference Mean** $\bar{d}$:
+- **Difference Mean** $\bar{d}$:
 
-    -   Average of the differences between paired scores.
+  - Average of the differences between paired scores.
 
--   **Standard Deviation of Differences** $s_d$:
+- **Standard Deviation of Differences** $s_d$:
 
-    -   Indicates how much individual differences deviate from the mean difference.
+  - Indicates how much individual differences deviate from the mean difference.
 
--   **Sample Size** $n$:
+- **Sample Size** $n$:
 
-    -   Number of pairs, affecting the significance of results.
+  - Number of pairs, affecting the significance of results.
 
 ## Application of Paired Samples t-Test
 
 ### When to Apply This Test
 
--   **Pretest-Posttest Design**
+- **Pretest-Posttest Design**
 
-    -   Measure changes in the same group over time.
+  - Measure changes in the same group over time.
 
--   **Matched Pairs**
+- **Matched Pairs**
 
-    -   Compare two related groups, such as twins or matched participants.
+  - Compare two related groups, such as twins or matched participants.
 
--   **Repeated Measures**
+- **Repeated Measures**
 
-    -   Test the same group under different conditions or at different times.
+  - Test the same group under different conditions or at different times.
 
 ## Paired Samples t-Test
 
@@ -248,26 +248,26 @@ with(ddata, t.test(Time_One,Time_Two,paired = TRUE)) |>
   )
 ```
 
--   D = mean difference of T2-T1
--   t = t-test statistic
--   df = n-1 (30-1)
--   p = probability results came from the Null Distribution
--   CI\[ll,uu\] = 95% CI of Mean Difference ($\bar{d}$)
+- D = mean difference of T2-T1
+- t = t-test statistic
+- df = n-1 (30-1)
+- p = probability results came from the Null Distribution
+- CI\[ll,uu\] = 95% CI of Mean Difference ($\bar{d}$)
 
 ## Effect Size: Cohen's *d*
 
 ### Why Report Effect Size?
 
--   Statistical significance (*p*) tells us **if** there is a difference.
+- Statistical significance (*p*) tells us **if** there is a difference.
 
--   Effect size tells us **how big** that difference is.
+- Effect size tells us **how big** that difference is.
 
--   For a paired-samples design, this version of Cohen's *d* is written $d_z$ to keep it distinct from $\bar{d}$ (mean difference) and $s_d$ (SD of the differences):
+- For a paired-samples design, this version of Cohen's *d* is written $d_z$ to keep it distinct from $\bar{d}$ (mean difference) and $s_d$ (SD of the differences):
 
--   $d_z = \frac{\bar{d}}{s_d}$
+- $d_z = \frac{\bar{d}}{s_d}$
 
-    -   $\bar{d}$ = mean difference between paired scores\
-    -   $s_d$ = standard deviation of the differences
+  - $\bar{d}$ = mean difference between paired scores\
+  - $s_d$ = standard deviation of the differences
 
 ```{r}
 tibble(
@@ -405,9 +405,9 @@ data |>
 
 ## Interpreting Results
 
--   We found a **statistically significant** decrease in stress (*p* \< .001).\
--   The **effect size ($d_z$ = 1.56)** indicates a *large* change.\
--   Combining significance and effect size gives us a fuller picture of the data.
+- We found a **statistically significant** decrease in stress (*p* \< .001).\
+- The **effect size (**$d_z$ = 1.56) indicates a *large* change.\
+- Combining significance and effect size gives us a fuller picture of the data.
 
 > Always ask: Is this difference not just *statistically*, but *practically* meaningful?
 
@@ -415,15 +415,17 @@ data |>
 
 ### Key Takeaways
 
--   Paired samples t-tests are ideal for comparing **two related** groups.
--   They help determine if interventions or conditions produce **significant changes**.
--   Remember to check **assumptions**: normality of differences and appropriate pairing.
+- Paired samples t-tests are ideal for comparing **two related** groups.
 
-    1.  **Differences are normally distributed.**
-        -   Check using histogram, QQ plot, or Shapiro-Wilk test.
-    2.  **Pairs are dependent (related measures).**
-        -   Same participants or matched pairs.
-    3.  **No major outliers in the differences.**
+- They help determine if interventions or conditions produce **significant changes**.
+
+- Remember to check **assumptions**: normality of differences and appropriate pairing.
+
+  1.  **Differences are normally distributed.**
+      - Check using histogram, QQ plot, or Shapiro-Wilk test.
+  2.  **Pairs are dependent (related measures).**
+      - Same participants or matched pairs.
+  3.  **No major outliers in the differences.**
 
 ## Example Datasets
 
