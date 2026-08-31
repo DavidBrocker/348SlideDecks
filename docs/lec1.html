@@ -35,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2970cdd042d9167d7f1ea11deaa7ea9f.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-17b9c4d21cbb7aef86fda92be13adc49.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -158,31 +158,29 @@ Dave Brocker
 </section>
 <section id="hi-im-dave" class="slide level2">
 <h2>Hi, I’m Dave! ✋</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/dave_about_me.jpeg" class="quarto-figure quarto-figure-center" style="border-radius: 15px;" height="500"></p>
-</figure>
+<div class="bio-cluster">
+<p><img data-src="images/dave_about_me.jpeg" class="bio-photo"></p>
+<div class="bio-name">
+<p>Professor Brocker</p>
 </div>
-</div><div class="column" style="width:60%;">
-<p><strong>Name:</strong> Professor Brocker</p>
-<p><strong>Background:</strong> 7+ years teaching undergraduate statistics, researcher and laboratory manager</p>
-<p><strong>Education:</strong> M.A.&nbsp;in Experimental Psychology (specializing in Morality and Emotion)</p>
-<p><strong>Current Research:</strong> Morbid curiosity, creepiness, disgust and anger, and dehumanization</p>
-</div></div>
-<div class="emoji-row">
-<div class="emoji">
+<div class="bio-badge bio-badge-num bio-badge-teaching">
 <p>7+</p>
+<p>Years Teaching</p>
 </div>
-<div class="emoji">
-<p>🎓</p>
+<div class="bio-badge bio-badge-education">
+<p><span class="material-icons">school</span></p>
+<p>Education<br>
+M.A.&nbsp;Experimental Psych</p>
 </div>
-<div class="emoji">
-<p>🗽</p>
+<div class="bio-badge bio-badge-research">
+<p><span class="material-icons">psychology</span></p>
+<p>Current Research<br>
+Morbid Curiosity &amp; Emotion</p>
 </div>
-<div class="emoji">
-<p>⚰️</p>
+<div class="bio-badge bio-badge-lg bio-badge-role">
+<p><span class="material-icons">edit</span></p>
+<p>Researcher &amp;<br>
+Lab Manager</p>
 </div>
 </div>
 </section>
@@ -370,20 +368,20 @@ Dave Brocker
 <p>Everywhere!</p>
 <p>Statistics makes appearances anywhere you see information being summarized or being used to make decisions.</p>
 <ul>
-<li class="fragment"><p>Purchasing a car</p>
+<li class="fragment"><p><span class="material-icons inline-icon">directions_car</span> Purchasing a car</p>
 <ul>
 <li class="fragment">You look at reviews and infer the overall takeaway of how ‘good’ or ‘bad’ a car might be.</li>
 </ul></li>
-<li class="fragment"><p>Going to a restaurant</p>
+<li class="fragment"><p><span class="material-icons inline-icon">restaurant</span> Going to a restaurant</p>
 <ul>
 <li class="fragment">You base your selection on prior experiences or on reviews/opinions from people you trust</li>
 </ul></li>
-<li class="fragment"><p>Voting for a candidate</p>
+<li class="fragment"><p><span class="material-icons inline-icon">how_to_vote</span> Voting for a candidate</p>
 <ul>
 <li class="fragment"><p>You look for increases in wages and decreases in taxes</p></li>
 <li class="fragment"><p>You look for promises of pollution reduction and energy increases</p></li>
 </ul></li>
-<li class="fragment"><p>Going to the Movies</p>
+<li class="fragment"><p><span class="material-icons inline-icon">local_movies</span> Going to the Movies</p>
 <ul>
 <li class="fragment">You pick a movie based on genre, past experiences, and reviews</li>
 </ul></li>
@@ -530,13 +528,29 @@ Dave Brocker
 <section id="syllabus" class="slide level2">
 <h2>Syllabus</h2>
 <h3 id="how-this-class-works">How This Class Works</h3>
-<ul>
-<li class="fragment"><p><strong>Participation:</strong> Asking questions helps you understand and will likely help out your classmates!</p></li>
-<li class="fragment"><p><strong>Homework:</strong> I want you to have practice outside of the classroom (low-stakes)</p></li>
-<li class="fragment"><p><strong>Labs:</strong> A weekly hands-on session right after Monday lecture, where you apply that week’s concepts in R using real (or realistic) data</p></li>
-<li class="fragment"><p><strong>Exams:</strong> This is a decent (not perfect) method of seeing how well you understand and can apply the material</p></li>
-<li class="fragment"><p>Full syllabus, grading breakdown, and office hours are posted on Brightspace — take a few minutes to skim it before next class.</p></li>
-</ul>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">forum</span></p>
+<h4 id="participation">Participation</h4>
+<p>Asking questions helps you understand – and will likely help your classmates too!</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">edit_note</span></p>
+<h4 id="homework">Homework</h4>
+<p>Practice outside of the classroom, kept low-stakes.</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">science</span></p>
+<h4 id="labs">Labs</h4>
+<p>A weekly hands-on session right after lecture, applying that week’s concepts in R.</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">fact_check</span></p>
+<h4 id="exams">Exams</h4>
+<p>A decent (not perfect) way to see how well you understand and can apply the material.</p>
+</div>
+</div>
+<p>Full syllabus, grading breakdown, and office hours are posted on Brightspace — take a few minutes to skim it before next class.</p>
 </section></section>
 <section>
 <section id="research-design" class="title-slide slide level1 center">
@@ -661,6 +675,20 @@ Dave Brocker
 <li class="fragment"><p>Examples: case studies, naturalistic observation, surveys</p></li>
 <li class="fragment"><p>Tells you <em>what</em> is going on, but not <em>why</em></p></li>
 </ul>
+<div class="icon-row">
+<div class="icon-row-item">
+<p><span class="material-icons">description</span></p>
+<p>Case Studies</p>
+</div>
+<div class="icon-row-item">
+<p><span class="material-icons">visibility</span></p>
+<p>Observation</p>
+</div>
+<div class="icon-row-item">
+<p><span class="material-icons">poll</span></p>
+<p>Surveys</p>
+</div>
+</div>
 </section>
 <section id="what-kinds-of-research-is-there" class="slide level2">
 <h2>What Kinds of Research is there?</h2>
@@ -670,6 +698,20 @@ Dave Brocker
 <li class="fragment"><p>You observe variables as they naturally occur — nothing is manipulated</p></li>
 <li class="fragment"><p>Lets you predict one variable from another, but <strong>cannot</strong> establish that one causes the other</p></li>
 </ul>
+<div class="icon-row">
+<div class="icon-row-item">
+<p><span class="material-icons">scatter_plot</span></p>
+<p>Relationship</p>
+</div>
+<div class="icon-row-item">
+<p><span class="material-icons">compare_arrows</span></p>
+<p>Two Variables</p>
+</div>
+<div class="icon-row-item">
+<p><span class="material-icons">block</span></p>
+<p>Not Causation</p>
+</div>
+</div>
 </section>
 <section id="what-kinds-of-research-is-there-1" class="slide level2">
 <h2>What Kinds of Research is there?</h2>
@@ -680,6 +722,20 @@ Dave Brocker
 <li class="fragment"><p>Participants are (ideally) <strong>randomly assigned</strong> to conditions, and other variables are controlled</p></li>
 <li class="fragment"><p>This is the <em>only</em> design type that can support a causal claim</p></li>
 </ul>
+<div class="icon-row">
+<div class="icon-row-item">
+<p><span class="material-icons">tune</span></p>
+<p>Manipulate IV</p>
+</div>
+<div class="icon-row-item">
+<p><span class="material-icons">shuffle</span></p>
+<p>Random Assignment</p>
+</div>
+<div class="icon-row-item">
+<p><span class="material-icons">verified</span></p>
+<p>Causal Claim</p>
+</div>
+</div>
 </section>
 <section id="what-kinds-of-research-are-there-1" class="slide level2">
 <h2>What Kinds of Research Are there?</h2>
@@ -885,9 +941,9 @@ Dave Brocker
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1600,
+        width: 1920,
 
-        height: 900,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

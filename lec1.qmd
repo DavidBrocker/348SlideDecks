@@ -7,10 +7,11 @@ footer: "PSY 348 - Statistics for Psychology"
 format:
   revealjs:
     theme: custom.scss
+    center: false
     incremental: true
     touch: true
-    width: 1600
-    height: 900
+    width: 1920
+    height: 1080
     chalkboard: true
     code-fold: true
     drop:
@@ -25,39 +26,40 @@ revealjs-plugins:
 
 ## Hi, I'm Dave! ✋
 
-::::: columns
-::: {.column width="40%"}
-![](images/dave_about_me.jpeg){fig-align="center" style="border-radius: 15px;" height="500"}
+::: {.bio-cluster}
+![](images/dave_about_me.jpeg){.bio-photo}
+
+::: {.bio-name}
+Professor Brocker
 :::
 
-::: {.column width="60%"}
-**Name:** Professor Brocker
-
-**Background:** 7+ years teaching undergraduate statistics, researcher and laboratory manager
-
-**Education:** M.A. in Experimental Psychology (specializing in Morality and Emotion)
-
-**Current Research:** Morbid curiosity, creepiness, disgust and anger, and dehumanization
-:::
-:::::
-
-::::::: emoji-row
-::: emoji
+::: {.bio-badge .bio-badge-num .bio-badge-teaching}
 7+
+
+Years Teaching
 :::
 
-::: emoji
-🎓
+::: {.bio-badge .bio-badge-education}
+[school]{.material-icons}
+
+Education\
+M.A. Experimental Psych
 :::
 
-::: emoji
-🗽
+::: {.bio-badge .bio-badge-research}
+[psychology]{.material-icons}
+
+Current Research\
+Morbid Curiosity & Emotion
 :::
 
-::: emoji
-⚰️
+::: {.bio-badge .bio-badge-lg .bio-badge-role}
+[edit]{.material-icons}
+
+Researcher &\
+Lab Manager
 :::
-:::::::
+:::
 
 ## My Teaching Style
 
@@ -234,21 +236,21 @@ Everywhere!
 
 Statistics makes appearances anywhere you see information being summarized or being used to make decisions.
 
-- Purchasing a car
+- [directions_car]{.material-icons .inline-icon} Purchasing a car
 
   - You look at reviews and infer the overall takeaway of how 'good' or 'bad' a car might be.
 
-- Going to a restaurant
+- [restaurant]{.material-icons .inline-icon} Going to a restaurant
 
   - You base your selection on prior experiences or on reviews/opinions from people you trust
 
-- Voting for a candidate
+- [how_to_vote]{.material-icons .inline-icon} Voting for a candidate
 
   - You look for increases in wages and decreases in taxes
 
   - You look for promises of pollution reduction and energy increases
 
-- Going to the Movies
+- [local_movies]{.material-icons .inline-icon} Going to the Movies
 
   - You pick a movie based on genre, past experiences, and reviews
 
@@ -361,15 +363,41 @@ Our brain is a pattern matching machine
 
 ### How This Class Works
 
-- **Participation:** Asking questions helps you understand and will likely help out your classmates!
+::: {.badge-row}
+::: {.content-badge}
+[forum]{.material-icons}
 
-- **Homework:** I want you to have practice outside of the classroom (low-stakes)
+#### Participation
 
-- **Labs:** A weekly hands-on session right after Monday lecture, where you apply that week's concepts in R using real (or realistic) data
+Asking questions helps you understand -- and will likely help your classmates too!
+:::
 
-- **Exams:** This is a decent (not perfect) method of seeing how well you understand and can apply the material
+::: {.content-badge}
+[edit_note]{.material-icons}
 
-- Full syllabus, grading breakdown, and office hours are posted on Brightspace — take a few minutes to skim it before next class.
+#### Homework
+
+Practice outside of the classroom, kept low-stakes.
+:::
+
+::: {.content-badge}
+[science]{.material-icons}
+
+#### Labs
+
+A weekly hands-on session right after lecture, applying that week's concepts in R.
+:::
+
+::: {.content-badge}
+[fact_check]{.material-icons}
+
+#### Exams
+
+A decent (not perfect) way to see how well you understand and can apply the material.
+:::
+:::
+
+Full syllabus, grading breakdown, and office hours are posted on Brightspace — take a few minutes to skim it before next class.
 
 # Research Design
 
@@ -420,6 +448,26 @@ digraph {
 
 - Tells you *what* is going on, but not *why*
 
+::: {.icon-row}
+::: {.icon-row-item}
+[description]{.material-icons}
+
+Case Studies
+:::
+
+::: {.icon-row-item}
+[visibility]{.material-icons}
+
+Observation
+:::
+
+::: {.icon-row-item}
+[poll]{.material-icons}
+
+Surveys
+:::
+:::
+
 ## What Kinds of Research is there?
 
 ### Correlational Research
@@ -429,6 +477,26 @@ digraph {
 - You observe variables as they naturally occur — nothing is manipulated
 
 - Lets you predict one variable from another, but **cannot** establish that one causes the other
+
+::: {.icon-row}
+::: {.icon-row-item}
+[scatter_plot]{.material-icons}
+
+Relationship
+:::
+
+::: {.icon-row-item}
+[compare_arrows]{.material-icons}
+
+Two Variables
+:::
+
+::: {.icon-row-item}
+[block]{.material-icons}
+
+Not Causation
+:::
+:::
 
 ## What Kinds of Research is there?
 
@@ -441,6 +509,26 @@ digraph {
 - Participants are (ideally) **randomly assigned** to conditions, and other variables are controlled
 
 - This is the *only* design type that can support a causal claim
+
+::: {.icon-row}
+::: {.icon-row-item}
+[tune]{.material-icons}
+
+Manipulate IV
+:::
+
+::: {.icon-row-item}
+[shuffle]{.material-icons}
+
+Random Assignment
+:::
+
+::: {.icon-row-item}
+[verified]{.material-icons}
+
+Causal Claim
+:::
+:::
 
 ## What Kinds of Research Are there?
 

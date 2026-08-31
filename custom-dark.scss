@@ -369,3 +369,194 @@ details[open] summary {
   font-size: 1.1em;
   line-height: 1.6;
 }
+
+// "Hi, I'm Dave!" bio cluster -- dark counterpart, see custom.scss for context.
+.bio-cluster {
+  position: relative;
+  width: 984px;
+  height: 744px;
+  margin: 24px auto 0;
+}
+
+.bio-photo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 384px;
+  height: 384px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid $accent3;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.bio-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 130px);
+  z-index: 3;
+  background: $accent2;
+  color: #14201A;
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 6px 18px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  white-space: nowrap;
+}
+
+.bio-badge {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: $accent4;
+  border: 3px solid $accent3;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  text-align: center;
+  padding: 10px;
+  z-index: 1;
+
+  .material-icons {
+    font-size: 2em;
+    color: $accent;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 0.68em;
+    line-height: 1.25;
+    color: $body-color;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.bio-badge-num {
+  p:first-of-type {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: $accent;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+}
+
+.bio-badge-lg {
+  width: 240px;
+  height: 240px;
+
+  .material-icons {
+    font-size: 2.6em;
+  }
+
+  p {
+    font-size: 0.75em;
+  }
+}
+
+.bio-badge-teaching {
+  top: 4%;
+  left: 14%;
+  transform: rotate(-6deg);
+}
+
+.bio-badge-education {
+  top: 2%;
+  left: 68%;
+  transform: rotate(5deg);
+}
+
+.bio-badge-research {
+  top: 66%;
+  left: 6%;
+  transform: rotate(-4deg);
+}
+
+.bio-badge-role {
+  top: 62%;
+  left: 62%;
+  transform: rotate(6deg);
+}
+
+// Dark counterparts to the inline-icon / badge-row additions in custom.scss.
+.material-icons.inline-icon {
+  font-size: 1.3em;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: $accent;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 34px;
+}
+
+.content-badge {
+  width: 320px;
+  background: $accent4;
+  border: 3px solid $accent3;
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+
+  .material-icons {
+    font-size: 2.2em;
+    color: $accent;
+    margin-bottom: 6px;
+  }
+
+  h4 {
+    color: $accent;
+    font-size: 1.15em;
+    margin: 4px 0 8px;
+  }
+
+  p {
+    font-size: 0.82em;
+    color: $body-color;
+    line-height: 1.35;
+    margin: 0;
+  }
+}
+
+// Dark counterpart to .icon-row in custom.scss.
+.icon-row {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 40px;
+}
+
+.icon-row-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .material-icons {
+    font-size: 2.4em;
+    color: $accent;
+    margin-bottom: 6px;
+  }
+
+  span, p {
+    font-size: 0.7em;
+    color: $text-muted;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+  }
+}
