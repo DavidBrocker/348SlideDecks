@@ -9,8 +9,7 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <meta name="author" content="Dave Brocker">
-  <title>PSY 348: Statistics for Psychology – Data Visualization</title>
+  <title>PSY 348: Statistics for Psychology – lec2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -101,7 +100,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-17b9c4d21cbb7aef86fda92be13adc49.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-1503cd80ef9fe5f8a6ece6d286b6ba33.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -199,44 +198,80 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Data Visualization</h1>
-  <p class="subtitle">PSY 348: Lecture 2</p>
 
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Dave Brocker
+<section id="custom-title" class="slide level2" data-menu-title="Data Visualization">
+<h2></h2>
+<!-- Manual title slide (like lab1.qmd's #custom-title pattern) instead of
+     the YAML-generated one -- ANY content before the first ## heading,
+     even an invisible HTML comment, renders as its own separate blank
+     slide in this Quarto/revealjs setup. Keep everything, including notes
+     like this one, after the heading line. -->
+<div class="title-bg-icons">
+<p><span class="material-icons title-bg-icon-1">bar_chart</span> <span class="material-icons title-bg-icon-2">scatter_plot</span> <span class="material-icons title-bg-icon-3">show_chart</span> <span class="material-icons title-bg-icon-4">pie_chart</span> <span class="material-icons title-bg-icon-5">table_chart</span> <span class="material-icons title-bg-icon-6">insert_chart</span></p>
 </div>
-<div class="quarto-title-author-email">
-<a href="mailto:brockeda@farmingdale.edu">brockeda@farmingdale.edu</a>
-</div>
-        <p class="quarto-title-affiliation">
-            Farmingdale State College
-          </p>
-    </div>
-</div>
+<div class="ghost-nodes">
+<div class="ghost-node">
 
+</div>
+<div class="ghost-node">
+
+</div>
+<div class="ghost-node">
+
+</div>
+<div class="ghost-node">
+
+</div>
+<div class="ghost-node">
+
+</div>
+</div>
+<p><span class="cust-title">Data Visualization</span></p>
+<p><span class="cust-sub">PSY 348: Lecture 2</span></p>
+<p><span class="cust-author">Dave Brocker <br> brockeda@farmingdale.edu <br> Farmingdale State College</span></p>
 </section>
 <section id="from-stats-is-everywhere-to-lets-actually-see-it" class="slide level2">
 <h2>From “Stats Is Everywhere” to “Let’s Actually See It”</h2>
 <p>Last time: statistics isn’t just math — it’s how you make sense of decisions you already make every day.</p>
+<div class="img-placeholder">
+<p><span class="material-icons">smartphone</span></p>
+<p><img data-src="https://media.istockphoto.com/id/2174699310/photo/handsome-man-shopping-for-a-new-smartphone-in-an-electronics-store.jpg?s=2048x2048&amp;w=is&amp;k=20&amp;c=so9jIM80bRyuCw3y8NOrPFzG1vC_feKJAH6S7_Ecn1M="></p>
+</div>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>A number by itself is hard to <em>feel</em> — “the average score was 78” doesn’t tell you much on its own</p></li>
-<li class="fragment"><p>A well-made graph turns a pile of numbers into something you can understand at a glance</p></li>
-<li class="fragment"><p>This lecture is about <strong>choosing and building the right picture</strong> for your data</p></li>
+<li class="fragment">A number by itself is hard to <em>feel</em> — “the average score was 78” doesn’t tell you much on its own</li>
 </ul>
 </div>
+<div class="you-callout">
+<p>The average was 78. You scored a 67.</p>
+</div>
+<p>Today: <strong>choosing and building the right picture</strong> for your data.</p>
 </section>
 <section id="why-visualize-data" class="slide level2">
 <h2>Why Visualize Data?</h2>
 <p>Consider these two ways of showing the same information:</p>
-<div class="fragment">
-<p><strong>Option A:</strong> “The average exam score was 78 (SD = 8).”</p>
+<div class="side-by-cols">
+<div class="stat-card">
+<p><strong>Option A</strong></p>
+<div class="stat-num">
+<p>78</p>
 </div>
-<div class="fragment">
-<p><strong>Option B:</strong> <em>A histogram showing the actual shape of the scores — most students clustered in the 70s, with a small group who struggled and a small group who excelled.</em></p>
+<div class="stat-sub">
+<p>(SD = 8)</p>
+</div>
+</div>
+<div class="card">
+<p><strong>Option B</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec2_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="fragment">
 <p>Both are “true.” Only one of them lets you <em>see</em> the students who didn’t fit the average.</p>
@@ -248,23 +283,23 @@ Dave Brocker
 <p>These four datasets have (essentially) identical descriptive statistics:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="btpgnygmvu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#btpgnygmvu table {
+<div id="tpobacxifq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tpobacxifq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#btpgnygmvu thead, #btpgnygmvu tbody, #btpgnygmvu tfoot, #btpgnygmvu tr, #btpgnygmvu td, #btpgnygmvu th {
+#tpobacxifq thead, #tpobacxifq tbody, #tpobacxifq tfoot, #tpobacxifq tr, #tpobacxifq td, #tpobacxifq th {
   border-style: none;
 }
 
-#btpgnygmvu p {
+#tpobacxifq p {
   margin: 0;
   padding: 0;
 }
 
-#btpgnygmvu .gt_table {
+#tpobacxifq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -290,12 +325,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_caption {
+#tpobacxifq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#btpgnygmvu .gt_title {
+#tpobacxifq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -307,7 +342,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#btpgnygmvu .gt_subtitle {
+#tpobacxifq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -319,7 +354,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#btpgnygmvu .gt_heading {
+#tpobacxifq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -331,13 +366,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_bottom_border {
+#tpobacxifq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_col_headings {
+#tpobacxifq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -352,7 +387,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_col_heading {
+#tpobacxifq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -372,7 +407,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#btpgnygmvu .gt_column_spanner_outer {
+#tpobacxifq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -384,15 +419,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#btpgnygmvu .gt_column_spanner_outer:first-child {
+#tpobacxifq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#btpgnygmvu .gt_column_spanner_outer:last-child {
+#tpobacxifq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#btpgnygmvu .gt_column_spanner {
+#tpobacxifq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -404,11 +439,11 @@ Dave Brocker
   width: 100%;
 }
 
-#btpgnygmvu .gt_spanner_row {
+#tpobacxifq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#btpgnygmvu .gt_group_heading {
+#tpobacxifq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -434,7 +469,7 @@ Dave Brocker
   text-align: left;
 }
 
-#btpgnygmvu .gt_empty_group_heading {
+#tpobacxifq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -449,15 +484,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#btpgnygmvu .gt_from_md > :first-child {
+#tpobacxifq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#btpgnygmvu .gt_from_md > :last-child {
+#tpobacxifq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#btpgnygmvu .gt_row {
+#tpobacxifq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -476,7 +511,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#btpgnygmvu .gt_stub {
+#tpobacxifq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -489,7 +524,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#btpgnygmvu .gt_stub_row_group {
+#tpobacxifq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -503,15 +538,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#btpgnygmvu .gt_row_group_first td {
+#tpobacxifq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#btpgnygmvu .gt_row_group_first th {
+#tpobacxifq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#btpgnygmvu .gt_summary_row {
+#tpobacxifq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -521,16 +556,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#btpgnygmvu .gt_first_summary_row {
+#tpobacxifq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_first_summary_row.thick {
+#tpobacxifq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#btpgnygmvu .gt_last_summary_row {
+#tpobacxifq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,7 +575,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_grand_summary_row {
+#tpobacxifq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -550,7 +585,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#btpgnygmvu .gt_first_grand_summary_row {
+#tpobacxifq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -560,7 +595,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_last_grand_summary_row_top {
+#tpobacxifq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -570,11 +605,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_striped {
+#tpobacxifq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#btpgnygmvu .gt_table_body {
+#tpobacxifq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -583,7 +618,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_footnotes {
+#tpobacxifq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -597,7 +632,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_footnote {
+#tpobacxifq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -606,7 +641,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#btpgnygmvu .gt_sourcenotes {
+#tpobacxifq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -620,7 +655,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#btpgnygmvu .gt_sourcenote {
+#tpobacxifq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -628,72 +663,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#btpgnygmvu .gt_left {
+#tpobacxifq .gt_left {
   text-align: left;
 }
 
-#btpgnygmvu .gt_center {
+#tpobacxifq .gt_center {
   text-align: center;
 }
 
-#btpgnygmvu .gt_right {
+#tpobacxifq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#btpgnygmvu .gt_font_normal {
+#tpobacxifq .gt_font_normal {
   font-weight: normal;
 }
 
-#btpgnygmvu .gt_font_bold {
+#tpobacxifq .gt_font_bold {
   font-weight: bold;
 }
 
-#btpgnygmvu .gt_font_italic {
+#tpobacxifq .gt_font_italic {
   font-style: italic;
 }
 
-#btpgnygmvu .gt_super {
+#tpobacxifq .gt_super {
   font-size: 65%;
 }
 
-#btpgnygmvu .gt_footnote_marks {
+#tpobacxifq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#btpgnygmvu .gt_asterisk {
+#tpobacxifq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#btpgnygmvu .gt_indent_1 {
+#tpobacxifq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#btpgnygmvu .gt_indent_2 {
+#tpobacxifq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#btpgnygmvu .gt_indent_3 {
+#tpobacxifq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#btpgnygmvu .gt_indent_4 {
+#tpobacxifq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#btpgnygmvu .gt_indent_5 {
+#tpobacxifq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#btpgnygmvu .katex-display {
+#tpobacxifq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#btpgnygmvu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tpobacxifq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -705,45 +740,45 @@ Dave Brocker
 </tr>
 <tr class="gt_col_headings even">
 <th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Mean-(x)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean (x)</th>
-<th id="Mean-(y)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean (y)</th>
-<th id="SD-(x)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD (x)</th>
-<th id="SD-(y)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD (y)</th>
-<th id="Correlation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Correlation</th>
+<th id="Mean-(x)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold;" scope="col">Mean (x)</th>
+<th id="Mean-(y)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold;" scope="col">Mean (y)</th>
+<th id="SD-(x)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold;" scope="col">SD (x)</th>
+<th id="SD-(y)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold;" scope="col">SD (y)</th>
+<th id="Correlation" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold;" scope="col">Correlation</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">I</th>
-<td class="gt_row gt_right" headers="stub_1_1 Mean (x)">9</td>
-<td class="gt_row gt_right" headers="stub_1_1 Mean (y)">7.5</td>
-<td class="gt_row gt_right" headers="stub_1_1 SD (x)">3.32</td>
-<td class="gt_row gt_right" headers="stub_1_1 SD (y)">2.03</td>
-<td class="gt_row gt_right" headers="stub_1_1 Correlation">0.82</td>
+<th id="stub_1_1" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">I</th>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_1 Mean (x)">9</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_1 Mean (y)">7.5</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_1 SD (x)">3.32</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_1 SD (y)">2.03</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_1 Correlation">0.82</td>
 </tr>
 <tr class="even">
-<th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">II</th>
-<td class="gt_row gt_right gt_striped" headers="stub_1_2 Mean (x)">9</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_2 Mean (y)">7.5</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_2 SD (x)">3.32</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_2 SD (y)">2.03</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_2 Correlation">0.82</td>
+<th id="stub_1_2" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">II</th>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_2 Mean (x)">9</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_2 Mean (y)">7.5</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_2 SD (x)">3.32</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_2 SD (y)">2.03</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_2 Correlation">0.82</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_3" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">III</th>
-<td class="gt_row gt_right" headers="stub_1_3 Mean (x)">9</td>
-<td class="gt_row gt_right" headers="stub_1_3 Mean (y)">7.5</td>
-<td class="gt_row gt_right" headers="stub_1_3 SD (x)">3.32</td>
-<td class="gt_row gt_right" headers="stub_1_3 SD (y)">2.03</td>
-<td class="gt_row gt_right" headers="stub_1_3 Correlation">0.82</td>
+<th id="stub_1_3" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">III</th>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_3 Mean (x)">9</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_3 Mean (y)">7.5</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_3 SD (x)">3.32</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_3 SD (y)">2.03</td>
+<td class="gt_row gt_center" style="text-align: center;" headers="stub_1_3 Correlation">0.82</td>
 </tr>
 <tr class="even">
-<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">IV</th>
-<td class="gt_row gt_right gt_striped" headers="stub_1_4 Mean (x)">9</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_4 Mean (y)">7.5</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_4 SD (x)">3.32</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_4 SD (y)">2.03</td>
-<td class="gt_row gt_right gt_striped" headers="stub_1_4 Correlation">0.82</td>
+<th id="stub_1_4" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">IV</th>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_4 Mean (x)">9</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_4 Mean (y)">7.5</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_4 SD (x)">3.32</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_4 SD (y)">2.03</td>
+<td class="gt_row gt_center gt_striped" style="text-align: center;" headers="stub_1_4 Correlation">0.82</td>
 </tr>
 </tbody><tfoot>
 <tr class="gt_sourcenotes odd">
@@ -760,8 +795,59 @@ Dave Brocker
 <section id="same-numbers-very-different-pictures-1" class="slide level2">
 <h2>Same Numbers, Very Different Pictures</h2>
 <h3 id="but-look-what-they-actually-look-like">But Look What They Actually Look Like</h3>
-
-<img data-src="lec2_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Set I</a></li><li><a href="#tabset-1-2">Set II</a></li><li><a href="#tabset-1-3">Set III</a></li><li><a href="#tabset-1-4">Set IV</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec2_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec2_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec2_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec2_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Same mean, SD, and correlation in every tab — click through them. Four very different pictures.</p>
+</div>
+</section>
 <section id="the-takeaway" class="slide level2">
 <h2>The Takeaway</h2>
 <div class="highlight-last">
@@ -776,23 +862,23 @@ Dave Brocker
 <h2>Choosing the Right Chart</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="acrlxytvvs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#acrlxytvvs table {
+<div id="teiluhdqiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#teiluhdqiu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#acrlxytvvs thead, #acrlxytvvs tbody, #acrlxytvvs tfoot, #acrlxytvvs tr, #acrlxytvvs td, #acrlxytvvs th {
+#teiluhdqiu thead, #teiluhdqiu tbody, #teiluhdqiu tfoot, #teiluhdqiu tr, #teiluhdqiu td, #teiluhdqiu th {
   border-style: none;
 }
 
-#acrlxytvvs p {
+#teiluhdqiu p {
   margin: 0;
   padding: 0;
 }
 
-#acrlxytvvs .gt_table {
+#teiluhdqiu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -818,12 +904,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_caption {
+#teiluhdqiu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#acrlxytvvs .gt_title {
+#teiluhdqiu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -835,7 +921,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#acrlxytvvs .gt_subtitle {
+#teiluhdqiu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -847,7 +933,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#acrlxytvvs .gt_heading {
+#teiluhdqiu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -859,13 +945,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_bottom_border {
+#teiluhdqiu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_col_headings {
+#teiluhdqiu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -880,7 +966,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_col_heading {
+#teiluhdqiu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -900,7 +986,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#acrlxytvvs .gt_column_spanner_outer {
+#teiluhdqiu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -912,15 +998,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#acrlxytvvs .gt_column_spanner_outer:first-child {
+#teiluhdqiu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#acrlxytvvs .gt_column_spanner_outer:last-child {
+#teiluhdqiu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#acrlxytvvs .gt_column_spanner {
+#teiluhdqiu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -932,11 +1018,11 @@ Dave Brocker
   width: 100%;
 }
 
-#acrlxytvvs .gt_spanner_row {
+#teiluhdqiu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#acrlxytvvs .gt_group_heading {
+#teiluhdqiu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -962,7 +1048,7 @@ Dave Brocker
   text-align: left;
 }
 
-#acrlxytvvs .gt_empty_group_heading {
+#teiluhdqiu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -977,15 +1063,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#acrlxytvvs .gt_from_md > :first-child {
+#teiluhdqiu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#acrlxytvvs .gt_from_md > :last-child {
+#teiluhdqiu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#acrlxytvvs .gt_row {
+#teiluhdqiu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1004,7 +1090,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#acrlxytvvs .gt_stub {
+#teiluhdqiu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,7 +1103,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#acrlxytvvs .gt_stub_row_group {
+#teiluhdqiu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1031,15 +1117,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#acrlxytvvs .gt_row_group_first td {
+#teiluhdqiu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#acrlxytvvs .gt_row_group_first th {
+#teiluhdqiu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#acrlxytvvs .gt_summary_row {
+#teiluhdqiu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1049,16 +1135,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#acrlxytvvs .gt_first_summary_row {
+#teiluhdqiu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_first_summary_row.thick {
+#teiluhdqiu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#acrlxytvvs .gt_last_summary_row {
+#teiluhdqiu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1068,7 +1154,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_grand_summary_row {
+#teiluhdqiu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1078,7 +1164,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#acrlxytvvs .gt_first_grand_summary_row {
+#teiluhdqiu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +1174,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_last_grand_summary_row_top {
+#teiluhdqiu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1098,11 +1184,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_striped {
+#teiluhdqiu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#acrlxytvvs .gt_table_body {
+#teiluhdqiu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1111,7 +1197,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_footnotes {
+#teiluhdqiu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1125,7 +1211,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_footnote {
+#teiluhdqiu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1134,7 +1220,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#acrlxytvvs .gt_sourcenotes {
+#teiluhdqiu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1148,7 +1234,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#acrlxytvvs .gt_sourcenote {
+#teiluhdqiu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1156,72 +1242,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#acrlxytvvs .gt_left {
+#teiluhdqiu .gt_left {
   text-align: left;
 }
 
-#acrlxytvvs .gt_center {
+#teiluhdqiu .gt_center {
   text-align: center;
 }
 
-#acrlxytvvs .gt_right {
+#teiluhdqiu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#acrlxytvvs .gt_font_normal {
+#teiluhdqiu .gt_font_normal {
   font-weight: normal;
 }
 
-#acrlxytvvs .gt_font_bold {
+#teiluhdqiu .gt_font_bold {
   font-weight: bold;
 }
 
-#acrlxytvvs .gt_font_italic {
+#teiluhdqiu .gt_font_italic {
   font-style: italic;
 }
 
-#acrlxytvvs .gt_super {
+#teiluhdqiu .gt_super {
   font-size: 65%;
 }
 
-#acrlxytvvs .gt_footnote_marks {
+#teiluhdqiu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#acrlxytvvs .gt_asterisk {
+#teiluhdqiu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#acrlxytvvs .gt_indent_1 {
+#teiluhdqiu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#acrlxytvvs .gt_indent_2 {
+#teiluhdqiu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#acrlxytvvs .gt_indent_3 {
+#teiluhdqiu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#acrlxytvvs .gt_indent_4 {
+#teiluhdqiu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#acrlxytvvs .gt_indent_5 {
+#teiluhdqiu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#acrlxytvvs .katex-display {
+#teiluhdqiu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#acrlxytvvs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#teiluhdqiu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1229,31 +1315,37 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">A Quick Decision Guide</td>
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">A Quick Decision Guide</td>
 </tr>
 <tr class="gt_col_headings even">
+<th id="Icon" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"></th>
 <th id="What-are-you-showing?" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">What are you showing?</th>
 <th id="Best-chart" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Best chart</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
+<td class="gt_row gt_left" headers="Icon"><span class="material-icons" style="font-size:1.3em;color:#5C715E;">bar_chart</span></td>
 <td class="gt_row gt_left" headers="What are you showing?">One categorical variable (counts per group)</td>
 <td class="gt_row gt_left" headers="Best chart">Bar chart</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Icon"><span class="material-icons" style="font-size:1.3em;color:#5C715E;">insert_chart</span></td>
 <td class="gt_row gt_left gt_striped" headers="What are you showing?">One continuous variable (its shape/spread)</td>
 <td class="gt_row gt_left gt_striped" headers="Best chart">Histogram or density plot</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="Icon"><span class="material-icons" style="font-size:1.3em;color:#5C715E;">scatter_plot</span></td>
 <td class="gt_row gt_left" headers="What are you showing?">Two continuous variables (a relationship)</td>
 <td class="gt_row gt_left" headers="Best chart">Scatterplot</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Icon"><span class="material-icons" style="font-size:1.3em;color:#5C715E;">equalizer</span></td>
 <td class="gt_row gt_left gt_striped" headers="What are you showing?">A continuous variable, compared across groups</td>
 <td class="gt_row gt_left gt_striped" headers="Best chart">Box plot</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="Icon"><span class="material-icons" style="font-size:1.3em;color:#5C715E;">show_chart</span></td>
 <td class="gt_row gt_left" headers="What are you showing?">Change over time</td>
 <td class="gt_row gt_left" headers="Best chart">Line chart</td>
 </tr>
@@ -1266,27 +1358,75 @@ Dave Brocker
 </section>
 <section id="the-ggplot2-recipe" class="slide level2">
 <h2>The <code>ggplot2</code> Recipe</h2>
-<p>Every <code>ggplot2</code> chart follows the same three-ingredient recipe — we’ll come back to this constantly this semester:</p>
-<div class="highlight-last">
-<ol type="1">
-<li class="fragment"><p><strong>Data</strong> — which tibble/data frame are you plotting?</p></li>
-<li class="fragment"><p><strong>Aesthetics</strong> (<code>aes()</code>) — which columns map to x, y, color, etc.?</p></li>
-<li class="fragment"><p><strong>Geometry</strong> (<code>geom_*()</code>) — what <em>shape</em> represents your data (bars, points, lines…)?</p></li>
-</ol>
+
+<img src="images/ggplot2_hex.png" class="corner-hex r-stretch" alt="ggplot2 hex sticker"><p>Every <code>ggplot2</code> chart follows the same three-ingredient recipe — we’ll come back to this constantly this semester. It’s <code>ggplot2</code>’s implementation of Wilkinson’s <strong>“Grammar of Graphics”</strong>: any chart can be built from the same small set of parts.</p>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">table_chart</span></p>
+<h4 id="data">Data</h4>
+<p>Which tibble/data frame are you plotting?</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">tune</span></p>
+<h4 id="aesthetics">Aesthetics</h4>
+<p><code>aes()</code> — which columns map to x, y, color, etc.?</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">bar_chart</span></p>
+<h4 id="geometry">Geometry</h4>
+<p><code>geom_*()</code> — what <em>shape</em> represents your data?</p>
+</div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> ..., <span class="at">y =</span> ...)) <span class="sc">+</span>  <span class="co"># 1. data + 2. aesthetics (which columns map to x/y)</span></span>
-<span id="cb1-2"><a aria-label="2"></a>  <span class="fu">geom_something</span>()                      <span class="co"># 3. geometry (the shape that represents your data)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-label="1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> ..., <span class="at">y =</span> ...)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-label="2"></a>  <span class="fu">geom_something</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1"><strong>Data + aesthetics</strong> — the data frame, and which columns map to x/y/color/etc.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="2"><strong>Geometry</strong> — the shape (bars, points, lines…) that represents your mapped data.</span>
+</dd>
+</dl>
+</div>
 </div>
 <p>We’ll build up from this simple recipe all semester — no need to memorize every option today.</p>
 </section>
-<section id="setting-up-our-example-data" class="slide level2">
-<h2>Setting Up Our Example Data</h2>
+<section id="example-student-data" class="slide level2">
+<h2>Example Student Data</h2>
 <h3 id="one-dataset-several-questions">One Dataset, Several Questions</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Build a fake ‘students’ dataset we’ll reuse all lecture</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)  <span class="co"># makes the "random" data reproducible every time this renders</span></span>
+<span id="cb1-2"><a aria-label="2"></a>students <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-3"><a aria-label="3"></a>  <span class="at">student =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>,                                             <span class="co"># just an ID number</span></span>
+<span id="cb1-4"><a aria-label="4"></a>  <span class="at">study_time =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Morning"</span>, <span class="st">"Afternoon"</span>, <span class="st">"Evening"</span>, <span class="st">"Night"</span>), <span class="dv">60</span>,</span>
+<span id="cb1-5"><a aria-label="5"></a>                       <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="fl">0.30</span>, <span class="fl">0.35</span>, <span class="fl">0.20</span>)),   <span class="co"># categorical variable</span></span>
+<span id="cb1-6"><a aria-label="6"></a>  <span class="at">study_hours =</span> <span class="fu">pmax</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">2</span>), <span class="dv">1</span>), <span class="fl">0.5</span>),          <span class="co"># continuous variable, floor at 0.5</span></span>
+<span id="cb1-7"><a aria-label="7"></a>  <span class="at">study_method =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Flashcards"</span>, <span class="st">"Practice Tests"</span>), <span class="at">each =</span> <span class="dv">30</span>),       <span class="co"># two even groups</span></span>
+<span id="cb1-8"><a aria-label="8"></a>  <span class="at">exam_score =</span> <span class="fu">pmin</span>(<span class="fu">round</span>(<span class="dv">55</span> <span class="sc">+</span> <span class="fl">2.5</span> <span class="sc">*</span> study_hours <span class="sc">+</span>                        <span class="co"># score rises with study hours...</span></span>
+<span id="cb1-9"><a aria-label="9"></a>                     <span class="fu">ifelse</span>(study_method <span class="sc">==</span> <span class="st">"Practice Tests"</span>, <span class="dv">4</span>, <span class="dv">0</span>) <span class="sc">+</span>     <span class="co"># ...gets a small bump from practice tests...</span></span>
+<span id="cb1-10"><a aria-label="10"></a>                     <span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="dv">0</span>, <span class="dv">5</span>)), <span class="dv">100</span>)                               <span class="co"># ...plus random noise, capped at 100</span></span>
+<span id="cb1-11"><a aria-label="11"></a>)</span>
+<span id="cb1-12"><a aria-label="12"></a></span>
+<span id="cb1-13"><a aria-label="13"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(students, <span class="st">"students.csv"</span>)  <span class="co"># so it can be linked/downloaded below</span></span>
+<span id="cb1-14"><a aria-label="14"></a></span>
+<span id="cb1-15"><a aria-label="15"></a>students <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a aria-label="16"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span>       <span class="co"># just preview the first 5 rows</span></span>
+<span id="cb1-17"><a aria-label="17"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a aria-label="18"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Example Student Data"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-19"><a aria-label="19"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-20"><a aria-label="20"></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">22</span>, <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">80</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-21"><a aria-label="21"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>), <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a aria-label="22"></a>  <span class="fu">cols_align</span>(<span class="at">align =</span> <span class="st">"center"</span>, <span class="at">columns =</span> <span class="fu">everything</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div id="jhvrltvvri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#jhvrltvvri table {
@@ -1740,49 +1880,52 @@ Dave Brocker
 
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
-<tr class="gt_col_headings header">
-<th id="student" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">student</th>
-<th id="study_time" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">study_time</th>
-<th id="study_hours" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">study_hours</th>
-<th id="study_method" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">study_method</th>
-<th id="exam_score" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">exam_score</th>
+<tr class="gt_heading header">
+<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border">Example Student Data</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="student" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">student</th>
+<th id="study_time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">study_time</th>
+<th id="study_hours" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">study_hours</th>
+<th id="study_method" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">study_method</th>
+<th id="exam_score" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">exam_score</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="student">1</td>
-<td class="gt_row gt_left" headers="study_time">Evening</td>
-<td class="gt_row gt_right" headers="study_hours">7.5</td>
-<td class="gt_row gt_left" headers="study_method">Flashcards</td>
-<td class="gt_row gt_right" headers="exam_score">82</td>
+<td class="gt_row gt_center" headers="student">1</td>
+<td class="gt_row gt_center" headers="study_time">Evening</td>
+<td class="gt_row gt_center" headers="study_hours">7.5</td>
+<td class="gt_row gt_center" headers="study_method">Flashcards</td>
+<td class="gt_row gt_center" headers="exam_score">82</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_right gt_striped" headers="student">2</td>
-<td class="gt_row gt_left gt_striped" headers="study_time">Night</td>
-<td class="gt_row gt_right gt_striped" headers="study_hours">6.6</td>
-<td class="gt_row gt_left gt_striped" headers="study_method">Flashcards</td>
-<td class="gt_row gt_right gt_striped" headers="exam_score">80</td>
+<td class="gt_row gt_center gt_striped" headers="student">2</td>
+<td class="gt_row gt_center gt_striped" headers="study_time">Night</td>
+<td class="gt_row gt_center gt_striped" headers="study_hours">6.6</td>
+<td class="gt_row gt_center gt_striped" headers="study_method">Flashcards</td>
+<td class="gt_row gt_center gt_striped" headers="exam_score">80</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_right" headers="student">3</td>
-<td class="gt_row gt_left" headers="study_time">Afternoon</td>
-<td class="gt_row gt_right" headers="study_hours">8.2</td>
-<td class="gt_row gt_left" headers="study_method">Flashcards</td>
-<td class="gt_row gt_right" headers="exam_score">70</td>
+<td class="gt_row gt_center" headers="student">3</td>
+<td class="gt_row gt_center" headers="study_time">Afternoon</td>
+<td class="gt_row gt_center" headers="study_hours">8.2</td>
+<td class="gt_row gt_center" headers="study_method">Flashcards</td>
+<td class="gt_row gt_center" headers="exam_score">70</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_right gt_striped" headers="student">4</td>
-<td class="gt_row gt_left gt_striped" headers="study_time">Evening</td>
-<td class="gt_row gt_right gt_striped" headers="study_hours">5.4</td>
-<td class="gt_row gt_left gt_striped" headers="study_method">Flashcards</td>
-<td class="gt_row gt_right gt_striped" headers="exam_score">62</td>
+<td class="gt_row gt_center gt_striped" headers="student">4</td>
+<td class="gt_row gt_center gt_striped" headers="study_time">Evening</td>
+<td class="gt_row gt_center gt_striped" headers="study_hours">5.4</td>
+<td class="gt_row gt_center gt_striped" headers="study_method">Flashcards</td>
+<td class="gt_row gt_center gt_striped" headers="exam_score">62</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_right" headers="student">5</td>
-<td class="gt_row gt_left" headers="study_time">Morning</td>
-<td class="gt_row gt_right" headers="study_hours">4.4</td>
-<td class="gt_row gt_left" headers="study_method">Flashcards</td>
-<td class="gt_row gt_right" headers="exam_score">58</td>
+<td class="gt_row gt_center" headers="student">5</td>
+<td class="gt_row gt_center" headers="study_time">Morning</td>
+<td class="gt_row gt_center" headers="study_hours">4.4</td>
+<td class="gt_row gt_center" headers="study_method">Flashcards</td>
+<td class="gt_row gt_center" headers="exam_score">58</td>
 </tr>
 </tbody>
 </table>
@@ -1790,22 +1933,25 @@ Dave Brocker
 </div>
 </div>
 </div>
+<div class="fragment">
+<p><a href="students.csv" class="you-callout">⬇ Download <code>students.csv</code></a></p>
+</div>
 </section>
 <section id="bar-charts" class="slide level2">
 <h2>Bar Charts</h2>
 <h3 id="one-categorical-variable">One Categorical Variable</h3>
 
-<img data-src="lec2_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="histograms" class="slide level2">
 <h2>Histograms</h2>
 <h3 id="one-continuous-variable">One Continuous Variable</h3>
 
-<img data-src="lec2_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="scatterplots" class="slide level2">
 <h2>Scatterplots</h2>
 <h3 id="two-continuous-variables">Two Continuous Variables</h3>
 
-<img data-src="lec2_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
 <p>We’ll come back to this exact question — “how strongly are two variables related?” — when we get to correlation.</p>
 </div>
 </section>
@@ -1813,7 +1959,7 @@ Dave Brocker
 <h2>Box Plots</h2>
 <h3 id="comparing-a-continuous-variable-across-groups">Comparing a Continuous Variable Across Groups</h3>
 
-<img data-src="lec2_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
 <p>This is also a preview — “is the difference between these two groups big enough to matter?” is exactly what a later lecture’s t-test answers.</p>
 </div>
 </section>
@@ -1821,7 +1967,7 @@ Dave Brocker
 <h2>How Graphs Can Mislead</h2>
 <h3 id="same-data-different-story">Same Data, Different Story</h3>
 
-<img data-src="lec2_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1056"><div class="fragment">
 <p>Same exact numbers. The right panel makes a small difference look dramatic — always check where the y-axis starts.</p>
 </div>
 </section>
@@ -1836,13 +1982,33 @@ Dave Brocker
 </ul>
 </div>
 </section>
+<section id="guess-this-chart" class="slide level2 smaller">
+<h2>Guess This Chart</h2>
+<div class="blank-tag">
+<p>Fill in the blank</p>
+</div>
+
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>What’s on the x-axis? The y-axis? What relationship is this showing — and what chart type is it?</p>
+</div>
+</section>
+<section id="guess-this-chart-too" class="slide level2 smaller">
+<h2>Guess This Chart, Too</h2>
+<div class="blank-tag">
+<p>Fill in the blank</p>
+</div>
+
+<img data-src="lec2_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>No axis labels this time either — what are the two groups probably being compared, and what does the shape of each box tell you?</p>
+</div>
+</section>
 <section id="recap-what-you-should-walk-away-with" class="slide level2">
 <h2>Recap: What You Should Walk Away With</h2>
 <div class="highlight-last">
 <ul>
 <li class="fragment"><p>A summary statistic can hide the actual shape of your data — that’s why we plot it</p></li>
 <li class="fragment"><p>You can match a research question to the right chart: one variable vs.&nbsp;two, categorical vs.&nbsp;continuous, one group vs.&nbsp;several</p></li>
-<li class="fragment"><p>You’ve seen the basic <code>ggplot2</code> recipe: <strong>data + aesthetics + geometry</strong></p></li>
+<li class="fragment"><p>You’ve seen the basic <code>ggplot2</code> recipe: <strong>data + aesthetics + geometry</strong> — the “Grammar of Graphics”</p></li>
 <li class="fragment"><p>You know how to spot (and avoid) a few common ways graphs mislead</p></li>
 </ul>
 </div>
@@ -2033,9 +2199,9 @@ Dave Brocker
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1920,
 
-        height: 700,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -2234,6 +2400,158 @@ Dave Brocker
             }
           });
         }
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+            for (let i=0; i<annoteTargets.length; i++) {
+              const annoteTarget = annoteTargets[i];
+              const targetCell = annoteTarget.getAttribute("data-target-cell");
+              const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+              const contentFn = () => {
+                const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                if (content) {
+                  const tipContent = content.cloneNode(true);
+                  tipContent.classList.add("code-annotation-tip-content");
+                  return tipContent.outerHTML;
+                }
+              }
+              const config = {
+                allowHTML: true,
+                content: contentFn,
+                onShow: (instance) => {
+                  selectCodeLines(instance.reference);
+                  instance.reference.classList.add('code-annotation-active');
+                  window.tippy.hideAll();
+                },
+                onHide: (instance) => {
+                  unselectCodeLines();
+                  instance.reference.classList.remove('code-annotation-active');
+                },
+                maxWidth: 300,
+                delay: [50, 0],
+                duration: [200, 0],
+                offset: [5, 10],
+                arrow: true,
+                appendTo: function(el) {
+                  return el.parentElement.parentElement.parentElement;
+                },
+                interactive: true,
+                interactiveBorder: 10,
+                theme: 'light-border',
+                placement: 'right',
+                popperOptions: {
+                  modifiers: [
+                  {
+                    name: 'flip',
+                    options: {
+                      flipVariations: false, // true by default
+                      allowedAutoPlacements: ['right'],
+                      fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                    },
+                  },
+                  {
+                    name: 'preventOverflow',
+                    options: {
+                      mainAxis: false,
+                      altAxis: false
+                    }
+                  }
+                  ]        
+                }      
+              };
+              window.tippy(annoteTarget, config); 
+            }
         const findCites = (el) => {
           const parentEl = el.parentElement;
           if (parentEl) {

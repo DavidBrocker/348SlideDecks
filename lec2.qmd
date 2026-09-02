@@ -1,14 +1,11 @@
 ---
-title: "Data Visualization"
-subtitle: "PSY 348: Lecture 2"
-author: 
-  - name: "Dave Brocker"
-    email: brockeda@farmingdale.edu
 institute: "Farmingdale State College"
 footer: "PSY 348 - Statistics for Psychology"
+resources:
+  - students.csv
 format:
   revealjs:
-    menu: 
+    menu:
       numbers: true
     slide-number: c/t
     preview-links: auto
@@ -16,6 +13,10 @@ format:
     incremental: true
     touch: true
     code-fold: true
+    code-annotations: hover
+    width: 1920
+    height: 1080
+    center: false
     drop:
       engine: webr
       webr:
@@ -26,28 +27,113 @@ revealjs-plugins:
   - drop
 ---
 
+##  {#custom-title data-menu-title="Data Visualization"}
+
+<!-- Manual title slide (like lab1.qmd's #custom-title pattern) instead of
+     the YAML-generated one -- ANY content before the first ## heading,
+     even an invisible HTML comment, renders as its own separate blank
+     slide in this Quarto/revealjs setup. Keep everything, including notes
+     like this one, after the heading line. -->
+
+```{r setup}
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(gt)
+
+# Shared theme so "plot.title.position = 'plot'" and the padded axis
+# titles carry consistently across every chart in this deck instead of
+# being retyped (and drifting) in each chunk.
+viz_theme <- function(base_size = 18) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      plot.title.position = "plot",
+      axis.title.x = element_text(margin = margin(t = 12)),
+      axis.title.y = element_text(margin = margin(r = 12)),
+      panel.grid.minor = element_blank()
+    )
+}
+```
+
+
+::: {.title-bg-icons}
+<span class="material-icons title-bg-icon-1">bar_chart</span>
+<span class="material-icons title-bg-icon-2">scatter_plot</span>
+<span class="material-icons title-bg-icon-3">show_chart</span>
+<span class="material-icons title-bg-icon-4">pie_chart</span>
+<span class="material-icons title-bg-icon-5">table_chart</span>
+<span class="material-icons title-bg-icon-6">insert_chart</span>
+:::
+
+::: {.ghost-nodes}
+<div class="ghost-node"></div>
+<div class="ghost-node"></div>
+<div class="ghost-node"></div>
+<div class="ghost-node"></div>
+<div class="ghost-node"></div>
+:::
+
+[Data Visualization]{.cust-title}
+
+[PSY 348: Lecture 2]{.cust-sub}
+
+[Dave Brocker <br> brockeda@farmingdale.edu <br> Farmingdale State College]{.cust-author}
+
+
 ## From "Stats Is Everywhere" to "Let's Actually See It"
 
 Last time: statistics isn't just math — it's how you make sense of decisions you already make every day.
 
+::: {.img-placeholder}
+<span class="material-icons">smartphone</span>
+
+![](https://media.istockphoto.com/id/2174699310/photo/handsome-man-shopping-for-a-new-smartphone-in-an-electronics-store.jpg?s=2048x2048&w=is&k=20&c=so9jIM80bRyuCw3y8NOrPFzG1vC_feKJAH6S7_Ecn1M=)
+:::
+
 ::: highlight-last
 - A number by itself is hard to *feel* — "the average score was 78" doesn't tell you much on its own
-
-- A well-made graph turns a pile of numbers into something you can understand at a glance
-
-- This lecture is about **choosing and building the right picture** for your data
 :::
+
+::: {.you-callout}
+The average was 78. You scored a 67.
+:::
+
+Today: **choosing and building the right picture** for your data.
 
 ## Why Visualize Data?
 
 Consider these two ways of showing the same information:
 
-::: fragment
-**Option A:** "The average exam score was 78 (SD = 8)."
+::: {.side-by-cols}
+::: {.stat-card}
+**Option A**
+
+::: {.stat-num}
+78
 :::
 
-::: fragment
-**Option B:** *A histogram showing the actual shape of the scores — most students clustered in the 70s, with a small group who struggled and a small group who excelled.*
+::: {.stat-sub}
+(SD = 8)
+:::
+:::
+
+::: {.card}
+**Option B**
+
+```{r}
+#| echo: false
+#| fig-height: 3.2
+#| code-summary: "Plain histogram, no axis/title clutter"
+set.seed(1)
+demo_scores <- data.frame(score = pmin(pmax(round(rnorm(120, 78, 8)), 45), 100))
+
+ggplot(demo_scores, aes(x = score)) +
+  geom_histogram(binwidth = 5, fill = "#8FAF9E", color = "white") +
+  geom_vline(xintercept = c(70, 86), linetype = "dashed", color = "#5C715E") + # ~mean +/- 1 SD, marks "most students"
+  theme_minimal(base_size = 14) +
+  theme(axis.title = element_blank(), plot.title = element_blank())
+```
+:::
 :::
 
 ::: fragment
@@ -62,9 +148,6 @@ These four datasets have (essentially) identical descriptive statistics:
 
 ```{r}
 #| echo: false
-library(dplyr)
-library(gt)
-
 data(anscombe)
 
 tab <- tibble(
@@ -81,7 +164,10 @@ tab |>
   tab_header(title = "Anscombe's Quartet: Identical Summary Statistics") |>
   tab_source_note("Anscombe, F. J. (1973). Graphs in statistical analysis.") |>
   opt_row_striping() |>
-  tab_options(table.font.size = 24, table.width = pct(90))
+  tab_options(table.font.size = 24, table.width = pct(90)) |>
+  tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels()) |>
+  tab_style(style = cell_text(align = "center"), locations = cells_body()) |>
+  cols_align(align = "center", columns = everything())
 ```
 
 ## Same Numbers, Very Different Pictures
@@ -89,11 +175,7 @@ tab |>
 ### But Look What They Actually Look Like
 
 ```{r}
-#| fig-align: center
-#| code-summary: "Build the 4-panel Anscombe scatterplot"
-library(dplyr)
-library(ggplot2)
-
+#| echo: false
 anscombe_long <- bind_rows(              # stack all four sets into one long tibble
   tibble(set = "Set I",   x = anscombe$x1, y = anscombe$y1),
   tibble(set = "Set II",  x = anscombe$x2, y = anscombe$y2),
@@ -101,18 +183,58 @@ anscombe_long <- bind_rows(              # stack all four sets into one long tib
   tibble(set = "Set IV",  x = anscombe$x4, y = anscombe$y4)
 )
 
-ggplot(anscombe_long, aes(x = x, y = y)) +
-  geom_point(size = 3, color = "#5C715E") +                    # the actual data points
-  geom_smooth(method = "lm", se = FALSE, color = "#8FAF9E") +   # a straight best-fit line for each set
-  facet_wrap(~set) +                                            # one small panel per dataset
-  theme_minimal(base_size = 16) +
-  theme(panel.grid.minor = element_blank()) +                   # drop the finer gridlines, keep the major ones
-  labs(
-    title = "Anscombe's Quartet",
-    subtitle = "Same mean, SD, and correlation — four very different pictures",
-    x = "x", y = "y"
-  )
+anscombe_plot <- function(which_set) {
+  anscombe_long |>
+    filter(set == which_set) |>
+    ggplot(aes(x = x, y = y)) +
+    geom_point(size = 4, color = "#5C715E") +
+    geom_smooth(method = "lm", se = FALSE, color = "#8FAF9E") +
+    viz_theme(18) +
+    labs(title = which_set, x = "x", y = "y")
+}
 ```
+
+::: {.panel-tabset}
+### Set I
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-height: 4.5
+anscombe_plot("Set I")
+```
+
+### Set II
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-height: 4.5
+anscombe_plot("Set II")
+```
+
+### Set III
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-height: 4.5
+anscombe_plot("Set III")
+```
+
+### Set IV
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-height: 4.5
+anscombe_plot("Set IV")
+```
+:::
+
+::: fragment
+Same mean, SD, and correlation in every tab — click through them. Four very different pictures.
+:::
 
 ## The Takeaway
 
@@ -128,10 +250,8 @@ ggplot(anscombe_long, aes(x = x, y = y)) +
 
 ```{r}
 #| echo: false
-library(dplyr)
-library(gt)
-
 chart_guide <- tibble(
+  Icon = c("bar_chart", "insert_chart", "scatter_plot", "equalizer", "show_chart"),
   `What are you showing?` = c(
     "One categorical variable (counts per group)",
     "One continuous variable (its shape/spread)",
@@ -156,39 +276,64 @@ chart_guide |>
   tab_style(
     style = cell_text(weight = "bold"),
     locations = cells_column_labels()
+  ) |>
+  cols_label(Icon = "") |>
+  text_transform(
+    locations = cells_body(columns = Icon),
+    fn = function(x) paste0('<span class="material-icons" style="font-size:1.3em;color:#5C715E;">', x, '</span>')
   )
 ```
 
 ## The `ggplot2` Recipe
 
-Every `ggplot2` chart follows the same three-ingredient recipe — we'll come back to this constantly this semester:
+<img src="images/ggplot2_hex.png" class="corner-hex" alt="ggplot2 hex sticker">
 
-::: highlight-last
-1.  **Data** — which tibble/data frame are you plotting?
+Every `ggplot2` chart follows the same three-ingredient recipe — we'll come back to this constantly this semester. It's `ggplot2`'s implementation of Wilkinson's **"Grammar of Graphics"**: any chart can be built from the same small set of parts.
 
-2.  **Aesthetics** (`aes()`) — which columns map to x, y, color, etc.?
+::: {.badge-row}
+::: {.content-badge}
+<span class="material-icons">table_chart</span>
 
-3.  **Geometry** (`geom_*()`) — what *shape* represents your data (bars, points, lines...)?
+#### Data
+
+Which tibble/data frame are you plotting?
+:::
+
+::: {.content-badge}
+<span class="material-icons">tune</span>
+
+#### Aesthetics
+
+`aes()` — which columns map to x, y, color, etc.?
+:::
+
+::: {.content-badge}
+<span class="material-icons">bar_chart</span>
+
+#### Geometry
+
+`geom_*()` — what *shape* represents your data?
+:::
 :::
 
 ```{r}
 #| eval: false
 #| echo: true
-ggplot(data, aes(x = ..., y = ...)) +  # 1. data + 2. aesthetics (which columns map to x/y)
-  geom_something()                      # 3. geometry (the shape that represents your data)
+ggplot(data, aes(x = ..., y = ...)) +  # <1>
+  geom_something()                      # <2>
 ```
+1. **Data + aesthetics** — the data frame, and which columns map to x/y/color/etc.
+2. **Geometry** — the shape (bars, points, lines...) that represents your mapped data.
 
 We'll build up from this simple recipe all semester — no need to memorize every option today.
 
-## Setting Up Our Example Data
+## Example Student Data
 
 ### One Dataset, Several Questions
 
 ```{r}
+#| echo: true
 #| code-summary: "Build a fake 'students' dataset we'll reuse all lecture"
-library(dplyr)
-library(gt)
-
 set.seed(2)  # makes the "random" data reproducible every time this renders
 students <- tibble(
   student = 1:60,                                             # just an ID number
@@ -201,12 +346,21 @@ students <- tibble(
                      rnorm(60, 0, 5)), 100)                               # ...plus random noise, capped at 100
 )
 
+readr::write_csv(students, "students.csv")  # so it can be linked/downloaded below
+
 students |>
   slice_head(n = 5) |>       # just preview the first 5 rows
   gt() |>
+  tab_header(title = "Example Student Data") |>
   opt_row_striping() |>
-  tab_options(table.font.size = 22, table.width = pct(80))
+  tab_options(table.font.size = 22, table.width = pct(80)) |>
+  tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels()) |>
+  cols_align(align = "center", columns = everything())
 ```
+
+::: fragment
+[⬇ Download `students.csv`](students.csv){.you-callout}
+:::
 
 ## Bar Charts
 
@@ -216,21 +370,19 @@ students |>
 #| fig-align: center
 #| fig-height: 4.5
 #| code-summary: "Bar chart: counts by study time"
-library(ggplot2)
-
 students |>
   count(study_time) |>                                     # tally how many students fall in each category
   ggplot(aes(x = study_time, y = n, fill = study_time)) +   # x = category, y = count, color by category
-  geom_col() +                                              # bars sized to the y value
-  theme_minimal(base_size = 18) +
+  geom_col(color = "black", width = 0.7) +                  # bars sized to the y value
+  ylim(0, 30) +
+  viz_theme(18) +
   theme(
     legend.position = "none",
-    panel.grid.minor = element_blank(),    # drop the finer gridlines
     panel.grid.major.x = element_blank()   # vertical gridlines add nothing when x is categorical
   ) +
   labs(
     title = "When Do Students Prefer to Study?",
-    x = "", y = "Number of Students"
+    x = "\nStudy Time", y = "Number of\nStudents"
   )
 ```
 
@@ -242,16 +394,13 @@ students |>
 #| fig-align: center
 #| fig-height: 4.5
 #| code-summary: "Histogram: distribution of exam scores"
-library(ggplot2)
-
 students |>
   ggplot(aes(x = exam_score)) +
   geom_histogram(binwidth = 5, fill = "#8FAF9E", color = "white") +  # bin width of 5 points per bar
-  theme_minimal(base_size = 18) +
-  theme(panel.grid.minor = element_blank()) +   # keep the major gridlines -- useful for reading bar heights
+  viz_theme(18) +
   labs(
     title = "Distribution of Exam Scores",
-    x = "Exam Score", y = "Number of Students"
+    x = "\nExam Score", y = "Number of\nStudents"
   )
 ```
 
@@ -261,19 +410,16 @@ students |>
 
 ```{r}
 #| fig-align: center
-#| fig-height: 4.5
+#| fig-height: 6.5
 #| code-summary: "Scatterplot: study hours vs. exam score"
-library(ggplot2)
-
 students |>
   ggplot(aes(x = study_hours, y = exam_score)) +
   geom_point(size = 3, color = "#5C715E", alpha = 0.7) +             # one dot per student
   geom_smooth(method = "lm", se = FALSE, color = "#8FAF9E") +        # a straight best-fit line through the cloud
-  theme_minimal(base_size = 18) +
-  theme(panel.grid.minor = element_blank()) +   # gridlines here help you read off approximate values
+  viz_theme(14) +                                                    # bigger plot, so dial text back down
   labs(
     title = "Study Hours vs. Exam Score",
-    x = "Study Hours (per week)", y = "Exam Score"
+    x = "\nStudy Hours (per week)", y = "Exam Score"
   )
 ```
 
@@ -287,22 +433,19 @@ We'll come back to this exact question — "how strongly are two variables relat
 
 ```{r}
 #| fig-align: center
-#| fig-height: 4.5
+#| fig-height: 6.5
 #| code-summary: "Box plot: exam scores by study method"
-library(ggplot2)
-
 students |>
   ggplot(aes(x = study_method, y = exam_score, fill = study_method)) +
   geom_boxplot(alpha = 0.6) +    # median, IQR box, and whiskers for each group
-  theme_minimal(base_size = 18) +
+  viz_theme(14) +                # bigger plot, so dial text back down -- this is the one students (and I!) struggle with most
   theme(
     legend.position = "none",
-    panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank()   # x is categorical here too -- vertical lines aren't meaningful
   ) +
   labs(
     title = "Exam Score by Study Method",
-    x = "", y = "Exam Score"
+    x = "\nStudy Method", y = "Exam Score"
   )
 ```
 
@@ -316,28 +459,27 @@ This is also a preview — "is the difference between these two groups big enoug
 
 ```{r}
 #| fig-align: center
-#| fig-height: 4.5
+#| fig-height: 6
+#| fig-width: 11
 #| code-summary: "Two bar charts of the same numbers, different y-axis range"
-library(ggplot2)
 library(patchwork)   # lets us place p1 and p2 side by side with `p1 + p2`
-library(dplyr)
 
 group_means <- students |>
   group_by(study_method) |>
   summarize(mean_score = mean(exam_score))   # one average score per study method
 
 p1 <- ggplot(group_means, aes(x = study_method, y = mean_score, fill = study_method)) +
-  geom_col() +
+  geom_col(color = "black", width = 0.7) +
   coord_cartesian(ylim = c(0, 100)) +    # y-axis starts at 0 -- the honest version
-  theme_minimal(base_size = 14) +
-  theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank()) +
+  viz_theme(16) +
+  theme(legend.position = "none", panel.grid.major.x = element_blank()) +
   labs(title = "Full Scale (0-100)", x = "", y = "Mean Exam Score")
 
 p2 <- ggplot(group_means, aes(x = study_method, y = mean_score, fill = study_method)) +
-  geom_col() +
+  geom_col(color = "black", width = 0.7) +
   coord_cartesian(ylim = c(65, 75)) +    # y-axis zoomed in -- makes the gap look huge
-  theme_minimal(base_size = 14) +
-  theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank()) +
+  viz_theme(16) +
+  theme(legend.position = "none", panel.grid.major.x = element_blank()) +
   labs(title = "Truncated Y-Axis", x = "", y = "Mean Exam Score")
 
 p1 + p2   # patchwork's `+` places the two plots next to each other
@@ -359,6 +501,48 @@ Same exact numbers. The right panel makes a small difference look dramatic — a
 - **Only the elements that add information** — no 3D effects, no unnecessary gridlines, no clutter
 :::
 
+## Guess This Chart {.smaller}
+
+::: {.blank-tag}
+Fill in the blank
+:::
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-height: 5
+students |>
+  ggplot(aes(x = study_hours, y = exam_score)) +
+  geom_point(size = 3, color = "#5C715E", alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8FAF9E") +
+  theme_void()
+```
+
+::: fragment
+What's on the x-axis? The y-axis? What relationship is this showing — and what chart type is it?
+:::
+
+## Guess This Chart, Too {.smaller}
+
+::: {.blank-tag}
+Fill in the blank
+:::
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-height: 5
+students |>
+  ggplot(aes(x = study_method, y = exam_score, fill = study_method)) +
+  geom_boxplot(alpha = 0.6) +
+  theme_void() +
+  theme(legend.position = "none")
+```
+
+::: fragment
+No axis labels this time either — what are the two groups probably being compared, and what does the shape of each box tell you?
+:::
+
 ## Recap: What You Should Walk Away With
 
 ::: highlight-last
@@ -366,7 +550,7 @@ Same exact numbers. The right panel makes a small difference look dramatic — a
 
 - You can match a research question to the right chart: one variable vs. two, categorical vs. continuous, one group vs. several
 
-- You've seen the basic `ggplot2` recipe: **data + aesthetics + geometry**
+- You've seen the basic `ggplot2` recipe: **data + aesthetics + geometry** — the "Grammar of Graphics"
 
 - You know how to spot (and avoid) a few common ways graphs mislead
 :::

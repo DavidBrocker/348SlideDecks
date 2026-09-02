@@ -1087,51 +1087,51 @@
   {
     "objectID": "lec2.html#from-stats-is-everywhere-to-lets-actually-see-it",
     "href": "lec2.html#from-stats-is-everywhere-to-lets-actually-see-it",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "From “Stats Is Everywhere” to “Let’s Actually See It”",
-    "text": "From “Stats Is Everywhere” to “Let’s Actually See It”\nLast time: statistics isn’t just math — it’s how you make sense of decisions you already make every day.\n\n\nA number by itself is hard to feel — “the average score was 78” doesn’t tell you much on its own\nA well-made graph turns a pile of numbers into something you can understand at a glance\nThis lecture is about choosing and building the right picture for your data"
+    "text": "From “Stats Is Everywhere” to “Let’s Actually See It”\nLast time: statistics isn’t just math — it’s how you make sense of decisions you already make every day.\n\nsmartphone\n\n\n\n\nA number by itself is hard to feel — “the average score was 78” doesn’t tell you much on its own\n\n\n\nThe average was 78. You scored a 67.\n\nToday: choosing and building the right picture for your data."
   },
   {
     "objectID": "lec2.html#why-visualize-data",
     "href": "lec2.html#why-visualize-data",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Why Visualize Data?",
-    "text": "Why Visualize Data?\nConsider these two ways of showing the same information:\n\nOption A: “The average exam score was 78 (SD = 8).”\n\n\nOption B: A histogram showing the actual shape of the scores — most students clustered in the 70s, with a small group who struggled and a small group who excelled.\n\n\nBoth are “true.” Only one of them lets you see the students who didn’t fit the average."
+    "text": "Why Visualize Data?\nConsider these two ways of showing the same information:\n\n\nOption A\n\n78\n\n\n(SD = 8)\n\n\n\nOption B\n\n\n\n\n\n\n\n\n\n\n\n\nBoth are “true.” Only one of them lets you see the students who didn’t fit the average."
   },
   {
     "objectID": "lec2.html#same-numbers-very-different-pictures",
     "href": "lec2.html#same-numbers-very-different-pictures",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Same Numbers, Very Different Pictures",
     "text": "Same Numbers, Very Different Pictures\nAnscombe’s Quartet\nThese four datasets have (essentially) identical descriptive statistics:\n\n\n\n\n\n\n\n\nAnscombe's Quartet: Identical Summary Statistics\n\n\n\nMean (x)\nMean (y)\nSD (x)\nSD (y)\nCorrelation\n\n\n\n\nI\n9\n7.5\n3.32\n2.03\n0.82\n\n\nII\n9\n7.5\n3.32\n2.03\n0.82\n\n\nIII\n9\n7.5\n3.32\n2.03\n0.82\n\n\nIV\n9\n7.5\n3.32\n2.03\n0.82\n\n\n\nAnscombe, F. J. (1973). Graphs in statistical analysis."
   },
   {
     "objectID": "lec2.html#same-numbers-very-different-pictures-1",
     "href": "lec2.html#same-numbers-very-different-pictures-1",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Same Numbers, Very Different Pictures",
-    "text": "Same Numbers, Very Different Pictures\nBut Look What They Actually Look Like"
+    "text": "Same Numbers, Very Different Pictures\nBut Look What They Actually Look Like\n\nSet ISet IISet IIISet IV\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSame mean, SD, and correlation in every tab — click through them. Four very different pictures."
   },
   {
     "objectID": "lec2.html#the-takeaway",
     "href": "lec2.html#the-takeaway",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "The Takeaway",
     "text": "The Takeaway\n\n\nSummary statistics (mean, SD, correlation) can hide the actual shape of your data\nOutliers, clusters, and non-linear patterns are often invisible in a table of numbers\nAlways look at the picture — it’s not optional, it’s part of the analysis"
   },
   {
     "objectID": "lec2.html#choosing-the-right-chart",
     "href": "lec2.html#choosing-the-right-chart",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Choosing the Right Chart",
-    "text": "Choosing the Right Chart\n\n\n\n\n\n\n\n\nA Quick Decision Guide\n\n\nWhat are you showing?\nBest chart\n\n\n\n\nOne categorical variable (counts per group)\nBar chart\n\n\nOne continuous variable (its shape/spread)\nHistogram or density plot\n\n\nTwo continuous variables (a relationship)\nScatterplot\n\n\nA continuous variable, compared across groups\nBox plot\n\n\nChange over time\nLine chart"
+    "text": "Choosing the Right Chart\n\n\n\n\n\n\n\n\nA Quick Decision Guide\n\n\n\nWhat are you showing?\nBest chart\n\n\n\n\nbar_chart\nOne categorical variable (counts per group)\nBar chart\n\n\ninsert_chart\nOne continuous variable (its shape/spread)\nHistogram or density plot\n\n\nscatter_plot\nTwo continuous variables (a relationship)\nScatterplot\n\n\nequalizer\nA continuous variable, compared across groups\nBox plot\n\n\nshow_chart\nChange over time\nLine chart"
   },
   {
     "objectID": "lec2.html#the-ggplot2-recipe",
     "href": "lec2.html#the-ggplot2-recipe",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "The ggplot2 Recipe",
-    "text": "The ggplot2 Recipe\nEvery ggplot2 chart follows the same three-ingredient recipe — we’ll come back to this constantly this semester:\n\n\nData — which tibble/data frame are you plotting?\nAesthetics (aes()) — which columns map to x, y, color, etc.?\nGeometry (geom_*()) — what shape represents your data (bars, points, lines…)?\n\n\n\n\nCode\nggplot(data, aes(x = ..., y = ...)) +  # 1. data + 2. aesthetics (which columns map to x/y)\n  geom_something()                      # 3. geometry (the shape that represents your data)\n\n\nWe’ll build up from this simple recipe all semester — no need to memorize every option today."
+    "text": "The ggplot2 Recipe\n\nEvery ggplot2 chart follows the same three-ingredient recipe — we’ll come back to this constantly this semester. It’s ggplot2’s implementation of Wilkinson’s “Grammar of Graphics”: any chart can be built from the same small set of parts.\n\n\ntable_chart\nData\nWhich tibble/data frame are you plotting?\n\n\ntune\nAesthetics\naes() — which columns map to x, y, color, etc.?\n\n\nbar_chart\nGeometry\ngeom_*() — what shape represents your data?\n\n\n\n\nCode\n1ggplot(data, aes(x = ..., y = ...)) +\n2  geom_something()\n\n\n\n1\n\nData + aesthetics — the data frame, and which columns map to x/y/color/etc.\n\n2\n\nGeometry — the shape (bars, points, lines…) that represents your mapped data.\n\n\n\n\nWe’ll build up from this simple recipe all semester — no need to memorize every option today."
   },
   {
     "objectID": "lec2.html#setting-up-our-example-data",
@@ -1143,51 +1143,51 @@
   {
     "objectID": "lec2.html#bar-charts",
     "href": "lec2.html#bar-charts",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Bar Charts",
     "text": "Bar Charts\nOne Categorical Variable"
   },
   {
     "objectID": "lec2.html#histograms",
     "href": "lec2.html#histograms",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Histograms",
     "text": "Histograms\nOne Continuous Variable"
   },
   {
     "objectID": "lec2.html#scatterplots",
     "href": "lec2.html#scatterplots",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Scatterplots",
     "text": "Scatterplots\nTwo Continuous Variables\n\n\nWe’ll come back to this exact question — “how strongly are two variables related?” — when we get to correlation."
   },
   {
     "objectID": "lec2.html#box-plots",
     "href": "lec2.html#box-plots",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Box Plots",
     "text": "Box Plots\nComparing a Continuous Variable Across Groups\n\n\nThis is also a preview — “is the difference between these two groups big enough to matter?” is exactly what a later lecture’s t-test answers."
   },
   {
     "objectID": "lec2.html#how-graphs-can-mislead",
     "href": "lec2.html#how-graphs-can-mislead",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "How Graphs Can Mislead",
     "text": "How Graphs Can Mislead\nSame Data, Different Story\n\n\nSame exact numbers. The right panel makes a small difference look dramatic — always check where the y-axis starts."
   },
   {
     "objectID": "lec2.html#building-a-good-graph",
     "href": "lec2.html#building-a-good-graph",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Building a Good Graph",
     "text": "Building a Good Graph\n\n\nTitle — what am I looking at?\nLabeled axes — with units, if relevant\nAn honest scale — start bar charts at 0; don’t cherry-pick a range to exaggerate a difference\nOnly the elements that add information — no 3D effects, no unnecessary gridlines, no clutter"
   },
   {
     "objectID": "lec2.html#recap-what-you-should-walk-away-with",
     "href": "lec2.html#recap-what-you-should-walk-away-with",
-    "title": "Data Visualization",
+    "title": "PSY 348: Statistics for Psychology",
     "section": "Recap: What You Should Walk Away With",
-    "text": "Recap: What You Should Walk Away With\n\n\nA summary statistic can hide the actual shape of your data — that’s why we plot it\nYou can match a research question to the right chart: one variable vs. two, categorical vs. continuous, one group vs. several\nYou’ve seen the basic ggplot2 recipe: data + aesthetics + geometry\nYou know how to spot (and avoid) a few common ways graphs mislead\n\n\nNext time: back to describing that shape with numbers — measures of central tendency."
+    "text": "Recap: What You Should Walk Away With\n\n\nA summary statistic can hide the actual shape of your data — that’s why we plot it\nYou can match a research question to the right chart: one variable vs. two, categorical vs. continuous, one group vs. several\nYou’ve seen the basic ggplot2 recipe: data + aesthetics + geometry — the “Grammar of Graphics”\nYou know how to spot (and avoid) a few common ways graphs mislead\n\n\nNext time: back to describing that shape with numbers — measures of central tendency."
   },
   {
     "objectID": "lec3.html#studying-psychology",
@@ -4996,5 +4996,33 @@
     "title": "Exam 1 Review",
     "section": "10. Normal Distribution & Areas",
     "text": "10. Normal Distribution & Areas\nProbability Beyond a Given Z-Score\n\nThe distribution of scores on a math test is approximately normal with mean \\(\\mu = 100\\) and standard deviation \\(\\sigma = 15\\).\n\nQuestion: What is the score of students who scored above \\(z = 1.2\\)?\n\n\n\n\nSolution\n\n\n\\(z = \\frac{x-\\bar{x}}{s}\\\\ x = z\\times\\bar{x} + 100\\\\ 1.2\\times15+100 = 118\\)\n\n\n\n\n\nCode Solution\n\n\n1.2*15 + 100\n\n[1] 118"
+  },
+  {
+    "objectID": "lec2.html#example-student-data",
+    "href": "lec2.html#example-student-data",
+    "title": "PSY 348: Statistics for Psychology",
+    "section": "Example Student Data",
+    "text": "Example Student Data\nOne Dataset, Several Questions\n\n\nBuild a fake ‘students’ dataset we’ll reuse all lecture\nset.seed(2)  # makes the \"random\" data reproducible every time this renders\nstudents &lt;- tibble(\n  student = 1:60,                                             # just an ID number\n  study_time = sample(c(\"Morning\", \"Afternoon\", \"Evening\", \"Night\"), 60,\n                       replace = TRUE, prob = c(0.15, 0.30, 0.35, 0.20)),   # categorical variable\n  study_hours = pmax(round(rnorm(60, mean = 6, sd = 2), 1), 0.5),          # continuous variable, floor at 0.5\n  study_method = rep(c(\"Flashcards\", \"Practice Tests\"), each = 30),       # two even groups\n  exam_score = pmin(round(55 + 2.5 * study_hours +                        # score rises with study hours...\n                     ifelse(study_method == \"Practice Tests\", 4, 0) +     # ...gets a small bump from practice tests...\n                     rnorm(60, 0, 5)), 100)                               # ...plus random noise, capped at 100\n)\n\nreadr::write_csv(students, \"students.csv\")  # so it can be linked/downloaded below\n\nstudents |&gt;\n  slice_head(n = 5) |&gt;       # just preview the first 5 rows\n  gt() |&gt;\n  tab_header(title = \"Example Student Data\") |&gt;\n  opt_row_striping() |&gt;\n  tab_options(table.font.size = 22, table.width = pct(80)) |&gt;\n  tab_style(style = cell_text(weight = \"bold\"), locations = cells_column_labels()) |&gt;\n  cols_align(align = \"center\", columns = everything())\n\n\n\n\n\n\n\n\nExample Student Data\n\n\nstudent\nstudy_time\nstudy_hours\nstudy_method\nexam_score\n\n\n\n\n1\nEvening\n7.5\nFlashcards\n82\n\n\n2\nNight\n6.6\nFlashcards\n80\n\n\n3\nAfternoon\n8.2\nFlashcards\n70\n\n\n4\nEvening\n5.4\nFlashcards\n62\n\n\n5\nMorning\n4.4\nFlashcards\n58\n\n\n\n\n\n\n\n\n⬇ Download students.csv"
+  },
+  {
+    "objectID": "lec2.html#guess-this-chart",
+    "href": "lec2.html#guess-this-chart",
+    "title": "PSY 348: Statistics for Psychology",
+    "section": "Guess This Chart",
+    "text": "Guess This Chart\n\nFill in the blank\n\n\n\nWhat’s on the x-axis? The y-axis? What relationship is this showing — and what chart type is it?"
+  },
+  {
+    "objectID": "lec2.html#guess-this-chart-too",
+    "href": "lec2.html#guess-this-chart-too",
+    "title": "PSY 348: Statistics for Psychology",
+    "section": "Guess This Chart, Too",
+    "text": "Guess This Chart, Too\n\nFill in the blank\n\n\n\nNo axis labels this time either — what are the two groups probably being compared, and what does the shape of each box tell you?"
+  },
+  {
+    "objectID": "lec2.html#custom-title",
+    "href": "lec2.html#custom-title",
+    "title": "PSY 348: Statistics for Psychology",
+    "section": "",
+    "text": "bar_chart scatter_plot show_chart pie_chart table_chart insert_chart\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\nPSY 348: Lecture 2\nDave Brocker  brockeda@farmingdale.edu  Farmingdale State College"
   }
 ]

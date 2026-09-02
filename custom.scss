@@ -455,7 +455,7 @@ details[open] summary {
   }
 
   p {
-    font-size: 0.68em;
+    font-size: 0.38em;
     line-height: 1.25;
     color: $body-color;
     font-weight: 600;
@@ -465,7 +465,7 @@ details[open] summary {
 
 .bio-badge-num {
   p:first-of-type {
-    font-size: 2.2em;
+    font-size: 1.2em;
     font-weight: 700;
     color: $accent;
     line-height: 1;
@@ -590,4 +590,211 @@ details[open] summary {
     letter-spacing: 0.03em;
     margin: 0;
   }
+}
+
+// ---------------------------------------------------------------------
+// Lecture 2 (Data Visualization) additions -- 9/2/26
+// ---------------------------------------------------------------------
+
+// Title-slide background: faint chart-type glyphs drifting slowly behind
+// the title text, plus a handful of small "ghost node" dots doing the
+// same. Kept low-opacity/slow so it reads as "alive" rather than busy --
+// this deck's aesthetic is still minimal, this is meant as a quiet nod to
+// motion/interactivity, not a light show.
+// Applies to lec2.qmd's manual #custom-title slide (see lab1.qmd's
+// #custom-title pattern) -- NOT the YAML auto-generated #title-slide used
+// by other decks, which keeps its own separate rules above.
+#custom-title {
+  position: relative;
+  overflow: hidden;
+}
+
+.title-bg-icons {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  .material-icons {
+    position: absolute;
+    color: $accent2;
+    opacity: 0.22;
+  }
+}
+
+// Six icons, six independent positions/sizes/drift animations so the
+// motion doesn't read as one repeating loop.
+.title-bg-icon-1 { top: 10%;  left: 8%;   font-size: 4.5em; animation: drift-a 22s ease-in-out infinite; }
+.title-bg-icon-2 { top: 68%;  left: 12%;  font-size: 3.2em; animation: drift-b 18s ease-in-out infinite; }
+.title-bg-icon-3 { top: 18%;  left: 82%;  font-size: 4em;   animation: drift-c 26s ease-in-out infinite; }
+.title-bg-icon-4 { top: 72%;  left: 80%;  font-size: 3.6em; animation: drift-a 20s ease-in-out infinite reverse; }
+.title-bg-icon-5 { top: 42%;  left: 4%;   font-size: 2.6em; animation: drift-b 24s ease-in-out infinite reverse; }
+.title-bg-icon-6 { top: 46%;  left: 90%;  font-size: 2.8em; animation: drift-c 19s ease-in-out infinite reverse; }
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(18px, -14px) rotate(6deg); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(-16px, 12px) rotate(-5deg); }
+}
+
+@keyframes drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(10px, 18px) scale(1.08); }
+}
+
+.ghost-nodes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ghost-node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $accent3;
+  opacity: 0.35;
+  animation: ghost-float 14s ease-in-out infinite;
+}
+
+.ghost-node:nth-child(1) { top: 22%; left: 30%; animation-duration: 15s; }
+.ghost-node:nth-child(2) { top: 60%; left: 22%; animation-duration: 19s; animation-delay: -3s; }
+.ghost-node:nth-child(3) { top: 30%; left: 65%; animation-duration: 17s; animation-delay: -6s; }
+.ghost-node:nth-child(4) { top: 78%; left: 55%; animation-duration: 21s; animation-delay: -9s; }
+.ghost-node:nth-child(5) { top: 50%; left: 48%; width: 6px; height: 6px; animation-duration: 13s; animation-delay: -2s; }
+
+@keyframes ghost-float {
+  0%, 100% { transform: translate(0, 0); opacity: 0.2; }
+  50%      { transform: translate(24px, -20px); opacity: 0.45; }
+}
+
+#custom-title .cust-title, #custom-title .cust-sub, #custom-title .cust-author, #custom-title .cust-pic {
+  position: relative;
+  z-index: 1;
+}
+
+// Dashed placeholder box for "find a real image later" spots -- a plain
+// visual stand-in so the slide still communicates layout/intent without
+// blocking on asset-hunting mid-build.
+.img-placeholder {
+  border: 2px dashed $accent2;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.5);
+  color: $text-muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px auto;
+  padding: 30px;
+  width: 70%;
+  min-height: 220px;
+  text-align: center;
+
+  .material-icons {
+    font-size: 2.6em;
+    color: $accent2;
+  }
+
+  p {
+    font-size: 0.75em;
+    margin: 0;
+    font-style: italic;
+  }
+
+  // Once a real photo replaces the icon+caption placeholder, keep it from
+  // blowing out slide height -- a full-res stock photo dropped in
+  // unconstrained is exactly the kind of thing that pushes everything
+  // below it off the bottom of the slide.
+  img {
+    max-width: 100%;
+    max-height: 340px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+}
+
+// Big bold stat card -- used for "a number by itself" (Option A) contrasts.
+.stat-card {
+  background: #fff;
+  border: 3px solid $accent2;
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+
+  .stat-num {
+    display: block;
+    font-size: 2.4em;
+    font-weight: 700;
+    color: $accent;
+    line-height: 1.1;
+  }
+
+  .stat-sub {
+    display: block;
+    font-size: 0.9em;
+    color: $text-muted;
+    margin-top: 6px;
+  }
+}
+
+.side-by-cols {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  margin-top: 20px;
+
+  > div {
+    flex: 1;
+  }
+}
+
+// Small personalized callout ("...and you scored a 67") -- a lighter,
+// single-line variant of .callout-important for a quick aside.
+.you-callout {
+  display: inline-block;
+  margin-top: 14px;
+  background: $accent4;
+  border: 2px solid $accent2;
+  border-radius: 999px;
+  padding: 6px 20px;
+  font-weight: 600;
+  color: $accent;
+}
+
+// "Fill in the blank" slides -- axis/title-stripped plots for in-class
+// guessing. A small tag makes it clear (to Dave, presenting) which slide
+// this is without giving away the answer to students looking at the
+// projected screen.
+// Small corner badge image (e.g. the ggplot2 hex sticker on the recipe
+// slide) -- sits out of the way of the text instead of competing with it.
+.corner-hex {
+  position: absolute;
+  top: 18px;
+  right: 30px;
+  width: 100px;
+  z-index: 2;
+}
+
+.blank-tag {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  background: $accent;
+  color: #fff;
+  font-size: 0.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 14px;
+  border-radius: 999px;
+  opacity: 0.85;
 }
