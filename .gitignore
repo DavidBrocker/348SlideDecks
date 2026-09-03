@@ -4,3 +4,17 @@
 .Rhistory
 .RData
 **/*.quarto_ipynb
+
+# iCloud/multi-device sync-conflict duplicates (macOS appends " 2", " 3", etc.
+# to a file when it sees simultaneous edits from two Macs). These should
+# never be tracked -- if one of these shows up, it means two devices edited
+# the same file at once and the real conflict needs resolving by hand, not
+# committing both copies. See claude/course_site_design_philosophy.md in the
+# Teaching project for the fuller multi-device-workflow notes.
+* [0-9].*
+* [0-9]
+
+# Stray root-level site_libs/ from a render that ran outside the project
+# context -- the real build output's site_libs/ lives under docs/ (this
+# project's output-dir) and stays tracked.
+/site_libs/
