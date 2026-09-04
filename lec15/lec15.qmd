@@ -25,37 +25,37 @@ revealjs-plugins:
 
 ## Types of Analysis
 
--   **Univariate**: One variable, like the mean
+- **Univariate**: One variable, like the mean
 
--   **Bivariate**: Two variables, like correlation
+- **Bivariate**: Two variables, like correlation
 
--   **Multivariate**: More than 2 variables
+- **Multivariate**: More than 2 variables
 
 ## Regression
 
--   Regression is the **multivariate** version of correlation.
+- Regression is the **multivariate** version of correlation.
 
--   Correlation is the **bivariate** version of regression.
+- Correlation is the **bivariate** version of regression.
 
--   We're doing the same thing in regression as we do in correlation, **BUT** there are more than 2 variables.
+- We're doing the same thing in regression as we do in correlation, **BUT** there are more than 2 variables.
 
 ## Regression terminology
 
 In regression we will choose one variable to predict.
 
--   We call this $Y$.
+- We call this $Y$.
 
--   $Y$ is the outcome variable.
+- $Y$ is the outcome variable.
 
--   $\hat{Y}$ is the predicted variable.
+- $\hat{Y}$ is the predicted variable.
 
 ## Regression terminology
 
 In regression we will choose two or more variables we have reason to believe predict y.
 
--   We call these $A$, $B$, etc.
+- We call these $A$, $B$, etc.
 
--   $A$ is the predictor variable.
+- $A$ is the predictor variable.
 
 ## Regression terminology
 
@@ -204,15 +204,15 @@ data |>
 
 ### Equation Component Meanings
 
--   $Y$ = the actual, observed `y` value for a participant
+- $Y$ = the actual, observed `y` value for a participant
 
--   $\hat{Y}$ = the model's predicted `y` value for a participant
+- $\hat{Y}$ = the model's predicted `y` value for a participant
 
--   $\beta_0$ = the intercept: the average `y` value
+- $\beta_0$ = the intercept: the average `y` value
 
--   $A$ = the A value for a participant
+- $A$ = the A value for a participant
 
--   $\beta_1$ = a weighted value that is multiplied by `A` and added to $\beta_0$ to estimate `y`.
+- $\beta_1$ = a weighted value that is multiplied by `A` and added to $\beta_0$ to estimate `y`.
 
 ## Regression Equation:
 
@@ -224,19 +224,19 @@ $\large{\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)}...$
 
 ### Equation Component Meanings
 
--   $Y$ = the actual, observed `y` value for a participant
+- $Y$ = the actual, observed `y` value for a participant
 
--   $\hat{Y}$ = the model's predicted `y` value for a participant
+- $\hat{Y}$ = the model's predicted `y` value for a participant
 
--   $\beta_0$ = the intercept: the average `y` value
+- $\beta_0$ = the intercept: the average `y` value
 
--   $A$ = the $A$ value for a participant
+- $A$ = the $A$ value for a participant
 
--   $\beta_1$ = a weighted value that is multiplied by x and added to $\beta_0$ to estimate y.
+- $\beta_1$ = a weighted value that is multiplied by x and added to $\beta_0$ to estimate y.
 
--   $B$ = the $B$ value for a participant
+- $B$ = the $B$ value for a participant
 
--   $\beta_2$ = a weighted value that is multiplied by $B$
+- $\beta_2$ = a weighted value that is multiplied by $B$
 
 ## Regression Equation:
 
@@ -265,51 +265,51 @@ mod1 |> tbl_regression()
 
 ## Interpreting coefficients
 
--   Beta coefficient
+- Beta coefficient
 
--   t-value
+- t-value
 
--   p-value
-
-## Interpreting coefficients
-
-::: nonincremental
--   Beta coefficient
-
--   t-value
-
--   **p-value: is this a significant predictor of y?**
-:::
+- p-value
 
 ## Interpreting coefficients
 
 ::: nonincremental
--   **Beta coefficient: which predictor of y has the more predictive power?**
+- Beta coefficient
 
--   t-value
+- t-value
 
--   p-value
+- **p-value: is this a significant predictor of y?**
+:::
+
+## Interpreting coefficients
+
+::: nonincremental
+- **Beta coefficient: which predictor of y has the more predictive power?**
+
+- t-value
+
+- p-value
 :::
 
 ## $R^2$: Coefficient of Determination
 
 ### How much can we account for?
 
--   $R^2$ is the correlation coefficient (`r`) squared.
+- $R^2$ is the correlation coefficient (`r`) squared.
 
--   $R^2$ is always positive
+- $R^2$ is always positive
 
--   In correlation, the amount of `y` accounted for by `x`
+- In correlation, the amount of `y` accounted for by `x`
 
 ## $R^2$: Coefficient of Determination
 
 ### How much can we account for?
 
--   In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
+- In Regression, $R^2$ refers to the amount of `y` accounted for by all of the `x's`.
 
--   How much of `y` did we account for?
+- How much of `y` did we account for?
 
--   Did we account for a **significant** amount of the variance in `y`?
+- Did we account for a **significant** amount of the variance in `y`?
 
 ## $R^2$: Coefficient of Determination
 
@@ -318,37 +318,37 @@ mod1 |> tbl_regression()
 ## Interpreting R Squared
 
 ::: nonincremental
--   R Squared
+- R Squared
 
--   Adjusted R Squared
+- Adjusted R Squared
 
--   F-value
+- F-value
 
--   **p-value: is this a significant predictor of `y`?**
+- **p-value: is this a significant predictor of `y`?**
 :::
 
 ## Interpreting R Squared
 
 ::: nonincremental
--   **R Squared: The percentage of `y` accounted for by the predictors**
+- **R Squared: The percentage of `y` accounted for by the predictors**
 
--   Adjusted R Squared
+- Adjusted R Squared
 
--   F-value
+- F-value
 
--   p-value
+- p-value
 :::
 
 ## Interpreting R Squared
 
 ::: nonincremental
--   R Squared
+- R Squared
 
--   **Adjusted R Squared: The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
+- **Adjusted R Squared: The percentage of `y` accounted for by the predictors, controlling for using too many predictors**
 
--   F-value
+- F-value
 
--   p-value
+- p-value
 :::
 
 # Linear Regression Example
@@ -361,9 +361,9 @@ mod1 |> tbl_regression()
 
 What are some predictors of social media use?
 
--   Sense of belonging
+- Sense of belonging
 
--   Age
+- Age
 
 ## Regression Equation
 
@@ -397,7 +397,7 @@ $\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B)$
 
 ## Linear Regression
 
--   This form of regression is called linear regression.
+- This form of regression is called linear regression.
 
 ## Example
 
@@ -479,9 +479,9 @@ mod2 |>
 
 First, report adjusted $R^2$ and it's corresponding p:
 
--   Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p\* \< 0.001.
+- Our model predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p\* \< 0.001.
 
--   Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p \< 0.001.
+- Age, sense of belonging, predicted a significant amount of variance in social media use, *adjusted* $R^2$ = 0.86, p \< 0.001.
 
 ## Example
 
@@ -491,11 +491,11 @@ sm_mod
 
 Then report individual betas and their p's:
 
--   Sense of belonging (*beta = 0.29, p = 0.001*) significantly predicted social media use.
+- Sense of belonging (*beta = 0.29, p = 0.001*) significantly predicted social media use.
 
--   Age significantly predicted likelihood of social media use (beta = -.10, p \<.001)
+- Age significantly predicted likelihood of social media use (beta = -.10, p \<.001)
 
--   It's common to report betas and p's in text as well as in a table.
+- It's common to report betas and p's in text as well as in a table.
 
 # Categorical Variables in Regression
 
@@ -511,10 +511,10 @@ Then report individual betas and their p's:
 
 In this example, we explore how TV watching habits (duration and genre), caffeine intake, and prior sleep predict energy levels. Using a multiple regression model, we’ll examine:
 
--   Duration of TV Watching (Continuous) – Does watching more TV affect energy?
--   Cups of Coffee (Continuous) – Does caffeine actually help?
--   Prior Sleep (Continuous) – Does more sleep always mean more energy?
--   TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
+- Duration of TV Watching (Continuous) – Does watching more TV affect energy?
+- Cups of Coffee (Continuous) – Does caffeine actually help?
+- Prior Sleep (Continuous) – Does more sleep always mean more energy?
+- TV Genre (Categorical: Drama, Comedy, Documentary) – Can what you watch impact how you feel?
 
 ## Categorical variables
 
@@ -575,8 +575,9 @@ tbl_regression(model_3,intercept = TRUE) |>
 
 ```{r}
 library(janitor)
+library(gtsummary)
 
-hm <- read.csv("Data_Files/Excel Files/csv files/Horror Movie Data.csv")
+hm <- read.csv("../Data_Files/Excel Files/csv files/Horror Movie Data.csv")
 
 hm_cln <- 
   hm |> 
