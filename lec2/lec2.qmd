@@ -29,12 +29,6 @@ revealjs-plugins:
 
 ##  {#custom-title data-menu-title="Data Visualization"}
 
-<!-- Manual title slide (like lab1.qmd's #custom-title pattern) instead of
-     the YAML-generated one -- ANY content before the first ## heading,
-     even an invisible HTML comment, renders as its own separate blank
-     slide in this Quarto/revealjs setup. Keep everything, including notes
-     like this one, after the heading line. -->
-
 ```{r setup}
 #| include: false
 library(dplyr)
@@ -55,37 +49,39 @@ viz_theme <- function(base_size = 18) {
 }
 ```
 
-
-::: {.title-bg-icons}
-<span class="material-icons title-bg-icon-1">bar_chart</span>
-<span class="material-icons title-bg-icon-2">scatter_plot</span>
-<span class="material-icons title-bg-icon-3">show_chart</span>
-<span class="material-icons title-bg-icon-4">pie_chart</span>
-<span class="material-icons title-bg-icon-5">table_chart</span>
-<span class="material-icons title-bg-icon-6">insert_chart</span>
+::: title-bg-icons
+[bar_chart]{.material-icons .title-bg-icon-1} [scatter_plot]{.material-icons .title-bg-icon-2} [show_chart]{.material-icons .title-bg-icon-3} [pie_chart]{.material-icons .title-bg-icon-4} [table_chart]{.material-icons .title-bg-icon-5} [insert_chart]{.material-icons .title-bg-icon-6}
 :::
 
-::: {.ghost-nodes}
-<div class="ghost-node"></div>
-<div class="ghost-node"></div>
-<div class="ghost-node"></div>
-<div class="ghost-node"></div>
-<div class="ghost-node"></div>
+:::::::: ghost-nodes
+::: ghost-node
 :::
+
+::: ghost-node
+:::
+
+::: ghost-node
+:::
+
+::: ghost-node
+:::
+
+::: ghost-node
+:::
+::::::::
 
 [Data Visualization]{.cust-title}
 
 [PSY 348: Lecture 2]{.cust-sub}
 
-[Dave Brocker <br> brockeda@farmingdale.edu <br> Farmingdale State College]{.cust-author}
-
+[Dave Brocker <br> brockeda\@farmingdale.edu <br> Farmingdale State College]{.cust-author}
 
 ## From "Stats Is Everywhere" to "Let's Actually See It"
 
 Last time: statistics isn't just math — it's how you make sense of decisions you already make every day.
 
-::: {.img-placeholder}
-<span class="material-icons">smartphone</span>
+::: img-placeholder
+[smartphone]{.material-icons}
 
 ![](https://media.istockphoto.com/id/2174699310/photo/handsome-man-shopping-for-a-new-smartphone-in-an-electronics-store.jpg?s=2048x2048&w=is&k=20&c=so9jIM80bRyuCw3y8NOrPFzG1vC_feKJAH6S7_Ecn1M=)
 :::
@@ -94,7 +90,7 @@ Last time: statistics isn't just math — it's how you make sense of decisions y
 - A number by itself is hard to *feel* — "the average score was 78" doesn't tell you much on its own
 :::
 
-::: {.you-callout}
+::: you-callout
 The average was 78. You scored a 67.
 :::
 
@@ -104,20 +100,20 @@ Today: **choosing and building the right picture** for your data.
 
 Consider these two ways of showing the same information:
 
-::: {.side-by-cols}
-::: {.stat-card}
+::::::: side-by-cols
+::::: stat-card
 **Option A**
 
-::: {.stat-num}
+::: stat-num
 78
 :::
 
-::: {.stat-sub}
+::: stat-sub
 (SD = 8)
 :::
-:::
+:::::
 
-::: {.card}
+::: card
 **Option B**
 
 ```{r}
@@ -134,7 +130,7 @@ ggplot(demo_scores, aes(x = score)) +
   theme(axis.title = element_blank(), plot.title = element_blank())
 ```
 :::
-:::
+:::::::
 
 ::: fragment
 Both are "true." Only one of them lets you *see* the students who didn't fit the average.
@@ -194,7 +190,7 @@ anscombe_plot <- function(which_set) {
 }
 ```
 
-::: {.panel-tabset}
+::: panel-tabset
 ### Set I
 
 ```{r}
@@ -286,35 +282,35 @@ chart_guide |>
 
 ## The `ggplot2` Recipe
 
-<img src="images/ggplot2_hex.png" class="corner-hex" alt="ggplot2 hex sticker">
+<img src="images/ggplot2_hex.png" alt="ggplot2 hex sticker" class="corner-hex"/>
 
 Every `ggplot2` chart follows the same three-ingredient recipe — we'll come back to this constantly this semester. It's `ggplot2`'s implementation of Wilkinson's **"Grammar of Graphics"**: any chart can be built from the same small set of parts.
 
-::: {.badge-row}
-::: {.content-badge}
-<span class="material-icons">table_chart</span>
+:::::: badge-row
+::: content-badge
+[table_chart]{.material-icons}
 
 #### Data
 
 Which tibble/data frame are you plotting?
 :::
 
-::: {.content-badge}
-<span class="material-icons">tune</span>
+::: content-badge
+[tune]{.material-icons}
 
 #### Aesthetics
 
 `aes()` — which columns map to x, y, color, etc.?
 :::
 
-::: {.content-badge}
-<span class="material-icons">bar_chart</span>
+::: content-badge
+[bar_chart]{.material-icons}
 
 #### Geometry
 
 `geom_*()` — what *shape* represents your data?
 :::
-:::
+::::::
 
 ```{r}
 #| eval: false
@@ -322,8 +318,9 @@ Which tibble/data frame are you plotting?
 ggplot(data, aes(x = ..., y = ...)) +  # <1>
   geom_something()                      # <2>
 ```
-1. **Data + aesthetics** — the data frame, and which columns map to x/y/color/etc.
-2. **Geometry** — the shape (bars, points, lines...) that represents your mapped data.
+
+1.  **Data + aesthetics** — the data frame, and which columns map to x/y/color/etc.
+2.  **Geometry** — the shape (bars, points, lines...) that represents your mapped data.
 
 We'll build up from this simple recipe all semester — no need to memorize every option today.
 
@@ -503,7 +500,7 @@ Same exact numbers. The right panel makes a small difference look dramatic — a
 
 ## Guess This Chart {.smaller}
 
-::: {.blank-tag}
+::: blank-tag
 Fill in the blank
 :::
 
@@ -524,7 +521,7 @@ What's on the x-axis? The y-axis? What relationship is this showing — and what
 
 ## Guess This Chart, Too {.smaller}
 
-::: {.blank-tag}
+::: blank-tag
 Fill in the blank
 :::
 

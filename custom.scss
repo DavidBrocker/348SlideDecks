@@ -798,3 +798,18 @@ details[open] summary {
   border-radius: 999px;
   opacity: 0.85;
 }
+
+// Fix: reveal.js/Quarto's built-in CSS never sets an explicit `top` for
+// `.slides > section.present` on this site's deck config (custom
+// width/height + a manual `##  {#custom-title}` first slide instead of
+// Quarto's auto-generated #title-slide -- see PSY348 folder reorg notes,
+// Sept 2026). Without it, the browser resolves `top:auto` on the
+// position:absolute present-slide as its normal-flow "static position",
+// which lands it directly *below* the previous slide's canvas instead of
+// overlapping it at the top -- the "heading pushed to the bottom / content
+// cut off" bug. Harmless on decks that already position correctly (this
+// is a no-op there); fixes every deck using the manual custom-title
+// pattern (lec2, lab1, and any future one built the same way).
+.reveal .slides > section.present {
+  top: 0 !important;
+}
