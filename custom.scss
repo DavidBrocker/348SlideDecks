@@ -829,3 +829,111 @@ details[open] summary {
 .reveal .slides > section.present {
   top: 0 !important;
 }
+
+// ---------------------------------------------------------------------
+// Term + Definition component
+//
+// Markup is pandoc's native definition-list syntax -- already the
+// convention on this site (see lec1.qmd's "Statistics / Describing /
+// Analyzing..." slide) -- with the term wrapped in a .term-pill span.
+// That compiles to plain <dl><dt><span class="term-pill">Term</span>
+// </dt><dd>Definition text</dd></dl>: no custom div bookkeeping, and
+// trivially extractable later for the site-wide glossary (grep every
+// .term-pill span + its dd sibling, across every deck, no per-slide
+// parsing needed).
+//
+// One pivotal term on a slide -- the pill sits half-overlapping a card,
+// definition is the card body underneath:
+//
+//   ::: hero-def
+//   [Operationalization]{.term-pill}
+//   : The process of defining the measurement of a phenomenon that is
+//     not directly measurable...
+//   :::
+//
+// Several terms on one slide -- lighter weight (no card chrome, a
+// hero-def per term would be visually loud repeated 5-7 times), each
+// pair in its own .fragment so they reveal one at a time rather than
+// landing on screen all at once:
+//
+//   ::: term-list
+//   ::: fragment
+//   [Term One]{.term-pill}
+//   : Definition one.
+//   :::
+//   ::: fragment
+//   [Term Two]{.term-pill}
+//   : Definition two.
+//   :::
+//   :::
+//
+// Neither dt (the term) nor dd (the definition) is a bare <p> in
+// pandoc's def-list output, so neither fight the .reveal .slide p
+// { color: $body-color } rule the way .blank-tag/.you-callout did --
+// dd gets that dark body color by default, which is exactly right for
+// definition text; .term-pill's own color is never contested.
+.term-pill {
+  display: inline-block;
+  background: $accent;
+  color: #fff;
+  font-weight: 700;
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-size: 0.85em;
+  letter-spacing: 0.02em;
+}
+
+.hero-def {
+  position: relative;
+  background: #fff;
+  border: 2px solid $accent3;
+  border-radius: 20px;
+  padding: 40px 36px 32px;
+  margin: 28px auto 0; // top margin leaves room for the pill to poke above the card edge
+  max-width: 900px;
+
+  dl {
+    margin: 0;
+  }
+
+  dt {
+    position: absolute;
+    top: -22px;
+    left: 32px;
+
+    .term-pill {
+      font-size: 1.1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.15em;
+    line-height: 1.6;
+  }
+}
+
+.term-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  dl {
+    margin: 0;
+  }
+
+  dt {
+    margin-bottom: 6px;
+
+    .term-pill {
+      padding: 4px 16px;
+      font-size: 0.75em;
+    }
+  }
+
+  dd {
+    margin: 0;
+    padding-left: 4px;
+  }
+}
