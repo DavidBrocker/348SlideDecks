@@ -30,6 +30,15 @@ skip_dirs <- c("_freeze", "/docs/", "renv", "site_libs", "unused_assets")
 files <- list.files(root, pattern = "\\.(qmd|R|r)$", recursive = TRUE, full.names = TRUE)
 files <- files[!grepl(paste(skip_dirs, collapse = "|"), files, fixed = FALSE)]
 
+# Don't scan this script itself -- its own comments contain example
+# patterns like "pkg::fn()" and "gt::gtsave()" that would otherwise be
+# misread as real dependencies.
+this_file <- normalizePath(sub("^--file=", "", grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)),
+                            mustWork = FALSE)
+if (length(this_file) == 1 && nzchar(this_file)) {
+  files <- files[normalizePath(files, mustWork = FALSE) != this_file]
+}
+
 read_file <- function(f) tryCatch(paste(readLines(f, warn = FALSE), collapse = "\n"),
                                    error = function(e) "")
 all_text <- vapply(files, read_file, character(1))
