@@ -768,13 +768,6 @@ details[open] summary {
   padding: 6px 20px;
   font-weight: 600;
   color: $accent;
-
-  // Same p-inheritance issue as .blank-tag above -- restate explicitly so
-  // a block-level ":::: you-callout" (wrapped in <p> by pandoc) doesn't
-  // silently fall back to $body-color instead of the intended $accent.
-  p {
-    color: $accent;
-  }
 }
 
 // "Fill in the blank" slides -- axis/title-stripped plots for in-class
@@ -804,15 +797,22 @@ details[open] summary {
   padding: 4px 14px;
   border-radius: 999px;
   opacity: 0.85;
+}
 
-  // .reveal .slide p { color: $body-color; } (near the top of this file)
-  // directly targets the <p> pandoc wraps this pill's text in, and a
-  // directly-matched rule always wins over an inherited one -- so the
-  // intended white text above was actually rendering in dark $body-color,
-  // i.e. dark text on this dark-sage pill. Restate it on the child p.
-  p {
-    color: #fff;
-  }
+// .blank-tag and .you-callout's text sits in a <p> (pandoc wraps fenced-div
+// content in one), and .reveal .slide p { color: $body-color; } up top
+// directly targets that <p>. Both ".blank-tag p" and ".reveal .slide p"
+// are direct-match rules, so it comes down to plain CSS specificity, not
+// inheritance -- and ".reveal .slide p" (2 classes + a tag) beats a bare
+// ".blank-tag p" (1 class + a tag) no matter what order the rules are in.
+// Prefixing with ".reveal .slide" here matches that rule's specificity
+// and adds the component class on top, so these two win outright.
+.reveal .slide .blank-tag p {
+  color: #fff;
+}
+
+.reveal .slide .you-callout p {
+  color: $accent;
 }
 
 // Fix: reveal.js/Quarto's built-in CSS never sets an explicit `top` for
