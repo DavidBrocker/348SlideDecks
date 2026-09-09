@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Standard Normal Distribution – PSY 348: Statistics for Psychology</title>
+<title>design_system – PSY 348: Statistics for Psychology</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,26 +26,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1352f9db2132ed6d9c4208da9f3ea9cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1146bc195056797996e2fce889ebdf47.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-1352f9db2132ed6d9c4208da9f3ea9cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1146bc195056797996e2fce889ebdf47.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light">
@@ -85,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">PSY 348: Statistics for Psychology</span>
     </a>
   </div>
@@ -96,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Course Overview</span></a>
   </li>  
 </ul>
@@ -110,14 +145,14 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lec1/lec1_viewer.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lec4/lec4_viewer.html">Standard Normal Distribution</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -133,97 +168,97 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec1/lec1_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec1/lec1_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome to Statistics for Psychology!</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec2/lec2_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec2/lec2_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data Visualization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec3/lec3_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec3/lec3_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scales of Measurement and Measures of Central Tendency</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec4/lec4_viewer.html" class="sidebar-item-text sidebar-link active">
+  <a href="./lec4/lec4_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Standard Normal Distribution</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec5/lec5_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec5/lec5_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Z-scores</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec6/lec6_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec6/lec6_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Z-Scores and Probability Under the Normal Curve</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec7/lec7_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec7/lec7_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Statistical Software</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec8/lec8_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec8/lec8_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec9/lec9_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec9/lec9_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">One-Sample T-Test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec10/lec10_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec10/lec10_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Paired Samples T-Test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec11/lec11_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec11/lec11_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Independent Samples T-Test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec12/lec12_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec12/lec12_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Analysis of Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec13fct/lec13fct_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec13fct/lec13fct_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Factorial ANOVA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec14/lec14_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec14/lec14_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Within Subjects ANOVA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec15c/lec15c_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec15c/lec15c_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Covariance &amp; Correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lec15/lec15_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lec15/lec15_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linear Regression</span></a>
   </div>
 </li>
@@ -240,37 +275,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lab_orientation/lab_orientation_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_orientation/lab_orientation_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 0: Welcome to Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lab1/lab1_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab1/lab1_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Method Section</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lab3/lab3_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab3/lab3_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Measures of Central Tendency</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lab_zscores/lab_zscores_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_zscores/lab_zscores_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab: Z-Scores &amp; Probability in Practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lab10/lab10_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab10/lab10_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 10: One-Way ANOVA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lab7/lab7_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab7/lab7_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 7: Regression</span></a>
   </div>
 </li>
@@ -287,19 +322,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../formulas.html" class="sidebar-item-text sidebar-link">
+  <a href="./formulas.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Formulas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exam1/exam1_review_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./exam1/exam1_review_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exam 1 Review</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exam2/exam2_review_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./exam2/exam2_review_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exam 2 Review</span></a>
   </div>
 </li>
@@ -316,13 +351,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../using_r/Using R.html" class="sidebar-item-text sidebar-link">
+  <a href="./using_r/Using R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using Posit Cloud for Statistics Students</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../using_r/RWorkstation_viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="./using_r/RWorkstation_viewer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Workstation</span></a>
   </div>
 </li>
@@ -333,35 +368,186 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#slidedecks-design-system" id="toc-slidedecks-design-system" class="nav-link active" data-scroll-target="#slidedecks-design-system">348SlideDecks Design System</a>
+  <ul class="collapse">
+  <li><a href="#tokens" id="toc-tokens" class="nav-link" data-scroll-target="#tokens">Tokens</a></li>
+  <li><a href="#title-slides-two-patterns-dont-mix-them" id="toc-title-slides-two-patterns-dont-mix-them" class="nav-link" data-scroll-target="#title-slides-two-patterns-dont-mix-them">Title slides — two patterns, don’t mix them</a></li>
+  <li><a href="#core-components" id="toc-core-components" class="nav-link" data-scroll-target="#core-components">Core components</a></li>
+  <li><a href="#term-definition-hero-def-term-list" id="toc-term-definition-hero-def-term-list" class="nav-link" data-scroll-target="#term-definition-hero-def-term-list">Term + definition (<code>hero-def</code> / <code>term-list</code>)</a></li>
+  <li><a href="#known-gotchas" id="toc-known-gotchas" class="nav-link" data-scroll-target="#known-gotchas">Known gotchas</a></li>
+  <li><a href="#dependency-checking" id="toc-dependency-checking" class="nav-link" data-scroll-target="#dependency-checking">Dependency checking</a></li>
+  <li><a href="#open-items" id="toc-open-items" class="nav-link" data-scroll-target="#open-items">Open items</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lec1/lec1_viewer.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lec4/lec4_viewer.html">Standard Normal Distribution</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Standard Normal Distribution</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta column-page-right">
 
-    
-  
-    
-  </div>
-  
+<section id="slidedecks-design-system" class="level1">
+<h1>348SlideDecks Design System</h1>
+<p>Reference for the shared <code>custom.scss</code> theme used across PSY 348/360/442 revealjs decks. This is the source of truth for design tokens and component conventions — it lives in this repo so it can never drift from the code it describes (a change to <code>custom.scss</code> and a change to this doc belong in the same commit).</p>
+<p>For the <em>narrative</em> of how and why specific decisions were made session-by-session, see the “Teaching” claude.ai project doc (<code>course_site_design_philosophy.md</code>). This file is the settled result; that one is the working log.</p>
+<section id="tokens" class="level2">
+<h2 class="anchored" data-anchor-id="tokens">Tokens</h2>
+<p>Defined at the top of <code>custom.scss</code>, under <code>scss:defaults</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>$body-color</code></td>
+<td><code>#2F3E46</code></td>
+<td>Body/paragraph/list text (dark desaturated green-gray)</td>
+</tr>
+<tr class="even">
+<td><code>$text-muted</code></td>
+<td><code>lighten($body-color, 50%)</code></td>
+<td>Captions, sub-labels</td>
+</tr>
+<tr class="odd">
+<td><code>$body-bg</code></td>
+<td><code>#E9F1EC</code></td>
+<td>Slide background (sage pastel)</td>
+</tr>
+<tr class="even">
+<td><code>$accent</code></td>
+<td><code>#5C715E</code></td>
+<td>Headings, links, primary pill/badge fill</td>
+</tr>
+<tr class="odd">
+<td><code>$accent2</code></td>
+<td><code>#8FAF9E</code></td>
+<td>Card/badge borders, secondary accents</td>
+</tr>
+<tr class="even">
+<td><code>$accent3</code></td>
+<td><code>#A7C7B5</code></td>
+<td>Lighter borders (e.g.&nbsp;<code>hero-def</code> card)</td>
+</tr>
+<tr class="odd">
+<td><code>$accent4</code></td>
+<td><code>#DCE8E1</code></td>
+<td>Lightest fill (e.g.&nbsp;<code>you-callout</code> background)</td>
+</tr>
+</tbody>
+</table>
+<p>Fonts: <strong>Fira Sans</strong> (body/headings), <strong>Fira Code</strong> (code), <strong>Atkinson Hyperlegible</strong> (fallback — chosen for accessibility), <strong>Material Icons</strong> (icon font, used throughout via <code>.material-icons</code>).</p>
+<p>Rule of thumb: don’t hardcode hex values in new components — use the token so a future palette change is a one-line edit.</p>
+</section>
+<section id="title-slides-two-patterns-dont-mix-them" class="level2">
+<h2 class="anchored" data-anchor-id="title-slides-two-patterns-dont-mix-them">Title slides — two patterns, don’t mix them</h2>
+<p>Most decks use Quarto’s YAML <code>title:</code> field, which auto-generates <code>#title-slide</code> (styled directly, near the top of the rules section: <code>.title</code>, <code>.subtitle</code>, <code>.quarto-title-authors</code>).</p>
+<p>Some decks (<code>lab1.qmd</code>, <code>lec2.qmd</code>) have no YAML title and instead hand-build a manual <code>##  {#custom-title}</code> slide, styled via <code>.cust-title</code> / <code>.cust-sub</code> / <code>.cust-pic</code> / <code>.cust-author</code>. <strong>This pattern has a known gotcha</strong> — see Known Gotchas below. If you’re starting a new deck, prefer the YAML <code>title:</code> approach unless you specifically need the custom layout; it avoids the gotcha entirely.</p>
+<p><code>lec2.qmd</code>’s custom title also has an optional animated background layer (<code>#custom-title</code>, <code>.title-bg-icons</code>, <code>.ghost-nodes</code>) — six drifting Material Icons + five floating dots, slow and low-opacity by design. Copy this only if a deck wants that same “quiet motion” flourish; it’s not a default every custom-title slide needs.</p>
+</section>
+<section id="core-components" class="level2">
+<h2 class="anchored" data-anchor-id="core-components">Core components</h2>
+<p><strong><code>.card</code></strong> — generic white card with hover-lift, used for image+caption groupings. <code>.card-img</code> crops to a fixed 260px height (<code>object-fit: cover</code>) so mixed-aspect-ratio source images stay uniform in a row.</p>
+<p><strong><code>.callout-important</code></strong> — Quarto’s default callout is restyled from red/orange to the sage accent, since on this site “important” means “definition, pay attention” rather than “warning/error.”</p>
+<p><strong><code>.blank-tag</code></strong> — small corner pill marking a “fill in the blank” slide for the presenter (axis/title-stripped plot for in-class guessing). White text on accent background.</p>
+<p><strong><code>.you-callout</code></strong> — inline pill for a short personalized aside (e.g.&nbsp;“…and you scored a 67”), lighter weight than <code>.callout-important</code>.</p>
+<p><strong><code>.stat-card</code></strong> — bordered card for a single big number + sublabel (<code>.stat-num</code> / <code>.stat-sub</code>).</p>
+<p><strong><code>.img-placeholder</code></strong> — dashed-border stand-in for “find a real image later,” so a slide’s layout/intent is legible before the asset hunt is done. Once a real photo replaces it, <code>img</code> inside is capped at <code>max-height: 340px</code> so a full-res photo can’t push content off the bottom of the slide.</p>
+<p><strong><code>.badge-row</code> / <code>.content-badge</code></strong> and <strong><code>.icon-row</code> / <code>.icon-row-item</code></strong> — two weights of “icon + short label” layout. <code>.content-badge</code> has card chrome (border, shadow, optional heading) for a handful of prominent items; <code>.icon-row-item</code> is bare icon + caption for recapping several examples/terms compactly (e.g.&nbsp;under a bullet list).</p>
+<p><strong><code>.bio-cluster</code></strong> — the “Hi, I’m Dave!” circular-photo-plus-scattered-badges layout (fixed pixel positioning, tuned to one specific slide). Not intended as a general-purpose pattern — treat as a one-off unless another bio slide needs the exact same shape.</p>
+<p><strong><code>.marquee-wrap</code> / <code>.marquee-track</code></strong> — continuous horizontal scroll (e.g.&nbsp;course-eval pull quotes), pauses on hover so a quote can be read.</p>
+<p><strong><code>.book-anim</code></strong> — small CSS crossfade flourish for a closing/Q&amp;A slide.</p>
+</section>
+<section id="term-definition-hero-def-term-list" class="level2">
+<h2 class="anchored" data-anchor-id="term-definition-hero-def-term-list">Term + definition (<code>hero-def</code> / <code>term-list</code>)</h2>
+<p>The newest component (added 9/4, applied first on <code>lec3.qmd</code>’s Operationalization slide). Built specifically with a future site-wide glossary in mind.</p>
+<p><strong>Markup uses pandoc’s native definition-list syntax</strong> — already the site’s convention (see <code>lec1.qmd</code>’s “Statistics / Describing / Analyzing…” slide) — rather than a bespoke div structure. <code>Term</code> / <code>: definition</code> compiles to plain <code>&lt;dl&gt;&lt;dt&gt;&lt;span class="term-pill"&gt;Term&lt;/span&gt;&lt;/dt&gt;&lt;dd&gt;Definition text&lt;/dd&gt;&lt;/dl&gt;</code>. That’s the most mechanical possible shape to script-extract later: grep every <code>.term-pill</code> span and its <code>dd</code> sibling, across every deck, no per-slide parsing needed.</p>
+<p><strong><code>.hero-def</code></strong> — one pivotal term per slide. Pill sits half-overlapping a white bordered card; definition is the card body underneath. The containing section auto-centers the card in the space below the slide heading via <code>:has()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode scss code-with-copy"><code class="sourceCode scss"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.reveal</span> <span class="fu">.slides</span> section<span class="in">:has(&gt; .hero-def)</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span>: <span class="dv">flex</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">flex-direction</span>: <span class="dv">column</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">.hero-def</span> { <span class="kw">margin</span>: <span class="bu">auto</span><span class="op">;</span> <span class="co">/* ... */</span> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Markup:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>::: hero-def</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Operationalization</span><span class="co">]</span>{.term-pill}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>: The process of defining the measurement of a phenomenon that is not</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  directly measurable (AKA a latent variable) though its existence is</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  implied by other phenomena.</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>.term-list</code></strong> — several terms on one slide. Lighter weight, no card chrome (a repeated <code>hero-def</code> five or six times would be visually loud). Each term/definition pair should be wrapped in its own <code>::: fragment :::</code> so they reveal one at a time rather than landing all at once:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>::: term-list</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>::: fragment</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Term One</span><span class="co">]</span>{.term-pill}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>: Definition one.</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>::: fragment</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Term Two</span><span class="co">]</span>{.term-pill}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>: Definition two.</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Open item:</strong> <code>lec1.qmd</code>’s existing 7-term slide predates this component and doesn’t use <code>::: fragment :::</code> per pair — a good candidate to retrofit into <code>.term-list</code>, not yet done.</p>
+<p><strong><code>hero-example</code></strong> — an optional worked-example <code>panel-tabset</code> nested inside a <code>hero-def</code> card, for showing how the same construct gets operationalized different ways. First use: <code>lec3.qmd</code>’s Operationalization slide, tabbed Self-Report / Physiological / Behavioral measures of “disgust” (Dave’s go-to running construct across different areas of psych). Markup nests directly inside the <code>hero-def</code> div, after the definition:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>::: hero-def</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Operationalization</span><span class="co">]</span>{.term-pill}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>: The process of defining the measurement of a phenomenon that is not</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  directly measurable...</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>::: hero-example</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">### Self-Report</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>"How disgusted do you feel right now?" -- rated on a 1-7 scale.</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Physiological</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>Skin conductance or facial EMG response while viewing a disgusting image.</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### Behavioral</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>Willingness to touch a "contaminated" object, or how far participants</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>move their chair away from it.</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Styling is scoped to <code>.hero-def .hero-example</code> specifically (restyled nav-tabs: muted uppercase labels, active tab gets the accent color + underline) so it never touches the plain default Bootstrap tabset styling already used elsewhere on the site (<code>lec2</code>’s Anscombe plots) — those keep rendering with their untouched default look.</p>
+</section>
+<section id="known-gotchas" class="level2">
+<h2 class="anchored" data-anchor-id="known-gotchas">Known gotchas</h2>
+<p><strong>CSS specificity beats source order, every time.</strong> <code>.reveal .slide p { color: $body-color; }</code> sits near the top of the file and directly targets any <code>&lt;p&gt;</code> on a slide — including the <code>&lt;p&gt;</code> pandoc wraps fenced-div content in. A new component that puts colored text in a plain <code>&lt;p&gt;</code> inside a div (e.g.&nbsp;<code>.my-thing p { color: #fff; }</code>) will silently lose to that rule if its own selector has <em>lower or equal specificity</em> (class + tag vs.&nbsp;two classes + tag), no matter where in the file it’s written or how late it’s added. This bit <code>.blank-tag</code> and <code>.you-callout</code> once already (fixed by matching specificity: <code>.reveal .slide .blank-tag p</code>). <strong>Before shipping any new pill/badge/tag component with its own text color, check what specificity the existing global text rules have and match or exceed it</strong> — don’t assume one extra class is enough.</p>
+<p><strong>The <code>##  {#custom-title}</code> manual title-slide pattern loses <code>top</code> positioning.</strong> Quarto’s reveal.css never sets an explicit <code>top</code> on <code>.reveal .slides &gt; section.present</code> in this site’s config. Normally that’s invisible because the auto-generated <code>#title-slide</code> slide is styled specially — but a manual custom-title slide is just an ordinary <code>.slide.level2</code> section like any other, which exposes the gap: the browser resolves the unset <code>top</code> as the element’s normal-flow “static position,” landing the present slide <em>below</em> the previous slide’s canvas instead of overlapping it at the top (reads as “content pushed off / cut off”). Fixed globally with <code>.reveal .slides &gt; section.present { top: 0 !important; }</code> — a no-op on already-correct decks, so this fix never needs revisiting per-deck.</p>
+</section>
+<section id="dependency-checking" class="level2">
+<h2 class="anchored" data-anchor-id="dependency-checking">Dependency checking</h2>
+<p><code>scripts/check_dependencies.R</code> scans every <code>.qmd</code>/<code>.R</code> file for R package dependencies — explicit (<code>library()</code>/<code>require()</code>), namespace-qualified (<code>pkg::fn()</code>), and a curated list of “invisible” triggers (e.g.&nbsp;<code>gt::gtsave(*.png)</code> silently needs <code>webshot2</code> + <code>chromote</code>). Run it on a fresh workspace (<code>Rscript scripts/check_dependencies.R</code>) before rendering to catch missing packages up front instead of one broken chunk at a time. If a render fails on a package that was never named directly in a <code>.qmd</code>, add its trigger pattern to the <code>implicit_triggers</code> list in that script so future runs catch it automatically.</p>
+</section>
+<section id="open-items" class="level2">
+<h2 class="anchored" data-anchor-id="open-items">Open items</h2>
+<ul>
+<li>Retrofit <code>lec1.qmd</code>’s 7-term slide into <code>.term-list</code> (with per-pair <code>::: fragment :::</code>).</li>
+<li>Missing images still unresolved on lec3/5/6/7/8/11/15c (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).</li>
+<li>Extract the glossary: once several decks use <code>.term-pill</code>/<code>dl</code>/<code>dd</code>, a script can walk every deck and build a site-wide glossary page from the markup alone.</li>
+<li><code>lec3.qmd</code>’s Bobo doll slide still has a dead image and an unverified proposed swap (a moral-disgust “moving a chair” paradigm) — needs Dave to confirm the actual citation before it goes on a slide; not implemented.</li>
+</ul>
 
 
-</header>
-
-
-<iframe src="lec4.html" style="width: 100%; height: calc(100vh - 140px); border: none;">
-</iframe>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
