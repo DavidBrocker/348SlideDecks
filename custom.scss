@@ -948,3 +948,43 @@ details[open] summary {
     padding-left: 4px;
   }
 }
+
+// hero-example: an optional worked-example tabset nested inside a
+// hero-def card (e.g. Self-Report / Physiological / Behavioral
+// operationalizations of the same construct). Scoped to
+// ".hero-def .hero-example" specifically so it never touches the plain
+// Bootstrap panel-tabset styling already used elsewhere on the site
+// (lec2's Anscombe plots) -- those keep their default look untouched.
+.hero-def .hero-example {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid $accent4;
+  text-align: left;
+
+  .nav-tabs {
+    border-bottom: 1px solid $accent4;
+    margin-bottom: 14px;
+  }
+
+  .nav-tabs .nav-link {
+    color: $text-muted;
+    border: none;
+    font-weight: 600;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-tabs .nav-link.active {
+    color: $accent;
+    background: transparent;
+    border-bottom: 3px solid $accent;
+  }
+
+  .tab-content p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: $body-color;
+    margin: 0;
+  }
+}

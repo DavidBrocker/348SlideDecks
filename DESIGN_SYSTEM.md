@@ -97,7 +97,34 @@ Markup:
 
 **Open item:** `lec1.qmd`'s existing 7-term slide predates this component and doesn't use `::: fragment :::` per pair — a good candidate to retrofit into `.term-list`, not yet done.
 
-**Planned next:** a `hero-example` extension — a `panel-tabset` of worked examples (e.g. Self-Report / Physiological / Behavioral operationalizations of "disgust," Dave's go-to running construct) nested as a natural child of `hero-def`, spawned from the Operationalization slide specifically. Check the existing tabset CSS (already used for `lec2`'s Anscombe plots) before writing new rules, to extend consistently rather than duplicate.
+**`hero-example`** — an optional worked-example `panel-tabset` nested inside a `hero-def` card, for showing how the same construct gets operationalized different ways. First use: `lec3.qmd`'s Operationalization slide, tabbed Self-Report / Physiological / Behavioral measures of "disgust" (Dave's go-to running construct across different areas of psych). Markup nests directly inside the `hero-def` div, after the definition:
+
+```markdown
+::: hero-def
+[Operationalization]{.term-pill}
+: The process of defining the measurement of a phenomenon that is not
+  directly measurable...
+
+::: hero-example
+::: panel-tabset
+### Self-Report
+
+"How disgusted do you feel right now?" -- rated on a 1-7 scale.
+
+### Physiological
+
+Skin conductance or facial EMG response while viewing a disgusting image.
+
+### Behavioral
+
+Willingness to touch a "contaminated" object, or how far participants
+move their chair away from it.
+:::
+:::
+:::
+```
+
+Styling is scoped to `.hero-def .hero-example` specifically (restyled nav-tabs: muted uppercase labels, active tab gets the accent color + underline) so it never touches the plain default Bootstrap tabset styling already used elsewhere on the site (`lec2`'s Anscombe plots) — those keep rendering with their untouched default look.
 
 ## Known gotchas
 
@@ -112,6 +139,6 @@ Markup:
 ## Open items
 
 - Retrofit `lec1.qmd`'s 7-term slide into `.term-list` (with per-pair `::: fragment :::`).
-- Build the `hero-example` tabset on `lec3.qmd`'s Operationalization slide (disgust example).
 - Missing images still unresolved on lec3/5/6/7/8/11/15c (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).
 - Extract the glossary: once several decks use `.term-pill`/`dl`/`dd`, a script can walk every deck and build a site-wide glossary page from the markup alone.
+- `lec3.qmd`'s Bobo doll slide still has a dead image and an unverified proposed swap (a moral-disgust "moving a chair" paradigm) — needs Dave to confirm the actual citation before it goes on a slide; not implemented.
