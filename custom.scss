@@ -104,13 +104,30 @@ $presentation-title-slide-text-align: left;
 // Callout Important -- default Bootstrap/Quarto styling is red/orange,
 // which reads as an error/warning rather than "pay attention, definition
 // here." Restyle it in the theme's own sage palette instead.
+//
+// Gotcha (found 9/11): the real markup is `.callout-title` (not
+// `.callout-title-container` -- that class doesn't exist, so the old rule
+// below was a dead selector and never touched the header). Quarto also
+// bakes the icon's color directly into a data-URI SVG background-image
+// (`.callout-icon::before`), not a plain `background-color` -- so painting
+// `background-color: $accent` behind it just added a solid dark-sage
+// square behind the still-red glyph. Fix both: recolor the header
+// background to a light sage tint, and swap in a sage-filled copy of the
+// same Bootstrap exclamation-circle icon Quarto uses by default.
 .callout-important {
   border-left-color: $accent !important;
-  .callout-icon::before {
-    background-color: $accent !important;
+
+  &.callout-style-default .callout-title {
+    background-color: $accent4 !important;
   }
-  .callout-title-container {
+
+  .callout-title {
     color: $accent;
+  }
+
+  .callout-icon::before {
+    background-color: transparent !important;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="fill: rgb(92, 113, 94)" class="bi bi-exclamation-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/></svg>') !important;
   }
 }
 
