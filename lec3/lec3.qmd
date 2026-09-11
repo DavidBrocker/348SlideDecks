@@ -1138,40 +1138,71 @@ ggplot(aes(l)) +
 
 ## Calculating Measures of Central Tendency
 
-### **Calculating The mean**
+### Calculating The Mean
+
+::: panel-tabset
+### By Hand
 
 ::: callout-tip
-1.  Sum all x values
-2.  Divide by the number of x values (n).
-3.  $\large{x = 4,2,5,6}$
-4.  $\large{\frac{\sum(x)}{n}}$
-5.  $\large{\sum(x) = 4 + 2 + 5 + 6 = 17}$
-6.  $\large{\frac{17}{4} = \color{red}{4.25}}$
+1. Sum all x values: $x = 4, 2, 5, 6$
+2. Divide by the number of x values ($n$)
+3. $\dfrac{\sum(x)}{n} = \dfrac{4+2+5+6}{4} = \dfrac{17}{4} = \color{red}{4.25}$
+:::
+
+### In R
+
+```r
+x <- c(4, 2, 5, 6)
+mean(x)
+```
 :::
 
 ## Calculating Measures of Central Tendency
 
-### **Calculating The median**
+### Calculating The Median
+
+::: panel-tabset
+### By Hand
 
 ::: callout-tip
-1.  Put all x values in order from smallest or largest or largest to smallest.
-2.  Find the middle number.
-3.  If there are an even number of x values, take the average of the 2 middle numbers.
-4.  $\large{x = \{6,2,4,2,8\}}$
-5.  $\large{x = \{2,2,4,6,8\}}$
-6.  $\large{x = \{2,2,\color{blue}{4},6,8\}}$
+1. Put all x values in order from smallest to largest
+2. Find the middle number (average the 2 middle numbers if $n$ is even)
+3. $x = \{6,2,4,2,8\} \rightarrow \{2,2,4,6,8\} \rightarrow \text{median} = \color{blue}{4}$
+:::
+
+### In R
+
+```r
+x <- c(6, 2, 4, 2, 8)
+median(x)
+```
 :::
 
 ## Calculating Measures of Central Tendency
 
-### **Calculating The mode**
+### Calculating The Mode
+
+::: panel-tabset
+### By Hand
 
 ::: callout-tip
-1.  Put all x values in order from smallest or largest or largest to smallest.
-2.  Find the number or numbers that repeat the most.
-3.  $\large{x = [3,2,1,5,3,7,8,3,2,4,1]}$
-4.  $\large{x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]}$
-5.  There can be more than 1 mode.
+1. Put all x values in order and count how often each one repeats
+2. $x = [3,2,1,5,3,7,8,3,2,4,1] \rightarrow [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]$
+3. The mode is whichever value repeats the most -- here, $\color{green}{3}$ (there can be more than one mode)
+:::
+
+### In R
+
+```r
+x <- c(3, 2, 1, 5, 3, 7, 8, 3, 2, 4, 1)
+
+# base R has no mode() function for statistical mode --
+# mode() actually returns an object's storage type, a classic gotcha
+table(x)
+
+# most frequent value:
+names(which.max(table(x)))
+```
 :::
 
 ## **Using Excel**
