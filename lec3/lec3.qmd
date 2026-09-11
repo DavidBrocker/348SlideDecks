@@ -22,6 +22,8 @@ revealjs-plugins:
   - codewindow
 ---
 
+[Jump to Part 2: Measures of Central Tendency →](#part2-central-tendency){.you-callout}
+
 ## Studying Psychology
 
 ### What do researchers in the areas of psychology that are interesting to you study?
@@ -441,8 +443,10 @@ Donating Money
 <details>
 <summary>Reveal Answer</summary>
 
+::: nonincremental
 - Predictor variable: **Self-Esteem** \| [Continuous (Interval)]{.bg style="--col: #e64173"}
 - Outcome variable: **GPA** \| [Continuous (Interval)]{.bg style="--col: #e64173"}
+:::
 
 </details>
 
@@ -455,8 +459,10 @@ Donating Money
 <details>
 <summary>Reveal Answer</summary>
 
+::: nonincremental
 - Independent variable: Drug vs. Placebo \| [Categorical (Nominal)]{.bg style="--col: #e64173"}
 - Dependent variable: Reaction Time \| [Continuous (Ratio)]{.bg style="--col: #e64173"}
+:::
 
 </details>
 
@@ -469,8 +475,10 @@ Donating Money
 <details>
 <summary>Reveal Answer</summary>
 
+::: nonincremental
 - Independent variable: Pictures of death versus landscapes \| [Categorical (Nominal)]{.bg style="--col: #e64173"}
 - Dependent variable: Anxiety about dying \| [Continuous (Interval)]{.bg style="--col: #e64173"}
+:::
 
 </details>
 
@@ -502,7 +510,7 @@ Donating Money
 
 ## Statistical Terms & Symbols
 
-![](https://media.tenor.com/CowGNQSUsOYAAAAM/confused-math.gif){fig-align="center" width="632"}
+![](https://media.tenor.com/CowGNQSUsOYAAAAM/confused-math.gif){fig-align="center" width="632" style="border-radius: 20px;"}
 
 ## Statistical Symbols
 
@@ -533,9 +541,11 @@ Donating Money
 <details>
 <summary>Reveal Answers</summary>
 
+::: nonincremental
 - n: 26
 - x: 98
 - $\bar{x}$: 97
+:::
 
 </details>
 
@@ -555,6 +565,8 @@ Scale of Measurement:
 
 ### Be Kind to Yourself!
 
+::::: columns
+::: {.column width="55%"}
 > A research study surveys 500 college student across 5 campuses in the United States, asking them to rate their self-esteem on a scale of 1 to 10.
 
 Sample:
@@ -562,19 +574,23 @@ Sample:
 Population:
 
 Scale of Measurement:
+:::
 
+::: {.column width="45%"}
 <details>
 <summary>Reveal Answers</summary>
 
+::: nonincremental
 - Sample: the 500 college students surveyed across the 5 campuses
-
 - Population: college students in the United States more broadly (what the sample is meant to represent)
-
-- Scale of Measurement: Ordinal -- a 1-10 self-esteem rating is a Likert-style scale, and (per the Ordinal slide earlier) Likert-style ratings are technically ordinal even though they're often treated as interval in practice. Good discussion point: ask the class why researchers commonly treat scales like this as interval anyway.
+- Scale of Measurement: Ordinal -- technically ordinal (Likert-style), though often treated as interval in practice. Ask the class why researchers commonly treat scales like this as interval anyway.
+:::
 
 </details>
+:::
+:::::
 
-## Measures of Central Tendency
+## Measures of Central Tendency {#part2-central-tendency}
 
 ### Part 2: What's in the Middle?
 
@@ -636,15 +652,17 @@ Scale of Measurement:
 
 ### Statistical Terms
 
-- What is a parameter?
+::: term-list
+::: fragment
+[Parameter]{.term-pill}
+: Information that describes the population.
+:::
 
-  - Information that describes the population.
-
-- What is a statistic?
-
-  - Information that describes the sample.
-
-  - Inferences about the population based on information from the sample.
+::: fragment
+[Statistic]{.term-pill}
+: Information that describes the sample -- used to make inferences about the population.
+:::
+:::
 
 ## **Descriptive Statistics**
 
@@ -672,34 +690,79 @@ Scale of Measurement:
 
 ### Describe the characteristics of a sample in terms of:
 
-- **Central tendency**: What most people said (mean, median, and mode)
+::: term-list
+::: fragment
+[Central Tendency]{.term-pill}
+: What most people said -- summarized via the mean, median, and mode.
+:::
 
-- **Dispersion**: How spread out the data are (standard deviation)
+::: fragment
+[Dispersion]{.term-pill}
+: How spread out the data are -- summarized via the standard deviation.
+:::
+:::
 
 ## **Measures of Central Tendency**
 
-- Tell us about the mid-point (center) of a distribution.
+### What Do They Tell Us?
 
-- Tell us about the mid-point (center) of a distribution.
+- Where the "center" of a distribution sits
 
-- Tell us most participants' answer.
+- What a typical/most common participant answer looks like
 
 ## The average GPA in the class is 3.2
 
 ### What does that actually mean?
+
+::: you-callout
+Turn to a neighbor: what does that single number NOT tell you about the class?
+:::
+
+<details>
+<summary>Discussion Points</summary>
+
+::: nonincremental
+- It can't tell you whether everyone scored close to 3.2, or half the class is at 4.0 and half is at 2.4
+- It doesn't reveal outliers -- a few 1.0s or a few 4.0s can shift it
+- Two classes with wildly different distributions of grades could still land on the exact same average
+:::
+
+</details>
+
+## Quick LaTeX Primer
+
+### Reading the Notation (So You Don't Have To Guess)
+
+::: callout-tip
+- $x$ -- a single value in your data
+
+- $\bar{x}$ -- "x-bar," the **mean**
+
+- $n$ -- the number of values (sample size)
+
+- $\sum$ -- "sigma," meaning **add these up**
+
+- $\sum_{i=1}^{n} x_i$ -- the formal way of writing "add up every value, 1st through nth" -- means the same thing as just writing $x_1 + x_2 + x_3 ...$
+
+- $\frac{a}{b}$ -- a fraction: $a$ divided by $b$
+:::
 
 ## **Measures of Central Tendency**
 
 ### Mean \| Average
 
 ::: callout-important
-- The average; obtained by summing all values and dividing by the number of values.
+::: fragment
+The average; obtained by summing all values and dividing by the number of values.
+:::
 
-- $\large{\sum^{n}_{i=1} = x_1 + x_2...}$
+::: fragment
+$\Large{\bar{x} = \dfrac{\sum(x)}{n}}$
+:::
 
-- $\large{\frac{\sum(x)}{n}}$
-
-- $\large{[3,4,5,2,1] = \frac{\sum(3+4+5+2+1)}{5} = \frac{15}{5} = \bar{x} = 3}$
+::: fragment
+$\Large{[3,4,5,2,1] \rightarrow \dfrac{\color{red}{3+4+5+2+1}}{\color{blue}{5}} = \dfrac{15}{5} = \bar{x} = 3}$
+:::
 :::
 
 - Think about how you calculate your GPA or grade for a class
@@ -722,9 +785,11 @@ Scale of Measurement:
 
 <details>
 
-<summary>Why is median typically used for income?</summary>
+<summary>Why does income get reported as a median instead of a mean?</summary>
 
 Income distributions are heavily right-skewed by a small number of very high earners, which pulls the mean upward. The median isn't affected by those extreme values, so it better represents what a "typical" person actually earns.
+
+For example, O\*NET reports the 2025 median annual wage for Psychologists as **$110,840** ([O\*NET OnLine, 19-3039.00](https://www.onetonline.org/link/summary/19-3039.00)) -- a handful of very high (or very low) earners in the field wouldn't shift that median the way they'd shift a mean.
 
 </details>
 
@@ -764,29 +829,24 @@ Any time your variable is skewed or outlier-prone -- reaction times, wait times,
 
 library(ggplot2)
 
-x <- seq(5, 15, length=1000)
+x <- seq(5, 15, length = 1000)
 
-y <- dnorm(x, mean=10, sd=1)
+y <- dnorm(x, mean = 10, sd = 1)
 
-nm <- data.frame(x,y)
+nm <- data.frame(x, y)
 
-ggplot(data = nm, aes(x,y)) + 
-  geom_point() +
-  theme_minimal() + 
-  labs(
-    x = "",
-    y = "") +
+ggplot(data = nm, aes(x, y)) +
+  geom_area(fill = "#DCE8E1", alpha = 0.8) +
+  geom_line(color = "#5C715E", linewidth = 1.2) +
+  geom_vline(xintercept = 10, color = "#2F3E46", linewidth = 0.8, linetype = "dashed") +
+  annotate("label", x = 10, y = 0.42, label = "Mean = Median = Mode",
+           fill = "#5C715E", color = "white", fontface = "bold", size = 5, label.size = 0) +
+  labs(x = "", y = "") +
+  theme_minimal(base_size = 16) +
   theme(
-    axis.text.x = element_blank()
-  ) +
-  geom_vline(xintercept = 10) +
-  geom_label(label = "Mean", y = 0, x = 10) +
-  geom_label(label = "Median", y = 0.15, x = 10) +
-  geom_label(label = "Mode", y = 0.3, x = 10) +
-  theme(
+    axis.text = element_blank(),
     panel.grid = element_blank()
   )
-  
 ```
 :::
 
@@ -804,23 +864,24 @@ Mean = Median = Mode
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
-  data.frame(
-    z = rnorm(500,30,sd =10)
-    ) |> 
-  ggplot(aes(z)) + 
-  geom_histogram(
-    binwidth = 10
-  ) + 
-    theme_minimal() +
-    labs(x = "",
-         y = "")
+data.frame(
+  z = rnorm(500, 30, sd = 10)
+) |>
+  ggplot(aes(z)) +
+  geom_histogram(aes(y = after_stat(density)), binwidth = 5,
+                 fill = "#A7C7B5", color = "white") +
+  geom_density(color = "#5C715E", linewidth = 1.2) +
+  labs(x = "Value", y = "Density") +
+  theme_minimal(base_size = 14)
 ```
 :::
 
 ::: {.column width="50%"}
-- The mean is only helpful in a [**normal distribution**]{.underline}, which you may have heard called a normal curve or bell curve.
+- The mean is only helpful in a [**normal distribution**]{.underline} -- also called a normal curve or bell curve.
 
 - We overwhelmingly use the mean, because in the social and behavioral sciences, we nearly always assume the distribution is normal.
+
+- A histogram (counts, in bins) and a density plot (a smoothed curve) show the same underlying shape -- a density plot is just what this histogram would look like with infinitely thin bins.
 :::
 :::::
 
