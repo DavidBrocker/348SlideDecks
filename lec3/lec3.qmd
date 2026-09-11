@@ -935,7 +935,11 @@ ggplot(df, aes(x = value, fill = group)) +
 
 ### [The Galton Board](https://www.mathsisfun.com/data/quincunx.html)
 
-![](images/galton.png)
+<!-- Trial: live iframe of the linked quincunx simulator, replacing the
+     dead images/galton.png reference. Untested against the site's own
+     framing policy -- if it renders blank/blocked, fall back to the
+     images/galton.png treatment (needs a real image) or just the link. -->
+<iframe src="https://www.mathsisfun.com/data/quincunx.html" width="900" height="560" style="border: 2px solid #8FAF9E; border-radius: 16px;"></iframe>
 
 [More Examples](https://editor.p5js.org/pazatico/sketches/n_CYcQBIF)
 
@@ -1151,7 +1155,7 @@ ggplot(aes(l)) +
 
 ### In R
 
-::: {.codewindow .r}
+::: {.codewindow .r .codewindow-dark}
 mean.R
 ```r
 x <- c(4, 2, 5, 6)
@@ -1175,7 +1179,7 @@ mean(x)
 
 ### In R
 
-::: {.codewindow .r}
+::: {.codewindow .r .codewindow-dark}
 median.R
 ```r
 x <- c(6, 2, 4, 2, 8)
@@ -1199,7 +1203,7 @@ median(x)
 
 ### In R
 
-::: {.codewindow .r}
+::: {.codewindow .r .codewindow-dark}
 mode.R
 ```r
 x <- c(3, 2, 1, 5, 3, 7, 8, 3, 2, 4, 1)
