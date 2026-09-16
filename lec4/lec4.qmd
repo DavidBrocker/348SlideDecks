@@ -411,7 +411,7 @@ tibble(
                   y = mean(`x-M`),
                   yend = `x-M`)
               ) +
-  geom_point(aes(ParticipantID,`x-M`, color = "black")) +
+  geom_point(aes(ParticipantID,`x-M`), color = "black") +
   theme_minimal() +
   labs(
   x = "\nParticipant ID",
