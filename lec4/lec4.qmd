@@ -4,9 +4,6 @@ subtitle: "PSY 348: Lecture 4"
 author: "Dave Brocker"
 institute: "Farmingdale State College"
 footer: "Dispersion | ⬡⬢⬡⬢"
-filters: 
-  - linkate
-  - editable
 format: 
   revealjs:
     theme: ../custom.scss
@@ -21,8 +18,6 @@ format:
     menu:
       side: right
       width: wide
-revealjs-plugins:
-  - editable
 ---
 
 ## Descriptive Statistics
@@ -69,44 +64,47 @@ revealjs-plugins:
 
 ### Describe the characteristics of a sample in terms of:
 
--   Central tendency
-
-    -   The mid-point of the data
-
-    -   The most typical/frequent answers
-
--   Dispersion (aka Variability aka Variance)
-
-    -   Dispersion: the action or process of distributing things or people over a wide area.
+::: term-list
+::: fragment
+[Central Tendency]{.term-pill}
+: The mid-point of the data -- the most typical or frequent answer.
+:::
+::: fragment
+[Dispersion]{.term-pill}
+: Also called variability or variance -- how spread out the data is; the action or process of distributing things or people over a wide area.
+:::
+:::
 
 ## Central Tendency: Mean
 
 ### What is it, when should we use it, and how do we calculate it?
 
--   Mean
-    -   Average of all $x$ values
-    -   Normal Distribution
-    -   Formula: $\frac{\sum(x)}{n}$
+::: hero-def
+[Mean]{.term-pill}
+: The average of all $x$ values -- best used with a normal distribution.
+  Formula: $\dfrac{\sum(x)}{n}$
+:::
 
 ## Central Tendency: Median
 
 ### What is it, when should we use it, and how do we calculate it?
 
--   Median
-    -   Middle value in **sorted** data
-    -   Skewed distributions
-        -   Is the data pulled to the left or the right?
-        -   $Med(X) = \frac{n + 1}{2}$
+::: hero-def
+[Median]{.term-pill}
+: The middle value in **sorted** data -- best used with a skewed
+  distribution (is the data pulled to the left or the right?).
+  Formula: $Med(X) = \dfrac{n + 1}{2}$
+:::
 
 ## Central Tendency: Mode
 
 ### What is it, when should we use it, and how do we calculate it?
 
--   Mode
-    -   Most common value
-    -   Bi/Tri-Modal Distributions
-    -   Most common value(s)
-        -   Shows us that data is clustered
+::: hero-def
+[Mode]{.term-pill}
+: The most common value (or values, in bi/tri-modal distributions) --
+  shows us where the data is clustered.
+:::
 
 ## Central Tendency
 
@@ -137,7 +135,7 @@ tibble(
   y = "Exam Score\n"
   ) + 
   geom_hline(aes(yintercept = mean(score)),
-             color = "maroon",
+             color = "#5C715E",
              lty = "dashed") 
 ```
 :::
@@ -162,7 +160,7 @@ tibble(
   y = "Exam Score\n"
   ) + 
   geom_hline(aes(yintercept = mean(score)),
-             color = "maroon",
+             color = "#5C715E",
               linewidth = 1.5) +
   geom_segment(aes(x = student, xend = student,
                   y = mean(score),
@@ -203,7 +201,7 @@ p1 <-
     ggplot(aes(student,exam1)) + 
     geom_point() +
     theme_minimal() +
-    geom_hline(aes(yintercept = mean(exam1),color = "maroon")) +
+    geom_hline(aes(yintercept = mean(exam1)), color = "#5C715E") +
 labs(
   x = "\nStudent",
   y = "Exam Score\n"
@@ -213,7 +211,7 @@ p2 <-
     ggplot(aes(student,exam2)) + 
     geom_point() +
     theme_minimal()+
-    geom_hline(aes(yintercept = mean(exam2),color = "maroon")) +
+    geom_hline(aes(yintercept = mean(exam2)), color = "#5C715E") +
   labs(
   x = "\nStudent",
   y = "Exam Score\n"
@@ -224,7 +222,7 @@ p3 <-
     ggplot(aes(student,exam3)) + 
     geom_point() +
     theme_minimal() +
-    geom_hline(aes(yintercept = mean(exam3)),color = "maroon") +
+    geom_hline(aes(yintercept = mean(exam3)), color = "#5C715E") +
   labs(
   x = "\nStudent",
   y = "Exam Score\n"
@@ -379,8 +377,8 @@ tibble(
   `x-M` = X-mean(X)
 ) |> 
   ggplot(aes(ParticipantID,X)) + 
-  geom_point(color = "darkgreen") + 
-  geom_hline(aes(yintercept = mean(X)),color = "red") + 
+  geom_point(color = "#8FAF9E") + 
+  geom_hline(aes(yintercept = mean(X)), color = "#5C715E") + 
   theme_minimal() +
   geom_segment(aes(x = ParticipantID, xend = ParticipantID,
                   y = mean(X),
@@ -691,9 +689,16 @@ $$
 
 ## Variance & Standard deviation
 
--   The Variance is the standard deviation squared: s²
-
--   The Standard Deviation is the square root of the variance: s
+::: term-list
+::: fragment
+[Variance]{.term-pill}
+: The standard deviation, squared -- $s^2$.
+:::
+::: fragment
+[Standard Deviation]{.term-pill}
+: The square root of the variance -- $s$.
+:::
+:::
 
 ## Practice 1 — Basic mean, deviations, variance, SD
 
@@ -750,7 +755,13 @@ list(
 
 ### Mathematically
 
-> Two instructors have class scores: - Class A: scores_A = $[80, 82, 78, 85, 75]$ - Class B: scores_B = $[60, 90, 75, 85, 85]$ 1. Compute the mean and sample SD for each class. 2. Both classes have similar means. Which class has greater dispersion? What does that imply about reporting a “typical” student score?
+Two instructors have class scores:
+
+-   Class A: $scores_A = [80, 82, 78, 85, 75]$
+-   Class B: $scores_B = [60, 90, 75, 85, 85]$
+
+1.  Compute the mean and sample SD for each class.
+2.  Both classes have similar means. Which class has greater dispersion? What does that imply about reporting a "typical" student score?
 
 ## Problem 2: Comparing dispersion
 
@@ -796,7 +807,7 @@ list(
 ## Interpretation
 
 -   Class A: $\bar{x} = 80, s \approx 3.81$
--   Class B: $\bar{x} = 79, s \approx 11.94)$
+-   Class B: $\bar{x} = 79, s \approx 11.94$
 
 ## Problem 2: Comparing dispersion
 
