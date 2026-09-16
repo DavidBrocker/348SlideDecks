@@ -95,6 +95,15 @@ $presentation-title-slide-text-align: left;
     text-align: left;
 }
 
+// Rounded corners on every callout box, site-wide (Dave likes this look).
+// overflow: hidden keeps the colored title bar's corners rounded too --
+// without it the title bar's square background pokes past the rounded
+// card edge.
+.reveal div.callout {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
 // Callout Tip
 .callout-tip{
   padding:10px;
@@ -902,6 +911,23 @@ details[open] summary {
   letter-spacing: 0.02em;
 }
 
+// Small "this is the new thing" flag -- used on lec4's x/x-bar/sum(x)/x^2
+// recap slides to call out which symbol is actually new to students.
+.new-badge {
+  display: inline-block;
+  background: #fff;
+  color: #B5473A;
+  border: 1.5px solid #B5473A;
+  font-weight: 700;
+  font-size: 0.55em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
 // Center the card in whatever space is left below the slide's heading
 // (not the whole slide -- headings stay top-anchored like every other
 // slide in the deck for consistency). Flexbox auto-margins on .hero-def
@@ -919,7 +945,13 @@ details[open] summary {
   border: 2px solid $accent3;
   border-radius: 20px;
   padding: 40px 36px 32px;
-  margin: auto; // centers within the flex column's leftover space (both axes)
+  // Gotcha (found 9/16): margin:auto centered this within whatever
+  // leftover main-axis space reveal.js's own layout/scaling left in the
+  // flex column, which isn't reliably the full slide height -- on some
+  // slides (lec4's Mean/Median/Mode) that came out to a few px, reading
+  // as "no gap under the heading." A fixed top margin doesn't depend on
+  // that computation; left/right stay auto for horizontal centering.
+  margin: 60px auto 40px;
   max-width: 900px;
 
   dl {
