@@ -39,8 +39,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b201c65f3edbfb305feefa552e8e2b1d.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-067137c2a159a10b408128d1de214fcf.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -155,6 +221,10 @@ Dave Brocker
     </div>
 </div>
 
+</section>
+<section class="slide level2">
+
+<p><a href="#/part2-central-tendency" class="you-callout">Jump to Part 2: Measures of Central Tendency →</a></p>
 </section>
 <section id="studying-psychology" class="slide level2">
 <h2>Studying Psychology</h2>
@@ -549,8 +619,8 @@ Purposely make some questions opposite
 Reveal Answer
 </summary>
 <ul>
-<li class="fragment">Predictor variable: <strong>Self-Esteem</strong> | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></li>
-<li class="fragment">Outcome variable: <strong>GPA</strong> | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></li>
+<li>Predictor variable: <strong>Self-Esteem</strong> | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></li>
+<li>Outcome variable: <strong>GPA</strong> | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></li>
 </ul>
 </details>
 </section>
@@ -565,8 +635,8 @@ Reveal Answer
 Reveal Answer
 </summary>
 <ul>
-<li class="fragment">Independent variable: Drug vs.&nbsp;Placebo | <span class="bg" style="--col: #e64173">Categorical (Nominal)</span></li>
-<li class="fragment">Dependent variable: Reaction Time | <span class="bg" style="--col: #e64173">Continuous (Ratio)</span></li>
+<li>Independent variable: Drug vs.&nbsp;Placebo | <span class="bg" style="--col: #e64173">Categorical (Nominal)</span></li>
+<li>Dependent variable: Reaction Time | <span class="bg" style="--col: #e64173">Continuous (Ratio)</span></li>
 </ul>
 </details>
 </section>
@@ -581,8 +651,8 @@ Reveal Answer
 Reveal Answer
 </summary>
 <ul>
-<li class="fragment">Independent variable: Pictures of death versus landscapes | <span class="bg" style="--col: #e64173">Categorical (Nominal)</span></li>
-<li class="fragment">Dependent variable: Anxiety about dying | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></li>
+<li>Independent variable: Pictures of death versus landscapes | <span class="bg" style="--col: #e64173">Categorical (Nominal)</span></li>
+<li>Dependent variable: Anxiety about dying | <span class="bg" style="--col: #e64173">Continuous (Interval)</span></li>
 </ul>
 </details>
 </section>
@@ -615,7 +685,7 @@ Reveal Answer
 <h2>Statistical Terms &amp; Symbols</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="https://media.tenor.com/CowGNQSUsOYAAAAM/confused-math.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://media.tenor.com/CowGNQSUsOYAAAAM/confused-math.gif" class="quarto-figure quarto-figure-center" width="632"></a></p>
+<p><a href="https://media.tenor.com/CowGNQSUsOYAAAAM/confused-math.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://media.tenor.com/CowGNQSUsOYAAAAM/confused-math.gif" class="quarto-figure quarto-figure-center" style="border-radius: 20px;" width="632"></a></p>
 </figure>
 </div>
 </section>
@@ -646,9 +716,9 @@ Reveal Answer
 Reveal Answers
 </summary>
 <ul>
-<li class="fragment">n: 26</li>
-<li class="fragment">x: 98</li>
-<li class="fragment"><span class="math inline">\(\bar{x}\)</span>: 97</li>
+<li>n: 26</li>
+<li>x: 98</li>
+<li><span class="math inline">\(\bar{x}\)</span>: 97</li>
 </ul>
 </details>
 </section>
@@ -665,24 +735,28 @@ Reveal Answers
 <section id="practice-3" class="slide level2">
 <h2>Practice 3</h2>
 <h3 id="be-kind-to-yourself">Be Kind to Yourself!</h3>
+<div class="columns">
+<div class="column" style="width:55%;">
 <blockquote>
 <p>A research study surveys 500 college student across 5 campuses in the United States, asking them to rate their self-esteem on a scale of 1 to 10.</p>
 </blockquote>
 <p>Sample:</p>
 <p>Population:</p>
 <p>Scale of Measurement:</p>
+</div><div class="column" style="width:45%;">
 <details>
 <summary>
 Reveal Answers
 </summary>
 <ul>
-<li class="fragment"><p>Sample: the 500 college students surveyed across the 5 campuses</p></li>
-<li class="fragment"><p>Population: college students in the United States more broadly (what the sample is meant to represent)</p></li>
-<li class="fragment"><p>Scale of Measurement: Ordinal – a 1-10 self-esteem rating is a Likert-style scale, and (per the Ordinal slide earlier) Likert-style ratings are technically ordinal even though they’re often treated as interval in practice. Good discussion point: ask the class why researchers commonly treat scales like this as interval anyway.</p></li>
+<li>Sample: the 500 college students surveyed across the 5 campuses</li>
+<li>Population: college students in the United States more broadly (what the sample is meant to represent)</li>
+<li>Scale of Measurement: Ordinal – technically ordinal (Likert-style), though often treated as interval in practice. Ask the class why researchers commonly treat scales like this as interval anyway.</li>
 </ul>
 </details>
+</div></div>
 </section>
-<section id="measures-of-central-tendency" class="slide level2">
+<section id="part2-central-tendency" class="slide level2">
 <h2>Measures of Central Tendency</h2>
 <h3 id="part-2-whats-in-the-middle">Part 2: What’s in the Middle?</h3>
 </section>
@@ -743,17 +817,24 @@ Reveal Answers
 <section id="review-4" class="slide level2">
 <h2><strong>Review</strong></h2>
 <h3 id="statistical-terms-2">Statistical Terms</h3>
-<ul>
-<li class="fragment"><p>What is a parameter?</p>
-<ul>
-<li class="fragment">Information that describes the population.</li>
-</ul></li>
-<li class="fragment"><p>What is a statistic?</p>
-<ul>
-<li class="fragment"><p>Information that describes the sample.</p></li>
-<li class="fragment"><p>Inferences about the population based on information from the sample.</p></li>
-</ul></li>
-</ul>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Parameter</span></dt>
+<dd class="fragment">
+Information that describes the population.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Statistic</span></dt>
+<dd class="fragment">
+Information that describes the sample – used to make inferences about the population.
+</dd>
+</dl>
+</div>
+</div>
 </section>
 <section id="descriptive-statistics" class="slide level2">
 <h2><strong>Descriptive Statistics</strong></h2>
@@ -781,24 +862,75 @@ Reveal Answers
 <section id="descriptive-statistics-1" class="slide level2">
 <h2><strong>Descriptive Statistics</strong></h2>
 <h3 id="describe-the-characteristics-of-a-sample-in-terms-of">Describe the characteristics of a sample in terms of:</h3>
-<ul>
-<li class="fragment"><p><strong>Central tendency</strong>: What most people said (mean, median, and mode)</p></li>
-<li class="fragment"><p><strong>Dispersion</strong>: How spread out the data are (standard deviation)</p></li>
-</ul>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Central Tendency</span></dt>
+<dd class="fragment">
+What most people said – summarized via the mean, median, and mode.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Dispersion</span></dt>
+<dd class="fragment">
+How spread out the data are – summarized via the standard deviation.
+</dd>
+</dl>
+</div>
+</div>
 </section>
-<section id="measures-of-central-tendency-1" class="slide level2">
+<section id="measures-of-central-tendency" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
+<h3 id="what-do-they-tell-us">What Do They Tell Us?</h3>
 <ul>
-<li class="fragment"><p>Tell us about the mid-point (center) of a distribution.</p></li>
-<li class="fragment"><p>Tell us about the mid-point (center) of a distribution.</p></li>
-<li class="fragment"><p>Tell us most participants’ answer.</p></li>
+<li class="fragment"><p>Where the “center” of a distribution sits</p></li>
+<li class="fragment"><p>What a typical/most common participant answer looks like</p></li>
 </ul>
 </section>
 <section id="the-average-gpa-in-the-class-is-3.2" class="slide level2">
 <h2>The average GPA in the class is 3.2</h2>
 <h3 id="what-does-that-actually-mean">What does that actually mean?</h3>
+<div class="you-callout">
+<p>Turn to a neighbor: what does that single number NOT tell you about the class?</p>
+</div>
+<details>
+<summary>
+Discussion Points
+</summary>
+<ul>
+<li>It can’t tell you whether everyone scored close to 3.2, or half the class is at 4.0 and half is at 2.4</li>
+<li>It doesn’t reveal outliers – a few 1.0s or a few 4.0s can shift it</li>
+<li>Two classes with wildly different distributions of grades could still land on the exact same average</li>
+</ul>
+</details>
 </section>
-<section id="measures-of-central-tendency-2" class="slide level2">
+<section id="quick-latex-primer" class="slide level2">
+<h2>Quick LaTeX Primer</h2>
+<h3 id="reading-the-notation-so-you-dont-have-to-guess">Reading the Notation (So You Don’t Have To Guess)</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment"><p><span class="math inline">\(x\)</span> – a single value in your data</p></li>
+<li class="fragment"><p><span class="math inline">\(\bar{x}\)</span> – “x-bar,” the <strong>mean</strong></p></li>
+<li class="fragment"><p><span class="math inline">\(n\)</span> – the number of values (sample size)</p></li>
+<li class="fragment"><p><span class="math inline">\(\sum\)</span> – “sigma,” meaning <strong>add these up</strong></p></li>
+<li class="fragment"><p><span class="math inline">\(\sum_{i=1}^{n} x_i\)</span> – the formal way of writing “add up every value, 1st through nth” – means the same thing as just writing <span class="math inline">\(x_1 + x_2 + x_3 ...\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\frac{a}{b}\)</span> – a fraction: <span class="math inline">\(a\)</span> divided by <span class="math inline">\(b\)</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="measures-of-central-tendency-1" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="mean-average">Mean | Average</h3>
 <div class="callout callout-important callout-titled callout-style-default">
@@ -810,12 +942,15 @@ Reveal Answers
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li class="fragment"><p>The average; obtained by summing all values and dividing by the number of values.</p></li>
-<li class="fragment"><p><span class="math inline">\(\large{\sum^{n}_{i=1} = x_1 + x_2...}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(\large{\frac{\sum(x)}{n}}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(\large{[3,4,5,2,1] = \frac{\sum(3+4+5+2+1)}{5} = \frac{15}{5} = \bar{x} = 3}\)</span></p></li>
-</ul>
+<div class="fragment">
+<p>The average; obtained by summing all values and dividing by the number of values.</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\Large{\bar{x} = \dfrac{\sum(x)}{n}}\)</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\Large{[3,4,5,2,1] \rightarrow \dfrac{\color{red}{3+4+5+2+1}}{\color{blue}{5}} = \dfrac{15}{5} = \bar{x} = 3}\)</span></p>
+</div>
 </div>
 </div>
 </div>
@@ -824,7 +959,7 @@ Reveal Answers
 <li class="fragment"><p>When would you use this in research?</p></li>
 </ul>
 </section>
-<section id="measures-of-central-tendency-3" class="slide level2">
+<section id="measures-of-central-tendency-2" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="median">Median</h3>
 <div class="callout callout-important callout-titled callout-style-default">
@@ -847,9 +982,10 @@ Reveal Answers
 </div>
 <details>
 <summary>
-Why is median typically used for income?
+Why does income get reported as a median instead of a mean?
 </summary>
 <p>Income distributions are heavily right-skewed by a small number of very high earners, which pulls the mean upward. The median isn’t affected by those extreme values, so it better represents what a “typical” person actually earns.</p>
+<p>For example, O*NET reports the 2025 median annual wage for Psychologists as <strong>$110,840</strong> (<a href="https://www.onetonline.org/link/summary/19-3039.00">O*NET OnLine, 19-3039.00</a>) – a handful of very high (or very low) earners in the field wouldn’t shift that median the way they’d shift a mean.</p>
 </details>
 <details>
 <summary>
@@ -858,7 +994,7 @@ When would you want this for research?
 <p>Any time your variable is skewed or outlier-prone – reaction times, wait times, salaries, hospital stays – the median gives a more honest sense of the “typical” case than the mean does.</p>
 </details>
 </section>
-<section id="measures-of-central-tendency-4" class="slide level2">
+<section id="measures-of-central-tendency-3" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="mode">Mode</h3>
 <div class="callout callout-important callout-titled callout-style-default">
@@ -882,7 +1018,7 @@ When would you want this for research?
 <li class="fragment"><p>When would you want this for research?</p></li>
 </ul>
 </section>
-<section id="measures-of-central-tendency-5" class="slide level2">
+<section id="measures-of-central-tendency-4" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="standard-normal-distribution">Standard Normal Distribution</h3>
 <div class="columns">
@@ -901,7 +1037,7 @@ When would you want this for research?
 <p>Mean = Median = Mode</p>
 </div></div>
 </section>
-<section id="measures-of-central-tendency-6" class="slide level2">
+<section id="measures-of-central-tendency-5" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="mean">Mean</h3>
 <div class="columns">
@@ -917,8 +1053,9 @@ When would you want this for research?
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>The mean is only helpful in a <u><strong>normal distribution</strong></u>, which you may have heard called a normal curve or bell curve.</p></li>
+<li class="fragment"><p>The mean is only helpful in a <u><strong>normal distribution</strong></u> – also called a normal curve or bell curve.</p></li>
 <li class="fragment"><p>We overwhelmingly use the mean, because in the social and behavioral sciences, we nearly always assume the distribution is normal.</p></li>
+<li class="fragment"><p>A histogram (counts, in bins) and a density plot (a smoothed curve) show the same underlying shape – a density plot is just what this histogram would look like with infinitely thin bins.</p></li>
 </ul>
 </div></div>
 </section>
@@ -946,10 +1083,15 @@ When would you want this for research?
 <section id="central-limit-theorem" class="slide level2">
 <h2>Central Limit Theorem</h2>
 <h3 id="the-galton-board"><a href="https://www.mathsisfun.com/data/quincunx.html">The Galton Board</a></h3>
-<p><a href="images/galton.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/galton.png"></a></p>
+<!-- Trial: live iframe of the linked quincunx simulator, replacing the
+     dead images/galton.png reference. Untested against the site's own
+     framing policy -- if it renders blank/blocked, fall back to the
+     images/galton.png treatment (needs a real image) or just the link. -->
+<iframe src="https://www.mathsisfun.com/data/quincunx.html" width="900" height="560" style="border: 2px solid #8FAF9E; border-radius: 16px;">
+</iframe>
 <p><a href="https://editor.p5js.org/pazatico/sketches/n_CYcQBIF">More Examples</a></p>
 </section>
-<section id="measures-of-central-tendency-7" class="slide level2">
+<section id="measures-of-central-tendency-6" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="when-should-we-use-the-median">When should we use the median…</h3>
 <div class="columns">
@@ -964,14 +1106,14 @@ When would you want this for research?
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="measures-of-central-tendency-8" class="slide level2">
+<section id="measures-of-central-tendency-7" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="the-mode"><strong>The Mode</strong></h3>
 <div class="columns">
@@ -985,21 +1127,21 @@ When would you want this for research?
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="measures-of-central-tendency-9" class="slide level2">
+<section id="measures-of-central-tendency-8" class="slide level2">
 <h2><strong>Measures of Central Tendency</strong></h2>
 <h3 id="example-mode"><strong>Example: Mode</strong></h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1031,7 +1173,7 @@ When would you want this for research?
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1044,7 +1186,7 @@ When would you want this for research?
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1057,7 +1199,7 @@ When would you want this for research?
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec3_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+<p><a href="lec3_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lec3_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1065,7 +1207,11 @@ When would you want this for research?
 </section>
 <section id="calculating-measures-of-central-tendency" class="slide level2">
 <h2>Calculating Measures of Central Tendency</h2>
-<h3 id="calculating-the-mean"><strong>Calculating The mean</strong></h3>
+<h3 id="calculating-the-mean">Calculating The Mean</h3>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">By Hand</a></li><li><a href="#tabset-2-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1076,20 +1222,31 @@ When would you want this for research?
 </div>
 <div class="callout-content">
 <ol type="1">
-<li class="fragment">Sum all x values</li>
-<li class="fragment">Divide by the number of x values (n).</li>
-<li class="fragment"><span class="math inline">\(\large{x = 4,2,5,6}\)</span></li>
-<li class="fragment"><span class="math inline">\(\large{\frac{\sum(x)}{n}}\)</span></li>
-<li class="fragment"><span class="math inline">\(\large{\sum(x) = 4 + 2 + 5 + 6 = 17}\)</span></li>
-<li class="fragment"><span class="math inline">\(\large{\frac{17}{4} = \color{red}{4.25}}\)</span></li>
+<li class="fragment">Sum all x values: <span class="math inline">\(x = 4, 2, 5, 6\)</span></li>
+<li class="fragment">Divide by the number of x values (<span class="math inline">\(n\)</span>)</li>
+<li class="fragment"><span class="math inline">\(\dfrac{\sum(x)}{n} = \dfrac{4+2+5+6}{4} = \dfrac{17}{4} = \color{red}{4.25}\)</span></li>
 </ol>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="codewindow r codewindow-dark">
+<p>mean.R</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">mean</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section id="calculating-measures-of-central-tendency-1" class="slide level2">
 <h2>Calculating Measures of Central Tendency</h2>
-<h3 id="calculating-the-median"><strong>Calculating The median</strong></h3>
+<h3 id="calculating-the-median">Calculating The Median</h3>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">By Hand</a></li><li><a href="#tabset-3-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1100,20 +1257,31 @@ When would you want this for research?
 </div>
 <div class="callout-content">
 <ol type="1">
-<li class="fragment">Put all x values in order from smallest or largest or largest to smallest.</li>
-<li class="fragment">Find the middle number.</li>
-<li class="fragment">If there are an even number of x values, take the average of the 2 middle numbers.</li>
-<li class="fragment"><span class="math inline">\(\large{x = \{6,2,4,2,8\}}\)</span></li>
-<li class="fragment"><span class="math inline">\(\large{x = \{2,2,4,6,8\}}\)</span></li>
-<li class="fragment"><span class="math inline">\(\large{x = \{2,2,\color{blue}{4},6,8\}}\)</span></li>
+<li class="fragment">Put all x values in order from smallest to largest</li>
+<li class="fragment">Find the middle number (average the 2 middle numbers if <span class="math inline">\(n\)</span> is even)</li>
+<li class="fragment"><span class="math inline">\(x = \{6,2,4,2,8\} \rightarrow \{2,2,4,6,8\} \rightarrow \text{median} = \color{blue}{4}\)</span></li>
 </ol>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="codewindow r codewindow-dark">
+<p>median.R</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">8</span>)</span>
+<span id="cb2-2"><a aria-label="2"></a><span class="fu">median</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section id="calculating-measures-of-central-tendency-2" class="slide level2">
 <h2>Calculating Measures of Central Tendency</h2>
-<h3 id="calculating-the-mode"><strong>Calculating The mode</strong></h3>
+<h3 id="calculating-the-mode">Calculating The Mode</h3>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">By Hand</a></li><li><a href="#tabset-4-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1124,12 +1292,26 @@ When would you want this for research?
 </div>
 <div class="callout-content">
 <ol type="1">
-<li class="fragment">Put all x values in order from smallest or largest or largest to smallest.</li>
-<li class="fragment">Find the number or numbers that repeat the most.</li>
-<li class="fragment"><span class="math inline">\(\large{x = [3,2,1,5,3,7,8,3,2,4,1]}\)</span></li>
-<li class="fragment"><span class="math inline">\(\large{x = [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]}\)</span></li>
-<li class="fragment">There can be more than 1 mode.</li>
+<li class="fragment">Put all x values in order and count how often each one repeats</li>
+<li class="fragment"><span class="math inline">\(x = [3,2,1,5,3,7,8,3,2,4,1] \rightarrow [1,1,2,2,\color{green}{3},\color{green}{3},\color{green}{3},4,5,7,8]\)</span></li>
+<li class="fragment">The mode is whichever value repeats the most – here, <span class="math inline">\(\color{green}{3}\)</span> (there can be more than one mode)</li>
 </ol>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<div class="codewindow r codewindow-dark">
+<p>mode.R</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb3-2"><a aria-label="2"></a></span>
+<span id="cb3-3"><a aria-label="3"></a><span class="co"># base R has no mode() function for statistical mode --</span></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="co"># mode() actually returns an object's storage type, a classic gotcha</span></span>
+<span id="cb3-5"><a aria-label="5"></a><span class="fu">table</span>(x)</span>
+<span id="cb3-6"><a aria-label="6"></a></span>
+<span id="cb3-7"><a aria-label="7"></a><span class="co"># most frequent value:</span></span>
+<span id="cb3-8"><a aria-label="8"></a><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>

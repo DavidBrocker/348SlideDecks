@@ -104,12 +104,13 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b201c65f3edbfb305feefa552e8e2b1d.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-067137c2a159a10b408128d1de214fcf.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -226,7 +227,7 @@ Dave Brocker
 <li class="fragment"><p><span class="math inline">\(x\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(\bar{x}\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(\sum(x)\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(x^2\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(x^2\)</span> <span class="new-badge">NEW</span></p></li>
 </ul>
 </section>
 <section id="descriptive-statistics-1" class="slide level2">
@@ -237,98 +238,96 @@ Dave Brocker
 <li class="fragment"><p><span class="math inline">\(x\)</span> = refers to the value for 1 person (1 datapoint) in the sample</p></li>
 <li class="fragment"><p><span class="math inline">\(\bar{x}\)</span> = refers to the mean or average value of X in the sample</p></li>
 <li class="fragment"><p><span class="math inline">\(\sum(x)\)</span> = refers to the sum of all x values (sum of all the datapoints)</p></li>
-<li class="fragment"><p><span class="math inline">\(x^2\)</span> = refers to the squared value of x (x multiplied by x)</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{red}{x^2}\)</span> = refers to the squared value of x (x multiplied by x) <span class="new-badge">NEW</span></p></li>
 </ul>
 </div>
 </section>
 <section id="descriptive-statistics-2" class="slide level2">
 <h2>Descriptive Statistics</h2>
 <h3 id="examples">Examples</h3>
+<div class="card" style="text-align:left; max-width:800px; margin:20px auto;">
 <ul>
 <li class="fragment"><p><span class="math inline">\(data = \{1,4,3,2,4,6\}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(x\)</span> = <span class="math inline">\(1 | 4 | 3 | 2 | 4 | 6\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(x\)</span> = <span class="math inline">\(1 \mid 4 \mid 3 \mid 2 \mid 4 \mid 6\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(\bar{x}\)</span> = <span class="math inline">\(3.33\bar{3}\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(\sum(x)\)</span> = <span class="math inline">\(1 + 4 + 3 + 2 + 4 + 6 = 20\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(x^2\)</span> = <span class="math inline">\(1 | 16 | 9 | 4 | 16 | 36\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\color{red}{x^2}\)</span> = <span class="math inline">\(1 \mid 16 \mid 9 \mid 4 \mid 16 \mid 36\)</span> <span class="new-badge">NEW</span></p></li>
 </ul>
+</div>
 </section>
 <section id="descriptive-statistics-3" class="slide level2">
 <h2>Descriptive Statistics</h2>
 <h3 id="describe-the-characteristics-of-a-sample-in-terms-of">Describe the characteristics of a sample in terms of:</h3>
-<ul>
-<li class="fragment"><p>Central tendency</p>
-<ul>
-<li class="fragment"><p>The mid-point of the data</p></li>
-<li class="fragment"><p>The most typical/frequent answers</p></li>
-</ul></li>
-<li class="fragment"><p>Dispersion (aka Variability aka Variance)</p>
-<ul>
-<li class="fragment">Dispersion: the action or process of distributing things or people over a wide area.</li>
-</ul></li>
-</ul>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Central Tendency</span></dt>
+<dd class="fragment">
+The mid-point of the data – the most typical or frequent answer.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Dispersion</span></dt>
+<dd class="fragment">
+Also called variability or variance – how spread out the data is; the action or process of distributing things or people over a wide area.
+</dd>
+</dl>
+</div>
+</div>
 </section>
 <section id="central-tendency-mean" class="slide level2">
 <h2>Central Tendency: Mean</h2>
 <h3 id="what-is-it-when-should-we-use-it-and-how-do-we-calculate-it">What is it, when should we use it, and how do we calculate it?</h3>
-<ul>
-<li class="fragment">Mean
-<ul>
-<li class="fragment">Average of all <span class="math inline">\(x\)</span> values</li>
-<li class="fragment">Normal Distribution</li>
-<li class="fragment">Formula: <span class="math inline">\(\frac{\sum(x)}{n}\)</span></li>
-</ul></li>
-</ul>
+<div class="hero-def">
+<dl>
+<dt class="fragment"><span class="term-pill">Mean</span></dt>
+<dd class="fragment">
+The average of all <span class="math inline">\(x\)</span> values – best used with a normal distribution. Formula: <span class="math inline">\(\dfrac{\sum(x)}{n}\)</span>
+</dd>
+</dl>
+</div>
 </section>
 <section id="central-tendency-median" class="slide level2">
 <h2>Central Tendency: Median</h2>
 <h3 id="what-is-it-when-should-we-use-it-and-how-do-we-calculate-it-1">What is it, when should we use it, and how do we calculate it?</h3>
-<ul>
-<li class="fragment">Median
-<ul>
-<li class="fragment">Middle value in <strong>sorted</strong> data</li>
-<li class="fragment">Skewed distributions
-<ul>
-<li class="fragment">Is the data pulled to the left or the right?</li>
-<li class="fragment"><span class="math inline">\(Med(X) = \frac{n + 1}{2}\)</span></li>
-</ul></li>
-</ul></li>
-</ul>
+<div class="hero-def">
+<dl>
+<dt class="fragment"><span class="term-pill">Median</span></dt>
+<dd class="fragment">
+The middle value in <strong>sorted</strong> data – best used with a skewed distribution (is the data pulled to the left or the right?). Formula: <span class="math inline">\(Med(X) = \dfrac{n + 1}{2}\)</span>
+</dd>
+</dl>
+</div>
 </section>
 <section id="central-tendency-mode" class="slide level2">
 <h2>Central Tendency: Mode</h2>
 <h3 id="what-is-it-when-should-we-use-it-and-how-do-we-calculate-it-2">What is it, when should we use it, and how do we calculate it?</h3>
-<ul>
-<li class="fragment">Mode
-<ul>
-<li class="fragment">Most common value</li>
-<li class="fragment">Bi/Tri-Modal Distributions</li>
-<li class="fragment">Most common value(s)
-<ul>
-<li class="fragment">Shows us that data is clustered</li>
-</ul></li>
-</ul></li>
-</ul>
+<div class="hero-def">
+<dl>
+<dt class="fragment"><span class="term-pill">Mode</span></dt>
+<dd class="fragment">
+The most common value (or values, in bi/tri-modal distributions) – shows us where the data is clustered.
+</dd>
+</dl>
+</div>
 </section>
 <section id="central-tendency" class="slide level2">
 <h2>Central Tendency</h2>
 <h3 id="what-do-measures-of-central-tendency-tell-you">What do measures of Central Tendency tell you?</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>The mid-point in the data</p></li>
-<li class="fragment"><p>The answer most of the participants gave.</p></li>
+<li class="fragment">The mid-point in the data, and the answer most participants gave.</li>
 </ul>
-</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec4_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+<p><a href="lec4_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</div></div>
 </section>
 <section id="central-tendency-1" class="slide level2">
 <h2>Central Tendency</h2>
@@ -337,7 +336,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec4_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+<p><a href="lec4_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -347,20 +346,20 @@ Dave Brocker
 <h2>Measures of Dispersion</h2>
 <h3 id="what-does-dispersion-mean">What does dispersion mean?</h3>
 <ul>
-<li class="fragment"><p>Spread-out-ness</p></li>
+<li class="fragment"><p>Spread</p></li>
 <li class="fragment"><p>How much the participants’ responses differ from one another</p></li>
 <li class="fragment"><p>Variance</p></li>
 </ul>
 </section>
 <section id="measures-of-dispersion-1" class="slide level2">
 <h2>Measures of Dispersion</h2>
-<h3 id="tells-us-about-the-spread-out-ness-of-the-data-but-what-does-that-actually-mean">Tells us about the spread-out-ness of the data, but what does that <em>actually</em> mean?</h3>
+<h3 id="tells-us-about-the-spread-of-the-data-but-what-does-that-actually-mean">Tells us about the spread of the data, but what does that <em>actually</em> mean?</h3>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="lec4_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+<p><a href="lec4_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -369,7 +368,7 @@ Dave Brocker
 </section>
 <section id="measures-of-dispersion-2" class="slide level2">
 <h2>Measures of Dispersion</h2>
-<h3 id="measures-of-dispersion-tell-us-about-the-spread-out-ness-of-the-data-but-what-does-that-actually-mean">Measures of dispersion tell us about the spread-out-ness of the data, but what does that <em>actually</em> mean?</h3>
+<h3 id="measures-of-dispersion-tell-us-about-the-spread-of-the-data-but-what-does-that-actually-mean">Measures of dispersion tell us about the spread of the data, but what does that <em>actually</em> mean?</h3>
 <ul>
 <li class="fragment">If I am measuring <strong>phone usage</strong> what would low dispersion tell me?</li>
 <li class="fragment">If I am measuring <strong>phone usage</strong>, what would high dispersion tell me?</li>
@@ -381,11 +380,11 @@ Dave Brocker
 <ul>
 <li class="fragment"><p>Did participants give similar answers?</p>
 <ul>
-<li class="fragment"><span class="math inline">\(\{1,2,2,1,2,2,3,2,1\}\)</span></li>
+<li class="fragment"><span class="math inline">\(\begin{bmatrix}1 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; 2 &amp; 1\end{bmatrix}\)</span></li>
 </ul></li>
 <li class="fragment"><p>Did participants give wildly different answers?</p>
 <ul>
-<li class="fragment"><span class="math inline">\(\{1,3,4,5,8,9,21,33\}\)</span></li>
+<li class="fragment"><span class="math inline">\(\begin{bmatrix}1 &amp; 3 &amp; 4 &amp; 5 &amp; 8 &amp; 9 &amp; 21 &amp; 33\end{bmatrix}\)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -871,56 +870,56 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="2" class="gt_heading gt_title gt_font_normal">Sample Data</td>
+<td colspan="2" class="gt_heading gt_title gt_font_normal" style="font-weight: bold">Sample Data</td>
 </tr>
 <tr class="gt_heading even">
-<td colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">X values for 10 participants</td>
+<td colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-style: italic; font-weight: normal">X values for 10 participants</td>
 </tr>
 <tr class="gt_col_headings header">
-<th id="Participant" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Participant</th>
-<th id="X" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">X</th>
+<th id="Participant" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">Participant</th>
+<th id="X" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">X</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="Participant">1</td>
-<td class="gt_row gt_center" headers="X">1</td>
+<td class="gt_row gt_center" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="Participant">2</td>
-<td class="gt_row gt_center gt_striped" headers="X">3</td>
+<td class="gt_row gt_center gt_striped" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="Participant">3</td>
-<td class="gt_row gt_center" headers="X">2</td>
+<td class="gt_row gt_center" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="Participant">4</td>
-<td class="gt_row gt_center gt_striped" headers="X">2</td>
+<td class="gt_row gt_center gt_striped" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">4</td>
+<td class="gt_row gt_center gt_striped" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="Participant">5</td>
-<td class="gt_row gt_center" headers="X">3</td>
+<td class="gt_row gt_center" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">5</td>
+<td class="gt_row gt_center" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="Participant">6</td>
-<td class="gt_row gt_center gt_striped" headers="X">2</td>
+<td class="gt_row gt_center gt_striped" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">6</td>
+<td class="gt_row gt_center gt_striped" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="Participant">7</td>
-<td class="gt_row gt_center" headers="X">1</td>
+<td class="gt_row gt_center" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">7</td>
+<td class="gt_row gt_center" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="Participant">8</td>
-<td class="gt_row gt_center gt_striped" headers="X">3</td>
+<td class="gt_row gt_center gt_striped" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">8</td>
+<td class="gt_row gt_center gt_striped" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="Participant">9</td>
-<td class="gt_row gt_center" headers="X">1</td>
+<td class="gt_row gt_center" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">9</td>
+<td class="gt_row gt_center" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="Participant">10</td>
-<td class="gt_row gt_center gt_striped" headers="X">2</td>
+<td class="gt_row gt_center gt_striped" headers="Participant" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">10</td>
+<td class="gt_row gt_center gt_striped" headers="X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
 </tr>
 </tbody>
 </table>
@@ -932,19 +931,24 @@ Dave Brocker
 <section id="deviation-scores" class="slide level2">
 <h2>Deviation Scores</h2>
 <h3 id="calculate-how-far-each-x-value-is-from-the-mean">Calculate how far each x-value is from the mean</h3>
+<div class="term-list">
 <div class="fragment">
-<p>Step 1. Examine Data</p>
+<dl>
+<dt class="fragment"><span class="term-pill"><span class="math inline">\(Step\ 1\)</span>: Examine Data</span></dt>
+<dd class="fragment">
+<span class="math inline">\(data = \{1,3,2,2,3,2,1,3,1,2\}\)</span>
+</dd>
+</dl>
 </div>
-<ul>
-<li class="fragment"><span class="math inline">\(data = \{1,3,2,2,3,2,1,3,1,2\}\)</span></li>
-</ul>
 <div class="fragment">
-<p>Step 2. Calculate Mean</p>
+<dl>
+<dt class="fragment"><span class="term-pill"><span class="math inline">\(Step\ 2\)</span>: Calculate the Mean</span></dt>
+<dd class="fragment">
+<span class="math inline">\(\bar{x} = \dfrac{\sum(x)}{n} = \dfrac{1+3+2+2+3+2+1+3+1+2}{10} = \dfrac{20}{10} = 2\)</span>
+</dd>
+</dl>
 </div>
-<ul>
-<li class="fragment"><p><span class="math inline">\(\bar{x} = \frac{\sum(x)}{n} = 1 + 3 + 2...\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(\bar{x} = \frac{20}{10} = 2\)</span></p></li>
-</ul>
+</div>
 </section>
 <section id="deviation-scores-1" class="slide level2">
 <h2>Deviation Scores</h2>
@@ -1414,67 +1418,67 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="3" class="gt_heading gt_title gt_font_normal">Deviation Scores</td>
+<td colspan="3" class="gt_heading gt_title gt_font_normal" style="font-weight: bold">Deviation Scores</td>
 </tr>
 <tr class="gt_heading even">
-<td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Each x value's distance from the mean</td>
+<td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-style: italic; font-weight: normal">Each x value's distance from the mean</td>
 </tr>
 <tr class="gt_col_headings header">
-<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">ParticipantID</th>
-<th id="x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">x</th>
-<th id="xM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\(x-\bar{x}\)</span></th>
+<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">ParticipantID</th>
+<th id="x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">x</th>
+<th id="xM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\(x-\bar{x}\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">1</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="xM">-1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">2</td>
-<td class="gt_row gt_center gt_striped" headers="x">3</td>
-<td class="gt_row gt_center gt_striped" headers="xM">1</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center gt_striped" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">3</td>
-<td class="gt_row gt_center" headers="x">2</td>
-<td class="gt_row gt_center" headers="xM">0</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">4</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="xM">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">4</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">5</td>
-<td class="gt_row gt_center" headers="x">3</td>
-<td class="gt_row gt_center" headers="xM">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">5</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">6</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="xM">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">6</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">7</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="xM">-1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">7</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">8</td>
-<td class="gt_row gt_center gt_striped" headers="x">3</td>
-<td class="gt_row gt_center gt_striped" headers="xM">1</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">8</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center gt_striped" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">9</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="xM">-1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">9</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">10</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="xM">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">10</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="xM" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 </tbody>
 </table>
@@ -1490,7 +1494,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec4_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="lec4_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1503,7 +1507,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec4_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="lec4_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec4_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1532,8 +1536,8 @@ Dave Brocker
 <h3 id="stop-being-so-negative">Stop Being So Negative!</h3>
 <ul>
 <li class="fragment"><p>The problem is the negative numbers!</p></li>
-<li class="fragment"><p>How do we get rid of negative numbers</p></li>
-<li class="fragment"><p><span class="math inline">\((x-\bar{x})^2 = (1-2) = 0 | (1-2)^2 = 1\)</span></p></li>
+<li class="fragment"><p>How do we get rid of negative numbers?</p></li>
+<li class="fragment"><p><span class="math inline">\((x - \bar{x}) = (1-2) = -1 \quad\rightarrow\quad (x-\bar{x})^2 = (-1)^2 = 1\)</span></p></li>
 </ul>
 </section>
 <section id="calculating-dispersion-8" class="slide level2">
@@ -1994,78 +1998,78 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="4" class="gt_heading gt_title gt_font_normal">Squared Deviations</td>
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style="font-weight: bold">Squared Deviations</td>
 </tr>
 <tr class="gt_heading even">
-<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Removing the negative signs</td>
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-style: italic; font-weight: normal">Removing the negative signs</td>
 </tr>
 <tr class="gt_col_headings header">
-<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">ParticipantID</th>
-<th id="x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">x</th>
-<th id="x-M" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x})\)</span></th>
-<th id="a(x-M)^2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x}^2)\)</span></th>
+<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">ParticipantID</th>
+<th id="x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">x</th>
+<th id="x-M" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\((x-\bar{x})\)</span></th>
+<th id="a(x-M)^2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\((x-\bar{x}^2)\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">1</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="x-M">-1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">2</td>
-<td class="gt_row gt_center gt_striped" headers="x">3</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">1</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">3</td>
-<td class="gt_row gt_center" headers="x">2</td>
-<td class="gt_row gt_center" headers="x-M">0</td>
-<td class="gt_row gt_center" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">4</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">0</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">4</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">5</td>
-<td class="gt_row gt_center" headers="x">3</td>
-<td class="gt_row gt_center" headers="x-M">1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">5</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">6</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">0</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">6</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">7</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="x-M">-1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">7</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">8</td>
-<td class="gt_row gt_center gt_striped" headers="x">3</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">1</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">8</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">9</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="x-M">-1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">9</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">10</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">0</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">10</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 </tbody>
 </table>
@@ -2549,75 +2553,75 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">Sum of Squared Deviations</td>
+<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="font-weight: bold">Sum of Squared Deviations</td>
 </tr>
 <tr class="gt_col_headings even">
-<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">ParticipantID</th>
-<th id="x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">x</th>
-<th id="x-M" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x})\)</span></th>
-<th id="a(x-M)^2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x}^2)\)</span></th>
+<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">ParticipantID</th>
+<th id="x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">x</th>
+<th id="x-M" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\((x-\bar{x})\)</span></th>
+<th id="a(x-M)^2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\((x-\bar{x}^2)\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">1</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="x-M">-1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">2</td>
-<td class="gt_row gt_center gt_striped" headers="x">3</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">1</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">3</td>
-<td class="gt_row gt_center" headers="x">2</td>
-<td class="gt_row gt_center" headers="x-M">0</td>
-<td class="gt_row gt_center" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">4</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">0</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">4</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">5</td>
-<td class="gt_row gt_center" headers="x">3</td>
-<td class="gt_row gt_center" headers="x-M">1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">5</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">6</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">0</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">6</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">7</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="x-M">-1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">7</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">8</td>
-<td class="gt_row gt_center gt_striped" headers="x">3</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">1</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">8</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="ParticipantID">9</td>
-<td class="gt_row gt_center" headers="x">1</td>
-<td class="gt_row gt_center" headers="x-M">-1</td>
-<td class="gt_row gt_center" headers="(x-M)^2">1</td>
+<td class="gt_row gt_center" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">9</td>
+<td class="gt_row gt_center" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
+<td class="gt_row gt_center" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">-1</td>
+<td class="gt_row gt_center" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="ParticipantID">10</td>
-<td class="gt_row gt_center gt_striped" headers="x">2</td>
-<td class="gt_row gt_center gt_striped" headers="x-M">0</td>
-<td class="gt_row gt_center gt_striped" headers="(x-M)^2">0</td>
+<td class="gt_row gt_center gt_striped" headers="ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">10</td>
+<td class="gt_row gt_center gt_striped" headers="x" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2</td>
+<td class="gt_row gt_center gt_striped" headers="x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
+<td class="gt_row gt_center gt_striped" headers="(x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">0</td>
 </tr>
 </tbody>
 </table>
@@ -2631,13 +2635,17 @@ Dave Brocker
 <h3 id="divide-by-n-1-to-estimate">Divide by n-1 to Estimate</h3>
 <p>Step 5: Divide by (n-1).</p>
 <ul>
-<li class="fragment"><p>(n-1) refers to the <em>degrees of freedom</em>… don’t worry about it for now.</p></li>
-<li class="fragment"><p><span class="math inline">\(\frac{\sum (x-\bar{x})^2}{n-1}\)</span></p></li>
-<li class="fragment"><p>Variance</p>
-<ul>
-<li class="fragment">The fact or quality of being different, divergent, or inconsistent.</li>
-</ul></li>
+<li class="fragment"><p><span class="math inline">\(\dfrac{\sum (x-\bar{x})^2}{n-1}\)</span></p></li>
+<li class="fragment"><p>(n-1) is called the <em>degrees of freedom</em> – we use it here because we’re estimating the population’s variance from a sample, and dividing by a slightly smaller number corrects for that estimation.</p></li>
 </ul>
+<div class="hero-def" style="border-color:#8FAF9E;">
+<dl>
+<dt class="fragment"><span class="term-pill">Variance</span></dt>
+<dd class="fragment">
+The fact or quality of being different, divergent, or inconsistent.
+</dd>
+</dl>
+</div>
 </section>
 <section id="calculating-dispersion-13" class="slide level2">
 <h2>Calculating Dispersion</h2>
@@ -3109,75 +3117,75 @@ Dave Brocker
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="5" class="gt_heading gt_title gt_font_normal">Why We Divide by n − 1</td>
+<td colspan="5" class="gt_heading gt_title gt_font_normal" style="font-weight: bold">Why We Divide by n − 1</td>
 </tr>
 <tr class="gt_heading even">
-<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Correcting the inflation from squaring</td>
+<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-style: italic; font-weight: normal">Correcting the inflation from squaring</td>
 </tr>
 <tr class="gt_col_headings header">
 <th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">ParticipantID</th>
-<th id="X" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">X</th>
-<th id="x-M" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x})\)</span></th>
-<th id="a(x-M)^2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x}^2)\)</span></th>
+<th id="ParticipantID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">ParticipantID</th>
+<th id="X" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col">X</th>
+<th id="x-M" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\((x-\bar{x})\)</span></th>
+<th id="a(x-M)^2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #5C715E" scope="col"><span class="math inline">\((x-\bar{x}^2)\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
-<td class="gt_row gt_right" headers="stub_1_1 ParticipantID">1&nbsp;</td>
-<td class="gt_row gt_right" headers="stub_1_1 X">40.55 </td>
-<td class="gt_row gt_right" headers="stub_1_1 x-M">−2.79 </td>
-<td class="gt_row gt_right" headers="stub_1_1 (x-M)^2"> 7.782</td>
+<th id="stub_1_1" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_center" headers="stub_1_1 ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">1&nbsp;</td>
+<td class="gt_row gt_center" headers="stub_1_1 X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">40.55 </td>
+<td class="gt_row gt_center" headers="stub_1_1 x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">−2.79 </td>
+<td class="gt_row gt_center" headers="stub_1_1 (x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1"> 7.782</td>
 </tr>
 <tr class="even">
-<th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
-<td class="gt_row gt_right" headers="stub_1_2 ParticipantID">2&nbsp;</td>
-<td class="gt_row gt_right" headers="stub_1_2 X">48.55 </td>
-<td class="gt_row gt_right" headers="stub_1_2 x-M"> 5.21 </td>
-<td class="gt_row gt_right" headers="stub_1_2 (x-M)^2">27.145</td>
+<th id="stub_1_2" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_center gt_striped" headers="stub_1_2 ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">2&nbsp;</td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_2 X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">48.55 </td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_2 x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1"> 5.21 </td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_2 (x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">27.145</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_3" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
-<td class="gt_row gt_right" headers="stub_1_3 ParticipantID">3&nbsp;</td>
-<td class="gt_row gt_right" headers="stub_1_3 X">46.751</td>
-<td class="gt_row gt_right" headers="stub_1_3 x-M"> 3.411</td>
-<td class="gt_row gt_right" headers="stub_1_3 (x-M)^2">11.636</td>
+<th id="stub_1_3" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_center" headers="stub_1_3 ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">3&nbsp;</td>
+<td class="gt_row gt_center" headers="stub_1_3 X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">46.751</td>
+<td class="gt_row gt_center" headers="stub_1_3 x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1"> 3.411</td>
+<td class="gt_row gt_center" headers="stub_1_3 (x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">11.636</td>
 </tr>
 <tr class="even">
-<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
-<td class="gt_row gt_right" headers="stub_1_4 ParticipantID">4&nbsp;</td>
-<td class="gt_row gt_right" headers="stub_1_4 X">42.035</td>
-<td class="gt_row gt_right" headers="stub_1_4 x-M">−1.304</td>
-<td class="gt_row gt_right" headers="stub_1_4 (x-M)^2"> 1.701</td>
+<th id="stub_1_4" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_center gt_striped" headers="stub_1_4 ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">4&nbsp;</td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_4 X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">42.035</td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_4 x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">−1.304</td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_4 (x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1"> 1.701</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_5" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
-<td class="gt_row gt_right" headers="stub_1_5 ParticipantID">5&nbsp;</td>
-<td class="gt_row gt_right" headers="stub_1_5 X">45.682</td>
-<td class="gt_row gt_right" headers="stub_1_5 x-M"> 2.342</td>
-<td class="gt_row gt_right" headers="stub_1_5 (x-M)^2"> 5.485</td>
+<th id="stub_1_5" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_center" headers="stub_1_5 ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">5&nbsp;</td>
+<td class="gt_row gt_center" headers="stub_1_5 X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">45.682</td>
+<td class="gt_row gt_center" headers="stub_1_5 x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1"> 2.342</td>
+<td class="gt_row gt_center" headers="stub_1_5 (x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1"> 5.485</td>
 </tr>
 <tr class="even">
-<th id="stub_1_6" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
-<td class="gt_row gt_right" headers="stub_1_6 ParticipantID">6&nbsp;</td>
-<td class="gt_row gt_right" headers="stub_1_6 X">36.47 </td>
-<td class="gt_row gt_right" headers="stub_1_6 x-M">−6.869</td>
-<td class="gt_row gt_right" headers="stub_1_6 (x-M)^2">47.188</td>
+<th id="stub_1_6" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_center gt_striped" headers="stub_1_6 ParticipantID" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">6&nbsp;</td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_6 X" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">36.47 </td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_6 x-M" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">−6.869</td>
+<td class="gt_row gt_center gt_striped" headers="stub_1_6 (x-M)^2" style="border-left-width: 1px; border-left-style: solid; border-left-color: #DCE8E1; border-top-width: 1px; border-top-style: solid; border-top-color: #DCE8E1">47.188</td>
 </tr>
 <tr class="odd">
 <th id="grand_summary_stub_1" class="gt_row gt_left gt_stub gt_grand_summary_row gt_first_grand_summary_row" data-quarto-table-cell-role="th" scope="row">Sum</th>
-<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 ParticipantID">—</td>
-<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 X">—</td>
-<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 x-M">—</td>
-<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 (x-M)^2">100.93818</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 ParticipantID" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">—</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 X" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">—</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 x-M" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">—</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row" headers="grand_summary_stub_1 (x-M)^2" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">100.93818</td>
 </tr>
 <tr class="even">
 <th id="grand_summary_stub_2" class="gt_row gt_left gt_stub gt_grand_summary_row gt_last_summary_row" data-quarto-table-cell-role="th" scope="row">Mean</th>
-<td class="gt_row gt_right gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 ParticipantID">—</td>
-<td class="gt_row gt_right gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 X">—</td>
-<td class="gt_row gt_right gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 x-M">—</td>
-<td class="gt_row gt_right gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 (x-M)^2">20.18764</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 ParticipantID" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">—</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 X" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">—</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 x-M" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">—</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_2 (x-M)^2" style="font-weight: bold; border-top-width: 2px; border-top-style: solid; border-top-color: #5C715E">20.18764</td>
 </tr>
 </tbody>
 </table>
@@ -3189,45 +3197,51 @@ Dave Brocker
 <section id="calculating-dispersion-15" class="slide level2">
 <h2>Calculating Dispersion</h2>
 <p>Step 6: Take the square root.</p>
-<ul>
-<li class="fragment"><span class="math inline">\(\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}\)</span></li>
-</ul>
+<p><span class="math display">\[
+\Large{\sqrt{\dfrac{\sum(x-\bar{x})^2}{n-1}}}
+\]</span></p>
 </section>
 <section id="calculating-standard-deviation" class="slide level2">
 <h2>Calculating Standard Deviation</h2>
 <h3 id="step-by-step">Step-by-Step</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
 <ol type="1">
-<li class="fragment"><p>Mean: Calculate the mean.</p>
-<ul>
-<li class="fragment"><span class="math inline">\(\bar{x}\)</span></li>
-</ul></li>
-<li class="fragment"><p>Deviation scores: Subtract the mean from each x-value.</p>
-<ul>
-<li class="fragment"><span class="math inline">\((x-\bar{x})\)</span></li>
-</ul></li>
-<li class="fragment"><p>Squared deviations: Square each deviation score.</p>
-<ul>
-<li class="fragment"><span class="math inline">\((x-\bar{x})^2\)</span></li>
-</ul></li>
-<li class="fragment"><p>Sum of squares: Add up the squared deviations.</p>
-<ul>
-<li class="fragment"><span class="math inline">\(\sum(x-\bar{x})^2\)</span></li>
-</ul></li>
+<li class="fragment">Mean: Calculate the mean – <span class="math inline">\(\bar{x}\)</span></li>
+<li class="fragment">Deviation scores: Subtract the mean from each x-value – <span class="math inline">\((x-\bar{x})\)</span></li>
+<li class="fragment">Squared deviations: Square each deviation score – <span class="math inline">\((x-\bar{x})^2\)</span></li>
+<li class="fragment">Sum of squares: Add up the squared deviations – <span class="math inline">\(\sum(x-\bar{x})^2\)</span></li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 <section id="calculating-standard-deviation-1" class="slide level2">
 <h2>Calculating Standard Deviation</h2>
 <h3 id="step-by-step-1">Step-by-Step</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
 <ol start="5" type="1">
-<li class="fragment"><p>Variance: Divide the sum of squares by (n-1).</p>
-<ul>
-<li class="fragment"><span class="math inline">\(\frac{\sum(x-\bar{x})^2}{n-1}\)</span></li>
-</ul></li>
-<li class="fragment"><p>Standard Deviation: Take the square root of the variance.</p>
-<ul>
-<li class="fragment"><span class="math inline">\(\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}\)</span></li>
-</ul></li>
+<li class="fragment">Variance: Divide the sum of squares by (n-1) – <span class="math inline">\(\dfrac{\sum(x-\bar{x})^2}{n-1}\)</span></li>
+<li class="fragment">Standard Deviation: Take the square root of the variance – <span class="math inline">\(\sqrt{\dfrac{\sum(x-\bar{x})^2}{n-1}}\)</span></li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 <section id="formulas-for-dispersion" class="slide level2">
 <h2>Formulas for Dispersion</h2>
@@ -3283,35 +3297,79 @@ Dave Brocker
 </section>
 <section id="variance-standard-deviation" class="slide level2">
 <h2>Variance &amp; Standard deviation</h2>
-<ul>
-<li class="fragment"><p>The Variance is the standard deviation squared: s²</p></li>
-<li class="fragment"><p>The Standard Deviation is the square root of the variance: s</p></li>
-</ul>
-</section>
-<section id="practice-1-basic-mean-deviations-variance-sd" class="slide level2">
-<h2>Practice 1 — Basic mean, deviations, variance, SD</h2>
-<p><strong>Problem (do by hand first):</strong><br>
-Compute the <strong>sample mean</strong>, each <strong>deviation</strong> from the mean, the <strong>sum of squared deviations</strong>, the <strong>sample variance</strong>, and the <strong>sample standard deviation</strong> for the dataset:</p>
-<p><code>x = [4, 2, 5, 6, 3]</code></p>
+<h3 id="the-relationship">The Relationship</h3>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Variance</span></dt>
+<dd class="fragment">
+The standard deviation, squared – <span class="math inline">\(s^2\)</span>.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Standard Deviation</span></dt>
+<dd class="fragment">
+The square root of the variance – <span class="math inline">\(s\)</span>.
+</dd>
+</dl>
+</div>
+</div>
 </section>
 <section id="practice-1" class="slide level2">
 <h2>Practice 1</h2>
+<h3 id="basic-mean-deviations-variance-sd">Basic mean, deviations, variance, SD</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Problem (do by hand first):</strong><br>
+Compute the <strong>sample mean</strong>, each <strong>deviation</strong> from the mean, the <strong>sum of squared deviations</strong>, the <strong>sample variance</strong>, and the <strong>sample standard deviation</strong> for the dataset:</p>
+<p><span class="math inline">\(x = [4, 2, 5, 6, 3]\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="practice-1-1" class="slide level2">
+<h2>Practice 1</h2>
 <h3 id="solution-steps">Solution (steps)</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">By Hand</a></li><li><a href="#tabset-1-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
 <ol type="1">
-<li class="fragment">Sum: <span class="math inline">\((\sum x = 4+2+5+6+3 = 20)\)</span></li>
-<li class="fragment">Sample size: <span class="math inline">\((n = 5)\)</span></li>
-<li class="fragment">Mean: <span class="math inline">\((\bar{x} = \frac{20}{5} = 4)\)</span></li>
-<li class="fragment">Deviations: <span class="math inline">\((x_i - \bar{x} = [0, -2, 1, 2, -1])\)</span></li>
-<li class="fragment">Squared deviations: <span class="math inline">\(([0, 4, 1, 4, 1])\)</span></li>
-<li class="fragment">Sum of squared deviations: <span class="math inline">\((0+4+1+4+1 = 10)\)</span></li>
-<li class="fragment">Sample variance: <span class="math inline">\((s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5)\)</span></li>
-<li class="fragment">Sample SD: <span class="math inline">\((s = \sqrt{2.5} \approx 1.5811)\)</span></li>
+<li class="fragment">Sum: <span class="math inline">\(\sum x = 4+2+5+6+3 = 20\)</span></li>
+<li class="fragment">Sample size: <span class="math inline">\(n = 5\)</span></li>
+<li class="fragment">Mean: <span class="math inline">\(\bar{x} = \dfrac{20}{5} = 4\)</span></li>
+<li class="fragment">Deviations: <span class="math inline">\(x_i - \bar{x} = [0, -2, 1, 2, -1]\)</span></li>
+<li class="fragment">Squared deviations: <span class="math inline">\([0, 4, 1, 4, 1]\)</span></li>
+<li class="fragment">Sum of squared deviations: <span class="math inline">\(0+4+1+4+1 = 10\)</span></li>
+<li class="fragment">Sample variance: <span class="math inline">\(s^2 = \dfrac{\sum (x_i-\bar{x})^2}{n-1} = \dfrac{10}{4} = 2.5\)</span></li>
+<li class="fragment">Sample SD: <span class="math inline">\(s = \sqrt{2.5} \approx 1.5811\)</span></li>
 </ol>
-</div><div class="column" style="width:50%;">
-<div class="cell columns column-output-location">
-<div class="column">
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="codewindow r">
+<p>practice1.R</p>
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">3</span>)</span>
 <span id="cb1-2"><a aria-label="2"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
 <span id="cb1-3"><a aria-label="3"></a>sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
@@ -3331,7 +3389,6 @@ Compute the <strong>sample mean</strong>, each <strong>deviation</strong> from t
 <span id="cb1-17"><a aria-label="17"></a>  <span class="at">sample_variance =</span> s2,</span>
 <span id="cb1-18"><a aria-label="18"></a>  <span class="at">sample_sd =</span> s</span>
 <span id="cb1-19"><a aria-label="19"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>$n
 [1] 5
@@ -3357,57 +3414,88 @@ $sample_variance
 $sample_sd
 [1] 1.581139</code></pre>
 </div>
-</div></div>
-</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="problem-2-comparing-dispersion" class="slide level2">
 <h2>Problem 2: Comparing dispersion</h2>
 <h3 id="mathematically">Mathematically</h3>
-<blockquote>
-<p>Two instructors have class scores: - Class A: scores_A = <span class="math inline">\([80, 82, 78, 85, 75]\)</span> - Class B: scores_B = <span class="math inline">\([60, 90, 75, 85, 85]\)</span> 1. Compute the mean and sample SD for each class. 2. Both classes have similar means. Which class has greater dispersion? What does that imply about reporting a “typical” student score?</p>
-</blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Two instructors have class scores:</p>
+<ul>
+<li class="fragment">Class A: <span class="math inline">\(scores_A = [80, 82, 78, 85, 75]\)</span></li>
+<li class="fragment">Class B: <span class="math inline">\(scores_B = [60, 90, 75, 85, 85]\)</span></li>
+</ul>
+<ol type="1">
+<li class="fragment">Compute the mean and sample SD for each class.</li>
+<li class="fragment">Both classes have similar means. Which class has greater dispersion? What does that imply about reporting a “typical” student score?</li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="problem-2-comparing-dispersion-1" class="slide level2">
 <h2>Problem 2: Comparing dispersion</h2>
 <h3 id="mathematically-1">Mathematically</h3>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Class A</strong></p>
 <ul>
-<li class="fragment"><p><strong>Step 1: Compute the mean</strong></p>
-<ul>
-<li class="fragment"><span class="math inline">\(\bar{x}_A = \frac{80+82+78+85+75}{5} = \frac{400}{5} = 80\)</span></li>
-</ul></li>
-<li class="fragment"><p><strong>Step 2: Compute deviations and squared deviations</strong></p></li>
-<li class="fragment"><p><span class="math inline">\(x_i - \bar{x}_A = [0, 2, -2, 5, -5]\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\((x_i - \bar{x}_A)^2 = [0, 4, 4, 25, 25]\)</span></p></li>
-<li class="fragment"><p><strong>Step 3: Compute variance and SD</strong></p></li>
-<li class="fragment"><p><span class="math inline">\(s_A^2 = \frac{\sum (x_i - \bar{x}_A)^2}{n-1} = \frac{58}{4} = 14.5\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(s_A = \sqrt{14.5} \approx 3.81\)</span></p></li>
+<li class="fragment">Mean: <span class="math inline">\(\bar{x}_A = \dfrac{80+82+78+85+75}{5} = \dfrac{400}{5} = 80\)</span></li>
+<li class="fragment">Deviations: <span class="math inline">\(x_i - \bar{x}_A = [0, 2, -2, 5, -5]\)</span></li>
+<li class="fragment">Squared deviations: <span class="math inline">\((x_i - \bar{x}_A)^2 = [0, 4, 4, 25, 25]\)</span></li>
+<li class="fragment">Variance and SD: <span class="math inline">\(s_A^2 = \dfrac{\sum (x_i - \bar{x}_A)^2}{n-1} = \dfrac{58}{4} = 14.5 \quad\rightarrow\quad s_A = \sqrt{14.5} \approx 3.81\)</span></li>
 </ul>
+</div>
+</div>
+</div>
 </div><div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Class B</strong></p>
 <ul>
-<li class="fragment"><p><strong>Step 1: Compute the mean</strong></p>
-<ul>
-<li class="fragment"><span class="math inline">\(\bar{x}_B = \frac{60+90+75+85+85}{5} = \frac{395}{5} = 79\)</span></li>
-</ul></li>
-<li class="fragment"><p><strong>Step 2: Compute deviations and squared deviations</strong></p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(x_i - \bar{x}_B = [-19, 11, -4, 6, 6]\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\((x_i - \bar{x}_B)^2 = [361, 121, 16, 36, 36]\)</span></p></li>
-</ul></li>
-<li class="fragment"><p><strong>Step 3: Compute variance and SD</strong></p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(s_B^2 = \frac{\sum (x_i - \bar{x}_B)^2}{n-1} = \frac{570}{4} = 142.5\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(s_B = \sqrt{142.5} \approx 11.94\)</span></p></li>
-</ul></li>
+<li class="fragment">Mean: <span class="math inline">\(\bar{x}_B = \dfrac{60+90+75+85+85}{5} = \dfrac{395}{5} = 79\)</span></li>
+<li class="fragment">Deviations: <span class="math inline">\(x_i - \bar{x}_B = [-19, 11, -4, 6, 6]\)</span></li>
+<li class="fragment">Squared deviations: <span class="math inline">\((x_i - \bar{x}_B)^2 = [361, 121, 16, 36, 36]\)</span></li>
+<li class="fragment">Variance and SD: <span class="math inline">\(s_B^2 = \dfrac{\sum (x_i - \bar{x}_B)^2}{n-1} = \dfrac{570}{4} = 142.5 \quad\rightarrow\quad s_B = \sqrt{142.5} \approx 11.94\)</span></li>
 </ul>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="interpretation" class="slide level2">
 <h2>Interpretation</h2>
 <ul>
 <li class="fragment">Class A: <span class="math inline">\(\bar{x} = 80, s \approx 3.81\)</span></li>
-<li class="fragment">Class B: <span class="math inline">\(\bar{x} = 79, s \approx 11.94)\)</span></li>
+<li class="fragment">Class B: <span class="math inline">\(\bar{x} = 79, s \approx 11.94\)</span></li>
 </ul>
 </section>
 <section id="problem-2-comparing-dispersion-2" class="slide level2">
@@ -3447,8 +3535,6 @@ $n
 </div></div>
 
 
-<script> window._input_file = "---\n" + "title: \"Dispersion\"\n" + "subtitle: \"PSY 348: Lecture 4\"\n" + "author: \"Dave Brocker\"\n" + "institute: \"Farmingdale State College\"\n" + "footer: \"Dispersion | ⬡⬢⬡⬢\"\n" + "filters: \n" + "  - linkate\n" + "  - editable\n" + "format: \n" + "  revealjs:\n" + "    theme: ../custom.scss\n" + "    chalkboard: true\n" + "    slide-number: c/t\n" + "    preview-links: true\n" + "    incremental: true   \n" + "    touch: true\n" + "    width: 1600\n" + "    height: 900\n" + "    lightbox: true\n" + "    menu:\n" + "      side: right\n" + "      width: wide\n" + "revealjs-plugins:\n" + "  - editable\n" + "---\n" + "\n" + "## Descriptive Statistics\n" + "\n" + "### The Old and the New\n" + "\n" + "-   $x$\n" + "\n" + "-   $\bar{x}$\n" + "\n" + "-   $\sum(x)$\n" + "\n" + "-   $x^2$\n" + "\n" + "## Descriptive Statistics\n" + "\n" + "### The Old and the New\n" + "\n" + "::: {.incremental .highlight-last}\n" + "-   $x$ = refers to the value for 1 person (1 datapoint) in the sample\n" + "\n" + "-   $\bar{x}$ = refers to the mean or average value of X in the sample\n" + "\n" + "-   $\sum(x)$ = refers to the sum of all x values (sum of all the datapoints)\n" + "\n" + "-   $x^2$ = refers to the squared value of x (x multiplied by x)\n" + ":::\n" + "\n" + "## Descriptive Statistics\n" + "\n" + "### Examples\n" + "\n" + "-   $data = \{1,4,3,2,4,6\}$\n" + "\n" + "-   $x$ = $1 | 4 | 3 | 2 | 4 | 6$\n" + "\n" + "-   $\bar{x}$ = $3.33\bar{3}$\n" + "\n" + "-   $\sum(x)$ = $1 + 4 + 3 + 2 + 4 + 6 = 20$\n" + "\n" + "-   $x^2$ = $1 | 16 | 9 | 4 | 16 | 36$\n" + "\n" + "## Descriptive Statistics\n" + "\n" + "### Describe the characteristics of a sample in terms of:\n" + "\n" + "-   Central tendency\n" + "\n" + "    -   The mid-point of the data\n" + "\n" + "    -   The most typical/frequent answers\n" + "\n" + "-   Dispersion (aka Variability aka Variance)\n" + "\n" + "    -   Dispersion: the action or process of distributing things or people over a wide area.\n" + "\n" + "## Central Tendency: Mean\n" + "\n" + "### What is it, when should we use it, and how do we calculate it?\n" + "\n" + "-   Mean\n" + "    -   Average of all $x$ values\n" + "    -   Normal Distribution\n" + "    -   Formula: $\frac{\sum(x)}{n}$\n" + "\n" + "## Central Tendency: Median\n" + "\n" + "### What is it, when should we use it, and how do we calculate it?\n" + "\n" + "-   Median\n" + "    -   Middle value in **sorted** data\n" + "    -   Skewed distributions\n" + "        -   Is the data pulled to the left or the right?\n" + "        -   $Med(X) = \frac{n + 1}{2}$\n" + "\n" + "## Central Tendency: Mode\n" + "\n" + "### What is it, when should we use it, and how do we calculate it?\n" + "\n" + "-   Mode\n" + "    -   Most common value\n" + "    -   Bi/Tri-Modal Distributions\n" + "    -   Most common value(s)\n" + "        -   Shows us that data is clustered\n" + "\n" + "## Central Tendency\n" + "\n" + "### What do measures of Central Tendency tell you?\n" + "\n" + "::::: columns\n" + "::: {.column width=\"50%\"}\n" + "-   The mid-point in the data\n" + "\n" + "-   The answer most of the participants gave.\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "```{r}\n" + "library(dplyr)\n" + "library(ggplot2)\n" + "set.seed(348)\n" + "\n" + "tibble(\n" + "  student = 1:30,\n" + "  score = rnorm(30,80,10)\n" + ") |> \n" + "  ggplot(aes(student,score)) + \n" + "  geom_point() +\n" + "  theme_minimal() +\n" + "  labs(\n" + "  x = \"\nStudent\",\n" + "  y = \"Exam Score\n\"\n" + "  ) + \n" + "  geom_hline(aes(yintercept = mean(score)),\n" + "             color = \"maroon\",\n" + "             lty = \"dashed\") \n" + "```\n" + ":::\n" + ":::::\n" + "\n" + "## Central Tendency\n" + "\n" + "### What do measures of Central Tendency tell you?\n" + "\n" + "```{r}\n" + "set.seed(348)\n" + "\n" + "tibble(\n" + "  student = 1:30,\n" + "  score = rnorm(30,80,10)\n" + ") |> \n" + "  ggplot(aes(student,score)) + \n" + "  geom_point() +\n" + "  theme_minimal() +\n" + "  labs(\n" + "  x = \"\nStudent\",\n" + "  y = \"Exam Score\n\"\n" + "  ) + \n" + "  geom_hline(aes(yintercept = mean(score)),\n" + "             color = \"maroon\",\n" + "              linewidth = 1.5) +\n" + "  geom_segment(aes(x = student, xend = student,\n" + "                  y = mean(score),\n" + "                  yend = score)\n" + "              )\n" + "```\n" + "\n" + "## Measures of Dispersion\n" + "\n" + "### What does dispersion mean?\n" + "\n" + "-   Spread-out-ness\n" + "\n" + "-   How much the participants' responses differ from one another\n" + "\n" + "-   Variance\n" + "\n" + "## Measures of Dispersion\n" + "\n" + "### Tells us about the spread-out-ness of the data, but what does that *actually* mean?\n" + "\n" + "::: fragment\n" + "```{r}\n" + "#| fig-align: center\n" + "\n" + "library(patchwork)\n" + "\n" + "exs <- \n" + "  tibble(\n" + "    student = 1:30,\n" + "    exam1 = rnorm(30,85,1),\n" + "    exam2 = rnorm(30,70,15),\n" + "    exam3 = rnorm(30,80,4)\n" + ")\n" + "\n" + "p1 <- \n" + "  exs |> \n" + "    ggplot(aes(student,exam1)) + \n" + "    geom_point() +\n" + "    theme_minimal() +\n" + "    geom_hline(aes(yintercept = mean(exam1),color = \"maroon\")) +\n" + "labs(\n" + "  x = \"\nStudent\",\n" + "  y = \"Exam Score\n\"\n" + "  ) + theme(legend.position = \"none\")\n" + "p2 <- \n" + "  exs |> \n" + "    ggplot(aes(student,exam2)) + \n" + "    geom_point() +\n" + "    theme_minimal()+\n" + "    geom_hline(aes(yintercept = mean(exam2),color = \"maroon\")) +\n" + "  labs(\n" + "  x = \"\nStudent\",\n" + "  y = \"Exam Score\n\"\n" + "  )+ theme(legend.position = \"none\")\n" + "\n" + "p3 <- \n" + "  exs |> \n" + "    ggplot(aes(student,exam3)) + \n" + "    geom_point() +\n" + "    theme_minimal() +\n" + "    geom_hline(aes(yintercept = mean(exam3)),color = \"maroon\") +\n" + "  labs(\n" + "  x = \"\nStudent\",\n" + "  y = \"Exam Score\n\"\n" + "  ) + theme(legend.position = \"none\")\n" + "\n" + "p1 + p2 + p3\n" + "\n" + "```\n" + ":::\n" + "\n" + "## Measures of Dispersion\n" + "\n" + "### Measures of dispersion tell us about the spread-out-ness of the data, but what does that *actually* mean?\n" + "\n" + "-   If I am measuring **phone usage** what would low dispersion tell me?\n" + "-   If I am measuring **phone usage**, what would high dispersion tell me?\n" + "\n" + "## Measures of Dispersion\n" + "\n" + "### Measures of dispersion tell us about consensus.\n" + "\n" + "-   Did participants give similar answers?\n" + "\n" + "    -   $\{1,2,2,1,2,2,3,2,1\}$\n" + "\n" + "-   Did participants give wildly different answers?\n" + "\n" + "    -   $\{1,3,4,5,8,9,21,33\}$\n" + "\n" + "## Dispersion\n" + "\n" + "### What does that tell us about consensus?\n" + "\n" + "-   Data should have natural dispersion.\n" + "\n" + "-   If everyone gives a similar answer, it's harder to analyze difference.\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### How do you think we should calculate dispersion?\n" + "\n" + "-   On average, how far is each x-value from the midpoint\n" + "\n" + "    -   Calculate how far each x-value is from the midpoint (mean)\n" + "\n" + "    -   Take the average of those distances.\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### How do you think we should calculate dispersion?\n" + "\n" + "In psychology, the mid-point we use will be the mean\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Acquire Data\n" + "\n" + "```{r}\n" + "library(gt)\n" + "\n" + "data.frame(\n" + "  Participant = 1:10,\n" + "  X = c(1,3,2,2,3,2,1,3,1,2)\n" + ") |> gt() |> \n" + "  tab_header(\n" + "    title = \"Sample Data\",\n" + "    subtitle = \"X values for 10 participants\"\n" + "  ) |> \n" + "  opt_row_striping() |> \n" + "  cols_align(align = \"center\") |> \n" + "        tab_options(\n" + "    table.font.size = px(25), # Adjust font size\n" + "    table.width = pct(80)   # Set table width as percentage\n" + "  ) |> \n" + "    tab_style(\n" + "    style = \n" + "      cell_text(\n" + "        weight = \"bold\"),\n" + "        locations = \n" + "      cells_column_labels()\n" + "    )\n" + "```\n" + "\n" + "## Deviation Scores\n" + "\n" + "### Calculate how far each x-value is from the mean\n" + "\n" + "::: fragment\n" + "Step 1. Examine Data\n" + ":::\n" + "\n" + "-   $data = \{1,3,2,2,3,2,1,3,1,2\}$\n" + "\n" + "::: fragment\n" + "Step 2. Calculate Mean\n" + ":::\n" + "\n" + "-   $\bar{x} = \frac{\sum(x)}{n} = 1 + 3 + 2...$\n" + "\n" + "-   $\bar{x} = \frac{20}{10} = 2$\n" + "\n" + "## Deviation Scores\n" + "\n" + "### Calculate how far each x-value is from the mean\n" + "\n" + "Step 2: Subtract the mean from each X-value.\n" + "\n" + "-   $x - \bar{x}$\n" + "\n" + "-   $(1-2) + (3-2) + (2-2) + (2-2)...$\n" + "\n" + "-   $(-1) + 1 + 0 + 0...$\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Visual\n" + "\n" + "```{r}\n" + "tibble(\n" + "  ParticipantID = 1:10,\n" + "  x = c(1,3,2,2,3,2,1,3,1,2),\n" + "  xM = x-mean(x)\n" + ") |> gt() |> \n" + "  tab_header(\n" + "    title = \"Deviation Scores\",\n" + "    subtitle = \"Each x value's distance from the mean\"\n" + "  ) |> \n" + "  opt_row_striping() |> \n" + "  cols_label(xM = md(\"$x-\\bar{x}$\")) |> \n" + "  cols_align(align = \"center\") |> \n" + "  tab_options(\n" + "    table.font.size = px(25), # Adjust font size\n" + "    table.width = pct(80)   # Set table width as percentage\n" + "  ) |> \n" + "  tab_style(\n" + "    style = \n" + "      cell_text(\n" + "        weight = \"bold\"),\n" + "        locations = \n" + "      cells_column_labels()\n" + "    )\n" + "```\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Visual\n" + "\n" + "```{r}\n" + "tibble(\n" + "  ParticipantID = factor(1:10),\n" + "  X = c(1,3,2,2,3,2,1,3,1,2),\n" + "  `x-M` = X-mean(X)\n" + ") |> \n" + "  ggplot(aes(ParticipantID,X)) + \n" + "  geom_point(color = \"darkgreen\") + \n" + "  geom_hline(aes(yintercept = mean(X)),color = \"red\") + \n" + "  theme_minimal() +\n" + "  geom_segment(aes(x = ParticipantID, xend = ParticipantID,\n" + "                  y = mean(X),\n" + "                  yend = X)\n" + "              ) +\n" + "  labs(\n" + "  x = \"\nParticipant ID\",\n" + "  y = \"X Value\n\"\n" + "  ) + \n" + "  theme(panel.grid.major = element_blank())\n" + "```\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Visual\n" + "\n" + "```{r}\n" + "library(forcats)\n" + "\n" + "tibble(\n" + "  ParticipantID = factor(1:10,ordered = TRUE),\n" + "  X = c(1,3,2,2,3,2,1,3,1,2),\n" + "  `x-M` = X-mean(X)\n" + ") |> \n" + "  ggplot(aes(ParticipantID,X)) + \n" + "  geom_hline(aes(yintercept = mean(`x-M`)),lty = \"dashed\") + \n" + "  geom_segment(aes(x = ParticipantID, xend = ParticipantID,\n" + "                  y = mean(`x-M`),\n" + "                  yend = `x-M`)\n" + "              ) +\n" + "  geom_point(aes(ParticipantID,`x-M`, color = \"black\")) +\n" + "  theme_minimal() +\n" + "  labs(\n" + "  x = \"\nParticipant ID\",\n" + "  y = \"X Value\n\"\n" + "  ) + \n" + "  theme(\n" + "    panel.grid.major = element_blank(),\n" + "    legend.position = \"none\"\n" + "    )\n" + "\n" + "```\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Visual\n" + "\n" + "-   The average of the deviation scores will always = 0.\n" + "\n" + "-   On average, the x-values = x.\n" + "\n" + "-   So the average distance of x from x is 0.\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### How do you think we should calculate dispersion?\n" + "\n" + "1.  Calculate the mean.\n" + "2.  Calculate the deviation scores.\n" + "3.  What can we do to the deviation scores to prevent them from adding up to 0?\n" + "\n" + "## What is the Mean of the Deviation Scores?\n" + "\n" + "### Stop Being So Negative!\n" + "\n" + "-   The problem is the negative numbers!\n" + "\n" + "-   How do we get rid of negative numbers\n" + "\n" + "-   $(x-\bar{x})^2 = (1-2) = 0 | (1-2)^2 = 1$\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Stop Being So Negative!\n" + "\n" + "```{r}\n" + "tibble(\n" + "  ParticipantID = 1:10,\n" + "  x = c(1,3,2,2,3,2,1,3,1,2),\n" + "  `x-M` = x-mean(x),\n" + "  `(x-M)^2` = `x-M`^2\n" + "  ) |> \n" + "  # Bold Last Column\n" + "  gt() |> \n" + "  tab_header(\n" + "    title = \"Squared Deviations\",\n" + "    subtitle = \"Removing the negative signs\"\n" + "  ) |> \n" + "  opt_row_striping() |> \n" + "  cols_align(align = \"center\") |> \n" + "  cols_label(\n" + "    `x-M` = md(\"$(x-\\bar{x})$\"),\n" + "    `(x-M)^2` = md(\"$(x-\\bar{x}^2)$\")\n" + "  ) |> \n" + "  tab_options(\n" + "    table.font.size = px(25), # Adjust font size\n" + "    table.width = pct(80)   # Set table width as percentage\n" + "  ) |> \n" + "    tab_style(\n" + "    style = \n" + "      cell_text(\n" + "        weight = \"bold\"),\n" + "        locations = \n" + "      cells_column_labels()\n" + "    )\n" + "```\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### First 3 Steps\n" + "\n" + "-   Step 1: Calculate the mean.\n" + "\n" + "-   Step 2: Subtract the mean from each X-value.\n" + "\n" + "-   Step 3: Square each deviation score.\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Continuing: Calculate the average squared deviation.\n" + "\n" + "-   Step 4: Add up the Squared Deviations.\n" + "\n" + "-   $1+1+0+1...$\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Continuing: Calculate the average squared deviation.\n" + "\n" + "```{r}\n" + "tibble(\n" + "  ParticipantID = 1:10,\n" + "  x = c(1,3,2,2,3,2,1,3,1,2),\n" + "  `x-M` = x-mean(x),\n" + "  `(x-M)^2` = `x-M`^2\n" + "  ) |> \n" + "  # Bold Last Column\n" + "  gt() |> \n" + "  tab_header(\n" + "    title = \"Sum of Squared Deviations\"\n" + "  ) |> \n" + "  opt_row_striping() |> \n" + "  cols_align(align = \"center\") |> \n" + "  cols_label(\n" + "    `x-M` = md(\"$(x-\\bar{x})$\"),\n" + "    `(x-M)^2` = md(\"$(x-\\bar{x}^2)$\")\n" + "  ) |> \n" + "    tab_options(\n" + "    table.font.size = px(25), # Adjust font size\n" + "    table.width = pct(80)   # Set table width as percentage\n" + "  ) |> \n" + "    tab_style(\n" + "    style = \n" + "      cell_text(\n" + "        weight = \"bold\"),\n" + "        locations = \n" + "      cells_column_labels()\n" + "    )\n" + "```\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Divide by n-1 to Estimate\n" + "\n" + "Step 5: Divide by (n-1).\n" + "\n" + "-   (n-1) refers to the *degrees of freedom*... don't worry about it for now.\n" + "\n" + "-   $\frac{\sum (x-\bar{x})^2}{n-1}$\n" + "\n" + "-   Variance\n" + "\n" + "    -   The fact or quality of being different, divergent, or inconsistent.\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### How do think we should calculate dispersion?\n" + "\n" + "-   When we squared the deviation scores in Step 3, we inflated the deviation.\n" + "\n" + "    -   We have to undo that inflation.\n" + "\n" + "    -   How do you undo squaring?\n" + "\n" + "    -   We take the square root.\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "### Inflation\n" + "\n" + "```{r}\n" + "set.seed(348)\n" + "\n" + "infl <- tibble(\n" + "  ParticipantID = 1:6,\n" + "  X = runif(6,30,50),\n" + "  `x-M` = X-mean(X),\n" + "  `(x-M)^2` = `x-M`^2\n" + "  ) |> \n" + "  gt() |> \n" + "  tab_header(\n" + "    title = \"Why We Divide by n − 1\",\n" + "    subtitle = \"Correcting the inflation from squaring\"\n" + "  ) |> \n" + "    grand_summary_rows(\n" + "    # Specify the single column to summarize\n" + "    columns = `(x-M)^2`,\n" + "    # Provide the aggregation function\n" + "    fns = list(\n" + "      Sum = ~sum(.),\n" + "      Mean = ~sum(.)/5\n" + "    )\n" + "  ) |> \n" + "  cols_label(\n" + "  `x-M` = md(\"$(x-\\bar{x})$\"),\n" + "  `(x-M)^2` = md(\"$(x-\\bar{x}^2)$\")\n" + "  ) |> fmt_auto() |> \n" + "      tab_options(\n" + "    table.font.size = px(25), # Adjust font size\n" + "    table.width = pct(80)   # Set table width as percentage\n" + "  ) |> \n" + "    tab_style(\n" + "    style = \n" + "      cell_text(\n" + "        weight = \"bold\"),\n" + "        locations = \n" + "      cells_column_labels()\n" + "    )\n" + "\n" + "infl\n" + "```\n" + "\n" + "## Calculating Dispersion\n" + "\n" + "Step 6: Take the square root.\n" + "\n" + "-   $\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$\n" + "\n" + "## Calculating Standard Deviation\n" + "\n" + "### Step-by-Step\n" + "\n" + "1.  Mean: Calculate the mean.\n" + "\n" + "    -   $\bar{x}$\n" + "\n" + "2.  Deviation scores: Subtract the mean from each x-value.\n" + "\n" + "    -   $(x-\bar{x})$\n" + "\n" + "3.  Squared deviations: Square each deviation score.\n" + "\n" + "    -   $(x-\bar{x})^2$\n" + "\n" + "4.  Sum of squares: Add up the squared deviations.\n" + "\n" + "    -   $\sum(x-\bar{x})^2$\n" + "\n" + "## Calculating Standard Deviation\n" + "\n" + "### Step-by-Step\n" + "\n" + "5.  Variance: Divide the sum of squares by (n-1).\n" + "\n" + "    -   $\frac{\sum(x-\bar{x})^2}{n-1}$\n" + "\n" + "6.  Standard Deviation: Take the square root of the variance.\n" + "\n" + "    -   $\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$\n" + "\n" + "## Formulas for Dispersion\n" + "\n" + "### Variance and Standard Deviation\n" + "\n" + "::::::: columns\n" + ":::: {.column width=\"50%\"}\n" + "::: callout-important\n" + "## Variance\n" + "\n" + "$$\n" + "\large{\color{gold}{s^2} = \frac{\sum(x-\bar{x})^2}{n-1}}\n" + "$$\n" + ":::\n" + "::::\n" + "\n" + ":::: {.column width=\"50%\"}\n" + "::: callout-important\n" + "## Standard Deviation\n" + "\n" + "$$\n" + "\large{\color{orange}{s} = \sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}}\n" + "$$\n" + ":::\n" + "::::\n" + ":::::::\n" + "\n" + "## Formulas for Dispersion\n" + "\n" + "### Standard Deviation\n" + "\n" + "-   Variance is a measure of dispersion.\n" + "\n" + "    -   It's not helpful, because it's inflated (from squaring the deviation scores).\n" + "\n" + "-   Standard deviation is a better measure of dispersion, because it is standardized.\n" + "\n" + "    -   This means that a standard deviation of 1 means a distance of 1 on the scale used to measure x.\n" + "\n" + "## Variance & Standard deviation\n" + "\n" + "-   The Variance is the standard deviation squared: s²\n" + "\n" + "-   The Standard Deviation is the square root of the variance: s\n" + "\n" + "## Practice 1 — Basic mean, deviations, variance, SD\n" + "\n" + "**Problem (do by hand first):**\\n" + "Compute the **sample mean**, each **deviation** from the mean, the **sum of squared deviations**, the **sample variance**, and the **sample standard deviation** for the dataset:\n" + "\n" + "`x = [4, 2, 5, 6, 3]`\n" + "\n" + "## Practice 1\n" + "\n" + "### Solution (steps)\n" + "\n" + "::::: columns\n" + "::: {.column width=\"50%\"}\n" + "1.  Sum: $(\sum x = 4+2+5+6+3 = 20)$\n" + "2.  Sample size: $(n = 5)$\n" + "3.  Mean: $(\bar{x} = \frac{20}{5} = 4)$\n" + "4.  Deviations: $(x_i - \bar{x} = [0, -2, 1, 2, -1])$\n" + "5.  Squared deviations: $([0, 4, 1, 4, 1])$\n" + "6.  Sum of squared deviations: $(0+4+1+4+1 = 10)$\n" + "7.  Sample variance: $(s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5)$\n" + "8.  Sample SD: $(s = \sqrt{2.5} \approx 1.5811)$\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: column\n" + "\n" + "x <- c(4,2,5,6,3)\n" + "n <- length(x)\n" + "sum_x <- sum(x)\n" + "mean_x <- mean(x)\n" + "deviations <- x - mean_x\n" + "sq_dev <- deviations^2\n" + "ssd <- sum(sq_dev)\n" + "s2 <- var(x)  # sample variance by default (n-1)\n" + "s <- sd(x)\n" + "list(\n" + "  n = n,\n" + "  sum = sum_x,\n" + "  mean = mean_x,\n" + "  deviations = deviations,\n" + "  squared_deviations = sq_dev,\n" + "  sum_squared_deviations = ssd,\n" + "  sample_variance = s2,\n" + "  sample_sd = s\n" + ")\n" + "```\n" + ":::\n" + ":::::\n" + "\n" + "## Problem 2: Comparing dispersion\n" + "\n" + "### Mathematically\n" + "\n" + "> Two instructors have class scores: - Class A: scores_A = $[80, 82, 78, 85, 75]$ - Class B: scores_B = $[60, 90, 75, 85, 85]$ 1. Compute the mean and sample SD for each class. 2. Both classes have similar means. Which class has greater dispersion? What does that imply about reporting a “typical” student score?\n" + "\n" + "## Problem 2: Comparing dispersion\n" + "\n" + "### Mathematically\n" + "\n" + "::::: columns\n" + "::: {.column width=\"50%\"}\n" + "-   **Step 1: Compute the mean**\n" + "\n" + "    -   $\bar{x}_A = \frac{80+82+78+85+75}{5} = \frac{400}{5} = 80$\n" + "\n" + "-   **Step 2: Compute deviations and squared deviations**\n" + "\n" + "-   $x_i - \bar{x}_A = [0, 2, -2, 5, -5]$\n" + "\n" + "-   $(x_i - \bar{x}_A)^2 = [0, 4, 4, 25, 25]$\n" + "\n" + "-   **Step 3: Compute variance and SD**\n" + "\n" + "-   $s_A^2 = \frac{\sum (x_i - \bar{x}_A)^2}{n-1} = \frac{58}{4} = 14.5$\n" + "\n" + "-   $s_A = \sqrt{14.5} \approx 3.81$\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "-   **Step 1: Compute the mean**\n" + "\n" + "    -   $\bar{x}_B = \frac{60+90+75+85+85}{5} = \frac{395}{5} = 79$\n" + "\n" + "-   **Step 2: Compute deviations and squared deviations**\n" + "\n" + "    -   $x_i - \bar{x}_B = [-19, 11, -4, 6, 6]$\n" + "\n" + "    -   $(x_i - \bar{x}_B)^2 = [361, 121, 16, 36, 36]$\n" + "\n" + "-   **Step 3: Compute variance and SD**\n" + "\n" + "    -   $s_B^2 = \frac{\sum (x_i - \bar{x}_B)^2}{n-1} = \frac{570}{4} = 142.5$\n" + "\n" + "    -   $s_B = \sqrt{142.5} \approx 11.94$\n" + ":::\n" + ":::::\n" + "\n" + "## Interpretation\n" + "\n" + "-   Class A: $\bar{x} = 80, s \approx 3.81$\n" + "-   Class B: $\bar{x} = 79, s \approx 11.94)$\n" + "\n" + "## Problem 2: Comparing dispersion\n" + "\n" + "### Computationally\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: column\n" + "scores_A <- c(80,82,78,85,75)\n" + "scores_B <- c(60,90,75,85,85)\n" + "\n" + "stats_A <- list(mean = mean(scores_A), sd = sd(scores_A), n = length(scores_A))\n" + "stats_B <- list(mean = mean(scores_B), sd = sd(scores_B), n = length(scores_B))\n" + "\n" + "stats_A\n" + "\n" + "stats_B\n" + "```\n" + ""</script>
-<script> window._input_filename = '/Users/davebrocker/Documents/348SlideDecks/lec4/lec4.qmd'</script>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -3465,7 +3551,7 @@ $n
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/revealeditable/editable.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -3659,7 +3745,7 @@ $n
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, Revealeditable, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealCodewindow, QuartoSupport,
 
           RevealMath,
           RevealNotes,
