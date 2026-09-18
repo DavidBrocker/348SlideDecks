@@ -725,7 +725,7 @@ $x = [4, 2, 5, 6, 3]$
 
 ### Solution (steps)
 
-::: panel-tabset
+::::: panel-tabset
 ### By Hand
 
 ::: callout-tip
@@ -743,6 +743,7 @@ $x = [4, 2, 5, 6, 3]$
 
 ::: {.codewindow .r}
 practice1.R
+
 ```{r}
 #| echo: true
 
@@ -767,7 +768,7 @@ list(
 )
 ```
 :::
-:::
+:::::
 
 ## Problem 2: Comparing dispersion
 
@@ -787,8 +788,8 @@ Two instructors have class scores:
 
 ### Mathematically
 
-::::: columns
-::: {.column width="50%"}
+::::::: columns
+:::: {.column width="50%"}
 ::: callout-tip
 **Class A**
 
@@ -797,9 +798,9 @@ Two instructors have class scores:
 - Squared deviations: $(x_i - \bar{x}_A)^2 = [0, 4, 4, 25, 25]$
 - Variance and SD: $s_A^2 = \dfrac{\sum (x_i - \bar{x}_A)^2}{n-1} = \dfrac{58}{4} = 14.5 \quad\rightarrow\quad s_A = \sqrt{14.5} \approx 3.81$
 :::
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: callout-tip
 **Class B**
 
@@ -808,8 +809,8 @@ Two instructors have class scores:
 - Squared deviations: $(x_i - \bar{x}_B)^2 = [361, 121, 16, 36, 36]$
 - Variance and SD: $s_B^2 = \dfrac{\sum (x_i - \bar{x}_B)^2}{n-1} = \dfrac{570}{4} = 142.5 \quad\rightarrow\quad s_B = \sqrt{142.5} \approx 11.94$
 :::
-:::
-:::::
+::::
+:::::::
 
 ## Interpretation
 
