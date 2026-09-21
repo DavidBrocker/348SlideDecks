@@ -1,0 +1,30 @@
+title: Mail
+author: Matthias Vallentin
+version: 0.1.0
+quarto-required: ">=1.4.0"
+contributes:
+  formats:
+    common:
+      filters:
+        - mail.lua
+      wrap: none
+    html:
+      minimal: true
+      template: template.html
+    plain:
+      validate-yaml: false
+      standalone: false
+      writer: plain.lua
+      output-ext: txt
+    gog:
+      validate-yaml: false
+      standalone: false
+      writer: gog.lua
+      output-ext: preview.md
+    eml:
+      validate-yaml: false
+      standalone: false
+      writer: eml.lua
+      output-ext: eml
+source: mavam/quarto-mail@v0.5.0
+source-type: registry
