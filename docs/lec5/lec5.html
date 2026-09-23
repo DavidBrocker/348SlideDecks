@@ -246,7 +246,7 @@ Dave Brocker
 <div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>What percentage of Students rate it a 7 or higher?</p></li>
-<li class="fragment"><p>What percentage of Students rate it at least a 4?</p></li>
+<li class="fragment"><p>What percentage of Students rate it a 4 or lower?</p></li>
 <li class="fragment"><p>What percentage of Students rate it an 8 or lower?</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -294,7 +294,7 @@ Dave Brocker
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>What percentage of Students rate it at least a 4?</p></li>
+<li class="fragment"><p>What percentage of Students rate it a 4 or lower?</p></li>
 <li class="fragment"><p>2.2%</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -319,7 +319,7 @@ Dave Brocker
 <div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>What percentage of Students rate it an 8 or lower?</p></li>
-<li class="fragment"><p>97.6%</p></li>
+<li class="fragment"><p>97.7%</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -336,13 +336,74 @@ Dave Brocker
 <section id="z-scores" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="what-does-it-do">What does it do?</h3>
-<p>A z-score tells you, in standard deviation units how far the x-value is from the mean.</p>
+<blockquote>
+<p>You scored an <strong>82</strong>. Is that good?</p>
+</blockquote>
 <ul>
-<li class="fragment"><p>Z-scores are better than using raw SD</p></li>
-<li class="fragment"><p>When the SD is a decimal, it is hard to find the exact point under the standard normal curve.</p></li>
+<li class="fragment">You can’t say yet — good <em>compared to what?</em></li>
+<li class="fragment"><strong>Standard deviation</strong> describes how spread out the whole group is — but only in the variable’s own units (exam points, inches, dollars…).</li>
+<li class="fragment">A <strong>z-score</strong> places <em>one</em> score on a common ruler: how many standard deviations it sits from the mean.</li>
+<li class="fragment">Because that ruler has no units, it can answer “compared to what?” for <em>any</em> measurement.</li>
 </ul>
 </section>
 <section id="z-scores-1" class="slide level2">
+<h2>Z-Scores</h2>
+<h3 id="compared-to-what">Compared to what?</h3>
+<blockquote>
+<p>Aisha’s raw scores: <strong>82</strong> in Statistics, <strong>70</strong> in Research Methods. Which did she do better on?</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Statistics</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Score = 82</li>
+<li class="fragment">Mean = 88, SD = 4</li>
+<li class="fragment"><span class="math inline">\(z = \frac{82-88}{4} = -1.5\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Research Methods</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Score = 70</li>
+<li class="fragment">Mean = 60, SD = 8</li>
+<li class="fragment"><span class="math inline">\(z = \frac{70-60}{8} = +1.25\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<div class="fragment">
+<p>Raw scores said Statistics (82 &gt; 70). The z-scores say <strong>Research Methods</strong> — above average there, below average in Stats. Same student, opposite story.</p>
+</div>
+</section>
+<section id="z-scores-2" class="slide level2">
+<h2>Z-Scores</h2>
+<h3 id="one-ruler-for-everything">One ruler for everything</h3>
+<ul>
+<li class="fragment">A z-score is <strong>unitless</strong> — it drops the original measurement entirely.</li>
+<li class="fragment">So <strong>z = +2 means the same thing</strong> whether the score is in exam points, inches, or dollars: <em>two standard deviations above average.</em></li>
+<li class="fragment">That’s what standard deviation <em>alone</em> can’t give you — a way to compare scores measured on completely different scales.</li>
+</ul>
+</section>
+<section id="z-scores-3" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="rule-of-thumb">Rule of Thumb</h3>
 <div class="columns">
@@ -359,12 +420,12 @@ Dave Brocker
 </ul>
 </div></div>
 </section>
-<section id="z-scores-2" class="slide level2">
+<section id="z-scores-4" class="slide level2">
 <h2>Z-Scores:</h2>
 <h3 id="find-z-1-z--2-z-0.5">Find: Z = 1 | Z = -2 | Z = 0.5</h3>
 
 <img data-src="images/bell_prop2.png" class="r-stretch"></section>
-<section id="z-scores-3" class="slide level2">
+<section id="z-scores-5" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="what-do-they-do">What do they do!</h3>
 <ul>
@@ -375,7 +436,7 @@ Dave Brocker
 </section>
 <section id="calculating" class="slide level2">
 <h2>Calculating</h2>
-<h3 id="z-scores-4">Z-scores</h3>
+<h3 id="z-scores-6">Z-scores</h3>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -392,7 +453,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 </div>
 </div>
 <ul>
-<li class="fragment"><p>Subtract each <span style="color:orange">x</span> value from the <span style="color:red">mean</span>.</p></li>
+<li class="fragment"><p>Subtract the [mean]{style=“color:orange”} value from each [x]{style=“color:red”}.</p></li>
 <li class="fragment"><p>Divide by the <span style="color:pink">standard deviation</span></p></li>
 </ul>
 </section>
@@ -427,7 +488,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 <li class="fragment"><p>Standard deviation (<span class="math inline">\(\sigma\)</span>) = 8</p></li>
 <li class="fragment"><p>Raw score (x) = 66</p></li>
 <li class="fragment"><p>Find the z-score.</p></li>
-<li class="fragment"><p><span class="math inline">\(\frac{66-70}{8} = .5\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\frac{66-70}{8} = \frac{-4}{8} = -0.5\)</span></p></li>
 </ul>
 </section>
 <section id="practice-examples-3" class="slide level2">
@@ -450,10 +511,10 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 <li class="fragment"><p>z-score = +2.5</p></li>
 <li class="fragment"><p>Find the raw score (x).</p></li>
 <li class="fragment"><p><span class="math inline">\(2.5 = \frac{x-40}{6}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(x = z\times s = 2.5\times6=15\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(x = \mu + (z\times\sigma) = 40 + (2.5\times6) = 55\)</span></p></li>
 </ul>
 </section>
-<section id="z-scores-5" class="slide level2">
+<section id="z-scores-7" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="z-scores-are-calculated-by">Z-Scores are calculated by</h3>
 <ul>
@@ -462,7 +523,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 <li class="fragment"><p>When we divide by the SD, the space from the mean is expressed in standard deviations.</p></li>
 </ul>
 </section>
-<section id="z-scores-6" class="slide level2">
+<section id="z-scores-8" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="a-familiar-face-barx-20">A Familiar Face: <span class="math inline">\(\bar{x} = 20\)</span></h3>
 <div class="cell">
@@ -964,7 +1025,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 </div>
 </div>
 </section>
-<section id="z-scores-7" class="slide level2">
+<section id="z-scores-9" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="formula-in-action">Formula in Action</h3>
 <div class="columns">
@@ -992,7 +1053,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 <p><strong>Standard Deviation</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[s^2 = \sqrt{\frac{\sum(x-\color{red}{\bar{x}})^2}{n-1}} = \frac{400}{4} = \sqrt{100} = s\]</span></p>
+<p><span class="math display">\[s = \sqrt{\frac{\sum(x-\color{red}{\bar{x}})^2}{n-1}} = \sqrt{\frac{400}{4}} = \sqrt{100} = 10\]</span></p>
 </div>
 </div>
 </div>
@@ -1006,14 +1067,17 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 <p><strong>Z-Score</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[z =\frac{x-\color{red}{\bar{x}}}{s} =  \frac{20-10}{s}=\frac{-10}{s}\]</span></p>
+<p><span class="math display">\[z =\frac{x-\color{red}{\bar{x}}}{s} = \frac{10-20}{10} = \frac{-10}{10} = -1\]</span></p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="z-scores-8" class="slide level2">
+<section id="z-scores-10" class="slide level2">
 <h2>Z-Scores</h2>
+</section>
+<section id="colorredbarx-fracsumxn-frac1005-20" class="slide level2">
+<h2><span class="math display">\[\color{red}{\bar{x}} = \frac{\sum{x}}{n} = \frac{100}{5} = 20\]</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -1474,7 +1538,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 <th id="x" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\(x\)</span></th>
 <th id="x-xbar" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\(x-\bar{x}\)</span></th>
 <th id="a(x-xbar)^2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\((x-\bar{x})^2\)</span></th>
-<th id="z" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\(z=\frac{(x-\bar{x})^2}{s}\)</span></th>
+<th id="z" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col"><span class="math inline">\(z=\frac{x-\bar{x}}{s}\)</span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1522,7 +1586,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 </ul>
 </div></div>
 </section>
-<section id="z-scores-9" class="slide level2">
+<section id="z-scores-11" class="slide level2">
 <h2>Z-Scores</h2>
 <div class="highlight-last">
 <ul>
@@ -1533,7 +1597,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 </div>
 
 <img data-src="lec5_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="z-scores-10" class="slide level2">
+<section id="z-scores-12" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="why-do-we-care">Why Do We Care?</h3>
 <div class="highlight-last">
@@ -1543,7 +1607,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 </ul>
 </div>
 </section>
-<section id="z-scores-11" class="slide level2">
+<section id="z-scores-13" class="slide level2">
 <h2>Z-Scores</h2>
 <h3 id="why-do-we-care-1">Why Do We Care?</h3>
 <blockquote>
@@ -1569,7 +1633,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
 </div>
 </div></div>
 </section>
-<section id="z-scores-12" class="slide level2">
+<section id="z-scores-14" class="slide level2">
 <h2>Z-Scores</h2>
 <blockquote>
 <p>The mean score for Exam 1 was a 92 with a standard deviation of 3.</p>
@@ -1599,7 +1663,7 @@ z = \large{\frac{\color{orange}{x}-\color{red}{\bar{x}}}{\color{pink}{s}}}
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Standard Normal Distribution | ⬡⬢⬡⬢⬡</p>
+<p>Z-Scores | ⬡⬢⬡⬢⬡</p>
 </div>
 </div></div>
 
