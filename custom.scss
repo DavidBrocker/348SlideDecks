@@ -1039,3 +1039,38 @@ details[open] summary {
     margin: 0;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Z-table excerpt (lec6): a few rows/cols of the z-table as a plain pipe
+// table, with the looked-up cell marked [0.2611]{.z-hit}. Matches the
+// `.reveal .slide` specificity of the global text rules (see Known Gotchas).
+// ---------------------------------------------------------------------------
+.reveal .slide .z-excerpt {
+  table {
+    font-size: 0.8em;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  }
+  th {
+    background: $accent4;
+    color: $accent;
+    border-bottom: 2px solid $accent !important;
+  }
+  td, th { padding: 8px 14px; }
+  td:first-child { color: $accent; font-weight: 600; }
+  caption, .table-caption, figcaption {
+    font-size: 0.6em;
+    color: $text-muted;
+    font-style: italic;
+  }
+  .z-hit {
+    background: $accent;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 2px 12px;
+  }
+}

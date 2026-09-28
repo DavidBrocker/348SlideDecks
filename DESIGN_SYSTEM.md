@@ -52,6 +52,8 @@ Some decks (`lab1.qmd`, `lec2.qmd`) have no YAML title and instead hand-build a 
 
 **`.book-anim`** — small CSS crossfade flourish for a closing/Q&A slide.
 
+**`.z-excerpt` / `.z-hit`** — wraps a small pandoc pipe table (a few rows/columns of the z-table) in a white rounded card with a sage header; the looked-up value is marked inline as `[0.2611]{.z-hit}` (sage pill). Used on lec6's worked z-table examples so the slide shows exactly which row/column intersect instead of a full-page table image.
+
 ## Term + definition (`hero-def` / `term-list`)
 
 The newest component (added 9/4, applied first on `lec3.qmd`'s Operationalization slide). Built specifically with a future site-wide glossary in mind.
@@ -139,6 +141,6 @@ Styling is scoped to `.hero-def .hero-example` specifically (restyled nav-tabs: 
 ## Open items
 
 - Retrofit `lec1.qmd`'s 7-term slide into `.term-list` (with per-pair `::: fragment :::`).
-- Missing images still unresolved on lec3/5/6/7/8/11/15c (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).
+- Missing images still unresolved on lec3/5/7/8/11/15c (lec6's `z-table.png` refs replaced by `.z-excerpt` tables, 9/28) (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).
 - Extract the glossary: once several decks use `.term-pill`/`dl`/`dd`, a script can walk every deck and build a site-wide glossary page from the markup alone.
 - `lec3.qmd`'s Bobo doll slide still has a dead image and an unverified proposed swap (a moral-disgust "moving a chair" paradigm) — needs Dave to confirm the actual citation before it goes on a slide; not implemented.
