@@ -25,18 +25,16 @@ format:
          - dplyr
 revealjs-plugins:
   - drop
+  - codewindow
 ---
-
-<!--
-Math colors follow lec4's symbol-coloring convention (trial, 9/21):
-  x-bar (mean) -> blue, s (standard deviation) -> orange.
-Plain x, z, and raw numbers stay uncolored.
-NOTE: lec5's formula slide uses a different mapping (x orange, x-bar red,
-s pink) -- pick one before promoting either to DESIGN_SYSTEM.md.
--->
 
 ```{r}
 #| include: false
+# Math colors follow lec4's symbol-coloring convention (trial, 9/21):
+#   x-bar (mean) -> blue, s (standard deviation) -> orange.
+#   Plain x, z, and raw numbers stay uncolored.
+# NOTE: lec5's formula slide uses a different mapping (x orange, x-bar red,
+# s pink) -- pick one before promoting either to DESIGN_SYSTEM.md.
 library(dplyr)
 library(ggplot2)
 
@@ -90,7 +88,7 @@ curve_plot <- function(mu, sigma, shade = NULL, marks = NULL,
 
 ### Proportional Breakdown
 
-::::::::: side-by-cols
+:::::::::::: side-by-cols
 ::::: stat-card
 ::: stat-num
 68.3%
@@ -120,14 +118,16 @@ of scores fall within **2 SD** of the mean
 of scores fall within **3 SD** of the mean
 :::
 :::::
-:::::::::
+::::::::::::
 
 ## Review
 
 ### What's a z-score again?
 
 ::: hero-def
+
 [Z-Score]{.term-pill}
+
 : How many **standard deviations** a single score (an $x$) sits above or below the mean.
 :::
 
@@ -217,8 +217,8 @@ $$x = \color{blue}{\bar{x}} + z\,\color{orange}{s}$$
 ::: callout-tip
 ## Two steps
 
-1. **Mean-center** the $x$ values: $x - \color{blue}{\bar{x}}$ — this makes the mean $= 0$.
-2. **Divide** by the standard deviation: $\dfrac{x - \color{blue}{\bar{x}}}{\color{orange}{s}}$ — this makes the SD $= 1$.
+1.  **Mean-center** the $x$ values: $x - \color{blue}{\bar{x}}$ — this makes the mean $= 0$.
+2.  **Divide** by the standard deviation: $\dfrac{x - \color{blue}{\bar{x}}}{\color{orange}{s}}$ — this makes the SD $= 1$.
 :::
 
 ## Calculating Probability
@@ -228,8 +228,8 @@ $$x = \color{blue}{\bar{x}} + z\,\color{orange}{s}$$
 > The average grade on the exam was an `86` with a standard deviation of `4`.
 
 ```{r}
-#| fig-width: 12
-#| fig-height: 5.5
+#| fig-width: 13
+#| fig-height: 4.4
 curve_plot(86, 4)
 ```
 
@@ -240,8 +240,8 @@ curve_plot(86, 4)
 > The average grade on the exam was an `86` with a standard deviation of `4`.
 
 ```{r}
-#| fig-width: 12
-#| fig-height: 5.5
+#| fig-width: 13
+#| fig-height: 4.4
 curve_plot(86, 4, shade = c(94, Inf), marks = 94)
 ```
 
@@ -263,8 +263,8 @@ curve_plot(86, 4, shade = c(94, Inf), marks = 94)
 > The mean exam score was `86` with a standard deviation of `4`. What is the probability of scoring between an `82` and a `90`?
 
 ```{r}
-#| fig-width: 12
-#| fig-height: 5.5
+#| fig-width: 13
+#| fig-height: 4.4
 curve_plot(86, 4)
 ```
 
@@ -275,8 +275,8 @@ curve_plot(86, 4)
 > The mean exam score was `86` with a standard deviation of `4`. What is the probability of scoring between an `82` and a `90`?
 
 ```{r}
-#| fig-width: 12
-#| fig-height: 5.5
+#| fig-width: 13
+#| fig-height: 4.4
 curve_plot(86, 4, shade = c(82, 90), marks = c(82, 90))
 ```
 
@@ -299,8 +299,8 @@ curve_plot(86, 4, shade = c(82, 90), marks = c(82, 90))
 > Esmeralda's stats professor tells the class that the average score on the exam was a `72` with a standard deviation of `6`, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below `60`.
 
 ```{r}
-#| fig-width: 12
-#| fig-height: 5.5
+#| fig-width: 14
+#| fig-height: 3.2
 curve_plot(72, 6)
 ```
 
@@ -311,8 +311,8 @@ curve_plot(72, 6)
 > Esmeralda's stats professor tells the class that the average score on the exam was a `72` with a standard deviation of `6`, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below `60`.
 
 ```{r}
-#| fig-width: 12
-#| fig-height: 5.5
+#| fig-width: 14
+#| fig-height: 3.2
 curve_plot(72, 6, shade = c(-Inf, 60), marks = 60)
 ```
 
@@ -388,30 +388,30 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 - **More than 8:** $z = \dfrac{8-5.4}{2.2} = \dfrac{2.6}{2.2} = 1.18$
 :::
 
-## Life Satisfaction
+## Life Satisfaction {.z-slide}
 
 ### Less than 4 ($z = -0.64$)
 
-::::: columns
-::: {.column width="50%"}
 ::: z-excerpt
-|   z  |  .02   |  .03   |       .04          |  .05   |  .06   |
-|:----:|:------:|:------:|:------------------:|:------:|:------:|
-| -0.5 | 0.3015 | 0.2981 | 0.2946             | 0.2912 | 0.2877 |
+|    z     |  .02   |  .03   |       .04        |  .05   |  .06   |
+|:--------:|:------:|:------:|:----------------:|:------:|:------:|
+|   -0.5   | 0.3015 | 0.2981 |      0.2946      | 0.2912 | 0.2877 |
 | **-0.6** | 0.2676 | 0.2643 | [0.2611]{.z-hit} | 0.2578 | 0.2546 |
-| -0.7 | 0.2358 | 0.2327 | 0.2296             | 0.2266 | 0.2236 |
+|   -0.7   | 0.2358 | 0.2327 |      0.2296      | 0.2266 | 0.2236 |
 
 : Excerpt of the z-table (area to the left of z)
 :::
-:::
 
-::: {.column width="50%"}
+::::: panel-tabset
+### By Hand
+
 - Find **-0.6** on the left side of the table — use the negative-z page.
 - Find the **.04** column.
 - Where they meet is the area to the left — that **is** the probability we want.
 - Report it as a percentage (the proportion $\times 100$).
 
 <details>
+
 <summary>Reveal Answer</summary>
 
 ::: nonincremental
@@ -419,27 +419,41 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 :::
 
 </details>
+
+### In R
+
+::: {.codewindow .r .codewindow-dark}
+pnorm.R
+
+``` r
+pnorm(-0.64)                        # .2611 (z-table)
+pnorm(4, mean = 5.4, sd = 2.2)      # .2623 (unrounded z)
+```
 :::
+
+::: {.callout-tip appearance="minimal"}
+**`pnorm`** (**p**robability) is the z-table: z in, area to the left out. **`qnorm`** (**q**uantile) is the reverse: probability in, z out.
+:::
+
 :::::
 
-## Life Satisfaction
+## Life Satisfaction {.z-slide}
 
 ### More than 8 ($z = 1.18$)
 
-::::: columns
-::: {.column width="50%"}
 ::: z-excerpt
-|   z  |  .06   |  .07   |       .08          |  .09   |
-|:----:|:------:|:------:|:------------------:|:------:|
-| 1.0  | 0.8554 | 0.8577 | 0.8599             | 0.8621 |
+|    z    |  .06   |  .07   |       .08        |  .09   |
+|:-------:|:------:|:------:|:----------------:|:------:|
+|   1.0   | 0.8554 | 0.8577 |      0.8599      | 0.8621 |
 | **1.1** | 0.8770 | 0.8790 | [0.8810]{.z-hit} | 0.8830 |
-| 1.2  | 0.8962 | 0.8980 | 0.8997             | 0.9015 |
+|   1.2   | 0.8962 | 0.8980 |      0.8997      | 0.9015 |
 
 : Excerpt of the z-table (area to the left of z)
 :::
-:::
 
-::: {.column width="50%"}
+::::: panel-tabset
+### By Hand
+
 - Find **1.1** on the left side of the table.
 - Find the **.08** column.
 - Note where they intersect.
@@ -447,6 +461,7 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 - Report it as a percentage (the proportion $\times 100$).
 
 <details>
+
 <summary>Reveal Answer</summary>
 
 ::: nonincremental
@@ -455,7 +470,22 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 :::
 
 </details>
+
+### In R
+
+::: {.codewindow .r .codewindow-dark}
+pnorm.R
+
+``` r
+1 - pnorm(1.18)                                              # .1190 (z-table)
+pnorm(8, mean = 5.4, sd = 2.2, lower.tail = FALSE)           # .1186 (unrounded z)
+```
 :::
+
+::: {.callout-tip appearance="minimal"}
+**`pnorm`** (**p**robability) is the z-table: z in, area to the left out. **`qnorm`** (**q**uantile) is the reverse: probability in, z out.
+:::
+
 :::::
 
 ## Z-scores and Probability
@@ -468,24 +498,23 @@ The z-table gives you the probability of that z-score **or less** (the area to t
   - Find the probability of scoring `130` or higher.
   - $z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{130-100}{15} = \dfrac{30}{15} = 2$
 
-## MENSA
+## MENSA {.z-slide}
 
 ### $\color{blue}{\bar{x}} = 100 \mid \color{orange}{s} = 15$ — `130` or higher ($z = 2.00$)
 
-::::: columns
-::: {.column width="50%"}
 ::: z-excerpt
-|   z  |       .00          |  .01   |  .02   |
-|:----:|:------------------:|:------:|:------:|
-| 1.9  | 0.9713             | 0.9719 | 0.9726 |
+|    z    |       .00        |  .01   |  .02   |
+|:-------:|:----------------:|:------:|:------:|
+|   1.9   |      0.9713      | 0.9719 | 0.9726 |
 | **2.0** | [0.9772]{.z-hit} | 0.9778 | 0.9783 |
-| 2.1  | 0.9821             | 0.9826 | 0.9830 |
+|   2.1   |      0.9821      | 0.9826 | 0.9830 |
 
 : Excerpt of the z-table (area to the left of z)
 :::
-:::
 
-::: {.column width="50%"}
+::::: panel-tabset
+### By Hand
+
 - Find **2.0** on the left side of the table.
 - Find the **.00** column.
 - Note where they intersect.
@@ -493,6 +522,7 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 - Report it as a percentage (the proportion $\times 100$).
 
 <details>
+
 <summary>Reveal Answer</summary>
 
 ::: nonincremental
@@ -501,5 +531,20 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 :::
 
 </details>
+
+### In R
+
+::: {.codewindow .r .codewindow-dark}
+pnorm.R
+
+``` r
+1 - pnorm(2)                                                 # .0228 (z-table)
+pnorm(130, mean = 100, sd = 15, lower.tail = FALSE)          # .0228
+```
 :::
+
+::: {.callout-tip appearance="minimal"}
+**`pnorm`** (**p**robability) is the z-table: z in, area to the left out. **`qnorm`** (**q**uantile) is the reverse: probability in, z out.
+:::
+
 :::::

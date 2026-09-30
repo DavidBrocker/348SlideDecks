@@ -1074,3 +1074,22 @@ details[open] summary {
     padding: 2px 12px;
   }
 }
+
+// Compact layout for the z-table lookup slides (lec6): table on top, then a
+// "By Hand" / "In R" panel-tabset underneath. Tightens the table and the
+// tab content so the whole thing (incl. the Reveal Answer) fits one slide.
+.reveal .slide.z-slide {
+  .z-excerpt table { font-size: 0.6em; }
+  .z-excerpt td, .z-excerpt th { padding: 4px 12px; }
+  .z-excerpt { margin-bottom: 4px; }
+
+  .panel-tabset {
+    font-size: 0.72em;
+    margin-top: 6px;
+    ul { margin: 4px 0; }
+    li { margin: 2px 0; }
+    details { margin-top: 6px; }
+    .callout { margin: 8px 0 0; }
+    .codewindow { margin-bottom: 10px; }
+  }
+}

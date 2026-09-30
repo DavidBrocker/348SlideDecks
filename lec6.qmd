@@ -1,0 +1,505 @@
+---
+title: "Z-Scores and Probability Under the Normal Curve"
+subtitle: "PSY 348: Lecture 6"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "Z-Scores & Probability | ⬡⬢⬡⬢⬡⬢"
+resources:
+  - assets/standardnormaltable.pdf
+format:
+  revealjs:
+    theme: ../custom.scss
+    incremental: true
+    touch: true
+    chalkboard: true
+    scrollable: true
+    lightbox: true
+    slide-number: c/t
+    width: 1600
+    height: 900
+    drop:
+      engine: webr
+      webr:
+        packages:
+         - ggplot2
+         - dplyr
+revealjs-plugins:
+  - drop
+---
+
+<!--
+Math colors follow lec4's symbol-coloring convention (trial, 9/21):
+  x-bar (mean) -> blue, s (standard deviation) -> orange.
+Plain x, z, and raw numbers stay uncolored.
+NOTE: lec5's formula slide uses a different mapping (x orange, x-bar red,
+s pink) -- pick one before promoting either to DESIGN_SYSTEM.md.
+-->
+
+```{r}
+#| include: false
+library(dplyr)
+library(ggplot2)
+
+# Site tokens (see custom.scss / DESIGN_SYSTEM.md)
+sage   <- "#5C715E"  # $accent
+sage2  <- "#8FAF9E"  # $accent2
+sage3  <- "#A7C7B5"  # $accent3
+ink    <- "#2F3E46"  # $body-color
+hot    <- "#B5483B"  # "look here" highlight -- deliberate exception, like lec4's red mean line
+
+# One normal curve, drawn from the theoretical density (not simulated data),
+# so the dashed mean line and the z-axis land exactly where the slide says.
+# shade = c(lower, upper) fills that region; marks = raw scores to draw lines at.
+curve_plot <- function(mu, sigma, shade = NULL, marks = NULL,
+                       xlab = "Exam Score") {
+  d <- tibble(
+    x = seq(mu - 4 * sigma, mu + 4 * sigma, length.out = 800),
+    y = dnorm(x, mu, sigma)
+  )
+  p <- ggplot(d, aes(x, y))
+  if (!is.null(shade)) {
+    p <- p + geom_area(
+      data = filter(d, x >= shade[1], x <= shade[2]),
+      fill = sage2, alpha = .7
+    )
+  }
+  p <- p +
+    geom_line(color = sage, linewidth = 1.4) +
+    geom_vline(xintercept = mu, linetype = "dashed", color = ink) +
+    scale_x_continuous(
+      breaks = seq(mu - 4 * sigma, mu + 4 * sigma, by = sigma),
+      sec.axis = sec_axis(~ (. - mu) / sigma, name = "z", breaks = -4:4)
+    ) +
+    labs(x = xlab, y = NULL) +
+    theme_minimal(base_size = 22) +
+    theme(
+      axis.text.y = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.grid.major.y = element_blank(),
+      axis.title = element_text(color = ink),
+      axis.text.x = element_text(color = ink)
+    )
+  if (!is.null(marks)) {
+    p <- p + geom_vline(xintercept = marks, color = hot, linewidth = 1.2)
+  }
+  p
+}
+```
+
+## Review
+
+### Proportional Breakdown
+
+::::::::: side-by-cols
+::::: stat-card
+::: stat-num
+68.3%
+:::
+
+::: stat-sub
+of scores fall within **1 SD** of the mean
+:::
+:::::
+
+::::: stat-card
+::: stat-num
+95.4%
+:::
+
+::: stat-sub
+of scores fall within **2 SD** of the mean
+:::
+:::::
+
+::::: stat-card
+::: stat-num
+99.7%
+:::
+
+::: stat-sub
+of scores fall within **3 SD** of the mean
+:::
+:::::
+:::::::::
+
+## Review
+
+### What's a z-score again?
+
+::: hero-def
+[Z-Score]{.term-pill}
+: How many **standard deviations** a single score (an $x$) sits above or below the mean.
+:::
+
+## Z-scores
+
+### Why do we care?
+
+Z-scores re-express the original data points (the $x$'s) so we can see, at a glance:
+
+- How close that $x$ is to the mean
+- Where it falls in the spread of the distribution
+- How similar this participant is to the rest of the sample
+- How different this participant is from the majority of the sample
+
+## Z-scores
+
+### Why do we care?
+
+```{r}
+#| fig-width: 12
+#| fig-height: 6.5
+set.seed(616)
+z1 <- tibble(
+  student = 1:1000,
+  x = rnorm(1000, 75, 2) |> round(2),
+  z = (x - mean(x)) / sd(x)
+) |>
+  mutate(
+    band = case_when(
+      abs(z) <= 1 ~ "Within 1 SD",
+      abs(z) <= 2 ~ "1-2 SD",
+      abs(z) <= 3 ~ "2-3 SD",
+      TRUE        ~ "Beyond 3 SD"
+    ),
+    band = factor(band, levels = c("Within 1 SD", "1-2 SD", "2-3 SD", "Beyond 3 SD"))
+  )
+
+z1 |>
+  ggplot(aes(z, student, color = band)) +
+  geom_point(size = 2) +
+  scale_color_manual(
+    values = c("Within 1 SD" = sage, "1-2 SD" = sage2, "2-3 SD" = "#D9A75B", "Beyond 3 SD" = hot),
+    name = NULL
+  ) +
+  scale_x_continuous(breaks = -4:4) +
+  theme_minimal(base_size = 22) +
+  theme(panel.grid.minor = element_blank(), legend.position = "top") +
+  labs(x = "\nZ-Score", y = "Student\n")
+```
+
+## Z-scores
+
+### Who's more than 2 SD *below* the mean?
+
+```{r}
+#| fig-width: 12
+#| fig-height: 6.5
+z1 |>
+  ggplot(aes(z, student)) +
+  geom_point(aes(color = ifelse(z <= -2, hot, "grey75")), size = 2) +
+  geom_vline(xintercept = -2, color = ink, linetype = "dashed") +
+  scale_color_identity() +
+  scale_x_continuous(breaks = -4:4) +
+  theme_minimal(base_size = 22) +
+  theme(panel.grid.minor = element_blank()) +
+  labs(x = "\nZ-Score", y = "Student\n")
+```
+
+## Z-scores
+
+### Going backwards: Imagine that $\color{orange}{s} = 2$ and $\color{blue}{\bar{x}} = 25$
+
+::: callout-tip
+## Formula
+
+$$x = \color{blue}{\bar{x}} + z\,\color{orange}{s}$$
+:::
+
+- $z = 1 \Rightarrow x = 25 + (1)(2) = 27$
+- $z = -2 \Rightarrow x = 25 + (-2)(2) = 21$
+- $z = 0.5 \Rightarrow x = 25 + (0.5)(2) = 26$
+
+## Calculating a Z-score
+
+### Step-by-Step
+
+::: callout-tip
+## Two steps
+
+1. **Mean-center** the $x$ values: $x - \color{blue}{\bar{x}}$ — this makes the mean $= 0$.
+2. **Divide** by the standard deviation: $\dfrac{x - \color{blue}{\bar{x}}}{\color{orange}{s}}$ — this makes the SD $= 1$.
+:::
+
+## Calculating Probability
+
+### Use the normal distribution
+
+> The average grade on the exam was an `86` with a standard deviation of `4`.
+
+```{r}
+#| fig-width: 12
+#| fig-height: 5.5
+curve_plot(86, 4)
+```
+
+## Calculating Probability
+
+### What is the probability of scoring a `94` or higher?
+
+> The average grade on the exam was an `86` with a standard deviation of `4`.
+
+```{r}
+#| fig-width: 12
+#| fig-height: 5.5
+curve_plot(86, 4, shade = c(94, Inf), marks = 94)
+```
+
+## Calculating Probability
+
+### What is the probability of scoring a `94` or higher?
+
+::: callout-tip
+## Solution
+
+- $z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{94-86}{4} = \dfrac{8}{4} = 2$
+- Beyond $z = 2$ is the `2.1%` + `0.1%` slivers of the curve ≈ **`2.3%`** chance.
+:::
+
+## Example 2
+
+### Test Time!
+
+> The mean exam score was `86` with a standard deviation of `4`. What is the probability of scoring between an `82` and a `90`?
+
+```{r}
+#| fig-width: 12
+#| fig-height: 5.5
+curve_plot(86, 4)
+```
+
+## Example 2
+
+### Test Time!
+
+> The mean exam score was `86` with a standard deviation of `4`. What is the probability of scoring between an `82` and a `90`?
+
+```{r}
+#| fig-width: 12
+#| fig-height: 5.5
+curve_plot(86, 4, shade = c(82, 90), marks = c(82, 90))
+```
+
+## Example 2
+
+### Test Time!
+
+::: callout-tip
+## Solution
+
+- $z = \dfrac{82-86}{4} = \dfrac{-4}{4} = -1$
+- $z = \dfrac{90-86}{4} = \dfrac{4}{4} = 1$
+- Between $z = -1$ and $z = 1$: a **`68.3%`** chance of scoring between `82` and `90`.
+:::
+
+## Example 3
+
+### Esmeralda's Second Test
+
+> Esmeralda's stats professor tells the class that the average score on the exam was a `72` with a standard deviation of `6`, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below `60`.
+
+```{r}
+#| fig-width: 12
+#| fig-height: 5.5
+curve_plot(72, 6)
+```
+
+## Example 3
+
+### Esmeralda's Second Test
+
+> Esmeralda's stats professor tells the class that the average score on the exam was a `72` with a standard deviation of `6`, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below `60`.
+
+```{r}
+#| fig-width: 12
+#| fig-height: 5.5
+curve_plot(72, 6, shade = c(-Inf, 60), marks = 60)
+```
+
+## Example 3
+
+### Esmeralda's Second Test: $\color{blue}{\bar{x}} = 72 \mid \color{orange}{s} = 6$
+
+::: callout-tip
+## Solution
+
+- $z = \dfrac{60-72}{6} = \dfrac{-12}{6} = -2$
+- About a **`2.3%`** chance that she failed.
+- What's the chance she passed?
+- $100\% - 2.3\% = 97.7\%$
+:::
+
+## Z-scores and Probability
+
+### How does it apply?
+
+In real life, we are usually working with numbers with long decimals rather than nice whole numbers.
+
+- Because the standard normal curve is *standard* and *normal*, we can look up the **exact** probability for a z-score with decimals.
+
+## Z-scores and Probability
+
+### The Z-Table
+
+::::: columns
+::: {.column width="45%"}
+- Locate the whole number and first decimal along the **left side** of the table.
+- Locate the second decimal along the **top** of the table.
+- Where they meet is the proportion of the curve at or **below** that z.
+:::
+
+::: {.column width="55%"}
+{{< pdf file="assets/standardnormaltable.pdf" height="600px" download-link="false">}}
+:::
+:::::
+
+## Z-scores and Probability
+
+### The Z-Table
+
+::: callout-important
+## Rule
+
+The z-table gives you the probability of that z-score **or less** (the area to the *left*).
+:::
+
+- If you need that z-score **or higher**, subtract the table value from 1.
+  - Esmeralda: `.023` chance of failing, so a `1 - .023 = .977` → **`97.7%`** chance of passing.
+
+## Z-scores and Probability
+
+### Life Satisfaction
+
+> In a recent study on world happiness, participants were asked to evaluate their current lives on a scale from `0` to `10`, where `0` represents the worst possible life and `10` represents the best possible life. The responses were normally distributed, with a mean of `5.4` and a standard deviation of `2.2`. Find the probability that a randomly selected study participant's response was:
+
+::: {.incremental .highlight-last}
+- Less than `4`
+- More than `8`
+:::
+
+## Z-scores and Probability
+
+### Life Satisfaction: $\color{blue}{\bar{x}} = 5.4 \mid \color{orange}{s} = 2.2$
+
+::: callout-tip
+## Convert to z first
+
+- **Less than 4:** $z = \dfrac{4-5.4}{2.2} = \dfrac{-1.4}{2.2} = -0.64$
+- **More than 8:** $z = \dfrac{8-5.4}{2.2} = \dfrac{2.6}{2.2} = 1.18$
+:::
+
+## Life Satisfaction
+
+### Less than 4 ($z = -0.64$)
+
+::::: columns
+::: {.column width="50%"}
+::: z-excerpt
+|   z  |  .02   |  .03   |       .04          |  .05   |  .06   |
+|:----:|:------:|:------:|:------------------:|:------:|:------:|
+| -0.5 | 0.3015 | 0.2981 | 0.2946             | 0.2912 | 0.2877 |
+| **-0.6** | 0.2676 | 0.2643 | [0.2611]{.z-hit} | 0.2578 | 0.2546 |
+| -0.7 | 0.2358 | 0.2327 | 0.2296             | 0.2266 | 0.2236 |
+
+: Excerpt of the z-table (area to the left of z)
+:::
+:::
+
+::: {.column width="50%"}
+- Find **-0.6** on the left side of the table — use the negative-z page.
+- Find the **.04** column.
+- Where they meet is the area to the left — that **is** the probability we want.
+- Report it as a percentage (the proportion $\times 100$).
+
+<details>
+<summary>Reveal Answer</summary>
+
+::: nonincremental
+- $.2611 \times 100 =$ **26.1%** of participants rated their life below a 4.
+:::
+
+</details>
+:::
+:::::
+
+## Life Satisfaction
+
+### More than 8 ($z = 1.18$)
+
+::::: columns
+::: {.column width="50%"}
+::: z-excerpt
+|   z  |  .06   |  .07   |       .08          |  .09   |
+|:----:|:------:|:------:|:------------------:|:------:|
+| 1.0  | 0.8554 | 0.8577 | 0.8599             | 0.8621 |
+| **1.1** | 0.8770 | 0.8790 | [0.8810]{.z-hit} | 0.8830 |
+| 1.2  | 0.8962 | 0.8980 | 0.8997             | 0.9015 |
+
+: Excerpt of the z-table (area to the left of z)
+:::
+:::
+
+::: {.column width="50%"}
+- Find **1.1** on the left side of the table.
+- Find the **.08** column.
+- Note where they intersect.
+- We want **8 or more**, so subtract that proportion from 1.
+- Report it as a percentage (the proportion $\times 100$).
+
+<details>
+<summary>Reveal Answer</summary>
+
+::: nonincremental
+- $1 - .8810 = .1190$
+- **11.9%** of participants rated their life above an 8.
+:::
+
+</details>
+:::
+:::::
+
+## Z-scores and Probability
+
+### MENSA
+
+> Scores on an IQ test are approximately normal with a mean of `100` and a standard deviation of `15`. The organization MENSA, which calls itself the "high IQ society," requires a score of `130` or higher.
+
+- What percent of adults would qualify for membership?
+  - Find the probability of scoring `130` or higher.
+  - $z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{130-100}{15} = \dfrac{30}{15} = 2$
+
+## MENSA
+
+### $\color{blue}{\bar{x}} = 100 \mid \color{orange}{s} = 15$ — `130` or higher ($z = 2.00$)
+
+::::: columns
+::: {.column width="50%"}
+::: z-excerpt
+|   z  |       .00          |  .01   |  .02   |
+|:----:|:------------------:|:------:|:------:|
+| 1.9  | 0.9713             | 0.9719 | 0.9726 |
+| **2.0** | [0.9772]{.z-hit} | 0.9778 | 0.9783 |
+| 2.1  | 0.9821             | 0.9826 | 0.9830 |
+
+: Excerpt of the z-table (area to the left of z)
+:::
+:::
+
+::: {.column width="50%"}
+- Find **2.0** on the left side of the table.
+- Find the **.00** column.
+- Note where they intersect.
+- We want **130 or more**, so subtract that proportion from 1.
+- Report it as a percentage (the proportion $\times 100$).
+
+<details>
+<summary>Reveal Answer</summary>
+
+::: nonincremental
+- $1 - .9772 = .0228$
+- About **2.3%** of adults would qualify for MENSA.
+:::
+
+</details>
+:::
+:::::

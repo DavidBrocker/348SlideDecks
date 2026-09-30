@@ -37,14 +37,81 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-067137c2a159a10b408128d1de214fcf.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ad50ef2cc1218545dc26c06d81bbd2d0.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -141,7 +208,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Z-Scores and Probability Under the Normal Curve</h1>
-  <p class="subtitle">Lecture 6</p>
+  <p class="subtitle">PSY 348: Lecture 6</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -158,28 +225,54 @@ Dave Brocker
 <section id="review" class="slide level2">
 <h2>Review</h2>
 <h3 id="proportional-breakdown">Proportional Breakdown</h3>
-<ul>
-<li class="fragment"><p><code>68.3%</code> of the datapoints (the X’s) will fall within <code>1 SD</code> of the mean.</p></li>
-<li class="fragment"><p><code>95.4%</code> of the datapoints (the X’s) will fall within <code>2 SD</code> of the mean.</p></li>
-<li class="fragment"><p><code>99.7%</code> of the datapoints (the X’s) will fall within <code>3 SD</code> of the mean.</p></li>
-</ul>
-<!-- -->
-<ul>
-<li class="fragment">Z-scores are expressed in Standard Deviation units.</li>
-</ul>
+<div class="side-by-cols">
+<div class="stat-card">
+<div class="stat-num">
+<p>68.3%</p>
+</div>
+<div class="stat-sub">
+<p>of scores fall within <strong>1 SD</strong> of the mean</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">
+<p>95.4%</p>
+</div>
+<div class="stat-sub">
+<p>of scores fall within <strong>2 SD</strong> of the mean</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">
+<p>99.7%</p>
+</div>
+<div class="stat-sub">
+<p>of scores fall within <strong>3 SD</strong> of the mean</p>
+</div>
+</div>
+</div>
+</section>
+<section id="review-1" class="slide level2">
+<h2>Review</h2>
+<h3 id="whats-a-z-score-again">What’s a z-score again?</h3>
+<div class="hero-def">
+<dl>
+<dt class="fragment"><span class="term-pill">Z-Score</span></dt>
+<dd class="fragment">
+How many <strong>standard deviations</strong> a single score (an <span class="math inline">\(x\)</span>) sits above or below the mean.
+</dd>
+</dl>
+</div>
 </section>
 <section id="z-scores" class="slide level2">
 <h2>Z-scores</h2>
 <h3 id="why-do-we-care">Why do we care?</h3>
+<p>Z-scores re-express the original data points (the <span class="math inline">\(x\)</span>’s) so we can see, at a glance:</p>
 <ul>
-<li class="fragment"><p>Z-scores re-express the original data points (the X’s) in a way that intuitively lets us know:</p>
-<ul>
-<li class="fragment"><p>How close the X is to the mean</p></li>
-<li class="fragment"><p>Where it falls in the dispersion of the distribution</p></li>
-<li class="fragment"><p>How much this participant is like the other person in the sample</p></li>
-<li class="fragment"><p>Where it falls in the dispersion of the distribution</p></li>
-<li class="fragment"><p>How different this participant is from the majority of people in the sample</p></li>
-</ul></li>
+<li class="fragment">How close that <span class="math inline">\(x\)</span> is to the mean</li>
+<li class="fragment">Where it falls in the spread of the distribution</li>
+<li class="fragment">How similar this participant is to the rest of the sample</li>
+<li class="fragment">How different this participant is from the majority of the sample</li>
 </ul>
 </section>
 <section id="z-scores-1" class="slide level2">
@@ -189,7 +282,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-2-1.png" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -197,12 +290,12 @@ Dave Brocker
 </section>
 <section id="z-scores-2" class="slide level2">
 <h2>Z-scores</h2>
-<h3 id="why-do-we-care-2">Why do we care?</h3>
+<h3 id="whos-more-than-2-sd-below-the-mean">Who’s more than 2 SD <em>below</em> the mean?</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-3-1.png" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -210,40 +303,57 @@ Dave Brocker
 </section>
 <section id="z-scores-3" class="slide level2">
 <h2>Z-scores</h2>
-<h3 id="imagine-that-s-2-and-barx-25">Imagine that <span class="math inline">\(s\)</span> = 2 and <span class="math inline">\(\bar{x}\)</span> = 25</h3>
+<h3 id="going-backwards-imagine-that-colororanges-2-and-colorbluebarx-25">Going backwards: Imagine that <span class="math inline">\(\color{orange}{s} = 2\)</span> and <span class="math inline">\(\color{blue}{\bar{x}} = 25\)</span></h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Formula</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[x = \color{blue}{\bar{x}} + z\,\color{orange}{s}\]</span></p>
+</div>
+</div>
+</div>
 <ul>
-<li class="fragment"><p><span class="math inline">\(z = 1 \Rightarrow x = 25 + (1)(2) = 27\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(z = -2 \Rightarrow x = 25 + (-2)(2) = 21\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(z = 0.5 \Rightarrow x = 25 + (0.5)(2) = 26\)</span></p></li>
+<li class="fragment"><span class="math inline">\(z = 1 \Rightarrow x = 25 + (1)(2) = 27\)</span></li>
+<li class="fragment"><span class="math inline">\(z = -2 \Rightarrow x = 25 + (-2)(2) = 21\)</span></li>
+<li class="fragment"><span class="math inline">\(z = 0.5 \Rightarrow x = 25 + (0.5)(2) = 26\)</span></li>
 </ul>
 </section>
-<section id="calculating-a-z-score" class="slide level2">
-<h2>Calculating A Z-score</h2>
+<section id="calculating-a-z-score" class="slide level2 scrollable">
+<h2>Calculating a Z-score</h2>
 <h3 id="step-by-step">Step-by-Step</h3>
-<ul>
-<li class="fragment"><p>Mean-center the X values:</p></li>
-<li class="fragment"><p><span class="math inline">\(x - \bar{x}\)</span></p>
-<ul>
-<li class="fragment">This makes the Mean = 0.</li>
-</ul></li>
-<li class="fragment"><p>Divide by the standard deviation</p></li>
-<li class="fragment"><p><span class="math inline">\(\frac{}{s}\)</span></p>
-<ul>
-<li class="fragment">Makes the SD = 1.</li>
-</ul></li>
-</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Two steps</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment"><strong>Mean-center</strong> the <span class="math inline">\(x\)</span> values: <span class="math inline">\(x - \color{blue}{\bar{x}}\)</span> — this makes the mean <span class="math inline">\(= 0\)</span>.</li>
+<li class="fragment"><strong>Divide</strong> by the standard deviation: <span class="math inline">\(\dfrac{x - \color{blue}{\bar{x}}}{\color{orange}{s}}\)</span> — this makes the SD <span class="math inline">\(= 1\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="calculating-probability" class="slide level2">
 <h2>Calculating Probability</h2>
 <h3 id="use-the-normal-distribution">Use the normal distribution</h3>
 <blockquote>
-<p>The average grade on the exam was an 86 with a standard deviation of 4.</p>
+<p>The average grade on the exam was an <code>86</code> with a standard deviation of <code>4</code>.</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-4-1.png" width="1248"></a></p>
 </figure>
 </div>
 </div>
@@ -251,14 +361,15 @@ Dave Brocker
 </section>
 <section id="calculating-probability-1" class="slide level2">
 <h2>Calculating Probability</h2>
+<h3 id="what-is-the-probability-of-scoring-a-94-or-higher">What is the probability of scoring a <code>94</code> or higher?</h3>
 <blockquote>
-<p>The average grade on the exam was an 86 with a standard deviation of 4. What is the probability of scoring a <code>94</code> or higher on the exam?</p>
+<p>The average grade on the exam was an <code>86</code> with a standard deviation of <code>4</code>.</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-5-1.png" width="1248"></a></p>
 </figure>
 </div>
 </div>
@@ -266,14 +377,23 @@ Dave Brocker
 </section>
 <section id="calculating-probability-2" class="slide level2">
 <h2>Calculating Probability</h2>
-<h3 id="use-the-normal-distribution-1">Use the normal distribution</h3>
-<blockquote>
-<p>The average grade on the exam was an <code>86</code> with a standard deviation of <code>4</code>. What is the probability of scoring a <code>94</code> or higher on the exam?</p>
-</blockquote>
+<h3 id="what-is-the-probability-of-scoring-a-94-or-higher-1">What is the probability of scoring a <code>94</code> or higher?</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Solution</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p><span class="math inline">\(z = \frac{x-\bar{x}}{s} = \frac{94-86}{4} = \frac{8}{4}=2\)</span></p></li>
-<li class="fragment"><p>Z = <code>2</code> corresponds with <code>2.1%</code> and <code>0.1%</code> of the curve (<code>2.2%</code>) chance.</p></li>
+<li class="fragment"><span class="math inline">\(z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{94-86}{4} = \dfrac{8}{4} = 2\)</span></li>
+<li class="fragment">Beyond <span class="math inline">\(z = 2\)</span> is the <code>2.1%</code> + <code>0.1%</code> slivers of the curve ≈ <strong><code>2.3%</code></strong> chance.</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section id="example-2" class="slide level2">
 <h2>Example 2</h2>
@@ -285,7 +405,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-6-1.png" width="1248"></a></p>
 </figure>
 </div>
 </div>
@@ -301,7 +421,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-7-1.png" width="1248"></a></p>
 </figure>
 </div>
 </div>
@@ -309,25 +429,36 @@ Dave Brocker
 </section>
 <section id="example-2-2" class="slide level2">
 <h2>Example 2</h2>
-<h3 id="esmeraldas-second-test">Esmeralda’s Second Test</h3>
-<p>What is the probability of scoring between an <code>82</code> and a <code>90</code>?</p>
+<h3 id="test-time-2">Test Time!</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Solution</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p><span class="math inline">\(z = \frac{82-86}{4} = \frac{-4}{4} = -1\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(z = \frac{90-86}{4} = \frac{4}{4} = 1\)</span></p></li>
-<li class="fragment"><p>There is a 68.3% chance of scoring between <code>82</code> and <code>90</code>.</p></li>
+<li class="fragment"><span class="math inline">\(z = \dfrac{82-86}{4} = \dfrac{-4}{4} = -1\)</span></li>
+<li class="fragment"><span class="math inline">\(z = \dfrac{90-86}{4} = \dfrac{4}{4} = 1\)</span></li>
+<li class="fragment">Between <span class="math inline">\(z = -1\)</span> and <span class="math inline">\(z = 1\)</span>: a <strong><code>68.3%</code></strong> chance of scoring between <code>82</code> and <code>90</code>.</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section id="example-3" class="slide level2">
 <h2>Example 3</h2>
-<h3 id="esmeraldas-second-test-1">Esmeralda’s Second Test</h3>
+<h3 id="esmeraldas-second-test">Esmeralda’s Second Test</h3>
 <blockquote>
-<p>Esmeralda’s stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below <code>60</code></p>
+<p>Esmeralda’s stats professor tells the class that the average score on the exam was a <code>72</code> with a standard deviation of <code>6</code>, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below <code>60</code>.</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344"></a></p>
 </figure>
 </div>
 </div>
@@ -335,15 +466,15 @@ Dave Brocker
 </section>
 <section id="example-3-1" class="slide level2">
 <h2>Example 3</h2>
-<h3 id="esmeraldas-second-test-2">Esmeralda’s Second Test</h3>
+<h3 id="esmeraldas-second-test-1">Esmeralda’s Second Test</h3>
 <blockquote>
-<p>Esmeralda’s stats professor tells her class that the average score on the exam was a 72 with a standard deviation of 6, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below <code>60</code></p>
+<p>Esmeralda’s stats professor tells the class that the average score on the exam was a <code>72</code> with a standard deviation of <code>6</code>, and the distribution of scores was normal. Esmeralda wants to calculate the probability that she scored below <code>60</code>.</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec6_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+<p><a href="lec6_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec6_files/figure-revealjs/unnamed-chunk-9-1.png" width="1344"></a></p>
 </figure>
 </div>
 </div>
@@ -351,34 +482,46 @@ Dave Brocker
 </section>
 <section id="example-3-2" class="slide level2">
 <h2>Example 3</h2>
-<h3 id="esmeraldas-second-test-barx-72-s-6">Esmeralda’s Second Test: <span class="math inline">\(\bar{x} = 72 | s = 6\)</span></h3>
-<p>Esmeralda wants to calculate the probability that she scored below <code>60</code></p>
+<h3 id="esmeraldas-second-test-colorbluebarx-72-mid-colororanges-6">Esmeralda’s Second Test: <span class="math inline">\(\color{blue}{\bar{x}} = 72 \mid \color{orange}{s} = 6\)</span></h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Solution</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p><span class="math inline">\(\frac{60-72}{6} = \frac{-12}{6} = -2\)</span></p></li>
-<li class="fragment"><p><code>2.2%</code> chance that she failed.</p></li>
-<li class="fragment"><p>What’s the chance she passed?</p></li>
-<li class="fragment"><p><span class="math inline">\(100-2.2 = 97.8%\)</span></p></li>
+<li class="fragment"><span class="math inline">\(z = \dfrac{60-72}{6} = \dfrac{-12}{6} = -2\)</span></li>
+<li class="fragment">About a <strong><code>2.3%</code></strong> chance that she failed.</li>
+<li class="fragment">What’s the chance she passed?</li>
+<li class="fragment"><span class="math inline">\(100\% - 2.3\% = 97.7\%\)</span></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section id="z-scores-and-probability" class="slide level2">
 <h2>Z-scores and Probability</h2>
 <h3 id="how-does-it-apply">How does it apply?</h3>
-<p>In real life, we are often working with numbers with long decimal points rather than nice whole numbers.</p>
+<p>In real life, we are usually working with numbers with long decimals rather than nice whole numbers.</p>
 <ul>
-<li class="fragment">Because the standard normal curve is standard and normal, we can calculate the <strong>exact</strong> probability of a z-score with a decimal point.</li>
+<li class="fragment">Because the standard normal curve is <em>standard</em> and <em>normal</em>, we can look up the <strong>exact</strong> probability for a z-score with decimals.</li>
 </ul>
 </section>
 <section id="z-scores-and-probability-1" class="slide level2">
 <h2>Z-scores and Probability</h2>
 <h3 id="the-z-table">The Z-Table</h3>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:45%;">
 <ul>
-<li class="fragment"><p>Locate the whole number and first decimal point along the left side of the table.</p></li>
-<li class="fragment"><p>Locate the second decimal point along the top of the table.</p></li>
+<li class="fragment">Locate the whole number and first decimal along the <strong>left side</strong> of the table.</li>
+<li class="fragment">Locate the second decimal along the <strong>top</strong> of the table.</li>
+<li class="fragment">Where they meet is the proportion of the curve at or <strong>below</strong> that z.</li>
 </ul>
-</div><div class="column" style="width:50%;">
-   <object data="assets/standardnormaltable.pdf" type="application/pdf" width="100%" height="500px">
+</div><div class="column" style="width:55%;">
+   <object data="assets/standardnormaltable.pdf" type="application/pdf" width="100%" height="600px">
     <p>Unable to display PDF file. <a href="assets/standardnormaltable.pdf">Download</a> instead.</p>
   </object>
   
@@ -387,112 +530,311 @@ Dave Brocker
 <section id="z-scores-and-probability-2" class="slide level2">
 <h2>Z-scores and Probability</h2>
 <h3 id="the-z-table-1">The Z-Table</h3>
-<p>The Z-score Probability Table gives you the probability of that z-score or <strong>less</strong>.</p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Rule</strong></p>
+</div>
+<div class="callout-content">
+<p>The z-table gives you the probability of that z-score <strong>or less</strong> (the area to the <em>left</em>).</p>
+</div>
+</div>
+</div>
 <ul>
-<li class="fragment">If you need that z-score or higher, you have to subtract the decimal from 1.
+<li class="fragment">If you need that z-score <strong>or higher</strong>, subtract the table value from 1.
 <ul>
-<li class="fragment">Esmeralda had a <code>2.2</code>% chance of failing and a <code>1-.022 = 97.8%</code> chance of passing.</li>
+<li class="fragment">Esmeralda: <code>.023</code> chance of failing, so a <code>1 - .023 = .977</code> → <strong><code>97.7%</code></strong> chance of passing.</li>
 </ul></li>
 </ul>
 </section>
 <section id="z-scores-and-probability-3" class="slide level2">
-<h2>Z-scores and Probability:</h2>
-<h3 id="some-examples">Some examples</h3>
+<h2>Z-scores and Probability</h2>
+<h3 id="life-satisfaction">Life Satisfaction</h3>
 <blockquote>
 <p>In a recent study on world happiness, participants were asked to evaluate their current lives on a scale from <code>0</code> to <code>10</code>, where <code>0</code> represents the worst possible life and <code>10</code> represents the best possible life. The responses were normally distributed, with a mean of <code>5.4</code> and a standard deviation of <code>2.2</code>. Find the probability that a randomly selected study participant’s response was:</p>
 </blockquote>
 <div class="highlight-last">
 <ul>
-<li class="fragment"><p>Less than 4</p></li>
-<li class="fragment"><p>More than 8</p></li>
+<li class="fragment">Less than <code>4</code></li>
+<li class="fragment">More than <code>8</code></li>
 </ul>
 </div>
 </section>
 <section id="z-scores-and-probability-4" class="slide level2">
-<h2>Z-scores and Probability:</h2>
-<h3 id="life-satisfaction-barx-5.4-text-and-s-2.2">Life Satisfaction: <span class="math inline">\(\bar{x} = 5.4 \text{ and } s = 2.2\)</span></h3>
+<h2>Z-scores and Probability</h2>
+<h3 id="life-satisfaction-colorbluebarx-5.4-mid-colororanges-2.2">Life Satisfaction: <span class="math inline">\(\color{blue}{\bar{x}} = 5.4 \mid \color{orange}{s} = 2.2\)</span></h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Convert to z first</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p>Find the probability that a randomly selected study participant’s response was:</p></li>
-<li class="fragment"><p>Less than 4</p>
-<ul>
-<li class="fragment"><span class="math inline">\(z = \frac{x-\bar{x}}{s} = \frac{4-5.4}{2.2} = \frac{-1.4}{2.2} = -.63\)</span></li>
-</ul></li>
-<li class="fragment"><p>More than 8</p>
-<ul>
-<li class="fragment"><span class="math inline">\(z = \frac{x-\bar{x}}{s} = \frac{8-5.4}{2.2} = \frac{2.6}{2.2} = 1.18\)</span></li>
-</ul></li>
+<li class="fragment"><strong>Less than 4:</strong> <span class="math inline">\(z = \dfrac{4-5.4}{2.2} = \dfrac{-1.4}{2.2} = -0.64\)</span></li>
+<li class="fragment"><strong>More than 8:</strong> <span class="math inline">\(z = \dfrac{8-5.4}{2.2} = \dfrac{2.6}{2.2} = 1.18\)</span></li>
 </ul>
+</div>
+</div>
+</div>
+</section>
+<section id="life-satisfaction-1" class="slide level2 z-slide">
+<h2>Life Satisfaction</h2>
+<h3 id="less-than-4-z--0.64">Less than 4 (<span class="math inline">\(z = -0.64\)</span>)</h3>
+<div class="z-excerpt">
+<table class="caption-top">
+<caption>Excerpt of the z-table (area to the left of z)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">z</th>
+<th style="text-align: center;">.02</th>
+<th style="text-align: center;">.03</th>
+<th style="text-align: center;">.04</th>
+<th style="text-align: center;">.05</th>
+<th style="text-align: center;">.06</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">-0.5</td>
+<td style="text-align: center;">0.3015</td>
+<td style="text-align: center;">0.2981</td>
+<td style="text-align: center;">0.2946</td>
+<td style="text-align: center;">0.2912</td>
+<td style="text-align: center;">0.2877</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>-0.6</strong></td>
+<td style="text-align: center;">0.2676</td>
+<td style="text-align: center;">0.2643</td>
+<td style="text-align: center;"><span class="z-hit">0.2611</span></td>
+<td style="text-align: center;">0.2578</td>
+<td style="text-align: center;">0.2546</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">-0.7</td>
+<td style="text-align: center;">0.2358</td>
+<td style="text-align: center;">0.2327</td>
+<td style="text-align: center;">0.2296</td>
+<td style="text-align: center;">0.2266</td>
+<td style="text-align: center;">0.2236</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">By Hand</a></li><li><a href="#tabset-1-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<ul>
+<li class="fragment">Find <strong>-0.6</strong> on the left side of the table — use the negative-z page.</li>
+<li class="fragment">Find the <strong>.04</strong> column.</li>
+<li class="fragment">Where they meet is the area to the left — that <strong>is</strong> the probability we want.</li>
+<li class="fragment">Report it as a percentage (the proportion <span class="math inline">\(\times 100\)</span>).</li>
+</ul>
+<details>
+<summary>
+Reveal Answer
+</summary>
+<ul>
+<li><span class="math inline">\(.2611 \times 100 =\)</span> <strong>26.1%</strong> of participants rated their life below a 4.</li>
+</ul>
+</details>
+</div>
+<div id="tabset-1-2">
+<div class="codewindow r codewindow-dark">
+<p>pnorm.R</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.64</span>)                        <span class="co"># .2611 (z-table)</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">pnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="fl">5.4</span>, <span class="at">sd =</span> <span class="fl">2.2</span>)      <span class="co"># .2623 (unrounded z)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong><code>pnorm</code></strong> (<strong>p</strong>robability) is the z-table: z in, area to the left out. <strong><code>qnorm</code></strong> (<strong>q</strong>uantile) is the reverse: probability in, z out.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="life-satisfaction-2" class="slide level2 z-slide">
+<h2>Life Satisfaction</h2>
+<h3 id="more-than-8-z-1.18">More than 8 (<span class="math inline">\(z = 1.18\)</span>)</h3>
+<div class="z-excerpt">
+<table class="caption-top">
+<caption>Excerpt of the z-table (area to the left of z)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">z</th>
+<th style="text-align: center;">.06</th>
+<th style="text-align: center;">.07</th>
+<th style="text-align: center;">.08</th>
+<th style="text-align: center;">.09</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;">0.8554</td>
+<td style="text-align: center;">0.8577</td>
+<td style="text-align: center;">0.8599</td>
+<td style="text-align: center;">0.8621</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1.1</strong></td>
+<td style="text-align: center;">0.8770</td>
+<td style="text-align: center;">0.8790</td>
+<td style="text-align: center;"><span class="z-hit">0.8810</span></td>
+<td style="text-align: center;">0.8830</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1.2</td>
+<td style="text-align: center;">0.8962</td>
+<td style="text-align: center;">0.8980</td>
+<td style="text-align: center;">0.8997</td>
+<td style="text-align: center;">0.9015</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">By Hand</a></li><li><a href="#tabset-2-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li class="fragment">Find <strong>1.1</strong> on the left side of the table.</li>
+<li class="fragment">Find the <strong>.08</strong> column.</li>
+<li class="fragment">Note where they intersect.</li>
+<li class="fragment">We want <strong>8 or more</strong>, so subtract that proportion from 1.</li>
+<li class="fragment">Report it as a percentage (the proportion <span class="math inline">\(\times 100\)</span>).</li>
+</ul>
+<details>
+<summary>
+Reveal Answer
+</summary>
+<ul>
+<li><span class="math inline">\(1 - .8810 = .1190\)</span></li>
+<li><strong>11.9%</strong> of participants rated their life above an 8.</li>
+</ul>
+</details>
+</div>
+<div id="tabset-2-2">
+<div class="codewindow r codewindow-dark">
+<p>pnorm.R</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">1.18</span>)                                              <span class="co"># .1190 (z-table)</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="fu">pnorm</span>(<span class="dv">8</span>, <span class="at">mean =</span> <span class="fl">5.4</span>, <span class="at">sd =</span> <span class="fl">2.2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)           <span class="co"># .1186 (unrounded z)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong><code>pnorm</code></strong> (<strong>p</strong>robability) is the z-table: z in, area to the left out. <strong><code>qnorm</code></strong> (<strong>q</strong>uantile) is the reverse: probability in, z out.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="z-scores-and-probability-5" class="slide level2">
 <h2>Z-scores and Probability</h2>
-<h3 id="example-1-barx-5.4-text-and-s-2.2">Example 1: <span class="math inline">\(\bar{x} = 5.4 \text{ and } s = 2.2\)</span></h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><p>Less than 4 (-.63)</p></li>
-<li class="fragment"><p>Find -0.6 on the left side of the table (z column) — use the negative-z page</p></li>
-<li class="fragment"><p>Find .03 column</p></li>
-<li class="fragment"><p>Note where they intersect — since the table already gives “area to the left,” this <strong>is</strong> the probability we want</p></li>
-<li class="fragment"><p>Report the value as a percentage (the proportion <span class="math inline">\(\times 100\)</span>)</p></li>
-</ul>
-</div></div>
-</section>
-<section id="example-1" class="slide level2">
-<h2>Example 1</h2>
-<h3 id="step-by-step-1">Step by Step</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><p>More than 8 (1.18)</p></li>
-<li class="fragment"><p>Find 1.1 on the left side of the table (z column)</p></li>
-<li class="fragment"><p>Find .08 column</p></li>
-<li class="fragment"><p>Note where they intersect</p></li>
-<li class="fragment"><p>Remember we are thinking about 8 or more, so we have to subtract that proportion from 1</p></li>
-<li class="fragment"><p>Report the value as a percentage (the proportion <span class="math inline">\(\times 100\)</span>)</p></li>
-</ul>
-</div></div>
-</section>
-<section id="z-scores-and-probability-6" class="slide level2">
-<h2>Z-scores and Probability:</h2>
-<h3 id="example-2-3">Example 2</h3>
+<h3 id="mensa">MENSA</h3>
 <blockquote>
-<p>The scale of scores for an IQ test are approximately normal with mean <code>100</code> and standard deviation <code>15</code>. The organization MENSA, which calls itself the “high IQ society”, requires a score of <code>130</code> or higher.</p>
+<p>Scores on an IQ test are approximately normal with a mean of <code>100</code> and a standard deviation of <code>15</code>. The organization MENSA, which calls itself the “high IQ society,” requires a score of <code>130</code> or higher.</p>
 </blockquote>
 <ul>
-<li class="fragment"><p>What percent of adults would qualify for membership?</p>
+<li class="fragment">What percent of adults would qualify for membership?
 <ul>
-<li class="fragment"><p>Find the probability of scores more than 130</p></li>
-<li class="fragment"><p><span class="math inline">\(z = \frac{x-\bar{x}}{s} = z = \frac{130-100}{15}=\frac{30}{15} = 2\)</span></p></li>
+<li class="fragment">Find the probability of scoring <code>130</code> or higher.</li>
+<li class="fragment"><span class="math inline">\(z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{130-100}{15} = \dfrac{30}{15} = 2\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="example-2-4" class="slide level2">
-<h2>Example 2</h2>
-<h3 id="mensa-barx100-text-and-s-15">MENSA: <span class="math inline">\(\bar{x}=100 \text{ and } s = 15\)</span></h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img src="images/z-table.png" alt="Z-table" style="display: block; width: 100%;"></p>
-</div><div class="column" style="width:50%;">
+<section id="mensa-1" class="slide level2 z-slide">
+<h2>MENSA</h2>
+<h3 id="colorbluebarx-100-mid-colororanges-15-130-or-higher-z-2.00"><span class="math inline">\(\color{blue}{\bar{x}} = 100 \mid \color{orange}{s} = 15\)</span> — <code>130</code> or higher (<span class="math inline">\(z = 2.00\)</span>)</h3>
+<div class="z-excerpt">
+<table class="caption-top">
+<caption>Excerpt of the z-table (area to the left of z)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">z</th>
+<th style="text-align: center;">.00</th>
+<th style="text-align: center;">.01</th>
+<th style="text-align: center;">.02</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.9</td>
+<td style="text-align: center;">0.9713</td>
+<td style="text-align: center;">0.9719</td>
+<td style="text-align: center;">0.9726</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2.0</strong></td>
+<td style="text-align: center;"><span class="z-hit">0.9772</span></td>
+<td style="text-align: center;">0.9778</td>
+<td style="text-align: center;">0.9783</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2.1</td>
+<td style="text-align: center;">0.9821</td>
+<td style="text-align: center;">0.9826</td>
+<td style="text-align: center;">0.9830</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">By Hand</a></li><li><a href="#tabset-3-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
 <ul>
-<li class="fragment"><p>More than 130 (2)</p></li>
-<li class="fragment"><p>Find 2.0 on the left side of the table (z column)</p></li>
-<li class="fragment"><p>Find .00 column</p></li>
-<li class="fragment"><p>Note where they intersect</p></li>
-<li class="fragment"><p>Remember we are thinking about 130 or more so we have to subtract 1 from our proportion.</p></li>
-<li class="fragment"><p>Report the value as a percentage (the proportion <span class="math inline">\(\times 100\)</span>)</p></li>
+<li class="fragment">Find <strong>2.0</strong> on the left side of the table.</li>
+<li class="fragment">Find the <strong>.00</strong> column.</li>
+<li class="fragment">Note where they intersect.</li>
+<li class="fragment">We want <strong>130 or more</strong>, so subtract that proportion from 1.</li>
+<li class="fragment">Report it as a percentage (the proportion <span class="math inline">\(\times 100\)</span>).</li>
 </ul>
-</div></div>
+<details>
+<summary>
+Reveal Answer
+</summary>
+<ul>
+<li><span class="math inline">\(1 - .9772 = .0228\)</span></li>
+<li>About <strong>2.3%</strong> of adults would qualify for MENSA.</li>
+</ul>
+</details>
+</div>
+<div id="tabset-3-2">
+<div class="codewindow r codewindow-dark">
+<p>pnorm.R</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">2</span>)                                                 <span class="co"># .0228 (z-table)</span></span>
+<span id="cb3-2"><a aria-label="2"></a><span class="fu">pnorm</span>(<span class="dv">130</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)          <span class="co"># .0228</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong><code>pnorm</code></strong> (<strong>p</strong>robability) is the z-table: z in, area to the left out. <strong><code>qnorm</code></strong> (<strong>q</strong>uantile) is the reverse: probability in, z out.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>Z-Scores &amp; Probability | ⬡⬢⬡⬢⬡⬢</p>
 </div>
 </div></div>
 
@@ -505,6 +847,7 @@ Dave Brocker
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -699,7 +1042,7 @@ Dave Brocker
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, RevealCodewindow, QuartoSupport,
 
           RevealMath,
           RevealNotes,
