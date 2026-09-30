@@ -1,0 +1,25 @@
+<script>
+// Adds lec2-style drifting icons + ghost nodes behind a YAML-generated
+// #title-slide (which can't hold raw HTML). Styles: custom.scss ("Title-slide
+// ambience"). Icons: pass via <body data-title-icons="functions percent ...">
+// or edit the default list below.
+document.addEventListener("DOMContentLoaded", function () {
+  var slide = document.getElementById("title-slide");
+  if (!slide) return;
+  var icons = (document.body.dataset.titleIcons ||
+    "functions percent show_chart calculate query_stats bar_chart").split(/\s+/);
+  var layer = document.createElement("div");
+  layer.className = "title-bg-icons";
+  icons.slice(0, 6).forEach(function (name, i) {
+    var s = document.createElement("span");
+    s.className = "material-icons title-bg-icon-" + (i + 1);
+    s.textContent = name;
+    layer.appendChild(s);
+  });
+  var nodes = document.createElement("div");
+  nodes.className = "ghost-nodes";
+  for (var i = 0; i < 5; i++) nodes.appendChild(document.createElement("div")).className = "ghost-node";
+  slide.insertBefore(nodes, slide.firstChild);
+  slide.insertBefore(layer, slide.firstChild);
+});
+</script>

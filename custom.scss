@@ -1093,3 +1093,59 @@ details[open] summary {
     .codewindow { margin-bottom: 10px; }
   }
 }
+
+// ---------------------------------------------------------------------------
+// Title-slide ambience (lec6+): drifting icons + ghost nodes on a YAML
+// #title-slide (injected by title-bg.html), and dingbat borders.
+// Reuses the lec2 .title-bg-icons / .ghost-nodes rules above.
+// ---------------------------------------------------------------------------
+#title-slide {
+  position: relative;
+  overflow: hidden;
+  // Fill the whole 1600x900 canvas so the background layer and dingbat
+  // borders span the slide instead of hugging the title text.
+  width: 100% !important;
+  height: 900px !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+#title-slide > *:not(.title-bg-icons):not(.ghost-nodes) {
+  position: relative;
+  z-index: 1;
+}
+
+// Dingbat borders. Glyphs are plain Unicode (Geometric Shapes / Dingbats
+// blocks), so no font file is needed; swap $dingbat-* to try other motifs.
+$dingbat-hex:  "⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢ ⬡ ⬢";
+$dingbat-star: "✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖ ✦ ❖";
+$dingbat-vine: "❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧";
+
+%dingbat-line {
+  position: absolute;
+  left: 0; right: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 34px;
+  letter-spacing: 0.35em;
+  color: $accent2;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#title-slide::before { content: $dingbat-hex; top: 30px; @extend %dingbat-line; }
+#title-slide::after  { content: $dingbat-hex; bottom: 96px; @extend %dingbat-line; }
+
+// Reusable divider for section slides: ::: {.dingbat-rule .star} ::: 
+.dingbat-rule {
+  text-align: center;
+  color: $accent2;
+  letter-spacing: 0.35em;
+  overflow: hidden;
+  white-space: nowrap;
+  &::before { content: $dingbat-hex; }
+  &.star::before { content: $dingbat-star; }
+  &.vine::before { content: $dingbat-vine; }
+}
