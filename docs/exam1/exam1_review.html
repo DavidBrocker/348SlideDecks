@@ -101,7 +101,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-c095c2c4efa36ca466d3fe776080d7ec.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -235,29 +235,24 @@ Dave Brocker
 <p>A psychology researcher collects the following data on the number of hours five participants spent practicing a task: <code>3, 5, 8, 2, 7</code>.</p>
 </blockquote>
 <p><strong>Question:</strong> What is the average number of hours spent practicing?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Manual Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Solution</a></li><li><a href="#tabset-1-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <p>
 <span class="math inline">\(\bar{x} = \frac{\sum(3+5+8+2+7)}{5} = \frac{25}{5} = 5\text{ hours}\)</span>
 </p>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-1-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">7</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="mean-calculation-1" class="slide level2">
 <h2>2. Mean Calculation</h2>
@@ -266,29 +261,24 @@ Code Solution
 <p>A study measures the changes in mood scores before and after an intervention. The changes in mood scores are: <code>-4, -2, 0, 3, 5</code>.</p>
 </blockquote>
 <p><strong>Question:</strong> Calculate the mean change in mood score.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Manual Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Solution</a></li><li><a href="#tabset-2-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
 <p>
 <span class="math inline">\(\bar{x} = \frac{\sum(-4 + (-2) + 0 + 3 + 5)}{5} = \frac{2}{5} = 0.4\)</span>
 </p>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-2-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="standard-deviation-calculation" class="slide level2">
 <h2>3. Standard Deviation Calculation</h2>
@@ -297,41 +287,26 @@ Code Solution
 <p>A psychologist measures the number of stressful events experienced by a small group of participants over a week: <code>2, 3, 6, 4, 5</code>.</p>
 </blockquote>
 <p><strong>Question:</strong> Calculate the standard deviation of stressful events.</p>
-<details>
-<summary>
-Manual Solution
-</summary>
-<p>
-</p><ul>
-<li>
-First compute the sample mean: <span class="math inline">\(\bar{x} = \frac{2+3+6+4+5}{5} = \frac{20}{5} = 4.\)</span>
-</li>
-<li>
-Compute squared deviations: <span class="math inline">\((2-4)^2=4,\ (3-4)^2=1,\ (6-4)^2=4,\ (4-4)^2=0,\ (5-4)^2=1\)</span>
-</li>
-<li>
-Sum of squares = <span class="math inline">\(4+1+4+0+1 = 10\)</span>
-</li>
-<li>
-Sample variance <span class="math inline">\(s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5\)</span>
-</li>
-<li>
-Sample SD <span class="math inline">\(s = \sqrt{2.5} \approx 1.58\)</span>
-</li>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Solution</a></li><li><a href="#tabset-3-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<ul>
+<li class="fragment">Mean: <span class="math inline">\(\bar{x} = \frac{2+3+6+4+5}{5} = 4\)</span></li>
+<li class="fragment">Sum of squares: <span class="math inline">\((2-4)^2+(3-4)^2+(6-4)^2+(4-4)^2+(5-4)^2 = 4+1+4+0+1 = 10\)</span></li>
+<li class="fragment"><span class="math inline">\(s = \sqrt{\frac{10}{5-1}} = \sqrt{2.5} \approx 1.58\)</span></li>
 </ul>
-<p></p>
-</details>
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-3-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.581139</code></pre>
 </div>
 </div>
-</details>
+</div>
+</div>
+</div>
 </section>
 <section id="standard-deviation-calculation-1" class="slide level2">
 <h2>4. Standard Deviation Calculation</h2>
@@ -340,29 +315,26 @@ Code Solution
 <p><strong>Sample Standard Deviation</strong> Participants’ anxiety scores in a clinical trial are recorded as: <code>4, 7, 3, 5, 8, 6, 2</code>.</p>
 </blockquote>
 <p><strong>Question:</strong> Compute the standard deviation of these anxiety scores.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
-<p>
-First compute the sample mean: <span class="math inline">\(\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5\)</span><br> Squared deviations: <span class="math inline">\((4-5)^2=1\\(7-5)^2=4\\ (3-5)^2=4\\(5-5)^2=0\\(8-5)^2=9\\(6-5)^2=1\\ (2-5)^2=9\\\)</span> <br> Sum = <span class="math inline">\(1+4+4+0+9+1+9 = 28\)</span>.<br> <span class="math inline">\(s^2 = \frac{28}{7-1} = 4.67\)</span>, so <span class="math inline">\(s = \sqrt{4.67} \approx 2.16\)</span>.
-</p>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Solution</a></li><li><a href="#tabset-4-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<ul>
+<li class="fragment">Mean: <span class="math inline">\(\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5\)</span></li>
+<li class="fragment">Sum of squares: <span class="math inline">\(1+4+4+0+9+1+9 = 28\)</span></li>
+<li class="fragment"><span class="math inline">\(s = \sqrt{\frac{28}{7-1}} = \sqrt{4.67} \approx 2.16\)</span></li>
+</ul>
+</div>
+<div id="tabset-4-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.160247</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="standard-deviation-calculation-2" class="slide level2">
 <h2>5. Standard Deviation Calculation</h2>
@@ -387,29 +359,24 @@ A standard deviation of <code>1.5</code> is is larger than <code>0.5</code> is, 
 <p>In a personality study, the average score on an extraversion scale is <code>50</code>, with a standard deviation of <code>10</code>. One participant scores <code>70</code>.</p>
 </blockquote>
 <p><strong>Question:</strong> What is the Z-score for this participant?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Solution</a></li><li><a href="#tabset-5-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
 <p>
 <span class="math inline">\(z = \frac{X - \mu}{\sigma} = \frac{70 - 50}{10} = \frac{20}{10} = 2\)</span>
 </p>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-5-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a>(<span class="dv">70-50</span>)<span class="sc">/</span><span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="z-score-calculation-1" class="slide level2">
 <h2>7. Z-Score Calculation:</h2>
@@ -434,29 +401,24 @@ A Z-score of <code>-1.5</code> is <strong>below</strong> the mean. In raw score 
 <p>The mean stress score of a group is <code>25</code>, with a standard deviation of <code>4</code>. If a participant has a stress score of <code>18</code>…</p>
 </blockquote>
 <p><strong>Question:</strong> Calculate their Z-score and interpret its meaning in the context of stress levels.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Solution</a></li><li><a href="#tabset-6-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
 <p>
 <span class="math inline">\(z = \frac{18 - 25}{4} = \frac{-7}{4} = -1.75.\)</span> The Z-score is <span class="math inline">\(z \approx -1.75\)</span>, meaning this participant’s stress score is <code>1.75</code> <strong>standard deviations below</strong> the group mean — they have substantially lower stress than average.
 </p>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-6-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a>(<span class="dv">18-25</span>)<span class="sc">/</span><span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.75</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="z-score-calculation-3" class="slide level2">
 <h2>9. Z-Score Calculation</h2>
@@ -465,28 +427,16 @@ Code Solution
 <p>In a clinical assessment, the average depression score is <code>60</code>, with a standard deviation of <code>8</code>. Two participants have scores of <code>72</code> and <code>48</code>.</p>
 </blockquote>
 <p><strong>Question:</strong> Calculate the Z-scores for both participants and explain what the values tell us about their relative positions in the group.</p>
-<details>
-<summary>
-Solution
-</summary>
-<p>
-</p><ul>
-<li>
-For the first participant (72): <span class="math inline">\(z_1 = \frac{72 - 60}{8} = \frac{12}{8} = 1.5.\)</span>
-</li>
-<li>
-For the second participant (48): <span class="math inline">\(z_2 = \frac{48 - 60}{8} = \frac{-12}{8} = -1.5.\)</span>
-</li>
-<li>
-Interpretation: the first participant is <code>1.5</code> SD <strong>above</strong> the mean (higher depression score than average), while the second is <code>1.5</code> SD <strong>below</strong> the mean (lower depression score than average). They are symmetric around the mean.
-</li>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Solution</a></li><li><a href="#tabset-7-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<ul>
+<li class="fragment">Participant 1 (72): <span class="math inline">\(z_1 = \frac{72 - 60}{8} = 1.5\)</span>. Participant 2 (48): <span class="math inline">\(z_2 = \frac{48 - 60}{8} = -1.5\)</span>.</li>
+<li class="fragment">The first is <code>1.5</code> SD <strong>above</strong> the mean (higher depression than average), the second <code>1.5</code> SD <strong>below</strong> (lower). They are symmetric around the mean.</li>
 </ul>
-<p></p>
-</details>
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-7-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a>(<span class="dv">72-60</span>)<span class="sc">/</span><span class="dv">8</span>;(<span class="dv">48-60</span>)<span class="sc">/</span><span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -496,7 +446,9 @@ Code Solution
 <pre><code>[1] -1.5</code></pre>
 </div>
 </div>
-</details>
+</div>
+</div>
+</div>
 </section>
 <section id="z-scores-to-raw-scores" class="slide level2">
 <h2>10. Z-Scores to Raw Scores</h2>
@@ -505,29 +457,24 @@ Code Solution
 <p>The distribution of scores on a math test is approximately normal with mean <span class="math inline">\(\mu = 100\)</span> and standard deviation <span class="math inline">\(\sigma = 15\)</span>.</p>
 </blockquote>
 <p><strong>Question:</strong> What raw score corresponds to <span class="math inline">\(z = 1.2\)</span>?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Solution</a></li><li><a href="#tabset-8-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
 <p>
 Solve <span class="math inline">\(z = \frac{x-\mu}{\sigma}\)</span> for <span class="math inline">\(x\)</span>: <span class="math inline">\(x = \mu + z\sigma = 100 + 1.2(15) = 118\)</span>
 </p>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-8-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a><span class="fl">1.2</span><span class="sc">*</span><span class="dv">15</span> <span class="sc">+</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 118</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="reading-the-z-table" class="slide level2 scrollable">
 <h2>Reading the Z-Table</h2>
@@ -555,12 +502,10 @@ Code Solution
 <h2>11. Probability: Left Tail</h2>
 <h3 id="below-a-score">Below a Score</h3>
 <p><strong>Question:</strong> What proportion of people score <strong>below 42</strong>?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Solution</a></li><li><a href="#tabset-9-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1">
 <ul>
 <li>
 <span class="math inline">\(z = \frac{42-50}{10} = -0.80\)</span>
@@ -572,12 +517,8 @@ Shade the left tail. The table gives the left area directly: <span class="math i
 About <strong>21.2%</strong> score below 42.
 </li>
 </ul>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-9-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.80</span>)                       <span class="co"># z-table</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -588,19 +529,18 @@ Code Solution
 <pre><code>[1] 0.2118554</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="probability-right-tail" class="slide level2">
 <h2>12. Probability: Right Tail</h2>
 <h3 id="above-a-score">Above a Score</h3>
 <p><strong>Question:</strong> What proportion of people score <strong>above 65</strong>?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Solution</a></li><li><a href="#tabset-10-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
 <ul>
 <li>
 <span class="math inline">\(z = \frac{65-50}{10} = 1.50\)</span>
@@ -612,12 +552,8 @@ Shade the right tail. The table gives the area to the <em>left</em> (<span class
 About <strong>6.7%</strong> score above 65.
 </li>
 </ul>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-10-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">1.50</span>)                                       <span class="co"># z-table</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -628,8 +564,9 @@ Code Solution
 <pre><code>[1] 0.0668072</code></pre>
 </div>
 </div>
-</details>
-</div></div>
+</div>
+</div>
+</div>
 </section>
 <section id="probability-between-two-scores" class="slide level2">
 <h2>13. Probability: Between Two Scores</h2>
@@ -637,10 +574,10 @@ Code Solution
 <p><strong>Question:</strong> What proportion of people score <strong>between 45 and 60</strong>?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<details>
-<summary>
-Solution
-</summary>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Solution</a></li><li><a href="#tabset-11-2">In R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
 <ul>
 <li>
 <span class="math inline">\(z_{45} = \frac{45-50}{10} = -0.50\)</span> and <span class="math inline">\(z_{60} = \frac{60-50}{10} = 1.00\)</span>
@@ -655,12 +592,8 @@ Big area minus small area: <span class="math inline">\(.8413 - .3085 = .5328\)</
 About <strong>53.3%</strong> score between 45 and 60.
 </li>
 </ul>
-</details>
-</div><div class="column" style="width:50%;">
-<details>
-<summary>
-Code Solution
-</summary>
+</div>
+<div id="tabset-11-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-label="1"></a><span class="fu">pnorm</span>(<span class="fl">1.00</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.50</span>)                            <span class="co"># z-table</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -671,7 +604,9 @@ Code Solution
 <pre><code>[1] 0.5328072</code></pre>
 </div>
 </div>
-</details>
+</div>
+</div>
+</div>
 </div></div>
 
 

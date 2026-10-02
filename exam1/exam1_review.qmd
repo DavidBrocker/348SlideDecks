@@ -35,30 +35,18 @@ revealjs-plugins:
 
 **Question:** What is the average number of hours spent practicing?
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Manual Solution</summary>
+::: panel-tabset
+## Solution
 
 <p>$\bar{x} = \frac{\sum(3+5+8+2+7)}{5} = \frac{25}{5} = 5\text{ hours}$</p>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 mean(c(3,5,8,2,7))
 ```
-
-</details>
 :::
-:::::
 
 ## 2. Mean Calculation
 
@@ -68,30 +56,18 @@ mean(c(3,5,8,2,7))
 
 **Question:** Calculate the mean change in mood score.
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Manual Solution</summary>
+::: panel-tabset
+## Solution
 
 <p>$\bar{x} = \frac{\sum(-4 + (-2) + 0 + 3 + 5)}{5} = \frac{2}{5} = 0.4$</p>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 mean(c(-4,-2,0,3,5))
 ```
-
-</details>
 :::
-:::::
 
 ## 3. Standard Deviation Calculation
 
@@ -101,40 +77,21 @@ mean(c(-4,-2,0,3,5))
 
 **Question:** Calculate the standard deviation of stressful events.
 
-<details>
+::: panel-tabset
+## Solution
 
-<summary>Manual Solution</summary>
+-   Mean: $\bar{x} = \frac{2+3+6+4+5}{5} = 4$
+-   Sum of squares: $(2-4)^2+(3-4)^2+(6-4)^2+(4-4)^2+(5-4)^2 = 4+1+4+0+1 = 10$
+-   $s = \sqrt{\frac{10}{5-1}} = \sqrt{2.5} \approx 1.58$
 
-<p>
-
-<ul>
-
-<li>First compute the sample mean: $\bar{x} = \frac{2+3+6+4+5}{5} = \frac{20}{5} = 4.$</li>
-
-<li>Compute squared deviations: $(2-4)^2=4,\ (3-4)^2=1,\ (6-4)^2=4,\ (4-4)^2=0,\ (5-4)^2=1$</li>
-
-<li>Sum of squares = $4+1+4+0+1 = 10$</li>
-
-<li>Sample variance $s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5$</li>
-
-<li>Sample SD $s = \sqrt{2.5} \approx 1.58$</li>
-
-</ul>
-
-</p>
-
-</details>
-
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 sd(c(2,3,6,4,5))
 ```
+:::
 
-</details>
 
 ## 4. Standard Deviation Calculation
 
@@ -144,30 +101,20 @@ sd(c(2,3,6,4,5))
 
 **Question:** Compute the standard deviation of these anxiety scores.
 
-::::: columns
-::: {.column width="50%"}
-<details>
+::: panel-tabset
+## Solution
 
-<summary>Solution</summary>
+-   Mean: $\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5$
+-   Sum of squares: $1+4+4+0+9+1+9 = 28$
+-   $s = \sqrt{\frac{28}{7-1}} = \sqrt{4.67} \approx 2.16$
 
-<p>First compute the sample mean: $\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5$<br> Squared deviations: $(4-5)^2=1\\(7-5)^2=4\\ (3-5)^2=4\\(5-5)^2=0\\(8-5)^2=9\\(6-5)^2=1\\ (2-5)^2=9\\$ <br> Sum = $1+4+4+0+9+1+9 = 28$.<br> $s^2 = \frac{28}{7-1} = 4.67$, so $s = \sqrt{4.67} \approx 2.16$.</p>
-
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 sd(c(4,7,3,5,8,6,2))
 ```
-
-</details>
 :::
-:::::
 
 ## 5. Standard Deviation Calculation
 
@@ -193,31 +140,19 @@ sd(c(4,7,3,5,8,6,2))
 
 **Question:** What is the Z-score for this participant?
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Solution</summary>
+::: panel-tabset
+## Solution
 
 <p>$z = \frac{X - \mu}{\sigma} = \frac{70 - 50}{10} = \frac{20}{10} = 2$</p>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 
 (70-50)/10
 ```
-
-</details>
 :::
-:::::
 
 ## 7. Z-Score Calculation:
 
@@ -243,30 +178,18 @@ sd(c(4,7,3,5,8,6,2))
 
 **Question:** Calculate their Z-score and interpret its meaning in the context of stress levels.
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Solution</summary>
+::: panel-tabset
+## Solution
 
 <p>$z = \frac{18 - 25}{4} = \frac{-7}{4} = -1.75.$ The Z-score is $z \approx -1.75$, meaning this participant's stress score is `1.75` **standard deviations below** the group mean — they have substantially lower stress than average.</p>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 (18-25)/4
 ```
-
-</details>
 :::
-:::::
 
 ## 9. Z-Score Calculation
 
@@ -276,36 +199,20 @@ sd(c(4,7,3,5,8,6,2))
 
 **Question:** Calculate the Z-scores for both participants and explain what the values tell us about their relative positions in the group.
 
-<details>
+::: panel-tabset
+## Solution
 
-<summary>Solution</summary>
+-   Participant 1 (72): $z_1 = \frac{72 - 60}{8} = 1.5$. Participant 2 (48): $z_2 = \frac{48 - 60}{8} = -1.5$.
+-   The first is `1.5` SD **above** the mean (higher depression than average), the second `1.5` SD **below** (lower). They are symmetric around the mean.
 
-<p>
-
-<ul>
-
-<li>For the first participant (72): $z_1 = \frac{72 - 60}{8} = \frac{12}{8} = 1.5.$</li>
-
-<li>For the second participant (48): $z_2 = \frac{48 - 60}{8} = \frac{-12}{8} = -1.5.$</li>
-
-<li>Interpretation: the first participant is `1.5` SD **above** the mean (higher depression score than average), while the second is `1.5` SD **below** the mean (lower depression score than average). They are symmetric around the mean.</li>
-
-</ul>
-
-</p>
-
-</details>
-
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 (72-60)/8;(48-60)/8
 ```
+:::
 
-</details>
 
 ## 10. Z-Scores to Raw Scores
 
@@ -315,30 +222,18 @@ sd(c(4,7,3,5,8,6,2))
 
 **Question:** What raw score corresponds to $z = 1.2$?
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Solution</summary>
+::: panel-tabset
+## Solution
 
 <p>Solve $z = \frac{x-\mu}{\sigma}$ for $x$: $x = \mu + z\sigma = 100 + 1.2(15) = 118$</p>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 1.2*15 + 100
 ```
-
-</details>
 :::
-:::::
 
 ## Reading the Z-Table
 
@@ -359,11 +254,8 @@ Anxiety scores are approximately normal with $\mu = 50$ and $\sigma = 10$.
 
 **Question:** What proportion of people score **below 42**?
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Solution</summary>
+::: panel-tabset
+## Solution
 
 <ul>
 
@@ -375,23 +267,14 @@ Anxiety scores are approximately normal with $\mu = 50$ and $\sigma = 10$.
 
 </ul>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 pnorm(-0.80)                       # z-table
 pnorm(42, mean = 50, sd = 10)      # unrounded z
 ```
-
-</details>
 :::
-:::::
 
 ## 12. Probability: Right Tail
 
@@ -399,11 +282,8 @@ pnorm(42, mean = 50, sd = 10)      # unrounded z
 
 **Question:** What proportion of people score **above 65**?
 
-::::: columns
-::: {.column width="50%"}
-<details>
-
-<summary>Solution</summary>
+::: panel-tabset
+## Solution
 
 <ul>
 
@@ -415,23 +295,14 @@ pnorm(42, mean = 50, sd = 10)      # unrounded z
 
 </ul>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 1 - pnorm(1.50)                                       # z-table
 pnorm(65, mean = 50, sd = 10, lower.tail = FALSE)     # unrounded z
 ```
-
-</details>
 :::
-:::::
 
 ## 13. Probability: Between Two Scores
 
@@ -441,9 +312,8 @@ pnorm(65, mean = 50, sd = 10, lower.tail = FALSE)     # unrounded z
 
 ::::: columns
 ::: {.column width="50%"}
-<details>
-
-<summary>Solution</summary>
+::: panel-tabset
+## Solution
 
 <ul>
 
@@ -457,20 +327,14 @@ pnorm(65, mean = 50, sd = 10, lower.tail = FALSE)     # unrounded z
 
 </ul>
 
-</details>
-:::
-
-::: {.column width="50%"}
-<details>
-
-<summary>Code Solution</summary>
+## In R
 
 ```{r}
 #| echo: true
 pnorm(1.00) - pnorm(-0.50)                            # z-table
 pnorm(60, 50, 10) - pnorm(45, 50, 10)                 # unrounded z
 ```
+:::
 
-</details>
 :::
 :::::
