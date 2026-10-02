@@ -37,14 +37,81 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ad50ef2cc1218545dc26c06d81bbd2d0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -141,7 +208,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Analysis of Variance</h1>
-  <p class="subtitle">Lecture 12</p>
+  <p class="subtitle">PSY 348: Lecture 12</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -157,7 +224,7 @@ Dave Brocker
 </section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
-<h3 id="how-did-we-get-here">How Did We Get Here?</h3>
+<h3 id="how-did-we-get-here">How did we get here?</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -170,20 +237,20 @@ Dave Brocker
 <text text-anchor="middle" x="79" y="-101" font-family="Times,serif" font-size="14.00">Caffeine Content</text>
 <g id="clust1" class="cluster">
 <title>cluster_tt</title>
-<path fill="white" stroke="black" d="M20,-8C20,-8 138,-8 138,-8 144,-8 150,-14 150,-20 150,-20 150,-72.8 150,-72.8 150,-78.8 144,-84.8 138,-84.8 138,-84.8 20,-84.8 20,-84.8 14,-84.8 8,-78.8 8,-72.8 8,-72.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<path fill="white" stroke="#8faf9e" d="M20,-8C20,-8 138,-8 138,-8 144,-8 150,-14 150,-20 150,-20 150,-72.8 150,-72.8 150,-78.8 144,-84.8 138,-84.8 138,-84.8 20,-84.8 20,-84.8 14,-84.8 8,-78.8 8,-72.8 8,-72.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
 <text text-anchor="middle" x="79" y="-68.2" font-family="Times,serif" font-size="14.00">T Test</text>
 </g>
 <!-- Coffee_T -->
 <g id="node1" class="node">
 <title>Coffee_T</title>
-<path fill="none" stroke="black" d="M130.09,-52C130.09,-52 99.91,-52 99.91,-52 93.91,-52 87.91,-46 87.91,-40 87.91,-40 87.91,-28 87.91,-28 87.91,-22 93.91,-16 99.91,-16 99.91,-16 130.09,-16 130.09,-16 136.09,-16 142.09,-22 142.09,-28 142.09,-28 142.09,-40 142.09,-40 142.09,-46 136.09,-52 130.09,-52"></path>
-<text text-anchor="middle" x="115" y="-29.8" font-family="Times,serif" font-size="14.00">Coffee</text>
+<path fill="white" stroke="#5c715e" d="M130.09,-52C130.09,-52 99.91,-52 99.91,-52 93.91,-52 87.91,-46 87.91,-40 87.91,-40 87.91,-28 87.91,-28 87.91,-22 93.91,-16 99.91,-16 99.91,-16 130.09,-16 130.09,-16 136.09,-16 142.09,-22 142.09,-28 142.09,-28 142.09,-40 142.09,-40 142.09,-46 136.09,-52 130.09,-52"></path>
+<text text-anchor="middle" x="115" y="-29.8" font-family="Fira Sans" font-size="14.00">Coffee</text>
 </g>
 <!-- Decaf_T -->
 <g id="node2" class="node">
 <title>Decaf_T</title>
-<path fill="none" stroke="black" d="M58,-52C58,-52 28,-52 28,-52 22,-52 16,-46 16,-40 16,-40 16,-28 16,-28 16,-22 22,-16 28,-16 28,-16 58,-16 58,-16 64,-16 70,-22 70,-28 70,-28 70,-40 70,-40 70,-46 64,-52 58,-52"></path>
-<text text-anchor="middle" x="43" y="-29.8" font-family="Times,serif" font-size="14.00">Decaf</text>
+<path fill="white" stroke="#5c715e" d="M58,-52C58,-52 28,-52 28,-52 22,-52 16,-46 16,-40 16,-40 16,-28 16,-28 16,-22 22,-16 28,-16 28,-16 58,-16 58,-16 64,-16 70,-22 70,-28 70,-28 70,-40 70,-40 70,-46 64,-52 58,-52"></path>
+<text text-anchor="middle" x="43" y="-29.8" font-family="Fira Sans" font-size="14.00">Decaf</text>
 </g>
 </g>
 </svg>
@@ -195,111 +262,111 @@ Dave Brocker
 </section>
 <section id="recap-1" class="slide level2">
 <h2>Recap</h2>
-<h3 id="how-did-we-get-here-1">How Did We Get Here?</h3>
+<h3 id="how-did-we-get-here-1">How did we get here?</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<svg width="960" height="480" viewbox="0.00 0.00 388.00 214.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<svg width="960" height="480" viewbox="0.00 0.00 488.00 214.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 210.4)">
-<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-210.4 384,-210.4 384,4 -4,4"></polygon>
-<text text-anchor="middle" x="190" y="-189.8" font-family="Times,serif" font-size="14.00">Independent Variable </text>
-<text text-anchor="middle" x="190" y="-173" font-family="Times,serif" font-size="14.00">Caffeine Content</text>
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-210.4 484,-210.4 484,4 -4,4"></polygon>
+<text text-anchor="middle" x="240" y="-189.8" font-family="Times,serif" font-size="14.00">Independent Variable </text>
+<text text-anchor="middle" x="240" y="-173" font-family="Times,serif" font-size="14.00">Caffeine Content</text>
 <g id="clust1" class="cluster">
 <title>cluster_tt</title>
-<path fill="white" stroke="black" d="M20,-8C20,-8 138,-8 138,-8 144,-8 150,-14 150,-20 150,-20 150,-144.8 150,-144.8 150,-150.8 144,-156.8 138,-156.8 138,-156.8 20,-156.8 20,-156.8 14,-156.8 8,-150.8 8,-144.8 8,-144.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
-<text text-anchor="middle" x="79" y="-140.2" font-family="Times,serif" font-size="14.00">T Test</text>
+<path fill="white" stroke="#8faf9e" d="M20,-8C20,-8 178,-8 178,-8 184,-8 190,-14 190,-20 190,-20 190,-144.8 190,-144.8 190,-150.8 184,-156.8 178,-156.8 178,-156.8 20,-156.8 20,-156.8 14,-156.8 8,-150.8 8,-144.8 8,-144.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="99" y="-140.2" font-family="Times,serif" font-size="14.00">T Test</text>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_anova</title>
-<path fill="white" stroke="black" d="M170,-8C170,-8 360,-8 360,-8 366,-8 372,-14 372,-20 372,-20 372,-144.8 372,-144.8 372,-150.8 366,-156.8 360,-156.8 360,-156.8 170,-156.8 170,-156.8 164,-156.8 158,-150.8 158,-144.8 158,-144.8 158,-20 158,-20 158,-14 164,-8 170,-8"></path>
-<text text-anchor="middle" x="265" y="-140.2" font-family="Times,serif" font-size="14.00">ANOVA</text>
+<path fill="white" stroke="#8faf9e" d="M210,-8C210,-8 460,-8 460,-8 466,-8 472,-14 472,-20 472,-20 472,-144.8 472,-144.8 472,-150.8 466,-156.8 460,-156.8 460,-156.8 210,-156.8 210,-156.8 204,-156.8 198,-150.8 198,-144.8 198,-144.8 198,-20 198,-20 198,-14 204,-8 210,-8"></path>
+<text text-anchor="middle" x="335" y="-140.2" font-family="Times,serif" font-size="14.00">ANOVA</text>
 </g>
 <!-- Coffee_T -->
 <g id="node1" class="node">
 <title>Coffee_T</title>
-<path fill="none" stroke="black" d="M130.09,-124C130.09,-124 99.91,-124 99.91,-124 93.91,-124 87.91,-118 87.91,-112 87.91,-112 87.91,-100 87.91,-100 87.91,-94 93.91,-88 99.91,-88 99.91,-88 130.09,-88 130.09,-88 136.09,-88 142.09,-94 142.09,-100 142.09,-100 142.09,-112 142.09,-112 142.09,-118 136.09,-124 130.09,-124"></path>
-<text text-anchor="middle" x="115" y="-101.8" font-family="Times,serif" font-size="14.00">Coffee</text>
+<path fill="white" stroke="#5c715e" d="M160.09,-124C160.09,-124 129.91,-124 129.91,-124 123.91,-124 117.91,-118 117.91,-112 117.91,-112 117.91,-100 117.91,-100 117.91,-94 123.91,-88 129.91,-88 129.91,-88 160.09,-88 160.09,-88 166.09,-88 172.09,-94 172.09,-100 172.09,-100 172.09,-112 172.09,-112 172.09,-118 166.09,-124 160.09,-124"></path>
+<text text-anchor="middle" x="145" y="-101.8" font-family="Fira Sans" font-size="14.00">Coffee</text>
 </g>
 <!-- Stress_T -->
 <g id="node3" class="node">
 <title>Stress_T</title>
-<path fill="none" stroke="black" d="M130,-52C130,-52 100,-52 100,-52 94,-52 88,-46 88,-40 88,-40 88,-28 88,-28 88,-22 94,-16 100,-16 100,-16 130,-16 130,-16 136,-16 142,-22 142,-28 142,-28 142,-40 142,-40 142,-46 136,-52 130,-52"></path>
-<text text-anchor="middle" x="115" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M170.32,-52C170.32,-52 119.68,-52 119.68,-52 113.68,-52 107.68,-46 107.68,-40 107.68,-40 107.68,-28 107.68,-28 107.68,-22 113.68,-16 119.68,-16 119.68,-16 170.32,-16 170.32,-16 176.32,-16 182.32,-22 182.32,-28 182.32,-28 182.32,-40 182.32,-40 182.32,-46 176.32,-52 170.32,-52"></path>
+<text text-anchor="middle" x="145" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Coffee_T&#45;&#45;Stress_T -->
 <g id="edge1" class="edge">
 <title>Coffee_T--Stress_T</title>
-<path fill="none" stroke="black" d="M115,-87.7C115,-76.85 115,-62.92 115,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M145,-87.7C145,-76.85 145,-62.92 145,-52.1"></path>
 </g>
 <!-- Decaf_T -->
 <g id="node2" class="node">
 <title>Decaf_T</title>
-<path fill="none" stroke="black" d="M58,-124C58,-124 28,-124 28,-124 22,-124 16,-118 16,-112 16,-112 16,-100 16,-100 16,-94 22,-88 28,-88 28,-88 58,-88 58,-88 64,-88 70,-94 70,-100 70,-100 70,-112 70,-112 70,-118 64,-124 58,-124"></path>
-<text text-anchor="middle" x="43" y="-101.8" font-family="Times,serif" font-size="14.00">Decaf</text>
+<path fill="white" stroke="#5c715e" d="M68,-124C68,-124 38,-124 38,-124 32,-124 26,-118 26,-112 26,-112 26,-100 26,-100 26,-94 32,-88 38,-88 38,-88 68,-88 68,-88 74,-88 80,-94 80,-100 80,-100 80,-112 80,-112 80,-118 74,-124 68,-124"></path>
+<text text-anchor="middle" x="53" y="-101.8" font-family="Fira Sans" font-size="14.00">Decaf</text>
 </g>
 <!-- Stress_T2 -->
 <g id="node4" class="node">
 <title>Stress_T2</title>
-<path fill="none" stroke="black" d="M58,-52C58,-52 28,-52 28,-52 22,-52 16,-46 16,-40 16,-40 16,-28 16,-28 16,-22 22,-16 28,-16 28,-16 58,-16 58,-16 64,-16 70,-22 70,-28 70,-28 70,-40 70,-40 70,-46 64,-52 58,-52"></path>
-<text text-anchor="middle" x="43" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M78.32,-52C78.32,-52 27.68,-52 27.68,-52 21.68,-52 15.68,-46 15.68,-40 15.68,-40 15.68,-28 15.68,-28 15.68,-22 21.68,-16 27.68,-16 27.68,-16 78.32,-16 78.32,-16 84.32,-16 90.32,-22 90.32,-28 90.32,-28 90.32,-40 90.32,-40 90.32,-46 84.32,-52 78.32,-52"></path>
+<text text-anchor="middle" x="53" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Decaf_T&#45;&#45;Stress_T2 -->
 <g id="edge2" class="edge">
 <title>Decaf_T--Stress_T2</title>
-<path fill="none" stroke="black" d="M43,-87.7C43,-76.85 43,-62.92 43,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M53,-87.7C53,-76.85 53,-62.92 53,-52.1"></path>
 </g>
 <!-- Coffee_A -->
 <g id="node5" class="node">
 <title>Coffee_A</title>
-<path fill="none" stroke="black" d="M352.09,-124C352.09,-124 321.91,-124 321.91,-124 315.91,-124 309.91,-118 309.91,-112 309.91,-112 309.91,-100 309.91,-100 309.91,-94 315.91,-88 321.91,-88 321.91,-88 352.09,-88 352.09,-88 358.09,-88 364.09,-94 364.09,-100 364.09,-100 364.09,-112 364.09,-112 364.09,-118 358.09,-124 352.09,-124"></path>
-<text text-anchor="middle" x="337" y="-101.8" font-family="Times,serif" font-size="14.00">Coffee</text>
+<path fill="white" stroke="#5c715e" d="M442.09,-124C442.09,-124 411.91,-124 411.91,-124 405.91,-124 399.91,-118 399.91,-112 399.91,-112 399.91,-100 399.91,-100 399.91,-94 405.91,-88 411.91,-88 411.91,-88 442.09,-88 442.09,-88 448.09,-88 454.09,-94 454.09,-100 454.09,-100 454.09,-112 454.09,-112 454.09,-118 448.09,-124 442.09,-124"></path>
+<text text-anchor="middle" x="427" y="-101.8" font-family="Fira Sans" font-size="14.00">Coffee</text>
 </g>
 <!-- Stress_A1 -->
 <g id="node8" class="node">
 <title>Stress_A1</title>
-<path fill="none" stroke="black" d="M352,-52C352,-52 322,-52 322,-52 316,-52 310,-46 310,-40 310,-40 310,-28 310,-28 310,-22 316,-16 322,-16 322,-16 352,-16 352,-16 358,-16 364,-22 364,-28 364,-28 364,-40 364,-40 364,-46 358,-52 352,-52"></path>
-<text text-anchor="middle" x="337" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M452.32,-52C452.32,-52 401.68,-52 401.68,-52 395.68,-52 389.68,-46 389.68,-40 389.68,-40 389.68,-28 389.68,-28 389.68,-22 395.68,-16 401.68,-16 401.68,-16 452.32,-16 452.32,-16 458.32,-16 464.32,-22 464.32,-28 464.32,-28 464.32,-40 464.32,-40 464.32,-46 458.32,-52 452.32,-52"></path>
+<text text-anchor="middle" x="427" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Coffee_A&#45;&#45;Stress_A1 -->
 <g id="edge3" class="edge">
 <title>Coffee_A--Stress_A1</title>
-<path fill="none" stroke="black" d="M337,-87.7C337,-76.85 337,-62.92 337,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M427,-87.7C427,-76.85 427,-62.92 427,-52.1"></path>
 </g>
 <!-- Decaf_A -->
 <g id="node6" class="node">
 <title>Decaf_A</title>
-<path fill="none" stroke="black" d="M280,-124C280,-124 250,-124 250,-124 244,-124 238,-118 238,-112 238,-112 238,-100 238,-100 238,-94 244,-88 250,-88 250,-88 280,-88 280,-88 286,-88 292,-94 292,-100 292,-100 292,-112 292,-112 292,-118 286,-124 280,-124"></path>
-<text text-anchor="middle" x="265" y="-101.8" font-family="Times,serif" font-size="14.00">Decaf</text>
+<path fill="white" stroke="#5c715e" d="M350,-124C350,-124 320,-124 320,-124 314,-124 308,-118 308,-112 308,-112 308,-100 308,-100 308,-94 314,-88 320,-88 320,-88 350,-88 350,-88 356,-88 362,-94 362,-100 362,-100 362,-112 362,-112 362,-118 356,-124 350,-124"></path>
+<text text-anchor="middle" x="335" y="-101.8" font-family="Fira Sans" font-size="14.00">Decaf</text>
 </g>
 <!-- Stress_A2 -->
 <g id="node9" class="node">
 <title>Stress_A2</title>
-<path fill="none" stroke="black" d="M280,-52C280,-52 250,-52 250,-52 244,-52 238,-46 238,-40 238,-40 238,-28 238,-28 238,-22 244,-16 250,-16 250,-16 280,-16 280,-16 286,-16 292,-22 292,-28 292,-28 292,-40 292,-40 292,-46 286,-52 280,-52"></path>
-<text text-anchor="middle" x="265" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M360.32,-52C360.32,-52 309.68,-52 309.68,-52 303.68,-52 297.68,-46 297.68,-40 297.68,-40 297.68,-28 297.68,-28 297.68,-22 303.68,-16 309.68,-16 309.68,-16 360.32,-16 360.32,-16 366.32,-16 372.32,-22 372.32,-28 372.32,-28 372.32,-40 372.32,-40 372.32,-46 366.32,-52 360.32,-52"></path>
+<text text-anchor="middle" x="335" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Decaf_A&#45;&#45;Stress_A2 -->
 <g id="edge4" class="edge">
 <title>Decaf_A--Stress_A2</title>
-<path fill="none" stroke="black" d="M265,-87.7C265,-76.85 265,-62.92 265,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M335,-87.7C335,-76.85 335,-62.92 335,-52.1"></path>
 </g>
 <!-- Water -->
 <g id="node7" class="node">
 <title>Water</title>
-<path fill="none" stroke="black" d="M208,-124C208,-124 178,-124 178,-124 172,-124 166,-118 166,-112 166,-112 166,-100 166,-100 166,-94 172,-88 178,-88 178,-88 208,-88 208,-88 214,-88 220,-94 220,-100 220,-100 220,-112 220,-112 220,-118 214,-124 208,-124"></path>
-<text text-anchor="middle" x="193" y="-101.8" font-family="Times,serif" font-size="14.00">Water</text>
+<path fill="white" stroke="#5c715e" d="M258,-124C258,-124 228,-124 228,-124 222,-124 216,-118 216,-112 216,-112 216,-100 216,-100 216,-94 222,-88 228,-88 228,-88 258,-88 258,-88 264,-88 270,-94 270,-100 270,-100 270,-112 270,-112 270,-118 264,-124 258,-124"></path>
+<text text-anchor="middle" x="243" y="-101.8" font-family="Fira Sans" font-size="14.00">Water</text>
 </g>
 <!-- Stress_A3 -->
 <g id="node10" class="node">
 <title>Stress_A3</title>
-<path fill="none" stroke="black" d="M208,-52C208,-52 178,-52 178,-52 172,-52 166,-46 166,-40 166,-40 166,-28 166,-28 166,-22 172,-16 178,-16 178,-16 208,-16 208,-16 214,-16 220,-22 220,-28 220,-28 220,-40 220,-40 220,-46 214,-52 208,-52"></path>
-<text text-anchor="middle" x="193" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M268.32,-52C268.32,-52 217.68,-52 217.68,-52 211.68,-52 205.68,-46 205.68,-40 205.68,-40 205.68,-28 205.68,-28 205.68,-22 211.68,-16 217.68,-16 217.68,-16 268.32,-16 268.32,-16 274.32,-16 280.32,-22 280.32,-28 280.32,-28 280.32,-40 280.32,-40 280.32,-46 274.32,-52 268.32,-52"></path>
+<text text-anchor="middle" x="243" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Water&#45;&#45;Stress_A3 -->
 <g id="edge5" class="edge">
 <title>Water--Stress_A3</title>
-<path fill="none" stroke="black" d="M193,-87.7C193,-76.85 193,-62.92 193,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M243,-87.7C243,-76.85 243,-62.92 243,-52.1"></path>
 </g>
 </g>
 </svg>
@@ -316,8 +383,8 @@ Dave Brocker
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>ANOVA can examine independent variables with [<strong>more than 2 groups</strong>].</p></li>
-<li class="fragment"><p>ANOVA can also be used for just 2 groups.</p></li>
+<li class="fragment"><p>ANOVA can examine independent variables with <strong>more than 2 groups</strong>.</p></li>
+<li class="fragment"><p>ANOVA can also be used for just 2 groups (then <span class="math inline">\(F = t^2\)</span> and it gives the same answer as the t-test).</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="default">
@@ -325,66 +392,66 @@ Dave Brocker
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<svg width="960" height="480" viewbox="0.00 0.00 238.00 214.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<svg width="960" height="480" viewbox="0.00 0.00 298.00 214.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 210.4)">
-<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-210.4 234,-210.4 234,4 -4,4"></polygon>
-<text text-anchor="middle" x="115" y="-189.8" font-family="Times,serif" font-size="14.00">Independent Variable </text>
-<text text-anchor="middle" x="115" y="-173" font-family="Times,serif" font-size="14.00">Caffeine Content</text>
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-210.4 294,-210.4 294,4 -4,4"></polygon>
+<text text-anchor="middle" x="145" y="-189.8" font-family="Times,serif" font-size="14.00">Independent Variable </text>
+<text text-anchor="middle" x="145" y="-173" font-family="Times,serif" font-size="14.00">Caffeine Content</text>
 <g id="clust1" class="cluster">
 <title>cluster_anova</title>
-<path fill="white" stroke="black" d="M20,-8C20,-8 210,-8 210,-8 216,-8 222,-14 222,-20 222,-20 222,-144.8 222,-144.8 222,-150.8 216,-156.8 210,-156.8 210,-156.8 20,-156.8 20,-156.8 14,-156.8 8,-150.8 8,-144.8 8,-144.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
-<text text-anchor="middle" x="115" y="-140.2" font-family="Times,serif" font-size="14.00">ANOVA</text>
+<path fill="white" stroke="#8faf9e" d="M20,-8C20,-8 270,-8 270,-8 276,-8 282,-14 282,-20 282,-20 282,-144.8 282,-144.8 282,-150.8 276,-156.8 270,-156.8 270,-156.8 20,-156.8 20,-156.8 14,-156.8 8,-150.8 8,-144.8 8,-144.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="145" y="-140.2" font-family="Times,serif" font-size="14.00">ANOVA</text>
 </g>
 <!-- Coffee_A -->
 <g id="node1" class="node">
 <title>Coffee_A</title>
-<path fill="none" stroke="black" d="M202.09,-124C202.09,-124 171.91,-124 171.91,-124 165.91,-124 159.91,-118 159.91,-112 159.91,-112 159.91,-100 159.91,-100 159.91,-94 165.91,-88 171.91,-88 171.91,-88 202.09,-88 202.09,-88 208.09,-88 214.09,-94 214.09,-100 214.09,-100 214.09,-112 214.09,-112 214.09,-118 208.09,-124 202.09,-124"></path>
-<text text-anchor="middle" x="187" y="-101.8" font-family="Times,serif" font-size="14.00">Coffee</text>
+<path fill="white" stroke="#5c715e" d="M252.09,-124C252.09,-124 221.91,-124 221.91,-124 215.91,-124 209.91,-118 209.91,-112 209.91,-112 209.91,-100 209.91,-100 209.91,-94 215.91,-88 221.91,-88 221.91,-88 252.09,-88 252.09,-88 258.09,-88 264.09,-94 264.09,-100 264.09,-100 264.09,-112 264.09,-112 264.09,-118 258.09,-124 252.09,-124"></path>
+<text text-anchor="middle" x="237" y="-101.8" font-family="Fira Sans" font-size="14.00">Coffee</text>
 </g>
 <!-- Stress_A1 -->
 <g id="node4" class="node">
 <title>Stress_A1</title>
-<path fill="none" stroke="black" d="M202,-52C202,-52 172,-52 172,-52 166,-52 160,-46 160,-40 160,-40 160,-28 160,-28 160,-22 166,-16 172,-16 172,-16 202,-16 202,-16 208,-16 214,-22 214,-28 214,-28 214,-40 214,-40 214,-46 208,-52 202,-52"></path>
-<text text-anchor="middle" x="187" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M262.32,-52C262.32,-52 211.68,-52 211.68,-52 205.68,-52 199.68,-46 199.68,-40 199.68,-40 199.68,-28 199.68,-28 199.68,-22 205.68,-16 211.68,-16 211.68,-16 262.32,-16 262.32,-16 268.32,-16 274.32,-22 274.32,-28 274.32,-28 274.32,-40 274.32,-40 274.32,-46 268.32,-52 262.32,-52"></path>
+<text text-anchor="middle" x="237" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Coffee_A&#45;&#45;Stress_A1 -->
 <g id="edge1" class="edge">
 <title>Coffee_A--Stress_A1</title>
-<path fill="none" stroke="black" d="M187,-87.7C187,-76.85 187,-62.92 187,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M237,-87.7C237,-76.85 237,-62.92 237,-52.1"></path>
 </g>
 <!-- Decaf_A -->
 <g id="node2" class="node">
 <title>Decaf_A</title>
-<path fill="none" stroke="black" d="M130,-124C130,-124 100,-124 100,-124 94,-124 88,-118 88,-112 88,-112 88,-100 88,-100 88,-94 94,-88 100,-88 100,-88 130,-88 130,-88 136,-88 142,-94 142,-100 142,-100 142,-112 142,-112 142,-118 136,-124 130,-124"></path>
-<text text-anchor="middle" x="115" y="-101.8" font-family="Times,serif" font-size="14.00">Decaf</text>
+<path fill="white" stroke="#5c715e" d="M160,-124C160,-124 130,-124 130,-124 124,-124 118,-118 118,-112 118,-112 118,-100 118,-100 118,-94 124,-88 130,-88 130,-88 160,-88 160,-88 166,-88 172,-94 172,-100 172,-100 172,-112 172,-112 172,-118 166,-124 160,-124"></path>
+<text text-anchor="middle" x="145" y="-101.8" font-family="Fira Sans" font-size="14.00">Decaf</text>
 </g>
 <!-- Stress_A2 -->
 <g id="node5" class="node">
 <title>Stress_A2</title>
-<path fill="none" stroke="black" d="M130,-52C130,-52 100,-52 100,-52 94,-52 88,-46 88,-40 88,-40 88,-28 88,-28 88,-22 94,-16 100,-16 100,-16 130,-16 130,-16 136,-16 142,-22 142,-28 142,-28 142,-40 142,-40 142,-46 136,-52 130,-52"></path>
-<text text-anchor="middle" x="115" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M170.32,-52C170.32,-52 119.68,-52 119.68,-52 113.68,-52 107.68,-46 107.68,-40 107.68,-40 107.68,-28 107.68,-28 107.68,-22 113.68,-16 119.68,-16 119.68,-16 170.32,-16 170.32,-16 176.32,-16 182.32,-22 182.32,-28 182.32,-28 182.32,-40 182.32,-40 182.32,-46 176.32,-52 170.32,-52"></path>
+<text text-anchor="middle" x="145" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Decaf_A&#45;&#45;Stress_A2 -->
 <g id="edge2" class="edge">
 <title>Decaf_A--Stress_A2</title>
-<path fill="none" stroke="black" d="M115,-87.7C115,-76.85 115,-62.92 115,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M145,-87.7C145,-76.85 145,-62.92 145,-52.1"></path>
 </g>
 <!-- Water -->
 <g id="node3" class="node">
 <title>Water</title>
-<path fill="none" stroke="black" d="M58,-124C58,-124 28,-124 28,-124 22,-124 16,-118 16,-112 16,-112 16,-100 16,-100 16,-94 22,-88 28,-88 28,-88 58,-88 58,-88 64,-88 70,-94 70,-100 70,-100 70,-112 70,-112 70,-118 64,-124 58,-124"></path>
-<text text-anchor="middle" x="43" y="-101.8" font-family="Times,serif" font-size="14.00">Water</text>
+<path fill="white" stroke="#5c715e" d="M68,-124C68,-124 38,-124 38,-124 32,-124 26,-118 26,-112 26,-112 26,-100 26,-100 26,-94 32,-88 38,-88 38,-88 68,-88 68,-88 74,-88 80,-94 80,-100 80,-100 80,-112 80,-112 80,-118 74,-124 68,-124"></path>
+<text text-anchor="middle" x="53" y="-101.8" font-family="Fira Sans" font-size="14.00">Water</text>
 </g>
 <!-- Stress_A3 -->
 <g id="node6" class="node">
 <title>Stress_A3</title>
-<path fill="none" stroke="black" d="M58,-52C58,-52 28,-52 28,-52 22,-52 16,-46 16,-40 16,-40 16,-28 16,-28 16,-22 22,-16 28,-16 28,-16 58,-16 58,-16 64,-16 70,-22 70,-28 70,-28 70,-40 70,-40 70,-46 64,-52 58,-52"></path>
-<text text-anchor="middle" x="43" y="-29.8" font-family="Times,serif" font-size="14.00">Stress</text>
+<path fill="white" stroke="#5c715e" d="M78.32,-52C78.32,-52 27.68,-52 27.68,-52 21.68,-52 15.68,-46 15.68,-40 15.68,-40 15.68,-28 15.68,-28 15.68,-22 21.68,-16 27.68,-16 27.68,-16 78.32,-16 78.32,-16 84.32,-16 90.32,-22 90.32,-28 90.32,-28 90.32,-40 90.32,-40 90.32,-46 84.32,-52 78.32,-52"></path>
+<text text-anchor="middle" x="53" y="-29.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- Water&#45;&#45;Stress_A3 -->
 <g id="edge3" class="edge">
 <title>Water--Stress_A3</title>
-<path fill="none" stroke="black" d="M43,-87.7C43,-76.85 43,-62.92 43,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M53,-87.7C53,-76.85 53,-62.92 53,-52.1"></path>
 </g>
 </g>
 </svg>
@@ -397,25 +464,28 @@ Dave Brocker
 </section>
 <section id="anova-1" class="slide level2">
 <h2>ANOVA</h2>
-<p>There are 3 types of ANOVA:</p>
-<ul>
-<li class="fragment"><p>Between subjects</p>
-<ul>
-<li class="fragment">Different participants are exposed to different levels of the IV</li>
-</ul></li>
-<li class="fragment"><p>Within subjects (repeated measures ANOVA)</p>
-<ul>
-<li class="fragment">The same participants are exposed to each level of the IV</li>
-</ul></li>
-<li class="fragment"><p>Factorial Designs</p>
-<ul>
-<li class="fragment">Participants experience different levels of one IV and levels of another IV</li>
-</ul></li>
-</ul>
+<h3 id="three-types">Three types</h3>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">groups</span></p>
+<h4 id="between-subjects">Between subjects</h4>
+<p>Different participants are exposed to different levels of the IV</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">repeat</span></p>
+<h4 id="within-subjects">Within subjects</h4>
+<p>The same participants are exposed to each level of the IV (repeated measures ANOVA)</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">grid_view</span></p>
+<h4 id="factorial">Factorial</h4>
+<p>Participants experience levels of one IV and levels of another IV</p>
+</div>
+</div>
 </section>
 <section id="anova-2" class="slide level2">
 <h2>ANOVA</h2>
-<h3 id="between-and-within">Between and Within</h3>
+<h3 id="between-and-within">Between and within</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -425,137 +495,137 @@ Dave Brocker
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 265.6)">
 <polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-265.6 608,-265.6 608,4 -4,4"></polygon>
 <text text-anchor="middle" x="302" y="-245" font-family="Times,serif" font-size="14.00">ANOVA Types</text>
-<g id="clust2" class="cluster">
-<title>cluster_wanova</title>
-<path fill="white" stroke="black" d="M326,-8C326,-8 584,-8 584,-8 590,-8 596,-14 596,-20 596,-20 596,-216.8 596,-216.8 596,-222.8 590,-228.8 584,-228.8 584,-228.8 326,-228.8 326,-228.8 320,-228.8 314,-222.8 314,-216.8 314,-216.8 314,-20 314,-20 314,-14 320,-8 326,-8"></path>
-<text text-anchor="middle" x="455" y="-212.2" font-family="Times,serif" font-size="14.00">Within Subjects ANOVA</text>
-</g>
 <g id="clust1" class="cluster">
 <title>cluster_anova</title>
-<path fill="white" stroke="black" d="M20,-8C20,-8 294,-8 294,-8 300,-8 306,-14 306,-20 306,-20 306,-216.8 306,-216.8 306,-222.8 300,-228.8 294,-228.8 294,-228.8 20,-228.8 20,-228.8 14,-228.8 8,-222.8 8,-216.8 8,-216.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<path fill="white" stroke="#8faf9e" d="M20,-8C20,-8 294,-8 294,-8 300,-8 306,-14 306,-20 306,-20 306,-216.8 306,-216.8 306,-222.8 300,-228.8 294,-228.8 294,-228.8 20,-228.8 20,-228.8 14,-228.8 8,-222.8 8,-216.8 8,-216.8 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
 <text text-anchor="middle" x="157" y="-212.2" font-family="Times,serif" font-size="14.00">Between Subjects ANOVA</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_wanova</title>
+<path fill="white" stroke="#8faf9e" d="M326,-8C326,-8 584,-8 584,-8 590,-8 596,-14 596,-20 596,-20 596,-216.8 596,-216.8 596,-222.8 590,-228.8 584,-228.8 584,-228.8 326,-228.8 326,-228.8 320,-228.8 314,-222.8 314,-216.8 314,-216.8 314,-20 314,-20 314,-14 320,-8 326,-8"></path>
+<text text-anchor="middle" x="455" y="-212.2" font-family="Times,serif" font-size="14.00">Within Subjects ANOVA</text>
 </g>
 <!-- IV -->
 <g id="node1" class="node">
 <title>IV</title>
-<path fill="none" stroke="black" d="M172,-196C172,-196 142,-196 142,-196 136,-196 130,-190 130,-184 130,-184 130,-172 130,-172 130,-166 136,-160 142,-160 142,-160 172,-160 172,-160 178,-160 184,-166 184,-172 184,-172 184,-184 184,-184 184,-190 178,-196 172,-196"></path>
-<text text-anchor="middle" x="157" y="-173.8" font-family="Times,serif" font-size="14.00">IV</text>
+<path fill="white" stroke="#5c715e" d="M172,-196C172,-196 142,-196 142,-196 136,-196 130,-190 130,-184 130,-184 130,-172 130,-172 130,-166 136,-160 142,-160 142,-160 172,-160 172,-160 178,-160 184,-166 184,-172 184,-172 184,-184 184,-184 184,-190 178,-196 172,-196"></path>
+<text text-anchor="middle" x="157" y="-173.8" font-family="Fira Sans" font-size="14.00">IV</text>
 </g>
 <!-- Participants1 -->
 <g id="node5" class="node">
 <title>Participants1</title>
-<path fill="none" stroke="black" d="M86.1,-124C86.1,-124 27.9,-124 27.9,-124 21.9,-124 15.9,-118 15.9,-112 15.9,-112 15.9,-100 15.9,-100 15.9,-94 21.9,-88 27.9,-88 27.9,-88 86.1,-88 86.1,-88 92.1,-88 98.1,-94 98.1,-100 98.1,-100 98.1,-112 98.1,-112 98.1,-118 92.1,-124 86.1,-124"></path>
-<text text-anchor="middle" x="57" y="-101.8" font-family="Times,serif" font-size="14.00">Participants</text>
+<path fill="white" stroke="#5c715e" d="M86.1,-124C86.1,-124 27.9,-124 27.9,-124 21.9,-124 15.9,-118 15.9,-112 15.9,-112 15.9,-100 15.9,-100 15.9,-94 21.9,-88 27.9,-88 27.9,-88 86.1,-88 86.1,-88 92.1,-88 98.1,-94 98.1,-100 98.1,-100 98.1,-112 98.1,-112 98.1,-118 92.1,-124 86.1,-124"></path>
+<text text-anchor="middle" x="57" y="-101.8" font-family="Fira Sans" font-size="14.00">Participants</text>
 </g>
 <!-- IV&#45;&#45;Participants1 -->
 <g id="edge1" class="edge">
 <title>IV--Participants1</title>
-<path fill="none" stroke="black" d="M132.54,-159.88C117.04,-149.03 97.07,-135.05 81.56,-124.19"></path>
+<path fill="none" stroke="#5c715e" d="M132.54,-159.88C117.04,-149.03 97.07,-135.05 81.56,-124.19"></path>
 </g>
 <!-- Participants2 -->
 <g id="node6" class="node">
 <title>Participants2</title>
-<path fill="none" stroke="black" d="M186.1,-124C186.1,-124 127.9,-124 127.9,-124 121.9,-124 115.9,-118 115.9,-112 115.9,-112 115.9,-100 115.9,-100 115.9,-94 121.9,-88 127.9,-88 127.9,-88 186.1,-88 186.1,-88 192.1,-88 198.1,-94 198.1,-100 198.1,-100 198.1,-112 198.1,-112 198.1,-118 192.1,-124 186.1,-124"></path>
-<text text-anchor="middle" x="157" y="-101.8" font-family="Times,serif" font-size="14.00">Participants</text>
+<path fill="white" stroke="#5c715e" d="M186.1,-124C186.1,-124 127.9,-124 127.9,-124 121.9,-124 115.9,-118 115.9,-112 115.9,-112 115.9,-100 115.9,-100 115.9,-94 121.9,-88 127.9,-88 127.9,-88 186.1,-88 186.1,-88 192.1,-88 198.1,-94 198.1,-100 198.1,-100 198.1,-112 198.1,-112 198.1,-118 192.1,-124 186.1,-124"></path>
+<text text-anchor="middle" x="157" y="-101.8" font-family="Fira Sans" font-size="14.00">Participants</text>
 </g>
 <!-- IV&#45;&#45;Participants2 -->
 <g id="edge3" class="edge">
 <title>IV--Participants2</title>
-<path fill="none" stroke="black" d="M157,-159.7C157,-148.85 157,-134.92 157,-124.1"></path>
+<path fill="none" stroke="#5c715e" d="M157,-159.7C157,-148.85 157,-134.92 157,-124.1"></path>
 </g>
 <!-- Participants3 -->
 <g id="node7" class="node">
 <title>Participants3</title>
-<path fill="none" stroke="black" d="M286.1,-124C286.1,-124 227.9,-124 227.9,-124 221.9,-124 215.9,-118 215.9,-112 215.9,-112 215.9,-100 215.9,-100 215.9,-94 221.9,-88 227.9,-88 227.9,-88 286.1,-88 286.1,-88 292.1,-88 298.1,-94 298.1,-100 298.1,-100 298.1,-112 298.1,-112 298.1,-118 292.1,-124 286.1,-124"></path>
-<text text-anchor="middle" x="257" y="-101.8" font-family="Times,serif" font-size="14.00">Participants</text>
+<path fill="white" stroke="#5c715e" d="M286.1,-124C286.1,-124 227.9,-124 227.9,-124 221.9,-124 215.9,-118 215.9,-112 215.9,-112 215.9,-100 215.9,-100 215.9,-94 221.9,-88 227.9,-88 227.9,-88 286.1,-88 286.1,-88 292.1,-88 298.1,-94 298.1,-100 298.1,-100 298.1,-112 298.1,-112 298.1,-118 292.1,-124 286.1,-124"></path>
+<text text-anchor="middle" x="257" y="-101.8" font-family="Fira Sans" font-size="14.00">Participants</text>
 </g>
 <!-- IV&#45;&#45;Participants3 -->
 <g id="edge5" class="edge">
 <title>IV--Participants3</title>
-<path fill="none" stroke="black" d="M181.46,-159.88C196.96,-149.03 216.93,-135.05 232.44,-124.19"></path>
+<path fill="none" stroke="#5c715e" d="M181.46,-159.88C196.96,-149.03 216.93,-135.05 232.44,-124.19"></path>
 </g>
 <!-- Level1 -->
 <g id="node2" class="node">
 <title>Level1</title>
-<path fill="none" stroke="black" d="M83.14,-52C83.14,-52 30.86,-52 30.86,-52 24.86,-52 18.86,-46 18.86,-40 18.86,-40 18.86,-28 18.86,-28 18.86,-22 24.86,-16 30.86,-16 30.86,-16 83.14,-16 83.14,-16 89.14,-16 95.14,-22 95.14,-28 95.14,-28 95.14,-40 95.14,-40 95.14,-46 89.14,-52 83.14,-52"></path>
-<text text-anchor="middle" x="57" y="-29.8" font-family="Times,serif" font-size="14.00">IV Level 1</text>
+<path fill="white" stroke="#5c715e" d="M83.14,-52C83.14,-52 30.86,-52 30.86,-52 24.86,-52 18.86,-46 18.86,-40 18.86,-40 18.86,-28 18.86,-28 18.86,-22 24.86,-16 30.86,-16 30.86,-16 83.14,-16 83.14,-16 89.14,-16 95.14,-22 95.14,-28 95.14,-28 95.14,-40 95.14,-40 95.14,-46 89.14,-52 83.14,-52"></path>
+<text text-anchor="middle" x="57" y="-29.8" font-family="Fira Sans" font-size="14.00">IV Level 1</text>
 </g>
 <!-- Level2 -->
 <g id="node3" class="node">
 <title>Level2</title>
-<path fill="none" stroke="black" d="M183.14,-52C183.14,-52 130.86,-52 130.86,-52 124.86,-52 118.86,-46 118.86,-40 118.86,-40 118.86,-28 118.86,-28 118.86,-22 124.86,-16 130.86,-16 130.86,-16 183.14,-16 183.14,-16 189.14,-16 195.14,-22 195.14,-28 195.14,-28 195.14,-40 195.14,-40 195.14,-46 189.14,-52 183.14,-52"></path>
-<text text-anchor="middle" x="157" y="-29.8" font-family="Times,serif" font-size="14.00">IV Level 2</text>
+<path fill="white" stroke="#5c715e" d="M183.14,-52C183.14,-52 130.86,-52 130.86,-52 124.86,-52 118.86,-46 118.86,-40 118.86,-40 118.86,-28 118.86,-28 118.86,-22 124.86,-16 130.86,-16 130.86,-16 183.14,-16 183.14,-16 189.14,-16 195.14,-22 195.14,-28 195.14,-28 195.14,-40 195.14,-40 195.14,-46 189.14,-52 183.14,-52"></path>
+<text text-anchor="middle" x="157" y="-29.8" font-family="Fira Sans" font-size="14.00">IV Level 2</text>
 </g>
 <!-- Level3 -->
 <g id="node4" class="node">
 <title>Level3</title>
-<path fill="none" stroke="black" d="M283.14,-52C283.14,-52 230.86,-52 230.86,-52 224.86,-52 218.86,-46 218.86,-40 218.86,-40 218.86,-28 218.86,-28 218.86,-22 224.86,-16 230.86,-16 230.86,-16 283.14,-16 283.14,-16 289.14,-16 295.14,-22 295.14,-28 295.14,-28 295.14,-40 295.14,-40 295.14,-46 289.14,-52 283.14,-52"></path>
-<text text-anchor="middle" x="257" y="-29.8" font-family="Times,serif" font-size="14.00">IV Level 3</text>
+<path fill="white" stroke="#5c715e" d="M283.14,-52C283.14,-52 230.86,-52 230.86,-52 224.86,-52 218.86,-46 218.86,-40 218.86,-40 218.86,-28 218.86,-28 218.86,-22 224.86,-16 230.86,-16 230.86,-16 283.14,-16 283.14,-16 289.14,-16 295.14,-22 295.14,-28 295.14,-28 295.14,-40 295.14,-40 295.14,-46 289.14,-52 283.14,-52"></path>
+<text text-anchor="middle" x="257" y="-29.8" font-family="Fira Sans" font-size="14.00">IV Level 3</text>
 </g>
 <!-- Participants1&#45;&#45;Level1 -->
 <g id="edge2" class="edge">
 <title>Participants1--Level1</title>
-<path fill="none" stroke="black" d="M57,-87.7C57,-76.85 57,-62.92 57,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M57,-87.7C57,-76.85 57,-62.92 57,-52.1"></path>
 </g>
 <!-- Participants2&#45;&#45;Level2 -->
 <g id="edge4" class="edge">
 <title>Participants2--Level2</title>
-<path fill="none" stroke="black" d="M157,-87.7C157,-76.85 157,-62.92 157,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M157,-87.7C157,-76.85 157,-62.92 157,-52.1"></path>
 </g>
 <!-- Participants3&#45;&#45;Level3 -->
 <g id="edge6" class="edge">
 <title>Participants3--Level3</title>
-<path fill="none" stroke="black" d="M257,-87.7C257,-76.85 257,-62.92 257,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M257,-87.7C257,-76.85 257,-62.92 257,-52.1"></path>
 </g>
 <!-- ParticipantsW -->
 <g id="node8" class="node">
 <title>ParticipantsW</title>
-<path fill="none" stroke="black" d="M484.1,-196C484.1,-196 425.9,-196 425.9,-196 419.9,-196 413.9,-190 413.9,-184 413.9,-184 413.9,-172 413.9,-172 413.9,-166 419.9,-160 425.9,-160 425.9,-160 484.1,-160 484.1,-160 490.1,-160 496.1,-166 496.1,-172 496.1,-172 496.1,-184 496.1,-184 496.1,-190 490.1,-196 484.1,-196"></path>
-<text text-anchor="middle" x="455" y="-173.8" font-family="Times,serif" font-size="14.00">Participants</text>
+<path fill="white" stroke="#5c715e" d="M484.1,-196C484.1,-196 425.9,-196 425.9,-196 419.9,-196 413.9,-190 413.9,-184 413.9,-184 413.9,-172 413.9,-172 413.9,-166 419.9,-160 425.9,-160 425.9,-160 484.1,-160 484.1,-160 490.1,-160 496.1,-166 496.1,-172 496.1,-172 496.1,-184 496.1,-184 496.1,-190 490.1,-196 484.1,-196"></path>
+<text text-anchor="middle" x="455" y="-173.8" font-family="Fira Sans" font-size="14.00">Participants</text>
 </g>
 <!-- IVW -->
 <g id="node9" class="node">
 <title>IVW</title>
-<path fill="none" stroke="black" d="M470,-124C470,-124 440,-124 440,-124 434,-124 428,-118 428,-112 428,-112 428,-100 428,-100 428,-94 434,-88 440,-88 440,-88 470,-88 470,-88 476,-88 482,-94 482,-100 482,-100 482,-112 482,-112 482,-118 476,-124 470,-124"></path>
-<text text-anchor="middle" x="455" y="-101.8" font-family="Times,serif" font-size="14.00">IV</text>
+<path fill="white" stroke="#5c715e" d="M470,-124C470,-124 440,-124 440,-124 434,-124 428,-118 428,-112 428,-112 428,-100 428,-100 428,-94 434,-88 440,-88 440,-88 470,-88 470,-88 476,-88 482,-94 482,-100 482,-100 482,-112 482,-112 482,-118 476,-124 470,-124"></path>
+<text text-anchor="middle" x="455" y="-101.8" font-family="Fira Sans" font-size="14.00">IV</text>
 </g>
 <!-- ParticipantsW&#45;&#45;IVW -->
 <g id="edge7" class="edge">
 <title>ParticipantsW--IVW</title>
-<path fill="none" stroke="black" d="M455,-159.7C455,-148.85 455,-134.92 455,-124.1"></path>
+<path fill="none" stroke="#5c715e" d="M455,-159.7C455,-148.85 455,-134.92 455,-124.1"></path>
 </g>
 <!-- Level1W -->
 <g id="node10" class="node">
 <title>Level1W</title>
-<path fill="none" stroke="black" d="M386.14,-52C386.14,-52 333.86,-52 333.86,-52 327.86,-52 321.86,-46 321.86,-40 321.86,-40 321.86,-28 321.86,-28 321.86,-22 327.86,-16 333.86,-16 333.86,-16 386.14,-16 386.14,-16 392.14,-16 398.14,-22 398.14,-28 398.14,-28 398.14,-40 398.14,-40 398.14,-46 392.14,-52 386.14,-52"></path>
-<text text-anchor="middle" x="360" y="-29.8" font-family="Times,serif" font-size="14.00">IV Level 1</text>
+<path fill="white" stroke="#5c715e" d="M386.14,-52C386.14,-52 333.86,-52 333.86,-52 327.86,-52 321.86,-46 321.86,-40 321.86,-40 321.86,-28 321.86,-28 321.86,-22 327.86,-16 333.86,-16 333.86,-16 386.14,-16 386.14,-16 392.14,-16 398.14,-22 398.14,-28 398.14,-28 398.14,-40 398.14,-40 398.14,-46 392.14,-52 386.14,-52"></path>
+<text text-anchor="middle" x="360" y="-29.8" font-family="Fira Sans" font-size="14.00">IV Level 1</text>
 </g>
 <!-- IVW&#45;&#45;Level1W -->
 <g id="edge8" class="edge">
 <title>IVW--Level1W</title>
-<path fill="none" stroke="black" d="M431.52,-87.7C416.79,-76.85 397.89,-62.92 383.21,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M431.52,-87.7C416.79,-76.85 397.89,-62.92 383.21,-52.1"></path>
 </g>
 <!-- Level2W -->
 <g id="node11" class="node">
 <title>Level2W</title>
-<path fill="none" stroke="black" d="M481.14,-52C481.14,-52 428.86,-52 428.86,-52 422.86,-52 416.86,-46 416.86,-40 416.86,-40 416.86,-28 416.86,-28 416.86,-22 422.86,-16 428.86,-16 428.86,-16 481.14,-16 481.14,-16 487.14,-16 493.14,-22 493.14,-28 493.14,-28 493.14,-40 493.14,-40 493.14,-46 487.14,-52 481.14,-52"></path>
-<text text-anchor="middle" x="455" y="-29.8" font-family="Times,serif" font-size="14.00">IV Level 2</text>
+<path fill="white" stroke="#5c715e" d="M481.14,-52C481.14,-52 428.86,-52 428.86,-52 422.86,-52 416.86,-46 416.86,-40 416.86,-40 416.86,-28 416.86,-28 416.86,-22 422.86,-16 428.86,-16 428.86,-16 481.14,-16 481.14,-16 487.14,-16 493.14,-22 493.14,-28 493.14,-28 493.14,-40 493.14,-40 493.14,-46 487.14,-52 481.14,-52"></path>
+<text text-anchor="middle" x="455" y="-29.8" font-family="Fira Sans" font-size="14.00">IV Level 2</text>
 </g>
 <!-- IVW&#45;&#45;Level2W -->
 <g id="edge9" class="edge">
 <title>IVW--Level2W</title>
-<path fill="none" stroke="black" d="M455,-87.7C455,-76.85 455,-62.92 455,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M455,-87.7C455,-76.85 455,-62.92 455,-52.1"></path>
 </g>
 <!-- Level3W -->
 <g id="node12" class="node">
 <title>Level3W</title>
-<path fill="none" stroke="black" d="M576.14,-52C576.14,-52 523.86,-52 523.86,-52 517.86,-52 511.86,-46 511.86,-40 511.86,-40 511.86,-28 511.86,-28 511.86,-22 517.86,-16 523.86,-16 523.86,-16 576.14,-16 576.14,-16 582.14,-16 588.14,-22 588.14,-28 588.14,-28 588.14,-40 588.14,-40 588.14,-46 582.14,-52 576.14,-52"></path>
-<text text-anchor="middle" x="550" y="-29.8" font-family="Times,serif" font-size="14.00">IV Level 3</text>
+<path fill="white" stroke="#5c715e" d="M576.14,-52C576.14,-52 523.86,-52 523.86,-52 517.86,-52 511.86,-46 511.86,-40 511.86,-40 511.86,-28 511.86,-28 511.86,-22 517.86,-16 523.86,-16 523.86,-16 576.14,-16 576.14,-16 582.14,-16 588.14,-22 588.14,-28 588.14,-28 588.14,-40 588.14,-40 588.14,-46 582.14,-52 576.14,-52"></path>
+<text text-anchor="middle" x="550" y="-29.8" font-family="Fira Sans" font-size="14.00">IV Level 3</text>
 </g>
 <!-- IVW&#45;&#45;Level3W -->
 <g id="edge10" class="edge">
 <title>IVW--Level3W</title>
-<path fill="none" stroke="black" d="M478.48,-87.7C493.21,-76.85 512.11,-62.92 526.79,-52.1"></path>
+<path fill="none" stroke="#5c715e" d="M478.48,-87.7C493.21,-76.85 512.11,-62.92 526.79,-52.1"></path>
 </g>
 </g>
 </svg>
@@ -567,186 +637,191 @@ Dave Brocker
 </section>
 <section id="anova-3" class="slide level2">
 <h2>ANOVA</h2>
-<h3 id="factorial-multiple-ivs">Factorial (Multiple IV’s)</h3>
+<h3 id="factorial-multiple-ivs">Factorial (multiple IVs)</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<svg width="960" height="480" viewbox="0.00 0.00 815.00 253.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<svg width="960" height="480" viewbox="0.00 0.00 814.00 253.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 249.6)">
-<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-249.6 811,-249.6 811,4 -4,4"></polygon>
-<text text-anchor="middle" x="403.5" y="-229" font-family="Times,serif" font-size="14.00">Factorial ANOVA (3 × 2 Design)</text>
+<polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-249.6 810,-249.6 810,4 -4,4"></polygon>
+<text text-anchor="middle" x="403" y="-229" font-family="Times,serif" font-size="14.00">Factorial ANOVA (3 × 2 Design)</text>
 <g id="clust1" class="cluster">
 <title>cluster_IV1</title>
-<path fill="white" stroke="black" d="M247,-136C247,-136 437,-136 437,-136 443,-136 449,-142 449,-148 449,-148 449,-200.8 449,-200.8 449,-206.8 443,-212.8 437,-212.8 437,-212.8 247,-212.8 247,-212.8 241,-212.8 235,-206.8 235,-200.8 235,-200.8 235,-148 235,-148 235,-142 241,-136 247,-136"></path>
-<text text-anchor="middle" x="342" y="-196.2" font-family="Times,serif" font-size="14.00">IV₁: Type of Beverage</text>
+<path fill="white" stroke="#8faf9e" d="M209,-136C209,-136 399,-136 399,-136 405,-136 411,-142 411,-148 411,-148 411,-200.8 411,-200.8 411,-206.8 405,-212.8 399,-212.8 399,-212.8 209,-212.8 209,-212.8 203,-212.8 197,-206.8 197,-200.8 197,-200.8 197,-148 197,-148 197,-142 203,-136 209,-136"></path>
+<text text-anchor="middle" x="304" y="-196.2" font-family="Times,serif" font-size="14.00">IV₁: Type of Beverage</text>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_IV2</title>
-<path fill="white" stroke="black" d="M469,-136C469,-136 607,-136 607,-136 613,-136 619,-142 619,-148 619,-148 619,-200.8 619,-200.8 619,-206.8 613,-212.8 607,-212.8 607,-212.8 469,-212.8 469,-212.8 463,-212.8 457,-206.8 457,-200.8 457,-200.8 457,-148 457,-148 457,-142 463,-136 469,-136"></path>
-<text text-anchor="middle" x="538" y="-196.2" font-family="Times,serif" font-size="14.00">IV₂: Time of Day</text>
+<path fill="white" stroke="#8faf9e" d="M431,-136C431,-136 569,-136 569,-136 575,-136 581,-142 581,-148 581,-148 581,-200.8 581,-200.8 581,-206.8 575,-212.8 569,-212.8 569,-212.8 431,-212.8 431,-212.8 425,-212.8 419,-206.8 419,-200.8 419,-200.8 419,-148 419,-148 419,-142 425,-136 431,-136"></path>
+<text text-anchor="middle" x="500" y="-196.2" font-family="Times,serif" font-size="14.00">IV₂: Time of Day</text>
 </g>
 <g id="clust3" class="cluster">
 <title>cluster_cells</title>
-<path fill="white" stroke="black" d="M20,-64C20,-64 787,-64 787,-64 793,-64 799,-70 799,-76 799,-76 799,-104 799,-104 799,-110 793,-116 787,-116 787,-116 20,-116 20,-116 14,-116 8,-110 8,-104 8,-104 8,-76 8,-76 8,-70 14,-64 20,-64"></path>
+<path fill="white" stroke="#8faf9e" d="M20,-64C20,-64 786,-64 786,-64 792,-64 798,-70 798,-76 798,-76 798,-104 798,-104 798,-110 792,-116 786,-116 786,-116 20,-116 20,-116 14,-116 8,-110 8,-104 8,-104 8,-76 8,-76 8,-70 14,-64 20,-64"></path>
 </g>
 <!-- IV1_L1 -->
 <g id="node1" class="node">
 <title>IV1_L1</title>
-<path fill="none" stroke="black" d="M285.09,-180C285.09,-180 254.91,-180 254.91,-180 248.91,-180 242.91,-174 242.91,-168 242.91,-168 242.91,-156 242.91,-156 242.91,-150 248.91,-144 254.91,-144 254.91,-144 285.09,-144 285.09,-144 291.09,-144 297.09,-150 297.09,-156 297.09,-156 297.09,-168 297.09,-168 297.09,-174 291.09,-180 285.09,-180"></path>
-<text text-anchor="middle" x="270" y="-157.8" font-family="Poppins" font-size="14.00">Coffee</text>
+<path fill="white" stroke="#5c715e" d="M391.09,-180C391.09,-180 360.91,-180 360.91,-180 354.91,-180 348.91,-174 348.91,-168 348.91,-168 348.91,-156 348.91,-156 348.91,-150 354.91,-144 360.91,-144 360.91,-144 391.09,-144 391.09,-144 397.09,-144 403.09,-150 403.09,-156 403.09,-156 403.09,-168 403.09,-168 403.09,-174 397.09,-180 391.09,-180"></path>
+<text text-anchor="middle" x="376" y="-157.8" font-family="Fira Sans" font-size="14.00">Coffee</text>
 </g>
 <!-- C1 -->
 <g id="node6" class="node">
 <title>C1</title>
-<path fill="none" stroke="black" d="M121.99,-108C121.99,-108 28.01,-108 28.01,-108 22.01,-108 16.01,-102 16.01,-96 16.01,-96 16.01,-84 16.01,-84 16.01,-78 22.01,-72 28.01,-72 28.01,-72 121.99,-72 121.99,-72 127.99,-72 133.99,-78 133.99,-84 133.99,-84 133.99,-96 133.99,-96 133.99,-102 127.99,-108 121.99,-108"></path>
-<text text-anchor="middle" x="75" y="-85.8" font-family="Poppins" font-size="14.00">Coffee + Morning</text>
+<path fill="white" stroke="#5c715e" d="M777.99,-108C777.99,-108 684.01,-108 684.01,-108 678.01,-108 672.01,-102 672.01,-96 672.01,-96 672.01,-84 672.01,-84 672.01,-78 678.01,-72 684.01,-72 684.01,-72 777.99,-72 777.99,-72 783.99,-72 789.99,-78 789.99,-84 789.99,-84 789.99,-96 789.99,-96 789.99,-102 783.99,-108 777.99,-108"></path>
+<text text-anchor="middle" x="731" y="-85.8" font-family="Fira Sans" font-size="14.00">Coffee + Morning</text>
 </g>
 <!-- IV1_L1&#45;&#45;C1 -->
 <g id="edge1" class="edge">
 <title>IV1_L1--C1</title>
-<path fill="none" stroke="black" d="M242.72,-151.44C216.98,-142.39 177.32,-128.39 143,-116 135.9,-113.44 128.39,-110.7 121.06,-108.02"></path>
+<path fill="none" stroke="#5c715e" d="M398.56,-143.94C403.72,-140.79 409.36,-137.9 415,-136 519.78,-100.66 555,-139.74 663,-116 671.97,-114.03 681.35,-111.15 690.18,-108.04"></path>
 </g>
 <!-- C2 -->
 <g id="node7" class="node">
 <title>C2</title>
-<path fill="none" stroke="black" d="M255.64,-108C255.64,-108 164.36,-108 164.36,-108 158.36,-108 152.36,-102 152.36,-96 152.36,-96 152.36,-84 152.36,-84 152.36,-78 158.36,-72 164.36,-72 164.36,-72 255.64,-72 255.64,-72 261.64,-72 267.64,-78 267.64,-84 267.64,-84 267.64,-96 267.64,-96 267.64,-102 261.64,-108 255.64,-108"></path>
-<text text-anchor="middle" x="210" y="-85.8" font-family="Poppins" font-size="14.00">Coffee + Evening</text>
+<path fill="white" stroke="#5c715e" d="M641.64,-108C641.64,-108 550.36,-108 550.36,-108 544.36,-108 538.36,-102 538.36,-96 538.36,-96 538.36,-84 538.36,-84 538.36,-78 544.36,-72 550.36,-72 550.36,-72 641.64,-72 641.64,-72 647.64,-72 653.64,-78 653.64,-84 653.64,-84 653.64,-96 653.64,-96 653.64,-102 647.64,-108 641.64,-108"></path>
+<text text-anchor="middle" x="596" y="-85.8" font-family="Fira Sans" font-size="14.00">Coffee + Evening</text>
 </g>
 <!-- IV1_L1&#45;&#45;C2 -->
 <g id="edge2" class="edge">
 <title>IV1_L1--C2</title>
-<path fill="none" stroke="black" d="M255.17,-143.7C245.87,-132.85 233.93,-118.92 224.66,-108.1"></path>
+<path fill="none" stroke="#5c715e" d="M399.54,-143.82C404.46,-140.84 409.75,-138.04 415,-136 463.35,-117.19 479.96,-129.69 530,-116 538.04,-113.8 546.46,-111.01 554.5,-108.09"></path>
 </g>
 <!-- IV1_L2 -->
 <g id="node2" class="node">
 <title>IV1_L2</title>
-<path fill="none" stroke="black" d="M429,-180C429,-180 399,-180 399,-180 393,-180 387,-174 387,-168 387,-168 387,-156 387,-156 387,-150 393,-144 399,-144 399,-144 429,-144 429,-144 435,-144 441,-150 441,-156 441,-156 441,-168 441,-168 441,-174 435,-180 429,-180"></path>
-<text text-anchor="middle" x="414" y="-157.8" font-family="Poppins" font-size="14.00">Decaf</text>
+<path fill="white" stroke="#5c715e" d="M319,-180C319,-180 289,-180 289,-180 283,-180 277,-174 277,-168 277,-168 277,-156 277,-156 277,-150 283,-144 289,-144 289,-144 319,-144 319,-144 325,-144 331,-150 331,-156 331,-156 331,-168 331,-168 331,-174 325,-180 319,-180"></path>
+<text text-anchor="middle" x="304" y="-157.8" font-family="Fira Sans" font-size="14.00">Decaf</text>
 </g>
 <!-- C3 -->
 <g id="node8" class="node">
 <title>C3</title>
-<path fill="none" stroke="black" d="M778.81,-108C778.81,-108 689.19,-108 689.19,-108 683.19,-108 677.19,-102 677.19,-96 677.19,-96 677.19,-84 677.19,-84 677.19,-78 683.19,-72 689.19,-72 689.19,-72 778.81,-72 778.81,-72 784.81,-72 790.81,-78 790.81,-84 790.81,-84 790.81,-96 790.81,-96 790.81,-102 784.81,-108 778.81,-108"></path>
-<text text-anchor="middle" x="734" y="-85.8" font-family="Poppins" font-size="14.00">Decaf + Morning</text>
+<path fill="white" stroke="#5c715e" d="M508.81,-108C508.81,-108 419.19,-108 419.19,-108 413.19,-108 407.19,-102 407.19,-96 407.19,-96 407.19,-84 407.19,-84 407.19,-78 413.19,-72 419.19,-72 419.19,-72 508.81,-72 508.81,-72 514.81,-72 520.81,-78 520.81,-84 520.81,-84 520.81,-96 520.81,-96 520.81,-102 514.81,-108 508.81,-108"></path>
+<text text-anchor="middle" x="464" y="-85.8" font-family="Fira Sans" font-size="14.00">Decaf + Morning</text>
 </g>
 <!-- IV1_L2&#45;&#45;C3 -->
 <g id="edge3" class="edge">
 <title>IV1_L2--C3</title>
-<path fill="none" stroke="black" d="M436.57,-144C441.74,-140.84 447.37,-137.94 453,-136 543.75,-104.78 574.5,-137.64 668,-116 676.59,-114.01 685.58,-111.16 694.05,-108.1"></path>
+<path fill="none" stroke="#5c715e" d="M326.65,-143.88C330.96,-141.03 335.52,-138.27 340,-136 364.32,-123.66 372.36,-125.27 398,-116 404.91,-113.5 412.21,-110.8 419.33,-108.13"></path>
 </g>
 <!-- C4 -->
 <g id="node9" class="node">
 <title>C4</title>
-<path fill="none" stroke="black" d="M514.46,-108C514.46,-108 427.54,-108 427.54,-108 421.54,-108 415.54,-102 415.54,-96 415.54,-96 415.54,-84 415.54,-84 415.54,-78 421.54,-72 427.54,-72 427.54,-72 514.46,-72 514.46,-72 520.46,-72 526.46,-78 526.46,-84 526.46,-84 526.46,-96 526.46,-96 526.46,-102 520.46,-108 514.46,-108"></path>
-<text text-anchor="middle" x="471" y="-85.8" font-family="Poppins" font-size="14.00">Decaf + Evening</text>
+<path fill="white" stroke="#5c715e" d="M377.46,-108C377.46,-108 290.54,-108 290.54,-108 284.54,-108 278.54,-102 278.54,-96 278.54,-96 278.54,-84 278.54,-84 278.54,-78 284.54,-72 290.54,-72 290.54,-72 377.46,-72 377.46,-72 383.46,-72 389.46,-78 389.46,-84 389.46,-84 389.46,-96 389.46,-96 389.46,-102 383.46,-108 377.46,-108"></path>
+<text text-anchor="middle" x="334" y="-85.8" font-family="Fira Sans" font-size="14.00">Decaf + Evening</text>
 </g>
 <!-- IV1_L2&#45;&#45;C4 -->
 <g id="edge4" class="edge">
 <title>IV1_L2--C4</title>
-<path fill="none" stroke="black" d="M428.09,-143.7C436.93,-132.85 448.27,-118.92 457.07,-108.1"></path>
+<path fill="none" stroke="#5c715e" d="M311.42,-143.7C316.07,-132.85 322.04,-118.92 326.67,-108.1"></path>
 </g>
 <!-- IV1_L3 -->
 <g id="node3" class="node">
 <title>IV1_L3</title>
-<path fill="none" stroke="black" d="M357,-180C357,-180 327,-180 327,-180 321,-180 315,-174 315,-168 315,-168 315,-156 315,-156 315,-150 321,-144 327,-144 327,-144 357,-144 357,-144 363,-144 369,-150 369,-156 369,-156 369,-168 369,-168 369,-174 363,-180 357,-180"></path>
-<text text-anchor="middle" x="342" y="-157.8" font-family="Poppins" font-size="14.00">Water</text>
+<path fill="white" stroke="#5c715e" d="M247,-180C247,-180 217,-180 217,-180 211,-180 205,-174 205,-168 205,-168 205,-156 205,-156 205,-150 211,-144 217,-144 217,-144 247,-144 247,-144 253,-144 259,-150 259,-156 259,-156 259,-168 259,-168 259,-174 253,-180 247,-180"></path>
+<text text-anchor="middle" x="232" y="-157.8" font-family="Fira Sans" font-size="14.00">Water</text>
 </g>
 <!-- C5 -->
 <g id="node10" class="node">
 <title>C5</title>
-<path fill="none" stroke="black" d="M647.09,-108C647.09,-108 556.91,-108 556.91,-108 550.91,-108 544.91,-102 544.91,-96 544.91,-96 544.91,-84 544.91,-84 544.91,-78 550.91,-72 556.91,-72 556.91,-72 647.09,-72 647.09,-72 653.09,-72 659.09,-78 659.09,-84 659.09,-84 659.09,-96 659.09,-96 659.09,-102 653.09,-108 647.09,-108"></path>
-<text text-anchor="middle" x="602" y="-85.8" font-family="Poppins" font-size="14.00">Water + Morning</text>
+<path fill="white" stroke="#5c715e" d="M248.09,-108C248.09,-108 157.91,-108 157.91,-108 151.91,-108 145.91,-102 145.91,-96 145.91,-96 145.91,-84 145.91,-84 145.91,-78 151.91,-72 157.91,-72 157.91,-72 248.09,-72 248.09,-72 254.09,-72 260.09,-78 260.09,-84 260.09,-84 260.09,-96 260.09,-96 260.09,-102 254.09,-108 248.09,-108"></path>
+<text text-anchor="middle" x="203" y="-85.8" font-family="Fira Sans" font-size="14.00">Water + Morning</text>
 </g>
 <!-- IV1_L3&#45;&#45;C5 -->
 <g id="edge5" class="edge">
 <title>IV1_L3--C5</title>
-<path fill="none" stroke="black" d="M363.13,-143.87C367.8,-140.8 372.89,-137.97 378,-136 443.66,-110.77 466.71,-132.85 535,-116 543.44,-113.92 552.27,-111.11 560.65,-108.12"></path>
+<path fill="none" stroke="#5c715e" d="M224.83,-143.7C220.34,-132.85 214.57,-118.92 210.09,-108.1"></path>
 </g>
 <!-- C6 -->
 <g id="node11" class="node">
 <title>C6</title>
-<path fill="none" stroke="black" d="M385.74,-108C385.74,-108 298.26,-108 298.26,-108 292.26,-108 286.26,-102 286.26,-96 286.26,-96 286.26,-84 286.26,-84 286.26,-78 292.26,-72 298.26,-72 298.26,-72 385.74,-72 385.74,-72 391.74,-72 397.74,-78 397.74,-84 397.74,-84 397.74,-96 397.74,-96 397.74,-102 391.74,-108 385.74,-108"></path>
-<text text-anchor="middle" x="342" y="-85.8" font-family="Poppins" font-size="14.00">Water + Evening</text>
+<path fill="white" stroke="#5c715e" d="M115.74,-108C115.74,-108 28.26,-108 28.26,-108 22.26,-108 16.26,-102 16.26,-96 16.26,-96 16.26,-84 16.26,-84 16.26,-78 22.26,-72 28.26,-72 28.26,-72 115.74,-72 115.74,-72 121.74,-72 127.74,-78 127.74,-84 127.74,-84 127.74,-96 127.74,-96 127.74,-102 121.74,-108 115.74,-108"></path>
+<text text-anchor="middle" x="72" y="-85.8" font-family="Fira Sans" font-size="14.00">Water + Evening</text>
 </g>
 <!-- IV1_L3&#45;&#45;C6 -->
 <g id="edge6" class="edge">
 <title>IV1_L3--C6</title>
-<path fill="none" stroke="black" d="M342,-143.7C342,-132.85 342,-118.92 342,-108.1"></path>
+<path fill="none" stroke="#5c715e" d="M204.86,-149.13C179.09,-137.85 140.08,-120.79 110.99,-108.06"></path>
 </g>
 <!-- IV2_L1 -->
 <g id="node4" class="node">
 <title>IV2_L1</title>
-<path fill="none" stroke="black" d="M598.5,-180C598.5,-180 557.5,-180 557.5,-180 551.5,-180 545.5,-174 545.5,-168 545.5,-168 545.5,-156 545.5,-156 545.5,-150 551.5,-144 557.5,-144 557.5,-144 598.5,-144 598.5,-144 604.5,-144 610.5,-150 610.5,-156 610.5,-156 610.5,-168 610.5,-168 610.5,-174 604.5,-180 598.5,-180"></path>
-<text text-anchor="middle" x="578" y="-157.8" font-family="Poppins" font-size="14.00">Morning</text>
+<path fill="white" stroke="#5c715e" d="M560.5,-180C560.5,-180 519.5,-180 519.5,-180 513.5,-180 507.5,-174 507.5,-168 507.5,-168 507.5,-156 507.5,-156 507.5,-150 513.5,-144 519.5,-144 519.5,-144 560.5,-144 560.5,-144 566.5,-144 572.5,-150 572.5,-156 572.5,-156 572.5,-168 572.5,-168 572.5,-174 566.5,-180 560.5,-180"></path>
+<text text-anchor="middle" x="540" y="-157.8" font-family="Fira Sans" font-size="14.00">Morning</text>
+</g>
+<!-- IV2_L1&#45;&#45;C1 -->
+<g id="edge7" class="edge">
+<title>IV2_L1--C1</title>
+<path fill="none" stroke="#5c715e" d="M572.64,-149.08C597.43,-140.01 632.37,-127.24 663,-116 669.97,-113.44 677.33,-110.74 684.55,-108.09"></path>
 </g>
 <!-- IV2_L1&#45;&#45;C3 -->
-<g id="edge8" class="edge">
+<g id="edge9" class="edge">
 <title>IV2_L1--C3</title>
-<path fill="none" stroke="black" d="M610.7,-146.33C635.54,-135.18 669.76,-119.83 695.84,-108.12"></path>
+<path fill="none" stroke="#5c715e" d="M521.21,-143.7C509.43,-132.85 494.31,-118.92 482.57,-108.1"></path>
 </g>
 <!-- IV2_L1&#45;&#45;C5 -->
-<g id="edge10" class="edge">
+<g id="edge11" class="edge">
 <title>IV2_L1--C5</title>
-<path fill="none" stroke="black" d="M583.93,-143.7C587.65,-132.85 592.43,-118.92 596.14,-108.1"></path>
+<path fill="none" stroke="#5c715e" d="M515.56,-143.98C510.01,-140.83 503.98,-137.93 498,-136 401.19,-104.76 369.22,-138.43 270,-116 261.28,-114.03 252.17,-111.19 243.57,-108.13"></path>
 </g>
 <!-- IV2_L2 -->
 <g id="node5" class="node">
 <title>IV2_L2</title>
-<path fill="none" stroke="black" d="M515.16,-180C515.16,-180 476.84,-180 476.84,-180 470.84,-180 464.84,-174 464.84,-168 464.84,-168 464.84,-156 464.84,-156 464.84,-150 470.84,-144 476.84,-144 476.84,-144 515.16,-144 515.16,-144 521.16,-144 527.16,-150 527.16,-156 527.16,-156 527.16,-168 527.16,-168 527.16,-174 521.16,-180 515.16,-180"></path>
-<text text-anchor="middle" x="496" y="-157.8" font-family="Poppins" font-size="14.00">Evening</text>
+<path fill="white" stroke="#5c715e" d="M477.16,-180C477.16,-180 438.84,-180 438.84,-180 432.84,-180 426.84,-174 426.84,-168 426.84,-168 426.84,-156 426.84,-156 426.84,-150 432.84,-144 438.84,-144 438.84,-144 477.16,-144 477.16,-144 483.16,-144 489.16,-150 489.16,-156 489.16,-156 489.16,-168 489.16,-168 489.16,-174 483.16,-180 477.16,-180"></path>
+<text text-anchor="middle" x="458" y="-157.8" font-family="Fira Sans" font-size="14.00">Evening</text>
 </g>
 <!-- IV2_L2&#45;&#45;C2 -->
-<g id="edge7" class="edge">
+<g id="edge8" class="edge">
 <title>IV2_L2--C2</title>
-<path fill="none" stroke="black" d="M470.44,-143.85C464.89,-140.79 458.9,-137.96 453,-136 378.27,-111.24 353.56,-134.34 277,-116 268.43,-113.95 259.46,-111.11 250.97,-108.08"></path>
+<path fill="none" stroke="#5c715e" d="M485.1,-143.89C489.69,-141.16 494.44,-138.44 499,-136 517.5,-126.11 538.57,-116.18 556.33,-108.18"></path>
 </g>
 <!-- IV2_L2&#45;&#45;C4 -->
-<g id="edge9" class="edge">
+<g id="edge10" class="edge">
 <title>IV2_L2--C4</title>
-<path fill="none" stroke="black" d="M489.82,-143.7C485.95,-132.85 480.97,-118.92 477.11,-108.1"></path>
+<path fill="none" stroke="#5c715e" d="M428.9,-143.98C424.26,-141.29 419.5,-138.56 415,-136 398.64,-126.7 380.31,-116.5 365.24,-108.17"></path>
 </g>
 <!-- IV2_L2&#45;&#45;C6 -->
-<g id="edge11" class="edge">
+<g id="edge12" class="edge">
 <title>IV2_L2--C6</title>
-<path fill="none" stroke="black" d="M467.63,-143.75C462.81,-141.04 457.81,-138.36 453,-136 440.63,-129.93 411.33,-118.09 385.94,-108.08"></path>
+<path fill="none" stroke="#5c715e" d="M432.96,-143.92C427.28,-140.77 421.11,-137.88 415,-136 296.63,-99.48 257.9,-142.97 137,-116 128.39,-114.08 119.4,-111.22 110.95,-108.11"></path>
 </g>
 <!-- Outcome -->
 <g id="node12" class="node">
 <title>Outcome</title>
-<ellipse fill="#fff2cc" stroke="black" cx="406" cy="-18" rx="34.22" ry="18"></ellipse>
-<text text-anchor="middle" x="406" y="-13.8" font-family="Poppins" font-size="14.00">Stress</text>
+<ellipse fill="#dce8e1" stroke="#5c715e" cx="399" cy="-18" rx="51.04" ry="18"></ellipse>
+<text text-anchor="middle" x="399" y="-13.8" font-family="Fira Sans" font-size="14.00">Happiness</text>
 </g>
 <!-- C1&#45;&#45;Outcome -->
-<g id="edge12" class="edge">
+<g id="edge13" class="edge">
 <title>C1--Outcome</title>
-<path fill="none" stroke="black" d="M117.79,-71.92C126.06,-69 134.74,-66.21 143,-64 224.23,-42.31 322.48,-28.76 372.78,-22.71"></path>
+<path fill="none" stroke="#5c715e" d="M688.22,-71.92C679.94,-69 671.26,-66.2 663,-64 588.87,-44.24 500.63,-31.25 447.26,-24.52"></path>
 </g>
 <!-- C2&#45;&#45;Outcome -->
-<g id="edge13" class="edge">
+<g id="edge14" class="edge">
 <title>C2--Outcome</title>
-<path fill="none" stroke="black" d="M255.36,-71.92C262.59,-69.25 269.99,-66.53 277,-64 311.8,-51.44 352.09,-37.48 378.26,-28.48"></path>
+<path fill="none" stroke="#5c715e" d="M551.69,-72C544.46,-69.29 537.03,-66.54 530,-64 497.88,-52.4 461.09,-39.83 434.69,-30.92"></path>
 </g>
 <!-- C3&#45;&#45;Outcome -->
-<g id="edge14" class="edge">
+<g id="edge15" class="edge">
 <title>C3--Outcome</title>
-<path fill="none" stroke="black" d="M692.5,-71.9C684.46,-68.98 676.04,-66.19 668,-64 587.18,-41.97 489.26,-28.56 439.12,-22.62"></path>
+<path fill="none" stroke="#5c715e" d="M447.93,-71.7C437.71,-60.68 424.54,-46.5 414.43,-35.62"></path>
 </g>
 <!-- C4&#45;&#45;Outcome -->
-<g id="edge15" class="edge">
+<g id="edge16" class="edge">
 <title>C4--Outcome</title>
-<path fill="none" stroke="black" d="M454.93,-71.7C444.41,-60.36 430.76,-45.66 420.55,-34.67"></path>
+<path fill="none" stroke="#5c715e" d="M350.07,-71.7C360.29,-60.68 373.46,-46.5 383.57,-35.62"></path>
 </g>
 <!-- C5&#45;&#45;Outcome -->
-<g id="edge16" class="edge">
+<g id="edge17" class="edge">
 <title>C5--Outcome</title>
-<path fill="none" stroke="black" d="M556.64,-71.92C549.41,-69.25 542.01,-66.53 535,-64 500.2,-51.44 459.91,-37.48 433.74,-28.48"></path>
+<path fill="none" stroke="#5c715e" d="M248.36,-71.92C255.59,-69.25 262.99,-66.53 270,-64 301.57,-52.61 337.65,-40.06 363.61,-31.12"></path>
 </g>
 <!-- C6&#45;&#45;Outcome -->
-<g id="edge17" class="edge">
+<g id="edge18" class="edge">
 <title>C6--Outcome</title>
-<path fill="none" stroke="black" d="M357.82,-71.7C368.18,-60.36 381.62,-45.66 391.67,-34.67"></path>
+<path fill="none" stroke="#5c715e" d="M112.85,-71.89C120.77,-68.97 129.07,-66.18 137,-64 210.2,-43.85 297.51,-31.01 350.57,-24.41"></path>
 </g>
 </g>
 </svg>
@@ -762,115 +837,170 @@ Dave Brocker
 <blockquote>
 <p>A researcher wants to see whether it is the taste of coffee that is causing higher levels of happiness. He assigns 30 people to each condition. The experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. All <code>3</code> groups complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
 </blockquote>
-<ul>
-<li class="fragment"><p>What is <span class="math inline">\(H_0\)</span>?</p>
-<ul>
-<li class="fragment"><span class="math inline">\(H_0: \mu_\text{Coffee} = \mu_\text{Placebo} = \mu_\text{Control}\)</span></li>
-</ul></li>
-<li class="fragment"><p>What is <span class="math inline">\(H_A\)</span>?</p>
-<ul>
-<li class="fragment"><span class="math inline">\(H_A: \mu_\text{Coffee} &gt; \mu_{\text{Placebo}} &gt; \mu_\text{Control}\)</span></li>
-</ul></li>
-</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null hypothesis <span class="math inline">\(H_0\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\mu_\text{Coffee} = \mu_\text{Placebo} = \mu_\text{Control}\)</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Alternative hypothesis <span class="math inline">\(H_A\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Not all</strong> the means are equal (at least one group mean differs).</p>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="between-subjects-anova-1" class="slide level2">
-<h2>Between subjects ANOVA</h2>
-<h3 id="coffee-example-vol.-2-1">Coffee Example Vol. 2</h3>
-<blockquote>
-<p>A researcher wants to see whether it is the taste of coffee that is causing higher levels of happiness. He assigns 30 people to each condition. The experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. All <code>3</code> groups complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
-</blockquote>
+<section id="coffee-example-vol.-2-1" class="slide level2">
+<h2>Coffee Example Vol. 2</h2>
+<h3 id="the-group-means">The group means</h3>
 <ul>
-<li class="fragment"><p>The experimental group has a mean happiness score <code>8</code></p></li>
-<li class="fragment"><p>The placebo group mean happiness score <code>6</code></p></li>
-<li class="fragment"><p>The control group mean happiness score <code>5</code></p>
+<li class="fragment"><p>The experimental group has a mean happiness score of <code>8</code>.</p></li>
+<li class="fragment"><p>The placebo group has a mean happiness score of <code>6</code>.</p></li>
+<li class="fragment"><p>The control group has a mean happiness score of <code>5</code>.</p>
 <ul>
 <li class="fragment">Is the group that drank coffee significantly happier than the other groups?</li>
 </ul></li>
 </ul>
-</section>
-<section id="coffee-example-vol.-2-2" class="slide level2">
-<h2>Coffee Example Vol. 2</h2>
-<h3 id="visualize">Visualize</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec12_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec12_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="lec12_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec12_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="coffee-example-vol.-2-3" class="slide level2">
+<section id="coffee-example-vol.-2-2" class="slide level2">
 <h2>Coffee Example Vol. 2</h2>
-<h3 id="why-not-do-more-t-tests">Why Not Do More T-Tests?</h3>
+<h3 id="why-not-do-more-t-tests">Why not do more t-tests?</h3>
+<p>Recall that our <span class="math inline">\(\alpha\)</span> level is set at .05. If we want to find out whether coffee affects happiness, we’d need <strong>three t-tests</strong>:</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Three pairwise comparisons</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p>Recall that our <span class="math inline">\(\alpha\)</span> level is set at .05.<br>
-If we want to find out whether coffee affects happiness, we’d need <strong>three t-tests</strong>:</p>
-<ul>
-<li class="fragment"><span class="math inline">\(t_1: \mu_\text{Coffee} &gt; \mu_\text{Placebo}\)</span></li>
-<li class="fragment"><span class="math inline">\(t_2: \mu_\text{Coffee} &gt; \mu_\text{Control}\)</span></li>
-<li class="fragment"><span class="math inline">\(t_3: \mu_\text{Placebo} &gt; \mu_\text{Control}\)</span></li>
-</ul></li>
+<li class="fragment"><span class="math inline">\(t_1\)</span>: Coffee vs.&nbsp;Placebo</li>
+<li class="fragment"><span class="math inline">\(t_2\)</span>: Coffee vs.&nbsp;Control</li>
+<li class="fragment"><span class="math inline">\(t_3\)</span>: Placebo vs.&nbsp;Control</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section id="why-not-do-more-t-tests-1" class="slide level2">
 <h2>Why Not Do More T-Tests?</h2>
-<h3 id="the-problem">The Problem</h3>
+<h3 id="the-problem">The problem</h3>
 <ul>
-<li class="fragment"><p>Each test is done <em>independently</em></p></li>
+<li class="fragment"><p>Each test is done <em>independently</em>.</p></li>
 <li class="fragment"><p>None accounts for the shared variability across all groups.</p></li>
 <li class="fragment"><p>By running multiple t-tests, we <strong>increase the probability of a false positive (Type I error)</strong> and <strong>ignore the combined structure</strong> of the data.</p></li>
-<li class="fragment"><p>ANOVA solves both problems by analyzing <strong>all groups at once</strong>, partitioning total variance into <em>between-group variance</em> (differences due to the treatment)<br>
-and <em>within-group variance</em> (random variation).</p></li>
+<li class="fragment"><p>ANOVA solves both problems by analyzing <strong>all groups at once</strong>, partitioning total variance into <em>between-group variance</em> (differences due to the treatment) and <em>within-group variance</em> (random variation).</p></li>
 </ul>
 </section>
 <section id="why-not-do-more-t-tests-2" class="slide level2">
 <h2>Why Not Do More T-Tests?</h2>
-<h3 id="alpha-inflation">Alpha Inflation</h3>
+<h3 id="alpha-inflation">Alpha inflation</h3>
 <ul>
-<li class="fragment"><p>Each hypothesis has a 5% chance of a false positive.</p></li>
-<li class="fragment"><p>When we test them one-by-one, those chances <strong>accumulate</strong>, increasing the overall risk of error.</p></li>
-<li class="fragment"><p><strong>Familywise Error Rate (FWE):</strong></p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(\alpha_\text{FWE} = 1 - (1 - \alpha)^k\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(\alpha_\text{FWE} = 1 - (0.95)^3 = 0.1426 \approx 14\%\)</span></p></li>
-</ul></li>
-<li class="fragment"><p>Even though each test uses <span class="math inline">\(\alpha(.05)\)</span>, the overall chance of finding at least one “significant” difference <strong>by chance</strong> jumps to ~15%.</p></li>
+<li class="fragment"><p>Each hypothesis test has a 5% chance of a false positive.</p></li>
+<li class="fragment"><p>When we test them one-by-one, those chances <strong>accumulate</strong>.</p></li>
 </ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Familywise error rate</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\alpha_\text{FWE} = 1 - (1 - \alpha)^k\)</span></p>
+<p>For three tests: <span class="math inline">\(1 - (0.95)^3 = 0.1426 \approx 14\%\)</span></p>
+</div>
+</div>
+</div>
+<div class="side-by-cols">
+<div class="stat-card">
+<div class="stat-num">
+<p>5.00%</p>
+</div>
+<div class="stat-sub">
+<p>1 test</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">
+<p>14.26%</p>
+</div>
+<div class="stat-sub">
+<p>3 tests</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">
+<p>40.13%</p>
+</div>
+<div class="stat-sub">
+<p>10 tests</p>
+</div>
+</div>
+</div>
 </section>
 <section id="why-not-do-more-t-tests-3" class="slide level2">
 <h2>Why Not Do More T-Tests?</h2>
-<h3 id="the-takeaway">The Takeaway</h3>
+<h3 id="the-takeaway">The takeaway</h3>
 <blockquote>
 <p>ANOVA protects against this inflation by giving us one overall test of group differences (F-statistic), keeping our Type I error at the intended 5%.</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
-<div id="krvxwtcpqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#krvxwtcpqa table {
+<div id="duryhkijxp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#duryhkijxp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#krvxwtcpqa thead, #krvxwtcpqa tbody, #krvxwtcpqa tfoot, #krvxwtcpqa tr, #krvxwtcpqa td, #krvxwtcpqa th {
+#duryhkijxp thead, #duryhkijxp tbody, #duryhkijxp tfoot, #duryhkijxp tr, #duryhkijxp td, #duryhkijxp th {
   border-style: none;
 }
 
-#krvxwtcpqa p {
+#duryhkijxp p {
   margin: 0;
   padding: 0;
 }
 
-#krvxwtcpqa .gt_table {
+#duryhkijxp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
-  margin-left: 0;
+  margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 33px;
+  font-size: 30px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -889,12 +1019,12 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-left-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_caption {
+#duryhkijxp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#krvxwtcpqa .gt_title {
+#duryhkijxp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -906,7 +1036,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-width: 0;
 }
 
-#krvxwtcpqa .gt_subtitle {
+#duryhkijxp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -918,7 +1048,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-width: 0;
 }
 
-#krvxwtcpqa .gt_heading {
+#duryhkijxp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -930,13 +1060,13 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_bottom_border {
+#duryhkijxp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_col_headings {
+#duryhkijxp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -951,7 +1081,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_col_heading {
+#duryhkijxp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -971,7 +1101,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#krvxwtcpqa .gt_column_spanner_outer {
+#duryhkijxp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -983,15 +1113,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 4px;
 }
 
-#krvxwtcpqa .gt_column_spanner_outer:first-child {
+#duryhkijxp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#krvxwtcpqa .gt_column_spanner_outer:last-child {
+#duryhkijxp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#krvxwtcpqa .gt_column_spanner {
+#duryhkijxp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1003,11 +1133,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   width: 100%;
 }
 
-#krvxwtcpqa .gt_spanner_row {
+#duryhkijxp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#krvxwtcpqa .gt_group_heading {
+#duryhkijxp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1033,7 +1163,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   text-align: left;
 }
 
-#krvxwtcpqa .gt_empty_group_heading {
+#duryhkijxp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1048,15 +1178,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: middle;
 }
 
-#krvxwtcpqa .gt_from_md > :first-child {
+#duryhkijxp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#krvxwtcpqa .gt_from_md > :last-child {
+#duryhkijxp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#krvxwtcpqa .gt_row {
+#duryhkijxp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1075,7 +1205,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#krvxwtcpqa .gt_stub {
+#duryhkijxp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1088,7 +1218,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#krvxwtcpqa .gt_stub_row_group {
+#duryhkijxp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1102,15 +1232,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: top;
 }
 
-#krvxwtcpqa .gt_row_group_first td {
+#duryhkijxp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#krvxwtcpqa .gt_row_group_first th {
+#duryhkijxp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#krvxwtcpqa .gt_summary_row {
+#duryhkijxp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1120,16 +1250,16 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#krvxwtcpqa .gt_first_summary_row {
+#duryhkijxp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_first_summary_row.thick {
+#duryhkijxp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#krvxwtcpqa .gt_last_summary_row {
+#duryhkijxp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1139,7 +1269,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_grand_summary_row {
+#duryhkijxp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1149,7 +1279,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#krvxwtcpqa .gt_first_grand_summary_row {
+#duryhkijxp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1159,7 +1289,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_last_grand_summary_row_top {
+#duryhkijxp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1169,11 +1299,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_striped {
+#duryhkijxp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#krvxwtcpqa .gt_table_body {
+#duryhkijxp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1182,7 +1312,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_footnotes {
+#duryhkijxp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1196,7 +1326,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_footnote {
+#duryhkijxp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1205,7 +1335,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#krvxwtcpqa .gt_sourcenotes {
+#duryhkijxp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1219,7 +1349,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#krvxwtcpqa .gt_sourcenote {
+#duryhkijxp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1227,72 +1357,72 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#krvxwtcpqa .gt_left {
+#duryhkijxp .gt_left {
   text-align: left;
 }
 
-#krvxwtcpqa .gt_center {
+#duryhkijxp .gt_center {
   text-align: center;
 }
 
-#krvxwtcpqa .gt_right {
+#duryhkijxp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#krvxwtcpqa .gt_font_normal {
+#duryhkijxp .gt_font_normal {
   font-weight: normal;
 }
 
-#krvxwtcpqa .gt_font_bold {
+#duryhkijxp .gt_font_bold {
   font-weight: bold;
 }
 
-#krvxwtcpqa .gt_font_italic {
+#duryhkijxp .gt_font_italic {
   font-style: italic;
 }
 
-#krvxwtcpqa .gt_super {
+#duryhkijxp .gt_super {
   font-size: 65%;
 }
 
-#krvxwtcpqa .gt_footnote_marks {
+#duryhkijxp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#krvxwtcpqa .gt_asterisk {
+#duryhkijxp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#krvxwtcpqa .gt_indent_1 {
+#duryhkijxp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#krvxwtcpqa .gt_indent_2 {
+#duryhkijxp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#krvxwtcpqa .gt_indent_3 {
+#duryhkijxp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#krvxwtcpqa .gt_indent_4 {
+#duryhkijxp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#krvxwtcpqa .gt_indent_5 {
+#duryhkijxp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#krvxwtcpqa .katex-display {
+#duryhkijxp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#krvxwtcpqa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#duryhkijxp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1300,46 +1430,34 @@ and <em>within-group variance</em> (random variation).</p></li>
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
+<th id="Comparison" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Comparison</th>
 <th id="D" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">D</th>
-<th id="Mean1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Mean1</th>
-<th id="Mean2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Mean2</th>
 <th id="t" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">t</th>
-<th id="p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">p</th>
 <th id="df" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">df</th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">conf.low</th>
-<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">p</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="D"> 2.5</td>
-<td class="gt_row gt_center" headers="Mean1">8.367</td>
-<td class="gt_row gt_center" headers="Mean2">5.867</td>
-<td class="gt_row gt_center" headers="t"> 9.816</td>
-<td class="gt_row gt_center" headers="p">&lt;.01</td>
-<td class="gt_row gt_center" headers="df">58&nbsp;</td>
-<td class="gt_row gt_center" headers="conf.low"> 1.99 </td>
-<td class="gt_row gt_center" headers="conf.high"> 3.01 </td>
+<td class="gt_row gt_center" headers="Comparison">Coffee vs. Placebo</td>
+<td class="gt_row gt_center" headers="D">2.00</td>
+<td class="gt_row gt_center" headers="t">6.45</td>
+<td class="gt_row gt_center" headers="df">58</td>
+<td class="gt_row gt_center" headers="p">&lt;.001</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="D"> 3.3</td>
-<td class="gt_row gt_center gt_striped" headers="Mean1">8.367</td>
-<td class="gt_row gt_center gt_striped" headers="Mean2">5.067</td>
-<td class="gt_row gt_center gt_striped" headers="t">12.48 </td>
-<td class="gt_row gt_center gt_striped" headers="p">&lt;.01</td>
-<td class="gt_row gt_center gt_striped" headers="df">58&nbsp;</td>
-<td class="gt_row gt_center gt_striped" headers="conf.low"> 2.771</td>
-<td class="gt_row gt_center gt_striped" headers="conf.high"> 3.829</td>
+<td class="gt_row gt_center gt_striped" headers="Comparison">Coffee vs. Control</td>
+<td class="gt_row gt_center gt_striped" headers="D">3.00</td>
+<td class="gt_row gt_center gt_striped" headers="t">9.68</td>
+<td class="gt_row gt_center gt_striped" headers="df">58</td>
+<td class="gt_row gt_center gt_striped" headers="p">&lt;.001</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="D">−0.8</td>
-<td class="gt_row gt_center" headers="Mean1">5.067</td>
-<td class="gt_row gt_center" headers="Mean2">5.867</td>
-<td class="gt_row gt_center" headers="t">−2.876</td>
-<td class="gt_row gt_center" headers="p">&lt;.01</td>
-<td class="gt_row gt_center" headers="df">58&nbsp;</td>
-<td class="gt_row gt_center" headers="conf.low">−1.357</td>
-<td class="gt_row gt_center" headers="conf.high">−0.243</td>
+<td class="gt_row gt_center" headers="Comparison">Placebo vs. Control</td>
+<td class="gt_row gt_center" headers="D">1.00</td>
+<td class="gt_row gt_center" headers="t">3.23</td>
+<td class="gt_row gt_center" headers="df">58</td>
+<td class="gt_row gt_center" headers="p">0.002</td>
 </tr>
 </tbody>
 </table>
@@ -1348,55 +1466,54 @@ and <em>within-group variance</em> (random variation).</p></li>
 </div>
 </div>
 </section>
-<section id="between-subjects-anova-2" class="slide level2">
+<section id="between-subjects-anova-1" class="slide level2">
 <h2>Between subjects ANOVA</h2>
 <ul>
-<li class="fragment"><p>Is the variance between the green, red, and blue dots greater than the variance across all of the dots?</p></li>
-<li class="fragment"><p>Is the variability between groups large enough, relative to the variability within groups, to suggest that group means truly differ?</p></li>
+<li class="fragment">Is the variability between groups large enough, relative to the variability within groups, to suggest that the group means truly differ?</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec12_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec12_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+<p><a href="lec12_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec12_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="between-subjects-anova-3" class="slide level2">
+<section id="between-subjects-anova-2" class="slide level2">
 <h2>Between subjects ANOVA</h2>
-<p>Is the variance between the green, red, and blue dots greater than the variance across all of the dots?</p>
+<h3 id="group-means-and-variances">Group means and variances</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bqbpxdktie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bqbpxdktie table {
+<div id="gwxeupjqgo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gwxeupjqgo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bqbpxdktie thead, #bqbpxdktie tbody, #bqbpxdktie tfoot, #bqbpxdktie tr, #bqbpxdktie td, #bqbpxdktie th {
+#gwxeupjqgo thead, #gwxeupjqgo tbody, #gwxeupjqgo tfoot, #gwxeupjqgo tr, #gwxeupjqgo td, #gwxeupjqgo th {
   border-style: none;
 }
 
-#bqbpxdktie p {
+#gwxeupjqgo p {
   margin: 0;
   padding: 0;
 }
 
-#bqbpxdktie .gt_table {
+#gwxeupjqgo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 33px;
+  font-size: 30px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
-  width: 75%;
+  width: 60%;
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
@@ -1411,12 +1528,12 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-left-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_caption {
+#gwxeupjqgo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bqbpxdktie .gt_title {
+#gwxeupjqgo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1428,7 +1545,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-width: 0;
 }
 
-#bqbpxdktie .gt_subtitle {
+#gwxeupjqgo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1440,7 +1557,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-width: 0;
 }
 
-#bqbpxdktie .gt_heading {
+#gwxeupjqgo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1452,13 +1569,13 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_bottom_border {
+#gwxeupjqgo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_col_headings {
+#gwxeupjqgo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1473,7 +1590,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_col_heading {
+#gwxeupjqgo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1493,7 +1610,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#bqbpxdktie .gt_column_spanner_outer {
+#gwxeupjqgo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1505,15 +1622,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 4px;
 }
 
-#bqbpxdktie .gt_column_spanner_outer:first-child {
+#gwxeupjqgo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bqbpxdktie .gt_column_spanner_outer:last-child {
+#gwxeupjqgo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bqbpxdktie .gt_column_spanner {
+#gwxeupjqgo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1525,11 +1642,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   width: 100%;
 }
 
-#bqbpxdktie .gt_spanner_row {
+#gwxeupjqgo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bqbpxdktie .gt_group_heading {
+#gwxeupjqgo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1555,7 +1672,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   text-align: left;
 }
 
-#bqbpxdktie .gt_empty_group_heading {
+#gwxeupjqgo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1570,15 +1687,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: middle;
 }
 
-#bqbpxdktie .gt_from_md > :first-child {
+#gwxeupjqgo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bqbpxdktie .gt_from_md > :last-child {
+#gwxeupjqgo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bqbpxdktie .gt_row {
+#gwxeupjqgo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1597,7 +1714,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#bqbpxdktie .gt_stub {
+#gwxeupjqgo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1610,7 +1727,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#bqbpxdktie .gt_stub_row_group {
+#gwxeupjqgo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1624,15 +1741,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: top;
 }
 
-#bqbpxdktie .gt_row_group_first td {
+#gwxeupjqgo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bqbpxdktie .gt_row_group_first th {
+#gwxeupjqgo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bqbpxdktie .gt_summary_row {
+#gwxeupjqgo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1642,16 +1759,16 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#bqbpxdktie .gt_first_summary_row {
+#gwxeupjqgo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_first_summary_row.thick {
+#gwxeupjqgo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bqbpxdktie .gt_last_summary_row {
+#gwxeupjqgo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1661,7 +1778,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_grand_summary_row {
+#gwxeupjqgo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1671,7 +1788,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#bqbpxdktie .gt_first_grand_summary_row {
+#gwxeupjqgo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1681,7 +1798,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_last_grand_summary_row_top {
+#gwxeupjqgo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1691,11 +1808,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_striped {
+#gwxeupjqgo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bqbpxdktie .gt_table_body {
+#gwxeupjqgo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1704,7 +1821,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_footnotes {
+#gwxeupjqgo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1718,7 +1835,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_footnote {
+#gwxeupjqgo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1727,7 +1844,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#bqbpxdktie .gt_sourcenotes {
+#gwxeupjqgo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1741,7 +1858,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#bqbpxdktie .gt_sourcenote {
+#gwxeupjqgo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1749,131 +1866,133 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#bqbpxdktie .gt_left {
+#gwxeupjqgo .gt_left {
   text-align: left;
 }
 
-#bqbpxdktie .gt_center {
+#gwxeupjqgo .gt_center {
   text-align: center;
 }
 
-#bqbpxdktie .gt_right {
+#gwxeupjqgo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bqbpxdktie .gt_font_normal {
+#gwxeupjqgo .gt_font_normal {
   font-weight: normal;
 }
 
-#bqbpxdktie .gt_font_bold {
+#gwxeupjqgo .gt_font_bold {
   font-weight: bold;
 }
 
-#bqbpxdktie .gt_font_italic {
+#gwxeupjqgo .gt_font_italic {
   font-style: italic;
 }
 
-#bqbpxdktie .gt_super {
+#gwxeupjqgo .gt_super {
   font-size: 65%;
 }
 
-#bqbpxdktie .gt_footnote_marks {
+#gwxeupjqgo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bqbpxdktie .gt_asterisk {
+#gwxeupjqgo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bqbpxdktie .gt_indent_1 {
+#gwxeupjqgo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bqbpxdktie .gt_indent_2 {
+#gwxeupjqgo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bqbpxdktie .gt_indent_3 {
+#gwxeupjqgo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bqbpxdktie .gt_indent_4 {
+#gwxeupjqgo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bqbpxdktie .gt_indent_5 {
+#gwxeupjqgo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bqbpxdktie .katex-display {
+#gwxeupjqgo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bqbpxdktie div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gwxeupjqgo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="gt_col_headings header">
-<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Coffee</strong><br>
-N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Control</strong><br>
-N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Placebo</strong><br>
-N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="Condition" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Condition</th>
+<th id="Mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean</th>
+<th id="Variance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Variance</th>
+<th id="SD" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">score</td>
-<td class="gt_row gt_center" headers="stat_1">7.49(1.08, 1.04)</td>
-<td class="gt_row gt_center" headers="stat_2">4.93(2.65, 1.63)</td>
-<td class="gt_row gt_center" headers="stat_3">5.08(0.85, 0.92)</td>
+<td class="gt_row gt_center" headers="Condition">Coffee</td>
+<td class="gt_row gt_right" headers="Mean">8.00</td>
+<td class="gt_row gt_right" headers="Variance">1.44</td>
+<td class="gt_row gt_right" headers="SD">1.20</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_footnotes odd">
-<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean(Variance, SD)</td>
+<tr class="even">
+<td class="gt_row gt_center gt_striped" headers="Condition">Placebo</td>
+<td class="gt_row gt_right gt_striped" headers="Mean">6.00</td>
+<td class="gt_row gt_right gt_striped" headers="Variance">1.44</td>
+<td class="gt_row gt_right gt_striped" headers="SD">1.20</td>
 </tr>
-</tfoot>
-
+<tr class="odd">
+<td class="gt_row gt_center" headers="Condition">Control</td>
+<td class="gt_row gt_right" headers="Mean">5.00</td>
+<td class="gt_row gt_right" headers="Variance">1.44</td>
+<td class="gt_row gt_right" headers="SD">1.20</td>
+</tr>
+</tbody>
 </table>
 
 </div>
 </div>
 </div>
 </section>
-<section id="between-subjects-anova-4" class="slide level2">
+<section id="between-subjects-anova-3" class="slide level2">
 <h2>Between subjects ANOVA</h2>
+<h3 id="why-analysis-of-variance">Why “analysis of variance”?</h3>
 <ul>
-<li class="fragment">If it’s all about the means, why is it called Analysis of Variance?</li>
-<li class="fragment">To compare the means, we are analyzing two types of variance:</li>
-<li class="fragment">Variance among all of the scores <em>(error group variance)</em></li>
-<li class="fragment">Variance <em>between the groups (between group variance).</em></li>
+<li class="fragment"><p>If it’s all about the means, why is it called Analysis of Variance?</p></li>
+<li class="fragment"><p>To compare the means, we analyze two types of variance:</p>
+<ul>
+<li class="fragment"><p>Variance <em>within</em> each group, around its own mean <em>(within-group or error variance)</em></p></li>
+<li class="fragment"><p>Variance <em>between</em> the group means <em>(between-group variance)</em></p></li>
+</ul></li>
 </ul>
 </section>
 <section id="the-f-statistic" class="slide level2">
 <h2>The F Statistic</h2>
-<ul>
-<li class="fragment"><p>ANOVA produces what we call the F statistic.</p></li>
-<li class="fragment"><p>Why do we call it F?</p>
-<ul>
-<li class="fragment">Ronald Fischer ™</li>
-</ul></li>
-</ul>
+<div class="hero-def">
+<dl>
+<dt class="fragment"><span class="term-pill">F Statistic</span></dt>
+<dd class="fragment">
+The ratio of <strong>between-group variance</strong> to <strong>within-group (error) variance</strong>. Named in honor of <strong>Sir Ronald Fisher</strong>, who developed ANOVA.
+</dd>
+</dl>
+</div>
 </section>
 <section id="calculating-f" class="slide level2">
 <h2>Calculating F</h2>
@@ -1886,23 +2005,41 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <p><strong>ANOVA Formula</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(F = \frac{MS_B}{MS_E} \\ MS_B = \frac{SS_B}{df_B} \quad MS_E = \frac{SS_E}{df_E} \\ df_B = k-1 \quad df_E = N - k\)</span></p>
+<p><span class="math inline">\(F = \dfrac{MS_B}{MS_E} \qquad MS_B = \dfrac{SS_B}{df_B} \quad MS_E = \dfrac{SS_E}{df_E} \qquad df_B = k-1 \quad df_E = N - k\)</span></p>
 </div>
 </div>
 </div>
-<ul>
-<li class="fragment"><p>Where MS - Means Square</p></li>
-<li class="fragment"><p><span class="math inline">\(_B\)</span> = Between Group Variance</p></li>
-<li class="fragment"><p><span class="math inline">\(_E\)</span> = Within Group Variance (Error)</p></li>
-<li class="fragment"><p><span class="math inline">\(SS\)</span> = Sum of Squares</p></li>
-<li class="fragment"><p><span class="math inline">\(k\)</span> = Number of groups</p></li>
-<li class="fragment"><p><span class="math inline">\(N\)</span> = Number of participants</p></li>
-</ul>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">MS</span></dt>
+<dd class="fragment">
+Mean Square: a sum of squares divided by its degrees of freedom (a variance).
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill"><span class="math inline">\(_B\)</span> and <span class="math inline">\(_E\)</span></span></dt>
+<dd class="fragment">
+<strong>B</strong>etween-group variance and within-group (<strong>E</strong>rror) variance.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill"><span class="math inline">\(SS\)</span>, <span class="math inline">\(k\)</span>, <span class="math inline">\(N\)</span></span></dt>
+<dd class="fragment">
+Sum of Squares, number of groups, number of participants.
+</dd>
+</dl>
+</div>
+</div>
 </section>
 <section id="calculating-f-1" class="slide level2">
 <h2>Calculating F</h2>
 <h3 id="calculating-the-variance">Calculating the variance</h3>
-<p>ANOVA looks at variance. To calculate the Variance:</p>
+<p>ANOVA looks at variance. To calculate the variance:</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1912,100 +2049,101 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <p><strong>Variance</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(\Large{s^2 = \frac{\sum(x-\bar{x})^2}{n-1}}\)</span></p>
+<p><span class="math inline">\(\Large{s^2 = \dfrac{\sum(x-\bar{x})^2}{n-1}}\)</span></p>
 </div>
 </div>
 </div>
 <ul>
 <li class="fragment"><p>Divide by (degrees of freedom).</p>
 <ul>
-<li class="fragment"><strong>This is the variance</strong>, but in ANOVA we also call it a Mean Squared (MS).</li>
+<li class="fragment"><strong>This is the variance</strong>, but in ANOVA we also call it a Mean Square (MS).</li>
 </ul></li>
 </ul>
 </section>
-<section id="calculating-means-squared-ss" class="slide level2">
-<h2>Calculating means squared (SS)</h2>
+<section id="calculating-the-mean-square-ms" class="slide level2">
+<h2>Calculating the Mean Square (MS)</h2>
 <ul>
-<li class="fragment"><p><span class="math inline">\(MS = \frac{SS}{df}\)</span></p></li>
-<li class="fragment"><p>Calculate the SS.</p></li>
+<li class="fragment"><p><span class="math inline">\(MS = \dfrac{SS}{df}\)</span></p></li>
+<li class="fragment"><p>Calculate the SS (sum of squared deviations).</p></li>
 <li class="fragment"><p>Divide the SS by the degrees of freedom.</p></li>
 </ul>
 </section>
-<section id="calculating-means-squared-ms" class="slide level2">
-<h2>Calculating means squared (MS)</h2>
+<section id="partitioning-the-variance" class="slide level2">
+<h2>Partitioning the variance</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Total = between + within</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(SS_{Total} = SS_B + SS_E\)</span></p>
+</div>
+</div>
+</div>
 <ul>
-<li class="fragment"><p>We will calculate a SS for the between group variance.</p>
+<li class="fragment"><p><span class="math inline">\(SS_B\)</span> (between): how much variance comes from <strong>group differences</strong>?</p>
 <ul>
-<li class="fragment">How much variance in the data is from group differences?</li>
+<li class="fragment"><span class="math inline">\(SS_B = \sum n_j(\bar{x}_j - \bar{x}_{grand})^2\)</span></li>
 </ul></li>
-<li class="fragment"><p>We will calculate a SS for all the data.</p>
+<li class="fragment"><p><span class="math inline">\(SS_E\)</span> (error, within): how much variance is <strong>random variation within the groups</strong>?</p>
 <ul>
-<li class="fragment">How much variance in the data is from random error?</li>
+<li class="fragment"><span class="math inline">\(SS_E = \sum\sum (x_{ij} - \bar{x}_j)^2\)</span></li>
 </ul></li>
-</ul>
-</section>
-<section id="between-subjects-anova-5" class="slide level2">
-<h2>Between subjects ANOVA</h2>
-<ul>
-<li class="fragment"><p><span class="math inline">\(SS_{BG}\)</span> = How much variance comes comes from the group differences?</p></li>
-<li class="fragment"><p><span class="math inline">\(SS_{Error}\)</span> = How much variance is there in total among all the data points?</p></li>
-</ul>
-</section>
-<section id="calculating-means-squared-ms-1" class="slide level2">
-<h2>Calculating means squared (MS)</h2>
-<p><span class="math inline">\(MS_B = \frac{SS_B}{df_B} \\ MS_E = \frac{SS_E}{df_E}\)</span></p>
-<ul>
-<li class="fragment">Divide the SS by their degrees of freedom.</li>
 </ul>
 </section>
 <section id="degrees-of-freedom" class="slide level2">
 <h2>Degrees of Freedom</h2>
-<h3 id="the-group-project">The Group Project</h3>
+<h3 id="the-group-project">The group project</h3>
 <blockquote>
 <p>Imagine a group of 5 students is submitting a project, and the total score for the group must be 100 points combined.</p>
 </blockquote>
 <ul>
-<li class="fragment"><p>The first <code>4</code> students can choose any score they want — say, <code>15</code>, <code>20</code>, <code>25</code>, and <code>10</code>.</p></li>
+<li class="fragment"><p>The first <code>4</code> students can choose any score they want, say <code>15</code>, <code>20</code>, <code>25</code>, and <code>10</code>.</p></li>
 <li class="fragment"><p>But the 5th student’s score isn’t free anymore. It must be whatever makes the total = <code>100</code>. In other words, only 4 scores are “free to vary.”</p></li>
 <li class="fragment"><p>That’s <code>n − 1 = 4</code> degrees of freedom.</p></li>
 </ul>
 </section>
 <section id="degrees-of-freedom-1" class="slide level2">
 <h2>Degrees of Freedom</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Rules for a one-way ANOVA</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p>Between Groups (<span class="math inline">\(df_{B}\)</span>) = k - 1</p></li>
-<li class="fragment"><p>Within Groups (<span class="math inline">\(df_E\)</span>) = N - k</p>
-<ul>
-<li class="fragment">k is the number of groups in the independent variable.</li>
-</ul></li>
-<li class="fragment"><p>Total <span class="math inline">\(df_{Total}\)</span>= N - 1</p></li>
+<li class="fragment"><p>Between groups: <span class="math inline">\(df_{B} = k - 1\)</span></p></li>
+<li class="fragment"><p>Within groups: <span class="math inline">\(df_E = N - k\)</span></p></li>
+<li class="fragment"><p>Total: <span class="math inline">\(df_{Total} = N - 1\)</span></p></li>
 </ul>
+<p>(<span class="math inline">\(k\)</span> is the number of groups in the independent variable.)</p>
+</div>
+</div>
+</div>
 </section>
-<section id="calculating-the-means-squared-ms" class="slide level2">
-<h2>Calculating the Means Squared (MS)</h2>
-<ul>
-<li class="fragment"><p><span class="math inline">\(MS_B = \frac{SS_B}{df_B}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(MS_E = \frac{SS_E}{df_E}\)</span></p></li>
-</ul>
-</section>
-<section id="calculating-between-subjects-anova" class="slide level2">
-<h2>Calculating Between subjects anova</h2>
-<ul>
-<li class="fragment"><span class="math inline">\(\Large{F = \frac{MS_B}{MS_E}}\)</span></li>
-</ul>
+<section id="calculating-the-mean-squares-and-f" class="slide level2">
+<h2>Calculating the Mean Squares and F</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The F ratio</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(MS_B = \dfrac{SS_B}{df_B} \qquad MS_E = \dfrac{SS_E}{df_E} \qquad F = \dfrac{MS_B}{MS_E}\)</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="between-subjects-anova-example" class="slide level2">
-<h2>Between subjects anova Example</h2>
-<blockquote>
-<p>Prof Brocker gives one group of <code>100</code> participants the <code>Super Secret Limitless Drug</code>. He gives another group of <code>100</code> participants a <code>placebo</code>. He gives the third group of <code>100</code> participants <code>nothing</code>. All participants then complete an IQ test. He wants to know if those who took the <code>SSLD</code> have significantly higher IQ than the placebo and the control groups.</p>
-</blockquote>
-<ul>
-<li class="fragment"><p>What is the IV?</p></li>
-<li class="fragment"><p>How many levels does it have?</p></li>
-<li class="fragment"><p>What is the DV?</p></li>
-</ul>
-</section>
-<section id="between-subjects-anova-example-1" class="slide level2">
 <h2>Between subjects ANOVA Example</h2>
 <blockquote>
 <p>Prof Brocker gives one group of <code>100</code> participants the <code>Super Secret Limitless Drug</code>. He gives another group of <code>100</code> participants a <code>placebo</code>. He gives the third group of <code>100</code> participants <code>nothing</code>. All participants then complete an IQ test. He wants to know if those who took the <code>SSLD</code> have significantly higher IQ than the placebo and the control groups.</p>
@@ -2013,23 +2151,1042 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <ul>
 <li class="fragment"><p>What is the IV?</p>
 <ul>
-<li class="fragment">Drug Taken</li>
+<li class="fragment">Drug taken</li>
 </ul></li>
 <li class="fragment"><p>How many levels does it have?</p>
 <ul>
-<li class="fragment">3 [SSLD, Placebo, Nothing]</li>
+<li class="fragment">3 (SSLD, Placebo, Nothing)</li>
 </ul></li>
 <li class="fragment"><p>What is the DV?</p>
 <ul>
-<li class="fragment">IQ Score</li>
+<li class="fragment">IQ score</li>
 </ul></li>
 </ul>
 </section>
-<section id="between-subjects-anova-example-2" class="slide level2">
+<section id="between-subjects-anova-example-1" class="slide level2">
 <h2>Between subjects ANOVA Example</h2>
-<blockquote>
-<p>Prof Brocker gives one group of <code>100</code> participants the <code>Super Secret Limitless Drug</code>. He gives another group of <code>100</code> participants a <code>placebo</code>. He gives the third group of <code>100</code> participants <code>nothing</code>. All participants then complete an IQ test. He wants to know if those who took the <code>SSLD</code> have significantly higher IQ than the placebo and the control groups.</p>
-</blockquote>
+<h3 id="group-means">Group means</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="srjabipawa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#srjabipawa table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#srjabipawa thead, #srjabipawa tbody, #srjabipawa tfoot, #srjabipawa tr, #srjabipawa td, #srjabipawa th {
+  border-style: none;
+}
+
+#srjabipawa p {
+  margin: 0;
+  padding: 0;
+}
+
+#srjabipawa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 50%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#srjabipawa .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#srjabipawa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#srjabipawa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#srjabipawa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#srjabipawa .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srjabipawa .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#srjabipawa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#srjabipawa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#srjabipawa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#srjabipawa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#srjabipawa .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#srjabipawa .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#srjabipawa .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#srjabipawa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#srjabipawa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#srjabipawa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#srjabipawa .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#srjabipawa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srjabipawa .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#srjabipawa .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#srjabipawa .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#srjabipawa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srjabipawa .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#srjabipawa .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#srjabipawa .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srjabipawa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srjabipawa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#srjabipawa .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srjabipawa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#srjabipawa .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srjabipawa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#srjabipawa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srjabipawa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#srjabipawa .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srjabipawa .gt_left {
+  text-align: left;
+}
+
+#srjabipawa .gt_center {
+  text-align: center;
+}
+
+#srjabipawa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#srjabipawa .gt_font_normal {
+  font-weight: normal;
+}
+
+#srjabipawa .gt_font_bold {
+  font-weight: bold;
+}
+
+#srjabipawa .gt_font_italic {
+  font-style: italic;
+}
+
+#srjabipawa .gt_super {
+  font-size: 65%;
+}
+
+#srjabipawa .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#srjabipawa .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#srjabipawa .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#srjabipawa .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#srjabipawa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#srjabipawa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#srjabipawa .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#srjabipawa .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#srjabipawa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Group" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Group</th>
+<th id="M" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">M</th>
+<th id="SD" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="Group">SSLD</td>
+<td class="gt_row gt_right" headers="M">106.00</td>
+<td class="gt_row gt_right" headers="SD">15.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center gt_striped" headers="Group">Placebo</td>
+<td class="gt_row gt_right gt_striped" headers="M">100.00</td>
+<td class="gt_row gt_right gt_striped" headers="SD">15.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="Group">Control</td>
+<td class="gt_row gt_right" headers="M">99.00</td>
+<td class="gt_row gt_right" headers="SD">15.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="anova-in-r" class="slide level2">
+<h2>ANOVA in R</h2>
+<h3 id="fitting-the-model">Fitting the model</h3>
+<div class="codewindow r codewindow-dark">
+<p>anova.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="co"># aov(DV ~ IV, data): the group column must be a factor</span></span>
+<span id="cb1-2"><a aria-label="2"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(iq <span class="sc">~</span> group, <span class="at">data =</span> ssld)</span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+group         2   2867    1433    6.37 0.00195 **
+Residuals   297  66825     225                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><code>Df</code>: degrees of freedom (<span class="math inline">\(k - 1\)</span> between, <span class="math inline">\(N - k\)</span> within)</p></li>
+<li class="fragment"><p><code>Sum Sq</code>, <code>Mean Sq</code>: the SS and MS (<span class="math inline">\(MS = SS/df\)</span>)</p></li>
+<li class="fragment"><p><code>F value</code>: <span class="math inline">\(MS_B / MS_E\)</span> and <code>Pr(&gt;F)</code>: its p-value</p></li>
+</ul>
+</section>
+<section id="anova-in-r-1" class="slide level2">
+<h2>ANOVA in R</h2>
+<h3 id="the-anova-table">The ANOVA table</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="gzdxinttco" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gzdxinttco table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gzdxinttco thead, #gzdxinttco tbody, #gzdxinttco tfoot, #gzdxinttco tr, #gzdxinttco td, #gzdxinttco th {
+  border-style: none;
+}
+
+#gzdxinttco p {
+  margin: 0;
+  padding: 0;
+}
+
+#gzdxinttco .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 85%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gzdxinttco .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gzdxinttco .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gzdxinttco .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gzdxinttco .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gzdxinttco .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gzdxinttco .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gzdxinttco .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gzdxinttco .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gzdxinttco .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gzdxinttco .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gzdxinttco .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gzdxinttco .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gzdxinttco .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gzdxinttco .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gzdxinttco .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gzdxinttco .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gzdxinttco .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gzdxinttco .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gzdxinttco .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gzdxinttco .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gzdxinttco .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gzdxinttco .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gzdxinttco .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gzdxinttco .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gzdxinttco .gt_left {
+  text-align: left;
+}
+
+#gzdxinttco .gt_center {
+  text-align: center;
+}
+
+#gzdxinttco .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gzdxinttco .gt_font_normal {
+  font-weight: normal;
+}
+
+#gzdxinttco .gt_font_bold {
+  font-weight: bold;
+}
+
+#gzdxinttco .gt_font_italic {
+  font-style: italic;
+}
+
+#gzdxinttco .gt_super {
+  font-size: 65%;
+}
+
+#gzdxinttco .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gzdxinttco .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gzdxinttco .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gzdxinttco .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gzdxinttco .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gzdxinttco .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gzdxinttco .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gzdxinttco .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gzdxinttco div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" style="width:100%;" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Source</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="SS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">SS</th>
+<th id="MS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">MS</th>
+<th id="F" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">F</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Source">Between groups</td>
+<td class="gt_row gt_right" headers="df">2</td>
+<td class="gt_row gt_right" headers="SS">2,866.67</td>
+<td class="gt_row gt_right" headers="MS">1,433.33</td>
+<td class="gt_row gt_right" headers="F">6.37</td>
+<td class="gt_row gt_right" headers="p">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Source">Within groups (error)</td>
+<td class="gt_row gt_right gt_striped" headers="df">297</td>
+<td class="gt_row gt_right gt_striped" headers="SS">66,825.00</td>
+<td class="gt_row gt_right gt_striped" headers="MS">225.00</td>
+<td class="gt_row gt_right gt_striped" headers="F"><br>
+</td>
+<td class="gt_row gt_right gt_striped" headers="p"><br>
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>By hand</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(SS_B = 100(106.00 - 101.67)^2 + 100(100.00 - 101.67)^2 + 100(99.00 - 101.67)^2 = 2866.67\)</span></p>
+<p><span class="math inline">\(MS_B = \dfrac{2866.67}{2} = 1433.33\)</span>, <span class="math inline">\(MS_E = \dfrac{66825.00}{297} = 225.00\)</span>, so <span class="math inline">\(F = \dfrac{1433.33}{225.00} = 6.37\)</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="interpreting-f" class="slide level2">
 <h2>Interpreting F</h2>
@@ -2038,31 +3195,1111 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <li class="fragment"><p><span class="math inline">\(MS_B = \text{group difference} + MS_E\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(MS_B = \text{group difference (0)} + MS_E\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(MS_B = MS_E\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(F = \frac{MS_B}{MS_E}\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F = \dfrac{MS_B}{MS_E}\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(F = 1\)</span></p></li>
 </ul>
 </section>
 <section id="interpreting-f-1" class="slide level2">
-<h2>Interpreting f</h2>
+<h2>Interpreting F</h2>
 <ul>
-<li class="fragment">When <span class="math inline">\(F &lt; 1\)</span>, it’s not likely to be significant.</li>
+<li class="fragment"><p>When <span class="math inline">\(F &lt; 1\)</span>, it’s not likely to be significant.</p></li>
+<li class="fragment"><p>When there <strong>is</strong> a group difference:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(MS_B = \text{(Number &gt; 0)} + MS_E\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(F = \dfrac{\text{Difference} + MS_E}{MS_E} = 1 + \dfrac{\text{Difference}}{MS_E}\)</span></p></li>
+<li class="fragment"><p>The bigger the group difference relative to the error, the bigger <span class="math inline">\(F\)</span> gets (larger than 1).</p></li>
+</ul></li>
 </ul>
 </section>
-<section id="interpreting-f-2" class="slide level2">
-<h2>Interpreting f</h2>
-<p>The MS<sub>BG</sub> is made up of the MS<sub>Error</sub> + the theoretical difference between groups:</p>
+<section id="the-f-distribution" class="slide level2">
+<h2>The F Distribution</h2>
+<h3 id="is-our-f-big-enough">Is our F big enough?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec12_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec12_files/figure-revealjs/unnamed-chunk-14-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
-<li class="fragment"><p><span class="math inline">\(MS_B = \text{group difference} + MS_E\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(MS_B = \text{(Number &gt; 0)} + MS_E\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(F = \frac{\text{Difference} + MS_E}{{MS_E}}\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(F = Difference\)</span></p></li>
+<li class="fragment"><p>The F distribution is <strong>right-skewed</strong> and never negative.</p></li>
+<li class="fragment"><p>In R: <code>qf(.95, df1 = 2, df2 = 297)</code> gives the critical value 3.03. Since <span class="math inline">\(6.37 &gt; 3.03\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</p></li>
 </ul>
 </section>
 <section id="hypothesis-testing-anova" class="slide level2">
 <h2>Hypothesis testing: ANOVA</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decision rule</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li class="fragment"><p><span class="math inline">\(F \le 1\)</span> = Fail to reject the Null Hypothesis</p></li>
-<li class="fragment"><p><span class="math inline">\(F \gt 1\)</span> = Refer to p-value, Reject the Null Hypothesis</p></li>
+<li class="fragment"><p><span class="math inline">\(F \le 1\)</span>: fail to reject the null hypothesis.</p></li>
+<li class="fragment"><p><span class="math inline">\(F &gt; 1\)</span>: compare to the critical value (or use the p-value). Reject <span class="math inline">\(H_0\)</span> only if <span class="math inline">\(F &gt; F_{critical}\)</span>, equivalently if <span class="math inline">\(p &lt; \alpha\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="assumptions-of-one-way-anova" class="slide level2 scrollable">
+<h2>Assumptions of One-Way ANOVA</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Assumptions</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment"><strong>The DV is continuous</strong> (interval or ratio scale).</li>
+<li class="fragment"><strong>Observations are independent</strong>, and each person is in only one group.</li>
+<li class="fragment"><strong>Normality:</strong> the scores (residuals) in each group are approximately normal.</li>
+<li class="fragment"><strong>Homogeneity of variance:</strong> the groups have similar variances (Levene’s Test).</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="codewindow r codewindow-dark">
+<p>assumptions.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">library</span>(car)</span>
+<span id="cb3-2"><a aria-label="2"></a></span>
+<span id="cb3-3"><a aria-label="3"></a><span class="co"># Equal variances? (H0: the variances are equal)</span></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="fu">leveneTest</span>(iq <span class="sc">~</span> group, <span class="at">data =</span> ssld)</span>
+<span id="cb3-5"><a aria-label="5"></a></span>
+<span id="cb3-6"><a aria-label="6"></a><span class="co"># Normal residuals? (H0: the residuals are normal)</span></span>
+<span id="cb3-7"><a aria-label="7"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(fit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="effect-size-eta-squared" class="slide level2">
+<h2>Effect Size: Eta Squared</h2>
+<h3 id="how-much-of-the-variance-is-explained-by-the-groups">How much of the variance is explained by the groups?</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><span class="math inline">\(\eta^2\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\eta^2 = \dfrac{SS_B}{SS_{Total}} = \dfrac{2866.67}{69691.67} = 0.041\)</span></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="urocoactav" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#urocoactav table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#urocoactav thead, #urocoactav tbody, #urocoactav tfoot, #urocoactav tr, #urocoactav td, #urocoactav th {
+  border-style: none;
+}
+
+#urocoactav p {
+  margin: 0;
+  padding: 0;
+}
+
+#urocoactav .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 50%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#urocoactav .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#urocoactav .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#urocoactav .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#urocoactav .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#urocoactav .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#urocoactav .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#urocoactav .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#urocoactav .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#urocoactav .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#urocoactav .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#urocoactav .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#urocoactav .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#urocoactav .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#urocoactav .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#urocoactav .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#urocoactav .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#urocoactav .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#urocoactav .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#urocoactav .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#urocoactav .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#urocoactav .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#urocoactav .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#urocoactav .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#urocoactav .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#urocoactav .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#urocoactav .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#urocoactav .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#urocoactav .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#urocoactav .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#urocoactav .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#urocoactav .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#urocoactav .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#urocoactav .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#urocoactav .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#urocoactav .gt_left {
+  text-align: left;
+}
+
+#urocoactav .gt_center {
+  text-align: center;
+}
+
+#urocoactav .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#urocoactav .gt_font_normal {
+  font-weight: normal;
+}
+
+#urocoactav .gt_font_bold {
+  font-weight: bold;
+}
+
+#urocoactav .gt_font_italic {
+  font-style: italic;
+}
+
+#urocoactav .gt_super {
+  font-size: 65%;
+}
+
+#urocoactav .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#urocoactav .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#urocoactav .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#urocoactav .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#urocoactav .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#urocoactav .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#urocoactav .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#urocoactav .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#urocoactav div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="aη²" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">η²</th>
+<th id="Interpretation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Interpretation</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="η²">0.01</td>
+<td class="gt_row gt_left" headers="Interpretation">Small effect</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right gt_striped" headers="η²">0.06</td>
+<td class="gt_row gt_left gt_striped" headers="Interpretation">Medium effect</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="η²">0.14</td>
+<td class="gt_row gt_left" headers="Interpretation">Large effect</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Our groups explain about 4.11% of the variance in IQ: a <strong>small-to-medium</strong> effect.</li>
+</ul>
+</section>
+<section id="post-hoc-tests" class="slide level2">
+<h2>Post-hoc Tests</h2>
+<h3 id="a-significant-f-tells-us-some-means-differ-not-which">A significant F tells us <em>some</em> means differ, not <em>which</em></h3>
+<div class="codewindow r codewindow-dark">
+<p>tukey.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Tukey's HSD compares every pair and adjusts for multiple comparisons</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="fu">TukeyHSD</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = iq ~ group, data = ssld)
+
+$group
+                diff        lwr       upr     p adj
+Placebo-SSLD      -6 -10.996823 -1.003177 0.0138048
+Control-SSLD      -7 -11.996823 -2.003177 0.0031068
+Control-Placebo   -1  -5.996823  3.996823 0.8847861</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><code>diff</code> is the difference between the two group means.</p></li>
+<li class="fragment"><p><code>p adj</code> is adjusted for the number of comparisons, so the familywise error rate stays at 5%.</p></li>
+</ul>
+</section>
+<section id="post-hoc-tests-1" class="slide level2">
+<h2>Post-hoc Tests</h2>
+<h3 id="reading-tukeys-hsd">Reading Tukey’s HSD</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="gnszmlixnu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gnszmlixnu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gnszmlixnu thead, #gnszmlixnu tbody, #gnszmlixnu tfoot, #gnszmlixnu tr, #gnszmlixnu td, #gnszmlixnu th {
+  border-style: none;
+}
+
+#gnszmlixnu p {
+  margin: 0;
+  padding: 0;
+}
+
+#gnszmlixnu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 28px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 80%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gnszmlixnu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gnszmlixnu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gnszmlixnu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gnszmlixnu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gnszmlixnu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gnszmlixnu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gnszmlixnu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gnszmlixnu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gnszmlixnu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gnszmlixnu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gnszmlixnu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gnszmlixnu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gnszmlixnu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gnszmlixnu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gnszmlixnu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gnszmlixnu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gnszmlixnu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gnszmlixnu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gnszmlixnu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gnszmlixnu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gnszmlixnu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gnszmlixnu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gnszmlixnu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gnszmlixnu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gnszmlixnu .gt_left {
+  text-align: left;
+}
+
+#gnszmlixnu .gt_center {
+  text-align: center;
+}
+
+#gnszmlixnu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gnszmlixnu .gt_font_normal {
+  font-weight: normal;
+}
+
+#gnszmlixnu .gt_font_bold {
+  font-weight: bold;
+}
+
+#gnszmlixnu .gt_font_italic {
+  font-style: italic;
+}
+
+#gnszmlixnu .gt_super {
+  font-size: 65%;
+}
+
+#gnszmlixnu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gnszmlixnu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gnszmlixnu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gnszmlixnu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gnszmlixnu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gnszmlixnu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gnszmlixnu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gnszmlixnu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gnszmlixnu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Comparison" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Comparison</th>
+<th id="Difference" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Difference</th>
+<th id="CI-low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CI low</th>
+<th id="CI-high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CI high</th>
+<th id="p-adj" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p adj</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparison">Placebo-SSLD</td>
+<td class="gt_row gt_right" headers="Difference">−6.00</td>
+<td class="gt_row gt_right" headers="CI low">−11.00</td>
+<td class="gt_row gt_right" headers="CI high">−1.00</td>
+<td class="gt_row gt_right" headers="p adj">0.014</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Comparison">Control-SSLD</td>
+<td class="gt_row gt_right gt_striped" headers="Difference">−7.00</td>
+<td class="gt_row gt_right gt_striped" headers="CI low">−12.00</td>
+<td class="gt_row gt_right gt_striped" headers="CI high">−2.00</td>
+<td class="gt_row gt_right gt_striped" headers="p adj">0.003</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparison">Control-Placebo</td>
+<td class="gt_row gt_right" headers="Difference">−1.00</td>
+<td class="gt_row gt_right" headers="CI low">−6.00</td>
+<td class="gt_row gt_right" headers="CI high">4.00</td>
+<td class="gt_row gt_right" headers="p adj">0.885</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">A pair is significant when its <strong>p adj</strong> is below .05 (or its confidence interval does not include 0).</li>
 </ul>
 </section>
 <section id="reporting-f" class="slide level2">
@@ -2079,43 +4316,46 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <h2>Reporting F</h2>
 <p>If asked to report findings in general or for publication, you need to report 5 things:</p>
 <ul>
-<li class="fragment"><p>F(df for the between group MS, df for the error MS)</p></li>
-<li class="fragment"><p>F-value</p></li>
-<li class="fragment"><p>p-value</p></li>
+<li class="fragment"><p><span class="math inline">\(F\)</span>(df for the between group MS, df for the error MS)</p></li>
+<li class="fragment"><p><span class="math inline">\(F\)</span>-value</p></li>
+<li class="fragment"><p><span class="math inline">\(p\)</span>-value</p></li>
 <li class="fragment"><p>Mean and standard deviation of each group</p></li>
+<li class="fragment"><p>An effect size (<span class="math inline">\(\eta^2\)</span>)</p></li>
 </ul>
 </section>
 <section id="reporting-f-2" class="slide level2">
 <h2>Reporting F</h2>
-<p>The group that watched took the SSLD (<code>M=118.43</code>, <code>s=1.02</code>) did not report significantly higher IQ compared to their peers in the control group (<code>M=116.12</code>, <code>s=0.98</code>), and the placebo group (<code>M=114.2. s =.91</code>), <code>F(2,297) = .912, p = 0.25</code>.</p>
+<blockquote>
+<p>IQ scores differed significantly across the three groups, <em>F</em>(2, 297) = 6.37, <em>p</em> = .002, <span class="math inline">\(\eta^2\)</span> = 0.04. The SSLD group had the highest mean (<em>M</em> = 106.00, <em>SD</em> = 15.00), followed by the placebo group (<em>M</em> = 100.00, <em>SD</em> = 15.00) and the control group (<em>M</em> = 99.00, <em>SD</em> = 15.00). Tukey’s HSD showed that the SSLD group scored higher than the placebo group (<em>p</em> = .014) and the control group (<em>p</em> = .003), which did not differ from each other (<em>p</em> = .885).</p>
+</blockquote>
 </section>
 <section id="reporting-f-3" class="slide level2">
 <h2>Reporting F</h2>
 <blockquote>
-<p>There was not a significant difference in happiness between the groups, F (2, 297) = .912, p = 0.25.</p>
+<p>There was a significant difference in IQ between the groups, <em>F</em>(2, 297) = 6.37, <em>p</em> = .002.</p>
 </blockquote>
 </section>
 <section id="identifying-degrees-of-freedom" class="slide level2">
 <h2>Identifying Degrees of Freedom</h2>
-<h3 id="one-way-anova-equal-groups">One-Way ANOVA, Equal Groups</h3>
+<h3 id="one-way-anova-equal-groups">One-way ANOVA, equal groups</h3>
 <blockquote>
 <p>A researcher compares three different study methods (flashcards, rereading, and practice testing) on exam performance. There are 15 students in each group.</p>
 </blockquote>
 <ul>
 <li class="fragment"><p>What is <span class="math inline">\(df_B\)</span>?</p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(15 \times 3 = 45\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(k-1 = 3-1 = 2\)</span></p></li>
+<li class="fragment"><span class="math inline">\(k-1 = 3-1 = 2\)</span></li>
 </ul></li>
 <li class="fragment"><p>What is <span class="math inline">\(df_E\)</span>?</p>
 <ul>
-<li class="fragment"><span class="math inline">\(df_E = N-k = 45-3 = 42\)</span></li>
+<li class="fragment"><p><span class="math inline">\(N = 15 \times 3 = 45\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(df_E = N-k = 45-3 = 42\)</span></p></li>
 </ul></li>
 </ul>
 </section>
 <section id="identifying-degrees-of-freedom-1" class="slide level2">
 <h2>Identifying Degrees of Freedom</h2>
-<h3 id="one-way-anova-unequal-groups">One-Way ANOVA Unequal Groups</h3>
+<h3 id="one-way-anova-unequal-groups">One-way ANOVA, unequal groups</h3>
 <blockquote>
 <p>A psychologist compares four types of therapy for anxiety. Group sizes are <code>10</code>, <code>12</code>, <code>14</code>, and <code>9</code> participants.</p>
 </blockquote>
@@ -2127,19 +4367,27 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </ul></li>
 <li class="fragment"><p>What is <span class="math inline">\(df_E\)</span>?</p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(n=10+12+14+9 = 45\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(N=10+12+14+9 = 45\)</span></p></li>
 <li class="fragment"><p><span class="math inline">\(df_E = N-k = 45-4 = 41\)</span></p></li>
 </ul></li>
 </ul>
-<p>Question: 1. What is df₍between₎? 2. What is df₍within₎?</p>
-<p>Answer Key: • k = 4 groups • N = 10 + 12 + 14 + 9 = 45 participants • df₍between₎ = 4 - 1 = 3 • df₍within₎ = 45 - 4 = 41</p>
+</section>
+<section id="summary-one-way-anova" class="slide level2">
+<h2>Summary: One-Way ANOVA</h2>
+<ul>
+<li class="fragment"><p>Compares <strong>three or more</strong> group means with <strong>one</strong> overall test.</p></li>
+<li class="fragment"><p><span class="math inline">\(F = MS_B / MS_E\)</span>: between-group variance relative to within-group variance.</p></li>
+<li class="fragment"><p>Follow a significant <span class="math inline">\(F\)</span> with a <strong>post-hoc test</strong> (Tukey’s HSD) to find which groups differ.</p></li>
+<li class="fragment"><p>Check assumptions: independence, normality, equal variance.</p></li>
+<li class="fragment"><p>Report <span class="math inline">\(F\)</span>(df, df), <span class="math inline">\(p\)</span>, group means and SDs, and an effect size (<span class="math inline">\(\eta^2\)</span>).</p></li>
+</ul>
 
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>PSY 348 - Statistics for Psychology</p>
+<p>Analysis of Variance | ⬡⬢⬡⬢⬡⬢</p>
 </div>
 </div></div>
 
@@ -2152,6 +4400,7 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -2175,7 +4424,7 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":["ggplot2","dplyr"]},"pyodide":{"packages":[]}},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":[]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -2196,7 +4445,7 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -2346,7 +4595,7 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, RevealCodewindow, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -2354,6 +4603,31 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
           RevealZoom
         ]
       });
+    </script>
+    <script>
+    // Adds lec2-style drifting icons + ghost nodes behind a YAML-generated
+    // #title-slide (which can't hold raw HTML). Styles: custom.scss ("Title-slide
+    // ambience"). Icons: pass via <body data-title-icons="functions percent ...">
+    // or edit the default list below.
+    document.addEventListener("DOMContentLoaded", function () {
+      var slide = document.getElementById("title-slide");
+      if (!slide) return;
+      var icons = (document.body.dataset.titleIcons ||
+        "functions percent show_chart calculate query_stats bar_chart").split(/\s+/);
+      var layer = document.createElement("div");
+      layer.className = "title-bg-icons";
+      icons.slice(0, 6).forEach(function (name, i) {
+        var s = document.createElement("span");
+        s.className = "material-icons title-bg-icon-" + (i + 1);
+        s.textContent = name;
+        layer.appendChild(s);
+      });
+      var nodes = document.createElement("div");
+      nodes.className = "ghost-nodes";
+      for (var i = 0; i < 5; i++) nodes.appendChild(document.createElement("div")).className = "ghost-node";
+      slide.insertBefore(nodes, slide.firstChild);
+      slide.insertBefore(layer, slide.firstChild);
+    });
     </script>
     
     <script>

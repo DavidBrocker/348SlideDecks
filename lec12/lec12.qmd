@@ -1,49 +1,115 @@
 ---
 title: "Analysis of Variance"
-subtitle: "Lecture 12"
+subtitle: "PSY 348: Lecture 12"
 author: "Dave Brocker"
-footer: "PSY 348 - Statistics for Psychology"
 institute: "Farmingdale State College"
-format: 
+footer: "Analysis of Variance | ⬡⬢⬡⬢⬡⬢"
+format:
   revealjs:
     theme: ../custom.scss
     scrollable: true
     width: 1600
     height: 900
-    incremental: true   
+    incremental: true
     touch: true
     chalkboard: true
     lightbox: true
     code-fold: true
+    slide-number: c/t
+    include-after-body: ../title-bg.html
     drop:
       engine: webr
-      webr:
-        packages:
-         - ggplot2
-         - dplyr
 revealjs-plugins:
   - drop
-editor: 
-  markdown: 
+  - codewindow
+editor:
+  markdown:
     wrap: 72
 ---
 
+```{r}
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(broom)
+library(gt)
+
+# Site tokens (see custom.scss / DESIGN_SYSTEM.md)
+sage  <- "#5C715E"  # $accent
+sage2 <- "#8FAF9E"  # $accent2
+sage3 <- "#A7C7B5"  # $accent3
+ink   <- "#2F3E46"  # $body-color
+hot   <- "#B5483B"  # "look here" highlight
+amber <- "#E8A33D"
+grp3  <- c(sage, amber, sage3)
+
+theme_deck <- function(base_size = 22) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.title = element_text(color = ink),
+      axis.text = element_text(color = ink),
+      plot.title = element_text(color = ink, face = "bold"),
+      legend.position = "none"
+    )
+}
+
+f2 <- function(x) formatC(x, format = "f", digits = 2)
+f3 <- function(x) formatC(x, format = "f", digits = 3)
+fp <- function(p) ifelse(p < .001, "< .001", paste("=", sub("^0", "", sprintf("%.3f", p))))
+exact <- function(n, m, sd) m + sd * scale(rnorm(n))[, 1]   # exactly mean m and SD sd
+
+# ---- Coffee Vol. 2: happiness scores, 30 per group -------------------
+set.seed(2024)
+cof <- tibble(
+  condition = factor(rep(c("Coffee", "Placebo", "Control"), each = 30),
+                     levels = c("Coffee", "Placebo", "Control")),
+  score = c(exact(30, 8, 1.2), exact(30, 6, 1.2), exact(30, 5, 1.2))
+)
+
+# ---- Super Secret Limitless Drug (SSLD): 100 per group, IQ (SD = 15) --
+set.seed(12)
+ssld <- tibble(
+  group = factor(rep(c("SSLD", "Placebo", "Control"), each = 100),
+                 levels = c("SSLD", "Placebo", "Control")),
+  iq = c(exact(100, 106, 15), exact(100, 100, 15), exact(100, 99, 15))
+)
+aov_ssld <- aov(iq ~ group, data = ssld)
+tab_ssld <- tidy(aov_ssld)
+F_ssld   <- tab_ssld$statistic[1]
+p_ssld   <- tab_ssld$p.value[1]
+df1      <- tab_ssld$df[1]
+df2      <- tab_ssld$df[2]
+ssb      <- tab_ssld$sumsq[1]
+sse      <- tab_ssld$sumsq[2]
+msb      <- tab_ssld$meansq[1]
+mse      <- tab_ssld$meansq[2]
+eta2     <- ssb / (ssb + sse)
+fcrit    <- qf(.95, df1, df2)
+ms_ssld  <- ssld |> group_by(group) |> summarise(M = mean(iq), SD = sd(iq))
+tuk      <- tidy(TukeyHSD(aov_ssld))
+grand    <- mean(ssld$iq)
+```
+
 ## Recap
 
-### How Did We Get Here?
+### How did we get here?
 
 ```{dot}
 graph {
-  
-  node[shape = box, style = rounded]
+  node[shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge[color = "#5C715E"]
   bgcolor="#E9F1EC"
   label="Independent Variable: \nCaffeine Content"
   labelloc="t"
 
   subgraph cluster_tt {
-  bgcolor="white"
-  style = rounded
-  label="T Test"
+    bgcolor="white"
+    style = rounded
+    color = "#8FAF9E"
+    label="T Test"
 
     Coffee_T [label="Coffee"]
     Decaf_T [label="Decaf"]
@@ -53,51 +119,50 @@ graph {
 
 ## Recap
 
-### How Did We Get Here?
+### How did we get here?
 
 ```{dot}
 graph {
-
-  node[shape = box, style = rounded]
+  node[shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge[color = "#5C715E"]
   bgcolor="#E9F1EC"
   label="Independent Variable \nCaffeine Content"
   labelloc="t"
 
   subgraph cluster_tt {
     style = rounded
+    color = "#8FAF9E"
     bgcolor="white"
     label="T Test"
 
     Coffee_T [label="Coffee"]
     Decaf_T [label="Decaf"]
-    
-    Stress_T[label="Stress"]
-    Stress_T2[label="Stress"]
-    
+
+    Stress_T[label="Happiness"]
+    Stress_T2[label="Happiness"]
+
     Coffee_T -- Stress_T
     Decaf_T  -- Stress_T2
-    
   }
 
   subgraph cluster_anova {
     style = rounded
+    color = "#8FAF9E"
     label="ANOVA"
     bgcolor="white"
     Coffee_A [label="Coffee"]
     Decaf_A [label="Decaf"]
     Water [label="Water"]
-    
-    Stress_A1[label="Stress"]
-    Stress_A2[label="Stress"]
-    Stress_A3[label="Stress"]
-    
+
+    Stress_A1[label="Happiness"]
+    Stress_A2[label="Happiness"]
+    Stress_A3[label="Happiness"]
+
     Coffee_A -- Stress_A1
     Decaf_A -- Stress_A2
     Water -- Stress_A3
   }
-
 }
-
 ```
 
 ## Analysis of Variance
@@ -109,38 +174,37 @@ if they differ significantly from one another.
 
 ::::: columns
 ::: {.column width="50%"}
--   ANOVA can examine independent variables with \[**more than 2
-    groups**\].
+-   ANOVA can examine independent variables with **more than 2 groups**.
 
--   ANOVA can also be used for just 2 groups.
+-   ANOVA can also be used for just 2 groups (then $F = t^2$ and it gives the same answer as the t-test).
 :::
 
 ::: {.column width="50%"}
 ```{dot}
 graph {
-
-  node[shape = box, style = rounded]
+  node[shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge[color = "#5C715E"]
   bgcolor="#E9F1EC"
   label="Independent Variable \nCaffeine Content"
   labelloc="t"
 
   subgraph cluster_anova {
     style = rounded
+    color = "#8FAF9E"
     label="ANOVA"
     bgcolor="white"
     Coffee_A [label="Coffee"]
     Decaf_A [label="Decaf"]
     Water [label="Water"]
-    
-    Stress_A1[label="Stress"]
-    Stress_A2[label="Stress"]
-    Stress_A3[label="Stress"]
-    
+
+    Stress_A1[label="Happiness"]
+    Stress_A2[label="Happiness"]
+    Stress_A3[label="Happiness"]
+
     Coffee_A -- Stress_A1
     Decaf_A -- Stress_A2
     Water -- Stress_A3
   }
-
 }
 ```
 :::
@@ -148,29 +212,42 @@ graph {
 
 ## ANOVA
 
-There are 3 types of ANOVA:
+### Three types
 
--   Between subjects
+:::::: badge-row
+::: content-badge
+[groups]{.material-icons}
 
-    -   Different participants are exposed to different levels of the IV
+#### Between subjects
 
--   Within subjects (repeated measures ANOVA)
+Different participants are exposed to different levels of the IV
+:::
 
-    -   The same participants are exposed to each level of the IV
+::: content-badge
+[repeat]{.material-icons}
 
--   Factorial Designs
+#### Within subjects
 
-    -   Participants experience different levels of one IV and levels of
-        another IV
+The same participants are exposed to each level of the IV (repeated measures ANOVA)
+:::
+
+::: content-badge
+[grid_view]{.material-icons}
+
+#### Factorial
+
+Participants experience levels of one IV and levels of another IV
+:::
+::::::
 
 ## ANOVA
 
-### Between and Within
+### Between and within
 
 ```{dot}
 graph {
-
-  node[shape = box, style = rounded]
+  node[shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge[color = "#5C715E"]
   center="t"
   bgcolor="#E9F1EC"
   label="ANOVA Types"
@@ -178,83 +255,77 @@ graph {
 
   subgraph cluster_anova {
     style = rounded
+    color = "#8FAF9E"
     label="Between Subjects ANOVA"
     bgcolor="white"
     IV
-    
+
     Level1[label="IV Level 1"]
     Level2[label="IV Level 2"]
     Level3[label="IV Level 3"]
-    
+
     Participants1[label = "Participants"]
     Participants2[label = "Participants"]
     Participants3[label = "Participants"]
-    
+
     IV -- Participants1 -- Level1
     IV -- Participants2 --Level2
     IV -- Participants3 --Level3
-    
   }
-  
-    subgraph cluster_wanova {
+
+  subgraph cluster_wanova {
     style = rounded
+    color = "#8FAF9E"
     label="Within Subjects ANOVA"
     bgcolor="white"
     ParticipantsW [label="Participants"]
     IVW [label = "IV"]
-    
+
     Level1W[label="IV Level 1"]
     Level2W[label="IV Level 2"]
     Level3W[label="IV Level 3"]
-    
+
     ParticipantsW -- IVW
     IVW -- Level1W
     IVW -- Level2W
     IVW -- Level3W
-    
   }
 }
 ```
 
 ## ANOVA
 
-### Factorial (Multiple IV's)
+### Factorial (multiple IVs)
 
 ```{dot}
 graph {
-
-  node [shape=box, style=rounded, fontname="Poppins"];
+  node [shape=box, style="rounded,filled", fillcolor="white", color="#5C715E", fontname="Fira Sans"];
+  edge [color="#5C715E"];
   bgcolor="#E9F1EC";
   labelloc="t";
   label="Factorial ANOVA (3 × 2 Design)";
 
-  # ---- Independent Variable 1 ----
   subgraph cluster_IV1 {
-    style=rounded;
+    style=rounded; color="#8FAF9E";
     label="IV₁: Type of Beverage";
     bgcolor="white";
-    
     IV1_L1 [label="Coffee"];
     IV1_L2 [label="Decaf"];
     IV1_L3 [label="Water"];
   }
 
-  # ---- Independent Variable 2 ----
   subgraph cluster_IV2 {
-    style=rounded;
+    style=rounded; color="#8FAF9E";
     label="IV₂: Time of Day";
     bgcolor="white";
-    
     IV2_L1 [label="Morning"];
     IV2_L2 [label="Evening"];
   }
 
-  # ---- Cells (Combinations) ----
   subgraph cluster_cells {
-    style=rounded;
+    style=rounded; color="#8FAF9E";
     label = ""
     bgcolor="white";
-    
     C1 [label="Coffee + Morning"];
     C2 [label="Coffee + Evening"];
     C3 [label="Decaf + Morning"];
@@ -263,33 +334,28 @@ graph {
     C6 [label="Water + Evening"];
   }
 
-  # ---- Outcome ----
-  Outcome [label="Stress", shape=ellipse, style=filled, fillcolor="#FFF2CC"];
+  Outcome [label="Happiness", shape=ellipse, style=filled, fillcolor="#DCE8E1"];
 
-  # ---- Relationships ----
   IV1_L1 -- C1;
   IV1_L1 -- C2;
   IV1_L2 -- C3;
   IV1_L2 -- C4;
   IV1_L3 -- C5;
   IV1_L3 -- C6;
+  IV2_L1 -- C1;
   IV2_L2 -- C2;
   IV2_L1 -- C3;
   IV2_L2 -- C4;
   IV2_L1 -- C5;
   IV2_L2 -- C6;
 
-  # ---- Output Links ----
   C1 -- Outcome;
   C2 -- Outcome;
   C3 -- Outcome;
   C4 -- Outcome;
   C5 -- Outcome;
   C6 -- Outcome;
-
 }
-
-
 ```
 
 ## Between subjects ANOVA
@@ -303,72 +369,69 @@ graph {
 > groups complete a survey to measure their happiness on a scale of `1`
 > to `10`.
 
--   What is $H_0$?
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## Null hypothesis $H_0$
 
-    -   $H_0: \mu_\text{Coffee} = \mu_\text{Placebo} = \mu_\text{Control}$
+$\mu_\text{Coffee} = \mu_\text{Placebo} = \mu_\text{Control}$
+:::
+:::
 
--   What is $H_A$?
+::: {.column width="50%"}
+::: callout-important
+## Alternative hypothesis $H_A$
 
-    -   $H_A: \mu_\text{Coffee} > \mu_{\text{Placebo}} > \mu_\text{Control}$
-
-## Between subjects ANOVA
-
-### Coffee Example Vol. 2
-
-> A researcher wants to see whether it is the taste of coffee that is
-> causing higher levels of happiness. He assigns 30 people to each
-> condition. The experimental group drinks caffeinated coffee. The
-> placebo group drinks decaf. The control group drinks water. All `3`
-> groups complete a survey to measure their happiness on a scale of `1`
-> to `10`.
-
--   The experimental group has a mean happiness score `8`
-
--   The placebo group mean happiness score `6`
-
--   The control group mean happiness score `5`
-
-    -   Is the group that drank coffee significantly happier than the
-        other groups?
+**Not all** the means are equal (at least one group mean differs).
+:::
+:::
+:::::
 
 ## Coffee Example Vol. 2
 
-### Visualize
+### The group means
+
+- The experimental group has a mean happiness score of `8`.
+
+- The placebo group has a mean happiness score of `6`.
+
+- The control group has a mean happiness score of `5`.
+
+  - Is the group that drank coffee significantly happier than the other groups?
 
 ```{r}
-library(dplyr)
-library(ggplot2)
-
-tibble(
-  group = c("Coffee","Decaf","Water"),
-  happy = c(8,6,5)
-) |> 
-  ggplot(aes(group,happy, fill = group)) + 
-  geom_col(color = "black") + 
-  theme_minimal() +
-  labs(
-    x = "\nCaffeine Content",
-    y = "Happiness Score\n",
-  )
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.8
+cof |>
+  group_by(condition) |>
+  summarise(happy = mean(score)) |>
+  ggplot(aes(condition, happy, fill = condition)) +
+  geom_col(color = ink, width = .6) +
+  scale_fill_manual(values = grp3) +
+  labs(x = "Caffeine content", y = "Happiness score") +
+  theme_deck(20)
 ```
 
 ## Coffee Example Vol. 2
 
-### Why Not Do More T-Tests?
+### Why not do more t-tests?
 
--   Recall that our $\alpha$ level is set at .05.\
-    If we want to find out whether coffee affects happiness, we’d need
-    **three t-tests**:
+Recall that our $\alpha$ level is set at .05. If we want to find out whether coffee affects happiness, we'd need **three t-tests**:
 
-    -   $t_1: \mu_\text{Coffee} > \mu_\text{Placebo}$
-    -   $t_2: \mu_\text{Coffee} > \mu_\text{Control}$
-    -   $t_3: \mu_\text{Placebo} > \mu_\text{Control}$
+::: callout-tip
+## Three pairwise comparisons
+
+- $t_1$: Coffee vs. Placebo
+- $t_2$: Coffee vs. Control
+- $t_3$: Placebo vs. Control
+:::
 
 ## Why Not Do More T-Tests?
 
-### The Problem
+### The problem
 
--   Each test is done *independently*
+-   Each test is done *independently*.
 
 -   None accounts for the shared variability across all groups.
 
@@ -378,293 +441,245 @@ tibble(
 
 -   ANOVA solves both problems by analyzing **all groups at once**,
     partitioning total variance into *between-group variance*
-    (differences due to the treatment)\
-    and *within-group variance* (random variation).
+    (differences due to the treatment) and *within-group variance*
+    (random variation).
 
 ## Why Not Do More T-Tests?
 
-### Alpha Inflation
+### Alpha inflation
 
--   Each hypothesis has a 5% chance of a false positive.
+-   Each hypothesis test has a 5% chance of a false positive.
 
--   When we test them one-by-one, those chances **accumulate**,
-    increasing the overall risk of error.
+-   When we test them one-by-one, those chances **accumulate**.
 
--   **Familywise Error Rate (FWE):**
+::: callout-tip
+## Familywise error rate
 
-    -   $\alpha_\text{FWE} = 1 - (1 - \alpha)^k$
+$\alpha_\text{FWE} = 1 - (1 - \alpha)^k$
 
-    -   $\alpha_\text{FWE} = 1 - (0.95)^3 = 0.1426 \approx 14\%$
+For three tests: $1 - (0.95)^3 = 0.1426 \approx 14\%$
+:::
 
--   Even though each test uses $\alpha(.05)$, the overall chance of
-    finding at least one “significant” difference **by chance** jumps to
-    \~15%.
+:::::::: side-by-cols
+::::: stat-card
+::: stat-num
+`r f2(100 * (1 - .95^1))`%
+:::
+
+::: stat-sub
+1 test
+:::
+:::::
+
+::::: stat-card
+::: stat-num
+`r f2(100 * (1 - .95^3))`%
+:::
+
+::: stat-sub
+3 tests
+:::
+:::::
+
+::::: stat-card
+::: stat-num
+`r f2(100 * (1 - .95^10))`%
+:::
+
+::: stat-sub
+10 tests
+:::
+:::::
+::::::::
 
 ## Why Not Do More T-Tests?
 
-### The Takeaway
+### The takeaway
 
 > ANOVA protects against this inflation by giving us one overall test of
 > group differences (F-statistic), keeping our Type I error at the
 > intended 5%.
 
 ```{r}
-library(dplyr)
-library(broom)
-library(gt)
-
-cof <- 
-  tibble(
-  condition = 
-    rep(c("Coffee","Placebo","Control"), 
-        each = 30),
-  score = c(rnorm(30,8,1) |> round(0),
-            rnorm(30,6,1) |> round(0),
-            rnorm(30,5,1) |> round(0))
-  ) 
-
-t1 <- t.test(data = cof |> 
-         filter(condition != "Control"), 
-       score~condition, var.equal = TRUE) |> 
-  tidy() |> 
-  rename(
-    Mean1 = estimate1,
-    Mean2 = estimate2
-  )
-
-t2 <- t.test(data = cof |> 
-         filter(condition != "Placebo"), 
-       score~condition, var.equal = TRUE) |> 
-  tidy() |> 
-  rename(
-    Mean1 = estimate1,
-    Mean2 = estimate2
-  )
-
-t3 <- t.test(data = cof |> 
-         filter(condition != "Coffee"), 
-       score~condition, var.equal = TRUE) |> 
-  tidy() |> 
-  rename(
-    Mean1 = estimate1,
-    Mean2 = estimate2
-  )
-
-
-t1 |> 
-  bind_rows(t2,t3) |> 
-  rename(
-    t = statistic,
-    D = estimate,
-    p = p.value,
-    df = parameter
-  ) |> 
-  select(-method, -alternative) |> 
-  mutate(p = ifelse(p<.01, "<.01", p)) |> 
-  gt() |> 
-  fmt_auto() |> 
-  cols_align(align = "center") |> 
-  opt_row_striping() |> 
-  tab_options(
-    table.width = pct(75),
-    table.font.size = 33,
-    table.align = "left"
-  )
-
+#| echo: false
+tt_row <- function(drop) {
+  t.test(score ~ condition, data = cof |> filter(condition != drop) |> droplevels(),
+         var.equal = TRUE) |>
+    tidy() |>
+    rename(Mean1 = estimate1, Mean2 = estimate2)
+}
+bind_rows(tt_row("Control"), tt_row("Placebo"), tt_row("Coffee")) |>
+  mutate(Comparison = c("Coffee vs. Placebo", "Coffee vs. Control", "Placebo vs. Control"),
+         p = ifelse(p.value < .001, "<.001", sprintf("%.3f", p.value))) |>
+  select(Comparison, D = estimate, t = statistic, df = parameter, p) |>
+  gt() |>
+  fmt_number(columns = c(D, t), decimals = 2) |>
+  fmt_number(columns = df, decimals = 0) |>
+  cols_align(align = "center") |>
+  opt_row_striping() |>
+  tab_options(table.width = pct(75), table.font.size = 30)
 ```
 
 ## Between subjects ANOVA
-
--   Is the variance between the green, red, and blue dots greater than
-    the variance across all of the dots?
 
 -   Is the variability between groups large enough, relative to the
-    variability within groups, to suggest that group means truly differ?
+    variability within groups, to suggest that the group means truly
+    differ?
 
 ```{r}
-library(dplyr)
-library(gt)
-library(gtsummary)
-library(ggplot2)
-cof <- 
-  tibble(
-  condition = 
-    rep(c("Coffee","Placebo","Control"), 
-        each = 30),
-  score = c(rnorm(30,7.5,1),
-            rnorm(30,5,1),
-            rnorm(30,5,2))
-  ) 
-
-cof |> 
-  ggplot(aes(condition, score, color = condition)) + 
-  geom_jitter(alpha = .25)  +
-  theme_minimal(
-    base_size = 20,
-    paper = "ghostwhite",
-    ink = "black") + 
-  labs(
-    x = "\nCondition",
-    y = "Score\n"
-  ) +
-  theme(
-    panel.grid.major = element_blank()
-  )
+#| echo: false
+#| fig-width: 11
+#| fig-height: 4.4
+cof |>
+  ggplot(aes(condition, score, color = condition)) +
+  geom_jitter(width = .15, alpha = .6, size = 2.5) +
+  stat_summary(fun = mean, geom = "crossbar", width = .5, color = ink) +
+  scale_color_manual(values = grp3) +
+  labs(x = "Condition", y = "Score", subtitle = "dark bar = group mean") +
+  theme_deck(20)
 ```
 
 ## Between subjects ANOVA
 
-Is the variance between the green, red, and blue dots greater than the
-variance across all of the dots?
+### Group means and variances
 
 ```{r}
-cof |> 
-    tbl_summary(
-      by = "condition",
-      statistic = list(all_continuous() ~ c("{mean}({var}, {sd})"))
-      ) |> 
-  as_gt() |> 
-  opt_row_striping() |> 
-  tab_options(
-    table.width = pct(75),
-    table.font.size = 33
-  )
+#| echo: false
+cof |>
+  group_by(Condition = condition) |>
+  summarise(Mean = mean(score), Variance = var(score), SD = sd(score)) |>
+  gt() |>
+  fmt_number(columns = c(Mean, Variance, SD), decimals = 2) |>
+  opt_row_striping() |>
+  tab_options(table.width = pct(60), table.font.size = 30)
 ```
 
 ## Between subjects ANOVA
 
--   If it's all about the means, why is it called Analysis of Variance?
--   To compare the means, we are analyzing two types of variance:
--   Variance among all of the scores *(error group variance)*
--   Variance *between the groups (between group variance).*
+### Why "analysis of variance"?
+
+- If it's all about the means, why is it called Analysis of Variance?
+
+- To compare the means, we analyze two types of variance:
+
+  - Variance *within* each group, around its own mean *(within-group or error variance)*
+
+  - Variance *between* the group means *(between-group variance)*
 
 ## The F Statistic
 
--   ANOVA produces what we call the F statistic.
+::: hero-def
+[F Statistic]{.term-pill}
 
--   Why do we call it F?
-
-    -   Ronald Fischer ™
+: The ratio of **between-group variance** to **within-group (error) variance**. Named in honor of **Sir Ronald Fisher**, who developed ANOVA.
+:::
 
 ## Calculating F
 
 ::: callout-tip
 # ANOVA Formula
 
-$F = \frac{MS_B}{MS_E} \\ MS_B = \frac{SS_B}{df_B} \quad MS_E = \frac{SS_E}{df_E} \\ df_B = k-1 \quad df_E = N - k$
+$F = \dfrac{MS_B}{MS_E} \qquad MS_B = \dfrac{SS_B}{df_B} \quad MS_E = \dfrac{SS_E}{df_E} \qquad df_B = k-1 \quad df_E = N - k$
 :::
 
--   Where MS - Means Square
+::::: term-list
+::: fragment
+[MS]{.term-pill}
 
--   $_B$ = Between Group Variance
+: Mean Square: a sum of squares divided by its degrees of freedom (a variance).
+:::
 
--   $_E$ = Within Group Variance (Error)
+::: fragment
+[$_B$ and $_E$]{.term-pill}
 
--   $SS$ = Sum of Squares
+: **B**etween-group variance and within-group (**E**rror) variance.
+:::
 
--   $k$ = Number of groups
+::: fragment
+[$SS$, $k$, $N$]{.term-pill}
 
--   $N$ = Number of participants
+: Sum of Squares, number of groups, number of participants.
+:::
+:::::
 
 ## Calculating F
 
 ### Calculating the variance
 
-ANOVA looks at variance. To calculate the Variance:
+ANOVA looks at variance. To calculate the variance:
 
 ::: callout-tip
 # Variance
 
-$\Large{s^2 = \frac{\sum(x-\bar{x})^2}{n-1}}$
+$\Large{s^2 = \dfrac{\sum(x-\bar{x})^2}{n-1}}$
 :::
 
 -   Divide by (degrees of freedom).
 
     -   **This is the variance**, but in ANOVA we also call it a Mean
-        Squared (MS).
+        Square (MS).
 
-## Calculating means squared (SS)
+## Calculating the Mean Square (MS)
 
--   $MS = \frac{SS}{df}$
+-   $MS = \dfrac{SS}{df}$
 
--   Calculate the SS.
+-   Calculate the SS (sum of squared deviations).
 
 -   Divide the SS by the degrees of freedom.
 
-## Calculating means squared (MS)
+## Partitioning the variance
 
--   We will calculate a SS for the between group variance.
+::: callout-tip
+## Total = between + within
 
-    -   How much variance in the data is from group differences?
+$SS_{Total} = SS_B + SS_E$
+:::
 
--   We will calculate a SS for all the data.
+-   $SS_B$ (between): how much variance comes from **group differences**?
 
-    -   How much variance in the data is from random error?
+    -   $SS_B = \sum n_j(\bar{x}_j - \bar{x}_{grand})^2$
 
-## Between subjects ANOVA
+-   $SS_E$ (error, within): how much variance is **random variation within the groups**?
 
--   $SS_{BG}$ = How much variance comes comes from the group
-    differences?
-
--   $SS_{Error}$ = How much variance is there in total among all the
-    data points?
-
-## Calculating means squared (MS)
-
-$MS_B = \frac{SS_B}{df_B} \\ MS_E = \frac{SS_E}{df_E}$
-
--   Divide the SS by their degrees of freedom.
+    -   $SS_E = \sum\sum (x_{ij} - \bar{x}_j)^2$
 
 ## Degrees of Freedom
 
-### The Group Project
+### The group project
 
 > Imagine a group of 5 students is submitting a project, and the total
 > score for the group must be 100 points combined.
 
--   The first `4` students can choose any score they want — say, `15`,
+-   The first `4` students can choose any score they want, say `15`,
     `20`, `25`, and `10`.
 
--   But the 5th student’s score isn’t free anymore. It must be whatever
-    makes the total = `100`. In other words, only 4 scores are “free to
-    vary.”
+-   But the 5th student's score isn't free anymore. It must be whatever
+    makes the total = `100`. In other words, only 4 scores are "free to
+    vary."
 
--   That’s `n − 1 = 4` degrees of freedom.
+-   That's `n − 1 = 4` degrees of freedom.
 
 ## Degrees of Freedom
 
--   Between Groups ($df_{B}$) = k - 1
+::: callout-tip
+## Rules for a one-way ANOVA
 
--   Within Groups ($df_E$) = N - k
+-   Between groups: $df_{B} = k - 1$
 
-    -   k is the number of groups in the independent variable.
+-   Within groups: $df_E = N - k$
 
--   Total $df_{Total}$= N - 1
+-   Total: $df_{Total} = N - 1$
 
-## Calculating the Means Squared (MS)
+($k$ is the number of groups in the independent variable.)
+:::
 
--   $MS_B = \frac{SS_B}{df_B}$
+## Calculating the Mean Squares and F
 
--   $MS_E = \frac{SS_E}{df_E}$
+::: callout-tip
+## The F ratio
 
-## Calculating Between subjects anova
-
--   $\Large{F = \frac{MS_B}{MS_E}}$
-
-## Between subjects anova Example
-
-> Prof Brocker gives one group of `100` participants the
-> `Super Secret Limitless Drug`. He gives another group of `100`
-> participants a `placebo`. He gives the third group of `100`
-> participants `nothing`. All participants then complete an IQ test. He
-> wants to know if those who took the `SSLD` have significantly higher
-> IQ than the placebo and the control groups.
-
--   What is the IV?
-
--   How many levels does it have?
-
--   What is the DV?
+$MS_B = \dfrac{SS_B}{df_B} \qquad MS_E = \dfrac{SS_E}{df_E} \qquad F = \dfrac{MS_B}{MS_E}$
+:::
 
 ## Between subjects ANOVA Example
 
@@ -677,24 +692,80 @@ $MS_B = \frac{SS_B}{df_B} \\ MS_E = \frac{SS_E}{df_E}$
 
 -   What is the IV?
 
-    -   Drug Taken
+    -   Drug taken
 
 -   How many levels does it have?
 
-    -   3 \[SSLD, Placebo, Nothing\]
+    -   3 (SSLD, Placebo, Nothing)
 
 -   What is the DV?
 
-    -   IQ Score
+    -   IQ score
 
 ## Between subjects ANOVA Example
 
-> Prof Brocker gives one group of `100` participants the
-> `Super Secret Limitless Drug`. He gives another group of `100`
-> participants a `placebo`. He gives the third group of `100`
-> participants `nothing`. All participants then complete an IQ test. He
-> wants to know if those who took the `SSLD` have significantly higher
-> IQ than the placebo and the control groups.
+### Group means
+
+```{r}
+#| echo: false
+ms_ssld |>
+  rename(Group = group) |>
+  gt() |>
+  fmt_number(columns = c(M, SD), decimals = 2) |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 30, table.width = pct(50))
+```
+
+## ANOVA in R
+
+### Fitting the model
+
+::: {.codewindow .r .codewindow-dark}
+anova.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+# aov(DV ~ IV, data): the group column must be a factor
+fit <- aov(iq ~ group, data = ssld)
+
+summary(fit)
+```
+:::
+
+-   `Df`: degrees of freedom ($k - 1$ between, $N - k$ within)
+
+-   `Sum Sq`, `Mean Sq`: the SS and MS ($MS = SS/df$)
+
+-   `F value`: $MS_B / MS_E$ and `Pr(>F)`: its p-value
+
+## ANOVA in R
+
+### The ANOVA table
+
+```{r}
+#| echo: false
+tab_ssld |>
+  mutate(term = c("Between groups", "Within groups (error)")) |>
+  rename(Source = term, SS = sumsq, MS = meansq, F = statistic, p = p.value) |>
+  gt() |>
+  fmt_number(columns = c(SS, MS, F), decimals = 2) |>
+  fmt_number(columns = df, decimals = 0) |>
+  fmt_number(columns = p, decimals = 3) |>
+  sub_missing(missing_text = "") |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 30, table.width = pct(85)) |>
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_column_labels())
+```
+
+::: callout-tip
+## By hand
+
+$SS_B = 100(`r f2(ms_ssld$M[1])` - `r f2(grand)`)^2 + 100(`r f2(ms_ssld$M[2])` - `r f2(grand)`)^2 + 100(`r f2(ms_ssld$M[3])` - `r f2(grand)`)^2 = `r f2(ssb)`$
+
+$MS_B = \dfrac{`r f2(ssb)`}{`r df1`} = `r f2(msb)`$, $MS_E = \dfrac{`r f2(sse)`}{`r df2`} = `r f2(mse)`$, so $F = \dfrac{`r f2(msb)`}{`r f2(mse)`} = `r f2(F_ssld)`$
+:::
 
 ## Interpreting F
 
@@ -706,32 +777,149 @@ $MS_B$ is made up of $MS_E$ + the theoretical difference between groups:
 
 -   $MS_B = MS_E$
 
--   $F = \frac{MS_B}{MS_E}$
+-   $F = \dfrac{MS_B}{MS_E}$
 
 -   $F = 1$
 
-## Interpreting f
+## Interpreting F
 
 -   When $F < 1$, it's not likely to be significant.
 
-## Interpreting f
+-   When there **is** a group difference:
 
-The MS~BG~ is made up of the MS~Error~ + the theoretical difference
-between groups:
+    -   $MS_B = \text{(Number > 0)} + MS_E$
 
--   $MS_B = \text{group difference} + MS_E$
+    -   $F = \dfrac{\text{Difference} + MS_E}{MS_E} = 1 + \dfrac{\text{Difference}}{MS_E}$
 
--   $MS_B = \text{(Number > 0)} + MS_E$
+    -   The bigger the group difference relative to the error, the bigger $F$ gets (larger than 1).
 
--   $F = \frac{\text{Difference} + MS_E}{{MS_E}}$
+## The F Distribution
 
--   $F = Difference$
+### Is our F big enough?
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 4.2
+fx <- seq(0, 8, length.out = 800)
+fd <- tibble(x = fx, y = df(fx, df1, df2))
+ggplot(fd, aes(x, y)) +
+  geom_area(data = filter(fd, x >= fcrit), fill = hot, alpha = .75) +
+  geom_line(color = sage, linewidth = 1.4) +
+  geom_vline(xintercept = fcrit, linetype = "dotted", color = ink, linewidth = 1.1) +
+  geom_vline(xintercept = F_ssld, color = hot, linewidth = 1.3) +
+  annotate("text", x = fcrit, y = .9, label = paste0("critical F = ", f2(fcrit)),
+           hjust = 1.05, color = ink, size = 6) +
+  annotate("text", x = F_ssld, y = .75, label = paste0("observed F = ", f2(F_ssld)),
+           hjust = -.05, color = hot, size = 6) +
+  labs(x = paste0("F (", df1, ", ", df2, ")"), y = NULL,
+       subtitle = "red area = the 5% of F values we would call unusual under H0") +
+  theme_deck(20) +
+  theme(axis.text.y = element_blank())
+```
+
+- The F distribution is **right-skewed** and never negative.
+
+- In R: `qf(.95, df1 = 2, df2 = 297)` gives the critical value `r f2(fcrit)`. Since $`r f2(F_ssld)` > `r f2(fcrit)`$, we **reject** $H_0$.
 
 ## Hypothesis testing: ANOVA
 
--   $F \le 1$ = Fail to reject the Null Hypothesis
+::: callout-tip
+## Decision rule
 
--   $F \gt 1$ = Refer to p-value, Reject the Null Hypothesis
+-   $F \le 1$: fail to reject the null hypothesis.
+
+-   $F > 1$: compare to the critical value (or use the p-value). Reject $H_0$ only if $F > F_{critical}$, equivalently if $p < \alpha$.
+:::
+
+## Assumptions of One-Way ANOVA
+
+::: callout-important
+## Assumptions
+
+1.  **The DV is continuous** (interval or ratio scale).
+2.  **Observations are independent**, and each person is in only one group.
+3.  **Normality:** the scores (residuals) in each group are approximately normal.
+4.  **Homogeneity of variance:** the groups have similar variances (Levene's Test).
+:::
+
+::: {.codewindow .r .codewindow-dark}
+assumptions.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| eval: false
+library(car)
+
+# Equal variances? (H0: the variances are equal)
+leveneTest(iq ~ group, data = ssld)
+
+# Normal residuals? (H0: the residuals are normal)
+shapiro.test(residuals(fit))
+```
+:::
+
+## Effect Size: Eta Squared
+
+### How much of the variance is explained by the groups?
+
+::: callout-tip
+## $\eta^2$
+
+$\eta^2 = \dfrac{SS_B}{SS_{Total}} = \dfrac{`r f2(ssb)`}{`r f2(ssb + sse)`} = `r f3(eta2)`$
+:::
+
+```{r}
+#| echo: false
+tibble(
+  `η²` = c("0.01", "0.06", "0.14"),
+  Interpretation = c("Small effect", "Medium effect", "Large effect")
+) |>
+  gt() |>
+  opt_row_striping() |>
+  tab_options(table.width = pct(50), table.font.size = 22)
+```
+
+- Our groups explain about `r f2(100 * eta2)`% of the variance in IQ: a **small-to-medium** effect.
+
+## Post-hoc Tests
+
+### A significant F tells us *some* means differ, not *which*
+
+::: {.codewindow .r .codewindow-dark}
+tukey.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+# Tukey's HSD compares every pair and adjusts for multiple comparisons
+TukeyHSD(fit)
+```
+:::
+
+-   `diff` is the difference between the two group means.
+
+-   `p adj` is adjusted for the number of comparisons, so the familywise error rate stays at 5%.
+
+## Post-hoc Tests
+
+### Reading Tukey's HSD
+
+```{r}
+#| echo: false
+tuk |>
+  mutate(Comparison = contrast,
+         p = ifelse(adj.p.value < .001, "<.001", sprintf("%.3f", adj.p.value))) |>
+  select(Comparison, Difference = estimate, `CI low` = conf.low,
+         `CI high` = conf.high, `p adj` = p) |>
+  gt() |>
+  fmt_number(columns = c(Difference, `CI low`, `CI high`), decimals = 2) |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 28, table.width = pct(80))
+```
+
+-   A pair is significant when its **p adj** is below .05 (or its confidence interval does not include 0).
 
 ## Reporting F
 
@@ -747,29 +935,27 @@ between groups:
 If asked to report findings in general or for publication, you need to
 report 5 things:
 
--   F(df for the between group MS, df for the error MS)
+-   $F$(df for the between group MS, df for the error MS)
 
--   F-value
+-   $F$-value
 
--   p-value
+-   $p$-value
 
 -   Mean and standard deviation of each group
 
-## Reporting F
-
-The group that watched took the SSLD (`M=118.43`, `s=1.02`) did not
-report significantly higher IQ compared to their peers in the control
-group (`M=116.12`, `s=0.98`), and the placebo group (`M=114.2. s =.91`),
-`F(2,297) = .912, p = 0.25`.
+-   An effect size ($\eta^2$)
 
 ## Reporting F
 
-> There was not a significant difference in happiness between the
-> groups, F (2, 297) = .912, p = 0.25.
+> IQ scores differed significantly across the three groups, *F*(`r df1`, `r df2`) = `r f2(F_ssld)`, *p* `r fp(p_ssld)`, $\eta^2$ = `r f2(eta2)`. The SSLD group had the highest mean (*M* = `r f2(ms_ssld$M[1])`, *SD* = `r f2(ms_ssld$SD[1])`), followed by the placebo group (*M* = `r f2(ms_ssld$M[2])`, *SD* = `r f2(ms_ssld$SD[2])`) and the control group (*M* = `r f2(ms_ssld$M[3])`, *SD* = `r f2(ms_ssld$SD[3])`). Tukey's HSD showed that the SSLD group scored higher than the placebo group (*p* `r fp(tuk$adj.p.value[tuk$contrast == "Placebo-SSLD"])`) and the control group (*p* `r fp(tuk$adj.p.value[tuk$contrast == "Control-SSLD"])`), which did not differ from each other (*p* `r fp(tuk$adj.p.value[tuk$contrast == "Control-Placebo"])`).
+
+## Reporting F
+
+> There was a significant difference in IQ between the groups, *F*(`r df1`, `r df2`) = `r f2(F_ssld)`, *p* `r fp(p_ssld)`.
 
 ## Identifying Degrees of Freedom
 
-### One-Way ANOVA, Equal Groups
+### One-way ANOVA, equal groups
 
 > A researcher compares three different study methods (flashcards,
 > rereading, and practice testing) on exam performance. There are 15
@@ -777,17 +963,17 @@ group (`M=116.12`, `s=0.98`), and the placebo group (`M=114.2. s =.91`),
 
 -   What is $df_B$?
 
-    -   $15 \times 3 = 45$
-
     -   $k-1 = 3-1 = 2$
 
 -   What is $df_E$?
+
+    -   $N = 15 \times 3 = 45$
 
     -   $df_E = N-k = 45-3 = 42$
 
 ## Identifying Degrees of Freedom
 
-### One-Way ANOVA Unequal Groups
+### One-way ANOVA, unequal groups
 
 > A psychologist compares four types of therapy for anxiety. Group sizes
 > are `10`, `12`, `14`, and `9` participants.
@@ -800,11 +986,18 @@ group (`M=116.12`, `s=0.98`), and the placebo group (`M=114.2. s =.91`),
 
 -   What is $df_E$?
 
-    -   $n=10+12+14+9 = 45$
+    -   $N=10+12+14+9 = 45$
 
     -   $df_E = N-k = 45-4 = 41$
 
-Question: 1. What is df₍between₎? 2. What is df₍within₎?
+## Summary: One-Way ANOVA
 
-Answer Key: • k = 4 groups • N = 10 + 12 + 14 + 9 = 45 participants •
-df₍between₎ = 4 - 1 = 3 • df₍within₎ = 45 - 4 = 41
+-   Compares **three or more** group means with **one** overall test.
+
+-   $F = MS_B / MS_E$: between-group variance relative to within-group variance.
+
+-   Follow a significant $F$ with a **post-hoc test** (Tukey's HSD) to find which groups differ.
+
+-   Check assumptions: independence, normality, equal variance.
+
+-   Report $F$(df, df), $p$, group means and SDs, and an effect size ($\eta^2$).

@@ -1741,5 +1741,355 @@
     "title": "Independent-Samples T-Test",
     "section": "Practice",
     "text": "Practice\nOnline vs. in-person exams\n\nDo exam scores differ between online and in-person sections? 25 students in each format took the same exam (ex_4: Format, Exam_Score).\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and decide.\n\n\npractice_4.R\n\nset.seed(104)\nex_4 &lt;- tibble(\n  Format = factor(rep(c(\"Online\", \"InPerson\"), each = 25),\n                  levels = c(\"Online\", \"InPerson\")),\n  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))\n)\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_\\text{online} = \\mu_\\text{in-person}\\); \\(H_A: \\mu_\\text{online} \\neq \\mu_\\text{in-person}\\). Online \\(M = 81.99\\) vs. in-person \\(M = 78.52\\): t(48) = 2.70, p = .009, \\(d = 0.76\\). Compare \\(p\\) to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+  },
+  {
+    "objectID": "lec12/lec12.html#recap",
+    "href": "lec12/lec12.html#recap",
+    "title": "Analysis of Variance",
+    "section": "Recap",
+    "text": "Recap\nHow did we get here?\n\n\n\n\n\n\n\n\nIndependent Variable: \nCaffeine Content\n\ncluster_tt\n\nT Test\n\n\n\nCoffee_T\n\nCoffee\n\n\n\nDecaf_T\n\nDecaf"
+  },
+  {
+    "objectID": "lec12/lec12.html#recap-1",
+    "href": "lec12/lec12.html#recap-1",
+    "title": "Analysis of Variance",
+    "section": "Recap",
+    "text": "Recap\nHow did we get here?\n\n\n\n\n\n\n\n\nIndependent Variable \nCaffeine Content\n\ncluster_tt\n\nT Test\n\n\ncluster_anova\n\nANOVA\n\n\n\nCoffee_T\n\nCoffee\n\n\n\nStress_T\n\nHappiness\n\n\n\nCoffee_T--Stress_T\n\n\n\n\nDecaf_T\n\nDecaf\n\n\n\nStress_T2\n\nHappiness\n\n\n\nDecaf_T--Stress_T2\n\n\n\n\nCoffee_A\n\nCoffee\n\n\n\nStress_A1\n\nHappiness\n\n\n\nCoffee_A--Stress_A1\n\n\n\n\nDecaf_A\n\nDecaf\n\n\n\nStress_A2\n\nHappiness\n\n\n\nDecaf_A--Stress_A2\n\n\n\n\nWater\n\nWater\n\n\n\nStress_A3\n\nHappiness\n\n\n\nWater--Stress_A3"
+  },
+  {
+    "objectID": "lec12/lec12.html#analysis-of-variance",
+    "href": "lec12/lec12.html#analysis-of-variance",
+    "title": "Analysis of Variance",
+    "section": "Analysis of Variance",
+    "text": "Analysis of Variance\nANOVA\nANOVA, like t-tests, compares the means of different groups to determine if they differ significantly from one another.\n\n\n\nANOVA can examine independent variables with more than 2 groups.\nANOVA can also be used for just 2 groups (then \\(F = t^2\\) and it gives the same answer as the t-test).\n\n\n\n\n\n\n\n\n\n\nIndependent Variable \nCaffeine Content\n\ncluster_anova\n\nANOVA\n\n\n\nCoffee_A\n\nCoffee\n\n\n\nStress_A1\n\nHappiness\n\n\n\nCoffee_A--Stress_A1\n\n\n\n\nDecaf_A\n\nDecaf\n\n\n\nStress_A2\n\nHappiness\n\n\n\nDecaf_A--Stress_A2\n\n\n\n\nWater\n\nWater\n\n\n\nStress_A3\n\nHappiness\n\n\n\nWater--Stress_A3"
+  },
+  {
+    "objectID": "lec12/lec12.html#anova-1",
+    "href": "lec12/lec12.html#anova-1",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nThree types\n\n\ngroups\nBetween subjects\nDifferent participants are exposed to different levels of the IV\n\n\nrepeat\nWithin subjects\nThe same participants are exposed to each level of the IV (repeated measures ANOVA)\n\n\ngrid_view\nFactorial\nParticipants experience levels of one IV and levels of another IV"
+  },
+  {
+    "objectID": "lec12/lec12.html#anova-2",
+    "href": "lec12/lec12.html#anova-2",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nBetween and within\n\n\n\n\n\n\n\n\nANOVA Types\n\ncluster_anova\n\nBetween Subjects ANOVA\n\n\ncluster_wanova\n\nWithin Subjects ANOVA\n\n\n\nIV\n\nIV\n\n\n\nParticipants1\n\nParticipants\n\n\n\nIV--Participants1\n\n\n\n\nParticipants2\n\nParticipants\n\n\n\nIV--Participants2\n\n\n\n\nParticipants3\n\nParticipants\n\n\n\nIV--Participants3\n\n\n\n\nLevel1\n\nIV Level 1\n\n\n\nLevel2\n\nIV Level 2\n\n\n\nLevel3\n\nIV Level 3\n\n\n\nParticipants1--Level1\n\n\n\n\nParticipants2--Level2\n\n\n\n\nParticipants3--Level3\n\n\n\n\nParticipantsW\n\nParticipants\n\n\n\nIVW\n\nIV\n\n\n\nParticipantsW--IVW\n\n\n\n\nLevel1W\n\nIV Level 1\n\n\n\nIVW--Level1W\n\n\n\n\nLevel2W\n\nIV Level 2\n\n\n\nIVW--Level2W\n\n\n\n\nLevel3W\n\nIV Level 3\n\n\n\nIVW--Level3W"
+  },
+  {
+    "objectID": "lec12/lec12.html#anova-3",
+    "href": "lec12/lec12.html#anova-3",
+    "title": "Analysis of Variance",
+    "section": "ANOVA",
+    "text": "ANOVA\nFactorial (multiple IVs)\n\n\n\n\n\n\n\n\nFactorial ANOVA (3 × 2 Design)\n\ncluster_IV1\n\nIV₁: Type of Beverage\n\n\ncluster_IV2\n\nIV₂: Time of Day\n\n\ncluster_cells\n\n\n\n\nIV1_L1\n\nCoffee\n\n\n\nC1\n\nCoffee + Morning\n\n\n\nIV1_L1--C1\n\n\n\n\nC2\n\nCoffee + Evening\n\n\n\nIV1_L1--C2\n\n\n\n\nIV1_L2\n\nDecaf\n\n\n\nC3\n\nDecaf + Morning\n\n\n\nIV1_L2--C3\n\n\n\n\nC4\n\nDecaf + Evening\n\n\n\nIV1_L2--C4\n\n\n\n\nIV1_L3\n\nWater\n\n\n\nC5\n\nWater + Morning\n\n\n\nIV1_L3--C5\n\n\n\n\nC6\n\nWater + Evening\n\n\n\nIV1_L3--C6\n\n\n\n\nIV2_L1\n\nMorning\n\n\n\nIV2_L1--C1\n\n\n\n\nIV2_L1--C3\n\n\n\n\nIV2_L1--C5\n\n\n\n\nIV2_L2\n\nEvening\n\n\n\nIV2_L2--C2\n\n\n\n\nIV2_L2--C4\n\n\n\n\nIV2_L2--C6\n\n\n\n\nOutcome\n\nHappiness\n\n\n\nC1--Outcome\n\n\n\n\nC2--Outcome\n\n\n\n\nC3--Outcome\n\n\n\n\nC4--Outcome\n\n\n\n\nC5--Outcome\n\n\n\n\nC6--Outcome"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova",
+    "href": "lec12/lec12.html#between-subjects-anova",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nCoffee Example Vol. 2\n\nA researcher wants to see whether it is the taste of coffee that is causing higher levels of happiness. He assigns 30 people to each condition. The experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. All 3 groups complete a survey to measure their happiness on a scale of 1 to 10.\n\n\n\n\n\n\n\n\n\nNull hypothesis \\(H_0\\)\n\n\n\\(\\mu_\\text{Coffee} = \\mu_\\text{Placebo} = \\mu_\\text{Control}\\)\n\n\n\n\n\n\n\n\n\n\nAlternative hypothesis \\(H_A\\)\n\n\nNot all the means are equal (at least one group mean differs)."
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-1",
+    "href": "lec12/lec12.html#between-subjects-anova-1",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\nIs the variability between groups large enough, relative to the variability within groups, to suggest that the group means truly differ?"
+  },
+  {
+    "objectID": "lec12/lec12.html#coffee-example-vol.-2-2",
+    "href": "lec12/lec12.html#coffee-example-vol.-2-2",
+    "title": "Analysis of Variance",
+    "section": "Coffee Example Vol. 2",
+    "text": "Coffee Example Vol. 2\nWhy not do more t-tests?\nRecall that our \\(\\alpha\\) level is set at .05. If we want to find out whether coffee affects happiness, we’d need three t-tests:\n\n\n\n\n\n\nThree pairwise comparisons\n\n\n\n\\(t_1\\): Coffee vs. Placebo\n\\(t_2\\): Coffee vs. Control\n\\(t_3\\): Placebo vs. Control"
+  },
+  {
+    "objectID": "lec12/lec12.html#coffee-example-vol.-2-3",
+    "href": "lec12/lec12.html#coffee-example-vol.-2-3",
+    "title": "Analysis of Variance",
+    "section": "Coffee Example Vol. 2",
+    "text": "Coffee Example Vol. 2\nWhy Not Do More T-Tests?\n\nRecall that our \\(\\alpha\\) level is set at .05.\nIf we want to find out whether coffee affects happiness, we’d need three t-tests:\n\n\\(t_1: \\mu_\\text{Coffee} &gt; \\mu_\\text{Placebo}\\)\n\\(t_2: \\mu_\\text{Coffee} &gt; \\mu_\\text{Control}\\)\n\\(t_3: \\mu_\\text{Placebo} &gt; \\mu_\\text{Control}\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#why-not-do-more-t-tests-1",
+    "href": "lec12/lec12.html#why-not-do-more-t-tests-1",
+    "title": "Analysis of Variance",
+    "section": "Why Not Do More T-Tests?",
+    "text": "Why Not Do More T-Tests?\nThe problem\n\nEach test is done independently.\nNone accounts for the shared variability across all groups.\nBy running multiple t-tests, we increase the probability of a false positive (Type I error) and ignore the combined structure of the data.\nANOVA solves both problems by analyzing all groups at once, partitioning total variance into between-group variance (differences due to the treatment) and within-group variance (random variation)."
+  },
+  {
+    "objectID": "lec12/lec12.html#why-not-do-more-t-tests-2",
+    "href": "lec12/lec12.html#why-not-do-more-t-tests-2",
+    "title": "Analysis of Variance",
+    "section": "Why Not Do More T-Tests?",
+    "text": "Why Not Do More T-Tests?\nAlpha inflation\n\nEach hypothesis test has a 5% chance of a false positive.\nWhen we test them one-by-one, those chances accumulate.\n\n\n\n\n\n\n\nFamilywise error rate\n\n\n\\(\\alpha_\\text{FWE} = 1 - (1 - \\alpha)^k\\)\nFor three tests: \\(1 - (0.95)^3 = 0.1426 \\approx 14\\%\\)\n\n\n\n\n\n\n5.00%\n\n\n1 test\n\n\n\n\n14.26%\n\n\n3 tests\n\n\n\n\n40.13%\n\n\n10 tests"
+  },
+  {
+    "objectID": "lec12/lec12.html#why-not-do-more-t-tests-3",
+    "href": "lec12/lec12.html#why-not-do-more-t-tests-3",
+    "title": "Analysis of Variance",
+    "section": "Why Not Do More T-Tests?",
+    "text": "Why Not Do More T-Tests?\nThe takeaway\n\nANOVA protects against this inflation by giving us one overall test of group differences (F-statistic), keeping our Type I error at the intended 5%.\n\n\n\n\n\n\n\n\n\nComparison\nD\nt\ndf\np\n\n\n\n\nCoffee vs. Placebo\n2.00\n6.45\n58\n&lt;.001\n\n\nCoffee vs. Control\n3.00\n9.68\n58\n&lt;.001\n\n\nPlacebo vs. Control\n1.00\n3.23\n58\n0.002"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-2",
+    "href": "lec12/lec12.html#between-subjects-anova-2",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nGroup means and variances\n\n\n\n\n\n\n\n\nCondition\nMean\nVariance\nSD\n\n\n\n\nCoffee\n8.00\n1.44\n1.20\n\n\nPlacebo\n6.00\n1.44\n1.20\n\n\nControl\n5.00\n1.44\n1.20"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-3",
+    "href": "lec12/lec12.html#between-subjects-anova-3",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\nWhy “analysis of variance”?\n\nIf it’s all about the means, why is it called Analysis of Variance?\nTo compare the means, we analyze two types of variance:\n\nVariance within each group, around its own mean (within-group or error variance)\nVariance between the group means (between-group variance)"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-4",
+    "href": "lec12/lec12.html#between-subjects-anova-4",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\nIf it’s all about the means, why is it called Analysis of Variance?\nTo compare the means, we are analyzing two types of variance:\nVariance within each group, around its own mean (within-group or error variance)\nVariance between the group means (between-group variance)"
+  },
+  {
+    "objectID": "lec12/lec12.html#the-f-statistic",
+    "href": "lec12/lec12.html#the-f-statistic",
+    "title": "Analysis of Variance",
+    "section": "The F Statistic",
+    "text": "The F Statistic\n\n\nF Statistic\n\nThe ratio of between-group variance to within-group (error) variance. Named in honor of Sir Ronald Fisher, who developed ANOVA."
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-f",
+    "href": "lec12/lec12.html#calculating-f",
+    "title": "Analysis of Variance",
+    "section": "Calculating F",
+    "text": "Calculating F\n\n\n\n\n\n\nANOVA Formula\n\n\n\\(F = \\dfrac{MS_B}{MS_E} \\qquad MS_B = \\dfrac{SS_B}{df_B} \\quad MS_E = \\dfrac{SS_E}{df_E} \\qquad df_B = k-1 \\quad df_E = N - k\\)\n\n\n\n\n\n\nMS\n\nMean Square: a sum of squares divided by its degrees of freedom (a variance).\n\n\n\n\n\n\\(_B\\) and \\(_E\\)\n\nBetween-group variance and within-group (Error) variance.\n\n\n\n\n\n\\(SS\\), \\(k\\), \\(N\\)\n\nSum of Squares, number of groups, number of participants."
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-f-1",
+    "href": "lec12/lec12.html#calculating-f-1",
+    "title": "Analysis of Variance",
+    "section": "Calculating F",
+    "text": "Calculating F\nCalculating the variance\nANOVA looks at variance. To calculate the variance:\n\n\n\n\n\n\nVariance\n\n\n\\(\\Large{s^2 = \\dfrac{\\sum(x-\\bar{x})^2}{n-1}}\\)\n\n\n\n\nDivide by (degrees of freedom).\n\nThis is the variance, but in ANOVA we also call it a Mean Square (MS)."
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-the-mean-square-ms",
+    "href": "lec12/lec12.html#calculating-the-mean-square-ms",
+    "title": "Analysis of Variance",
+    "section": "Calculating the Mean Square (MS)",
+    "text": "Calculating the Mean Square (MS)\n\n\\(MS = \\dfrac{SS}{df}\\)\nCalculate the SS (sum of squared deviations).\nDivide the SS by the degrees of freedom."
+  },
+  {
+    "objectID": "lec12/lec12.html#partitioning-the-variance",
+    "href": "lec12/lec12.html#partitioning-the-variance",
+    "title": "Analysis of Variance",
+    "section": "Partitioning the variance",
+    "text": "Partitioning the variance\n\n\n\n\n\n\nTotal = between + within\n\n\n\\(SS_{Total} = SS_B + SS_E\\)\n\n\n\n\n\\(SS_B\\) (between): how much variance comes from group differences?\n\n\\(SS_B = \\sum n_j(\\bar{x}_j - \\bar{x}_{grand})^2\\)\n\n\\(SS_E\\) (error, within): how much variance is random variation within the groups?\n\n\\(SS_E = \\sum\\sum (x_{ij} - \\bar{x}_j)^2\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-5",
+    "href": "lec12/lec12.html#between-subjects-anova-5",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA",
+    "text": "Between subjects ANOVA\n\n\\(SS_{B}\\) = how much variance comes from the group differences?\n\\(SS_{E}\\) = how much variance is left over within the groups (random error)?\n\\(SS_{Total}\\) = all the variance in the data = \\(SS_B + SS_E\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-the-mean-square-ms-1",
+    "href": "lec12/lec12.html#calculating-the-mean-square-ms-1",
+    "title": "Analysis of Variance",
+    "section": "Calculating the Mean Square (MS)",
+    "text": "Calculating the Mean Square (MS)\n\\(MS_B = \\frac{SS_B}{df_B} \\\\ MS_E = \\frac{SS_E}{df_E}\\)\n\nDivide the SS by their degrees of freedom."
+  },
+  {
+    "objectID": "lec12/lec12.html#degrees-of-freedom",
+    "href": "lec12/lec12.html#degrees-of-freedom",
+    "title": "Analysis of Variance",
+    "section": "Degrees of Freedom",
+    "text": "Degrees of Freedom\nThe group project\n\nImagine a group of 5 students is submitting a project, and the total score for the group must be 100 points combined.\n\n\nThe first 4 students can choose any score they want, say 15, 20, 25, and 10.\nBut the 5th student’s score isn’t free anymore. It must be whatever makes the total = 100. In other words, only 4 scores are “free to vary.”\nThat’s n − 1 = 4 degrees of freedom."
+  },
+  {
+    "objectID": "lec12/lec12.html#degrees-of-freedom-1",
+    "href": "lec12/lec12.html#degrees-of-freedom-1",
+    "title": "Analysis of Variance",
+    "section": "Degrees of Freedom",
+    "text": "Degrees of Freedom\n\n\n\n\n\n\nRules for a one-way ANOVA\n\n\n\nBetween groups: \\(df_{B} = k - 1\\)\nWithin groups: \\(df_E = N - k\\)\nTotal: \\(df_{Total} = N - 1\\)\n\n(\\(k\\) is the number of groups in the independent variable.)"
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-the-mean-squared-ms",
+    "href": "lec12/lec12.html#calculating-the-mean-squared-ms",
+    "title": "Analysis of Variance",
+    "section": "Calculating the Mean Squared (MS)",
+    "text": "Calculating the Mean Squared (MS)\n\n\\(MS_B = \\frac{SS_B}{df_B}\\)\n\\(MS_E = \\frac{SS_E}{df_E}\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-between-subjects-anova",
+    "href": "lec12/lec12.html#calculating-between-subjects-anova",
+    "title": "Analysis of Variance",
+    "section": "Calculating Between subjects anova",
+    "text": "Calculating Between subjects anova\n\n\\(\\Large{F = \\frac{MS_B}{MS_E}}\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-example",
+    "href": "lec12/lec12.html#between-subjects-anova-example",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA Example",
+    "text": "Between subjects ANOVA Example\n\nProf Brocker gives one group of 100 participants the Super Secret Limitless Drug. He gives another group of 100 participants a placebo. He gives the third group of 100 participants nothing. All participants then complete an IQ test. He wants to know if those who took the SSLD have significantly higher IQ than the placebo and the control groups.\n\n\nWhat is the IV?\n\nDrug taken\n\nHow many levels does it have?\n\n3 (SSLD, Placebo, Nothing)\n\nWhat is the DV?\n\nIQ score"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-example-1",
+    "href": "lec12/lec12.html#between-subjects-anova-example-1",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA Example",
+    "text": "Between subjects ANOVA Example\nGroup means\n\n\n\n\n\n\n\n\nGroup\nM\nSD\n\n\n\n\nSSLD\n106.00\n15.00\n\n\nPlacebo\n100.00\n15.00\n\n\nControl\n99.00\n15.00"
+  },
+  {
+    "objectID": "lec12/lec12.html#between-subjects-anova-example-2",
+    "href": "lec12/lec12.html#between-subjects-anova-example-2",
+    "title": "Analysis of Variance",
+    "section": "Between subjects ANOVA Example",
+    "text": "Between subjects ANOVA Example\nGroup means and the ANOVA table\n\n\n\n\n\n\n\n\ngroup\nM\nSD\n\n\n\n\nSSLD\n106.00\n15.00\n\n\nPlacebo\n101.00\n15.00\n\n\nControl\n99.00\n15.00\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nBetween groups\n2\n2,600.00\n1,300.00\n5.78\n0.003\n\n\nWithin groups (error)\n297\n66,825.00\n225.00"
+  },
+  {
+    "objectID": "lec12/lec12.html#interpreting-f",
+    "href": "lec12/lec12.html#interpreting-f",
+    "title": "Analysis of Variance",
+    "section": "Interpreting F",
+    "text": "Interpreting F\n\\(MS_B\\) is made up of \\(MS_E\\) + the theoretical difference between groups:\n\n\\(MS_B = \\text{group difference} + MS_E\\)\n\\(MS_B = \\text{group difference (0)} + MS_E\\)\n\\(MS_B = MS_E\\)\n\\(F = \\dfrac{MS_B}{MS_E}\\)\n\\(F = 1\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#interpreting-f-1",
+    "href": "lec12/lec12.html#interpreting-f-1",
+    "title": "Analysis of Variance",
+    "section": "Interpreting F",
+    "text": "Interpreting F\n\nWhen \\(F &lt; 1\\), it’s not likely to be significant.\nWhen there is a group difference:\n\n\\(MS_B = \\text{(Number &gt; 0)} + MS_E\\)\n\\(F = \\dfrac{\\text{Difference} + MS_E}{MS_E} = 1 + \\dfrac{\\text{Difference}}{MS_E}\\)\nThe bigger the group difference relative to the error, the bigger \\(F\\) gets (larger than 1)."
+  },
+  {
+    "objectID": "lec12/lec12.html#interpreting-f-2",
+    "href": "lec12/lec12.html#interpreting-f-2",
+    "title": "Analysis of Variance",
+    "section": "Interpreting f",
+    "text": "Interpreting f\nThe MSBG is made up of the MSError + the theoretical difference between groups:\n\n\\(MS_B = \\text{group difference} + MS_E\\)\n\\(MS_B = \\text{(Number &gt; 0)} + MS_E\\)\n\\(F = \\frac{\\text{Difference} + MS_E}{{MS_E}} = 1 + \\frac{\\text{Difference}}{MS_E}\\)\nThe bigger the group difference relative to the error, the bigger \\(F\\) gets (larger than 1)."
+  },
+  {
+    "objectID": "lec12/lec12.html#hypothesis-testing-anova",
+    "href": "lec12/lec12.html#hypothesis-testing-anova",
+    "title": "Analysis of Variance",
+    "section": "Hypothesis testing: ANOVA",
+    "text": "Hypothesis testing: ANOVA\n\n\n\n\n\n\nDecision rule\n\n\n\n\\(F \\le 1\\): fail to reject the null hypothesis.\n\\(F &gt; 1\\): compare to the critical value (or use the p-value). Reject \\(H_0\\) only if \\(F &gt; F_{critical}\\), equivalently if \\(p &lt; \\alpha\\)."
+  },
+  {
+    "objectID": "lec12/lec12.html#reporting-f",
+    "href": "lec12/lec12.html#reporting-f",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\n\nReject \\(H_0\\), or\nFail to Reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#reporting-f-1",
+    "href": "lec12/lec12.html#reporting-f-1",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in general or for publication, you need to report 5 things:\n\n\\(F\\)(df for the between group MS, df for the error MS)\n\\(F\\)-value\n\\(p\\)-value\nMean and standard deviation of each group\nAn effect size (\\(\\eta^2\\))"
+  },
+  {
+    "objectID": "lec12/lec12.html#reporting-f-2",
+    "href": "lec12/lec12.html#reporting-f-2",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nIQ scores differed significantly across the three groups, F(2, 297) = 6.37, p = .002, \\(\\eta^2\\) = 0.04. The SSLD group had the highest mean (M = 106.00, SD = 15.00), followed by the placebo group (M = 100.00, SD = 15.00) and the control group (M = 99.00, SD = 15.00). Tukey’s HSD showed that the SSLD group scored higher than the placebo group (p = .014) and the control group (p = .003), which did not differ from each other (p = .885)."
+  },
+  {
+    "objectID": "lec12/lec12.html#reporting-f-3",
+    "href": "lec12/lec12.html#reporting-f-3",
+    "title": "Analysis of Variance",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nThere was a significant difference in IQ between the groups, F(2, 297) = 6.37, p = .002."
+  },
+  {
+    "objectID": "lec12/lec12.html#identifying-degrees-of-freedom",
+    "href": "lec12/lec12.html#identifying-degrees-of-freedom",
+    "title": "Analysis of Variance",
+    "section": "Identifying Degrees of Freedom",
+    "text": "Identifying Degrees of Freedom\nOne-way ANOVA, equal groups\n\nA researcher compares three different study methods (flashcards, rereading, and practice testing) on exam performance. There are 15 students in each group.\n\n\nWhat is \\(df_B\\)?\n\n\\(k-1 = 3-1 = 2\\)\n\nWhat is \\(df_E\\)?\n\n\\(N = 15 \\times 3 = 45\\)\n\\(df_E = N-k = 45-3 = 42\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#identifying-degrees-of-freedom-1",
+    "href": "lec12/lec12.html#identifying-degrees-of-freedom-1",
+    "title": "Analysis of Variance",
+    "section": "Identifying Degrees of Freedom",
+    "text": "Identifying Degrees of Freedom\nOne-way ANOVA, unequal groups\n\nA psychologist compares four types of therapy for anxiety. Group sizes are 10, 12, 14, and 9 participants.\n\n\nWhat is \\(df_B\\)?\n\n\\(k = 4\\)\n\\(k-1 = 4-1 = 3\\)\n\nWhat is \\(df_E\\)?\n\n\\(N=10+12+14+9 = 45\\)\n\\(df_E = N-k = 45-4 = 41\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#coffee-example-vol.-2-1",
+    "href": "lec12/lec12.html#coffee-example-vol.-2-1",
+    "title": "Analysis of Variance",
+    "section": "Coffee Example Vol. 2",
+    "text": "Coffee Example Vol. 2\nThe group means\n\nThe experimental group has a mean happiness score of 8.\nThe placebo group has a mean happiness score of 6.\nThe control group has a mean happiness score of 5.\n\nIs the group that drank coffee significantly happier than the other groups?"
+  },
+  {
+    "objectID": "lec12/lec12.html#calculating-the-mean-squares-and-f",
+    "href": "lec12/lec12.html#calculating-the-mean-squares-and-f",
+    "title": "Analysis of Variance",
+    "section": "Calculating the Mean Squares and F",
+    "text": "Calculating the Mean Squares and F\n\n\n\n\n\n\nThe F ratio\n\n\n\\(MS_B = \\dfrac{SS_B}{df_B} \\qquad MS_E = \\dfrac{SS_E}{df_E} \\qquad F = \\dfrac{MS_B}{MS_E}\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#anova-in-r",
+    "href": "lec12/lec12.html#anova-in-r",
+    "title": "Analysis of Variance",
+    "section": "ANOVA in R",
+    "text": "ANOVA in R\nFitting the model\n\nanova.R\n\n# aov(DV ~ IV, data): the group column must be a factor\nfit &lt;- aov(iq ~ group, data = ssld)\n\nsummary(fit)\n\n             Df Sum Sq Mean Sq F value  Pr(&gt;F)   \ngroup         2   2867    1433    6.37 0.00195 **\nResiduals   297  66825     225                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nDf: degrees of freedom (\\(k - 1\\) between, \\(N - k\\) within)\nSum Sq, Mean Sq: the SS and MS (\\(MS = SS/df\\))\nF value: \\(MS_B / MS_E\\) and Pr(&gt;F): its p-value"
+  },
+  {
+    "objectID": "lec12/lec12.html#anova-in-r-1",
+    "href": "lec12/lec12.html#anova-in-r-1",
+    "title": "Analysis of Variance",
+    "section": "ANOVA in R",
+    "text": "ANOVA in R\nThe ANOVA table\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nBetween groups\n2\n2,866.67\n1,433.33\n6.37\n0.002\n\n\nWithin groups (error)\n297\n66,825.00\n225.00\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBy hand\n\n\n\\(SS_B = 100(106.00 - 101.67)^2 + 100(100.00 - 101.67)^2 + 100(99.00 - 101.67)^2 = 2866.67\\)\n\\(MS_B = \\dfrac{2866.67}{2} = 1433.33\\), \\(MS_E = \\dfrac{66825.00}{297} = 225.00\\), so \\(F = \\dfrac{1433.33}{225.00} = 6.37\\)"
+  },
+  {
+    "objectID": "lec12/lec12.html#the-f-distribution",
+    "href": "lec12/lec12.html#the-f-distribution",
+    "title": "Analysis of Variance",
+    "section": "The F Distribution",
+    "text": "The F Distribution\nIs our F big enough?\n\n\n\n\n\n\n\n\n\n\nThe F distribution is right-skewed and never negative.\nIn R: qf(.95, df1 = 2, df2 = 297) gives the critical value 3.03. Since \\(6.37 &gt; 3.03\\), we reject \\(H_0\\)."
+  },
+  {
+    "objectID": "lec12/lec12.html#assumptions-of-one-way-anova",
+    "href": "lec12/lec12.html#assumptions-of-one-way-anova",
+    "title": "Analysis of Variance",
+    "section": "Assumptions of One-Way ANOVA",
+    "text": "Assumptions of One-Way ANOVA\n\n\n\n\n\n\nAssumptions\n\n\n\nThe DV is continuous (interval or ratio scale).\nObservations are independent, and each person is in only one group.\nNormality: the scores (residuals) in each group are approximately normal.\nHomogeneity of variance: the groups have similar variances (Levene’s Test).\n\n\n\n\n\nassumptions.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(iq ~ group, data = ssld)\n\n# Normal residuals? (H0: the residuals are normal)\nshapiro.test(residuals(fit))"
+  },
+  {
+    "objectID": "lec12/lec12.html#effect-size-eta-squared",
+    "href": "lec12/lec12.html#effect-size-eta-squared",
+    "title": "Analysis of Variance",
+    "section": "Effect Size: Eta Squared",
+    "text": "Effect Size: Eta Squared\nHow much of the variance is explained by the groups?\n\n\n\n\n\n\n\\(\\eta^2\\)\n\n\n\\(\\eta^2 = \\dfrac{SS_B}{SS_{Total}} = \\dfrac{2866.67}{69691.67} = 0.041\\)\n\n\n\n\n\n\n\n\n\n\n\nη²\nInterpretation\n\n\n\n\n0.01\nSmall effect\n\n\n0.06\nMedium effect\n\n\n0.14\nLarge effect\n\n\n\n\n\n\n\n\nOur groups explain about 4.11% of the variance in IQ: a small-to-medium effect."
+  },
+  {
+    "objectID": "lec12/lec12.html#post-hoc-tests",
+    "href": "lec12/lec12.html#post-hoc-tests",
+    "title": "Analysis of Variance",
+    "section": "Post-hoc Tests",
+    "text": "Post-hoc Tests\nA significant F tells us some means differ, not which\n\ntukey.R\n\n# Tukey's HSD compares every pair and adjusts for multiple comparisons\nTukeyHSD(fit)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = iq ~ group, data = ssld)\n\n$group\n                diff        lwr       upr     p adj\nPlacebo-SSLD      -6 -10.996823 -1.003177 0.0138048\nControl-SSLD      -7 -11.996823 -2.003177 0.0031068\nControl-Placebo   -1  -5.996823  3.996823 0.8847861\n\n\n\n\ndiff is the difference between the two group means.\np adj is adjusted for the number of comparisons, so the familywise error rate stays at 5%."
+  },
+  {
+    "objectID": "lec12/lec12.html#post-hoc-tests-1",
+    "href": "lec12/lec12.html#post-hoc-tests-1",
+    "title": "Analysis of Variance",
+    "section": "Post-hoc Tests",
+    "text": "Post-hoc Tests\nReading Tukey’s HSD\n\n\n\n\n\n\n\n\nComparison\nDifference\nCI low\nCI high\np adj\n\n\n\n\nPlacebo-SSLD\n−6.00\n−11.00\n−1.00\n0.014\n\n\nControl-SSLD\n−7.00\n−12.00\n−2.00\n0.003\n\n\nControl-Placebo\n−1.00\n−6.00\n4.00\n0.885\n\n\n\n\n\n\n\n\nA pair is significant when its p adj is below .05 (or its confidence interval does not include 0)."
+  },
+  {
+    "objectID": "lec12/lec12.html#summary-one-way-anova",
+    "href": "lec12/lec12.html#summary-one-way-anova",
+    "title": "Analysis of Variance",
+    "section": "Summary: One-Way ANOVA",
+    "text": "Summary: One-Way ANOVA\n\nCompares three or more group means with one overall test.\n\\(F = MS_B / MS_E\\): between-group variance relative to within-group variance.\nFollow a significant \\(F\\) with a post-hoc test (Tukey’s HSD) to find which groups differ.\nCheck assumptions: independence, normality, equal variance.\nReport \\(F\\)(df, df), \\(p\\), group means and SDs, and an effect size (\\(\\eta^2\\))."
   }
 ]
