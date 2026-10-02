@@ -2167,7 +2167,7 @@
     "href": "lec13fct/lec13fct.html#understanding-main-effects-1",
     "title": "Factorial ANOVA",
     "section": "Understanding Main Effects",
-    "text": "Understanding Main Effects\nThe 2 × 2 table of means\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean happiness by condition (cell means)\n\n\nWatched TV?\n\nCoffee condition\n\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n\n\nNo TV\n4.0\n8.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWith marginal means\n\n\nRow and column means show the main effects\n\n\nWatched TV?\nCoffee\nNo Coffee\nRow mean\n\n\n\n\nTV\n3.0\n4.0\n3.5\n\n\nNo TV\n4.0\n8.0\n6.0\n\n\nColumn mean\n3.5\n6.0\n4.8\n\n\n\n\n\n\n\n\n\nCoffee main effect: 3.50 (coffee) vs. 6.00 (no coffee).\nTV main effect: 3.50 (TV) vs. 6.00 (no TV)."
+    "text": "Understanding Main Effects\nThe 2 × 2 table of means\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean happiness by condition (cell means)\n\n\nWatched TV?\n\nCoffee condition\n\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n\n\nNo TV\n4.0\n8.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWith marginal means\n\n\nRow and column means show the main effects\n\n\nWatched TV?\nCoffee\nNo Coffee\nRow mean\n\n\n\n\nTV\n3.0\n4.0\n3.5\n\n\nNo TV\n4.0\n8.0\n6.0\n\n\nColumn mean\n3.5\n6.0\n4.8\n\n\n\n\n\n\n\n\n\nCoffee main effect: 3.50 (coffee) vs. 6.00 (no coffee).\nTV main effect: 3.50 (TV) vs. 6.00 (no TV)."
   },
   {
     "objectID": "lec13fct/lec13fct.html#visualizing-interactions",
@@ -2322,5 +2322,257 @@
     "title": "Factorial ANOVA",
     "section": "Understanding Interactions",
     "text": "Understanding Interactions\nWhat it tests\n\n\n\n\n\n\n\n\nSource\nQuestion\nInterpretation\n\n\n\n\nMain Effect A\nDoes IV1 (e.g., Coffee) affect the DV on average?\n“Coffee drinkers happier?”\n\n\nMain Effect B\nDoes IV2 (e.g., TV Show) affect the DV on average?\n“TV watchers happier?”\n\n\nInteraction (A × B)\nDoes the effect of Coffee depend on watching TV?\n“Coffee only helps if watching TV?”"
+  },
+  {
+    "objectID": "lec14/lec14.html#a-repeated-measures-design",
+    "href": "lec14/lec14.html#a-repeated-measures-design",
+    "title": "Within-Subjects ANOVA",
+    "section": "A Repeated-Measures Design",
+    "text": "A Repeated-Measures Design\n\n\n\n\n\n\n\n\nDesign\n\n\n\nObjective: test whether productivity changes over time.\nIV: time\n\nBefore lunch\n10 minutes after pizza\n1 hour after pizza\n\nThe same participants are measured at each timepoint.\nDV: number of emails written in 10 minutes."
+  },
+  {
+    "objectID": "lec14/lec14.html#visualizing-the-data",
+    "href": "lec14/lec14.html#visualizing-the-data",
+    "title": "Within-Subjects ANOVA",
+    "section": "Visualizing the Data",
+    "text": "Visualizing the Data"
+  },
+  {
+    "objectID": "lec14/lec14.html#why-repeated-measures-anova",
+    "href": "lec14/lec14.html#why-repeated-measures-anova",
+    "title": "Within-Subjects ANOVA",
+    "section": "Why Repeated-Measures ANOVA?",
+    "text": "Why Repeated-Measures ANOVA?\n\nCan’t use multiple paired-samples t-tests.\n\nAlpha inflation increases the Type I error rate.\n\nRepeated-Measures ANOVA allows us to:\n\nCompare within-subject changes across time.\nControl for individual variability.\nTest for an overall time effect."
+  },
+  {
+    "objectID": "lec14/lec14.html#within-subjects-anova",
+    "href": "lec14/lec14.html#within-subjects-anova",
+    "title": "Within-Subjects ANOVA",
+    "section": "Within-Subjects ANOVA",
+    "text": "Within-Subjects ANOVA\nWhere the variance comes from\n\nBetween-subjects ANOVA splits variance into between-group and error (within-group) parts.\nWithin-subjects ANOVA has a third source, because each person contributes several scores:\n\n\n\n\nTime\n\nHow the means vary across the time points (the effect we care about).\n\n\n\n\n\nSubjects\n\nHow people differ from each other overall.\n\n\n\n\n\nError\n\nWhat is left over once time and subjects are accounted for."
+  },
+  {
+    "objectID": "lec14/lec14.html#within-subjects-anova-1",
+    "href": "lec14/lec14.html#within-subjects-anova-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Within-Subjects ANOVA",
+    "text": "Within-Subjects ANOVA\nPartitioning the variability\n\n\n\n\n\n\n\n\n\n\nA\n\nTotal Variability\n\n\n\nB\n\nTime Variability\n\n\n\nA-&gt;B\n\n\n\n\n\nC\n\nWithin-Groups Variability\n\n\n\nA-&gt;C\n\n\n\n\n\nD\n\nSubject Variability\n\n\n\nC-&gt;D\n\n\n\n\n\nE\n\nError Variability\n\n\n\nC-&gt;E"
+  },
+  {
+    "objectID": "lec14/lec14.html#within-subjects-anova-2",
+    "href": "lec14/lec14.html#within-subjects-anova-2",
+    "title": "Within-Subjects ANOVA",
+    "section": "Within-Subjects ANOVA",
+    "text": "Within-Subjects ANOVA\nThe key idea\n\n\n\n\n\n\nRemoving the person\n\n\n\\(SS_{W} = SS_{Subjects} + SS_{Error}\\)\n\\(SS_{Error} = SS_{W} - SS_{Subjects}\\)\n\n\n\n\nIn between-subjects ANOVA, differences between people sit inside the error term.\nIn within-subjects ANOVA we subtract them out, so the error is smaller and the test is more powerful."
+  },
+  {
+    "objectID": "lec14/lec14.html#calculating-repeated-measures-anova",
+    "href": "lec14/lec14.html#calculating-repeated-measures-anova",
+    "title": "Within-Subjects ANOVA",
+    "section": "Calculating Repeated-Measures ANOVA",
+    "text": "Calculating Repeated-Measures ANOVA\n\n\n\n\n\n\nThe F ratio\n\n\n\\(F = \\dfrac{MS_{Time}}{MS_{Error}}\\)\n\\(MS_{Time} = \\dfrac{SS_{Time}}{df_{Time}} = \\dfrac{SS_{Time}}{k - 1}\\)\n\\(MS_{Error} = \\dfrac{SS_{W} - SS_{Subjects}}{df_{Error}} = \\dfrac{SS_{W} - SS_{Subjects}}{(n-1)(k-1)}\\)\n\n\n\n\n\\(k\\) is the number of time points (or conditions) and \\(n\\) is the number of participants."
+  },
+  {
+    "objectID": "lec14/lec14.html#degrees-of-freedom",
+    "href": "lec14/lec14.html#degrees-of-freedom",
+    "title": "Within-Subjects ANOVA",
+    "section": "Degrees of Freedom",
+    "text": "Degrees of Freedom\n\n\n\n\n\n\nRules\n\n\n\nTime: \\(df_{Time} = k - 1\\)\nSubjects: \\(df_{Subjects} = n - 1\\)\nError: \\(df_{Error} = (n - 1) \\times (k - 1)\\)"
+  },
+  {
+    "objectID": "lec14/lec14.html#degrees-of-freedom-1",
+    "href": "lec14/lec14.html#degrees-of-freedom-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Degrees of Freedom",
+    "text": "Degrees of Freedom\nExample\n\n20 students rate their stress at three time points during finals week: three days before the exam, the night before, and after the exam.\n\nWhat are the df’s for a one-way repeated-measures ANOVA on Time?\n\n\nReveal answer\n\n\n\\(df_{Time} = 3 - 1 = 2\\)\n\\(df_{Subjects} = 20 - 1 = 19\\)\n\\(df_{Error} = 19 \\times 2 = 38\\)"
+  },
+  {
+    "objectID": "lec14/lec14.html#pizza-study-results",
+    "href": "lec14/lec14.html#pizza-study-results",
+    "title": "Within-Subjects ANOVA",
+    "section": "Pizza Study Results",
+    "text": "Pizza Study Results\nThe ANOVA table\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n105.58\n52.79\n69.19\n&lt;.001\n\n\nSubjects\n29\n175.71\n6.06\n–\n–\n\n\nError\n58\n44.25\n0.76\n–\n–\n\n\n\n\n\n\n\n\n\n\n\\(F(2, 58) = 69.19\\), \\(p\\) &lt; .001: productivity changes significantly across the three time points."
+  },
+  {
+    "objectID": "lec14/lec14.html#pizza-study-results-1",
+    "href": "lec14/lec14.html#pizza-study-results-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Pizza Study Results",
+    "text": "Pizza Study Results\nIn R\n\nrepeated_measures.R\n\nlibrary(afex)\n\n# id = who; within = the repeated factor\nfit &lt;- aov_ez(id = \"id\", dv = \"y\", data = pizza,\n              within = \"cond\", return = \"afex_aov\")\n\n# the corrected ANOVA table (Greenhouse-Geisser if needed)\nanova(fit)\n\nAnova Table (Type 3 tests)\n\nResponse: y\n     num Df den Df     MSE      F     ges    Pr(&gt;F)    \ncond 1.9264 55.866 0.79209 69.189 0.32431 1.403e-15 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nsummary(fit) also prints Mauchly’s test and the other corrections."
+  },
+  {
+    "objectID": "lec14/lec14.html#pizza-study-results-2",
+    "href": "lec14/lec14.html#pizza-study-results-2",
+    "title": "Within-Subjects ANOVA",
+    "section": "Pizza Study Results",
+    "text": "Pizza Study Results\nWhy within-subjects helps\n\n\n\n69.19\n\n\nRepeated-measures F (removes person differences)\n\n\n\n\n20.88\n\n\nBetween-subjects F (same data, ignoring the person)\n\n\n\n\nThe same scores give a much larger F once we account for the fact that each person was measured three times."
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova",
+    "href": "lec14/lec14.html#repeated-measures-anova",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nAssumptions\n\n\n\n\n\n\nAssumptions\n\n\n\nNormality of the differences.\nSphericity: the variances of all pairwise differences are about equal.\n\nTest: Mauchly’s Test.\n\nIf sphericity is violated, use the Greenhouse-Geisser correction.\n\nAlways check sphericity when the within-subject factor has more than two levels."
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-1",
+    "href": "lec14/lec14.html#repeated-measures-anova-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nInterpretation\n\n\\(F(2, 58) = 69.19\\), \\(p\\) &lt; .001\n\nMain effect of time on productivity.\nProductivity changes significantly across the timepoints.\n\nWhat would be your next step?"
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-2",
+    "href": "lec14/lec14.html#repeated-measures-anova-2",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nEffect size\n\n\n\n\n\n\nPartial eta squared\n\n\n\\(\\eta_p^2 = \\dfrac{SS_{Time}}{SS_{Time} + SS_{Error}} = \\dfrac{105.58}{105.58 + 44.25} =0.70\\)\n\n\n\n\nBenchmarks are the same as other ANOVAs: about .01 small, .06 medium, .14 large."
+  },
+  {
+    "objectID": "lec14/lec14.html#follow-up",
+    "href": "lec14/lec14.html#follow-up",
+    "title": "Within-Subjects ANOVA",
+    "section": "Follow-Up",
+    "text": "Follow-Up\nPost-hoc comparisons\n\nA significant F says that some time points differ, not which.\nRun paired t-tests with a Bonferroni correction:\n\n\nposthoc.R\n\npairwise.t.test(pizza$y, pizza$cond,\n                paired = TRUE, p.adjust.method = \"bonferroni\")\n\n\n    Pairwise comparisons using paired t tests \n\ndata:  pizza$y and pizza$cond \n\n             Before lunch 10 min after\n10 min after 1.5e-08      -           \n1 hour after 0.0086       1.4e-12     \n\nP value adjustment method: bonferroni"
+  },
+  {
+    "objectID": "lec14/lec14.html#follow-up-1",
+    "href": "lec14/lec14.html#follow-up-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Follow-Up",
+    "text": "Follow-Up\nReading the comparisons\n\n\n\n\n\n\n\n\nComparison\nAdjusted p\n\n\n\n\nBefore lunch vs. 10 min after\n&lt;.001\n\n\nBefore lunch vs. 1 hour after\n0.009\n\n\n10 min after vs. 1 hour after\n&lt;.001\n\n\n\n\n\n\n\n\nThe adjusted p-values already account for running three comparisons."
+  },
+  {
+    "objectID": "lec14/lec14.html#within-subjects-anova-3",
+    "href": "lec14/lec14.html#within-subjects-anova-3",
+    "title": "Within-Subjects ANOVA",
+    "section": "Within-Subjects ANOVA",
+    "text": "Within-Subjects ANOVA\nReporting F\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\nReject \\(H_0\\), or\nFail to Reject \\(H_0\\)\nIf asked to report findings in general or for publication, you need to report \\(F(df_{Time}, df_{Error}) = F, p\\), an effect size, and the means and standard deviations at each time point."
+  },
+  {
+    "objectID": "lec14/lec14.html#within-subjects-anova-4",
+    "href": "lec14/lec14.html#within-subjects-anova-4",
+    "title": "Within-Subjects ANOVA",
+    "section": "Within-Subjects ANOVA",
+    "text": "Within-Subjects ANOVA\nReporting the pizza study\n\nProductivity differed significantly across the three time points, F(2, 58) = 69.19, p &lt; .001, \\(\\eta_p^2\\) = 0.70. Productivity was highest 10 minutes after pizza (M = 6.93, SD = 1.61) and lowest an hour after pizza (M = 4.33, SD = 1.60); before lunch it was M = 5.14 (SD = 1.56)."
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-3",
+    "href": "lec14/lec14.html#repeated-measures-anova-3",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nExample: an engagement intervention\n\nProf. Brocker evaluates a new engagement intervention. 100 students rate their enjoyment of statistics (1 to 10) at the start of the semester, after week 1 of a statistics warm-up activity, and after week 2.\n\n\n\n\n\n\n\nFind the degrees of freedom\n\n\n\n\\(df_{Time}\\) = ?\n\\(df_{Subjects}\\) = ?\n\\(df_{Error}\\) = ?\n\\(n\\) = ?"
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-4",
+    "href": "lec14/lec14.html#repeated-measures-anova-4",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nEngagement intervention: answers\n\n\n\n\n\n\nDegrees of freedom\n\n\n\n\\(df_{Time} = k - 1 = 3 - 1 = 2\\)\n\\(df_{Subjects} = n - 1 = 100 - 1 = 99\\)\n\\(df_{Error} = (n - 1)(k - 1) = 99 \\times 2 = 198\\)\n\\(n = 100\\)"
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-5",
+    "href": "lec14/lec14.html#repeated-measures-anova-5",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nEngagement intervention: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n111.72\n55.86\n343.60\n&lt;.001\n\n\nSubjects\n99\n769.76\n7.78\n–\n–\n\n\nError\n198\n32.19\n0.16\n–\n–\n\n\n\n\n\n\n\nF(2, 198) = 343.60, p &lt; .001"
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-6",
+    "href": "lec14/lec14.html#repeated-measures-anova-6",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nExample: active-learning practices\n\nProfessor Brocker tests whether structured active-learning practices improve 80 students’ attitudes toward statistics. He collects a 1-10 enjoyment rating at the beginning of the semester, mid-semester (after four modules), and the end (after eight modules).\n\n\n\n\n\n\n\nFind the degrees of freedom\n\n\n\n\\(df_{Time}\\) = ?\n\\(df_{Participants}\\) = ?\n\\(df_{Error}\\) = ?"
+  },
+  {
+    "objectID": "lec14/lec14.html#interpreting-f",
+    "href": "lec14/lec14.html#interpreting-f",
+    "title": "Within-Subjects ANOVA",
+    "section": "Interpreting F",
+    "text": "Interpreting F\n\n\n\n\n\n\nWhat F means\n\n\n\\(MS_{Time}\\) is made up of \\(MS_{Error}\\) + the theoretical change over time:\n\n\\(MS_{Time} = \\text{change over time} + MS_{Error}\\)\nIf there is no change: \\(MS_{Time} = 0 + MS_{Error}\\), so \\(F = \\dfrac{MS_{Error}}{MS_{Error}} = 1\\).\nIf there is a change: \\(F = 1 + \\dfrac{\\text{change}}{MS_{Error}}\\), which is greater than 1.\n\n\n\n\n\nWhen \\(F \\leq 1\\), it’s not likely to be significant."
+  },
+  {
+    "objectID": "lec14/lec14.html#hypothesis-testing-anova",
+    "href": "lec14/lec14.html#hypothesis-testing-anova",
+    "title": "Within-Subjects ANOVA",
+    "section": "Hypothesis Testing: ANOVA",
+    "text": "Hypothesis Testing: ANOVA\n\n\n\n\n\n\nDecision rule\n\n\n\n\\(F \\leq 1\\): fail to reject the null hypothesis.\n\\(F &gt; 1\\): compare to the critical value (or use the p-value). Reject \\(H_0\\) only if \\(p &lt; \\alpha\\)."
+  },
+  {
+    "objectID": "lec14/lec14.html#reporting-f-1",
+    "href": "lec14/lec14.html#reporting-f-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nActive-learning example\n\nAttitudes toward statistics differed significantly across the semester, F(2, 158) = 281.96, p &lt; .001. Attitudes were highest at the end of the semester (M = 6.27, SD = 1.69) and lowest at the beginning (M = 4.56, SD = 1.42). Mid-semester attitudes were M = 5.45 (SD = 1.59)."
+  },
+  {
+    "objectID": "lec14/lec14.html#data-manipulation",
+    "href": "lec14/lec14.html#data-manipulation",
+    "title": "Within-Subjects ANOVA",
+    "section": "Data Manipulation",
+    "text": "Data Manipulation\nWide and long format\n\nWhen collected, data can be in either wide or long format.\nBelow are the same five participants in both formats.\n\n\n\n\n\n\n\n\n\nWide data\n\n\nEach row is one participant\n\n\nParticipant\nImmediate\nAfter24Hours\nAfter1Week\n\n\n\n\n1\n11.4\n4.6\n4.5\n\n\n2\n6.2\n7.1\n8.1\n\n\n3\n7.0\n5.8\n7.4\n\n\n4\n7.4\n6.2\n4.5\n\n\n5\n6.5\n9.3\n6.8"
+  },
+  {
+    "objectID": "lec14/lec14.html#data-manipulation-1",
+    "href": "lec14/lec14.html#data-manipulation-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Data Manipulation",
+    "text": "Data Manipulation\nWide and long format\n\n\n\n\n\n\n\n\n\n\nLong data\n\n\nEach row is one participant at one time\n\n\nParticipant\nTime\nMemory\n\n\n\n\n1\nImmediate\n11.4\n\n\n1\nAfter24Hours\n4.6\n\n\n1\nAfter1Week\n4.5\n\n\n2\nImmediate\n6.2\n\n\n2\nAfter24Hours\n7.1\n\n\n2\nAfter1Week\n8.1\n\n\n3\nImmediate\n7.0\n\n\n3\nAfter24Hours\n5.8\n\n\n3\nAfter1Week\n7.4\n\n\n4\nImmediate\n7.4\n\n\n4\nAfter24Hours\n6.2\n\n\n4\nAfter1Week\n4.5\n\n\n5\nImmediate\n6.5\n\n\n5\nAfter24Hours\n9.3\n\n\n5\nAfter1Week\n6.8\n\n\n\n\n\n\n\n\n\npivot.R\n\nlibrary(tidyr)\n\n# wide -&gt; long: one row per person per time\nlong &lt;- wide |&gt;\n  pivot_longer(cols = !Participant,\n               names_to = \"Time\",\n               values_to = \"Memory\")\n\n\n\naov() and aov_ez() need the long format."
+  },
+  {
+    "objectID": "lec14/lec14.html#practice",
+    "href": "lec14/lec14.html#practice",
+    "title": "Within-Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n1. Memory recall\n\n30 participants study a word list and recall it immediately, after 24 hours, and after 1 week. Does recall change over time?\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n213.74\n106.87\n102.22\n&lt;.001\n\n\nSubjects\n29\n155.67\n5.37\n–\n–\n\n\nError\n58\n60.64\n1.05\n–\n–\n\n\n\n\n\n\n\n\n\nReveal answer\n\nF(2, 58) = 102.22, p &lt; .001: recall decreased significantly over time."
+  },
+  {
+    "objectID": "lec14/lec14.html#practice-1",
+    "href": "lec14/lec14.html#practice-1",
+    "title": "Within-Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n2. Clinical trial\n\n30 patients each receive a low, medium, and high dose of a medication (in separate sessions) and report symptom improvement. Does dose matter?\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n89.14\n44.57\n60.95\n&lt;.001\n\n\nSubjects\n29\n178.95\n6.17\n–\n–\n\n\nError\n58\n42.41\n0.73\n–\n–\n\n\n\n\n\n\n\n\n\nReveal answer\n\nF(2, 58) = 60.95, p &lt; .001: improvement increased significantly with dose."
+  },
+  {
+    "objectID": "lec14/lec14.html#practice-2",
+    "href": "lec14/lec14.html#practice-2",
+    "title": "Within-Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n3. Behavioral therapy progress\n\n30 participants rate their anxiety at baseline, mid-treatment, and post-treatment.\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n434.22\n217.11\n101.90\n&lt;.001\n\n\nSubjects\n29\n268.05\n9.24\n–\n–\n\n\nError\n58\n123.58\n2.13\n–\n–\n\n\n\n\n\n\n\n\n\nReveal answer\n\nF(2, 58) = 101.90, p &lt; .001: anxiety decreased."
+  },
+  {
+    "objectID": "lec14/lec14.html#practice-3",
+    "href": "lec14/lec14.html#practice-3",
+    "title": "Within-Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n4. Consumer product ratings\n\n30 consumers each rate three products (A, B, and C).\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n73.17\n36.58\n39.80\n&lt;.001\n\n\nSubjects\n29\n215.88\n7.44\n–\n–\n\n\nError\n58\n53.31\n0.92\n–\n–\n\n\n\n\n\n\n\n\n\nReveal answer\n\nF(2, 58) = 39.80, p &lt; .001: the ratings differed by product. A post-hoc test would show which products differ."
+  },
+  {
+    "objectID": "lec14/lec14.html#practice-4",
+    "href": "lec14/lec14.html#practice-4",
+    "title": "Within-Subjects ANOVA",
+    "section": "Practice",
+    "text": "Practice\n5. Physiological stress\n\n30 participants’ heart rate is measured at rest, during a task, and during recovery.\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n7,027.50\n3,513.75\n215.83\n&lt;.001\n\n\nSubjects\n29\n2,266.64\n78.16\n–\n–\n\n\nError\n58\n944.26\n16.28\n–\n–\n\n\n\n\n\n\n\n\n\nReveal answer\n\nF(2, 58) = 215.83, p &lt; .001: heart rate differed significantly across the phases."
+  },
+  {
+    "objectID": "lec14/lec14.html#summary-within-subjects-anova",
+    "href": "lec14/lec14.html#summary-within-subjects-anova",
+    "title": "Within-Subjects ANOVA",
+    "section": "Summary: Within-Subjects ANOVA",
+    "text": "Summary: Within-Subjects ANOVA\n\nCompares three or more related means (the same people measured repeatedly).\nSplits the variability into time, subjects, and error, and removes the subject differences from the error term.\n\\(F = MS_{Time} / MS_{Error}\\) with \\(df = (k - 1,\\ (n - 1)(k - 1))\\).\nCheck sphericity (Mauchly’s Test) and use the Greenhouse-Geisser correction if it is violated.\nFollow a significant \\(F\\) with post-hoc paired comparisons (Bonferroni).\nReport \\(F(df_{Time}, df_{Error})\\), \\(p\\), an effect size, and the means and standard deviations."
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-7",
+    "href": "lec14/lec14.html#repeated-measures-anova-7",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nActive-learning practices: answers\n\n\n\n\n\n\nDegrees of freedom\n\n\n\n\\(df_{Time} = k - 1 = 3 - 1 = 2\\)\n\\(df_{Participants} = n - 1 = 80 - 1 = 79\\)\n\\(df_{Error} = (n - 1)(k - 1) = 79 \\times 2 = 158\\)"
+  },
+  {
+    "objectID": "lec14/lec14.html#repeated-measures-anova-8",
+    "href": "lec14/lec14.html#repeated-measures-anova-8",
+    "title": "Within-Subjects ANOVA",
+    "section": "Repeated-Measures ANOVA",
+    "text": "Repeated-Measures ANOVA\nActive-learning practices: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n116.75\n58.38\n281.96\n&lt;.001\n\n\nSubjects\n79\n552.90\n7.00\n–\n–\n\n\nError\n158\n32.71\n0.21\n–\n–\n\n\n\n\n\n\n\nF(2, 158) = 281.96, p &lt; .001"
   }
 ]

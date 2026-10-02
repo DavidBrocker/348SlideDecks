@@ -1,899 +1,924 @@
 ---
-title: "Within Subjects ANOVA"
-subtitle: "Lecture 14"
+title: "Within-Subjects ANOVA"
+subtitle: "PSY 348: Lecture 14"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
 institute: "Farmingdale State College"
-execute:
-  echo: true
-format: 
+footer: "Within-Subjects ANOVA | ⬡⬢⬡⬢⬡⬢"
+format:
   revealjs:
     theme: ../custom.scss
     scrollable: true
     width: 1600
     height: 900
-    incremental: true   
+    incremental: true
     touch: true
     chalkboard: true
     lightbox: true
     code-fold: true
+    slide-number: c/t
+    include-after-body: ../title-bg.html
+    drop:
+      engine: webr
+revealjs-plugins:
+  - drop
+  - codewindow
 ---
+
+```{r}
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(tidyr)
+library(broom)
+library(gt)
+library(afex)
+
+# Site tokens (see custom.scss / DESIGN_SYSTEM.md)
+sage  <- "#5C715E"  # $accent
+sage2 <- "#8FAF9E"  # $accent2
+sage3 <- "#A7C7B5"  # $accent3
+ink   <- "#2F3E46"  # $body-color
+hot   <- "#B5483B"  # "look here" highlight
+amber <- "#E8A33D"
+
+theme_deck <- function(base_size = 22) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.title = element_text(color = ink),
+      axis.text = element_text(color = ink),
+      plot.title = element_text(color = ink, face = "bold"),
+      legend.position = "none"
+    )
+}
+
+f2 <- function(x) formatC(x, format = "f", digits = 2)
+fp <- function(p) ifelse(p < .001, "< .001", paste("=", sub("^0", "", sprintf("%.3f", p))))
+
+# ---- Helpers ----------------------------------------------------------
+# Simulate a repeated-measures design: condition mean + person effect + noise
+sim_rm <- function(n, means, sd_subj, sd_err, seed, lo = -Inf, hi = Inf) {
+  set.seed(seed)
+  u <- rnorm(n, 0, sd_subj)
+  tibble(id = factor(rep(1:n, each = length(means))),
+         cond = factor(rep(names(means), times = n), levels = names(means)),
+         y = rep(means, times = n) + rep(u, each = length(means)) +
+           rnorm(n * length(means), 0, sd_err)) |>
+    mutate(y = pmin(pmax(y, lo), hi))
+}
+
+# Classic repeated-measures ANOVA table (Subjects / Time / Error)
+rm_table <- function(d) {
+  a <- tidy(aov(y ~ cond + Error(id), data = d))
+  sub <- a |> filter(stratum == "id", term == "Residuals")
+  eff <- a |> filter(term == "cond")
+  err <- a |> filter(stratum == "Within", term == "Residuals")
+  tibble(Source = c("Time (condition)", "Subjects", "Error"),
+         df = c(eff$df, sub$df, err$df),
+         SS = c(eff$sumsq, sub$sumsq, err$sumsq),
+         MS = c(eff$meansq, sub$meansq, err$meansq),
+         `F` = c(eff$statistic, NA, NA),
+         p = c(eff$p.value, NA, NA))
+}
+rm_gt <- function(tab, size = 26) {
+  tab |>
+    mutate(p = ifelse(is.na(p), NA, ifelse(p < .001, "<.001", sprintf("%.3f", p)))) |>
+    gt() |>
+    fmt_number(columns = c(SS, MS, `F`), decimals = 2) |>
+    fmt_number(columns = df, decimals = 0) |>
+    sub_missing(missing_text = "--") |>
+    tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels()) |>
+    opt_row_striping() |>
+    cols_align(align = "center") |>
+    tab_options(table.width = pct(100), table.font.size = size)
+}
+rm_apa <- function(tab) {
+  sprintf("F(%d, %d) = %s, p %s", tab$df[1], tab$df[3], f2(tab$`F`[1]), fp(tab$p[1]))
+}
+means_sd <- function(d) d |> group_by(cond) |> summarise(M = mean(y), SD = sd(y))
+rm_plot <- function(d, ylab, title) {
+  ggplot(d, aes(cond, y, group = id)) +
+    geom_line(color = sage3, alpha = .6) +
+    geom_point(color = sage, alpha = .6, size = 1.8) +
+    stat_summary(aes(group = 1), fun = mean, geom = "line", color = hot, linewidth = 1.6) +
+    stat_summary(aes(group = 1), fun = mean, geom = "point", color = hot, size = 4) +
+    labs(title = title, x = NULL, y = ylab) +
+    theme_deck(20)
+}
+
+# ---- Pizza and productivity (n = 30) ---------------------------------
+pizza <- sim_rm(30, c("Before lunch" = 5, "10 min after" = 7, "1 hour after" = 4.5),
+                sd_subj = 1.5, sd_err = 1, seed = 123)
+pz_tab <- rm_table(pizza)
+pz_ms  <- means_sd(pizza)
+# the same data analysed as if they were different people
+pz_between <- tidy(aov(y ~ cond, data = pizza))
+pz_F_between <- pz_between$statistic[1]
+pz_post <- pairwise.t.test(pizza$y, pizza$cond, paired = TRUE, p.adjust.method = "bonferroni")
+pz_ges <- {
+  fit <- aov_ez("id", "y", pizza, within = "cond", anova_table = list(es = c("ges", "pes"), correction = "none"),
+                return = "afex_aov")
+  as.data.frame(anova(fit))
+}
+
+# ---- Engagement intervention (n = 100) -------------------------------
+set.seed(2025)
+n1 <- 100
+b1 <- rnorm(n1, 4.8, 1.6); w1a <- b1 + rnorm(n1, .7, .5); w1b <- w1a + rnorm(n1, .8, .5)
+clip <- function(x) pmin(pmax(x, 1), 10)
+eng <- tibble(id = factor(rep(1:n1, each = 3)),
+              cond = factor(rep(c("baseline", "week1", "week2"), times = n1),
+                            levels = c("baseline", "week1", "week2")),
+              y = as.vector(rbind(clip(b1), clip(w1a), clip(w1b))))
+eng_tab <- rm_table(eng)
+
+# ---- Active learning (n = 80) ----------------------------------------
+set.seed(2025)
+n2 <- 80
+b2 <- rnorm(n2, 4.5, 1.4); m2 <- b2 + rnorm(n2, 1.0, .6); e2 <- m2 + rnorm(n2, .8, .5)
+act <- tibble(id = factor(rep(1:n2, each = 3)),
+              cond = factor(rep(c("beginning", "mid", "end"), times = n2),
+                            levels = c("beginning", "mid", "end")),
+              y = as.vector(rbind(clip(b2), clip(m2), clip(e2))))
+act_tab <- rm_table(act)
+act_ms  <- means_sd(act)
+
+# ---- Practice studies (n = 30 each) ----------------------------------
+mem  <- sim_rm(30, c(Immediate = 8, After24Hours = 6, After1Week = 4), 1.2, 1.1, seed = 301)
+clin <- sim_rm(30, c(LowDose = 5, MediumDose = 6.5, HighDose = 8), 1.2, 1.0, seed = 302)
+ther <- sim_rm(30, c(Baseline = 10, MidTreatment = 7, PostTreatment = 5), 1.8, 1.4, seed = 303)
+prod <- sim_rm(30, c(ProductA = 6, ProductB = 7, ProductC = 5), 0.9, 0.9, seed = 304)
+strs <- sim_rm(30, c(Rest = 50, Task = 70, Recovery = 55), 4, 4, seed = 305)
+mem_t <- rm_table(mem); clin_t <- rm_table(clin); ther_t <- rm_table(ther)
+prod_t <- rm_table(prod); strs_t <- rm_table(strs)
+```
 
 # When to Use Repeated Measures ANOVA
 
 Use Repeated Measures ANOVA when:
 
--   You have the **same participants measured more than once** (e.g., pre-test/post-test).
+- You have the **same participants measured more than once** (e.g., pre-test/post-test).
 
--   You're interested in **changes over time** or **under different conditions**.
+- You're interested in **changes over time** or **under different conditions**.
 
-    -   Testing whether students' enjoyment of statistics improves after receiving lollipops for 2 weeks.
+  - Testing whether students' enjoyment of statistics improves after receiving lollipops for 2 weeks.
 
 # Between vs. Within Subjects ANOVA
 
--   **Between-Subjects ANOVA:**
+::::::: columns
+:::: {.column width="50%"}
+::: callout-tip
+## Between-subjects ANOVA
 
-    -   Compares means **between groups** (e.g., Group A vs. Group B vs. Group C).
+- Compares means **between groups** (Group A vs. B vs. C).
 
-    -   Error comes from individual differences **between people**.
+- Error comes from individual differences **between people**.
+:::
+::::
 
--   **Within-Subjects (Repeated Measures) ANOVA:**
+:::: {.column width="50%"}
+::: callout-important
+## Within-subjects (repeated measures) ANOVA
 
-    -   Compares means **within the same participants** over time.
+- Compares means **within the same participants** over time or conditions.
 
-    -   Controls for individual differences.
+- **Controls for** individual differences.
+:::
+::::
+:::::::
 
 # Pizza and Productivity Study
 
 ## A Repeated-Measures Design
 
--   Objective: Test whether productivity changes over time
--   IV:
-    1.  Before lunch
-    2.  10 minutes after pizza
-    3.  1 hour after pizza
--   Same participants measured at each timepoint
--   DV:
-    -   Number of emails written in 10 minutes
+:::::: columns
+:::: {.column width="50%"}
+::: callout-tip
+## Design
 
-# Visualizing the Data
+- **Objective:** test whether productivity changes over time.
+
+- **IV:** time
+
+  1.  Before lunch
+  2.  10 minutes after pizza
+  3.  1 hour after pizza
+
+- The **same participants** are measured at each timepoint.
+
+- **DV:** number of emails written in 10 minutes.
+:::
+::::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6.5
+#| fig-height: 5.2
+rm_plot(pizza, "Emails written (10 min)", "Each line is one person") +
+  scale_x_discrete(labels = c("Before", "10 min", "1 hour"))
+```
+:::
+::::::
+
+## Visualizing the Data
 
 ```{r}
-library(tidyverse)
-library(forcats)
-
-set.seed(123)
-data <- tibble(
-  id = rep(1:30, each = 3),
-  time = factor(rep(c("Pre", "Post10", "Post60"), times = 30), ordered = TRUE),
-  productivity = c(
-    rnorm(30, mean = 5, sd = 1),
-    rnorm(30, mean = 7, sd = 1.5),
-    rnorm(30, mean = 4.5, sd = 1)
-  )
-)
-
-data %>%
-  ggplot(aes(fct_inorder(time), productivity, group = id)) +
-  geom_point() +
-  geom_line(alpha = 0.3) +
-  stat_summary(
-    aes(group = 1), 
-    fun.data = "mean_se", 
-    geom = "line", 
-    color = "red", 
-    lty = "dashed"
-    ) +
-  labs(
-    title = "Individual and Mean Productivity Over Time",
-    x = "\nTime",
-    y = "Productivity (Emails Sent)\n"
-    ) +
-  theme_minimal() +
-  theme(panel.grid = element_blank())
+#| echo: false
+#| fig-width: 11
+#| fig-height: 4.6
+rm_plot(pizza, "Productivity (emails sent)", "Individual and mean productivity over time") +
+  labs(subtitle = "red = group mean")
 ```
 
 ## Why Repeated-Measures ANOVA?
 
--   Can't use multiple paired-samples t-tests
-    -   Alpha inflation - increases Type I error
--   Repeated-Measures ANOVA allows us to:
-    -   Compare within-subject changes across time
-    -   Control for individual variability
-    -   Test for an overall **time effect**
+- Can't use multiple paired-samples t-tests.
+
+  - Alpha inflation increases the Type I error rate.
+
+- Repeated-Measures ANOVA allows us to:
+
+  - Compare within-subject changes across time.
+
+  - **Control for individual variability.**
+
+  - Test for an overall **time effect**.
+
+## Within-Subjects ANOVA
+
+### Where the variance comes from
+
+- **Between-subjects** ANOVA splits variance into **between-group** and **error** (within-group) parts.
+
+- **Within-subjects** ANOVA has a third source, because each person contributes several scores:
+
+:::::: term-list
+::: fragment
+
+[Time]{.term-pill}
+
+: How the **means** vary across the time points (the effect we care about).
+:::
+
+::: fragment
+
+[Subjects]{.term-pill}
+
+: How people differ from **each other overall**.
+:::
+
+::: fragment
+
+[Error]{.term-pill}
+
+: What is left over once time and subjects are accounted for.
+:::
+::::::
+
+## Within-Subjects ANOVA
+
+### Partitioning the variability
+
+```{dot}
+digraph {
+  node[shape = "box", style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge[color = "#5C715E"]
+  bgcolor = "#E9F1EC"
+
+  A[label="Total Variability"]
+  B[label="Time Variability"]
+  C[label="Within-Groups Variability"]
+  D[label="Subject Variability"]
+  E[label="Error Variability"]
+
+  A -> B
+  A -> C
+  C -> D
+  C -> E
+}
+```
+
+## Within-Subjects ANOVA
+
+### The key idea
+
+::: callout-tip
+## Removing the person
+
+$SS_{W} = SS_{Subjects} + SS_{Error}$
+
+$SS_{Error} = SS_{W} - SS_{Subjects}$
+:::
+
+- In between-subjects ANOVA, differences between people sit **inside** the error term.
+
+- In within-subjects ANOVA we **subtract them out**, so the error is smaller and the test is more **powerful**.
+
+## Calculating Repeated-Measures ANOVA
+
+::: callout-tip
+## The F ratio
+
+$F = \dfrac{MS_{Time}}{MS_{Error}}$
+
+$MS_{Time} = \dfrac{SS_{Time}}{df_{Time}} = \dfrac{SS_{Time}}{k - 1}$
+
+$MS_{Error} = \dfrac{SS_{W} - SS_{Subjects}}{df_{Error}} = \dfrac{SS_{W} - SS_{Subjects}}{(n-1)(k-1)}$
+:::
+
+- $k$ is the number of time points (or conditions) and $n$ is the number of participants.
+
+## Degrees of Freedom
+
+::: callout-tip
+## Rules
+
+- Time: $df_{Time} = k - 1$
+
+- Subjects: $df_{Subjects} = n - 1$
+
+- Error: $df_{Error} = (n - 1) \times (k - 1)$
+:::
+
+## Degrees of Freedom
+
+### Example
+
+> **20 students** rate their **stress** at **three time points** during finals week: three days before the exam, the night before, and after the exam.
+
+What are the df's for a one-way repeated-measures ANOVA on Time?
+
+<details>
+
+<summary>Reveal answer</summary>
+
+- $df_{Time} = 3 - 1 = 2$
+
+- $df_{Subjects} = 20 - 1 = 19$
+
+- $df_{Error} = 19 \times 2 = 38$
+
+</details>
+
+## Pizza Study Results
+
+### The ANOVA table
+
+```{r}
+#| echo: false
+rm_gt(pz_tab)
+```
+
+::: {.callout-tip appearance="minimal"}
+$F(`r pz_tab$df[1]`, `r pz_tab$df[3]`) = `r f2(pz_tab$F[1])`$, $p$ `r fp(pz_tab$p[1])`: productivity changes significantly across the three time points.
+:::
+
+## Pizza Study Results
+
+### In R
+
+::: {.codewindow .r .codewindow-dark}
+repeated_measures.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+library(afex)
+
+# id = who; within = the repeated factor
+fit <- aov_ez(id = "id", dv = "y", data = pizza,
+              within = "cond", return = "afex_aov")
+
+# the corrected ANOVA table (Greenhouse-Geisser if needed)
+anova(fit)
+```
+:::
+
+- `summary(fit)` also prints Mauchly's test and the other corrections.
+
+
+## Pizza Study Results
+
+### Why within-subjects helps
+
+::::::::: side-by-cols
+::::: stat-card
+::: stat-num
+`r f2(pz_tab$F[1])`
+:::
+
+::: stat-sub
+**Repeated-measures** F (removes person differences)
+:::
+:::::
+
+::::: stat-card
+::: stat-num
+`r f2(pz_F_between)`
+:::
+
+::: stat-sub
+**Between-subjects** F (same data, ignoring the person)
+:::
+:::::
+:::::::::
+
+- The same scores give a much larger F once we account for the fact that each person was measured three times.
 
 ## Repeated-Measures ANOVA
 
 ### Assumptions
 
--   **Normality** of differences
--   **Sphericity**: Equal variances of pairwise differences
-    -   Test: **Mauchly’s Test**
--   If assumption is violated, use **Greenhouse-Geisser correction**
-    -   Always check sphericity if more than two levels of the within-subject factor
+::: callout-important
+## Assumptions
+
+- **Normality** of the differences.
+
+- **Sphericity:** the variances of all pairwise differences are about equal.
+
+  - Test: **Mauchly's Test**.
+
+- If sphericity is violated, use the **Greenhouse-Geisser correction**.
+
+  - Always check sphericity when the within-subject factor has **more than two** levels.
+:::
 
 ## Repeated-Measures ANOVA
 
 ### Interpretation
 
--   F(2, 58) = 12.3, p \< .001
-    -   Main effect of time on productivity
-    -   Productivity changes significantly across timepoints
-        -   What would be your next step?
+- $F(`r pz_tab$df[1]`, `r pz_tab$df[3]`) = `r f2(pz_tab$F[1])`$, $p$ `r fp(pz_tab$p[1])`
 
-## Follow-Up
+  - Main effect of time on productivity.
 
-### Post-hoc Comparisons
+  - Productivity changes significantly across the timepoints.
 
--   Run paired t-tests with **Bonferroni correction**
--   Which timepoints differ?
-    -   Pre vs. Post-10 Minutes
-    -   Post-10 Minutes vs. Post-60 Minutes
-    -   Pre vs. Post-60 Minutes
-
-## ANOVA
-
--   Between subjects ANOVA compares means **between** groups to determine if they differ significantly from one another.
-
--   Within subjects ANOVA compares pre-manipulation means to post-manipulation means to determine if there is a difference **within** participants over time.
-
-## Within Subjects ANOVA
-
--   Within subjects ANOVA examines differences within participants over time.
-
--   Within subjects ANOVA is also known as Repeated Measures ANOVA, because it looks at one measure repeated over time.
-
-## Within Subjects ANOVA
-
-The independent variable is time.
-
--   Before intervention: baseline or pre-test
-
--   After intervention: post-test
-
-## Within Subjects ANOVA
-
--   Within subjects ANOVA can look at 2 or more time points.
-    -   Think about this as **conditions**
-
-## Within Subjects ANOVA
-
-```{r}
-library(ggplot2)
-library(dplyr)
-library(gt)
-library(gtsummary)
-library(broom)
-library(afex)
-
-# Generate data for two normal distributions
-x <- seq(-6, 6, length=100)
-null_dist <- dnorm(x, mean = 0, sd = 1)
-alt_dist <- dnorm(x, mean = 2, sd = 1)
-
-data <- data.frame(
-  x = rep(x, 2),
-  y = c(null_dist, alt_dist),
-  hypothesis = factor(rep(c("Null Hypothesis", "Alternative Hypothesis"), each=length(x)))
-)
-
-# Create the plot
-
-plt <- 
-  ggplot(data, aes(x = x, y = y, 
-                 lty = rev(hypothesis))) +
-    geom_line(aes(color = "purple")) +
-  theme_linedraw() + 
-  labs(
-    x = "",
-    y = "",
-    lty = "Hypotheses"
-  ) + 
-  theme(
-    panel.grid = element_blank(),
-    legend.position = "inside",
-    legend.position.inside = c(.2,.5),
-    legend.background = element_rect(color = "black")
-  ) + 
-  scale_color_identity()
-
-plt
-
-```
-
-## Between Subjects ANOVA
-
-In between subjects ANOVA, we analyze two types of variance:
-
--   **Between Group variance**: How the data varies between the groups
-
--   **Error variance**: How the data varies across all participants
-
-## Within Subjects ANOVA
-
-In within subjects ANOVA the variance is more complicated, because data will differ in 3 ways:
-
--   Over time
-
-    -   How the data varies across time-points
-
--   Error variance:
-
-    -   How the data varies across all participants
-
--   Per participant
-
-    -   How the data varies between each person
-
-## Within Subjects ANOVA
-
-### Over Time
-
-> A person’s mood measured **before TV,** **during TV**, and **after TV** are correlated because they come from the same person
-
-## Within Subjects ANOVA
-
-### Error
-
-> Mood will have natural variance across participants and time.
-
-## Within Subjects ANOVA Example
-
-### **Per participant**
-
-> Each participant's scores will be more like *their* other scores than they are like the scores of another participant.
-
-## Within Subjects ANOVA
-
-```{dot}
- digraph {     
-    node[shape = "box", style = "rounded"]
-    
-      A[label="Total Variability"]
-      B[label="Time Variability"]
-      C[label="Within-Groups Variability"]
-      D[label="Subject Variability"]
-      E[label="Error Variability"]
-      
-      A -> B
-      A -> C
-      C -> D
-      C -> E
-}
-```
-
-## Within Subjects ANOVA
-
-What is the F ratio in between subjects ANOVA?
-
--   $F = \frac{{MS_{BG}}}{MS_{Error}}$
-
--   $MS_{BG} = \frac{SS_{BG}}{df_{BG}}$
-
--   $MS_{Error} = \frac{SS_{Error}}{df_{Error}}$
-
-## Within Subjects ANOVA
-
-We want measure 2 sources of variance:
-
--   $SS_{Time}$
-
-    -   Similar to SS~Between~ from between subjects ANOVA
-
--   $SS_{Error}$
-
-    -   Harder to calculate in within subjects ANOVA, because of the subject variance.
-
-## Within Subjects ANOVA
-
--   $SS_{WG} = SS_{Subjects} + SS_{Error}$
-
-## Within Subjects ANOVA
-
--   $SS_{W} = SS_{Subjects} + \color{red}{SS_{Error}}$
-
--   $SS_{Error} = SS_{W} - SS_{Subjects}$
-
-## Calculating Means Squared (MS)
-
--   We calculate a SS for the variance between the times points ($SS_{Time}$).
-
-    -   This is just like the $SS_{BG}$ from between subjects ANOVA
-
--   We calculate a SS for the within group variance ($SS_{W}$).
-
--   We calculate a SS for the variance by person ($SS_{Subject}$).
-
--   To find $SS_{Error}$, we subtract $SS_{Subjects}$ from $SS_{WG}$.
-
-## Calculating means squared (MS)
-
--   $MS_{Time} = \frac{SS_{Time}} {df_{Time}}$
-
--   $MS_{Error} = \frac{(SS_{W} - SS_{Subject})}{df_{Error}}$
-
-## Degrees of freedom
-
--   Time $(MS_{Time}) = k - 1$
-
--   Error $(MS_{Error}) = (n - 1) \times (k - 1)$
-
-    -   k is the number of time points
-
-## Degrees of Freedom
-
-### Examples
-
-> A researcher measures students’ **stress levels** at **three time points** during finals week:
->
-> a\) Three days before the exam b) The night before the exam c) After the exam. A total of **20 students** provided stress ratings at all three times.
-
-What are the df's for a one-way repeated-measures ANOVA on Time?
-
-## Degrees of Freedom
-
-### Examples
-
-> A researcher measures students’ **stress levels** at **three time points** during finals week:
->
-> a\) Three days before the exam b) The night before the exam c) After the exam. A total of **20 students** provided stress ratings at all three times.
-
-1.  df~Time~ = 3 - 1 = 2
-2.  df~Error~ = 19\*2 = 38
-3.  df~Subjects~ = 20-1 = 19
-
-## Calculating Repeated-Measures ANVOA
-
--   $F = \frac{MS_{Time}}{MS_{Error}}$
-
--   $MS_{Time} = \frac{SS_{Time}}{df_{Time}} = \frac{SS_{Time}}{(k - 1)}$
-
--   $MS_{Error} = \frac{(SS_{W} - SS_{Subject})} {df_{Error}} = \frac{(SS_{W}\ - SS_{Subject})}{(n-1)\times(k-1)}$
+    - What would be your next step?
 
 ## Repeated-Measures ANOVA
 
-### Example
+### Effect size
 
-> Prof. Brocker wants to evaluate whether a new **engagement intervention** improves students’ attitudes toward statistics. At the beginning of the semester, **100 students** complete a survey rating how much they enjoy statistics on a scale from `1 (not at all)` to `10 (extremely)`.He then implements a two-week intervention in which each class begins with a brief **statistics-related warm-up activity** designed to increase interest and reduce anxiety. After the first week of the intervention, students rate their enjoyment of statistics again. At the end of the second week, they complete the rating a third time.
+::: callout-tip
+## Partial eta squared
 
--   df~Time~ =
+$\eta_p^2 = \dfrac{SS_{Time}}{SS_{Time} + SS_{Error}} = \dfrac{`r f2(pz_tab$SS[1])`}{`r f2(pz_tab$SS[1])` + `r f2(pz_tab$SS[3])`} =`r f2(pz_tab$SS[1] / (pz_tab$SS[1] + pz_tab$SS[3]))`$
+:::
 
--   df~Subjects~ =
+- Benchmarks are the same as other ANOVAs: about .01 small, .06 medium, .14 large.
 
--   df~Error~ =
+## Follow-Up
 
--   n =
+### Post-hoc comparisons
 
-## Practice
+- A significant F says that **some** time points differ, not which.
 
-> Prof. Brocker wants to evaluate whether a new **engagement intervention** improves students’ attitudes toward statistics. At the beginning of the semester, **100 students** complete a survey rating how much they enjoy statistics on a scale from `1 (not at all)` to `10 (extremely)`.He then implements a two-week intervention in which each class begins with a brief **statistics-related warm-up activity** designed to increase interest and reduce anxiety. After the first week of the intervention, students rate their enjoyment of statistics again. At the end of the second week, they complete the rating a third time.
+- Run paired t-tests with a **Bonferroni correction**:
 
--   df~Time~ = `3 - 1 = 2`
+::: {.codewindow .r .codewindow-dark}
+posthoc.R
 
--   df~Subjects~ = `100-1 = 99`
+```{r}
+#| echo: true
+#| code-fold: false
+pairwise.t.test(pizza$y, pizza$cond,
+                paired = TRUE, p.adjust.method = "bonferroni")
+```
+:::
 
--   df~Error~ = `(100 - 1) * (3-1) = 198`
+## Follow-Up
 
--   n = `100`
+### Reading the comparisons
 
-## Practice
+```{r}
+#| echo: false
+pz_pw <- as.data.frame(as.table(pz_post$p.value)) |>
+  filter(!is.na(Freq)) |>
+  transmute(Comparison = paste(Var2, "vs.", Var1),
+            `Adjusted p` = ifelse(Freq < .001, "<.001", sprintf("%.3f", Freq)))
+pz_pw |>
+  gt() |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 28, table.width = pct(60))
+```
 
-> Prof. Brocker wants to evaluate whether a new **engagement intervention** improves students’ attitudes toward statistics.
+- The adjusted p-values already account for running three comparisons.
+
+## Within-Subjects ANOVA
+
+### Reporting F
+
+If asked to report findings in terms of the Null Hypothesis (H~0~), you should report findings as:
+
+- Reject $H_0$, or
+
+- Fail to Reject $H_0$
+
+- If asked to report findings in general or for publication, you need to report $F(df_{Time}, df_{Error}) = F, p$, an effect size, and the means and standard deviations at each time point.
+
+## Within-Subjects ANOVA
+
+### Reporting the pizza study
+
+> Productivity differed significantly across the three time points, *`r rm_apa(pz_tab)`*, $\eta_p^2$ = `r f2(pz_tab$SS[1] / (pz_tab$SS[1] + pz_tab$SS[3]))`. Productivity was highest 10 minutes after pizza (*M* = `r f2(pz_ms$M[2])`, *SD* = `r f2(pz_ms$SD[2])`) and lowest an hour after pizza (*M* = `r f2(pz_ms$M[3])`, *SD* = `r f2(pz_ms$SD[3])`); before lunch it was *M* = `r f2(pz_ms$M[1])` (*SD* = `r f2(pz_ms$SD[1])`).
+
+## Repeated-Measures ANOVA
+
+### Example: an engagement intervention
+
+> Prof. Brocker evaluates a new **engagement intervention**. **100 students** rate their enjoyment of statistics (`1` to `10`) at the start of the semester, after week 1 of a statistics warm-up activity, and after week 2.
+
+::: {.callout-tip .nonincremental}
+## Find the degrees of freedom
+
+-   $df_{Time}$ = ?
+
+-   $df_{Subjects}$ = ?
+
+-   $df_{Error}$ = ?
+
+-   $n$ = ?
+:::
+
+## Repeated-Measures ANOVA
+
+### Engagement intervention: answers
+
+::: {.callout-important .nonincremental}
+## Degrees of freedom
+
+-   $df_{Time} = k - 1 = 3 - 1 = 2$
+
+-   $df_{Subjects} = n - 1 = 100 - 1 = 99$
+
+-   $df_{Error} = (n - 1)(k - 1) = 99 \times 2 = 198$
+
+-   $n = 100$
+:::
+
+## Repeated-Measures ANOVA
+
+### Engagement intervention: results
 
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
-
-library(tidyverse)
-library(ez)
-library(afex)
-
-set.seed(2025)  # for reproducibility
-
-n <- 100
-
-# Baseline: lower enjoyment, more variability
-baseline <- rnorm(n, mean = 4.8, sd = 1.6)
-
-# After Week 1: slight increase
-week1 <- baseline + rnorm(n, mean = 0.7, sd = 0.5)
-
-# After Week 2: additional increase
-week2 <- week1 + rnorm(n, mean = 0.8, sd = 0.5)
-
-# Keep scores bounded between 1 and 10
-clip <- function(x) pmin(pmax(x, 1), 10)
-baseline <- clip(baseline)
-week1    <- clip(week1)
-week2    <- clip(week2)
-
-# Construct long dataset
-data_long <- tibble(
-  id = factor(1:n),
-  baseline = baseline,
-  week1 = week1,
-  week2 = week2
-) %>%
-  pivot_longer(cols = baseline:week2,
-               names_to = "time",
-               values_to = "enjoyment")
-
-aov_ez(
-  data = data_long,
-  dv = "enjoyment",
-  id = "id",
-  within = "time",
-  anova_table = list(es = "ges"),
-  return = "aov"
-) |>
-  tidy() |> 
-  rename(
-    Source = term,
-    SS = sumsq,
-    MS = meansq,
-    `F` = statistic, 
-    p = p.value
-  ) |> 
-  select(-stratum) |> 
-  filter(Source == "time" | df == 198) |> 
-  gt() |> 
-  fmt_auto()
+#| echo: false
+rm_gt(eng_tab)
 ```
+
+*`r rm_apa(eng_tab)`*
 :::
 
 ::: {.column width="50%"}
 ```{r}
-
-data_long %>%
-  group_by(time) %>%
-  summarize(mean = mean(enjoyment), se = sd(enjoyment)/sqrt(n)) %>%
-  ggplot(aes(x = time, y = mean, group = 1)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 3) +
-  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.1) +
-  labs(title = "Enjoyment of Statistics Across Intervention",
-       x = "Time Point",
-       y = "Mean Enjoyment (1–10)") +
-  theme_minimal(base_size = 14)
+#| echo: false
+#| fig-width: 6
+#| fig-height: 4.6
+eng |>
+  group_by(cond) |>
+  summarise(m = mean(y), se = sd(y) / sqrt(n())) |>
+  ggplot(aes(cond, m, group = 1)) +
+  geom_line(color = sage, linewidth = 1.4) +
+  geom_point(color = sage, size = 3.5) +
+  geom_errorbar(aes(ymin = m - se, ymax = m + se), width = .1, color = ink) +
+  labs(title = "Enjoyment of statistics", x = NULL, y = "Mean enjoyment (1-10)") +
+  theme_deck(20)
 ```
 :::
 :::::
 
-## ANOVA
+## Repeated-Measures ANOVA
 
-> Professor Brocker is interested in whether structured **active-learning practices** improve `80`students’ attitudes toward statistics over time. He administers a `1–10` enjoyment rating at three points:
->
-> 1.  **Beginning of the semester** (before any intervention).
->
-> 2.  **After four active-learning modules** (mid-semester).
->
-> 3.  **After eight active-learning modules** (end of the semester).
+### Example: active-learning practices
 
-1.  df~Time~ =
-2.  df~Participants~ =
-3.  df~Error~ =
+> Professor Brocker tests whether structured **active-learning practices** improve `80` students' attitudes toward statistics. He collects a `1-10` enjoyment rating at the **beginning** of the semester, **mid-semester** (after four modules), and the **end** (after eight modules).
 
-## Practice
+::: {.callout-tip .nonincremental}
+## Find the degrees of freedom
 
-> Professor Brocker is interested in whether structured **active-learning practices** improve 80 students’ attitudes toward statistics over time. He administers a `1–10` enjoyment rating at three points:
->
-> 1.  **Beginning of the semester** (before any intervention).
->
-> 2.  **After four active-learning modules** (mid-semester).
->
-> 3.  **After eight active-learning modules** (end of the semester).
+1.  $df_{Time}$ = ?
+2.  $df_{Participants}$ = ?
+3.  $df_{Error}$ = ?
+:::
 
-1.  df~Time~ = 3 - 1 = 2
-2.  df~Participants~ = 80 - 1 = 79
-3.  df~Error~ = 158
+## Repeated-Measures ANOVA
 
-## Practice
+### Active-learning practices: answers
 
-> Professor Brocker is interested in whether structured **active-learning practices** improve 80 students’ attitudes toward statistics over time. He administers a `1–10` enjoyment rating at three points:
+::: {.callout-important .nonincremental}
+## Degrees of freedom
+
+1.  $df_{Time} = k - 1 = 3 - 1 = 2$
+2.  $df_{Participants} = n - 1 = 80 - 1 = 79$
+3.  $df_{Error} = (n - 1)(k - 1) = 79 \times 2 = 158$
+:::
+
+## Repeated-Measures ANOVA
+
+### Active-learning practices: results
 
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
-set.seed(2025)
-
-n <- 80
-
-# Attitude ratings (1–10 scale)
-beginning <- rnorm(n, mean = 4.5, sd = 1.4)   # before any modules
-mid       <- beginning + rnorm(n, mean = 1.0, sd = 0.6)  # after 4 modules
-end       <- mid + rnorm(n, mean = 0.8, sd = 0.5)        # after 8 modules
-
-# Bound values between 1 and 10
-clip <- function(x) pmin(pmax(x, 1), 10)
-
-beginning <- clip(beginning)
-mid       <- clip(mid)
-end       <- clip(end)
-
-# Create long dataset
-data_long2 <- tibble(
-  id = factor(1:n),
-  beginning = beginning,
-  mid = mid,
-  end = end
-) |>
-  pivot_longer(
-    cols = beginning:end,
-    names_to = "time",
-    values_to = "attitude"
-  ) |> 
-  mutate(
-    time = factor(time, 
-                  levels = c("beginning","mid","end"))
-    )
-
-# ------------------------------
-# Repeated-Measures ANOVA
-# ------------------------------
-
-rm_aov <- aov_ez(
-  id = "id",
-  dv = "attitude",
-  within = "time",
-  data = data_long2,
-  anova_table = list(es = "ges"),
-  return = "aov"
-)
-
-# Clean table for display
-rm_aov |>
-  tidy() |>
-  rename(
-    Source = term,
-    SS = sumsq,
-    MS = meansq,
-    `F` = statistic, 
-    p = p.value
-  ) |> 
-  select(!stratum) |>
-  gt()
-
+#| echo: false
+rm_gt(act_tab)
 ```
+
+*`r rm_apa(act_tab)`*
 :::
 
 ::: {.column width="50%"}
 ```{r}
-data_long2 |>
-  group_by(time) |>
-  summarize(
-    mean = mean(attitude),
-    se = sd(attitude) / sqrt(n)
-  ) |>
-  ggplot(aes(fct_inorder(time, ordered = TRUE), mean, group = 1)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 3) +
-  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.1) +
-  labs(
-    title = "Attitudes Toward Statistics Across the Semester",
-    x = "\nTime Point",
-    y = "Mean Attitude Rating (1–10)\n"
-  ) +
-  theme_minimal(base_size = 14)
+#| echo: false
+#| fig-width: 6
+#| fig-height: 4.6
+act |>
+  group_by(cond) |>
+  summarise(m = mean(y), se = sd(y) / sqrt(n())) |>
+  ggplot(aes(cond, m, group = 1)) +
+  geom_line(color = sage, linewidth = 1.4) +
+  geom_point(color = sage, size = 3.5) +
+  geom_errorbar(aes(ymin = m - se, ymax = m + se), width = .1, color = ink) +
+  labs(title = "Attitudes across the semester", x = NULL, y = "Mean attitude (1-10)") +
+  theme_deck(20)
 ```
 :::
 :::::
-
-## Practice
-
-### Interpreting F
-
-MS~Time~ is made up of MS~Error~ + the theoretical difference over time:
-
--   $MS_{Time} = \text{change over time} + MS_{Error}$
--   $MS_{Time} = 0 + MS_{Error}$
--   $MS_{Time} = MS_{Error}$
--   $F = \frac{MS_{Error}}{MS_{Error}} = 1$
 
 ## Interpreting F
 
--   When F \<= 1, it's not likely to be significant.
+::: callout-tip
+## What F means
 
--   The MS~Time~ is made up of the MS~Error~ + the theoretical difference over time:
+$MS_{Time}$ is made up of $MS_{Error}$ + the theoretical change over time:
 
-    -   $MS_{Time} = \text{change over time} + MS_{Error}$
+- $MS_{Time} = \text{change over time} + MS_{Error}$
 
-    -   $MS_{Time} = \text{effect} + MS_{Error}$
+- If there is no change: $MS_{Time} = 0 + MS_{Error}$, so $F = \dfrac{MS_{Error}}{MS_{Error}} = 1$.
 
-    -   $F > 1$
+- If there is a change: $F = 1 + \dfrac{\text{change}}{MS_{Error}}$, which is greater than 1.
+:::
 
-## Hypothesis testing: ANOVA
+- When $F \leq 1$, it's not likely to be significant.
 
--   $F \leq 1$
+## Hypothesis Testing: ANOVA
 
-    -   Fail to reject the Null Hypothesis
+::: callout-tip
+## Decision rule
 
--   $F > 1$
+- $F \leq 1$: fail to reject the null hypothesis.
 
-    -   Refer to *p*-value
-
-    -   Reject the Null Hypothesis
-
-## Reporting F
-
-If asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:
-
--   Reject H~0~, or
-
--   Fail to Reject H~0~
-
--   If asked to report findings in general or for publication, you need to report:
-
-    -   $F(df_{Time}, df_{Error}) = F, p$
+- $F > 1$: compare to the critical value (or use the *p*-value). Reject $H_0$ only if $p < \alpha$.
+:::
 
 ## Reporting F
 
-> Enjoyment of statistics after three weeks was significantly higher compared to enjoyment of statistics at the start of measurement, *F* (2, 158) = 281.96, *p* \<.001
+### Active-learning example
 
--   If the results are significant, we have to also report the means and standard deviations for each time point.
-
-> Participants' enjoyment of statistics differed significant across time, *`F`*`(2, 158) = 281.96, p <.001`. Enjoyment was highest at week 2 (`M= 6.61, s = 1.77`). Enjoyment was lowest at baseline (`M  = 5.14, s  = 1.62`). Anxiety at week 1 test was `M= 5.86, s = 1.67`.
+> Attitudes toward statistics differed significantly across the semester, *`r rm_apa(act_tab)`*. Attitudes were highest at the end of the semester (*M* = `r f2(act_ms$M[act_ms$cond == "end"])`, *SD* = `r f2(act_ms$SD[act_ms$cond == "end"])`) and lowest at the beginning (*M* = `r f2(act_ms$M[act_ms$cond == "beginning"])`, *SD* = `r f2(act_ms$SD[act_ms$cond == "beginning"])`). Mid-semester attitudes were *M* = `r f2(act_ms$M[act_ms$cond == "mid"])` (*SD* = `r f2(act_ms$SD[act_ms$cond == "mid"])`).
 
 ## Data Manipulation
 
--   When collected, data can be in either wide or long format.
+### Wide and long format
 
--   Below are the first five rows of the same dataset:
+- When collected, data can be in either **wide** or **long** format.
+
+- Below are the same five participants in both formats.
 
 ```{r}
-data.frame(
-  Participant = factor(1:5),
-  Immediate = rnorm(5, mean = 8, sd = 1.5),
-  After24Hours = rnorm(5, mean = 6, sd = 1.5),
-  After1Week = rnorm(5, mean = 4, sd = 1.5)
-) |> 
-  gt() |> 
-  tab_header(title = "Wide Data",
-             subtitle = "Each row represents an indivdual participant")
+#| echo: false
+set.seed(7)
+wide <- tibble(Participant = factor(1:5),
+               Immediate = rnorm(5, 8, 1.5), After24Hours = rnorm(5, 6, 1.5),
+               After1Week = rnorm(5, 4, 1.5))
+long <- wide |> pivot_longer(cols = !Participant, names_to = "Time", values_to = "Memory")
 
-
-data.frame(
-  Participant = factor(1:5),
-  Immediate = rnorm(5, mean = 8, sd = 1.5),
-  Day = rnorm(5, mean = 6, sd = 1.5),
-  Week = rnorm(5, mean = 4, sd = 1.5)
-) |> 
-  tidyr::pivot_longer(cols = !Participant,
-                      names_to = "Time",
-                      values_to = "Stress") |> 
-  gt() |> 
-  fmt_auto() |> 
-  tab_header(title = "Long Data",
-             subtitle = "Each row represents an indivdual participant's score on each level of the treatment")
+wide |>
+  gt() |>
+  fmt_number(decimals = 1) |>
+  tab_header(title = "Wide data", subtitle = "Each row is one participant") |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 22, table.width = pct(60))
 ```
 
-## Memory Recall Study
+## Data Manipulation
+
+### Wide and long format
+
+:::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+long |>
+  gt() |>
+  fmt_number(columns = Memory, decimals = 1) |>
+  tab_header(title = "Long data", subtitle = "Each row is one participant at one time") |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 18, table.width = pct(90))
+```
+:::
+
+:::: {.column width="50%"}
+::: {.codewindow .r .codewindow-dark}
+pivot.R
 
 ```{r}
-set.seed(100)
+#| echo: true
+#| code-fold: false
+#| eval: false
+library(tidyr)
 
-# Memory Recall Study
-memory_data <- data.frame(
-  Participant = factor(1:30),
-  Immediate = rnorm(30, mean = 8, sd = 1.5),
-  After24Hours = rnorm(30, mean = 6, sd = 1.5),
-  After1Week = rnorm(30, mean = 4, sd = 1.5)
-)
-
-# Make Data Longer
-memory_data_long <- 
-  memory_data |> 
+# wide -> long: one row per person per time
+long <- wide |>
   pivot_longer(cols = !Participant,
-                      names_to = "Time",
-                      values_to = "Memory")
-
-
-aov(Memory ~ Time + Error(Participant), data = memory_data_long) |> 
-  tidy() |> 
-  mutate(
-    Source = term,
-    SS = sumsq,
-    MS = meansq,
-    `F` = ifelse(is.na(statistic),"--",statistic |> round(3)),
-    p = ifelse(p.value >.05,"<.05",p.value),
-    p = ifelse(is.na(p),"--",p)
-  ) |> 
-  select(Source, df, SS, MS, `F`, p) |> 
-  gt() |> 
-  fmt_auto()
-
-
-memory_data_long |> 
-  ggplot(aes(Time,Memory, color = Time)) + 
-    stat_summary(
-    geom = "line",
-    group = 1,
-    fun.data = "mean_se",
-    color = "black"
-  ) + 
-    stat_summary(
-    fun.data = "mean_se",
-    geom = "line",
-    group = 1,
-    color = "black"
-  ) + 
-  geom_jitter(alpha = .2) + 
-  stat_summary(
-    geom = "errorbar",
-    fun.data = "mean_se",
-    width = .2
-  ) + 
-  theme_minimal()
+               names_to = "Time",
+               values_to = "Memory")
 ```
+:::
 
-## Clinical Trial
+- `aov()` and `aov_ez()` need the **long** format.
+::::
+::::::
 
+## Practice
+
+### 1. Memory recall
+
+> 30 participants study a word list and recall it **immediately**, **after 24 hours**, and **after 1 week**. Does recall change over time?
+
+::::: columns
+::: {.column width="50%"}
 ```{r}
-set.seed(100)
-
-# Clinical Trial Study
-clinical_data <- data.frame(
-  Participant = factor(1:30),
-  LowDose = rnorm(30, mean = 5, sd = 1),
-  MediumDose = rnorm(30, mean = 6.5, sd = 1),
-  HighDose = rnorm(30, mean = 8, sd = 1)
-)
-
-clinical_data_long <- 
-  clinical_data |> 
-  pivot_longer(
-    cols = !Participant,
-    names_to = "Dosage",
-    values_to = "DV"
-  )
-
-aov(DV ~ Dosage + Error(Participant), data = clinical_data_long) |> 
-  tidy() |> 
-  gt()
-
-
-clinical_data_long |> 
-  ggplot(aes(Dosage,DV, color = Dosage)) + 
-    stat_summary(
-    geom = "line",
-    group = 1,
-    fun.data = "mean_se",
-    color = "black"
-  ) + 
-    stat_summary(
-    fun.data = "mean_se",
-    geom = "line",
-    group = 1,
-    color = "black"
-  ) + 
-  geom_jitter(alpha = .2) + 
-  stat_summary(
-    geom = "errorbar",
-    fun.data = "mean_se",
-    width = .2
-  ) + 
-  theme_minimal()
+#| echo: false
+rm_gt(mem_t, size = 20)
 ```
 
-## Behavioral Therapy Progress
+<details>
 
+<summary>Reveal answer</summary>
+
+*`r rm_apa(mem_t)`*: recall decreased significantly over time.
+
+</details>
+:::
+
+::: {.column width="50%"}
 ```{r}
-set.seed(100)
-
-# Behavioral Therapy Study
-therapy_data <- data.frame(
-  Participant = factor(1:30),
-  Baseline = rnorm(30, mean = 10, sd = 2),
-  MidTreatment = rnorm(30, mean = 7, sd = 2),
-  PostTreatment = rnorm(30, mean = 5, sd = 2)
-)
-
-therapy_data_long <- 
-  therapy_data |> 
-  pivot_longer(
-    cols = !Participant,
-    names_to = "Treatment_Group",
-    values_to = "DV"
-  )
-
-aov_ez(
-  "Participant",
-  "DV",
-  therapy_data_long, 
-  within = "Treatment_Group",
-  anova_table = list(correction = "none"),
-  return = "nice"
-) |> gt()
-
-therapy_data_long |> 
-  ggplot(aes(Treatment_Group,DV,color = Treatment_Group)) +
-  geom_jitter(alpha = .2) + 
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "errorbar",
-    width = .2
-  ) + 
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "line",
-    group = 1,
-    color = "black"
-  ) + 
-  theme_minimal()
+#| echo: false
+#| fig-width: 6
+#| fig-height: 2.5
+rm_plot(mem, "Words recalled", "Memory recall")
 ```
+:::
+:::::
 
-## 4. Consumer Product Ratings
 
+## Practice
+
+### 2. Clinical trial
+
+> 30 patients each receive a **low**, **medium**, and **high** dose of a medication (in separate sessions) and report symptom improvement. Does dose matter?
+
+::::: columns
+::: {.column width="50%"}
 ```{r}
-set.seed(100)
-
-# Consumer Product Study
-product_data <- data.frame(
-  Participant = factor(1:30),
-  ProductA = rnorm(30, mean = 6, sd = 1),
-  ProductB = rnorm(30, mean = 7, sd = 1),
-  ProductC = rnorm(30, mean = 5, sd = 1)
-)
-
-product_data_long <- 
-  product_data |> 
-  pivot_longer(cols = !Participant,
-                      names_to = "products",
-                      values_to = "ratings")
-
-aov(ratings ~ products + Error(Participant), data = product_data_long) |>
-  tidy() |> 
-  gt()
-
-product_data_long |> 
-  ggplot(aes(products,ratings,fill = products)) + 
-  stat_summary(
-    fun = "mean",
-    geom = "bar",
-    width = .5
-  ) +
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "errorbar",
-    width = .2
-  ) + 
-  theme_minimal()
+#| echo: false
+rm_gt(clin_t, size = 20)
 ```
 
-## 5. Physiological Stress Study
+<details>
 
+<summary>Reveal answer</summary>
+
+*`r rm_apa(clin_t)`*: improvement increased significantly with dose.
+
+</details>
+:::
+
+::: {.column width="50%"}
 ```{r}
-set.seed(100)
-
-# Physiological Stress Study
-stress_data <- data.frame(
-  Participant = factor(1:30),
-  Rest = rnorm(30, mean = 50, sd = 5),
-  Task = rnorm(30, mean = 70, sd = 5),
-  Recovery = rnorm(30, mean = 55, sd = 5)
-)
-
-stress_data_long <- 
-  stress_data |> 
-  pivot_longer(cols = !Participant,
-                      names_to = "Time",
-                      values_to = "Stress")
-
-aov(Stress ~ Time + Error(Participant), data = stress_data_long) |>
-  tidy() |> 
-  gt() |> 
-  fmt_auto()
-
-stress_data_long |> 
-  ggplot(aes(Time,Stress,color = Time)) + 
-  geom_jitter(alpha = .2) + 
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "errorbar",
-    width = .2
-  ) + 
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "line",
-    group = 1) + 
-  theme_minimal()
+#| echo: false
+#| fig-width: 6
+#| fig-height: 2.5
+rm_plot(clin, "Symptom improvement", "Clinical trial")
 ```
+:::
+:::::
+
+
+## Practice
+
+### 3. Behavioral therapy progress
+
+> 30 participants rate their anxiety at **baseline**, **mid-treatment**, and **post-treatment**.
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+rm_gt(ther_t, size = 20)
+```
+
+<details>
+
+<summary>Reveal answer</summary>
+
+*`r rm_apa(ther_t)`*: anxiety decreased.
+
+</details>
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 2.5
+rm_plot(ther, "Anxiety", "Behavioral therapy")
+```
+:::
+:::::
+
+
+## Practice
+
+### 4. Consumer product ratings
+
+> 30 consumers each rate **three products** (A, B, and C).
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+rm_gt(prod_t, size = 20)
+```
+
+<details>
+
+<summary>Reveal answer</summary>
+
+*`r rm_apa(prod_t)`*: the ratings differed by product. A post-hoc test would show which products differ.
+
+</details>
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 2.5
+rm_plot(prod, "Rating", "Product ratings")
+```
+:::
+:::::
+
+
+## Practice
+
+### 5. Physiological stress
+
+> 30 participants' heart rate is measured at **rest**, during a **task**, and during **recovery**.
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+rm_gt(strs_t, size = 20)
+```
+
+<details>
+
+<summary>Reveal answer</summary>
+
+*`r rm_apa(strs_t)`*: heart rate differed significantly across the phases.
+
+</details>
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 2.5
+rm_plot(strs, "Heart rate (bpm)", "Physiological stress")
+```
+:::
+:::::
+
+
+## Summary: Within-Subjects ANOVA
+
+- Compares **three or more** related means (the same people measured repeatedly).
+
+- Splits the variability into time, subjects, and error, and **removes the subject differences** from the error term.
+
+- $F = MS_{Time} / MS_{Error}$ with $df = (k - 1,\ (n - 1)(k - 1))$.
+
+- Check sphericity (Mauchly's Test) and use the Greenhouse-Geisser correction if it is violated.
+
+- Follow a significant $F$ with post-hoc paired comparisons (Bonferroni).
+
+- Report $F(df_{Time}, df_{Error})$, $p$, an effect size, and the means and standard deviations.
