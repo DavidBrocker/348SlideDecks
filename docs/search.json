@@ -1167,5 +1167,180 @@
     "title": "One-Sample T-Test",
     "section": "Reading the t-Table",
     "text": "Reading the t-Table\nCritical values by degrees of freedom\n\n\nExcerpt of the t-table (critical values)\n\n\n\n\n\n\n\n\ndf\nOne-tailed .05(two-tailed .10)\nOne-tailed .025(two-tailed .05)\nOne-tailed .005(two-tailed .01)\n\n\n\n\n15\n1.753\n2.131\n2.947\n\n\n19\n1.729\n2.093\n2.861\n\n\n24\n1.711\n2.064\n2.797\n\n\n29\n1.699\n2.045\n2.756\n\n\n∞ (z)\n1.645\n1.960\n2.576\n\n\n\n\n\nFind your df (\\(n - 1\\) for a one-sample test), then pick the column for your \\(\\alpha\\) and your tails.\nIf \\(|t|\\) is beyond the critical value, reject \\(H_0\\).\n\nExample: \\(t = 2.68\\) with \\(df = 19\\), two-tailed \\(\\alpha = .05\\): \\(2.68 &gt; 2.093\\), so reject.\n\nIn R: qt(.975, df = 19) returns 2.093."
+  },
+  {
+    "objectID": "lec10/lec10.html#introduction-to-paired-samples-t-test",
+    "href": "lec10/lec10.html#introduction-to-paired-samples-t-test",
+    "title": "Paired-Samples T-Test",
+    "section": "Introduction to Paired-Samples t-Test",
+    "text": "Introduction to Paired-Samples t-Test\nWhat is a paired-samples t-test?\n\n\nPaired-Samples t-Test\n\nA statistical method for comparing the means of two related sets of scores, such as the same people measured twice."
+  },
+  {
+    "objectID": "lec10/lec10.html#purpose-of-paired-samples-t-test",
+    "href": "lec10/lec10.html#purpose-of-paired-samples-t-test",
+    "title": "Paired-Samples T-Test",
+    "section": "Purpose of Paired-Samples t-Test",
+    "text": "Purpose of Paired-Samples t-Test\nWhy use it?\n\nTo determine whether there is a statistically significant difference between two related group means.\nUseful in psychology for assessing change due to an intervention, therapy, or experiment."
+  },
+  {
+    "objectID": "lec10/lec10.html#connection-to-the-one-sample-t-test",
+    "href": "lec10/lec10.html#connection-to-the-one-sample-t-test",
+    "title": "Paired-Samples T-Test",
+    "section": "Connection to the One-Sample t-Test",
+    "text": "Connection to the One-Sample t-Test\n\n\n\nA paired-samples t-test is a one-sample t-test on the difference scores.\n\n\n\n\n\n\n\n\n\n\n\nOne-sample\n\n\n\\(t = \\dfrac{\\bar{x} - \\mu_0}{s / \\sqrt{n}}\\)\nIs the sample mean different from a known value?\n\n\n\n\n\n\n\n\n\n\nPaired\n\n\n\\(t = \\dfrac{\\bar{D} - 0}{s_D / \\sqrt{n}}\\)\nIs the mean difference \\(\\bar{D}\\) different from 0?"
+  },
+  {
+    "objectID": "lec10/lec10.html#formula-for-paired-samples-t-test",
+    "href": "lec10/lec10.html#formula-for-paired-samples-t-test",
+    "title": "Paired-Samples T-Test",
+    "section": "Formula for Paired-Samples t-Test",
+    "text": "Formula for Paired-Samples t-Test\nMathematical representation\n\n\n\n\n\n\nPaired-Samples t-Test\n\n\n\\(\\large{t = \\dfrac{\\color{blue}{\\bar{D}}}{\\color{orange}{s_D}/\\sqrt{n}}}\\)\n\n\n\n\n\\(\\color{blue}{\\bar{D}}\\): mean of the differences between paired observations.\n\\(\\color{orange}{s_D}\\): standard deviation of the differences.\n\\(n\\): number of pairs.\nDegrees of freedom: \\(df = n - 1\\)."
+  },
+  {
+    "objectID": "lec10/lec10.html#theoretical-formula-explanation",
+    "href": "lec10/lec10.html#theoretical-formula-explanation",
+    "title": "Paired-Samples T-Test",
+    "section": "Theoretical Formula Explanation",
+    "text": "Theoretical Formula Explanation\nUnderstanding each component\n\n\n\nMean difference \\(\\bar{D}\\)\n\nThe average of the differences between paired scores.\n\n\n\n\n\nSD of differences \\(s_D\\)\n\nHow much individual differences vary around the mean difference.\n\n\n\n\n\nNumber of pairs \\(n\\)\n\nA larger \\(n\\) shrinks the standard error \\(s_D/\\sqrt{n}\\), so smaller differences can reach significance."
+  },
+  {
+    "objectID": "lec10/lec10.html#application-of-paired-samples-t-test",
+    "href": "lec10/lec10.html#application-of-paired-samples-t-test",
+    "title": "Paired-Samples T-Test",
+    "section": "Application of Paired-Samples t-Test",
+    "text": "Application of Paired-Samples t-Test\nWhen to apply this test\n\n\ntrending_up\nPretest-Posttest\nThe same group measured before and after\n\n\npeople\nMatched Pairs\nTwins or matched participants\n\n\nrepeat\nRepeated Measures\nThe same group under different conditions"
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test",
+    "href": "lec10/lec10.html#paired-samples-t-test",
+    "title": "Paired Samples T-Test",
+    "section": "Paired Samples t-Test",
+    "text": "Paired Samples t-Test\nApplication in Psychology Research\n\nA psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.\n\nSteps:\n\nState the Null and Alternative Hypothesis\nCalculate the difference between pre- and post-intervention scores.\nFind the mean \\(\\bar{d}\\) and standard deviation \\(s_d\\) of the differences.\nApply the formula to calculate the t-value and check for significance."
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-1",
+    "href": "lec10/lec10.html#paired-samples-t-test-1",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nApplication in psychology research\n\nA psychologist measures stress levels of a group before and after a mindfulness program. Participants first answer a stress survey, next they participate in a mindfulness exercise. After the exercise, their stress scores are measured again and compared.\n\n\n\n\n\n\n\nSteps\n\n\n\nState the null and alternative hypotheses.\nCalculate the difference between post- and pre-intervention scores.\nFind the mean \\(\\bar{D}\\) and standard deviation \\(s_D\\) of the differences.\nApply the formula to calculate the t-value and check for significance."
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-2",
+    "href": "lec10/lec10.html#paired-samples-t-test-2",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nStep 1: hypotheses\n\n\n\n\n\n\n\n\nNull hypothesis \\(H_0\\)\n\n\nThere will be no difference in stress before and after the mindfulness exercise.\n\\(\\mu_\\text{post} = \\mu_\\text{pre}\\), or equivalently \\(\\mu_D = 0\\)\n\n\n\n\n\n\n\n\n\n\nAlternative hypothesis \\(H_A\\)\n\n\nThere will be a decrease in stress after the mindfulness exercise.\n\\(\\mu_\\text{post} &lt; \\mu_\\text{pre}\\), or equivalently \\(\\mu_D &lt; 0\\)"
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-3",
+    "href": "lec10/lec10.html#paired-samples-t-test-3",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nEach person has two scores\n\n\n\n\n\n\n\n\n\n\n\nParticipant\nPre\nPost\n\n\n\n\n1\nP1\n10\n7\n\n\n2\nP2\n7\n7\n\n\n3\nP3\n12\n11\n\n\n4\nP4\n5\n5\n\n\n5\nP5\n7\n4\n\n\n6\nP6\n9\n4\n\n\n7..29\n\n\n\n\n\n30\nP30\n7\n6"
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-4",
+    "href": "lec10/lec10.html#paired-samples-t-test-4",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nStep 2: the difference scores\n\n\n\n\n\n\n\n\n\n\n\nParticipant\nPre\nPost\nD = Post - Pre\n\n\n\n\n1\nP1\n10\n7\n-3\n\n\n2\nP2\n7\n7\n0\n\n\n3\nP3\n12\n11\n-1\n\n\n4\nP4\n5\n5\n0\n\n\n5\nP5\n7\n4\n-3\n\n\n6\nP6\n9\n4\n-5\n\n\n7..29\n\n\n\n\n\n\n30\nP30\n7\n6\n-1\n\n\n\n\n\n\n\n\n\n\\(D\\) is post minus pre.\nA negative \\(D\\) means stress went down.\nFrom here on, the test only looks at the column of \\(D\\) values."
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-5",
+    "href": "lec10/lec10.html#paired-samples-t-test-5",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nSteps 3 and 4: construct the formula (manually)\n\n\n\n\n\n\nMean and SD of the differences\n\n\n\\(\\bar{D} = -1.67\\) and \\(s_D = 1.21\\) across \\(n = 30\\) pairs\n\n\n\n\n\n\n\n\n\nCompute t\n\n\n\\(t = \\dfrac{\\bar{D}}{s_D/\\sqrt{n}} = \\dfrac{-1.67}{1.21/\\sqrt{30}} = -7.53\\)\n\n\n\n\n\n\n\n\n\nDecide\n\n\nAt \\(\\alpha = .05\\) (two-tailed) and \\(df = 29\\), \\(t_{critical} = \\pm 2.045\\). Since \\(|t| = 7.53 &gt; 2.045\\), we reject \\(H_0\\)."
+  },
+  {
+    "objectID": "lec10/lec10.html#effect-size-cohens-d",
+    "href": "lec10/lec10.html#effect-size-cohens-d",
+    "title": "Paired-Samples T-Test",
+    "section": "Effect Size: Cohen’s d",
+    "text": "Effect Size: Cohen’s d\nWhy report effect size?\n\nStatistical significance (\\(p\\)) tells us if there is a difference.\nEffect size tells us how big that difference is.\nFor a paired-samples design, the effect size is \\(d_z\\):\n\n\n\n\n\n\n\n\\(d_z\\)\n\n\n\\(d_z = \\dfrac{\\bar{D}}{s_D}\\): the mean difference in units of the standard deviation of the differences.\n\n\n\n\n\n\n\n\n\n\n\n|d|\nInterpretation\n\n\n\n\n0.20\nSmall effect\n\n\n0.50\nMedium effect\n\n\n0.80\nLarge effect"
+  },
+  {
+    "objectID": "lec10/lec10.html#cohens-d",
+    "href": "lec10/lec10.html#cohens-d",
+    "title": "Paired-Samples T-Test",
+    "section": "Cohen’s d",
+    "text": "Cohen’s d\nMindfulness example\n\n\n\n\n\n\n\n\nBy hand\n\n\n\\(d_z = \\dfrac{\\bar{D}}{s_D} = \\dfrac{-1.67}{1.21} = -1.37\\)\n\n\n\nThe size is \\(|d_z| = 1.37\\), a large effect. The negative sign just means scores went down.\n\n\ncohens_d.R\n\nlibrary(rstatix)\nstress |&gt;\n  pivot_longer(c(Post, Pre),\n               names_to = \"time\", values_to = \"score\") |&gt;\n  cohens_d(score ~ time, paired = TRUE)\n\n\nrstatix reports the same value: \\(d_z = -1.37\\)."
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-t-tests",
+    "href": "lec10/lec10.html#paired-t-tests",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired T-Tests",
+    "text": "Paired T-Tests\nVisualizing results"
+  },
+  {
+    "objectID": "lec10/lec10.html#interpreting-results",
+    "href": "lec10/lec10.html#interpreting-results",
+    "title": "Paired-Samples T-Test",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\n\nWe found a statistically significant decrease in stress (\\(p\\) &lt; .001).\nThe effect size (\\(|d_z| =\\) 1.37) indicates a large change.\nCombining significance and effect size gives us a fuller picture of the data.\n\n\nAlways ask: is this difference not just statistically, but practically meaningful?"
+  },
+  {
+    "objectID": "lec10/lec10.html#summary-of-paired-samples-t-test",
+    "href": "lec10/lec10.html#summary-of-paired-samples-t-test",
+    "title": "Paired-Samples T-Test",
+    "section": "Summary of Paired-Samples t-Test",
+    "text": "Summary of Paired-Samples t-Test\nKey takeaways\n\nPaired-samples t-tests are ideal for comparing two related sets of scores.\nThey help determine if interventions or conditions produce significant changes.\nRemember to check the assumptions:\n\n\n\n\n\n\n\nAssumptions\n\n\n\nThe differences are normally distributed. Check with a histogram, QQ plot, or Shapiro-Wilk test.\nThe pairs are dependent (related measures). Same participants or matched pairs.\nNo major outliers in the differences."
+  },
+  {
+    "objectID": "lec10/lec10.html#example-datasets",
+    "href": "lec10/lec10.html#example-datasets",
+    "title": "Paired Samples T-Test",
+    "section": "Example Datasets",
+    "text": "Example Datasets\n\n\nCode\nlibrary(tidyverse)\n\nset.seed(101)\n# Paired Samples t-Test: Pre vs. Post Stress Scores\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre = rnorm(30, mean = 20, sd = 4),\n  Stress_Post = rnorm(30, mean = 16, sd = 4)\n)\n\nset.seed(102)\n\n# Example Dataset 2 — Paired Samples t-Test: Reaction Time Before/After Music\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60),\n  RT_Music = rnorm(25, mean = 500, sd = 55)\n)\n\nset.seed(103)\n\n# Example Dataset 3 — Independent Samples t-Test: Caffeine vs. Placebo Alertness\nex_3 &lt;- tibble(\n  Group = rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n  Alertness = c(\n    rnorm(20, mean = 75, sd = 8),\n    rnorm(20, mean = 68, sd = 8)\n  )\n)\n\nset.seed(104)\n\n# Example Dataset 4 — Independent Samples t-Test: Online vs. In-Person Exam Scores\nex_4 &lt;- tibble(\n  Format = rep(c(\"Online\", \"InPerson\"), each = 25),\n  Exam_Score = c(\n    rnorm(25, mean = 82, sd = 5),\n    rnorm(25, mean = 79, sd = 6)\n  )\n)"
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-6",
+    "href": "lec10/lec10.html#paired-samples-t-test-6",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nConstruct the formula (computationally)\n\npaired_t.R\n\n# post - pre, so a decrease in stress is a negative difference\nt.test(stress$Post, stress$Pre, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  stress$Post and stress$Pre\nt = -7.526, df = 29, p-value = 2.696e-08\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.119592 -1.213741\nsample estimates:\nmean difference \n      -1.666667"
+  },
+  {
+    "objectID": "lec10/lec10.html#paired-samples-t-test-7",
+    "href": "lec10/lec10.html#paired-samples-t-test-7",
+    "title": "Paired-Samples T-Test",
+    "section": "Paired-Samples t-Test",
+    "text": "Paired-Samples t-Test\nReading the output\n\n\n\n\n\n\n\n\nd\nt\ndf\np\nCI[ll,uu]\n\n\n\n\n−1.67\n−7.53\n29\n&lt;.001\n[-2.12, -1.21]\n\n\n\n\n\n\n\n\nd = mean difference (post minus pre, \\(\\bar{D}\\))\nt = t-test statistic\ndf = \\(n - 1\\) (30 - 1)\np = probability of a difference at least this extreme if \\(H_0\\) is true\nCI[ll,uu] = 95% confidence interval for the mean difference"
+  },
+  {
+    "objectID": "lec10/lec10.html#one-tailed-or-two-tailed",
+    "href": "lec10/lec10.html#one-tailed-or-two-tailed",
+    "title": "Paired-Samples T-Test",
+    "section": "One-Tailed or Two-Tailed?",
+    "text": "One-Tailed or Two-Tailed?\nMatching the test to the hypothesis\n\nOur alternative is directional: \\(H_A: \\mu_\\text{post} &lt; \\mu_\\text{pre}\\).\nt.test() is two-tailed by default. A directional test uses alternative:\n\n\none_tailed.R\n\n# post - pre, testing for a DEcrease\nt.test(stress$Post, stress$Pre, paired = TRUE, alternative = \"less\")\n\n\n\nThe t-statistic is the same. The one-tailed p-value is half the two-tailed p-value (when the effect is in the predicted direction), and the confidence interval becomes one-sided.\nChoose the direction before you see the data. Here the conclusion is the same either way: p &lt; .001."
+  },
+  {
+    "objectID": "lec10/lec10.html#why-pairing-helps",
+    "href": "lec10/lec10.html#why-pairing-helps",
+    "title": "Paired-Samples T-Test",
+    "section": "Why Pairing Helps",
+    "text": "Why Pairing Helps\nThe same data, analyzed two ways\n\n\n\n-7.53\n\n\nPaired t-test (uses the pairing)\n\n\n\n\n-3.12\n\n\nIndependent t-test (ignores the pairing)\n\n\n\n\nPeople differ a lot from each other (some start stressed, some start calm). That between-person variability swamps the average change in an independent-samples test.\nPairing compares each person to themselves, removing that variability. Because pre and post scores are correlated (r = 0.83), the differences are much less spread out than the raw scores."
+  },
+  {
+    "objectID": "lec10/lec10.html#reporting-results",
+    "href": "lec10/lec10.html#reporting-results",
+    "title": "Paired-Samples T-Test",
+    "section": "Reporting Results",
+    "text": "Reporting Results\nAPA-style\n\nA paired-samples t-test was conducted to compare stress before and after a mindfulness program. Results showed a significant decrease in stress after the program, t(29) = -7.53, p &lt; .001, 95% CI [-2.12, -1.21], \\(d_z\\) = -1.37.\n\n\nWhat kind of test? paired-samples t-test\nWhat is being compared? stress before and after the program\nIs it significant? significant decrease\nWhat are the test results? t, df, p, confidence interval, and effect size"
+  },
+  {
+    "objectID": "lec10/lec10.html#practice",
+    "href": "lec10/lec10.html#practice",
+    "title": "Paired-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nPre/post stress\n\nA researcher measures 30 participants’ stress before and after a mindfulness program (ex_1: Stress_Pre, Stress_Post). She predicts that stress will be lower afterward.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (post minus pre).\nRun the paired-samples t-test, report \\(d_z\\), and write an APA sentence.\n\n\npractice_1.R\n\nset.seed(101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z\\) = -1.44: a significant, large decrease in stress."
+  },
+  {
+    "objectID": "lec10/lec10.html#practice-1",
+    "href": "lec10/lec10.html#practice-1",
+    "title": "Paired-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nReaction time and music\n\nDo people respond faster with music playing? 25 participants complete a reaction-time task with no music and with music (ex_2: RT_NoMusic, RT_Music). The prediction is that reaction times will be faster (lower) with music.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (music minus no music).\nRun a one-tailed paired-samples t-test (alternative = \"less\") and decide.\n\n\npractice_2.R\n\nset.seed(102)\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60)\n) |&gt; mutate(RT_Music = RT_NoMusic - 20 + rnorm(25, 0, 25))\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(24) = -1.49, p = .075 (one-tailed), \\(d_z\\) = -0.30. The decision depends on the result: compare p to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
   }
 ]
