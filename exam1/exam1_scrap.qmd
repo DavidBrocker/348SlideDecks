@@ -1,6 +1,6 @@
 ---
 title: "Exam 1 - Scrap Paper"
-subtitle: "Press ~ to bring up R"
+subtitle: "Press the ` key to bring up R (see next slide)"
 format: 
   revealjs:
     theme: ../custom.scss
@@ -16,9 +16,11 @@ revealjs-plugins:
 
 Press the ✏️ icon to draw on the screen
 
+Press <span class="keycap"><span class="keycap-top">~</span><span class="keycap-main">`</span></span> (just press it, no Shift) to open R
+
 ## Formula Sheet
 
-::::::: columns
+::::::::: columns
 :::: {.column width="33%"}
 ::: callout-tip
 ## Formula 1
@@ -31,16 +33,25 @@ $$\frac{\sum(x)}{n}$$
 ::: callout-tip
 ## Formula 2
 
-$$\sqrt{\frac{\sum(x)-\bar{x}^2}{n-1}}$$
+$$\sqrt{\frac{\sum(x-\bar{x})^2}{n-1}}$$
 :::
 ::::
 
-:::: {.column width="33%"} 
-::: callout-tip 
+:::: {.column width="33%"}
+::: callout-tip
 ## Formula 3
 
 $$\frac{x-\bar{x}}{s}$$
 :::
-:::::
+::::
+:::::::::
 
-:::::::
+## Z-Table Reminder
+
+::: callout-tip
+## The table gives the area to the **left** of z
+
+- **Left of z:** read the table value directly.
+- **Right of z:** 1 minus the table value.
+- **Between two z's:** big area minus small area.
+:::

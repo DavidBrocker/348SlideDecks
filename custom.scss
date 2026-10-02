@@ -37,7 +37,7 @@ $presentation-title-slide-text-align: left;
 
 #title-slide .subtitle {
   color: $accent;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-bottom: 20px;
 }
 
@@ -1174,4 +1174,53 @@ $dingbat-vine: "❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ 
     img { max-height: 150px; margin: 0 auto; display: block; }
     p { margin: 2px 0; }
   }
+}
+
+// ---------------------------------------------------------------------------
+// Drop console (` key): label the two panes so students can tell the Script
+// editor (top, write code + Run) from the Console (bottom, R's output).
+// IDs (#editor, #terminal) come from the r-wasm/drop extension's markup.
+// ---------------------------------------------------------------------------
+.reveal .drop {
+  #editor::before,
+  #terminal::before {
+    display: block;
+    padding: 6px 12px;
+    font-family: $font-family-sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #fff;
+  }
+  #editor::before {
+    content: "SCRIPT  \2014  type your code here, then press Run (or Cmd/Ctrl + Enter)";
+    background: $accent;
+  }
+  #terminal::before {
+    content: "CONSOLE  \2014  R's answers show up here";
+    background: #2F3E46;
+  }
+}
+
+// Keyboard key icon: <span class="keycap"><span class="keycap-top">~</span><span class="keycap-main">`</span></span>
+// Shows the shifted symbol small on top and the symbol you actually press large below.
+.keycap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.4em;
+  padding: .2em .6em .3em;
+  font-size: 1.2em;
+  vertical-align: middle;
+  background: #fff;
+  border: 2px solid $accent2;
+  border-bottom-width: 5px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+  font-family: monospace;
+  line-height: 1.05;
+
+  .keycap-top  { font-size: .75em; font-weight: 700; color: $text-muted; }
+  .keycap-main { font-size: 2em; line-height: 1.1; margin-top: .1em; font-weight: 700; color: $accent; }
 }

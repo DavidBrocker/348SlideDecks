@@ -15,21 +15,17 @@ format:
     lightbox: true
     drop:
       engine: webr
-      webr:
-        packages:
-         - ggplot2
-         - dplyr
 revealjs-plugins:
   - drop
 ---
 
 ## Learning Goals
 
--   Compute sample mean and standard deviation by hand.
--   Interpret what the mean and SD tell us about data.
--   Standardize raw scores into Z-scores.
--   Interpret Z-scores (direction and distance from mean).
--   Relate Z-scores to probability under a normal curve.
+- Compute sample mean and standard deviation by hand.
+- Interpret what the mean and SD tell us about data.
+- Standardize raw scores into Z-scores.
+- Interpret Z-scores (direction and distance from mean).
+- Relate Z-scores to probability under a normal curve.
 
 ## 1. Mean Calculation
 
@@ -119,7 +115,7 @@ mean(c(-4,-2,0,3,5))
 
 <li>Sum of squares = $4+1+4+0+1 = 10$</li>
 
-<li>Sample variance $s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5)$</li>
+<li>Sample variance $s^2 = \frac{\sum (x_i-\bar{x})^2}{n-1} = \frac{10}{4} = 2.5$</li>
 
 <li>Sample SD $s = \sqrt{2.5} \approx 1.58$</li>
 
@@ -154,7 +150,7 @@ sd(c(2,3,6,4,5))
 
 <summary>Solution</summary>
 
-<p>First compute the sample mean: $\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5$<br> Squared deviations: $(4-5)^2=1\\(7-5)^2=4\\ (3-5)^2=4\\(5-5)^2=0\\(8-5)^2=9\\(6-5)^2=1\\ (2-5)^2=9\\$ <br> Sum = $1+4+4+0+9+1+9 = 28$.</p>
+<p>First compute the sample mean: $\bar{x} = \frac{4+7+3+5+8+6+2}{7} = \frac{35}{7} = 5$<br> Squared deviations: $(4-5)^2=1\\(7-5)^2=4\\ (3-5)^2=4\\(5-5)^2=0\\(8-5)^2=9\\(6-5)^2=1\\ (2-5)^2=9\\$ <br> Sum = $1+4+4+0+9+1+9 = 28$.<br> $s^2 = \frac{28}{7-1} = 4.67$, so $s = \sqrt{4.67} \approx 2.16$.</p>
 
 </details>
 :::
@@ -235,7 +231,7 @@ sd(c(4,7,3,5,8,6,2))
 
 <summary>Solution</summary>
 
-<p>A Z-score of `-1.5` is **below** the mean. In raw score terms: $X = \mu + \frac{z}{\sigma} = 40 + (-1.5)(5) = 40 - 7.5 = 32.5.$ So the participant scored `32.5`, which is `1.5` standard deviations **below** the mean.</p>
+<p>A Z-score of `-1.5` is **below** the mean. In raw score terms: $X = \mu + z\sigma = 40 + (-1.5)(5) = 40 - 7.5 = 32.5.$ So the participant scored `32.5`, which is `1.5` standard deviations **below** the mean.</p>
 
 </details>
 
@@ -285,10 +281,17 @@ sd(c(4,7,3,5,8,6,2))
 <summary>Solution</summary>
 
 <p>
-  <ul>
-    <li>For the first participant (72): $z_1 = \frac{72 - 60}{8} = \frac{12}{8} = 1.5.$</li>
-    <li>For the second participant (48): $z_2 = \frac{48 - 60}{8} = \frac{-12}{8} = -1.5.$</li> <li>Interpretation: the first participant is `1.5` SD **above** the mean (higher depression score than average), while the second is `1.5` SD **below** the mean (lower depression score than average). They are symmetric around the mean.</li>
-  </ul>
+
+<ul>
+
+<li>For the first participant (72): $z_1 = \frac{72 - 60}{8} = \frac{12}{8} = 1.5.$</li>
+
+<li>For the second participant (48): $z_2 = \frac{48 - 60}{8} = \frac{-12}{8} = -1.5.$</li>
+
+<li>Interpretation: the first participant is `1.5` SD **above** the mean (higher depression score than average), while the second is `1.5` SD **below** the mean (lower depression score than average). They are symmetric around the mean.</li>
+
+</ul>
+
 </p>
 
 </details>
@@ -304,13 +307,13 @@ sd(c(4,7,3,5,8,6,2))
 
 </details>
 
-## 10. Normal Distribution & Areas
+## 10. Z-Scores to Raw Scores
 
-### Probability Beyond a Given Z-Score
+### Working Backwards
 
 > The distribution of scores on a math test is approximately normal with mean $\mu = 100$ and standard deviation $\sigma = 15$.
 
-Question: What is the score of students who scored above $z = 1.2$?
+**Question:** What raw score corresponds to $z = 1.2$?
 
 ::::: columns
 ::: {.column width="50%"}
@@ -318,7 +321,7 @@ Question: What is the score of students who scored above $z = 1.2$?
 
 <summary>Solution</summary>
 
-<p>$z = \frac{x-\bar{x}}{s}\\ x = z\times\bar{x} + 100\\ 1.2\times15+100 = 118$</p>
+<p>Solve $z = \frac{x-\mu}{\sigma}$ for $x$: $x = \mu + z\sigma = 100 + 1.2(15) = 118$</p>
 
 </details>
 :::
@@ -331,6 +334,141 @@ Question: What is the score of students who scored above $z = 1.2$?
 ```{r}
 #| echo: true
 1.2*15 + 100
+```
+
+</details>
+:::
+:::::
+
+## Reading the Z-Table
+
+::: callout-tip
+## The table only ever gives the area to the **left** of z
+
+1.  **Sketch** the curve and shade what the question asks for.
+2.  **Left of z:** read the table value directly.
+3.  **Right of z:** 1 minus the table value (subtract the *area*, not $z$).
+4.  **Between two z's:** big area minus small area.
+:::
+
+Anxiety scores are approximately normal with $\mu = 50$ and $\sigma = 10$.
+
+## 11. Probability: Left Tail
+
+### Below a Score
+
+**Question:** What proportion of people score **below 42**?
+
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<ul>
+
+<li>$z = \frac{42-50}{10} = -0.80$</li>
+
+<li>Shade the left tail. The table gives the left area directly: $.2119$</li>
+
+<li>About **21.2%** score below 42.</li>
+
+</ul>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+pnorm(-0.80)                       # z-table
+pnorm(42, mean = 50, sd = 10)      # unrounded z
+```
+
+</details>
+:::
+:::::
+
+## 12. Probability: Right Tail
+
+### Above a Score
+
+**Question:** What proportion of people score **above 65**?
+
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<ul>
+
+<li>$z = \frac{65-50}{10} = 1.50$</li>
+
+<li>Shade the right tail. The table gives the area to the *left* ($.9332$), so subtract from 1: $1 - .9332 = .0668$</li>
+
+<li>About **6.7%** score above 65.</li>
+
+</ul>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+1 - pnorm(1.50)                                       # z-table
+pnorm(65, mean = 50, sd = 10, lower.tail = FALSE)     # unrounded z
+```
+
+</details>
+:::
+:::::
+
+## 13. Probability: Between Two Scores
+
+### Between Two Values
+
+**Question:** What proportion of people score **between 45 and 60**?
+
+::::: columns
+::: {.column width="50%"}
+<details>
+
+<summary>Solution</summary>
+
+<ul>
+
+<li>$z_{45} = \frac{45-50}{10} = -0.50$ and $z_{60} = \frac{60-50}{10} = 1.00$</li>
+
+<li>Table: left of $1.00$ is $.8413$; left of $-0.50$ is $.3085$</li>
+
+<li>Big area minus small area: $.8413 - .3085 = .5328$</li>
+
+<li>About **53.3%** score between 45 and 60.</li>
+
+</ul>
+
+</details>
+:::
+
+::: {.column width="50%"}
+<details>
+
+<summary>Code Solution</summary>
+
+```{r}
+#| echo: true
+pnorm(1.00) - pnorm(-0.50)                            # z-table
+pnorm(60, 50, 10) - pnorm(45, 50, 10)                 # unrounded z
 ```
 
 </details>

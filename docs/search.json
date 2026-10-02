@@ -187,5 +187,131 @@
     "title": "Z-Scores and Probability Under the Normal Curve",
     "section": "Z-scores",
     "text": "Z-scores\n“Compared to what?” is everywhere\n\n\n\nNewborn weight\n\n\nIs a 4.3 kg baby big? (\\(\\mu = 3.4\\), \\(\\sigma = 0.5\\))\n\n\nRaw (kg)z-score\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(z = \\dfrac{4.3-3.4}{0.5} = 1.8\\). Growth charts report exactly this.\n\n\n\n\n\n\nDaily screen time\n\n\nIs 7 hours a lot? (\\(\\mu = 4.5\\), \\(\\sigma = 1.5\\))\n\n\nRaw (hours)z-score\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(z = \\dfrac{7-4.5}{1.5} = 1.67\\)\n\n\n\n\n\n\nBolt diameter\n\n\nIs 10.10 mm out of spec? (\\(\\mu = 10.00\\), \\(\\sigma = 0.05\\))\n\n\nRaw (mm)z-score\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(z = \\dfrac{10.10-10.00}{0.05} = 2.0\\). Quality control flags this.\n\n\n\n\n\n\nOne-day stock return\n\n\nIs a \\(-2.15\\%\\) day unusual? (\\(\\mu = 0.05\\%\\), \\(\\sigma = 1.1\\%\\))\n\n\nRaw (%)z-score\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(z = \\dfrac{-2.15-0.05}{1.1} = -2.0\\)"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#learning-goals",
+    "href": "exam1/exam1_review.html#learning-goals",
+    "title": "Exam 1 Review",
+    "section": "Learning Goals",
+    "text": "Learning Goals\n\nCompute sample mean and standard deviation by hand.\nInterpret what the mean and SD tell us about data.\nStandardize raw scores into Z-scores.\nInterpret Z-scores (direction and distance from mean).\nRelate Z-scores to probability under a normal curve."
+  },
+  {
+    "objectID": "exam1/exam1_review.html#mean-calculation",
+    "href": "exam1/exam1_review.html#mean-calculation",
+    "title": "Exam 1 Review",
+    "section": "1. Mean Calculation",
+    "text": "1. Mean Calculation\nSample Mean Calculation\n\nA psychology researcher collects the following data on the number of hours five participants spent practicing a task: 3, 5, 8, 2, 7.\n\nQuestion: What is the average number of hours spent practicing?\n\n\n\n\nManual Solution\n\n\n\\(\\bar{x} = \\frac{\\sum(3+5+8+2+7)}{5} = \\frac{25}{5} = 5\\text{ hours}\\)\n\n\n\n\n\nCode Solution\n\n\nmean(c(3,5,8,2,7))\n\n[1] 5"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#mean-calculation-1",
+    "href": "exam1/exam1_review.html#mean-calculation-1",
+    "title": "Exam 1 Review",
+    "section": "2. Mean Calculation",
+    "text": "2. Mean Calculation\nSample Mean Calculation\n\nA study measures the changes in mood scores before and after an intervention. The changes in mood scores are: -4, -2, 0, 3, 5.\n\nQuestion: Calculate the mean change in mood score.\n\n\n\n\nManual Solution\n\n\n\\(\\bar{x} = \\frac{\\sum(-4 + (-2) + 0 + 3 + 5)}{5} = \\frac{2}{5} = 0.4\\)\n\n\n\n\n\nCode Solution\n\n\nmean(c(-4,-2,0,3,5))\n\n[1] 0.4"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#standard-deviation-calculation",
+    "href": "exam1/exam1_review.html#standard-deviation-calculation",
+    "title": "Exam 1 Review",
+    "section": "3. Standard Deviation Calculation",
+    "text": "3. Standard Deviation Calculation\nSample Standard Deviation\n\nA psychologist measures the number of stressful events experienced by a small group of participants over a week: 2, 3, 6, 4, 5.\n\nQuestion: Calculate the standard deviation of stressful events.\n\n\nManual Solution\n\n\n\n\nFirst compute the sample mean: \\(\\bar{x} = \\frac{2+3+6+4+5}{5} = \\frac{20}{5} = 4.\\)\n\n\nCompute squared deviations: \\((2-4)^2=4,\\ (3-4)^2=1,\\ (6-4)^2=4,\\ (4-4)^2=0,\\ (5-4)^2=1\\)\n\n\nSum of squares = \\(4+1+4+0+1 = 10\\)\n\n\nSample variance \\(s^2 = \\frac{\\sum (x_i-\\bar{x})^2}{n-1} = \\frac{10}{4} = 2.5\\)\n\n\nSample SD \\(s = \\sqrt{2.5} \\approx 1.58\\)\n\n\n\n\n\n\nCode Solution\n\n\nsd(c(2,3,6,4,5))\n\n[1] 1.581139"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#standard-deviation-calculation-1",
+    "href": "exam1/exam1_review.html#standard-deviation-calculation-1",
+    "title": "Exam 1 Review",
+    "section": "4. Standard Deviation Calculation",
+    "text": "4. Standard Deviation Calculation\nSample Standard Deviation\n\nSample Standard Deviation Participants’ anxiety scores in a clinical trial are recorded as: 4, 7, 3, 5, 8, 6, 2.\n\nQuestion: Compute the standard deviation of these anxiety scores.\n\n\n\n\nSolution\n\n\nFirst compute the sample mean: \\(\\bar{x} = \\frac{4+7+3+5+8+6+2}{7} = \\frac{35}{7} = 5\\) Squared deviations: \\((4-5)^2=1\\\\(7-5)^2=4\\\\ (3-5)^2=4\\\\(5-5)^2=0\\\\(8-5)^2=9\\\\(6-5)^2=1\\\\ (2-5)^2=9\\\\\\)  Sum = \\(1+4+4+0+9+1+9 = 28\\). \\(s^2 = \\frac{28}{7-1} = 4.67\\), so \\(s = \\sqrt{4.67} \\approx 2.16\\).\n\n\n\n\n\nCode Solution\n\n\nsd(c(4,7,3,5,8,6,2))\n\n[1] 2.160247"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#standard-deviation-calculation-2",
+    "href": "exam1/exam1_review.html#standard-deviation-calculation-2",
+    "title": "Exam 1 Review",
+    "section": "5. Standard Deviation Calculation",
+    "text": "5. Standard Deviation Calculation\nInterpreting Standard Deviation in Psychology\n\nA researcher finds that the standard deviation of reaction times in a cognitive task is 1.5 seconds. Another researcher finds a standard deviation of 0.5 seconds for a similar task.\n\nQuestion: Which task shows more variability in participants’ reaction times, and what might this indicate about task difficulty?\n\n\nSolution\n\n\nA standard deviation of 1.5 is is larger than 0.5 is, so the first task shows more variability."
+  },
+  {
+    "objectID": "exam1/exam1_review.html#z-score-calculation",
+    "href": "exam1/exam1_review.html#z-score-calculation",
+    "title": "Exam 1 Review",
+    "section": "6. Z-Score Calculation",
+    "text": "6. Z-Score Calculation\nZ-Score for a Single Value\n\nIn a personality study, the average score on an extraversion scale is 50, with a standard deviation of 10. One participant scores 70.\n\nQuestion: What is the Z-score for this participant?\n\n\n\n\nSolution\n\n\n\\(z = \\frac{X - \\mu}{\\sigma} = \\frac{70 - 50}{10} = \\frac{20}{10} = 2\\)\n\n\n\n\n\nCode Solution\n\n\n(70-50)/10\n\n[1] 2"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#z-score-calculation-1",
+    "href": "exam1/exam1_review.html#z-score-calculation-1",
+    "title": "Exam 1 Review",
+    "section": "7. Z-Score Calculation:",
+    "text": "7. Z-Score Calculation:\nInterpreting Z-Scores\n\nA participant in a self-esteem survey has a Z-score of -1.5. The mean self-esteem score for the survey is 40, and the standard deviation is 5.\n\nQuestion: Did this participant score above or below the mean, and by how many standard deviations?\n\n\nSolution\n\n\nA Z-score of -1.5 is below the mean. In raw score terms: \\(X = \\mu + z\\sigma = 40 + (-1.5)(5) = 40 - 7.5 = 32.5.\\) So the participant scored 32.5, which is 1.5 standard deviations below the mean."
+  },
+  {
+    "objectID": "exam1/exam1_review.html#z-score-calculation-2",
+    "href": "exam1/exam1_review.html#z-score-calculation-2",
+    "title": "Exam 1 Review",
+    "section": "8. Z-Score Calculation",
+    "text": "8. Z-Score Calculation\nZ-Score with Negative Value\n\nThe mean stress score of a group is 25, with a standard deviation of 4. If a participant has a stress score of 18…\n\nQuestion: Calculate their Z-score and interpret its meaning in the context of stress levels.\n\n\n\n\nSolution\n\n\n\\(z = \\frac{18 - 25}{4} = \\frac{-7}{4} = -1.75.\\) The Z-score is \\(z \\approx -1.75\\), meaning this participant’s stress score is 1.75 standard deviations below the group mean — they have substantially lower stress than average.\n\n\n\n\n\nCode Solution\n\n\n(18-25)/4\n\n[1] -1.75"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#z-score-calculation-3",
+    "href": "exam1/exam1_review.html#z-score-calculation-3",
+    "title": "Exam 1 Review",
+    "section": "9. Z-Score Calculation",
+    "text": "9. Z-Score Calculation\nMultiple Z-Scores\n\nIn a clinical assessment, the average depression score is 60, with a standard deviation of 8. Two participants have scores of 72 and 48.\n\nQuestion: Calculate the Z-scores for both participants and explain what the values tell us about their relative positions in the group.\n\n\nSolution\n\n\n\n\nFor the first participant (72): \\(z_1 = \\frac{72 - 60}{8} = \\frac{12}{8} = 1.5.\\)\n\n\nFor the second participant (48): \\(z_2 = \\frac{48 - 60}{8} = \\frac{-12}{8} = -1.5.\\)\n\n\nInterpretation: the first participant is 1.5 SD above the mean (higher depression score than average), while the second is 1.5 SD below the mean (lower depression score than average). They are symmetric around the mean.\n\n\n\n\n\n\nCode Solution\n\n\n(72-60)/8;(48-60)/8\n\n[1] 1.5\n\n\n[1] -1.5"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#z-scores-to-raw-scores",
+    "href": "exam1/exam1_review.html#z-scores-to-raw-scores",
+    "title": "Exam 1 Review",
+    "section": "10. Z-Scores to Raw Scores",
+    "text": "10. Z-Scores to Raw Scores\nWorking Backwards\n\nThe distribution of scores on a math test is approximately normal with mean \\(\\mu = 100\\) and standard deviation \\(\\sigma = 15\\).\n\nQuestion: What raw score corresponds to \\(z = 1.2\\)?\n\n\n\n\nSolution\n\n\nSolve \\(z = \\frac{x-\\mu}{\\sigma}\\) for \\(x\\): \\(x = \\mu + z\\sigma = 100 + 1.2(15) = 118\\)\n\n\n\n\n\nCode Solution\n\n\n1.2*15 + 100\n\n[1] 118"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#reading-the-z-table",
+    "href": "exam1/exam1_review.html#reading-the-z-table",
+    "title": "Exam 1 Review",
+    "section": "Reading the Z-Table",
+    "text": "Reading the Z-Table\n\n\n\n\n\n\nThe table only ever gives the area to the left of z\n\n\n\nSketch the curve and shade what the question asks for.\nLeft of z: read the table value directly.\nRight of z: 1 minus the table value (subtract the area, not \\(z\\)).\nBetween two z’s: big area minus small area.\n\n\n\n\nAnxiety scores are approximately normal with \\(\\mu = 50\\) and \\(\\sigma = 10\\)."
+  },
+  {
+    "objectID": "exam1/exam1_review.html#probability-left-tail",
+    "href": "exam1/exam1_review.html#probability-left-tail",
+    "title": "Exam 1 Review",
+    "section": "11. Probability: Left Tail",
+    "text": "11. Probability: Left Tail\nBelow a Score\nQuestion: What proportion of people score below 42?\n\n\n\n\nSolution\n\n\n\n\\(z = \\frac{42-50}{10} = -0.80\\)\n\n\nShade the left tail. The table gives the left area directly: \\(.2119\\)\n\n\nAbout 21.2% score below 42.\n\n\n\n\n\n\nCode Solution\n\n\npnorm(-0.80)                       # z-table\n\n[1] 0.2118554\n\npnorm(42, mean = 50, sd = 10)      # unrounded z\n\n[1] 0.2118554"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#probability-right-tail",
+    "href": "exam1/exam1_review.html#probability-right-tail",
+    "title": "Exam 1 Review",
+    "section": "12. Probability: Right Tail",
+    "text": "12. Probability: Right Tail\nAbove a Score\nQuestion: What proportion of people score above 65?\n\n\n\n\nSolution\n\n\n\n\\(z = \\frac{65-50}{10} = 1.50\\)\n\n\nShade the right tail. The table gives the area to the left (\\(.9332\\)), so subtract from 1: \\(1 - .9332 = .0668\\)\n\n\nAbout 6.7% score above 65.\n\n\n\n\n\n\nCode Solution\n\n\n1 - pnorm(1.50)                                       # z-table\n\n[1] 0.0668072\n\npnorm(65, mean = 50, sd = 10, lower.tail = FALSE)     # unrounded z\n\n[1] 0.0668072"
+  },
+  {
+    "objectID": "exam1/exam1_review.html#probability-between-two-scores",
+    "href": "exam1/exam1_review.html#probability-between-two-scores",
+    "title": "Exam 1 Review",
+    "section": "13. Probability: Between Two Scores",
+    "text": "13. Probability: Between Two Scores\nBetween Two Values\nQuestion: What proportion of people score between 45 and 60?\n\n\n\n\nSolution\n\n\n\n\\(z_{45} = \\frac{45-50}{10} = -0.50\\) and \\(z_{60} = \\frac{60-50}{10} = 1.00\\)\n\n\nTable: left of \\(1.00\\) is \\(.8413\\); left of \\(-0.50\\) is \\(.3085\\)\n\n\nBig area minus small area: \\(.8413 - .3085 = .5328\\)\n\n\nAbout 53.3% score between 45 and 60.\n\n\n\n\n\n\nCode Solution\n\n\npnorm(1.00) - pnorm(-0.50)                            # z-table\n\n[1] 0.5328072\n\npnorm(60, 50, 10) - pnorm(45, 50, 10)                 # unrounded z\n\n[1] 0.5328072"
+  },
+  {
+    "objectID": "exam1/exam1_scrap.html#scrap-paper---show-work",
+    "href": "exam1/exam1_scrap.html#scrap-paper---show-work",
+    "title": "Exam 1 - Scrap Paper",
+    "section": "Scrap Paper - Show Work",
+    "text": "Scrap Paper - Show Work\nPress the ✏️ icon to draw on the screen\nPress ~` (just press it, no Shift) to open R"
+  },
+  {
+    "objectID": "exam1/exam1_scrap.html#formula-sheet",
+    "href": "exam1/exam1_scrap.html#formula-sheet",
+    "title": "Exam 1 - Scrap Paper",
+    "section": "Formula Sheet",
+    "text": "Formula Sheet\n\n\n\n\n\n\n\n\nFormula 1\n\n\n\\[\\frac{\\sum(x)}{n}\\]\n\n\n\n\n\n\n\n\n\n\nFormula 2\n\n\n\\[\\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n-1}}\\]\n\n\n\n\n\n\n\n\n\n\nFormula 3\n\n\n\\[\\frac{x-\\bar{x}}{s}\\]"
+  },
+  {
+    "objectID": "exam1/exam1_scrap.html#z-table-reminder",
+    "href": "exam1/exam1_scrap.html#z-table-reminder",
+    "title": "Exam 1 - Scrap Paper",
+    "section": "Z-Table Reminder",
+    "text": "Z-Table Reminder\n\n\n\n\n\n\nThe table gives the area to the left of z\n\n\n\nLeft of z: read the table value directly.\nRight of z: 1 minus the table value.\nBetween two z’s: big area minus small area."
   }
 ]
