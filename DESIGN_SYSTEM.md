@@ -54,6 +54,8 @@ Some decks (`lab1.qmd`, `lec2.qmd`) have no YAML title and instead hand-build a 
 
 **`.z-excerpt` / `.z-hit`** — wraps a small pandoc pipe table (a few rows/columns of the z-table) in a white rounded card with a sage header; the looked-up value is marked inline as `[0.2611]{.z-hit}` (sage pill). Used on lec6's worked z-table examples so the slide shows exactly which row/column intersect instead of a full-page table image.
 
+**`.z-cards` / `.z-card`** — 2x2 grid of white bordered cards (same chrome as `.stat-card`), each holding a title, a one-line question (`.z-card-title`, `.z-card-q`) and a small Raw / z-score `panel-tabset` with a histogram. First use: lec6's "Compared to what?" slide (simulated `rnorm()` data, red line at the example score).
+
 ## Term + definition (`hero-def` / `term-list`)
 
 The newest component (added 9/4, applied first on `lec3.qmd`'s Operationalization slide). Built specifically with a future site-wide glossary in mind.

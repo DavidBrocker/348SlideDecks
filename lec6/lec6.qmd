@@ -38,6 +38,7 @@ revealjs-plugins:
 # s pink) -- pick one before promoting either to DESIGN_SYSTEM.md.
 library(dplyr)
 library(ggplot2)
+library(ggiraph)
 
 # Site tokens (see custom.scss / DESIGN_SYSTEM.md)
 sage   <- "#5C715E"  # $accent
@@ -549,3 +550,221 @@ pnorm(130, mean = 100, sd = 15, lower.tail = FALSE)          # .0228
 :::
 
 :::::
+
+## Z-table clarity {.z-slide}
+
+### The table only ever looks **left**
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3.4
+# Hover-to-shade: every slice at or left of the cursor fills in, and the
+# tooltip reads out the z-table value. Shade slices (s_i) and invisible
+# full-height hit targets (h_i) share an index; the JS below fills s_j for
+# all j <= hovered i. Slices are .05 wide, so every z shown is a real table row.
+zs <- seq(-3.5, 3.5, by = .05)
+sl <- tibble(
+  i    = seq_len(length(zs) - 1),
+  xmin = head(zs, -1), xmax = tail(zs, -1),
+  z    = round(xmax, 2),
+  ymax = dnorm((xmin + xmax) / 2),
+  tip  = sprintf("z = %.2f\nTable: %.4f  (area to the left)\nRight tail: 1 - %.4f = %.4f",
+                 z, pnorm(z), pnorm(z), 1 - pnorm(z))
+)
+g <- ggplot(sl) +
+  geom_rect_interactive(aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = ymax,
+                            data_id = paste0("s_", i)),
+                        fill = "white", color = NA) +
+  geom_line(data = tibble(x = seq(-3.5, 3.5, length.out = 400), y = dnorm(x)),
+            aes(x, y), color = sage, linewidth = 1.4) +
+  geom_rect_interactive(aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = .42,
+                            data_id = paste0("h_", i), tooltip = tip),
+                        fill = "#ffffff", alpha = .01, color = NA) +
+  scale_x_continuous(breaks = -3:3) +
+  labs(x = "z", y = NULL) +
+  theme_minimal(base_size = 22) +
+  theme(axis.text.y = element_blank(), panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        axis.title = element_text(color = ink), axis.text.x = element_text(color = ink))
+w <- girafe(ggobj = g, width_svg = 11, height_svg = 3.4, bg = "transparent",
+            options = list(
+              opts_tooltip(css = paste0("background:", ink, ";color:white;padding:8px 12px;",
+                                        "border-radius:8px;font-size:18px;white-space:pre;"),
+                           use_cursor_pos = TRUE, offx = 14, offy = -10),
+              opts_hover(css = ""), opts_hover_inv(css = ""),
+              opts_toolbar(saveaspng = FALSE), opts_sizing(rescale = TRUE, width = 1)))
+w <- htmlwidgets::onRender(w, sprintf("function(el) {
+  var fill = '%s';
+  function paint(i) {
+    el.querySelectorAll('[data-id^=\"s_\"]').forEach(function(n) {
+      var j = +n.getAttribute('data-id').slice(2);
+      n.style.fill = (i !== null && j <= i) ? fill : 'white';
+      n.style.fillOpacity = (i !== null && j <= i) ? .75 : 0;
+    });
+  }
+  el.addEventListener('mouseover', function(e) {
+    var id = e.target.getAttribute && e.target.getAttribute('data-id');
+    if (id && id.indexOf('h_') === 0) paint(+id.slice(2));
+  });
+  el.addEventListener('mouseleave', function() { paint(null); });
+}", sage2))
+w
+```
+
+::: {.callout-tip appearance="minimal"}
+**Hover over the curve.** Shaded = the table value. **Left of z:** read it directly. **Right of z:** 1 minus the table value. **Between:** big area minus small area. The "1 minus" applies to the *area*, never to $z$.
+:::
+
+## Z-scores
+
+### "Compared to what?" is everywhere
+
+```{r}
+#| include: false
+set.seed(348)
+ex_plot <- function(mu, sd, val, xlab, std = FALSE, n = 500) {
+  x <- rnorm(n, mu, sd)
+  zv <- (val - mu) / sd
+  d <- if (std) tibble(x = (x - mu) / sd) else tibble(x = x)
+  v <- if (std) zv else val
+  ggplot(d, aes(x)) +
+    geom_histogram(bins = 30, fill = sage3, color = "white") +
+    geom_vline(xintercept = v, color = hot, linewidth = 1.4) +
+    scale_x_continuous(n.breaks = 4) +
+    labs(x = if (std) "z" else xlab, y = NULL) +
+    theme_minimal(base_size = 22) +
+    theme(axis.text.y = element_blank(), panel.grid = element_blank(),
+          axis.title = element_text(color = ink), axis.text.x = element_text(color = ink))
+}
+```
+
+:::: z-cards
+::: z-card
+::: z-card-title
+Newborn weight
+:::
+
+::: z-card-q
+Is a 4.3 kg baby big? ($\mu = 3.4$, $\sigma = 0.5$)
+:::
+
+::: panel-tabset
+### Raw (kg)
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(3.4, .5, 4.3, "Birth weight (kg)")
+```
+
+### z-score
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(3.4, .5, 4.3, "", std = TRUE)
+```
+
+$z = \dfrac{4.3-3.4}{0.5} = 1.8$. Growth charts report exactly this.
+:::
+:::
+
+::: z-card
+::: z-card-title
+Daily screen time
+:::
+
+::: z-card-q
+Is 7 hours a lot? ($\mu = 4.5$, $\sigma = 1.5$)
+:::
+
+::: panel-tabset
+### Raw (hours)
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(4.5, 1.5, 7, "Hours per day")
+```
+
+### z-score
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(4.5, 1.5, 7, "", std = TRUE)
+```
+
+$z = \dfrac{7-4.5}{1.5} = 1.67$
+:::
+:::
+
+::: z-card
+::: z-card-title
+Bolt diameter
+:::
+
+::: z-card-q
+Is 10.10 mm out of spec? ($\mu = 10.00$, $\sigma = 0.05$)
+:::
+
+::: panel-tabset
+### Raw (mm)
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(10, .05, 10.1, "Diameter (mm)")
+```
+
+### z-score
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(10, .05, 10.1, "", std = TRUE)
+```
+
+$z = \dfrac{10.10-10.00}{0.05} = 2.0$. Quality control flags this.
+:::
+:::
+
+::: z-card
+::: z-card-title
+One-day stock return
+:::
+
+::: z-card-q
+Is a $-2.15\%$ day unusual? ($\mu = 0.05\%$, $\sigma = 1.1\%$)
+:::
+
+::: panel-tabset
+### Raw (%)
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(.05, 1.1, -2.15, "Daily return (%)")
+```
+
+### z-score
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 1.9
+ex_plot(.05, 1.1, -2.15, "", std = TRUE)
+```
+
+$z = \dfrac{-2.15-0.05}{1.1} = -2.0$
+:::
+:::
+::::
