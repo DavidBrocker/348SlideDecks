@@ -2059,7 +2059,7 @@ mean difference
 </div>
 </div>
 <ul>
-<li class="fragment"><p>The t-statistic is the same. The one-tailed p-value is <strong>half</strong> the two-tailed p-value (when the effect is in the predicted direction), and the confidence interval becomes one-sided.</p></li>
+<li class="fragment"><p>The t-statistic is the same, but the one-tailed p-value is <strong>half</strong> the two-tailed p-value (for an effect in the predicted direction) and the CI becomes one-sided.</p></li>
 <li class="fragment"><p>Choose the direction <strong>before</strong> you see the data. Here the conclusion is the same either way: p &lt; .001.</p></li>
 </ul>
 </section>
@@ -2085,8 +2085,8 @@ mean difference
 </div>
 </div>
 <ul>
-<li class="fragment"><p>People differ a lot from each other (some start stressed, some start calm). That <strong>between-person</strong> variability swamps the average change in an independent-samples test.</p></li>
-<li class="fragment"><p>Pairing compares each person to <strong>themselves</strong>, removing that variability. Because pre and post scores are correlated (r = 0.83), the differences are much less spread out than the raw scores.</p></li>
+<li class="fragment"><p>People differ a lot from each other, and that <strong>between-person</strong> variability swamps the average change in an independent-samples test.</p></li>
+<li class="fragment"><p>Pairing compares each person to <strong>themselves</strong>. Because pre and post scores are correlated (r = 0.83), the differences are much less spread out than the raw scores.</p></li>
 </ul>
 </section>
 <section id="effect-size-cohens-d" class="slide level2">
@@ -2691,11 +2691,27 @@ mean difference
 <blockquote>
 <p>A researcher measures 30 participants’ stress before and after a mindfulness program (<code>ex_1</code>: <code>Stress_Pre</code>, <code>Stress_Post</code>). She predicts that stress will be <strong>lower</strong> afterward.</p>
 </blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your tasks</strong></p>
+</div>
+<div class="callout-content">
 <ol type="1">
-<li class="fragment">State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
-<li class="fragment">Compute the difference scores (post minus pre).</li>
-<li class="fragment">Run the paired-samples t-test, report <span class="math inline">\(d_z\)</span>, and write an APA sentence.</li>
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
+<li>Compute the difference scores (post minus pre).</li>
+<li>Run the paired-samples t-test, report <span class="math inline">\(d_z\)</span>, and write an APA sentence.</li>
 </ol>
+</div>
+</div>
+</div>
+</section>
+<section id="practice-1" class="slide level2">
+<h2>Practice</h2>
+<h3 id="prepost-stress-data-and-answer">Pre/post stress: data and answer</h3>
 <div class="codewindow r codewindow-dark">
 <p>practice_1.R</p>
 <div class="cell">
@@ -2706,24 +2722,49 @@ mean difference
 <span id="cb5-5"><a aria-label="5"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Stress_Post =</span> Stress_Pre <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<details>
-<summary>
-Reveal answer
-</summary>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
 <p><span class="math inline">\(H_0: \mu_D = 0\)</span>; <span class="math inline">\(H_A: \mu_D &lt; 0\)</span>. <em>t(29) = -7.87, p &lt; .001</em>, <span class="math inline">\(d_z\)</span> = -1.44: a significant, large decrease in stress.</p>
-</details>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="practice-1" class="slide level2 scrollable">
+<section id="practice-2" class="slide level2 scrollable">
 <h2>Practice</h2>
 <h3 id="reaction-time-and-music">Reaction time and music</h3>
 <blockquote>
 <p>Do people respond faster with music playing? 25 participants complete a reaction-time task with no music and with music (<code>ex_2</code>: <code>RT_NoMusic</code>, <code>RT_Music</code>). The prediction is that reaction times will be <strong>faster (lower)</strong> with music.</p>
 </blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your tasks</strong></p>
+</div>
+<div class="callout-content">
 <ol type="1">
-<li class="fragment">State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
-<li class="fragment">Compute the difference scores (music minus no music).</li>
-<li class="fragment">Run a <strong>one-tailed</strong> paired-samples t-test (<code>alternative = "less"</code>) and decide.</li>
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
+<li>Compute the difference scores (music minus no music).</li>
+<li>Run a <strong>one-tailed</strong> paired-samples t-test (<code>alternative = "less"</code>) and decide.</li>
 </ol>
+</div>
+</div>
+</div>
+</section>
+<section id="practice-3" class="slide level2">
+<h2>Practice</h2>
+<h3 id="reaction-time-and-music-data-and-answer">Reaction time and music: data and answer</h3>
 <div class="codewindow r codewindow-dark">
 <p>practice_2.R</p>
 <div class="cell">
@@ -2734,12 +2775,21 @@ Reveal answer
 <span id="cb6-5"><a aria-label="5"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">RT_Music =</span> RT_NoMusic <span class="sc">-</span> <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">25</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<details>
-<summary>
-Reveal answer
-</summary>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
 <p><span class="math inline">\(H_0: \mu_D = 0\)</span>; <span class="math inline">\(H_A: \mu_D &lt; 0\)</span>. <em>t(24) = -1.49, p = .075 (one-tailed)</em>, <span class="math inline">\(d_z\)</span> = -0.30. The decision depends on the result: compare p to <span class="math inline">\(\alpha = .05\)</span> and interpret both the decision and the effect size.</p>
-</details>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>

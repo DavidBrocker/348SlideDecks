@@ -498,7 +498,7 @@ means |>
 ```{r}
 #| echo: false
 #| fig-width: 6.5
-#| fig-height: 5.4
+#| fig-height: 4.4
 ggplot(means, aes(TV, Happiness, color = Coffee, group = Coffee)) +
   geom_line(linewidth = 1.6) +
   geom_point(size = 4) +
@@ -510,20 +510,11 @@ ggplot(means, aes(TV, Happiness, color = Coffee, group = Coffee)) +
 :::
 
 ::: {.column width="50%"}
-- Each line represents one independent variable, in this case, whether
-  participants drank coffee.
+- Each line is one level of the first IV (coffee). The x-axis is the second IV (TV).
 
-- The x-axis represents the second independent variable, watching TV or
-  not.
+- **Parallel** lines mean **no interaction**: the effect of one IV doesn't depend on the other.
 
-- If the lines are **parallel**, there is **no interaction**: the effect
-  of one IV doesn't depend on the other.
-
-- Here the lines are **not parallel**, so the effect of one IV depends
-  on the other. Without coffee, watching TV drops happiness a lot
-  (`r f2(means$Happiness[4])` to `r f2(means$Happiness[2])`). With
-  coffee, TV matters much less (`r f2(means$Happiness[3])` to
-  `r f2(means$Happiness[1])`). That is an interaction.
+- Here the lines are **not parallel**. Without coffee, TV drops happiness a lot (`r f2(means$Happiness[4])` to `r f2(means$Happiness[2])`). With coffee, TV matters much less (`r f2(means$Happiness[3])` to `r f2(means$Happiness[1])`). That is an interaction.
 :::
 :::::
 
@@ -534,11 +525,11 @@ ggplot(means, aes(TV, Happiness, color = Coffee, group = Coffee)) +
 ```{r}
 #| echo: false
 #| fig-width: 8
-#| fig-height: 4.2
+#| fig-height: 3.0
 ggplot(coffee_marg, aes(Coffee, M, fill = Coffee)) +
   geom_col(width = .5, color = ink) +
   scale_fill_manual(values = two) +
-  labs(title = "Main effect of coffee on happiness (averaged over TV)",
+  labs(title = "Main effect of coffee (averaged over TV)",
        x = NULL, y = "Mean happiness") +
   theme_deck(20) +
   theme(legend.position = "none")
@@ -573,21 +564,13 @@ ggplot(coffee_marg, aes(Coffee, M, fill = Coffee)) +
 
 ## Calculating MS
 
-- Between Group 1 MS:
+::: callout-tip
+## Each MS is an SS divided by its df
 
-  - $MS_{B_1} = \dfrac{SS_{B_1}}{k_1-1}$
+$MS_{B_1} = \dfrac{SS_{B_1}}{k_1-1} \qquad MS_{B_2} = \dfrac{SS_{B_2}}{k_2-1}$
 
-- Between Group 2 MS:
-
-  - $MS_{B_2} = \dfrac{SS_{B_2}}{k_2-1}$
-
-- Interaction MS:
-
-  - $MS_{Interaction} = \dfrac{SS_{Interaction}}{(k_1-1) \times (k_2-1)}$
-
-- Error MS:
-
-  - $MS_{Error} = \dfrac{SS_{Error}}{N-(k_1 \times k_2)}$
+$MS_{Interaction} = \dfrac{SS_{Interaction}}{(k_1-1)(k_2-1)} \qquad MS_{Error} = \dfrac{SS_{Error}}{N-(k_1 k_2)}$
+:::
 
 ## Calculating F
 

@@ -466,7 +466,7 @@
     "href": "lec8/lec8.html#sampling-theory-2",
     "title": "Sampling Theory",
     "section": "Sampling Theory",
-    "text": "Sampling Theory\nThirty Samples\n\n\n\nEach student asks 500 people how much they enjoy the Netflix Original Dark.\nHow many people did the class ask in total?\n\n\\(30 \\times 500 = 15{,}000\\)\n\n\n\n\n\nCode\nset.seed(348)\n\n# 30 students each rate 500 people on the 1-10 scale\nreplicate(30, mean(pmin(pmax(round(rnorm(500, 6.6, 1.5)), 1), 10))) |&gt;\n  (\\(m) tibble(Sample = paste0(\"S\", 1:30), `Sample Mean` = m))() |&gt;\n  gt() |&gt;\n  fmt_number(columns = `Sample Mean`, decimals = 3) |&gt;\n  tab_options(table.width = pct(60), table.font.size = 30) |&gt;\n  opt_row_striping() |&gt;\n  opt_interactive()"
+    "text": "Sampling Theory\nThirty Samples\n\n\n\nEach student asks 500 people how much they enjoy the Netflix Original Dark.\nHow many people did the class ask in total?\n\n\\(30 \\times 500 = 15{,}000\\)\n\n\n\n\n\nCode\nset.seed(348)\n\n# 30 students each rate 500 people on the 1-10 scale\nreplicate(30, mean(pmin(pmax(round(rnorm(500, 6.6, 1.5)), 1), 10))) |&gt;\n  (\\(m) tibble(Sample = paste0(\"S\", 1:30), `Sample Mean` = m))() |&gt;\n  gt() |&gt;\n  fmt_number(columns = `Sample Mean`, decimals = 3) |&gt;\n  tab_options(table.width = pct(60), table.font.size = 22) |&gt;\n  opt_row_striping() |&gt;\n  opt_interactive(page_size_default = 8)"
   },
   {
     "objectID": "lec8/lec8.html#sampling-theory-3",
@@ -529,7 +529,7 @@
     "href": "lec8/lec8.html#probability-1",
     "title": "Sampling Theory",
     "section": "Probability",
-    "text": "Probability\nNow sample means\n\nThis is the distribution of sample means from adults in the US.\nWhat is the probability that a sample has a mean with a z-score of 2 or higher?\n\n\n\n\n\n\n\n\n\n\n\n\nSame curve, same area, new meaning: only about 2.3% of samples would produce a mean this high."
+    "text": "Probability\nNow sample means\n\nThis is the distribution of sample means from adults in the US. What is the probability that a sample has a mean with a z-score of 2 or higher?\n\n\n\n\n\n\n\n\n\n\n\n\nSame curve, same area, new meaning: only about 2.3% of samples would produce a mean this high."
   },
   {
     "objectID": "lec8/lec8.html#probability-2",
@@ -977,7 +977,7 @@
     "href": "lec9/lec9.html#the-t-test",
     "title": "One-Sample T-Test",
     "section": "The t-test",
-    "text": "The t-test\nThree types, three cases\n\n\n\n\n\n\n\n\nOne-Sample\n\n\n\\(t=\\dfrac{\\bar{x}-\\mu}{\\sigma/\\sqrt{n}} \\;|\\; \\dfrac{\\bar{x}-\\mu}{s/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nPaired-Samples\n\n\n\\(t=\\dfrac{\\bar{D}}{\\sigma_D/\\sqrt{n}} \\;|\\; \\dfrac{\\bar{D}}{s_D/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nIndependent-Samples\n\n\n\\(t = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{s_p^2\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}}\\)\n\\(s_p^2 = \\dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\)\n\n\n\n\n\nWe use the sample standard deviation (\\(s\\)) to estimate the standard error (\\(s/\\sqrt{n}\\)) since population \\(\\sigma\\) is typically unknown.\n\\(s_D\\) is the standard deviation of the difference scores; \\(s_p^2\\) is the pooled variance, a weighted average of the two groups’ variances.\nIn all cases, the t-distribution’s shape (and so the critical value) depends on the degrees of freedom (df).\n\nOne-sample and paired: \\(df = n - 1\\). Independent samples: \\(df = n_1 + n_2 - 2\\)"
+    "text": "The t-test\nThree types, three cases\n\n\n\n\n\n\n\n\nOne-Sample\n\n\n\\(t=\\dfrac{\\bar{x}-\\mu}{\\sigma/\\sqrt{n}} \\;|\\; \\dfrac{\\bar{x}-\\mu}{s/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nPaired-Samples\n\n\n\\(t=\\dfrac{\\bar{D}}{\\sigma_D/\\sqrt{n}} \\;|\\; \\dfrac{\\bar{D}}{s_D/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nIndependent-Samples\n\n\n\\(t = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{s_p^2\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}}\\)\n\\(s_p^2 = \\dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\)\n\n\n\n\n\nWe use the sample SD (\\(s\\)) to estimate the standard error (\\(s/\\sqrt{n}\\)), since \\(\\sigma\\) is usually unknown. \\(s_D\\) is the SD of the difference scores and \\(s_p^2\\) is the pooled variance.\nThe critical value depends on the degrees of freedom: \\(df = n - 1\\) (one-sample, paired) or \\(n_1 + n_2 - 2\\) (independent)."
   },
   {
     "objectID": "lec9/lec9.html#the-t-distribution",
@@ -998,7 +998,7 @@
     "href": "lec9/lec9.html#the-one-sample-t-test-formula",
     "title": "One-Sample T-Test",
     "section": "The One-Sample t-Test Formula",
-    "text": "The One-Sample t-Test Formula\n\n\n\n\n\n\nOne-Sample t-Test\n\n\n\\(\\large{t = \\dfrac{\\color{blue}{\\bar{x}} - \\mu}{\\color{orange}{s}/\\sqrt{n}}}\\)\n\n\n\nWhere:\n\n\\(\\color{blue}{\\bar{x}}\\) = sample mean\n\\(\\mu\\) = population mean (null hypothesis value)\n\\(\\color{orange}{s}/\\sqrt{n}\\) = the standard error (SE), estimated from the sample since population \\(\\sigma\\) is typically unknown\n\n\\(\\color{orange}{s}\\) = sample standard deviation\n\\(n\\) = sample size"
+    "text": "The One-Sample t-Test Formula\n\n\n\n\n\n\nOne-Sample t-Test\n\n\n\\(\\large{t = \\dfrac{\\color{blue}{\\bar{x}} - \\mu}{\\color{orange}{s}/\\sqrt{n}}}\\)\n\n\n\n\n\\(\\color{blue}{\\bar{x}}\\) = sample mean\n\\(\\mu\\) = population mean (null hypothesis value)\n\\(\\color{orange}{s}/\\sqrt{n}\\) = the standard error (SE), estimated from the sample: \\(s\\) is the sample SD and \\(n\\) the sample size"
   },
   {
     "objectID": "lec9/lec9.html#hypothesis-testing-steps",
@@ -1012,7 +1012,7 @@
     "href": "lec9/lec9.html#hypothesis-testing-steps-1",
     "title": "One-Sample T-Test",
     "section": "Hypothesis Testing Steps",
-    "text": "Hypothesis Testing Steps\nManual: hypotheses and data\n\nA sample of 20 students has a mean exam score of 78 with a standard deviation of 5. Does the class differ from the national average of 75?\n\n\n\n\n\n\n\n1. Set hypotheses\n\n\n\n\\(H_0\\): The average exam score is 75 (\\(\\mu = 75\\)).\n\\(H_A\\): The average exam score is not 75 (\\(\\mu \\neq 75\\)).\n\n\n\n\n\n\n\n\n\n\n2. Collect sample data\n\n\n\nSample size: \\(n = 20\\)\nSample mean: \\(\\color{blue}{\\bar{x}} = 78\\)\nSample standard deviation: \\(\\color{orange}{s} = 5\\)"
+    "text": "Hypothesis Testing Steps\nManual: hypotheses and data\n\n20 students have a mean exam score of 78 (SD = 5). Does the class differ from the national average of 75?\n\n\n\n\n\n\n\n1. Set hypotheses\n\n\n\n\\(H_0\\): The average exam score is 75 (\\(\\mu = 75\\)).\n\\(H_A\\): The average exam score is not 75 (\\(\\mu \\neq 75\\)).\n\n\n\n\n\n\n\n\n\n\n2. Collect sample data\n\n\n\n\\(n = 20\\), \\(\\color{blue}{\\bar{x}} = 78\\), \\(\\color{orange}{s} = 5\\)"
   },
   {
     "objectID": "lec9/lec9.html#hypothesis-testing-steps-2",
@@ -1026,7 +1026,7 @@
     "href": "lec9/lec9.html#hypothesis-testing-steps-3",
     "title": "One-Sample T-Test",
     "section": "Hypothesis Testing Steps",
-    "text": "Hypothesis Testing Steps\nProgrammatic\n\none_sample.R\n\n# For Reproducibility\nset.seed(20)\n\nn = 20   # sample size\nm = 78   # sample mean\nmu = 75  # population mean (H0)\ns = 5    # sample SD\n\n# Simulate data, then rescale so the sample has exactly mean 78 and SD 5\ndat &lt;- rnorm(n)\ndat &lt;- m + s * (dat - mean(dat)) / sd(dat)\n\nt.test(dat, mu = mu)\n\n\n    One Sample t-test\n\ndata:  dat\nt = 2.6833, df = 19, p-value = 0.01471\nalternative hypothesis: true mean is not equal to 75\n95 percent confidence interval:\n 75.65993 80.34007\nsample estimates:\nmean of x \n       78 \n\n# By hand\n(m - mu) / (s / sqrt(n))\n\n[1] 2.683282\n\n# Critical value (two-tailed, alpha = .05)\nqt(.975, df = n - 1)\n\n[1] 2.093024"
+    "text": "Hypothesis Testing Steps\nProgrammatic\n\none_sample.R\n\n# For Reproducibility\nset.seed(20)\n\nn = 20   # sample size\nm = 78   # sample mean\nmu = 75  # population mean (H0)\ns = 5    # sample SD\n\n# Simulate data, then rescale so the sample has exactly mean 78 and SD 5\ndat &lt;- rnorm(n)\ndat &lt;- m + s * (dat - mean(dat)) / sd(dat)\n\nt.test(dat, mu = mu)\n\n\n    One Sample t-test\n\ndata:  dat\nt = 2.6833, df = 19, p-value = 0.01471\nalternative hypothesis: true mean is not equal to 75\n95 percent confidence interval:\n 75.65993 80.34007\nsample estimates:\nmean of x \n       78"
   },
   {
     "objectID": "lec9/lec9.html#reporting-results",
@@ -1145,7 +1145,7 @@
     "href": "lec9/lec9.html#alpha-and-beta",
     "title": "One-Sample T-Test",
     "section": "Alpha and Beta",
-    "text": "Alpha and Beta\nSeeing the two errors\n\n\n\n\n\n\n\n\n\n\nThe dashed line is the critical value: results beyond it lead us to reject \\(H_0\\).\n\\(\\alpha\\) (red): the part of the \\(H_0\\) curve beyond the line, so a true null gets rejected (Type I error).\n\\(\\beta\\) (orange): the part of the \\(H_1\\) curve before the line, so a real effect is missed (Type II error).\nPower is \\(1 - \\beta\\): the chance of detecting a real effect."
+    "text": "Alpha and Beta\nSeeing the two errors\n\n\n\n\n\n\n\n\n\n\nThe dashed line is the critical value: beyond it we reject \\(H_0\\).\n\\(\\alpha\\) (red): a true null gets rejected (Type I error). \\(\\beta\\) (orange): a real effect is missed (Type II error).\nPower is \\(1 - \\beta\\): the chance of detecting a real effect."
   },
   {
     "objectID": "lec9/lec9.html#why-not-z",
@@ -1166,7 +1166,7 @@
     "href": "lec9/lec9.html#reading-the-t-table",
     "title": "One-Sample T-Test",
     "section": "Reading the t-Table",
-    "text": "Reading the t-Table\nCritical values by degrees of freedom\n\n\nExcerpt of the t-table (critical values)\n\n\n\n\n\n\n\n\ndf\nOne-tailed .05(two-tailed .10)\nOne-tailed .025(two-tailed .05)\nOne-tailed .005(two-tailed .01)\n\n\n\n\n15\n1.753\n2.131\n2.947\n\n\n19\n1.729\n2.093\n2.861\n\n\n24\n1.711\n2.064\n2.797\n\n\n29\n1.699\n2.045\n2.756\n\n\n∞ (z)\n1.645\n1.960\n2.576\n\n\n\n\n\nFind your df (\\(n - 1\\) for a one-sample test), then pick the column for your \\(\\alpha\\) and your tails.\nIf \\(|t|\\) is beyond the critical value, reject \\(H_0\\).\n\nExample: \\(t = 2.68\\) with \\(df = 19\\), two-tailed \\(\\alpha = .05\\): \\(2.68 &gt; 2.093\\), so reject.\n\nIn R: qt(.975, df = 19) returns 2.093."
+    "text": "Reading the t-Table\nCritical values by degrees of freedom\n\n\nExcerpt of the t-table (critical values)\n\n\n\n\n\n\n\n\ndf\nOne-tailed .05(two-tailed .10)\nOne-tailed .025(two-tailed .05)\nOne-tailed .005(two-tailed .01)\n\n\n\n\n15\n1.753\n2.131\n2.947\n\n\n19\n1.729\n2.093\n2.861\n\n\n24\n1.711\n2.064\n2.797\n\n\n29\n1.699\n2.045\n2.756\n\n\n∞ (z)\n1.645\n1.960\n2.576\n\n\n\n\n\nFind your df (\\(n - 1\\) for a one-sample test), then the column for your \\(\\alpha\\) and tails. If \\(|t|\\) is beyond the critical value, reject \\(H_0\\) (here \\(2.68 &gt; 2.093\\)).\nIn R: qt(.975, df = 19) returns 2.093."
   },
   {
     "objectID": "lec10/lec10.html#introduction-to-paired-samples-t-test",
@@ -1313,14 +1313,14 @@
     "href": "lec10/lec10.html#one-tailed-or-two-tailed",
     "title": "Paired-Samples T-Test",
     "section": "One-Tailed or Two-Tailed?",
-    "text": "One-Tailed or Two-Tailed?\nMatching the test to the hypothesis\n\nOur alternative is directional: \\(H_A: \\mu_\\text{post} &lt; \\mu_\\text{pre}\\).\nt.test() is two-tailed by default. A directional test uses alternative:\n\n\none_tailed.R\n\n# post - pre, testing for a DEcrease\nt.test(stress$Post, stress$Pre, paired = TRUE, alternative = \"less\")\n\n\n\nThe t-statistic is the same. The one-tailed p-value is half the two-tailed p-value (when the effect is in the predicted direction), and the confidence interval becomes one-sided.\nChoose the direction before you see the data. Here the conclusion is the same either way: p &lt; .001."
+    "text": "One-Tailed or Two-Tailed?\nMatching the test to the hypothesis\n\nOur alternative is directional: \\(H_A: \\mu_\\text{post} &lt; \\mu_\\text{pre}\\).\nt.test() is two-tailed by default. A directional test uses alternative:\n\n\none_tailed.R\n\n# post - pre, testing for a DEcrease\nt.test(stress$Post, stress$Pre, paired = TRUE, alternative = \"less\")\n\n\n\nThe t-statistic is the same, but the one-tailed p-value is half the two-tailed p-value (for an effect in the predicted direction) and the CI becomes one-sided.\nChoose the direction before you see the data. Here the conclusion is the same either way: p &lt; .001."
   },
   {
     "objectID": "lec10/lec10.html#why-pairing-helps",
     "href": "lec10/lec10.html#why-pairing-helps",
     "title": "Paired-Samples T-Test",
     "section": "Why Pairing Helps",
-    "text": "Why Pairing Helps\nThe same data, analyzed two ways\n\n\n\n-7.53\n\n\nPaired t-test (uses the pairing)\n\n\n\n\n-3.12\n\n\nIndependent t-test (ignores the pairing)\n\n\n\n\nPeople differ a lot from each other (some start stressed, some start calm). That between-person variability swamps the average change in an independent-samples test.\nPairing compares each person to themselves, removing that variability. Because pre and post scores are correlated (r = 0.83), the differences are much less spread out than the raw scores."
+    "text": "Why Pairing Helps\nThe same data, analyzed two ways\n\n\n\n-7.53\n\n\nPaired t-test (uses the pairing)\n\n\n\n\n-3.12\n\n\nIndependent t-test (ignores the pairing)\n\n\n\n\nPeople differ a lot from each other, and that between-person variability swamps the average change in an independent-samples test.\nPairing compares each person to themselves. Because pre and post scores are correlated (r = 0.83), the differences are much less spread out than the raw scores."
   },
   {
     "objectID": "lec10/lec10.html#reporting-results",
@@ -1334,14 +1334,14 @@
     "href": "lec10/lec10.html#practice",
     "title": "Paired-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nPre/post stress\n\nA researcher measures 30 participants’ stress before and after a mindfulness program (ex_1: Stress_Pre, Stress_Post). She predicts that stress will be lower afterward.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (post minus pre).\nRun the paired-samples t-test, report \\(d_z\\), and write an APA sentence.\n\n\npractice_1.R\n\nset.seed(101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z\\) = -1.44: a significant, large decrease in stress."
+    "text": "Practice\nPre/post stress\n\nA researcher measures 30 participants’ stress before and after a mindfulness program (ex_1: Stress_Pre, Stress_Post). She predicts that stress will be lower afterward.\n\n\n\n\n\n\n\nYour tasks\n\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (post minus pre).\nRun the paired-samples t-test, report \\(d_z\\), and write an APA sentence."
   },
   {
     "objectID": "lec10/lec10.html#practice-1",
     "href": "lec10/lec10.html#practice-1",
     "title": "Paired-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nReaction time and music\n\nDo people respond faster with music playing? 25 participants complete a reaction-time task with no music and with music (ex_2: RT_NoMusic, RT_Music). The prediction is that reaction times will be faster (lower) with music.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (music minus no music).\nRun a one-tailed paired-samples t-test (alternative = \"less\") and decide.\n\n\npractice_2.R\n\nset.seed(102)\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60)\n) |&gt; mutate(RT_Music = RT_NoMusic - 20 + rnorm(25, 0, 25))\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(24) = -1.49, p = .075 (one-tailed), \\(d_z\\) = -0.30. The decision depends on the result: compare p to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+    "text": "Practice\nPre/post stress: data and answer\n\npractice_1.R\n\nset.seed(101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z\\) = -1.44: a significant, large decrease in stress."
   },
   {
     "objectID": "lec11/lec11.html#from-paired-to-independent-samples",
@@ -1656,14 +1656,14 @@
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-3",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nCheck the assumptions, then run the test\n\nchocolate.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n# Pooled (equal variances) t-test\nt.test(concentration ~ group, data = choco, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 48, p-value = 0.000542\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.095202 3.690462\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224 \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and the pooled test is appropriate."
+    "text": "Does chocolate improve concentration?\nCheck the assumption\n\nlevene.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and the pooled test is appropriate."
   },
   {
     "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-4",
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-4",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(48) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(48) = 3.71, p &lt; .001, 95% CI [1.10, 3.69], d = 1.05."
+    "text": "Does chocolate improve concentration?\nRun the test\n\nchocolate.R\n\n# Pooled (equal variances) t-test\nt.test(concentration ~ group, data = choco, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 48, p-value = 0.000542\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.095202 3.690462\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224"
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-1",
@@ -1691,14 +1691,14 @@
     "href": "lec11/lec11.html#does-instrumental-music-improve-studying-4",
     "title": "Independent-Samples T-Test",
     "section": "Does instrumental music improve studying?",
-    "text": "Does instrumental music improve studying?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(38) = 1.73\\), \\(p\\) = .091. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.60}{1.09} = 0.55\\) (a medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who studied with music (M = 7.65, SD = 1.08) did not differ significantly on the quiz from students who studied in silence (M = 7.05, SD = 1.11), t(38) = 1.73, p = .091, 95% CI [-0.10, 1.30], d = 0.55.\n\n\n\n\n\nA medium effect that is not significant is a hint that the study may have been too small to detect it. (If we had predicted a direction before collecting data, the one-tailed \\(p\\) would be about 0.046. But the direction has to be chosen before you see the result.)"
+    "text": "Does instrumental music improve studying?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(38) = 1.73\\), \\(p\\) = .091. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.60}{1.09} = 0.55\\) (a medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who studied with music (M = 7.65, SD = 1.08) did not differ significantly on the quiz from students who studied in silence (M = 7.05, SD = 1.11), t(38) = 1.73, p = .091, 95% CI [-0.10, 1.30], d = 0.55."
   },
   {
     "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep",
     "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep",
     "title": "Independent-Samples T-Test",
     "section": "Does bedtime phone use affect sleep?",
-    "text": "Does bedtime phone use affect sleep?\nDesign\n\nDesign Summary\n80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.\n\n\nIV: phone use before bed (yes vs. no)\nDV: sleep quality rating (1 = poor, 10 = excellent)\nDesign: between-subjects, randomized"
+    "text": "Does bedtime phone use affect sleep?\nDesign\n\nDesign Summary\n80 students were randomly assigned to avoid phone use for 30 minutes before bed or to use their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.\n\n\nIV: phone use before bed (yes vs. no)\nDV: sleep quality rating (1 = poor, 10 = excellent)\nDesign: between-subjects, randomized"
   },
   {
     "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-1",
@@ -1733,14 +1733,14 @@
     "href": "lec11/lec11.html#practice",
     "title": "Independent-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nCaffeine and alertness\n\nDoes caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (ex_3: Group, Alertness; 20 per group). Alertness was scored on a 0-100 scale.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and write an APA sentence.\n\n\npractice_3.R\n\nset.seed(103)\nex_3 &lt;- tibble(\n  Group = factor(rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n                 levels = c(\"Caffeine\", \"Placebo\")),\n  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))\n)\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_\\text{caffeine} = \\mu_\\text{placebo}\\); \\(H_A: \\mu_\\text{caffeine} \\neq \\mu_\\text{placebo}\\). Caffeine \\(M = 74.31\\) vs. placebo \\(M = 68.23\\): t(38) = 2.52, p = .016, 95% CI [1.19, 10.98], \\(d = 0.80\\)."
+    "text": "Practice\nCaffeine and alertness\n\nDoes caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (ex_3: Group, Alertness; 20 per group). Alertness was scored on a 0-100 scale.\n\n\n\n\n\n\n\nYour tasks\n\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and write an APA sentence."
   },
   {
     "objectID": "lec11/lec11.html#practice-1",
     "href": "lec11/lec11.html#practice-1",
     "title": "Independent-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nOnline vs. in-person exams\n\nDo exam scores differ between online and in-person sections? 25 students in each format took the same exam (ex_4: Format, Exam_Score).\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and decide.\n\n\npractice_4.R\n\nset.seed(104)\nex_4 &lt;- tibble(\n  Format = factor(rep(c(\"Online\", \"InPerson\"), each = 25),\n                  levels = c(\"Online\", \"InPerson\")),\n  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))\n)\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_\\text{online} = \\mu_\\text{in-person}\\); \\(H_A: \\mu_\\text{online} \\neq \\mu_\\text{in-person}\\). Online \\(M = 81.99\\) vs. in-person \\(M = 78.52\\): t(48) = 2.70, p = .009, \\(d = 0.76\\). Compare \\(p\\) to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+    "text": "Practice\nCaffeine and alertness: data and answer\n\npractice_3.R\n\nset.seed(103)\nex_3 &lt;- tibble(\n  Group = factor(rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n                 levels = c(\"Caffeine\", \"Placebo\")),\n  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))\n)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_\\text{caffeine} = \\mu_\\text{placebo}\\); \\(H_A: \\mu_\\text{caffeine} \\neq \\mu_\\text{placebo}\\). Caffeine \\(M = 74.31\\) vs. placebo \\(M = 68.23\\): t(38) = 2.52, p = .016, 95% CI [1.19, 10.98], \\(d = 0.80\\)."
   },
   {
     "objectID": "lec12/lec12.html#recap",
@@ -1768,7 +1768,7 @@
     "href": "lec12/lec12.html#anova-1",
     "title": "Analysis of Variance",
     "section": "ANOVA",
-    "text": "ANOVA\nThree types\n\n\ngroups\nBetween subjects\nDifferent participants are exposed to different levels of the IV\n\n\nrepeat\nWithin subjects\nThe same participants are exposed to each level of the IV (repeated measures ANOVA)\n\n\ngrid_view\nFactorial\nParticipants experience levels of one IV and levels of another IV"
+    "text": "ANOVA\nThree types\n\n\ngroups\nBetween subjects\nDifferent participants at each level of the IV\n\n\nrepeat\nWithin subjects\nThe same participants at every level (repeated measures)\n\n\ngrid_view\nFactorial\nLevels of two or more IVs combined"
   },
   {
     "objectID": "lec12/lec12.html#anova-2",
@@ -1824,7 +1824,7 @@
     "href": "lec12/lec12.html#why-not-do-more-t-tests-2",
     "title": "Analysis of Variance",
     "section": "Why Not Do More T-Tests?",
-    "text": "Why Not Do More T-Tests?\nAlpha inflation\n\nEach hypothesis test has a 5% chance of a false positive.\nWhen we test them one-by-one, those chances accumulate.\n\n\n\n\n\n\n\nFamilywise error rate\n\n\n\\(\\alpha_\\text{FWE} = 1 - (1 - \\alpha)^k\\)\nFor three tests: \\(1 - (0.95)^3 = 0.1426 \\approx 14\\%\\)\n\n\n\n\n\n\n5.00%\n\n\n1 test\n\n\n\n\n14.26%\n\n\n3 tests\n\n\n\n\n40.13%\n\n\n10 tests"
+    "text": "Why Not Do More T-Tests?\nAlpha inflation\n\nEach test has a 5% chance of a false positive, and those chances accumulate.\n\n\n\n\n\n\n\nFamilywise error rate\n\n\n\\(\\alpha_\\text{FWE} = 1 - (1 - \\alpha)^k\\)\nFor three tests: \\(1 - (0.95)^3 = 0.1426 \\approx 14\\%\\)\n\n\n\n\n\n\n5.00%\n\n\n1 test\n\n\n\n\n14.26%\n\n\n3 tests\n\n\n\n\n40.13%\n\n\n10 tests"
   },
   {
     "objectID": "lec12/lec12.html#why-not-do-more-t-tests-3",
@@ -1859,7 +1859,7 @@
     "href": "lec12/lec12.html#the-f-statistic",
     "title": "Analysis of Variance",
     "section": "The F Statistic",
-    "text": "The F Statistic\n\n\nF Statistic\n\nThe ratio of between-group variance to within-group (error) variance. Named in honor of Sir Ronald Fisher, who developed ANOVA."
+    "text": "The F Statistic\n\n\n\nF Statistic\n\nThe ratio of between-group variance to within-group (error) variance. Named in honor of Sir Ronald Fisher, who developed ANOVA."
   },
   {
     "objectID": "lec12/lec12.html#calculating-f",
@@ -1936,7 +1936,7 @@
     "href": "lec12/lec12.html#between-subjects-anova-example",
     "title": "Analysis of Variance",
     "section": "Between subjects ANOVA Example",
-    "text": "Between subjects ANOVA Example\n\nProf Brocker gives one group of 100 participants the Super Secret Limitless Drug. He gives another group of 100 participants a placebo. He gives the third group of 100 participants nothing. All participants then complete an IQ test. He wants to know if those who took the SSLD have significantly higher IQ than the placebo and the control groups.\n\n\nWhat is the IV?\n\nDrug taken\n\nHow many levels does it have?\n\n3 (SSLD, Placebo, Nothing)\n\nWhat is the DV?\n\nIQ score"
+    "text": "Between subjects ANOVA Example\n\n100 participants take the Super Secret Limitless Drug (SSLD), 100 take a placebo, and 100 take nothing. All complete an IQ test. Do those who took the SSLD have significantly higher IQ than the placebo and control groups?\n\n\nWhat is the IV?\n\nDrug taken\n\nHow many levels does it have?\n\n3 (SSLD, Placebo, Nothing)\n\nWhat is the DV?\n\nIQ score"
   },
   {
     "objectID": "lec12/lec12.html#between-subjects-anova-example-1",
@@ -2020,14 +2020,14 @@
     "href": "lec12/lec12.html#identifying-degrees-of-freedom-1",
     "title": "Analysis of Variance",
     "section": "Identifying Degrees of Freedom",
-    "text": "Identifying Degrees of Freedom\nOne-way ANOVA, unequal groups\n\nA psychologist compares four types of therapy for anxiety. Group sizes are 10, 12, 14, and 9 participants.\n\n\nWhat is \\(df_B\\)?\n\n\\(k = 4\\)\n\\(k-1 = 4-1 = 3\\)\n\nWhat is \\(df_E\\)?\n\n\\(N=10+12+14+9 = 45\\)\n\\(df_E = N-k = 45-4 = 41\\)"
+    "text": "Identifying Degrees of Freedom\nOne-way ANOVA, unequal groups\n\nA psychologist compares four types of therapy for anxiety. Group sizes are 10, 12, 14, and 9 participants.\n\n\nWhat is \\(df_B\\)?\n\n\\(k-1 = 4-1 = 3\\)\n\nWhat is \\(df_E\\)?\n\n\\(N = 10+12+14+9 = 45\\), so \\(df_E = N-k = 45-4 = 41\\)"
   },
   {
     "objectID": "lec12/lec12.html#coffee-example-vol.-2-1",
     "href": "lec12/lec12.html#coffee-example-vol.-2-1",
     "title": "Analysis of Variance",
     "section": "Coffee Example Vol. 2",
-    "text": "Coffee Example Vol. 2\nThe group means\n\nThe experimental group has a mean happiness score of 8.\nThe placebo group has a mean happiness score of 6.\nThe control group has a mean happiness score of 5.\n\nIs the group that drank coffee significantly happier than the other groups?"
+    "text": "Coffee Example Vol. 2\nThe group means\n\nMean happiness: coffee 8, placebo 6, control 5.\n\nIs the group that drank coffee significantly happier than the other groups?"
   },
   {
     "objectID": "lec12/lec12.html#calculating-the-mean-squares-and-f",
@@ -2174,7 +2174,7 @@
     "href": "lec13fct/lec13fct.html#visualizing-interactions",
     "title": "Factorial ANOVA",
     "section": "Visualizing Interactions",
-    "text": "Visualizing Interactions\n\n\n\n\n\n\n\n\n\n\n\n\n\nEach line represents one independent variable, in this case, whether participants drank coffee.\nThe x-axis represents the second independent variable, watching TV or not.\nIf the lines are parallel, there is no interaction: the effect of one IV doesn’t depend on the other.\nHere the lines are not parallel, so the effect of one IV depends on the other. Without coffee, watching TV drops happiness a lot (8.00 to 4.00). With coffee, TV matters much less (4.00 to 3.00). That is an interaction."
+    "text": "Visualizing Interactions\n\n\n\n\n\n\n\n\n\n\n\n\n\nEach line is one level of the first IV (coffee). The x-axis is the second IV (TV).\nParallel lines mean no interaction: the effect of one IV doesn’t depend on the other.\nHere the lines are not parallel. Without coffee, TV drops happiness a lot (8.00 to 4.00). With coffee, TV matters much less (4.00 to 3.00). That is an interaction."
   },
   {
     "objectID": "lec13fct/lec13fct.html#visualizing-interactions-1",
@@ -2202,7 +2202,7 @@
     "href": "lec13fct/lec13fct.html#calculating-ms",
     "title": "Factorial ANOVA",
     "section": "Calculating MS",
-    "text": "Calculating MS\n\nBetween Group 1 MS:\n\n\\(MS_{B_1} = \\dfrac{SS_{B_1}}{k_1-1}\\)\n\nBetween Group 2 MS:\n\n\\(MS_{B_2} = \\dfrac{SS_{B_2}}{k_2-1}\\)\n\nInteraction MS:\n\n\\(MS_{Interaction} = \\dfrac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError MS:\n\n\\(MS_{Error} = \\dfrac{SS_{Error}}{N-(k_1 \\times k_2)}\\)"
+    "text": "Calculating MS\n\n\n\n\n\n\nEach MS is an SS divided by its df\n\n\n\\(MS_{B_1} = \\dfrac{SS_{B_1}}{k_1-1} \\qquad MS_{B_2} = \\dfrac{SS_{B_2}}{k_2-1}\\)\n\\(MS_{Interaction} = \\dfrac{SS_{Interaction}}{(k_1-1)(k_2-1)} \\qquad MS_{Error} = \\dfrac{SS_{Error}}{N-(k_1 k_2)}\\)"
   },
   {
     "objectID": "lec13fct/lec13fct.html#calculating-f",
@@ -2574,5 +2574,54 @@
     "title": "Within-Subjects ANOVA",
     "section": "Repeated-Measures ANOVA",
     "text": "Repeated-Measures ANOVA\nActive-learning practices: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n116.75\n58.38\n281.96\n&lt;.001\n\n\nSubjects\n79\n552.90\n7.00\n–\n–\n\n\nError\n158\n32.71\n0.21\n–\n–\n\n\n\n\n\n\n\nF(2, 158) = 281.96, p &lt; .001"
+  },
+  {
+    "objectID": "lec9/lec9.html#hypothesis-testing-steps-4",
+    "href": "lec9/lec9.html#hypothesis-testing-steps-4",
+    "title": "One-Sample T-Test",
+    "section": "Hypothesis Testing Steps",
+    "text": "Hypothesis Testing Steps\nProgrammatic: by hand and the critical value\n\ncheck.R\n\n# By hand\n(m - mu) / (s / sqrt(n))\n\n[1] 2.683282\n\n# Critical value (two-tailed, alpha = .05)\nqt(.975, df = n - 1)\n\n[1] 2.093024"
+  },
+  {
+    "objectID": "lec10/lec10.html#practice-2",
+    "href": "lec10/lec10.html#practice-2",
+    "title": "Paired-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nReaction time and music\n\nDo people respond faster with music playing? 25 participants complete a reaction-time task with no music and with music (ex_2: RT_NoMusic, RT_Music). The prediction is that reaction times will be faster (lower) with music.\n\n\n\n\n\n\n\nYour tasks\n\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (music minus no music).\nRun a one-tailed paired-samples t-test (alternative = \"less\") and decide."
+  },
+  {
+    "objectID": "lec10/lec10.html#practice-3",
+    "href": "lec10/lec10.html#practice-3",
+    "title": "Paired-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nReaction time and music: data and answer\n\npractice_2.R\n\nset.seed(102)\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60)\n) |&gt; mutate(RT_Music = RT_NoMusic - 20 + rnorm(25, 0, 25))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(24) = -1.49, p = .075 (one-tailed), \\(d_z\\) = -0.30. The decision depends on the result: compare p to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-5",
+    "href": "lec11/lec11.html#does-chocolate-improve-concentration-5",
+    "title": "Independent-Samples T-Test",
+    "section": "Does chocolate improve concentration?",
+    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(48) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(48) = 3.71, p &lt; .001, 95% CI [1.10, 3.69], d = 1.05."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-5",
+    "href": "lec11/lec11.html#does-instrumental-music-improve-studying-5",
+    "title": "Independent-Samples T-Test",
+    "section": "Does instrumental music improve studying?",
+    "text": "Does instrumental music improve studying?\nReading a non-significant result\n\n\n\nA medium effect that is not significant is a hint that the study may have been too small to detect it. (If we had predicted a direction before collecting data, the one-tailed \\(p\\) would be about 0.046. But the direction has to be chosen before you see the result.)"
+  },
+  {
+    "objectID": "lec11/lec11.html#practice-2",
+    "href": "lec11/lec11.html#practice-2",
+    "title": "Independent-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nOnline vs. in-person exams\n\nDo exam scores differ between online and in-person sections? 25 students in each format took the same exam (ex_4: Format, Exam_Score).\n\n\n\n\n\n\n\nYour tasks\n\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and decide."
+  },
+  {
+    "objectID": "lec11/lec11.html#practice-3",
+    "href": "lec11/lec11.html#practice-3",
+    "title": "Independent-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nOnline vs. in-person exams: data and answer\n\npractice_4.R\n\nset.seed(104)\nex_4 &lt;- tibble(\n  Format = factor(rep(c(\"Online\", \"InPerson\"), each = 25),\n                  levels = c(\"Online\", \"InPerson\")),\n  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))\n)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_\\text{online} = \\mu_\\text{in-person}\\); \\(H_A: \\mu_\\text{online} \\neq \\mu_\\text{in-person}\\). Online \\(M = 81.99\\) vs. in-person \\(M = 78.52\\): t(48) = 2.70, p = .009, \\(d = 0.76\\). Compare \\(p\\) to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
   }
 ]

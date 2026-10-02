@@ -182,7 +182,7 @@ error_table |>
 ```{r}
 #| echo: false
 #| fig-width: 11
-#| fig-height: 4.4
+#| fig-height: 3.3
 x <- seq(-4, 8, length.out = 900)
 crit <- qnorm(.95)
 d <- bind_rows(
@@ -204,11 +204,9 @@ ggplot(d, aes(x, y, color = curve)) +
         legend.position = "top")
 ```
 
-- The dashed line is the **critical value**: results beyond it lead us to reject $H_0$.
+- The dashed line is the **critical value**: beyond it we reject $H_0$.
 
-- $\alpha$ (red): the part of the $H_0$ curve beyond the line, so a true null gets rejected (Type I error).
-
-- $\beta$ (orange): the part of the $H_1$ curve before the line, so a real effect is missed (Type II error).
+- $\alpha$ (red): a true null gets rejected (Type I error). $\beta$ (orange): a real effect is missed (Type II error).
 
 - **Power** is $1 - \beta$: the chance of detecting a real effect.
 
@@ -328,13 +326,9 @@ $s_p^2 = \dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$
 :::
 :::::
 
-- We use the sample standard deviation ($s$) to estimate the standard error ($s/\sqrt{n}$) since population $\sigma$ is typically unknown.
+- We use the sample SD ($s$) to estimate the standard error ($s/\sqrt{n}$), since $\sigma$ is usually unknown. $s_D$ is the SD of the **difference scores** and $s_p^2$ is the **pooled variance**.
 
-- $s_D$ is the standard deviation of the **difference scores**; $s_p^2$ is the **pooled variance**, a weighted average of the two groups' variances.
-
-- In all cases, the t-distribution's shape (and so the critical value) depends on the **degrees of freedom** (df).
-
-  - One-sample and paired: $df = n - 1$. Independent samples: $df = n_1 + n_2 - 2$
+- The critical value depends on the **degrees of freedom**: $df = n - 1$ (one-sample, paired) or $n_1 + n_2 - 2$ (independent).
 
 ## The t-distribution
 
@@ -388,17 +382,11 @@ ggplot(df, aes(x = t.values, y = density, color = distribution, linetype = distr
 $\large{t = \dfrac{\color{blue}{\bar{x}} - \mu}{\color{orange}{s}/\sqrt{n}}}$
 :::
 
-Where:
-
 - $\color{blue}{\bar{x}}$ = sample mean
 
 - $\mu$ = population mean (null hypothesis value)
 
-- $\color{orange}{s}/\sqrt{n}$ = the standard error (SE), estimated from the sample since population $\sigma$ is typically unknown
-
-  - $\color{orange}{s}$ = sample standard deviation
-
-  - $n$ = sample size
+- $\color{orange}{s}/\sqrt{n}$ = the standard error (SE), estimated from the sample: $s$ is the sample SD and $n$ the sample size
 
 ## Hypothesis Testing Steps
 
@@ -427,11 +415,7 @@ Where:
 : Excerpt of the t-table (critical values)
 :::
 
-- Find your **df** ($n - 1$ for a one-sample test), then pick the column for your $\alpha$ and your **tails**.
-
-- If $|t|$ is **beyond** the critical value, reject $H_0$.
-
-  - Example: $t = 2.68$ with $df = 19$, two-tailed $\alpha = .05$: $2.68 > 2.093$, so reject.
+- Find your **df** ($n - 1$ for a one-sample test), then the column for your $\alpha$ and **tails**. If $|t|$ is **beyond** the critical value, reject $H_0$ (here $2.68 > 2.093$).
 
 - In R: `qt(.975, df = 19)` returns `2.093`.
 
@@ -439,7 +423,7 @@ Where:
 
 ### Manual: hypotheses and data
 
-> A sample of `20` students has a mean exam score of `78` with a standard deviation of `5`. Does the class differ from the national average of `75`?
+> `20` students have a mean exam score of `78` (SD = `5`). Does the class differ from the national average of `75`?
 
 ::: callout-tip
 ## 1. Set hypotheses
@@ -451,9 +435,7 @@ Where:
 ::: callout-tip
 ## 2. Collect sample data
 
-- Sample size: $n = 20$
-- Sample mean: $\color{blue}{\bar{x}} = 78$
-- Sample standard deviation: $\color{orange}{s} = 5$
+- $n = 20$, $\color{blue}{\bar{x}} = 78$, $\color{orange}{s} = 5$
 :::
 
 ## Hypothesis Testing Steps
@@ -497,6 +479,19 @@ dat <- rnorm(n)
 dat <- m + s * (dat - mean(dat)) / sd(dat)
 
 t.test(dat, mu = mu)
+```
+:::
+
+## Hypothesis Testing Steps
+
+### Programmatic: by hand and the critical value
+
+::: {.codewindow .r .codewindow-dark}
+check.R
+
+```{r}
+#| echo: true
+#| code-fold: false
 
 # By hand
 (m - mu) / (s / sqrt(n))

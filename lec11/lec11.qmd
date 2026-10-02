@@ -600,10 +600,10 @@ Chocolate: $M = `r f2(ch$m1)`$, $SD = `r f2(ch$s1)`$. No chocolate: $M = `r f2(c
 
 ## Does chocolate improve concentration?
 
-### Check the assumptions, then run the test
+### Check the assumption
 
 ::: {.codewindow .r .codewindow-dark}
-chocolate.R
+levene.R
 
 ```{r}
 #| echo: true
@@ -612,13 +612,25 @@ library(car)
 
 # Equal variances? (H0: the variances are equal)
 leveneTest(concentration ~ group, data = choco)
-
-# Pooled (equal variances) t-test
-t.test(concentration ~ group, data = choco, var.equal = TRUE)
 ```
 :::
 
 - Levene's $p > .05$, so equal variances are reasonable and the pooled test is appropriate.
+
+## Does chocolate improve concentration?
+
+### Run the test
+
+::: {.codewindow .r .codewindow-dark}
+chocolate.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+# Pooled (equal variances) t-test
+t.test(concentration ~ group, data = choco, var.equal = TRUE)
+```
+:::
 
 ## Does chocolate improve concentration?
 
@@ -746,6 +758,10 @@ $d = \dfrac{`r f2(mu_$diff)`}{`r f2(mu_$sp)`} = `r f2(mu_$d)`$ (a **medium** eff
 :::
 :::::
 
+## Does instrumental music improve studying?
+
+### Reading a non-significant result
+
 ::: {.callout-tip appearance="minimal"}
 A medium effect that is *not* significant is a hint that the study may have been too small to detect it. (If we had predicted a *direction* before collecting data, the one-tailed $p$ would be about `r f3(mu_$p / 2)`. But the direction has to be chosen **before** you see the result.)
 :::
@@ -755,7 +771,7 @@ A medium effect that is *not* significant is a hint that the study may have been
 ### Design
 
 > **Design Summary**\
-> 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.
+> 80 students were randomly assigned to avoid phone use for 30 minutes before bed or to use their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.
 
 - **IV:** phone use before bed (yes vs. no)
 
@@ -858,9 +874,17 @@ $d = \dfrac{`r f2(sl$diff)`}{`r f2(sl$sp)`} = `r f2(sl$d)`$ (a **small-to-medium
 
 > Does caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (`ex_3`: `Group`, `Alertness`; 20 per group). Alertness was scored on a 0-100 scale.
 
+::: {.callout-tip .nonincremental}
+## Your tasks
+
 1.  State $H_0$ and $H_A$.
 2.  Check the equal-variance assumption (Levene's Test).
 3.  Run the independent-samples t-test, compute $d$, and write an APA sentence.
+:::
+
+## Practice
+
+### Caffeine and alertness: data and answer
 
 ::: {.codewindow .r .codewindow-dark}
 practice_3.R
@@ -878,13 +902,13 @@ ex_3 <- tibble(
 ```
 :::
 
-<details>
-
-<summary>Reveal answer</summary>
+::: {.fragment}
+::: {.callout-important .nonincremental}
+## Answer
 
 $H_0: \mu_\text{caffeine} = \mu_\text{placebo}$; $H_A: \mu_\text{caffeine} \neq \mu_\text{placebo}$. Caffeine $M = `r f2(e3$m1)`$ vs. placebo $M = `r f2(e3$m2)`$: *`r apa_t(e3)`*, 95% CI [`r f2(e3$ci[1])`, `r f2(e3$ci[2])`], $d = `r f2(e3$d)`$.
-
-</details>
+:::
+:::
 
 ## Practice
 
@@ -892,9 +916,17 @@ $H_0: \mu_\text{caffeine} = \mu_\text{placebo}$; $H_A: \mu_\text{caffeine} \neq 
 
 > Do exam scores differ between online and in-person sections? 25 students in each format took the same exam (`ex_4`: `Format`, `Exam_Score`).
 
+::: {.callout-tip .nonincremental}
+## Your tasks
+
 1.  State $H_0$ and $H_A$.
 2.  Check the equal-variance assumption (Levene's Test).
 3.  Run the independent-samples t-test, compute $d$, and decide.
+:::
+
+## Practice
+
+### Online vs. in-person exams: data and answer
 
 ::: {.codewindow .r .codewindow-dark}
 practice_4.R
@@ -912,13 +944,13 @@ ex_4 <- tibble(
 ```
 :::
 
-<details>
-
-<summary>Reveal answer</summary>
+::: {.fragment}
+::: {.callout-important .nonincremental}
+## Answer
 
 $H_0: \mu_\text{online} = \mu_\text{in-person}$; $H_A: \mu_\text{online} \neq \mu_\text{in-person}$. Online $M = `r f2(e4$m1)`$ vs. in-person $M = `r f2(e4$m2)`$: *`r apa_t(e4)`*, $d = `r f2(e4$d)`$. Compare $p$ to $\alpha = .05$ and interpret both the decision and the effect size.
-
-</details>
+:::
+:::
 
 ## Summary: Independent-Samples t-Test
 

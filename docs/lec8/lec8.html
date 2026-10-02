@@ -104,7 +104,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-690e7fa464b54d3fbacf1c87e06ebe01.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -306,7 +306,7 @@ Dave Brocker
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="images/dark.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/dark.png" class="quarto-figure quarto-figure-center" style="border-radius: 15px;" width="419"></a></p>
+<p><a href="images/dark.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/dark.png" class="quarto-figure quarto-figure-center" style="border-radius: 15px;" width="320"></a></p>
 </figure>
 </div>
 </section>
@@ -333,9 +333,9 @@ Dave Brocker
 <span id="cb1-5"><a aria-label="5"></a>  (\(m) <span class="fu">tibble</span>(<span class="at">Sample =</span> <span class="fu">paste0</span>(<span class="st">"S"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>), <span class="st">`</span><span class="at">Sample Mean</span><span class="st">`</span> <span class="ot">=</span> m))() <span class="sc">|&gt;</span></span>
 <span id="cb1-6"><a aria-label="6"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
 <span id="cb1-7"><a aria-label="7"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="st">`</span><span class="at">Sample Mean</span><span class="st">`</span>, <span class="at">decimals =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a aria-label="8"></a>  <span class="fu">tab_options</span>(<span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">60</span>), <span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a aria-label="8"></a>  <span class="fu">tab_options</span>(<span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">60</span>), <span class="at">table.font.size =</span> <span class="dv">22</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-9"><a aria-label="9"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a aria-label="10"></a>  <span class="fu">opt_interactive</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-10"><a aria-label="10"></a>  <span class="fu">opt_interactive</span>(<span class="at">page_size_default =</span> <span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="ftfvonaysr" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -361,7 +361,7 @@ Dave Brocker
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -788,7 +788,7 @@ Dave Brocker
 }
 </style>
 <div id="ftfvonaysr" class="reactable html-widget" style="width:60%;height:auto;"></div>
-<script type="application/json" data-for="ftfvonaysr">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Sample":["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20","S21","S22","S23","S24","S25","S26","S27","S28","S29","S30"],"Sample Mean":[6.546,6.642,6.624,6.49,6.536,6.574,6.71,6.588,6.634,6.532,6.538,6.566,6.408,6.438,6.548,6.57,6.64,6.444,6.444,6.538,6.48,6.372,6.736,6.522,6.472,6.552,6.54,6.582,6.598,6.64]},"columns":[{"id":"Sample","name":"Sample","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"Sample Mean","name":"Sample Mean","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["6.546","6.642","6.624","6.490","6.536","6.574","6.710","6.588","6.634","6.532","6.538","6.566","6.408","6.438","6.548","6.570","6.640","6.444","6.444","6.538","6.480","6.372","6.736","6.522","6.472","6.552","6.540","6.582","6.598","6.640"],"html":true,"align":"right"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"width":"60%","height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"30px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"ftfvonaysr","dataKey":"3875a8365d3090e3bac2e9ab48d730b5"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+<script type="application/json" data-for="ftfvonaysr">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Sample":["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20","S21","S22","S23","S24","S25","S26","S27","S28","S29","S30"],"Sample Mean":[6.546,6.642,6.624,6.49,6.536,6.574,6.71,6.588,6.634,6.532,6.538,6.566,6.408,6.438,6.548,6.57,6.64,6.444,6.444,6.538,6.48,6.372,6.736,6.522,6.472,6.552,6.54,6.582,6.598,6.64]},"columns":[{"id":"Sample","name":"Sample","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"Sample Mean","name":"Sample Mean","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["6.546","6.642","6.624","6.490","6.536","6.574","6.710","6.588","6.634","6.532","6.538","6.566","6.408","6.438","6.548","6.570","6.640","6.444","6.444","6.538","6.480","6.372","6.736","6.522","6.472","6.552","6.540","6.582","6.598","6.640"],"html":true,"align":"right"}],"defaultPageSize":8,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"width":"60%","height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"22px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"ftfvonaysr","dataKey":"3875a8365d3090e3bac2e9ab48d730b5"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1472,8 +1472,7 @@ The standard deviation of the sampling distribution of the mean: <span class="ma
 <h2>Probability</h2>
 <h3 id="now-sample-means">Now sample means</h3>
 <ul>
-<li class="fragment"><p>This is the distribution of <strong>sample means</strong> from adults in the US.</p></li>
-<li class="fragment"><p>What is the probability that a sample has a mean with a z-score of 2 or higher?</p></li>
+<li class="fragment">This is the distribution of <strong>sample means</strong> from adults in the US. What is the probability that a sample has a mean with a z-score of 2 or higher?</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -1676,7 +1675,7 @@ Reveal Answer
 <h3 id="with-candy">With candy!</h3>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="images/candyjar.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/candyjar.png" style="border-radius: 20px;"></a></p>
+<p><a href="images/candyjar.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/candyjar.png" style="border-radius: 20px;" width="460"></a></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>This is a jar of <code>500</code> pieces of candy with <code>5</code> equally common flavors, so <code>100</code> are orange.</p></li>

@@ -170,7 +170,7 @@ z_plot(bands = TRUE)
 
 > On a scale of 1 (I hate it with my entire being) to 10 (I believe in my soul that Dark is the best show ever made), how much do you enjoy Dark?
 
-![](images/dark.png){style="border-radius: 15px;" fig-align="center" width="419"}
+![](images/dark.png){style="border-radius: 15px;" fig-align="center" width="320"}
 
 ## Sampling Theory
 
@@ -196,9 +196,9 @@ replicate(30, mean(pmin(pmax(round(rnorm(500, 6.6, 1.5)), 1), 10))) |>
   (\(m) tibble(Sample = paste0("S", 1:30), `Sample Mean` = m))() |>
   gt() |>
   fmt_number(columns = `Sample Mean`, decimals = 3) |>
-  tab_options(table.width = pct(60), table.font.size = 30) |>
+  tab_options(table.width = pct(60), table.font.size = 22) |>
   opt_row_striping() |>
-  opt_interactive()
+  opt_interactive(page_size_default = 8)
 ```
 :::
 :::::
@@ -424,9 +424,7 @@ z_plot(shade = c(2, 4))
 
 ### Now sample means
 
-- This is the distribution of **sample means** from adults in the US.
-
-- What is the probability that a sample has a mean with a z-score of 2 or higher?
+- This is the distribution of **sample means** from adults in the US. What is the probability that a sample has a mean with a z-score of 2 or higher?
 
 ```{r}
 #| echo: false
@@ -579,7 +577,7 @@ ggplot(df, aes(sample_mean)) +
 ```{r}
 #| echo: false
 #| fig-width: 11
-#| fig-height: 4.2
+#| fig-height: 3.4
 z_plot(shade = c(-4, -1))
 ```
 
@@ -615,7 +613,7 @@ z_plot(shade = c(-4, -1))
 
 ::::: columns
 ::: {.column width="50%"}
-![](images/candyjar.png){style="border-radius: 20px;"}
+![](images/candyjar.png){style="border-radius: 20px;" width="460"}
 :::
 
 ::: {.column width="50%"}

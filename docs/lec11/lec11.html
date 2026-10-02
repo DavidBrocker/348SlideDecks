@@ -1596,9 +1596,9 @@ Dave Brocker
 </section>
 <section id="does-chocolate-improve-concentration-3" class="slide level2">
 <h2>Does chocolate improve concentration?</h2>
-<h3 id="check-the-assumptions-then-run-the-test">Check the assumptions, then run the test</h3>
+<h3 id="check-the-assumption">Check the assumption</h3>
 <div class="codewindow r codewindow-dark">
-<p>chocolate.R</p>
+<p>levene.R</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(car)</span>
 <span id="cb1-2"><a aria-label="2"></a></span>
@@ -1610,6 +1610,18 @@ Dave Brocker
 group  1  1.4945 0.2275
       48               </code></pre>
 </div>
+</div>
+</div>
+<ul>
+<li class="fragment">Levene’s <span class="math inline">\(p &gt; .05\)</span>, so equal variances are reasonable and the pooled test is appropriate.</li>
+</ul>
+</section>
+<section id="does-chocolate-improve-concentration-4" class="slide level2">
+<h2>Does chocolate improve concentration?</h2>
+<h3 id="run-the-test">Run the test</h3>
+<div class="codewindow r codewindow-dark">
+<p>chocolate.R</p>
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Pooled (equal variances) t-test</span></span>
 <span id="cb3-2"><a aria-label="2"></a><span class="fu">t.test</span>(concentration <span class="sc">~</span> group, <span class="at">data =</span> choco, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1627,11 +1639,8 @@ sample estimates:
 </div>
 </div>
 </div>
-<ul>
-<li class="fragment">Levene’s <span class="math inline">\(p &gt; .05\)</span>, so equal variances are reasonable and the pooled test is appropriate.</li>
-</ul>
 </section>
-<section id="does-chocolate-improve-concentration-4" class="slide level2">
+<section id="does-chocolate-improve-concentration-5" class="slide level2">
 <h2>Does chocolate improve concentration?</h2>
 <h3 id="decision-effect-size-and-report">Decision, effect size, and report</h3>
 <div class="columns">
@@ -1726,7 +1735,7 @@ sample estimates:
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec11_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-11-1.png" width="576"></a></p>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-12-1.png" width="576"></a></p>
 </figure>
 </div>
 </div>
@@ -2215,7 +2224,7 @@ sample estimates:
 </section>
 <section id="does-instrumental-music-improve-studying-3" class="slide level2">
 <h2>Does instrumental music improve studying?</h2>
-<h3 id="run-the-test">Run the test</h3>
+<h3 id="run-the-test-1">Run the test</h3>
 <div class="codewindow r codewindow-dark">
 <p>music.R</p>
 <div class="cell">
@@ -2272,6 +2281,10 @@ sample estimates:
 <p>An independent-samples t-test showed that students who studied with music (<em>M</em> = 7.65, <em>SD</em> = 1.08) did not differ significantly on the quiz from students who studied in silence (<em>M</em> = 7.05, <em>SD</em> = 1.11), <span class="hl"><em>t(38) = 1.73, p = .091</em></span>, 95% CI [-0.10, 1.30], <em>d</em> = 0.55.</p>
 </blockquote>
 </div></div>
+</section>
+<section id="does-instrumental-music-improve-studying-5" class="slide level2">
+<h2>Does instrumental music improve studying?</h2>
+<h3 id="reading-a-non-significant-result">Reading a non-significant result</h3>
 <div class="callout callout-tip no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
@@ -2285,7 +2298,7 @@ sample estimates:
 <h3 id="design-2">Design</h3>
 <blockquote>
 <p><strong>Design Summary</strong><br>
-80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.</p>
+80 students were randomly assigned to avoid phone use for 30 minutes before bed or to use their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.</p>
 </blockquote>
 <ul>
 <li class="fragment"><p><strong>IV:</strong> phone use before bed (yes vs.&nbsp;no)</p></li>
@@ -2338,7 +2351,7 @@ sample estimates:
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec11_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-14-1.png" width="576"></a></p>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-15-1.png" width="576"></a></p>
 </figure>
 </div>
 </div>
@@ -2827,7 +2840,7 @@ sample estimates:
 </section>
 <section id="does-bedtime-phone-use-affect-sleep-3" class="slide level2">
 <h2>Does bedtime phone use affect sleep?</h2>
-<h3 id="run-the-test-1">Run the test</h3>
+<h3 id="run-the-test-2">Run the test</h3>
 <div class="codewindow r codewindow-dark">
 <p>sleep.R</p>
 <div class="cell">
@@ -2891,11 +2904,27 @@ mean in group no_phone    mean in group phone
 <blockquote>
 <p>Does caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (<code>ex_3</code>: <code>Group</code>, <code>Alertness</code>; 20 per group). Alertness was scored on a 0-100 scale.</p>
 </blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your tasks</strong></p>
+</div>
+<div class="callout-content">
 <ol type="1">
-<li class="fragment">State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
-<li class="fragment">Check the equal-variance assumption (Levene’s Test).</li>
-<li class="fragment">Run the independent-samples t-test, compute <span class="math inline">\(d\)</span>, and write an APA sentence.</li>
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
+<li>Check the equal-variance assumption (Levene’s Test).</li>
+<li>Run the independent-samples t-test, compute <span class="math inline">\(d\)</span>, and write an APA sentence.</li>
 </ol>
+</div>
+</div>
+</div>
+</section>
+<section id="practice-1" class="slide level2">
+<h2>Practice</h2>
+<h3 id="caffeine-and-alertness-data-and-answer">Caffeine and alertness: data and answer</h3>
 <div class="codewindow r codewindow-dark">
 <p>practice_3.R</p>
 <div class="cell">
@@ -2907,24 +2936,49 @@ mean in group no_phone    mean in group phone
 <span id="cb9-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<details>
-<summary>
-Reveal answer
-</summary>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
 <p><span class="math inline">\(H_0: \mu_\text{caffeine} = \mu_\text{placebo}\)</span>; <span class="math inline">\(H_A: \mu_\text{caffeine} \neq \mu_\text{placebo}\)</span>. Caffeine <span class="math inline">\(M = 74.31\)</span> vs.&nbsp;placebo <span class="math inline">\(M = 68.23\)</span>: <em>t(38) = 2.52, p = .016</em>, 95% CI [1.19, 10.98], <span class="math inline">\(d = 0.80\)</span>.</p>
-</details>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="practice-1" class="slide level2 scrollable">
+<section id="practice-2" class="slide level2 scrollable">
 <h2>Practice</h2>
 <h3 id="online-vs.-in-person-exams">Online vs.&nbsp;in-person exams</h3>
 <blockquote>
 <p>Do exam scores differ between online and in-person sections? 25 students in each format took the same exam (<code>ex_4</code>: <code>Format</code>, <code>Exam_Score</code>).</p>
 </blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your tasks</strong></p>
+</div>
+<div class="callout-content">
 <ol type="1">
-<li class="fragment">State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
-<li class="fragment">Check the equal-variance assumption (Levene’s Test).</li>
-<li class="fragment">Run the independent-samples t-test, compute <span class="math inline">\(d\)</span>, and decide.</li>
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
+<li>Check the equal-variance assumption (Levene’s Test).</li>
+<li>Run the independent-samples t-test, compute <span class="math inline">\(d\)</span>, and decide.</li>
 </ol>
+</div>
+</div>
+</div>
+</section>
+<section id="practice-3" class="slide level2">
+<h2>Practice</h2>
+<h3 id="online-vs.-in-person-exams-data-and-answer">Online vs.&nbsp;in-person exams: data and answer</h3>
 <div class="codewindow r codewindow-dark">
 <p>practice_4.R</p>
 <div class="cell">
@@ -2936,12 +2990,21 @@ Reveal answer
 <span id="cb10-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<details>
-<summary>
-Reveal answer
-</summary>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
 <p><span class="math inline">\(H_0: \mu_\text{online} = \mu_\text{in-person}\)</span>; <span class="math inline">\(H_A: \mu_\text{online} \neq \mu_\text{in-person}\)</span>. Online <span class="math inline">\(M = 81.99\)</span> vs.&nbsp;in-person <span class="math inline">\(M = 78.52\)</span>: <em>t(48) = 2.70, p = .009</em>, <span class="math inline">\(d = 0.76\)</span>. Compare <span class="math inline">\(p\)</span> to <span class="math inline">\(\alpha = .05\)</span> and interpret both the decision and the effect size.</p>
-</details>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="summary-independent-samples-t-test" class="slide level2">
 <h2>Summary: Independent-Samples t-Test</h2>

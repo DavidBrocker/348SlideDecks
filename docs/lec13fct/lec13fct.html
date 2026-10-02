@@ -1802,10 +1802,9 @@ Variance <strong>within</strong> each cell, around that cell’s own mean.
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>Each line represents one independent variable, in this case, whether participants drank coffee.</p></li>
-<li class="fragment"><p>The x-axis represents the second independent variable, watching TV or not.</p></li>
-<li class="fragment"><p>If the lines are <strong>parallel</strong>, there is <strong>no interaction</strong>: the effect of one IV doesn’t depend on the other.</p></li>
-<li class="fragment"><p>Here the lines are <strong>not parallel</strong>, so the effect of one IV depends on the other. Without coffee, watching TV drops happiness a lot (8.00 to 4.00). With coffee, TV matters much less (4.00 to 3.00). That is an interaction.</p></li>
+<li class="fragment"><p>Each line is one level of the first IV (coffee). The x-axis is the second IV (TV).</p></li>
+<li class="fragment"><p><strong>Parallel</strong> lines mean <strong>no interaction</strong>: the effect of one IV doesn’t depend on the other.</p></li>
+<li class="fragment"><p>Here the lines are <strong>not parallel</strong>. Without coffee, TV drops happiness a lot (8.00 to 4.00). With coffee, TV matters much less (4.00 to 3.00). That is an interaction.</p></li>
 </ul>
 </div></div>
 </section>
@@ -1854,24 +1853,20 @@ Variance <strong>within</strong> each cell, around that cell’s own mean.
 </section>
 <section id="calculating-ms" class="slide level2">
 <h2>Calculating MS</h2>
-<ul>
-<li class="fragment"><p>Between Group 1 MS:</p>
-<ul>
-<li class="fragment"><span class="math inline">\(MS_{B_1} = \dfrac{SS_{B_1}}{k_1-1}\)</span></li>
-</ul></li>
-<li class="fragment"><p>Between Group 2 MS:</p>
-<ul>
-<li class="fragment"><span class="math inline">\(MS_{B_2} = \dfrac{SS_{B_2}}{k_2-1}\)</span></li>
-</ul></li>
-<li class="fragment"><p>Interaction MS:</p>
-<ul>
-<li class="fragment"><span class="math inline">\(MS_{Interaction} = \dfrac{SS_{Interaction}}{(k_1-1) \times (k_2-1)}\)</span></li>
-</ul></li>
-<li class="fragment"><p>Error MS:</p>
-<ul>
-<li class="fragment"><span class="math inline">\(MS_{Error} = \dfrac{SS_{Error}}{N-(k_1 \times k_2)}\)</span></li>
-</ul></li>
-</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Each MS is an SS divided by its df</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(MS_{B_1} = \dfrac{SS_{B_1}}{k_1-1} \qquad MS_{B_2} = \dfrac{SS_{B_2}}{k_2-1}\)</span></p>
+<p><span class="math inline">\(MS_{Interaction} = \dfrac{SS_{Interaction}}{(k_1-1)(k_2-1)} \qquad MS_{Error} = \dfrac{SS_{Error}}{N-(k_1 k_2)}\)</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="calculating-f" class="slide level2">
 <h2>Calculating F</h2>
