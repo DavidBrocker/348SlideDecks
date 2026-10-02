@@ -60,6 +60,8 @@ Some decks (`lab1.qmd`, `lec2.qmd`) have no YAML title and instead hand-build a 
 
 **Drop console (`` ` ``)** — `custom.scss` labels the two panes (`#editor` = SCRIPT, `#terminal` = CONSOLE) so students can tell them apart. The extension's `drop-runtime.js` is also patched (`RArgs:[]` -> `RArgs:["--quiet"]`) to suppress R's startup banner; reinstalling the extension undoes that one-liner.
 
+**`.hl`** — inline highlight (accent3 pill) for picking parts of a sentence out of a blockquote, e.g. the pieces of an APA results sentence: `[one-sample t-test]{.hl}`. Used on lec9's "Reporting Results" slide.
+
 ## Term + definition (`hero-def` / `term-list`)
 
 The newest component (added 9/4, applied first on `lec3.qmd`'s Operationalization slide). Built specifically with a future site-wide glossary in mind.

@@ -1,0 +1,2957 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Dave Brocker">
+  <title>PSY 348: Statistics for Psychology – One-Sample T-Test</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">One-Sample T-Test</h1>
+  <p class="subtitle">PSY 348: Lecture 9</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dave Brocker
+</div>
+        <p class="quarto-title-affiliation">
+            Farmingdale State College
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<h3 id="how-did-we-get-here">How did we get here?</h3>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">straighten</span></p>
+<h4 id="measurement">Measurement</h4>
+<p>Measuring abstract concepts</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">category</span></p>
+<h4 id="variables">Variables</h4>
+<p>Types and scales</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">show_chart</span></p>
+<h4 id="the-normal-curve">The Normal Curve</h4>
+<p>Probability from z-scores</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">groups</span></p>
+<h4 id="sampling-theory">Sampling Theory</h4>
+<p>Distribution of sample means</p>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>If we can estimate the probability that a sample mean came from a particular distribution, can we also estimate whether it came from the null or the alternative hypothesis?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="from-probability-to-decision-making" class="slide level2">
+<h2>From Probability to Decision-Making</h2>
+<ul>
+<li class="fragment"><p>Once we know how likely a sample mean is to occur, we can begin to make decisions about what that likelihood means.</p></li>
+<li class="fragment"><p>We introduced two competing ideas:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null hypothesis <span class="math inline">\(H_0\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>No real difference or effect.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Alternative hypothesis <span class="math inline">\(H_1/H_A\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>A true difference or effect exists.</p>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li class="fragment">Because samples vary, we can never be 100% certain, only confident to a degree.</li>
+</ul>
+</section>
+<section id="errors-in-estimation" class="slide level2">
+<h2>Errors in Estimation</h2>
+<h3 id="type-i-and-ii-error">Type I and II Error</h3>
+<ul>
+<li class="fragment"><p>That degree of confidence is defined by <span class="math inline">\(\alpha\)</span> (alpha), our threshold for error when rejecting <span class="math inline">\(H_0\)</span>.</p></li>
+<li class="fragment"><p><span class="math inline">\(\beta\)</span> (beta) is the probability of missing a real effect (failing to reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_1\)</span> is true).</p></li>
+</ul>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Type I Error (<span class="math inline">\(\alpha\)</span>)</span></dt>
+<dd class="fragment">
+Finding a difference that isn’t really there. (False Positive)
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Type II Error (<span class="math inline">\(\beta\)</span>)</span></dt>
+<dd class="fragment">
+Missing a difference that actually exists. (False Negative)
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="the-truth-table" class="slide level2">
+<h2>The Truth Table</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="rpfinyrttj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rpfinyrttj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rpfinyrttj thead, #rpfinyrttj tbody, #rpfinyrttj tfoot, #rpfinyrttj tr, #rpfinyrttj td, #rpfinyrttj th {
+  border-style: none;
+}
+
+#rpfinyrttj p {
+  margin: 0;
+  padding: 0;
+}
+
+#rpfinyrttj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 25px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 70%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rpfinyrttj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rpfinyrttj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rpfinyrttj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rpfinyrttj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rpfinyrttj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rpfinyrttj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rpfinyrttj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rpfinyrttj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rpfinyrttj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rpfinyrttj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rpfinyrttj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rpfinyrttj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rpfinyrttj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rpfinyrttj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rpfinyrttj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rpfinyrttj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rpfinyrttj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rpfinyrttj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rpfinyrttj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rpfinyrttj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rpfinyrttj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rpfinyrttj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rpfinyrttj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rpfinyrttj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rpfinyrttj .gt_left {
+  text-align: left;
+}
+
+#rpfinyrttj .gt_center {
+  text-align: center;
+}
+
+#rpfinyrttj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rpfinyrttj .gt_font_normal {
+  font-weight: normal;
+}
+
+#rpfinyrttj .gt_font_bold {
+  font-weight: bold;
+}
+
+#rpfinyrttj .gt_font_italic {
+  font-style: italic;
+}
+
+#rpfinyrttj .gt_super {
+  font-size: 65%;
+}
+
+#rpfinyrttj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rpfinyrttj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rpfinyrttj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rpfinyrttj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rpfinyrttj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rpfinyrttj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rpfinyrttj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rpfinyrttj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rpfinyrttj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Decision Outcomes in Hypothesis Testing</strong></td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="null_true" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><span class="math display">\[H_0\text{ True}\]</span></th>
+<th id="null_false" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><span class="math display">\[H_0\text{ False}\]</span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"><span class="math display">\[\text{Reject }H_0\]</span></th>
+<td class="gt_row gt_left" headers="stub_1_1 null_true" style="background-color: #EBC9C3"><span class="math display">\[\text{Type I Error }(\alpha)\]</span></td>
+<td class="gt_row gt_left" headers="stub_1_1 null_false" style="background-color: #DCE8E1"><span class="math display">\[\text{Correct Decision}\\1-\beta\]</span></td>
+</tr>
+<tr class="even">
+<th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"><span class="math display">\[\text{Fail to Reject } H_0\]</span></th>
+<td class="gt_row gt_left" headers="stub_1_2 null_true" style="background-color: #DCE8E1"><span class="math display">\[\text{Correct Decision}\\1-\alpha\]</span></td>
+<td class="gt_row gt_left" headers="stub_1_2 null_false" style="background-color: #EBC9C3"><span class="math display">\[\text{Type II Error } (\beta)\]</span></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="alpha-and-beta" class="slide level2">
+<h2>Alpha and Beta</h2>
+<h3 id="seeing-the-two-errors">Seeing the two errors</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>The dashed line is the <strong>critical value</strong>: results beyond it lead us to reject <span class="math inline">\(H_0\)</span>.</p></li>
+<li class="fragment"><p><span class="math inline">\(\alpha\)</span> (red): the part of the <span class="math inline">\(H_0\)</span> curve beyond the line, so a true null gets rejected (Type I error).</p></li>
+<li class="fragment"><p><span class="math inline">\(\beta\)</span> (orange): the part of the <span class="math inline">\(H_1\)</span> curve before the line, so a real effect is missed (Type II error).</p></li>
+<li class="fragment"><p><strong>Power</strong> is <span class="math inline">\(1 - \beta\)</span>: the chance of detecting a real effect.</p></li>
+</ul>
+</section>
+<section id="why-compare-means" class="slide level2">
+<h2>Why Compare Means?</h2>
+<ul>
+<li class="fragment"><p>We often want to test whether a sample mean differs from a known population mean.</p></li>
+<li class="fragment"><p>The one-sample t-test helps determine if the sample mean is significantly different from the hypothesized population mean.</p></li>
+</ul>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">school</span></p>
+<h4 id="exam-scores">Exam scores</h4>
+<p>Class average vs.&nbsp;a national average of 75</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">timer</span></p>
+<h4 id="reaction-times">Reaction times</h4>
+<p>Average vs.&nbsp;a published 250 ms standard</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">linear_scale</span></p>
+<h4 id="scale-midpoints">Scale midpoints</h4>
+<p>Ratings vs.&nbsp;the scale midpoint</p>
+</div>
+</div>
+</section>
+<section id="why-not-z" class="slide level2">
+<h2>Why Not z?</h2>
+<h3 id="from-z-to-t">From z to t</h3>
+<ul>
+<li class="fragment"><p>In lecture 8 we computed <span class="math inline">\(z = \dfrac{\bar{x} - \mu}{\sigma / \sqrt{n}}\)</span>, which needs the <strong>population</strong> standard deviation <span class="math inline">\(\sigma\)</span>.</p></li>
+<li class="fragment"><p>In practice we almost never know <span class="math inline">\(\sigma\)</span>, so we substitute the sample’s <span class="math inline">\(s\)</span>.</p></li>
+<li class="fragment"><p>But <span class="math inline">\(s\)</span> changes from sample to sample, especially when <span class="math inline">\(n\)</span> is small. That is <strong>extra uncertainty</strong> the normal curve does not account for.</p></li>
+<li class="fragment"><p>So the sampling distribution has <strong>heavier tails</strong> than the normal curve: the t-distribution. A result must be more extreme to count as unusual.</p></li>
+</ul>
+</section>
+<section id="why-not-z-1" class="slide level2">
+<h2>Why Not z?</h2>
+<h3 id="same-alpha-.05-bigger-cutoff-for-small-samples">Same <span class="math inline">\(\alpha = .05\)</span>, bigger cutoff for small samples</h3>
+<p>Two-tailed critical values:</p>
+<div class="side-by-cols">
+<div class="stat-card">
+<div class="stat-num">
+<p>1.96</p>
+</div>
+<div class="stat-sub">
+<p>z (<span class="math inline">\(\sigma\)</span> known)</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">
+<p>2.09</p>
+</div>
+<div class="stat-sub">
+<p>t, <span class="math inline">\(df = 19\)</span> (<span class="math inline">\(n = 20\)</span>)</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">
+<p>2.78</p>
+</div>
+<div class="stat-sub">
+<p>t, <span class="math inline">\(df = 4\)</span> (<span class="math inline">\(n = 5\)</span>)</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">The smaller the sample, the more the t cutoff moves away from the z cutoff. With large <span class="math inline">\(n\)</span>, they are nearly identical.</li>
+</ul>
+</section>
+<section id="the-t-test" class="slide level2">
+<h2>The t-test</h2>
+<h3 id="three-types-three-cases">Three types, three cases</h3>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>One-Sample</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t=\dfrac{\bar{x}-\mu}{\sigma/\sqrt{n}} \;|\; \dfrac{\bar{x}-\mu}{s/\sqrt{n}}\)</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Paired-Samples</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t=\dfrac{\bar{D}}{\sigma_D/\sqrt{n}} \;|\; \dfrac{\bar{D}}{s_D/\sqrt{n}}\)</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Independent-Samples</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{\bar{x}_1 - \bar{x}_2}{\sqrt{s_p^2\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}}\)</span></p>
+<p><span class="math inline">\(s_p^2 = \dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\)</span></p>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li class="fragment"><p>We use the sample standard deviation (<span class="math inline">\(s\)</span>) to estimate the standard error (<span class="math inline">\(s/\sqrt{n}\)</span>) since population <span class="math inline">\(\sigma\)</span> is typically unknown.</p></li>
+<li class="fragment"><p><span class="math inline">\(s_D\)</span> is the standard deviation of the <strong>difference scores</strong>; <span class="math inline">\(s_p^2\)</span> is the <strong>pooled variance</strong>, a weighted average of the two groups’ variances.</p></li>
+<li class="fragment"><p>In all cases, the t-distribution’s shape (and so the critical value) depends on the <strong>degrees of freedom</strong> (df).</p>
+<ul>
+<li class="fragment">One-sample and paired: <span class="math inline">\(df = n - 1\)</span>. Independent samples: <span class="math inline">\(df = n_1 + n_2 - 2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-t-distribution" class="slide level2">
+<h2>The t-distribution</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>The t-distribution has <strong>heavier tails</strong> than the normal curve when df is small, because <span class="math inline">\(s\)</span> is only an estimate of <span class="math inline">\(\sigma\)</span>.</p></li>
+<li class="fragment"><p>As df grows, the t-distribution approaches the normal curve.</p></li>
+</ul>
+</section>
+<section id="assumptions-of-the-one-sample-t-test" class="slide level2 scrollable">
+<h2>Assumptions of the One-Sample t-Test</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Assumptions</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment">The data are continuous (interval or ratio scale).</li>
+<li class="fragment">The sample is randomly selected.</li>
+<li class="fragment">The data are normally distributed (or the sample size is large enough for the Central Limit Theorem to apply).</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="the-one-sample-t-test-formula" class="slide level2">
+<h2>The One-Sample t-Test Formula</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>One-Sample t-Test</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\large{t = \dfrac{\color{blue}{\bar{x}} - \mu}{\color{orange}{s}/\sqrt{n}}}\)</span></p>
+</div>
+</div>
+</div>
+<p>Where:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\color{blue}{\bar{x}}\)</span> = sample mean</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> = population mean (null hypothesis value)</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{orange}{s}/\sqrt{n}\)</span> = the standard error (SE), estimated from the sample since population <span class="math inline">\(\sigma\)</span> is typically unknown</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\color{orange}{s}\)</span> = sample standard deviation</p></li>
+<li class="fragment"><p><span class="math inline">\(n\)</span> = sample size</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-steps" class="slide level2 scrollable">
+<h2>Hypothesis Testing Steps</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Four steps</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment"><strong>Set hypotheses:</strong> define both the null and alternative.</li>
+<li class="fragment"><strong>Collect sample data:</strong> use the appropriate sampling method and collect the needed data.</li>
+<li class="fragment"><strong>Compute the t-statistic:</strong> conduct the correct t-test.</li>
+<li class="fragment"><strong>Compare to the critical value:</strong> use the t-statistic, sample size (df), and alpha level to determine statistical significance. Equivalently, compare the p-value to <span class="math inline">\(\alpha\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="reading-the-t-table" class="slide level2">
+<h2>Reading the t-Table</h2>
+<h3 id="critical-values-by-degrees-of-freedom">Critical values by degrees of freedom</h3>
+<div class="z-excerpt">
+<table class="caption-top">
+<caption>Excerpt of the t-table (critical values)</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">df</th>
+<th style="text-align: center;">One-tailed .05<br>(two-tailed .10)</th>
+<th style="text-align: center;">One-tailed .025<br>(two-tailed .05)</th>
+<th style="text-align: center;">One-tailed .005<br>(two-tailed .01)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">1.753</td>
+<td style="text-align: center;">2.131</td>
+<td style="text-align: center;">2.947</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: center;">1.729</td>
+<td style="text-align: center;"><span class="z-hit">2.093</span></td>
+<td style="text-align: center;">2.861</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">1.711</td>
+<td style="text-align: center;">2.064</td>
+<td style="text-align: center;">2.797</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">1.699</td>
+<td style="text-align: center;">2.045</td>
+<td style="text-align: center;">2.756</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">∞ (z)</td>
+<td style="text-align: center;">1.645</td>
+<td style="text-align: center;">1.960</td>
+<td style="text-align: center;">2.576</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li class="fragment"><p>Find your <strong>df</strong> (<span class="math inline">\(n - 1\)</span> for a one-sample test), then pick the column for your <span class="math inline">\(\alpha\)</span> and your <strong>tails</strong>.</p></li>
+<li class="fragment"><p>If <span class="math inline">\(|t|\)</span> is <strong>beyond</strong> the critical value, reject <span class="math inline">\(H_0\)</span>.</p>
+<ul>
+<li class="fragment">Example: <span class="math inline">\(t = 2.68\)</span> with <span class="math inline">\(df = 19\)</span>, two-tailed <span class="math inline">\(\alpha = .05\)</span>: <span class="math inline">\(2.68 &gt; 2.093\)</span>, so reject.</li>
+</ul></li>
+<li class="fragment"><p>In R: <code>qt(.975, df = 19)</code> returns <code>2.093</code>.</p></li>
+</ul>
+</section>
+<section id="hypothesis-testing-steps-1" class="slide level2">
+<h2>Hypothesis Testing Steps</h2>
+<h3 id="manual-hypotheses-and-data">Manual: hypotheses and data</h3>
+<blockquote>
+<p>A sample of <code>20</code> students has a mean exam score of <code>78</code> with a standard deviation of <code>5</code>. Does the class differ from the national average of <code>75</code>?</p>
+</blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>1. Set hypotheses</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment"><span class="math inline">\(H_0\)</span>: The average exam score is 75 (<span class="math inline">\(\mu = 75\)</span>).</li>
+<li class="fragment"><span class="math inline">\(H_A\)</span>: The average exam score is not 75 (<span class="math inline">\(\mu \neq 75\)</span>).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>2. Collect sample data</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Sample size: <span class="math inline">\(n = 20\)</span></li>
+<li class="fragment">Sample mean: <span class="math inline">\(\color{blue}{\bar{x}} = 78\)</span></li>
+<li class="fragment">Sample standard deviation: <span class="math inline">\(\color{orange}{s} = 5\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="hypothesis-testing-steps-2" class="slide level2">
+<h2>Hypothesis Testing Steps</h2>
+<h3 id="manual-test-and-decide">Manual: test and decide</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>3. Compute the t-statistic</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{78 - 75}{\frac{5}{\sqrt{20}}} = \dfrac{3}{1.118} = 2.68\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>4. Compare to the critical value</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">At <span class="math inline">\(\alpha = .05\)</span> (two-tailed) and <span class="math inline">\(df = 19\)</span>: <span class="math inline">\(t_{critical} = \pm 2.093\)</span>.</li>
+<li class="fragment">Since <span class="math inline">\(2.68 &gt; 2.093\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="hypothesis-testing-steps-3" class="slide level2">
+<h2>Hypothesis Testing Steps</h2>
+<h3 id="programmatic">Programmatic</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a aria-label="4"></a></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="co"># For Reproducibility</span></span>
+<span id="cb1-6"><a aria-label="6"></a><span class="fu">set.seed</span>(<span class="dv">20</span>)</span>
+<span id="cb1-7"><a aria-label="7"></a></span>
+<span id="cb1-8"><a aria-label="8"></a><span class="co"># Using Functions</span></span>
+<span id="cb1-9"><a aria-label="9"></a>n <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb1-10"><a aria-label="10"></a>m <span class="ot">=</span> <span class="dv">78</span></span>
+<span id="cb1-11"><a aria-label="11"></a>mu <span class="ot">=</span> <span class="dv">75</span></span>
+<span id="cb1-12"><a aria-label="12"></a>s <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb1-13"><a aria-label="13"></a><span class="co"># Simulate data, then rescale so the sample has exactly mean 78 and SD 5</span></span>
+<span id="cb1-14"><a aria-label="14"></a>dat <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb1-15"><a aria-label="15"></a>dat <span class="ot">&lt;-</span> m <span class="sc">+</span> s <span class="sc">*</span> (dat <span class="sc">-</span> <span class="fu">mean</span>(dat)) <span class="sc">/</span> <span class="fu">sd</span>(dat)</span>
+<span id="cb1-16"><a aria-label="16"></a><span class="fu">t.test</span>(dat,<span class="at">mu =</span> mu) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a aria-label="17"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a aria-label="18"></a>  <span class="fu">rename</span>(</span>
+<span id="cb1-19"><a aria-label="19"></a>    <span class="at">M =</span> estimate,</span>
+<span id="cb1-20"><a aria-label="20"></a>    <span class="at">t =</span> statistic,</span>
+<span id="cb1-21"><a aria-label="21"></a>    <span class="at">df =</span> parameter,</span>
+<span id="cb1-22"><a aria-label="22"></a>    <span class="at">p =</span> p.value</span>
+<span id="cb1-23"><a aria-label="23"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-24"><a aria-label="24"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"method"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-25"><a aria-label="25"></a>  <span class="fu">fmt_auto</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-26"><a aria-label="26"></a>  <span class="fu">opt_row_striping</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="shmsipenme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#shmsipenme table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#shmsipenme thead, #shmsipenme tbody, #shmsipenme tfoot, #shmsipenme tr, #shmsipenme td, #shmsipenme th {
+  border-style: none;
+}
+
+#shmsipenme p {
+  margin: 0;
+  padding: 0;
+}
+
+#shmsipenme .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#shmsipenme .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#shmsipenme .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#shmsipenme .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#shmsipenme .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#shmsipenme .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shmsipenme .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#shmsipenme .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#shmsipenme .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#shmsipenme .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#shmsipenme .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#shmsipenme .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#shmsipenme .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#shmsipenme .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#shmsipenme .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#shmsipenme .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#shmsipenme .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#shmsipenme .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#shmsipenme .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shmsipenme .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#shmsipenme .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#shmsipenme .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#shmsipenme .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shmsipenme .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#shmsipenme .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#shmsipenme .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shmsipenme .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shmsipenme .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#shmsipenme .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shmsipenme .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#shmsipenme .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shmsipenme .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#shmsipenme .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shmsipenme .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#shmsipenme .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shmsipenme .gt_left {
+  text-align: left;
+}
+
+#shmsipenme .gt_center {
+  text-align: center;
+}
+
+#shmsipenme .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#shmsipenme .gt_font_normal {
+  font-weight: normal;
+}
+
+#shmsipenme .gt_font_bold {
+  font-weight: bold;
+}
+
+#shmsipenme .gt_font_italic {
+  font-style: italic;
+}
+
+#shmsipenme .gt_super {
+  font-size: 65%;
+}
+
+#shmsipenme .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#shmsipenme .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#shmsipenme .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#shmsipenme .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#shmsipenme .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#shmsipenme .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#shmsipenme .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#shmsipenme .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#shmsipenme div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="M" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">M</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">t</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">df</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+<th id="alternative" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">alternative</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">One Sample t-test</th>
+<td class="gt_row gt_right" headers="stub_1_1 M">78&nbsp;</td>
+<td class="gt_row gt_right" headers="stub_1_1 t">2.683</td>
+<td class="gt_row gt_right" headers="stub_1_1 p">0.015</td>
+<td class="gt_row gt_right" headers="stub_1_1 df">19&nbsp;</td>
+<td class="gt_row gt_right" headers="stub_1_1 conf.low">75.66</td>
+<td class="gt_row gt_right" headers="stub_1_1 conf.high">80.34</td>
+<td class="gt_row gt_left" headers="stub_1_1 alternative">two.sided</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Manually</span></span>
+<span id="cb2-2"><a aria-label="2"></a>(m<span class="sc">-</span>mu)<span class="sc">/</span>(s<span class="sc">/</span><span class="fu">sqrt</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.683282</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Critical value (two-tailed, alpha = .05)</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.093024</code></pre>
+</div>
+</div>
+</section>
+<section id="reporting-results" class="slide level2">
+<h2>Reporting Results</h2>
+<h3 id="apa-style">APA-style</h3>
+<blockquote>
+<p>A one-sample t-test was conducted to compare exam scores to the national average of <code>75</code>. Results showed a significant difference, <code>t(19) = 2.68, p = .015</code>, indicating that students scored significantly higher than the national average (<code>M = 78, SD = 5</code>).</p>
+</blockquote>
+<ul>
+<li class="fragment">What kind of test?</li>
+<li class="fragment">What is being compared?</li>
+<li class="fragment">Is it significant?</li>
+<li class="fragment">What are the test results?</li>
+</ul>
+</section>
+<section id="reporting-results-1" class="slide level2">
+<h2>Reporting Results</h2>
+<h3 id="apa-style-1">APA-style</h3>
+<blockquote>
+<p>A <span class="hl">one-sample t-test</span> was conducted to <span class="hl">compare exam scores to the national average</span> of <code>75</code>. Results showed a <span class="hl">significant difference</span>, <span class="hl"><code>t(19) = 2.68, p = .015</code></span>, indicating that students scored significantly higher than the national average (<code>M = 78, SD = 5</code>).</p>
+</blockquote>
+<ul>
+<li class="fragment"><strong>What kind of test?</strong> one-sample t-test</li>
+<li class="fragment"><strong>What is being compared?</strong> exam scores to the national average</li>
+<li class="fragment"><strong>Is it significant?</strong> significant difference</li>
+<li class="fragment"><strong>What are the test results?</strong> <code>t(19) = 2.68, p = .015</code></li>
+</ul>
+</section>
+<section id="interpreting-results" class="slide level2">
+<h2>Interpreting Results</h2>
+<h3 id="sample-summary-table">Sample summary table</h3>
+<ul>
+<li class="fragment"><p>A significant result (<span class="math inline">\(p &lt; .05\)</span>) suggests that the sample mean is different from the population mean.</p></li>
+<li class="fragment"><p>A non-significant result (<span class="math inline">\(p &gt; .05\)</span>) means we fail to reject <span class="math inline">\(H_0\)</span> (insufficient evidence of a difference).</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="jprvvpsuyq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jprvvpsuyq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jprvvpsuyq thead, #jprvvpsuyq tbody, #jprvvpsuyq tfoot, #jprvvpsuyq tr, #jprvvpsuyq td, #jprvvpsuyq th {
+  border-style: none;
+}
+
+#jprvvpsuyq p {
+  margin: 0;
+  padding: 0;
+}
+
+#jprvvpsuyq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jprvvpsuyq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jprvvpsuyq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jprvvpsuyq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jprvvpsuyq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jprvvpsuyq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jprvvpsuyq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jprvvpsuyq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jprvvpsuyq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jprvvpsuyq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jprvvpsuyq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jprvvpsuyq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jprvvpsuyq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jprvvpsuyq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jprvvpsuyq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jprvvpsuyq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jprvvpsuyq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jprvvpsuyq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jprvvpsuyq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jprvvpsuyq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jprvvpsuyq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jprvvpsuyq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jprvvpsuyq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jprvvpsuyq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jprvvpsuyq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jprvvpsuyq .gt_left {
+  text-align: left;
+}
+
+#jprvvpsuyq .gt_center {
+  text-align: center;
+}
+
+#jprvvpsuyq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jprvvpsuyq .gt_font_normal {
+  font-weight: normal;
+}
+
+#jprvvpsuyq .gt_font_bold {
+  font-weight: bold;
+}
+
+#jprvvpsuyq .gt_font_italic {
+  font-style: italic;
+}
+
+#jprvvpsuyq .gt_super {
+  font-size: 65%;
+}
+
+#jprvvpsuyq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jprvvpsuyq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jprvvpsuyq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jprvvpsuyq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jprvvpsuyq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jprvvpsuyq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jprvvpsuyq .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jprvvpsuyq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jprvvpsuyq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="M" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">M</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">t</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">df</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+<th id="alternative" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">alternative</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">One Sample t-test</th>
+<td class="gt_row gt_right" headers="stub_1_1 M">78&nbsp;</td>
+<td class="gt_row gt_right" headers="stub_1_1 t">2.683</td>
+<td class="gt_row gt_right" headers="stub_1_1 p">0.015</td>
+<td class="gt_row gt_right" headers="stub_1_1 df">19&nbsp;</td>
+<td class="gt_row gt_right" headers="stub_1_1 conf.low">75.66</td>
+<td class="gt_row gt_right" headers="stub_1_1 conf.high">80.34</td>
+<td class="gt_row gt_left" headers="stub_1_1 alternative">two.sided</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-data" class="slide level2">
+<h2>Visualizing Data</h2>
+<h3 id="scores-against-the-national-average">Scores against the national average</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-7-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec9_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec9_files/figure-revealjs/unnamed-chunk-8-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="exam-scores-vs.-national-average" class="slide level2">
+<h2>Exam Scores vs.&nbsp;National Average</h2>
+<h3 id="hypotheses">Hypotheses</h3>
+<blockquote>
+<p>A professor wants to test if students in their class scored differently from the national average of <code>75</code> on an exam. A sample of <code>25</code> students has a mean score of <code>78</code> with a standard deviation of <code>10</code>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): <span class="math inline">\(\mu = 75\)</span> (no difference)</p></li>
+<li class="fragment"><p>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>): <span class="math inline">\(\mu \neq 75\)</span> (scores differ)</p></li>
+</ul>
+</section>
+<section id="exam-scores-vs.-national-average-1" class="slide level2">
+<h2>Exam Scores vs.&nbsp;National Average</h2>
+<h3 id="manual">Manual</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Compute t</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{\color{blue}{\bar{x}} - \mu}{\frac{\color{orange}{s}}{\sqrt{n}}} = \dfrac{78 - 75}{\frac{10}{\sqrt{25}}} = \dfrac{3}{2} = 1.5\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p>For <span class="math inline">\(df = 24\)</span> (<span class="math inline">\(25 - 1\)</span>), the critical value at <span class="math inline">\(\alpha = .05\)</span> (two-tailed) is <span class="math inline">\(\pm 2.064\)</span>. Since <span class="math inline">\(1.5 &lt; 2.064\)</span>, we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exam-scores-vs.-national-average-2" class="slide level2">
+<h2>Exam Scores vs.&nbsp;National Average</h2>
+<h3 id="programmatic-1">Programmatic</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="co"># For Reproducibility</span></span>
+<span id="cb6-2"><a aria-label="2"></a><span class="fu">set.seed</span>(<span class="dv">131</span>)</span>
+<span id="cb6-3"><a aria-label="3"></a></span>
+<span id="cb6-4"><a aria-label="4"></a><span class="co"># Simulate data, then rescale so the sample has exactly mean 78 and SD 10</span></span>
+<span id="cb6-5"><a aria-label="5"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>)</span>
+<span id="cb6-6"><a aria-label="6"></a>x <span class="ot">&lt;-</span> <span class="dv">78</span> <span class="sc">+</span> <span class="dv">10</span> <span class="sc">*</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb6-7"><a aria-label="7"></a></span>
+<span id="cb6-8"><a aria-label="8"></a><span class="fu">t.test</span>(</span>
+<span id="cb6-9"><a aria-label="9"></a>  x,</span>
+<span id="cb6-10"><a aria-label="10"></a>  <span class="co"># The population mean to test against</span></span>
+<span id="cb6-11"><a aria-label="11"></a>  <span class="at">mu =</span> <span class="dv">75</span></span>
+<span id="cb6-12"><a aria-label="12"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  x
+t = 1.5, df = 24, p-value = 0.1467
+alternative hypothesis: true mean is not equal to 75
+95 percent confidence interval:
+ 73.8722 82.1278
+sample estimates:
+mean of x 
+       78 </code></pre>
+</div>
+</div>
+</section>
+<section id="apa-reporting" class="slide level2">
+<h2>APA Reporting</h2>
+<blockquote>
+<p>A one-sample t-test was conducted to determine whether students’ exam scores differed from the national average (<span class="math inline">\(\mu\)</span> = 75). Results were not statistically significant, <code>t(24) = 1.50, p = .147</code>, indicating that students performed similarly to the national average (<code>M = 78, SD = 10</code>).</p>
+</blockquote>
+</section>
+<section id="daily-coffee-consumption" class="slide level2">
+<h2>Daily Coffee Consumption</h2>
+<h3 id="hypotheses-1">Hypotheses</h3>
+<blockquote>
+<p>A coffee company claims that people drink an average of <code>3 cups</code> of coffee per day. A researcher samples <code>16 individuals</code>, finding a mean of <code>2.5 cups</code> and a standard deviation of <code>1 cup</code>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): <span class="math inline">\(\mu = 3\)</span></p></li>
+<li class="fragment"><p>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>): <span class="math inline">\(\mu &lt; 3\)</span> (people drink less)</p></li>
+</ul>
+</section>
+<section id="daily-coffee-consumption-1" class="slide level2">
+<h2>Daily Coffee Consumption</h2>
+<h3 id="manual-1">Manual</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Compute t</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{2.5 - 3}{1 / \sqrt{16}} = \dfrac{-0.5}{0.25} = -2.0\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p>For <span class="math inline">\(df = 15\)</span> (<span class="math inline">\(16 - 1\)</span>), the critical t-value for a one-tailed test at <span class="math inline">\(\alpha = .05\)</span> is <span class="math inline">\(-1.753\)</span>. Since <span class="math inline">\(-2.0 &lt; -1.753\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="daily-coffee-consumption-2" class="slide level2">
+<h2>Daily Coffee Consumption</h2>
+<h3 id="programmatic-2">Programmatic</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a><span class="co"># For Reproducibility</span></span>
+<span id="cb8-2"><a aria-label="2"></a><span class="fu">set.seed</span>(<span class="dv">131</span>)</span>
+<span id="cb8-3"><a aria-label="3"></a></span>
+<span id="cb8-4"><a aria-label="4"></a><span class="co"># Simulate data, then rescale so the sample has exactly mean 2.5 and SD 1</span></span>
+<span id="cb8-5"><a aria-label="5"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">16</span>)</span>
+<span id="cb8-6"><a aria-label="6"></a>x <span class="ot">&lt;-</span> <span class="fl">2.5</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb8-7"><a aria-label="7"></a></span>
+<span id="cb8-8"><a aria-label="8"></a><span class="fu">t.test</span>(</span>
+<span id="cb8-9"><a aria-label="9"></a>  x,</span>
+<span id="cb8-10"><a aria-label="10"></a>  <span class="co"># The value claimed by the company</span></span>
+<span id="cb8-11"><a aria-label="11"></a>  <span class="at">mu =</span> <span class="dv">3</span>,</span>
+<span id="cb8-12"><a aria-label="12"></a>  <span class="co"># Our alternative is directional: fewer than 3 cups</span></span>
+<span id="cb8-13"><a aria-label="13"></a>  <span class="at">alternative =</span> <span class="st">"less"</span></span>
+<span id="cb8-14"><a aria-label="14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  x
+t = -2, df = 15, p-value = 0.03197
+alternative hypothesis: true mean is less than 3
+95 percent confidence interval:
+     -Inf 2.938263
+sample estimates:
+mean of x 
+      2.5 </code></pre>
+</div>
+</div>
+</section>
+<section id="apa-reporting-1" class="slide level2">
+<h2>APA Reporting</h2>
+<blockquote>
+<p>A one-sample t-test was conducted to test whether daily coffee consumption was lower than the reported average of <code>3 cups</code>. Results showed a significant difference, <code>t(15) = -2.00, p = .032</code> (one-tailed), suggesting that people consume significantly fewer cups of coffee per day than reported (<code>M = 2.5, SD = 1</code>).</p>
+</blockquote>
+</section>
+<section id="sleep-duration-among-college-students" class="slide level2">
+<h2>Sleep Duration Among College Students</h2>
+<h3 id="hypotheses-2">Hypotheses</h3>
+<blockquote>
+<p>A health researcher believes college students sleep less than <code>7 hours</code> per night. A sample of <code>30 students</code> reports a mean of <code>6.5</code> hours with a standard deviation of <code>1.2</code> hours.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): <span class="math inline">\(\mu = 7\)</span></p></li>
+<li class="fragment"><p>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>): <span class="math inline">\(\mu &lt; 7\)</span></p></li>
+</ul>
+</section>
+<section id="sleep-duration-among-college-students-1" class="slide level2">
+<h2>Sleep Duration Among College Students</h2>
+<h3 id="manual-2">Manual</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Compute t</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{6.5 - 7}{1.2 / \sqrt{30}} = \dfrac{-0.5}{0.219} = -2.28\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p>For <span class="math inline">\(df = 29\)</span>, the critical t-value for a one-tailed test at <span class="math inline">\(\alpha = .05\)</span> is <span class="math inline">\(-1.699\)</span>. Since <span class="math inline">\(-2.28 &lt; -1.699\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sleep-duration-among-college-students-2" class="slide level2">
+<h2>Sleep Duration Among College Students</h2>
+<h3 id="programmatic-3">Programmatic</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a><span class="co"># For Reproducibility</span></span>
+<span id="cb10-2"><a aria-label="2"></a><span class="fu">set.seed</span>(<span class="dv">728</span>)</span>
+<span id="cb10-3"><a aria-label="3"></a></span>
+<span id="cb10-4"><a aria-label="4"></a><span class="co"># Simulate data, then rescale so the sample has exactly mean 6.5 and SD 1.2</span></span>
+<span id="cb10-5"><a aria-label="5"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>)</span>
+<span id="cb10-6"><a aria-label="6"></a>x <span class="ot">&lt;-</span> <span class="fl">6.5</span> <span class="sc">+</span> <span class="fl">1.2</span> <span class="sc">*</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb10-7"><a aria-label="7"></a></span>
+<span id="cb10-8"><a aria-label="8"></a><span class="fu">t.test</span>(</span>
+<span id="cb10-9"><a aria-label="9"></a>  x,</span>
+<span id="cb10-10"><a aria-label="10"></a>  <span class="co"># The value we are testing against</span></span>
+<span id="cb10-11"><a aria-label="11"></a>  <span class="at">mu =</span> <span class="dv">7</span>,</span>
+<span id="cb10-12"><a aria-label="12"></a>  <span class="co"># Our alternative is directional: less than 7 hours</span></span>
+<span id="cb10-13"><a aria-label="13"></a>  <span class="at">alternative =</span> <span class="st">"less"</span></span>
+<span id="cb10-14"><a aria-label="14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  x
+t = -2.2822, df = 29, p-value = 0.015
+alternative hypothesis: true mean is less than 7
+95 percent confidence interval:
+    -Inf 6.87226
+sample estimates:
+mean of x 
+      6.5 </code></pre>
+</div>
+</div>
+</section>
+<section id="apa-reporting-2" class="slide level2">
+<h2>APA Reporting</h2>
+<blockquote>
+<p>A one-sample t-test was conducted to test whether college students sleep fewer than 7 hours per night. Results were statistically significant, <code>t(29) = -2.28, p = .015</code> (one-tailed), indicating that students get significantly less sleep than the recommended amount (<code>M = 6.5, SD = 1.2</code>).</p>
+</blockquote>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>One-Sample T-Test | ⬡⬢⬡⬢⬡⬢</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":[]},"pyodide":{"packages":[]}},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script>
+    // Adds lec2-style drifting icons + ghost nodes behind a YAML-generated
+    // #title-slide (which can't hold raw HTML). Styles: custom.scss ("Title-slide
+    // ambience"). Icons: pass via <body data-title-icons="functions percent ...">
+    // or edit the default list below.
+    document.addEventListener("DOMContentLoaded", function () {
+      var slide = document.getElementById("title-slide");
+      if (!slide) return;
+      var icons = (document.body.dataset.titleIcons ||
+        "functions percent show_chart calculate query_stats bar_chart").split(/\s+/);
+      var layer = document.createElement("div");
+      layer.className = "title-bg-icons";
+      icons.slice(0, 6).forEach(function (name, i) {
+        var s = document.createElement("span");
+        s.className = "material-icons title-bg-icon-" + (i + 1);
+        s.textContent = name;
+        layer.appendChild(s);
+      });
+      var nodes = document.createElement("div");
+      nodes.className = "ghost-nodes";
+      for (var i = 0; i < 5; i++) nodes.appendChild(document.createElement("div")).className = "ghost-node";
+      slide.insertBefore(nodes, slide.firstChild);
+      slide.insertBefore(layer, slide.firstChild);
+    });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>
