@@ -1026,7 +1026,7 @@
     "href": "lec9/lec9.html#hypothesis-testing-steps-3",
     "title": "One-Sample T-Test",
     "section": "Hypothesis Testing Steps",
-    "text": "Hypothesis Testing Steps\nProgrammatic\n\nlibrary(dplyr)\nlibrary(broom)\nlibrary(gt)\n\n# For Reproducibility\nset.seed(20)\n\n# Using Functions\nn = 20\nm = 78\nmu = 75\ns = 5\n# Simulate data, then rescale so the sample has exactly mean 78 and SD 5\ndat &lt;- rnorm(n)\ndat &lt;- m + s * (dat - mean(dat)) / sd(dat)\nt.test(dat,mu = mu) |&gt;\n  tidy() |&gt;\n  rename(\n    M = estimate,\n    t = statistic,\n    df = parameter,\n    p = p.value\n  ) |&gt;\n  gt(rowname_col = \"method\") |&gt;\n  fmt_auto() |&gt;\n  opt_row_striping()\n\n\n\n\n\n\n\n\nM\nt\np\ndf\nconf.low\nconf.high\nalternative\n\n\n\n\nOne Sample t-test\n78 \n2.683\n0.015\n19 \n75.66\n80.34\ntwo.sided\n\n\n\n\n\n\n# Manually\n(m-mu)/(s/sqrt(n))\n\n[1] 2.683282\n\n# Critical value (two-tailed, alpha = .05)\nqt(.975, df = n - 1)\n\n[1] 2.093024"
+    "text": "Hypothesis Testing Steps\nProgrammatic\n\none_sample.R\n\n# For Reproducibility\nset.seed(20)\n\nn = 20   # sample size\nm = 78   # sample mean\nmu = 75  # population mean (H0)\ns = 5    # sample SD\n\n# Simulate data, then rescale so the sample has exactly mean 78 and SD 5\ndat &lt;- rnorm(n)\ndat &lt;- m + s * (dat - mean(dat)) / sd(dat)\n\nt.test(dat, mu = mu)\n\n\n    One Sample t-test\n\ndata:  dat\nt = 2.6833, df = 19, p-value = 0.01471\nalternative hypothesis: true mean is not equal to 75\n95 percent confidence interval:\n 75.65993 80.34007\nsample estimates:\nmean of x \n       78 \n\n# By hand\n(m - mu) / (s / sqrt(n))\n\n[1] 2.683282\n\n# Critical value (two-tailed, alpha = .05)\nqt(.975, df = n - 1)\n\n[1] 2.093024"
   },
   {
     "objectID": "lec9/lec9.html#reporting-results",
@@ -1075,7 +1075,7 @@
     "href": "lec9/lec9.html#exam-scores-vs.-national-average-2",
     "title": "One-Sample T-Test",
     "section": "Exam Scores vs. National Average",
-    "text": "Exam Scores vs. National Average\nProgrammatic\n\n# For Reproducibility\nset.seed(131)\n\n# Simulate data, then rescale so the sample has exactly mean 78 and SD 10\nx &lt;- rnorm(25)\nx &lt;- 78 + 10 * (x - mean(x)) / sd(x)\n\nt.test(\n  x,\n  # The population mean to test against\n  mu = 75\n  )\n\n\n    One Sample t-test\n\ndata:  x\nt = 1.5, df = 24, p-value = 0.1467\nalternative hypothesis: true mean is not equal to 75\n95 percent confidence interval:\n 73.8722 82.1278\nsample estimates:\nmean of x \n       78"
+    "text": "Exam Scores vs. National Average\nProgrammatic\n\nexam_scores.R\n\n# For Reproducibility\nset.seed(131)\n\n# Simulate data, then rescale so the sample has exactly mean 78 and SD 10\nx &lt;- rnorm(25)\nx &lt;- 78 + 10 * (x - mean(x)) / sd(x)\n\nt.test(\n  x,\n  # The population mean to test against\n  mu = 75\n  )\n\n\n    One Sample t-test\n\ndata:  x\nt = 1.5, df = 24, p-value = 0.1467\nalternative hypothesis: true mean is not equal to 75\n95 percent confidence interval:\n 73.8722 82.1278\nsample estimates:\nmean of x \n       78"
   },
   {
     "objectID": "lec9/lec9.html#apa-reporting",
@@ -1103,7 +1103,7 @@
     "href": "lec9/lec9.html#daily-coffee-consumption-2",
     "title": "One-Sample T-Test",
     "section": "Daily Coffee Consumption",
-    "text": "Daily Coffee Consumption\nProgrammatic\n\n# For Reproducibility\nset.seed(131)\n\n# Simulate data, then rescale so the sample has exactly mean 2.5 and SD 1\nx &lt;- rnorm(16)\nx &lt;- 2.5 + 1 * (x - mean(x)) / sd(x)\n\nt.test(\n  x,\n  # The value claimed by the company\n  mu = 3,\n  # Our alternative is directional: fewer than 3 cups\n  alternative = \"less\"\n  )\n\n\n    One Sample t-test\n\ndata:  x\nt = -2, df = 15, p-value = 0.03197\nalternative hypothesis: true mean is less than 3\n95 percent confidence interval:\n     -Inf 2.938263\nsample estimates:\nmean of x \n      2.5"
+    "text": "Daily Coffee Consumption\nProgrammatic\n\ncoffee.R\n\n# For Reproducibility\nset.seed(131)\n\n# Simulate data, then rescale so the sample has exactly mean 2.5 and SD 1\nx &lt;- rnorm(16)\nx &lt;- 2.5 + 1 * (x - mean(x)) / sd(x)\n\nt.test(\n  x,\n  # The value claimed by the company\n  mu = 3,\n  # Our alternative is directional: fewer than 3 cups\n  alternative = \"less\"\n  )\n\n\n    One Sample t-test\n\ndata:  x\nt = -2, df = 15, p-value = 0.03197\nalternative hypothesis: true mean is less than 3\n95 percent confidence interval:\n     -Inf 2.938263\nsample estimates:\nmean of x \n      2.5"
   },
   {
     "objectID": "lec9/lec9.html#apa-reporting-1",
@@ -1131,7 +1131,7 @@
     "href": "lec9/lec9.html#sleep-duration-among-college-students-2",
     "title": "One-Sample T-Test",
     "section": "Sleep Duration Among College Students",
-    "text": "Sleep Duration Among College Students\nProgrammatic\n\n# For Reproducibility\nset.seed(728)\n\n# Simulate data, then rescale so the sample has exactly mean 6.5 and SD 1.2\nx &lt;- rnorm(30)\nx &lt;- 6.5 + 1.2 * (x - mean(x)) / sd(x)\n\nt.test(\n  x,\n  # The value we are testing against\n  mu = 7,\n  # Our alternative is directional: less than 7 hours\n  alternative = \"less\"\n  )\n\n\n    One Sample t-test\n\ndata:  x\nt = -2.2822, df = 29, p-value = 0.015\nalternative hypothesis: true mean is less than 7\n95 percent confidence interval:\n    -Inf 6.87226\nsample estimates:\nmean of x \n      6.5"
+    "text": "Sleep Duration Among College Students\nProgrammatic\n\nsleep.R\n\n# For Reproducibility\nset.seed(728)\n\n# Simulate data, then rescale so the sample has exactly mean 6.5 and SD 1.2\nx &lt;- rnorm(30)\nx &lt;- 6.5 + 1.2 * (x - mean(x)) / sd(x)\n\nt.test(\n  x,\n  # The value we are testing against\n  mu = 7,\n  # Our alternative is directional: less than 7 hours\n  alternative = \"less\"\n  )\n\n\n    One Sample t-test\n\ndata:  x\nt = -2.2822, df = 29, p-value = 0.015\nalternative hypothesis: true mean is less than 7\n95 percent confidence interval:\n    -Inf 6.87226\nsample estimates:\nmean of x \n      6.5"
   },
   {
     "objectID": "lec9/lec9.html#apa-reporting-2",

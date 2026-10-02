@@ -21,6 +21,7 @@ format:
       engine: webr
 revealjs-plugins:
   - drop
+  - codewindow
 ---
 
 ```{r}
@@ -476,42 +477,34 @@ $t = \dfrac{78 - 75}{\frac{5}{\sqrt{20}}} = \dfrac{3}{1.118} = 2.68$
 
 ### Programmatic
 
+::: {.codewindow .r .codewindow-dark}
+one_sample.R
+
 ```{r}
 #| echo: true
 #| code-fold: false
-library(dplyr)
-library(broom)
-library(gt)
 
 # For Reproducibility
 set.seed(20)
 
-# Using Functions
-n = 20
-m = 78
-mu = 75
-s = 5
+n = 20   # sample size
+m = 78   # sample mean
+mu = 75  # population mean (H0)
+s = 5    # sample SD
+
 # Simulate data, then rescale so the sample has exactly mean 78 and SD 5
 dat <- rnorm(n)
 dat <- m + s * (dat - mean(dat)) / sd(dat)
-t.test(dat,mu = mu) |>
-  tidy() |>
-  rename(
-    M = estimate,
-    t = statistic,
-    df = parameter,
-    p = p.value
-  ) |>
-  gt(rowname_col = "method") |>
-  fmt_auto() |>
-  opt_row_striping()
 
-# Manually
-(m-mu)/(s/sqrt(n))
+t.test(dat, mu = mu)
+
+# By hand
+(m - mu) / (s / sqrt(n))
 
 # Critical value (two-tailed, alpha = .05)
 qt(.975, df = n - 1)
 ```
+:::
 
 ## Reporting Results
 
@@ -641,6 +634,9 @@ For $df = 24$ ($25 - 1$), the critical value at $\alpha = .05$ (two-tailed) is $
 
 ### Programmatic
 
+::: {.codewindow .r .codewindow-dark}
+exam_scores.R
+
 ```{r}
 #| echo: true
 #| code-fold: false
@@ -658,6 +654,7 @@ t.test(
   mu = 75
   )
 ```
+:::
 
 ## APA Reporting
 
@@ -693,6 +690,9 @@ For $df = 15$ ($16 - 1$), the critical t-value for a one-tailed test at $\alpha 
 
 ### Programmatic
 
+::: {.codewindow .r .codewindow-dark}
+coffee.R
+
 ```{r}
 #| echo: true
 #| code-fold: false
@@ -712,6 +712,7 @@ t.test(
   alternative = "less"
   )
 ```
+:::
 
 ## APA Reporting
 
@@ -747,6 +748,9 @@ For $df = 29$, the critical t-value for a one-tailed test at $\alpha = .05$ is $
 
 ### Programmatic
 
+::: {.codewindow .r .codewindow-dark}
+sleep.R
+
 ```{r}
 #| echo: true
 #| code-fold: false
@@ -766,6 +770,7 @@ t.test(
   alternative = "less"
   )
 ```
+:::
 
 ## APA Reporting
 
