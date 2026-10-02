@@ -2091,5 +2091,236 @@
     "title": "Analysis of Variance",
     "section": "Summary: One-Way ANOVA",
     "text": "Summary: One-Way ANOVA\n\nCompares three or more group means with one overall test.\n\\(F = MS_B / MS_E\\): between-group variance relative to within-group variance.\nFollow a significant \\(F\\) with a post-hoc test (Tukey’s HSD) to find which groups differ.\nCheck assumptions: independence, normality, equal variance.\nReport \\(F\\)(df, df), \\(p\\), group means and SDs, and an effect size (\\(\\eta^2\\))."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#what-is-a-factorial-anova",
+    "href": "lec13fct/lec13fct.html#what-is-a-factorial-anova",
+    "title": "Factorial ANOVA",
+    "section": "What is a Factorial ANOVA?",
+    "text": "What is a Factorial ANOVA?\nMore than 1 independent variable\n\nUp to now, we’ve looked at experiments that test one question at a time.\n\n\n\n\n\n\n\n\n\nt-test\n\n\nDo two groups differ?\n“Does drinking coffee make people happier than not drinking coffee?”\n\n\n\n\n\n\n\n\n\n\nOne-way ANOVA\n\n\nDo more than two groups differ on one IV?\n“Does coffee make people happier, compared to decaf or water?”\n\n\n\n\n\nBut in real life, there’s rarely just one thing influencing behavior."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#why-factorial-anova",
+    "href": "lec13fct/lec13fct.html#why-factorial-anova",
+    "title": "Factorial ANOVA",
+    "section": "Why Factorial ANOVA?",
+    "text": "Why Factorial ANOVA?\nA Factorial ANOVA allows us to test more than one independent variable (IV) at the same time.\n\nInstead of asking separate questions:\n\n“Does coffee make people happier?”\n“Does watching TV make people happier?”\n\nWe can now ask:\n\n“Does coffee and watching TV make people happier?”\n“Does the effect of coffee depend on what you’re watching?”"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#the-power-of-two-or-more",
+    "href": "lec13fct/lec13fct.html#the-power-of-two-or-more",
+    "title": "Factorial ANOVA",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nTesting as separate IVs\n\n\n\n\n\n\n\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\n\nC1\n\nCoffee\n\n\n\nH1\n\nHappiness\n\n\n\nC1-&gt;H1\n\n\n\n\n\nC2\n\nNo Coffee\n\n\n\nH2\n\nHappiness\n\n\n\nC2-&gt;H2\n\n\n\n\n\nTV\n\nTV\n\n\n\nH3\n\nHappiness\n\n\n\nTV-&gt;H3\n\n\n\n\n\nNTV\n\nNo TV\n\n\n\nH4\n\nHappiness\n\n\n\nNTV-&gt;H4"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#the-power-of-two-or-more-1",
+    "href": "lec13fct/lec13fct.html#the-power-of-two-or-more-1",
+    "title": "Factorial ANOVA",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nCombining IVs\n\n\n\n\n\n\n\n\n\ncluster_design\n\n2 × 2 Factorial Design\n\n\n\nCoffee\n\nCoffee\n\n\n\nCoffeeDark\n\nCoffee + Dark\n\n\n\nCoffee-&gt;CoffeeDark\n\n\n\n\n\nCoffeeNoDark\n\nCoffee + No Dark\n\n\n\nCoffee-&gt;CoffeeNoDark\n\n\n\n\n\nNoCoffee\n\nNo Coffee\n\n\n\nNoCoffeeDark\n\nNo Coffee + Dark\n\n\n\nNoCoffee-&gt;NoCoffeeDark\n\n\n\n\n\nNoCoffeeNoDark\n\nNo Coffee + No Dark\n\n\n\nNoCoffee-&gt;NoCoffeeNoDark\n\n\n\n\n\nDark\n\nWatch Dark\n\n\n\nDark-&gt;CoffeeDark\n\n\n\n\n\nDark-&gt;NoCoffeeDark\n\n\n\n\n\nNoDark\n\nNo Dark\n\n\n\nNoDark-&gt;CoffeeNoDark\n\n\n\n\n\nNoDark-&gt;NoCoffeeNoDark\n\n\n\n\n\nHappiness1\n\nHappiness\n\n\n\nCoffeeDark-&gt;Happiness1\n\n\n\n\n\nHappiness2\n\nHappiness\n\n\n\nCoffeeNoDark-&gt;Happiness2\n\n\n\n\n\nHappiness3\n\nHappiness\n\n\n\nNoCoffeeDark-&gt;Happiness3\n\n\n\n\n\nHappiness4\n\nHappiness\n\n\n\nNoCoffeeNoDark-&gt;Happiness4"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#the-power-of-two-or-more-2",
+    "href": "lec13fct/lec13fct.html#the-power-of-two-or-more-2",
+    "title": "Factorial ANOVA",
+    "section": "The Power of Two (or More)",
+    "text": "The Power of Two (or More)\nThree questions at once\n\n\n\nMain Effect 1\n\nDoes IV1 alone affect the outcome? (Coffee → Happiness)\n\n\n\n\n\nMain Effect 2\n\nDoes IV2 alone affect the outcome? (TV Show → Happiness)\n\n\n\n\n\nInteraction Effect\n\nDoes the effect of one variable depend on the other? (Maybe coffee only helps if you’re watching TV!)"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#why-not-just-run-multiple-t-tests",
+    "href": "lec13fct/lec13fct.html#why-not-just-run-multiple-t-tests",
+    "title": "Factorial ANOVA",
+    "section": "Why Not Just Run Multiple t-tests?",
+    "text": "Why Not Just Run Multiple t-tests?\nYou could compare…\n\nCoffee vs. No Coffee\nDark vs. No Dark\nCoffee + Dark vs. everything else\n\nbut each additional t-test increases your Type I error rate (false positives).\n\nA Factorial ANOVA solves that problem by testing all these relationships in one model, controlling for shared variance and examining combined effects."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#in-other-words",
+    "href": "lec13fct/lec13fct.html#in-other-words",
+    "title": "Factorial ANOVA",
+    "section": "In Other Words…",
+    "text": "In Other Words…\n\n\n\n\n\n\n\n\nTest Type\nQuestion\nExample\n\n\n\n\nt-test\nDo two groups differ?\nCoffee vs. No Coffee\n\n\nOne-Way ANOVA\nDo 3+ groups differ on one IV?\nDecaf, Coffee, Energy Drink\n\n\nFactorial ANOVA\nHow do two or more IVs work together?\nCoffee × TV Show → Happiness"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#the-goal-of-research",
+    "href": "lec13fct/lec13fct.html#the-goal-of-research",
+    "title": "Factorial ANOVA",
+    "section": "The Goal of Research",
+    "text": "The Goal of Research\n\nThe goal of good research is to narrow in on the real sources of variation.\nFactorial ANOVA lets us see not just whether variables matter, but how they matter together.\n\n\nIt’s not just what causes an effect, it’s what combinations of causes create patterns we care about."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#factorial-anova",
+    "href": "lec13fct/lec13fct.html#factorial-anova",
+    "title": "Factorial ANOVA",
+    "section": "Factorial ANOVA",
+    "text": "Factorial ANOVA\nFour sources of variance\n\n\n\nBetween IV 1\n\nVariance between the groups of the first IV (main effect 1).\n\n\n\n\n\nBetween IV 2\n\nVariance between the groups of the second IV (main effect 2).\n\n\n\n\n\nInteraction\n\nVariance from the combination of the groups (the cells).\n\n\n\n\n\nError\n\nVariance within each cell, around that cell’s own mean."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#understanding-main-effects",
+    "href": "lec13fct/lec13fct.html#understanding-main-effects",
+    "title": "Factorial ANOVA",
+    "section": "Understanding Main Effects",
+    "text": "Understanding Main Effects\n\n\n\nThe main effect of Coffee asks:\n\nOn average, does drinking coffee make people happier than not drinking coffee?\n(Regardless of whether they watched TV or not.)\n\nThe main effect of Watching TV asks:\n\nOn average, does watching TV make people happier than not watching it?\n(Regardless of whether they had coffee or not.)\n\n\n\n\n\n\n\n\n\n\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\n\nC1\n\nCoffee\n\n\n\nC2\n\nNo Coffee\n\n\n\nH1\n\nHappiness\n\n\n\nH1-&gt;C1\n\n\n\n\n\nH2\n\nHappiness\n\n\n\nH2-&gt;C2\n\n\n\n\n\nTV\n\nTV\n\n\n\nNTV\n\nNo TV\n\n\n\nH3\n\nHappiness\n\n\n\nH3-&gt;TV\n\n\n\n\n\nH4\n\nHappiness\n\n\n\nH4-&gt;NTV"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#understanding-main-effects-1",
+    "href": "lec13fct/lec13fct.html#understanding-main-effects-1",
+    "title": "Factorial ANOVA",
+    "section": "Understanding Main Effects",
+    "text": "Understanding Main Effects\nThe 2 × 2 table of means\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2 × 2 Factorial Design: Coffee × TV\n\n\nMean happiness by condition (cell means)\n\n\nWatched TV?\n\nCoffee condition\n\n\n\nCoffee\nNo Coffee\n\n\n\n\nTV\n3.0\n4.0\n\n\nNo TV\n4.0\n8.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWith marginal means\n\n\nRow and column means show the main effects\n\n\nWatched TV?\nCoffee\nNo Coffee\nRow mean\n\n\n\n\nTV\n3.0\n4.0\n3.5\n\n\nNo TV\n4.0\n8.0\n6.0\n\n\nColumn mean\n3.5\n6.0\n4.8\n\n\n\n\n\n\n\n\n\nCoffee main effect: 3.50 (coffee) vs. 6.00 (no coffee).\nTV main effect: 3.50 (TV) vs. 6.00 (no TV)."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#visualizing-interactions",
+    "href": "lec13fct/lec13fct.html#visualizing-interactions",
+    "title": "Factorial ANOVA",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\n\n\n\n\n\n\n\n\n\n\n\n\n\nEach line represents one independent variable, in this case, whether participants drank coffee.\nThe x-axis represents the second independent variable, watching TV or not.\nIf the lines are parallel, there is no interaction: the effect of one IV doesn’t depend on the other.\nHere the lines are not parallel, so the effect of one IV depends on the other. Without coffee, watching TV drops happiness a lot (8.00 to 4.00). With coffee, TV matters much less (4.00 to 3.00). That is an interaction."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#visualizing-interactions-1",
+    "href": "lec13fct/lec13fct.html#visualizing-interactions-1",
+    "title": "Factorial ANOVA",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\nA main effect hides the story\n\n\n\n\n\n\n\n\n\n\nAveraged over TV, coffee drinkers are less happy (3.50 vs. 6.00). The interaction plot shows the full story: the size of the difference depends on whether people watched TV."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#visualizing-interactions-2",
+    "href": "lec13fct/lec13fct.html#visualizing-interactions-2",
+    "title": "Factorial ANOVA",
+    "section": "Visualizing Interactions",
+    "text": "Visualizing Interactions\nFrom main effect to interaction"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#calculating-f-values",
+    "href": "lec13fct/lec13fct.html#calculating-f-values",
+    "title": "Factorial ANOVA",
+    "section": "Calculating F Values",
+    "text": "Calculating F Values\n\n\n\n\n\n\nDegrees of freedom\n\n\n\nBetween groups 1: \\(df_{B_1} = k_1 - 1\\)\nBetween groups 2: \\(df_{B_2} = k_2 - 1\\)\nInteraction: \\(df_{Interaction} = (k_1 - 1) \\times (k_2 - 1)\\)\nError: \\(df_{Error} = N - (k_1 \\times k_2)\\)\nTotal: \\(df_{Total} = N - 1\\)"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#calculating-ms",
+    "href": "lec13fct/lec13fct.html#calculating-ms",
+    "title": "Factorial ANOVA",
+    "section": "Calculating MS",
+    "text": "Calculating MS\n\nBetween Group 1 MS:\n\n\\(MS_{B_1} = \\dfrac{SS_{B_1}}{k_1-1}\\)\n\nBetween Group 2 MS:\n\n\\(MS_{B_2} = \\dfrac{SS_{B_2}}{k_2-1}\\)\n\nInteraction MS:\n\n\\(MS_{Interaction} = \\dfrac{SS_{Interaction}}{(k_1-1) \\times (k_2-1)}\\)\n\nError MS:\n\n\\(MS_{Error} = \\dfrac{SS_{Error}}{N-(k_1 \\times k_2)}\\)"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#calculating-f",
+    "href": "lec13fct/lec13fct.html#calculating-f",
+    "title": "Factorial ANOVA",
+    "section": "Calculating F",
+    "text": "Calculating F\n\n\n\n\n\n\nEvery F uses the same denominator\n\n\n\\(F_A = \\dfrac{MS_{B_1}}{MS_{Error}} \\qquad F_B = \\dfrac{MS_{B_2}}{MS_{Error}} \\qquad F_{AB} = \\dfrac{MS_{Interaction}}{MS_{Error}}\\)"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#how-many-fs",
+    "href": "lec13fct/lec13fct.html#how-many-fs",
+    "title": "Factorial ANOVA",
+    "section": "How Many F’s?",
+    "text": "How Many F’s?\n\n\n\n\n\n\n\nF_Tests\n\n\n\noneway\n\n1-Way ANOVA\n→ 1 F-test\n(Main Effect Only)\n\n\n\ntwoway\n\n2-Way ANOVA (2×2)\n→ 3 F-tests\n(2 Main Effects + 1 Interaction)\n\n\n\noneway-&gt;twoway\n\n\n\n\n\nthreeway\n\n3-Way ANOVA (2×2×2)\n→ 7 F-tests\n(3 Main + 3 Two-Way + 1 Three-Way)\n\n\n\ntwoway-&gt;threeway\n\n\n\n\n\nfourway\n\n4-Way ANOVA (2×2×2×2)\n→ 15 F-tests\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)\n\n\n\nthreeway-&gt;fourway\n\n\n\n\n\nnote\n\n\n\nGeneral Formula:\nF-tests = 2ⁿ - 1\n(where n = # of IVs)\n\n\n\nthreeway-&gt;note"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#factorial-anova-in-r",
+    "href": "lec13fct/lec13fct.html#factorial-anova-in-r",
+    "title": "Factorial ANOVA",
+    "section": "Factorial ANOVA in R",
+    "text": "Factorial ANOVA in R\nThe model formula\n\nfactorial_anova.R\n\n# A * B means: main effect of A + main effect of B + the A:B interaction\nfit &lt;- aov(weight_loss ~ diet_type * exercise_regimen, data = wl)\n\nsummary(fit)\n\n                           Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ndiet_type                   1 101.27  101.27  41.899 4.06e-09 ***\nexercise_regimen            1 114.06  114.06  47.191 6.41e-10 ***\ndiet_type:exercise_regimen  1   9.07    9.07   3.751   0.0557 .  \nResiduals                  96 232.02    2.42                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\ndiet_type * exercise_regimen is shorthand for diet_type + exercise_regimen + diet_type:exercise_regimen.\nEach row of the table is one F-test: two main effects and the interaction."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#interpreting-results",
+    "href": "lec13fct/lec13fct.html#interpreting-results",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\nExample 1: weight loss, diet type × exercise regimen\n\nTablePlot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ndiet_type\n1\n101.27\n101.27\n41.90\n&lt;.001\n\n\nexercise_regimen\n1\n114.06\n114.06\n47.19\n&lt;.001\n\n\ndiet_type:exercise_regimen\n1\n9.07\n9.07\n3.75\n0.056\n\n\nResiduals\n96\n232.02\n2.42\n–\n–\n\n\n\nDependent Variable: Weight LossDiet Type: Low Carb, Low FatExercise Regimen: Cardio, Strength"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#interpreting-the-fs-in-2-way-anova",
+    "href": "lec13fct/lec13fct.html#interpreting-the-fs-in-2-way-anova",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting the Fs in 2-way ANOVA",
+    "text": "Interpreting the Fs in 2-way ANOVA\n\n\\(F_A\\) (Diet type): F(1, 96) = 41.90, p &lt; .001\n\\(F_B\\) (Exercise regimen): F(1, 96) = 47.19, p &lt; .001\n\\(F_{AB}\\) (Diet × Exercise): F(1, 96) = 3.75, p = .056 (not significant)\n\n\n\n\nBoth main effects are significant and the interaction is not, so the effect of diet is about the same at each exercise regimen (and vice versa): the lines in the plot are close to parallel."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#interpreting-results-1",
+    "href": "lec13fct/lec13fct.html#interpreting-results-1",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\nExample 2: political interest, gender × education\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\ngender\n1\n216.57\n216.57\n244.15\n&lt;.001\n\n\neducation_level\n3\n198.31\n66.10\n74.52\n&lt;.001\n\n\ngender:education_level\n3\n23.65\n7.88\n8.89\n&lt;.001\n\n\nResiduals\n92\n81.61\n0.89\n–\n–\n\n\n\nDependent Variable: Political InterestGender: Male, FemaleEducation: High School, Bachelor’s, Master’s, PhD\n\n\n\n\n\n\n\n\n\nGender: F(1, 92) = 244.15, p &lt; .001\nEducation: F(3, 92) = 74.52, p &lt; .001\nGender × Education: F(3, 92) = 8.89, p &lt; .001"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#interpreting-fs",
+    "href": "lec13fct/lec13fct.html#interpreting-fs",
+    "title": "Factorial ANOVA",
+    "section": "Interpreting F’s",
+    "text": "Interpreting F’s\nVisually\n\n\n\n\n\n\n\n\n\n\nThe lines are not parallel: the effect of education depends on gender, which is why the interaction is significant."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#effect-size-partial-eta-squared",
+    "href": "lec13fct/lec13fct.html#effect-size-partial-eta-squared",
+    "title": "Factorial ANOVA",
+    "section": "Effect Size: Partial Eta Squared",
+    "text": "Effect Size: Partial Eta Squared\n\n\n\n\n\n\n\\(\\eta_p^2\\)\n\n\n\\(\\eta_p^2 = \\dfrac{SS_{effect}}{SS_{effect} + SS_{error}}\\) (one value for each F)\n\n\n\n\n\n\n\n\n\n\n\nEffect\nPartial η²\n\n\n\n\nDiet type\n0.304\n\n\nExercise regimen\n0.330\n\n\nDiet × Exercise\n0.038\n\n\n\n\n\n\n\n\nBenchmarks are the same as one-way ANOVA: about .01 small, .06 medium, .14 large."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#following-up-an-interaction",
+    "href": "lec13fct/lec13fct.html#following-up-an-interaction",
+    "title": "Factorial ANOVA",
+    "section": "Following Up an Interaction",
+    "text": "Following Up an Interaction\nWhat if the interaction is significant?\n\nA significant interaction means the effect of one IV depends on the other, so interpret the cells, not just the main effects.\nCompare the cell means with a post-hoc test, or test the effect of one IV at each level of the other (simple effects).\n\n\nfollow_up.R\n\n# Tukey's HSD for every pair of cells (the four combinations)\nTukeyHSD(fit, \"diet_type:exercise_regimen\")\n\n\n\nIn the weight-loss example the interaction was not significant, so we interpret the two main effects."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#assumptions-of-factorial-anova",
+    "href": "lec13fct/lec13fct.html#assumptions-of-factorial-anova",
+    "title": "Factorial ANOVA",
+    "section": "Assumptions of Factorial ANOVA",
+    "text": "Assumptions of Factorial ANOVA\n\n\n\n\n\n\nAssumptions\n\n\n\nThe DV is continuous (interval or ratio scale).\nObservations are independent. Each person is in only one cell.\nNormality: scores (residuals) are approximately normal in each cell.\nHomogeneity of variance: the cells have similar variances (Levene’s Test).\n\n\n\n\n\nassumptions.R\n\nlibrary(car)\nleveneTest(weight_loss ~ diet_type * exercise_regimen, data = wl)\nshapiro.test(residuals(fit))"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#reporting-f",
+    "href": "lec13fct/lec13fct.html#reporting-f",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\n\nIf asked to report findings in terms of the Null Hypothesis (H0), you should report findings as:\n\n\nReject \\(H_0\\), or\nFail to Reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#reporting-f-1",
+    "href": "lec13fct/lec13fct.html#reporting-f-1",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nIf asked to report findings in general or for publication, you need EACH F-value:\n\n\\(F\\)(df between, df error) = F-value\nthe corresponding p-value\nan effect size (\\(\\eta_p^2\\))\nfor significant results: the means and standard deviations of each group"
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#reporting-f-2",
+    "href": "lec13fct/lec13fct.html#reporting-f-2",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nMain effect of diet type\n\nParticipants on the low-carb diet (M = 10.06, SD = 2.13) lost significantly more weight than participants on the low-fat diet (M = 8.04, SD = 1.65), F(1, 96) = 41.90, p &lt; .001, \\(\\eta_p^2\\) = 0.30."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#reporting-f-3",
+    "href": "lec13fct/lec13fct.html#reporting-f-3",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nMain effect of exercise regimen\n\nParticipants who did cardio (M = 10.12, SD = 1.98) lost significantly more weight than participants who did strength training (M = 7.98, SD = 1.75), F(1, 96) = 47.19, p &lt; .001, \\(\\eta_p^2\\) = 0.33."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#reporting-f-4",
+    "href": "lec13fct/lec13fct.html#reporting-f-4",
+    "title": "Factorial ANOVA",
+    "section": "Reporting F",
+    "text": "Reporting F\nInteraction\n\nIf NOT significant: The interaction between diet type and exercise regimen was not significant, F(1, 96) = 3.75, p = .056.\n\n\nIf significant: report the cell means and standard deviations, and describe the pattern (e.g., “the benefit of cardio was larger for the low-carb diet”)."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#factorial-anova-wrap-up",
+    "href": "lec13fct/lec13fct.html#factorial-anova-wrap-up",
+    "title": "Factorial ANOVA",
+    "section": "Factorial ANOVA Wrap-Up",
+    "text": "Factorial ANOVA Wrap-Up\nConnecting the dots\n\nBig picture: a factorial ANOVA lets us test multiple independent variables at once.\n\nNot just whether each matters, but whether they matter together."
+  },
+  {
+    "objectID": "lec13fct/lec13fct.html#understanding-interactions",
+    "href": "lec13fct/lec13fct.html#understanding-interactions",
+    "title": "Factorial ANOVA",
+    "section": "Understanding Interactions",
+    "text": "Understanding Interactions\nWhat it tests\n\n\n\n\n\n\n\n\nSource\nQuestion\nInterpretation\n\n\n\n\nMain Effect A\nDoes IV1 (e.g., Coffee) affect the DV on average?\n“Coffee drinkers happier?”\n\n\nMain Effect B\nDoes IV2 (e.g., TV Show) affect the DV on average?\n“TV watchers happier?”\n\n\nInteraction (A × B)\nDoes the effect of Coffee depend on watching TV?\n“Coffee only helps if watching TV?”"
   }
 ]

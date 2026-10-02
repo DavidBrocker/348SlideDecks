@@ -1,90 +1,211 @@
 ---
 title: "Factorial ANOVA"
-subtitle: "Lecture 13"
+subtitle: "PSY 348: Lecture 13"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡⬢⬡"
 institute: "Farmingdale State College"
-execute:
-  echo: true
-format: 
+footer: "Factorial ANOVA | ⬡⬢⬡⬢⬡⬢"
+format:
   revealjs:
     theme: ../custom.scss
     scrollable: true
     width: 1600
     height: 900
-    incremental: true   
+    incremental: true
     touch: true
     chalkboard: true
     lightbox: true
     code-fold: true
+    slide-number: c/t
+    include-after-body: ../title-bg.html
     drop:
       engine: webr
-      webr:
-        packages:
-         - ggplot2
-         - dplyr
 revealjs-plugins:
   - drop
-editor: 
-  markdown: 
+  - codewindow
+editor:
+  markdown:
     wrap: 72
 ---
 
+```{r}
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(tidyr)
+library(broom)
+library(gt)
+library(afex)
+
+# Site tokens (see custom.scss / DESIGN_SYSTEM.md)
+sage  <- "#5C715E"  # $accent
+sage2 <- "#8FAF9E"  # $accent2
+sage3 <- "#A7C7B5"  # $accent3
+ink   <- "#2F3E46"  # $body-color
+hot   <- "#B5483B"  # "look here" highlight
+amber <- "#E8A33D"
+two   <- c(sage, amber)
+
+theme_deck <- function(base_size = 22) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.title = element_text(color = ink),
+      axis.text = element_text(color = ink),
+      plot.title = element_text(color = ink, face = "bold"),
+      legend.text = element_text(color = ink),
+      legend.position = "top"
+    )
+}
+
+f2 <- function(x) formatC(x, format = "f", digits = 2)
+f3 <- function(x) formatC(x, format = "f", digits = 3)
+fp <- function(p) ifelse(p < .001, "< .001", paste("=", sub("^0", "", sprintf("%.3f", p))))
+# pull one row of a tidy ANOVA table
+row_of <- function(tab, term) tab[tab$term == term, ]
+apa_F <- function(tab, term) {
+  r <- row_of(tab, term); e <- row_of(tab, "Residuals")
+  sprintf("F(%d, %d) = %s, p %s", r$df, e$df, f2(r$statistic), fp(r$p.value))
+}
+pEta <- function(tab, term) {
+  r <- row_of(tab, term); e <- row_of(tab, "Residuals")
+  r$sumsq / (r$sumsq + e$sumsq)
+}
+
+# ---- Running example: Coffee x TV (the same cell means as the animation) ----
+means <- tribble(
+  ~TV,      ~Coffee,       ~Happiness,
+  "TV",     "Coffee",       3,
+  "TV",     "No Coffee",    4,
+  "No TV",  "Coffee",       4,
+  "No TV",  "No Coffee",    8
+) |>
+  mutate(TV = factor(TV, levels = c("TV", "No TV")),
+         Coffee = factor(Coffee, levels = c("Coffee", "No Coffee")))
+coffee_marg <- means |> group_by(Coffee) |> summarise(M = mean(Happiness))
+tv_marg     <- means |> group_by(TV) |> summarise(M = mean(Happiness))
+
+# ---- Example 1: gender x education, political interest (interaction) ----
+set.seed(123)
+twoway <-
+  tibble(
+    id = 1:100,
+    gender = sample(c("Male", "Female"), 100, replace = TRUE),
+    education_level = sample(c("High School", "Bachelor's", "Master's", "PhD"), 100, replace = TRUE)
+  ) |>
+  mutate(
+    edu_num = case_when(education_level == "High School" ~ 1,
+                        education_level == "Bachelor's" ~ 2,
+                        education_level == "Master's" ~ 3,
+                        education_level == "PhD" ~ 4),
+    political_interest = 5 + edu_num * 1.2 +
+      if_else(gender == "Female", edu_num * 0.8, edu_num * -0.5) +
+      rnorm(100, mean = 0, sd = 1),
+    education_level = factor(education_level,
+                             levels = c("High School", "Bachelor's", "Master's", "PhD"))
+  )
+tab_pol <- aov_ez("id", "political_interest", twoway,
+                  between = c("gender", "education_level"), return = "aov") |>
+  tidy()
+
+# ---- Example 2: diet x exercise, weight loss (no interaction) ----------
+set.seed(42)
+wl <- expand.grid(
+  diet_type = c("Low Carb", "Low Fat"),
+  exercise_regimen = c("Cardio", "Strength"),
+  id = 1:25
+) |>
+  mutate(weight_loss = case_when(diet_type == "Low Carb" ~ 6, diet_type == "Low Fat" ~ 4) +
+           case_when(exercise_regimen == "Cardio" ~ 5, exercise_regimen == "Strength" ~ 3) +
+           rnorm(n(), mean = 0, sd = 1.5))
+fit_wl <- aov(weight_loss ~ diet_type * exercise_regimen, data = wl)
+tab_wl <- tidy(fit_wl)
+cells_wl <- wl |> group_by(diet_type, exercise_regimen) |>
+  summarise(M = mean(weight_loss), SD = sd(weight_loss), .groups = "drop")
+diet_marg <- wl |> group_by(diet_type) |> summarise(M = mean(weight_loss), SD = sd(weight_loss))
+ex_marg   <- wl |> group_by(exercise_regimen) |> summarise(M = mean(weight_loss), SD = sd(weight_loss))
+
+# Pretty ANOVA table
+anova_gt <- function(tab, fn = NULL) {
+  out <- tab |>
+    mutate(p.value = ifelse(is.na(p.value), NA, ifelse(p.value < .001, "<.001", sprintf("%.3f", p.value)))) |>
+    rename(Source = term, SS = sumsq, MS = meansq, `F` = statistic, p = p.value) |>
+    gt() |>
+    fmt_number(columns = c(SS, MS, `F`), decimals = 2) |>
+    fmt_number(columns = df, decimals = 0) |>
+    sub_missing(missing_text = "--") |>
+    tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels()) |>
+    opt_row_striping() |>
+    cols_align(align = "center") |>
+    tab_options(table.width = pct(80), table.font.size = 26)
+  if (!is.null(fn)) out <- out |> tab_footnote(footnote = md(fn))
+  out
+}
+```
+
 ## What is a Factorial ANOVA?
 
-### More Than 1 Independent Variable
+### More than 1 independent variable
 
--   Up to now, we’ve looked at experiments that test **one question at a
-    time**
+-   Up to now, we've looked at experiments that test **one question at a time**.
 
--   A **t-test** tells us whether **two groups** (coffee vs. no coffee)
-    differ significantly.
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## t-test
 
-    -   “*Does drinking coffee make people happier than not drinking
-        coffee*?”   
+Do **two groups** differ?
 
--   A **one-way ANOVA** lets us test **more than two groups** for that
-    same question.
+*"Does drinking coffee make people happier than not drinking coffee?"*
+:::
+:::
 
-    -   “*Does drinking coffee make people happier, compared to drinking
-        decaf or water*?”  
+::: {.column width="50%"}
+::: callout-tip
+## One-way ANOVA
 
--   But in real life, there’s *rarely* just one thing influencing
-    behavior.
+Do **more than two groups** differ on one IV?
+
+*"Does coffee make people happier, compared to decaf or water?"*
+:::
+:::
+:::::
+
+-   But in real life, there's *rarely* just one thing influencing behavior.
 
 ## Why Factorial ANOVA?
 
 A **Factorial ANOVA** allows us to test **more than one independent
 variable (IV)** *at the same time.*
 
--   Instead of asking
+-   Instead of asking separate questions:
 
-    -   “Does coffee make people happier?”
+    -   "Does coffee make people happier?"
 
-    -   "Does watching TV make people happier?
+    -   "Does watching TV make people happier?"
 
 -   We can now ask:
 
-    -   “Does coffee *and* watching TV show make people happier?”
+    -   "Does coffee *and* watching TV make people happier?"
 
-    -   “Does the effect of coffee depend on what you’re watching?”
+    -   "Does the effect of coffee *depend* on what you're watching?"
 
 ## The Power of Two (or More)
 
-### Testing as Separate IV's
+### Testing as separate IVs
 
 ```{dot}
-//| echo: false
-
-
 digraph {
-  node [shape = box, style = rounded, fontname = Helvetica]
+  node [shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge [color = "#5C715E"]
   bgcolor = "#E9F1EC"
 
   subgraph cluster_coffee {
     label = "Independent Variable 1: Coffee"
     bgcolor = "white"
     style = rounded
+    color = "#8FAF9E"
 
     C1 [label="Coffee"]
     C2 [label="No Coffee"]
@@ -99,6 +220,7 @@ digraph {
     label = "Independent Variable 2: TV Show"
     bgcolor = "white"
     style = rounded
+    color = "#8FAF9E"
 
     TV [label="TV"]
     NTV [label="No TV"]
@@ -113,12 +235,12 @@ digraph {
 
 ## The Power of Two (or More)
 
-## Combining IV's
+### Combining IVs
 
 ```{dot}
-
 digraph {
-  node [shape = box, style = rounded, fontname = Helvetica]
+  node [shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge [color = "#5C715E"]
   bgcolor = "#E9F1EC"
 
   Coffee [label="Coffee"]
@@ -130,6 +252,7 @@ digraph {
     label = "2 × 2 Factorial Design"
     bgcolor = "white"
     style = rounded
+    color = "#8FAF9E"
 
     CoffeeDark [label="Coffee + Dark"]
     CoffeeNoDark [label="Coffee + No Dark"]
@@ -147,36 +270,45 @@ digraph {
     NoDark -> NoCoffeeNoDark
   }
 
-  Happiness1 [label="Happiness", style = "rounded, filled", color = "white"]
-  Happiness2 [label="Happiness", style = "rounded,filled", color = "white"]
-  Happiness3 [label="Happiness", style = "rounded,filled", color = "white"]
-  Happiness4 [label="Happiness", style = "rounded,filled", color = "white"]
-  
+  Happiness1 [label="Happiness", style = "rounded,filled", fillcolor = "#DCE8E1"]
+  Happiness2 [label="Happiness", style = "rounded,filled", fillcolor = "#DCE8E1"]
+  Happiness3 [label="Happiness", style = "rounded,filled", fillcolor = "#DCE8E1"]
+  Happiness4 [label="Happiness", style = "rounded,filled", fillcolor = "#DCE8E1"]
+
   CoffeeDark -> Happiness1
   CoffeeNoDark -> Happiness2
   NoCoffeeDark -> Happiness3
   NoCoffeeNoDark -> Happiness4
- 
 }
 ```
 
 ## The Power of Two (or More)
 
-Factorial ANOVA helps answer three major questions:
+### Three questions at once
 
-1.  **Main Effect 1:** Does IV1 alone affect the outcome?\
-    (Coffee → Happiness)
+::::: term-list
+::: fragment
+[Main Effect 1]{.term-pill}
 
-2.  **Main Effect 2:** Does IV2 alone affect the outcome?\
-    (TV Show → Happiness)
+: Does IV1 alone affect the outcome? (Coffee → Happiness)
+:::
 
-3.  **Interaction Effect:** Does the effect of one variable depend on
-    the other?\
-    (Maybe coffee *only* helps if you’re watching *TV!*)
+::: fragment
+[Main Effect 2]{.term-pill}
+
+: Does IV2 alone affect the outcome? (TV Show → Happiness)
+:::
+
+::: fragment
+[Interaction Effect]{.term-pill}
+
+: Does the effect of one variable depend on the other? (Maybe coffee *only* helps if you're watching *TV!*)
+:::
+:::::
 
 ## Why Not Just Run Multiple t-tests?
 
-### You Could Compare...
+### You could compare...
 
 -   Coffee vs. No Coffee
 
@@ -188,10 +320,10 @@ Factorial ANOVA helps answer three major questions:
         (false positives).
 
 -   A Factorial ANOVA solves that problem by testing all these
-    relationships **in one model** controlling for shared variance and
+    relationships **in one model**, controlling for shared variance and
     examining combined effects.
 
-## In Other Words…
+## In Other Words...
 
 | Test Type | Question | Example |
 |:---|:---|:---|
@@ -207,23 +339,38 @@ Factorial ANOVA helps answer three major questions:
 -   Factorial ANOVA lets us see *not just whether variables matter,* but
     *how they matter together.*
 
-> It’s not just what causes an effect, it’s what combinations of causes
+> It's not just what causes an effect, it's what combinations of causes
 > create patterns we care about.
 
 ## Factorial ANOVA
 
-### Two types of variance:
+### Four sources of variance
 
--   Variance among all of the scores (error variance).
+::::: term-list
+::: fragment
+[Between IV 1]{.term-pill}
 
--   Variance between the groups of the first IV (between group variance
-    1).
+: Variance between the groups of the first IV (main effect 1).
+:::
 
--   Variance between the groups of the second IV (between group variance
-    2).
+::: fragment
+[Between IV 2]{.term-pill}
 
--   Variance between the combination of the groups (interaction
-    variance).
+: Variance between the groups of the second IV (main effect 2).
+:::
+
+::: fragment
+[Interaction]{.term-pill}
+
+: Variance from the **combination** of the groups (the cells).
+:::
+
+::: fragment
+[Error]{.term-pill}
+
+: Variance **within** each cell, around that cell's own mean.
+:::
+:::::
 
 ## Understanding Main Effects
 
@@ -232,29 +379,29 @@ Factorial ANOVA helps answer three major questions:
 -   The **main effect of Coffee** asks:
 
     -   *On average, does drinking coffee make people happier than not
-        drinking coffee?”\
-        *(Regardless of whether they watched *TV* or not.)
+        drinking coffee?*\
+        (Regardless of whether they watched *TV* or not.)
 
 -   The **main effect of Watching TV** asks:
 
     -   *On average, does watching TV make people happier than not
-        watching it?”\
-        *(Regardless of whether they had coffee or not.)
+        watching it?*\
+        (Regardless of whether they had coffee or not.)
 :::
 
 ::: {.column width="50%"}
 ```{dot}
-
 digraph {
-
   rankdir = RL
-  node [shape = box, style = rounded, fontname = Helvetica]
+  node [shape = box, style = "rounded,filled", fillcolor = "white", color = "#5C715E", fontname = "Fira Sans"]
+  edge [color = "#5C715E"]
   bgcolor = "#E9F1EC"
 
   subgraph cluster_coffee {
     label = "Independent Variable 1: Coffee"
     bgcolor = "white"
     style = rounded
+    color = "#8FAF9E"
 
     C1 [label="Coffee"]
     C2 [label="No Coffee"]
@@ -269,6 +416,7 @@ digraph {
     label = "Independent Variable 2: TV Show"
     bgcolor = "white"
     style = rounded
+    color = "#8FAF9E"
 
     TV [label="TV"]
     NTV [label="No TV"]
@@ -285,590 +433,392 @@ digraph {
 
 ## Understanding Main Effects
 
-### 2x2 Table
+### The 2 × 2 table of means
 
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
-library(tibble)
-library(dplyr)
-library(gt)
-
-library(tibble)
-library(gt)
-
-# Create a 2x2 factorial table (wide layout)
-design_tbl <- tribble(
-  ~Condition,     ~`Coffee`, ~`No Coffee`,
-  "TV",               3,           4,
-  "No TV",            4,           8
-)
-
-# Display as a 2x2 factorial grid
-design_tbl |>
+#| echo: false
+means |>
+  pivot_wider(names_from = Coffee, values_from = Happiness) |>
   gt() |>
-  tab_header(
-    title = md("**2 × 2 Factorial Design: Coffee × TV**"),
-    subtitle = "Mean Happiness Scores by Condition"
-  ) |>
-  cols_label(
-    Condition = "Watched TV?",
-    `Coffee` = "Coffee",
-    `No Coffee` = "No Coffee"
-  ) |>
-  fmt_number(
-    columns = c(`Coffee`, `No Coffee`),
-    decimals = 1
-  ) |>
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_column_labels()
-  ) |>
-  tab_style(
-    style = cell_fill(color = "#f8f9fa"),
-    locations = cells_body(columns = everything())
-  ) |>
-  tab_spanner(
-    label = md("**Coffee Condition**"),
-    columns = c(`Coffee`, `No Coffee`)
-  ) |>
-  tab_footnote(
-    footnote = "Higher numbers indicate greater happiness."
-  ) |> 
-  tab_options(
-    table.font.size = 30
-  )
+  cols_label(TV = "Watched TV?") |>
+  tab_spanner(label = md("**Coffee condition**"), columns = c(Coffee, `No Coffee`)) |>
+  fmt_number(columns = c(Coffee, `No Coffee`), decimals = 1) |>
+  tab_header(title = md("**2 × 2 Factorial Design: Coffee × TV**"),
+             subtitle = "Mean happiness by condition (cell means)") |>
+  tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels()) |>
+  tab_options(table.font.size = 28)
 ```
 :::
 
 ::: {.column width="50%"}
 ```{r}
-
-# Base 2x2 design with condition means
-design_tbl <- tribble(
-  ~Condition, ~`Coffee`, ~`No Coffee`,
-  "TV",       3,          4,
-  "No TV",    4,          8
-)
-
-# Compute marginal means
-design_tbl_extended <- design_tbl |>
-  mutate(Row_Mean = rowMeans(across(c(`Coffee`, `No Coffee`)))) |>
-  bind_rows(
-    tibble(
-      Condition = "Column Mean",
-      Coffee = mean(design_tbl$Coffee),
-      `No Coffee` = mean(design_tbl$`No Coffee`),
-      Row_Mean = mean(c(design_tbl$Coffee, design_tbl$`No Coffee`))
-    )
-  )
-
-# Display with gt
-design_tbl_extended |>
+#| echo: false
+means |>
+  pivot_wider(names_from = Coffee, values_from = Happiness) |>
+  mutate(`Row mean` = (Coffee + `No Coffee`) / 2) |>
+  bind_rows(tibble(TV = factor("Column mean", levels = c("TV", "No TV", "Column mean")),
+                   Coffee = coffee_marg$M[1], `No Coffee` = coffee_marg$M[2],
+                   `Row mean` = mean(means$Happiness))) |>
   gt() |>
-  tab_header(
-    title = md("**2 × 2 Factorial Design: Coffee × TV**"),
-    subtitle = "Mean Happiness Scores with Marginal Means"
-  ) |>
-  cols_label(
-    Condition = "Watched TV?",
-    `Coffee` = "Coffee",
-    `No Coffee` = "No Coffee",
-    Row_Mean = md("**Row Mean**")
-  ) |>
-  fmt_number(
-    columns = c(`Coffee`, `No Coffee`, Row_Mean),
-    decimals = 1
-  ) |>
-  tab_spanner(
-    label = md("**Coffee Condition**"),
-    columns = c(`Coffee`, `No Coffee`)
-  ) |>
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(
-      cells_column_labels(),
-      cells_body(rows = Condition == "Column Mean")
-    )
-  ) |>
-  tab_style(
-    style = cell_fill(color = "#f5f5f5"),
-    locations = cells_body(
-      rows = Condition == "Column Mean" | Condition == "No TV"
-    )
-  ) |>
-  tab_footnote(
-    footnote = "Row and column means illustrate main effects of Coffee and TV."
-  ) |> 
-   tab_options(
-    table.font.size = 30
-  )
+  cols_label(TV = "Watched TV?") |>
+  fmt_number(columns = c(Coffee, `No Coffee`, `Row mean`), decimals = 1) |>
+  tab_header(title = md("**With marginal means**"),
+             subtitle = "Row and column means show the main effects") |>
+  tab_style(style = cell_text(weight = "bold"),
+            locations = list(cells_column_labels(),
+                             cells_body(rows = TV == "Column mean"),
+                             cells_body(columns = `Row mean`))) |>
+  tab_options(table.font.size = 28)
 ```
 :::
 :::::
 
-## Visualizing Interactions
+-   Coffee main effect: `r f2(coffee_marg$M[1])` (coffee) vs. `r f2(coffee_marg$M[2])` (no coffee).
 
-```{r}
-
-library(ggplot2) 
-set.seed(1) 
-interaction_df <- 
-  data.frame(Coffee = rep(c("No", "Yes"), each = 4), 
-             Show = rep(c("No", "Yes"), times = 4), 
-             Happiness = c(3, 5, 6, 8) )
-
-ggplot(interaction_df, 
-       aes(Coffee, Happiness, 
-           color = Show, group = Show)) + 
-  stat_summary(fun = mean, geom = "line", linewidth = 1.2) + 
-  stat_summary(fun = mean, geom = "point", size = 3) + 
-  theme_minimal(base_size = 14) + 
-  labs(
-    title = "Interaction Example", 
-    subtitle = "Coffee only boosts happiness when watching TV", 
-    x = "Coffee", 
-    y = "Happiness" ) + 
-  scale_color_manual(values = c("#8b0000", "#004488"))
-```
+-   TV main effect: `r f2(tv_marg$M[1])` (TV) vs. `r f2(tv_marg$M[2])` (no TV).
 
 ## Visualizing Interactions
 
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
-library(tibble)
-library(dplyr)
-library(ggplot2)
-
-# Create the 2x2 design with your condition means
-plot_data <- tribble(
-  ~TV,      ~Coffee,        ~Happiness,
-  "TV",     "Coffee",        3,
-  "TV",     "No Coffee",     4,
-  "No TV",  "Coffee",        4,
-  "No TV",  "No Coffee",     8
-)
-
-# Basic interaction plot
-ggplot(plot_data, aes(x = TV, y = Happiness, color = Coffee, group = Coffee)) +
-  geom_point(size = 3) +
-  geom_line(linewidth = 1.2) +
-  scale_color_manual(values = c("#3E92CC", "#FF6B6B")) +
-  theme_minimal(base_size = 18) +
-  labs(
-    title = "Interaction Plot: Coffee × TV on Happiness",
-    x = "Watched TV",
-    y = "Mean Happiness",
-    color = "Coffee Condition"
-  ) +
-  theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),
-    panel.grid = element_blank(),
-    legend.position = "bottom"
-  )
-
+#| echo: false
+#| fig-width: 6.5
+#| fig-height: 5.4
+ggplot(means, aes(TV, Happiness, color = Coffee, group = Coffee)) +
+  geom_line(linewidth = 1.6) +
+  geom_point(size = 4) +
+  scale_x_discrete(limits = c("No TV", "TV")) +
+  scale_color_manual(values = two) +
+  labs(title = "Interaction plot", x = "Watched TV", y = "Mean happiness", color = NULL) +
+  theme_deck(20)
 ```
 :::
 
 ::: {.column width="50%"}
--   Each line represents one independent variable, in this case, whether
-    participants drank coffee.
+-   Each line represents one independent variable, in this case, whether participants drank coffee.
 
--   The x-axis represents the second independent variable, watching TV
-    or not.
+-   The x-axis represents the second independent variable, watching TV or not.
 
--   If these lines are **parallel**, there’s **no interaction**. Tthe
-    effect of one IV doesn’t depend on the other.
+-   If the lines are **parallel**, there is **no interaction**: the effect of one IV doesn't depend on the other.
 
--   But here, notice that the lines **cross**. That means the effect of
-    coffee on happiness depends on whether someone watched TV. Coffee
-    makes people happier *unless* they watched TV; an interaction
-    effect.”
+-   Here the lines are **not parallel**, so the effect of one IV depends on the other. Without coffee, watching TV drops happiness a lot (`r f2(means$Happiness[4])` to `r f2(means$Happiness[2])`). With coffee, TV matters much less (`r f2(means$Happiness[3])` to `r f2(means$Happiness[1])`). That is an interaction.
 :::
 :::::
 
 ## Visualizing Interactions
 
-```{r}
-# Summarize marginal means
-main_effects <- plot_data %>%
-  group_by(Coffee) %>%
-  summarize(Happiness = mean(Happiness))
+### A main effect hides the story
 
-ggplot(main_effects, aes(Coffee, Happiness, fill = Coffee)) +
-  geom_col(width = 0.5) +
-  scale_fill_manual(values = c("#3E92CC", "#FF6B6B")) +
-  theme_minimal(base_size = 18) +
-  labs(
-    title = "Main Effect of Coffee on Happiness",
-    x = "",
-    y = "Mean Happiness"
-  ) +
-  theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),
-    legend.position = "none"
-  )
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4.2
+ggplot(coffee_marg, aes(Coffee, M, fill = Coffee)) +
+  geom_col(width = .5, color = ink) +
+  scale_fill_manual(values = two) +
+  labs(title = "Main effect of coffee on happiness (averaged over TV)",
+       x = NULL, y = "Mean happiness") +
+  theme_deck(20) +
+  theme(legend.position = "none")
 ```
+
+-   Averaged over TV, coffee drinkers are less happy (`r f2(coffee_marg$M[1])` vs. `r f2(coffee_marg$M[2])`). The interaction plot shows the full story: the size of the difference **depends on whether people watched TV**.
 
 ## Visualizing Interactions
 
-## From Main Effect to Interaction
+### From main effect to interaction
 
 ![](images/inx.gif)
 
 ## Calculating F Values
 
--   Between Groups 1 (df~B1~ ) = k~**1**~ - 1
+::: callout-tip
+## Degrees of freedom
 
--   Between Groups 2 (df~B2~ ) = k~**2**~ - 1
+-   Between groups 1: $df_{B_1} = k_1 - 1$
 
--   Interaction (MS~Interaction~i) = (k~**1**~ - 1) x (k~**2**~ - 1)
+-   Between groups 2: $df_{B_2} = k_2 - 1$
 
--   Error (MS~Error~) = n - (k~**1**~ x k~**2**~)
+-   Interaction: $df_{Interaction} = (k_1 - 1) \times (k_2 - 1)$
 
--   Total = n - 1
+-   Error: $df_{Error} = N - (k_1 \times k_2)$
+
+-   Total: $df_{Total} = N - 1$
+:::
 
 ## Calculating MS
 
 -   Between Group 1 MS:
 
-    -   $MS_{B_1} = \frac{SS_{B_{1}}}{k_1-1}$
+    -   $MS_{B_1} = \dfrac{SS_{B_1}}{k_1-1}$
 
 -   Between Group 2 MS:
 
-    -   $MS_{B_{2}} = \frac{SS_{B_{2}}}{k_2-1}$
+    -   $MS_{B_2} = \dfrac{SS_{B_2}}{k_2-1}$
 
--   Interaction MS
+-   Interaction MS:
 
-    -   $MS_{Interaction} = \frac{SS_{Interaction}}{(k_1-1) \times (k_2-1)}$
+    -   $MS_{Interaction} = \dfrac{SS_{Interaction}}{(k_1-1) \times (k_2-1)}$
 
 -   Error MS:
 
-    -   $MS_{Error} = \frac{SS{Error}}{n-(k_1 \times k_2)}$
+    -   $MS_{Error} = \dfrac{SS_{Error}}{N-(k_1 \times k_2)}$
 
 ## Calculating F
 
--   $F_A = \frac{MS_{B_{1}}}{MS{Error}}$
+::: callout-tip
+## Every F uses the same denominator
 
--   $F_B = \frac{MS_{B_{2}}}{MS{Error}}$
-
--   $F_{AB} = \frac{MS_{Interaction}}{MS{Error}}$
+$F_A = \dfrac{MS_{B_1}}{MS_{Error}} \qquad F_B = \dfrac{MS_{B_2}}{MS_{Error}} \qquad F_{AB} = \dfrac{MS_{Interaction}}{MS_{Error}}$
+:::
 
 ## How Many F's?
 
 ```{dot}
-
 digraph F_Tests {
   size=5
   rankdir=TB
   bgcolor="#E9F1EC"
-  node [shape=box, style="rounded,filled", fontname="Helvetica", color = "white"]
+  node [shape=box, style="rounded,filled", fontname="Fira Sans", color = "#5C715E", fillcolor = "white"]
+  edge [color = "#5C715E"]
 
-  # Level 1
   oneway [label="1-Way ANOVA\n→ 1 F-test\n(Main Effect Only)"]
-
-  # Level 2
   twoway [label="2-Way ANOVA (2×2)\n→ 3 F-tests\n(2 Main Effects + 1 Interaction)"]
-
-  # Level 3
   threeway [label="3-Way ANOVA (2×2×2)\n→ 7 F-tests\n(3 Main + 3 Two-Way + 1 Three-Way)"]
-
-  # Level 4
   fourway [label="4-Way ANOVA (2×2×2×2)\n→ 15 F-tests\n(4 Main + 6 Two-Way + 4 Three-Way + 1 Four-Way)"]
 
-  # Connections
   oneway -> twoway -> threeway -> fourway
 
-  # Optional: a note on the right
-  note [label="General Formula:\nF = 2ⁿ - 1\n(where n = # of IVs)", shape=note, fillcolor="#FFF3CD", color="#E0B800", fontcolor="#3B2F00"]
+  note [label="General Formula:\nF-tests = 2ⁿ - 1\n(where n = # of IVs)", shape=note, fillcolor="#DCE8E1", color="#5C715E", fontcolor="#2F3E46"]
   threeway -> note [style=dotted, color="#888"]
 }
 ```
 
-## Interpreting Results
+## Factorial ANOVA in R
 
-### ANOVA Table
+### The model formula
+
+::: {.codewindow .r .codewindow-dark}
+factorial_anova.R
 
 ```{r}
-set.seed(123)
-library(dplyr)
-library(afex)
-library(gt)
-library(broom)
-library(forcats)
+#| echo: true
+#| code-fold: false
+# A * B means: main effect of A + main effect of B + the A:B interaction
+fit <- aov(weight_loss ~ diet_type * exercise_regimen, data = wl)
 
-twoway <- 
-  tibble(
-    id = 1:100,
-    gender = sample(c("Male", "Female"), 100, replace = TRUE),
-    education_level = sample(c("High School", "Bachelor's", "Master's", "PhD"), 100, replace = TRUE)
-    ) %>%
-  mutate(
-    # assign numeric values for education level
-    edu_num = case_when(
-      education_level == "High School" ~ 1,
-      education_level == "Bachelor's"  ~ 2,
-      education_level == "Master's"    ~ 3,
-      education_level == "PhD"         ~ 4
-    ),
-    # introduce a systematic difference based on gender and education_level interaction
-    political_interest = 5 + 
-    edu_num * 1.2 +   # main effect of education level
-    if_else(gender == "Female", 
-            edu_num * 0.8, 
-            edu_num * -0.5) +  # interaction
-    rnorm(100, mean = 0, sd = 1) # some noise
-    ) 
+summary(fit)
+```
+:::
 
-# Run factorial ANOVA
-aov_ez(
-  "id",
-  "political_interest",
-  twoway,
-  between = c("gender","education_level"),
-  return = "aov"
-) |> 
-  tidy() |> 
-  mutate(
-    p.value = ifelse(p.value < .001, "<.001",p.value),
-    statistic = ifelse(is.na(statistic),"--",statistic |> round(2)),
-    p.value = ifelse(is.na(p.value),"--",p.value)
-  ) |> 
-  rename(
-    Source = term,
-    SS = sumsq,
-    MS = meansq,
-    `F` = statistic,
-    p = p.value
-  ) |> 
-  gt() |> 
-  fmt_auto() |> 
-  tab_footnote(footnote = md("*Dependent Variable: Political Interest*<br>
-                             *Gende*: Male, Female*<br>
-                             *Education*: High School, Bachelor's, Master's, PhD*")) |> 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_column_labels()
-  ) |> 
-  opt_row_striping() |> 
-  cols_align(align="center") |> 
-  tab_options(
-    table.width = pct(75),
-    table.font.size = 30
-  )
+-   `diet_type * exercise_regimen` is shorthand for `diet_type + exercise_regimen + diet_type:exercise_regimen`.
+
+-   Each row of the table is one F-test: two main effects and the interaction.
+
+## Interpreting Results
+
+### Example 1: weight loss, diet type × exercise regimen
+
+::: panel-tabset
+## Table
+
+```{r}
+#| echo: false
+anova_gt(tab_wl, "*Dependent Variable: Weight Loss*<br>*Diet Type: Low Carb, Low Fat*<br>*Exercise Regimen: Cardio, Strength*")
 ```
 
--   $F(1,92) = 244.15, p <.001$
+## Plot
 
--   $F(3,92) = 74.52, p <.001$
+```{r}
+#| echo: false
+#| fig-width: 9
+#| fig-height: 4.6
+ggplot(wl, aes(diet_type, weight_loss, color = exercise_regimen, group = exercise_regimen)) +
+  geom_jitter(alpha = .25, width = .08) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  stat_summary(fun = "mean", geom = "line", linewidth = 1.2) +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .15) +
+  scale_color_manual(values = two) +
+  labs(x = NULL, y = "Weight loss", color = "Exercise") +
+  theme_deck(20)
+```
+:::
 
--   $F(3,92) = 8.89, p<.001$
+## Interpreting the Fs in 2-way ANOVA
+
+-   $F_A$ (Diet type): `r apa_F(tab_wl, "diet_type")`
+
+-   $F_B$ (Exercise regimen): `r apa_F(tab_wl, "exercise_regimen")`
+
+-   $F_{AB}$ (Diet × Exercise): `r apa_F(tab_wl, "diet_type:exercise_regimen")` (*not significant*)
+
+::: {.callout-tip appearance="minimal"}
+Both main effects are significant and the interaction is not, so the effect of diet is about the **same** at each exercise regimen (and vice versa): the lines in the plot are close to parallel.
+:::
+
+## Interpreting Results
+
+### Example 2: political interest, gender × education
+
+```{r}
+#| echo: false
+anova_gt(tab_pol, "*Dependent Variable: Political Interest*<br>*Gender: Male, Female*<br>*Education: High School, Bachelor's, Master's, PhD*")
+```
+
+-   Gender: `r apa_F(tab_pol, "gender")`
+
+-   Education: `r apa_F(tab_pol, "education_level")`
+
+-   Gender × Education: `r apa_F(tab_pol, "gender:education_level")`
 
 ## Interpreting F's
 
 ### Visually
 
 ```{r}
-twoway$education_level <- factor(twoway$education_level, labels = c("High School","Bachelors","Masters","PhD"),ordered = TRUE)
-
-twoway |> 
-  ggplot(aes(education_level, political_interest,color = gender, group = gender)) + 
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun = "mean", geom = "line") + 
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) + 
-  theme_minimal() + 
-  labs(x = "", y = "Political Interest\n")
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.6
+twoway |>
+  ggplot(aes(education_level, political_interest, color = gender, group = gender)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  stat_summary(fun = "mean", geom = "line", linewidth = 1.2) +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .15) +
+  scale_color_manual(values = two) +
+  labs(x = NULL, y = "Political interest", color = "Gender") +
+  theme_deck(20)
 ```
 
-## Interpreting the F's
+-   The lines are **not parallel**: the effect of education depends on gender, which is why the **interaction** is significant.
 
-### Weight Loss and Exercise Regimen and Diet Type
+## Effect Size: Partial Eta Squared
 
-::: panel-tabset
-## Table
+::: callout-tip
+## $\eta_p^2$
+
+$\eta_p^2 = \dfrac{SS_{effect}}{SS_{effect} + SS_{error}}$ (one value for each F)
+:::
 
 ```{r}
-set.seed(42)
-
-# Create a balanced design
-df <- expand.grid(
-  diet_type = c("Low Carb", "Low Fat"),
-  exercise_regimen = c("Cardio", "Strength"),
-  id = 1:25
-) %>%
-  mutate(
-    # simulate main effects: both diet and exercise influence weight loss
-    weight_loss = case_when(
-      diet_type == "Low Carb" ~ 6,
-      diet_type == "Low Fat" ~ 4
-    ) + case_when(
-      exercise_regimen == "Cardio" ~ 5,
-      exercise_regimen == "Strength" ~ 3
-    ) +
-    rnorm(n(), mean = 0, sd = 1.5)  # add some noise
-  )
-
-# Run the two-way ANOVA
-anova_result <- aov(weight_loss ~ diet_type * exercise_regimen, data = df)
-anova_result |> 
-  tidy() |> 
-    mutate(
-    p.value = ifelse(p.value < .001, "<.001",p.value |> round(2)),
-    statistic = ifelse(is.na(statistic),"--",statistic |> round(2)),
-    p.value = ifelse(is.na(p.value),"--",p.value)
-  ) |> 
-  rename(
-    Source = term,
-    SS = sumsq,
-    MS = meansq,
-    `F` = statistic,
-    p = p.value
-  ) |> 
-  gt() |> 
-  fmt_auto() |> 
-  tab_footnote(footnote = md("*Dependent Variable: Weight Loss*<br>
-                             *Exercise Regimen: Cardio, Strength*<br>
-                             *Diet Type: Low Carb, Low Fat*")) |> 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_column_labels()
-  )  |> 
-  tab_options(
-    table.width = pct(75),
-    table.font.size = 30
-  )
+#| echo: false
+tibble(
+  Effect = c("Diet type", "Exercise regimen", "Diet × Exercise"),
+  `Partial η²` = c(pEta(tab_wl, "diet_type"), pEta(tab_wl, "exercise_regimen"),
+                   pEta(tab_wl, "diet_type:exercise_regimen"))
+) |>
+  gt() |>
+  fmt_number(columns = `Partial η²`, decimals = 3) |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 28, table.width = pct(55))
 ```
 
-## Plot
+-   Benchmarks are the same as one-way ANOVA: about .01 small, .06 medium, .14 large.
+
+## Following Up an Interaction
+
+### What if the interaction is significant?
+
+-   A significant interaction means the effect of one IV **depends** on the other, so interpret the **cells**, not just the main effects.
+
+-   Compare the cell means with a post-hoc test, or test the effect of one IV **at each level** of the other (*simple effects*).
+
+::: {.codewindow .r .codewindow-dark}
+follow_up.R
 
 ```{r}
-
-df |> 
-  ggplot(aes(diet_type, weight_loss,color = exercise_regimen, group = exercise_regimen)) + 
-  geom_jitter(alpha = .2) +
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun = "mean", geom = "line") + 
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) + 
-  theme_minimal() + 
-  labs(x = "", y = "Weight Loss\n")
+#| echo: true
+#| code-fold: false
+#| eval: false
+# Tukey's HSD for every pair of cells (the four combinations)
+TukeyHSD(fit, "diet_type:exercise_regimen")
 ```
 :::
 
-## Interpreting the Fs in 2-way ANOVA
+-   In the weight-loss example the interaction was **not** significant, so we interpret the two main effects.
 
--   F~A~ (1,96) = 41.9, p \< .001
+## Assumptions of Factorial ANOVA
 
--   F~B~ (1,96) = 47.19, p \< .001
+::: callout-important
+## Assumptions
 
--   F~AB~ (1,96) = 3.75, p = *ns*
+1.  **The DV is continuous** (interval or ratio scale).
+2.  **Observations are independent.** Each person is in only one cell.
+3.  **Normality:** scores (residuals) are approximately normal in each cell.
+4.  **Homogeneity of variance:** the cells have similar variances (Levene's Test).
+:::
 
-## Interpreting the Fs in 2-way ANOVA
+::: {.codewindow .r .codewindow-dark}
+assumptions.R
 
--   F~A~ = Diet Type
-
--   F~B~ = Exercise Regimen
-
--   F~AB~ = Diet Type x Exercise Regimen
-
-## Calculating 2-way ANOVA anova
-
--   $F = \frac{MS_{BG_{1}}}{MS{Error}}$
-
--   $F = \frac{MS_{BG_{1}}}{MS{Error}}$
-
--   $F = \frac{MS_{Interaction}}{MS{Error}}$
-
--   \*All MS are divided by $MS_{Error}$
-
-## Reporting F
+```{r}
+#| echo: true
+#| code-fold: false
+#| eval: false
+library(car)
+leveneTest(weight_loss ~ diet_type * exercise_regimen, data = wl)
+shapiro.test(residuals(fit))
+```
+:::
 
 ## Reporting F
 
-If asked to report findings in terms of the Null Hypothesis (H~0~), you
-should report findings as:
+> If asked to report findings in terms of the Null Hypothesis (H~0~), you
+> should report findings as:
 
--   Reject H~0~, or
+-   Reject $H_0$, or
 
--   Fail to Reject H~0~
+-   Fail to Reject $H_0$
 
 ## Reporting F
 
 If asked to report findings in general or for publication, you need
 **EACH** F-value:
 
--   F*(df~BG~, df~W~ )*
+-   $F$(df between, df error) = F-value
 
-    -   = F-value
+-   the corresponding p-value
 
-        -   Corresponding p-value
+-   an effect size ($\eta_p^2$)
 
-            -   *For significant results: Means and standard deviations
-                of each group*
-
-## Reporting F
-
-> The group that watched Dark (M=8.43, s=1.02) reported significantly
-> more happiness compared to their peers in the control group who
-> watched Jeopardy (M=6.12, s=0.98), *F(1,496) = 7.12, p \< 0.05*.
+-   for significant results: the means and standard deviations of each group
 
 ## Reporting F
 
-Results IV~1~:
+### Main effect of diet type
 
-::: fragment
-> **If significant**: The group that watched TV (M=8.43, s=1.02)
-> reported significantly more happiness compared to their peers in the
-> control group who watched No TV (M=6.12, s=0.98), *F (1, 496) = 7.12,
-> p \< 0.05*.
-:::
-
-::: fragment
-> **If NOT significant**: There was not a significant difference in
-> happiness between the groups, F (1, 498) = 1.02, p = 0.07.
-:::
+> Participants on the low-carb diet (*M* = `r f2(diet_marg$M[1])`, *SD* = `r f2(diet_marg$SD[1])`) lost significantly more weight than participants on the low-fat diet (*M* = `r f2(diet_marg$M[2])`, *SD* = `r f2(diet_marg$SD[2])`), *`r apa_F(tab_wl, "diet_type")`*, $\eta_p^2$ = `r f2(pEta(tab_wl, "diet_type"))`.
 
 ## Reporting F
 
-Results IV~2~:
+### Main effect of exercise regimen
 
-> **If significant**: The group that drank coffee (M=7.35, s=1.01)
-> reported significantly more happiness compared to their peers in the
-> control group who drank decaf (M=4.21, s=0.99), *F (1, 496) = 9.12, p
-> \< 0.05*.
-
-> **If NOT significant**: There was not a significant difference in
-> happiness between the groups, *F (1, 498) = 1.02, p = 0.07*.
+> Participants who did cardio (*M* = `r f2(ex_marg$M[1])`, *SD* = `r f2(ex_marg$SD[1])`) lost significantly more weight than participants who did strength training (*M* = `r f2(ex_marg$M[2])`, *SD* = `r f2(ex_marg$SD[2])`), *`r apa_F(tab_wl, "exercise_regimen")`*, $\eta_p^2$ = `r f2(pEta(tab_wl, "exercise_regimen"))`.
 
 ## Reporting F
 
-Results Interaction:
+### Interaction
 
-> **If significant**: The group that drank coffee AND watched TV
-> (M=7.35, s=1.01) reported significantly more happiness compared to the
-> other groups (M=4.21, s=0.99), F *(1, 496) = 11.14, p \< 0.05.*
+> **If NOT significant:** The interaction between diet type and exercise regimen was not significant, *`r apa_F(tab_wl, "diet_type:exercise_regimen")`*.
 
-> **If NOT significant**: There was not a significant difference in
-> happiness between the groups, *F (1, 498) = 1.02, p = 0.07*.
+> **If significant:** report the cell means and standard deviations, and describe the pattern (e.g., "the benefit of cardio was larger for the low-carb diet").
 
 ## Factorial ANOVA Wrap-Up
 
-### Connecting the Dots
+### Connecting the dots
 
--   **Big Picture:**
+-   **Big picture:** a factorial ANOVA lets us test **multiple independent variables** at once.
 
-    -   A factorial ANOVA lets us test **multiple independent
-        variables** at once
-
-        -   Not just whether each matters, but *whether they matter
-            together.*
+    -   Not just whether each matters, but *whether they matter together.*
 
 ## Understanding Interactions
 
-## What It Tests
+### What it tests
 
 | Source | Question | Interpretation |
 |:---|:---|:---|
 | **Main Effect A** | Does IV1 (e.g., Coffee) affect the DV on average? | "Coffee drinkers happier?" |
 | **Main Effect B** | Does IV2 (e.g., TV Show) affect the DV on average? | "TV watchers happier?" |
-| **Interaction (A × B)** | Does the effect of Coffee *depend* on watching Dark? | "Coffee only helps if watching TV?" |
+| **Interaction (A × B)** | Does the effect of Coffee *depend* on watching TV? | "Coffee only helps if watching TV?" |
