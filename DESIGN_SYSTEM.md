@@ -56,6 +56,12 @@ Some decks (`lab1.qmd`, `lec2.qmd`) have no YAML title and instead hand-build a 
 
 **`.z-cards` / `.z-card`** — 2x2 grid of white bordered cards (same chrome as `.stat-card`), each holding a title, a one-line question (`.z-card-title`, `.z-card-q`) and a small Raw / z-score `panel-tabset` with a histogram. First use: lec6's "Compared to what?" slide (simulated `rnorm()` data, red line at the example score).
 
+**`.keycap` / `.keycap-line`** — keyboard-key icon: shifted symbol small on top (`.keycap-top`), the key you actually press large below (`.keycap-main`). Markup: `<span class="keycap"><span class="keycap-top">~</span><span class="keycap-main">`</span></span>`. Wrap a sentence in `::: keycap-line` to enlarge it. Used for the drop-console key (backtick) on lec7 and `exam1_scrap`.
+
+**`.badge-row-5`** — modifier for a `.badge-row` with five `.content-badge`s (`::: {.badge-row .badge-row-5}`): narrower cards so all five fit one row on a 1600px slide instead of wrapping 4 + 1.
+
+**Drop console (`` ` ``)** — `custom.scss` labels the two panes (`#editor` = SCRIPT, `#terminal` = CONSOLE) so students can tell them apart. The extension's `drop-runtime.js` is also patched (`RArgs:[]` -> `RArgs:["--quiet"]`) to suppress R's startup banner; reinstalling the extension undoes that one-liner.
+
 ## Term + definition (`hero-def` / `term-list`)
 
 The newest component (added 9/4, applied first on `lec3.qmd`'s Operationalization slide). Built specifically with a future site-wide glossary in mind.

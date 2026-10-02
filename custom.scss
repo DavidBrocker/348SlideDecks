@@ -1208,19 +1208,28 @@ $dingbat-vine: "❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ 
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-width: 2.4em;
-  padding: .2em .6em .3em;
-  font-size: 1.2em;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  width: 2.4em;
+  height: 2.4em;
   vertical-align: middle;
   background: #fff;
   border: 2px solid $accent2;
   border-bottom-width: 5px;
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0,0,0,.12);
-  font-family: monospace;
-  line-height: 1.05;
+  font-family: "Fira Code", monospace;
 
-  .keycap-top  { font-size: .75em; font-weight: 700; color: $text-muted; }
-  .keycap-main { font-size: 2em; line-height: 1.1; margin-top: .1em; font-weight: 700; color: $accent; }
+  .keycap-top  { font-size: .9em; font-weight: 700; line-height: 1; color: $text-muted; }
+  .keycap-main { font-size: 2em; font-weight: 400; line-height: .5; padding-top: .3em; color: $accent; }
 }
+
+// Five content-badges on one row (lec7 software menu): narrower cards so they
+// fit the 1600px slide instead of wrapping 4 + 1.
+.badge-row.badge-row-5 {
+  gap: 24px;
+  .content-badge { width: 262px; padding: 20px 14px; font-size: .85em; }
+}
+
+// Larger line for a keycap call-out ("Press [key] to ...").
+.reveal .slide .keycap-line { font-size: 1.5em; margin: 18px 0; }

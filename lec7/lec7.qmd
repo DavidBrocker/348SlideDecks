@@ -2,7 +2,7 @@
 title: "Introduction to Statistical Software"
 subtitle: "Lecture 7"
 author: "Dave Brocker"
-footer: "⬡⬢⬡⬢⬡⬢⬡"
+footer: "Statistical Software | ⬡⬢⬡⬢⬡⬢"
 institute: "Farmingdale State College"
 format: 
   revealjs:
@@ -16,10 +16,6 @@ format:
     lightbox: true
     drop:
       engine: webr
-      webr:
-        packages:
-         - ggplot2
-         - dplyr
 revealjs-plugins:
   - drop
 ---
@@ -38,12 +34,66 @@ There are several tools you can use for statistical analyses.
 
 ## Statistical Software
 
-### Excel, R, SPSS, Jamovi, JASP – Oh My!
+### The Menu
+
+:::::: {.badge-row .badge-row-5}
+::: content-badge
+[table_chart]{.material-icons}
+
+#### Excel
+
+Familiar, and good for the core concepts
+:::
+
+::: content-badge
+[code]{.material-icons}
+
+#### R
+
+Free, flexible, runs in a browser
+:::
+
+::: content-badge
+[analytics]{.material-icons}
+
+#### SPSS
+
+Point-and-click, with a syntax editor
+:::
+
+::: content-badge
+[touch_app]{.material-icons}
+
+#### Jamovi
+
+Free, point-and-click
+:::
+
+::: content-badge
+[query_stats]{.material-icons}
+
+#### JASP
+
+Free, point-and-click
+:::
+::::::
+
+## Statistical Software
+
+### R
 
 ::: {.incremental .highlight-last}
 - R is available on all Operating Systems completely free of charge and can even be accessed through web browsers such as Safari, Chrome, or Mozilla Firefox.
 
-  - As an added bonus, R is *even* accessible in *this* presentation! Press \~ to see
+- As an added bonus, R is *even* accessible in *this* presentation!
+:::
+
+::: keycap-line
+Press <span class="keycap"><span class="keycap-top">~</span><span class="keycap-main">`</span></span> (no Shift needed) to open R.
+:::
+
+::: {.callout-tip appearance="minimal"}
+**Script** (top) is where you write code. **Console** (bottom) is where R answers.
 :::
 
 ## Statistical Software
@@ -65,46 +115,42 @@ Your time is worth something and if I can show you a different way of approachin
 We have used Microsoft Excel in this course to demonstrate core concepts such as finding the arithmetic average, standard deviation, measures of central tendency, and calculating z-scores.
 
 ::: {.incremental .highlight-last}
-- Since statistical tests are mathematical at a base-level, (most) any test can be run in Excel that can be run elsewhere
+- Since statistical tests are mathematical at a base-level, nearly any test that can be run elsewhere can be run in Excel
 :::
 
 ## Statistical Software
 
-### Excel
+### Excel: Data Analysis Toolpak
 
-::: {.incremental .highlight-last}
-- Excel has dedicated first-party addons such as `Data Analysis Toolpak` and third-party addons as well. The `Data Analysis Toolpak` can be used to run the following tests:
+Excel has first-party addons such as the `Data Analysis Toolpak` (and third-party ones too). The `Data Analysis Toolpak` can run the following tests:
+
+::: panel-tabset
+### Top
+
+![](images/excel1.png){fig-alt="Data Analysis Toolpak list, top: ANOVA, Correlation, Covariance, Descriptive Statistics" width="42%"}
+
+### Middle
+
+![](images/excel2.png){fig-alt="Data Analysis Toolpak list, middle: Exponential Smoothing through Random Number Generation" width="42%"}
+
+### Bottom
+
+![](images/excel3.png){fig-alt="Data Analysis Toolpak list, bottom: Rank and Percentile through t-Tests" width="42%"}
 :::
 
-## Statistical Software
-
-### Excel
-
-![](images/excel1.png)
-
-## Statistical Software
-
-### Excel
-
-![](images/excel2.png)
-
-## Statistical Software
-
-### Excel
-
-![](images/excel3.png)
-
-## Statistical Software
-
-### Excel
-
+::: {.callout-tip appearance="minimal"}
 Whoa! Those are *a lot* of tests! Excel is an absolute powerhouse, but some of the tests and options are somewhat difficult to access and/or have a steep learning curve.
+:::
 
 ## Statistical Software
 
 ### SPSS
 
-> SPSS (Statistical Package for the Social Sciences) is used in a variety of disciplines and has options for the majority of tests that you will end up running in your academic career. SPSS also has a syntax editor which allows you to have more control over your data/tests/outputs.
+::: hero-def
+[SPSS]{.term-pill}
+
+: **S**tatistical **P**ackage for the **S**ocial **S**ciences. Used in a variety of disciplines, with options for the majority of tests you will end up running in your academic career, plus a syntax editor that gives you more control over your data, tests, and outputs.
+:::
 
 ## Statistical Software
 
@@ -112,10 +158,11 @@ Whoa! Those are *a lot* of tests! Excel is an absolute powerhouse, but some of t
 
 Let's walk through an example in SPSS step-by-step.
 
-::: {.incremental .highlight-last}
-- Open up the dataset `move_dat_reduced.csv` from Brightspace
+::: callout-tip
+## Setup
 
-- Double-click on IBM SPSS and wait for the file to open
+1. Download the dataset `movie_dat_trimmed.csv` from Brightspace
+2. Double-click on IBM SPSS, then open the file
 :::
 
 ## SPSS: Example
@@ -132,39 +179,51 @@ SPSS does its best to analyze your data and assign data value types (continuous,
 
 ## SPSS: Example
 
-### Descriptive Statistics
+### Two Views
 
-SPSS has two views, `Variable View` and `Data View`
+SPSS has two views.
 
-Variable View: Provides an overview of your variables.
+::::: term-list
+::: fragment
+[Variable View]{.term-pill}
 
-::: {.incremental .highlight-last}
-- What is the name?
-
-- What is the data type?
-
-- What is the range of values?
-
-- Are there any labels?
-
-- What is the Measure type?
+: An overview of your variables.
 :::
+
+::: fragment
+[Data View]{.term-pill}
+
+: A glimpse of your raw data.
+:::
+:::::
 
 ## SPSS: Example
 
-### Descriptive Statistics
+### Two Views: What to Look For
 
-SPSS has two views, Variable View and Data View
+::::: {.columns}
+::: {.column width="50%"}
+::: callout-tip
+## Variable View
 
-::: {.incremental .highlight-last}
-- Data View: Provides a glimpse of your raw data
-
-  - What is in the first column?
-
-  - What is in the second column?
-
-  - etc.
+- What is the name?
+- What is the data type?
+- What is the range of values?
+- Are there any labels?
+- What is the Measure type?
 :::
+:::
+
+::: {.column width="50%"}
+::: callout-tip
+## Data View
+
+- What is in the first column?
+- What is in the second column?
+- etc.
+:::
+:::
+:::::
 
 ## SPSS: Example
 
@@ -190,6 +249,10 @@ Descriptive Statistics *describe* the data, they give us an idea of where our da
 :::
 :::::
 
+::: {.callout-tip appearance="minimal"}
+\* Kurtosis and skewness help us judge how close to normal our data is.
+:::
+
 ## SPSS: Example
 
 ### Frequency Statistics
@@ -208,8 +271,12 @@ Frequency Statistics give us an idea of the composition of our dataset and allow
 
 ## SPSS: Example
 
-### Descriptive and Frequency Statistics
+### Your Turn
+
+::: callout-important
+## Descriptive and Frequency Statistics
 
 In our dataset, we want to investigate the *categorical composition* of our data as well as the *statistical makeup* of our data.
 
-For the dataset provided, find the descriptive Statistics and Frequency Statistics for each variable of the appropriate data type.
+For the dataset provided, find the descriptive statistics and frequency statistics for each variable of the appropriate data type.
+:::
