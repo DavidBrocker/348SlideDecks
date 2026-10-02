@@ -1,34 +1,171 @@
 ---
-title: "Independent Samples T-Test"
-subtitle: "Lecture 11"
+title: "Independent-Samples T-Test"
+subtitle: "PSY 348: Lecture 11"
 author: "Dave Brocker"
-footer: "PSY 348 - Statistics for Psychology"
 institute: "Farmingdale State College"
-format: 
+footer: "Independent-Samples T-Test | ⬡⬢⬡⬢⬡⬢"
+format:
   revealjs:
     theme: ../custom.scss
-    incremental: true   
+    incremental: true
     touch: true
     chalkboard: true
+    lightbox: true
+    scrollable: true
+    code-fold: true
+    slide-number: c/t
+    include-after-body: ../title-bg.html
     width: 1600
     height: 900
-    lightbox: true
-    code-fold: true
     drop:
       engine: webr
-      webr:
-        packages:
-         - ggplot2
-         - dplyr
 revealjs-plugins:
   - drop
+  - codewindow
 ---
+
+```{r}
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(tidyr)
+library(broom)
+library(gt)
+
+# Site tokens (see custom.scss / DESIGN_SYSTEM.md)
+sage  <- "#5C715E"  # $accent
+sage2 <- "#8FAF9E"  # $accent2
+sage3 <- "#A7C7B5"  # $accent3
+ink   <- "#2F3E46"  # $body-color
+hot   <- "#B5483B"  # "look here" highlight
+amber <- "#E8A33D"
+grp_cols <- c(sage2, amber)
+
+theme_deck <- function(base_size = 22) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.title = element_text(color = ink),
+      axis.text = element_text(color = ink),
+      plot.title = element_text(color = ink, face = "bold"),
+      legend.text = element_text(color = ink),
+      legend.position = "none"
+    )
+}
+
+# Formatting helpers so every number on a slide comes from the data.
+f2 <- function(x) formatC(x, format = "f", digits = 2)
+f3 <- function(x) formatC(x, format = "f", digits = 3)
+fp <- function(p) ifelse(p < .001, "< .001", paste("=", sub("^0", "", sprintf("%.3f", p))))
+
+# Pooled independent-samples t-test summary (first factor level minus second).
+ind_stats <- function(y, g) {
+  g <- factor(g); lv <- levels(g)
+  a <- y[g == lv[1]]; b <- y[g == lv[2]]
+  tt <- t.test(a, b, var.equal = TRUE)
+  sp <- sqrt(((length(a) - 1) * var(a) + (length(b) - 1) * var(b)) /
+               (length(a) + length(b) - 2))
+  list(lv = lv, n1 = length(a), n2 = length(b), m1 = mean(a), m2 = mean(b),
+       s1 = sd(a), s2 = sd(b), sp = sp, diff = mean(a) - mean(b),
+       t = unname(tt$statistic), df = unname(tt$parameter), p = tt$p.value,
+       ci = tt$conf.int, d = (mean(a) - mean(b)) / sp)
+}
+apa_t <- function(r) sprintf("t(%d) = %s, p %s", r$df, f2(r$t), fp(r$p))
+
+# ---- Example datasets -------------------------------------------------
+# Coffee vs. decaf happiness (built to have exactly these means and SDs)
+set.seed(11)
+exact <- function(n, m, sd) m + sd * scale(rnorm(n))[, 1]
+coffee <- tibble(
+  grp = factor(rep(c("Experimental", "Control"), each = 10),
+               levels = c("Experimental", "Control")),
+  happy = c(exact(10, 8, 1), exact(10, 6, 1))
+)
+cf <- ind_stats(coffee$happy, coffee$grp)
+
+# Chocolate and concentration (0-20 scale)
+set.seed(42)
+choco <- data.frame(
+  concentration = c(rnorm(25, 15, 2), rnorm(25, 13.5, 2)),
+  group = factor(rep(c("chocolate", "no_chocolate"), each = 25),
+                 levels = c("chocolate", "no_chocolate"))
+)
+ch <- ind_stats(choco$concentration, choco$group)
+
+# Music and studying (0-10 quiz)
+set.seed(99)
+music <- data.frame(
+  quiz_score = c(rnorm(20, 8, 1), rnorm(20, 7, 1.2)) |> pmin(10),
+  group = factor(rep(c("music", "silence"), each = 20),
+                 levels = c("music", "silence"))
+)
+mu_ <- ind_stats(music$quiz_score, music$group)
+
+# Phone use and sleep quality (1-10 scale)
+set.seed(77)
+sleep <- data.frame(
+  sleep_quality = c(rnorm(40, 6.8, 1), rnorm(40, 7.4, 0.9)),
+  group = factor(rep(c("phone", "no_phone"), each = 40),
+                 levels = c("no_phone", "phone"))
+)
+sl <- ind_stats(sleep$sleep_quality, sleep$group)
+
+# Practice datasets
+set.seed(103)
+ex_3 <- tibble(
+  Group = factor(rep(c("Caffeine", "Placebo"), each = 20),
+                 levels = c("Caffeine", "Placebo")),
+  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))
+)
+set.seed(104)
+ex_4 <- tibble(
+  Format = factor(rep(c("Online", "InPerson"), each = 25),
+                  levels = c("Online", "InPerson")),
+  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))
+)
+e3 <- ind_stats(ex_3$Alertness, ex_3$Group)
+e4 <- ind_stats(ex_4$Exam_Score, ex_4$Format)
+
+# A reusable results plot for each worked example
+group_plot <- function(d, x, y, ylab, title, kind = "box") {
+  p <- ggplot(d, aes(.data[[x]], .data[[y]], fill = .data[[x]]))
+  p <- switch(kind,
+    box = p + geom_boxplot(alpha = .6, outlier.shape = NA),
+    violin = p + geom_violin(alpha = .5, trim = FALSE),
+    bar = p + stat_summary(fun = mean, geom = "col", width = .5, alpha = .8))
+  p +
+    geom_jitter(width = .12, alpha = .5, size = 2, color = ink) +
+    stat_summary(fun.data = mean_se, geom = "errorbar", width = .2, color = ink) +
+    scale_fill_manual(values = grp_cols) +
+    labs(title = title, y = ylab, x = NULL) +
+    theme_deck(20)
+}
+
+# Results table for a worked example
+results_tbl <- function(r) {
+  tibble(
+    Difference = r$diff, t = r$t, df = r$df,
+    p = ifelse(r$p < .001, "<.001", sprintf("%.3f", r$p)),
+    `CI[ll,uu]` = paste0("[", f2(r$ci[1]), ", ", f2(r$ci[2]), "]"),
+    d = r$d
+  ) |>
+    gt() |>
+    fmt_number(columns = c(Difference, t, d), decimals = 2) |>
+    fmt_number(columns = df, decimals = 0) |>
+    opt_row_striping() |>
+    tab_options(table.font.size = 22, table.width = pct(100)) |>
+    tab_style(style = cell_text(weight = "bold"),
+              locations = cells_column_labels())
+}
+```
 
 ## From Paired to Independent Samples
 
-Last time, we compared **two related means** — the *same participants* measured twice (e.g., before vs. after caffeine).
+Last time, we compared **two related means**: the *same participants* measured twice (e.g., stress before vs. after a mindfulness program).
 
-Now, we’ll compare **two unrelated means** — *different participants* in each group.
+Now, we'll compare **two unrelated means**: *different participants* in each group.
 
 | Paired t-test                          | Independent t-test             |
 |----------------------------------------|--------------------------------|
@@ -38,681 +175,759 @@ Now, we’ll compare **two unrelated means** — *different participants* in eac
 
 ## From Paired to Independent Samples
 
-### Visual Comparison
+### Visual comparison
 
 ```{r}
 #| echo: false
-#| fig-align: center
-
-
-library(ggplot2)
-library(gt)
-
-paired <- data.frame(
-  condition = rep(c("Pre","Post"), each = 10),
-  score = c(rnorm(10, 70, 5), rnorm(10, 75, 5)),
+#| fig-width: 12
+#| fig-height: 4.8
+library(patchwork)
+set.seed(5)
+paired <- tibble(
+  condition = factor(rep(c("Pre", "Post"), each = 10), levels = c("Pre", "Post")),
   id = rep(1:10, 2)
-)
-
-independent <- data.frame(
-  group = rep(c("Control","Experimental"), each = 10),
+) |> mutate(score = c(rnorm(10, 70, 5)) |> (\(x) c(x, x + 5 + rnorm(10, 0, 2)))())
+independent <- tibble(
+  group = rep(c("Control", "Experimental"), each = 10),
   score = c(rnorm(10, 70, 5), rnorm(10, 75, 5))
 )
 
-library(patchwork)
+p1 <- ggplot(paired, aes(condition, score, group = id)) +
+  geom_line(color = sage3, linewidth = .9) +
+  geom_point(color = sage, size = 3) +
+  labs(title = "Paired: same people", y = "Score", x = NULL) +
+  theme_deck(20)
 
-p1 <- ggplot(paired, aes(x = condition, y = score, group = id)) +
-  geom_line(alpha = 0.5) +
-  geom_point(size = 2) +
-  theme_minimal() +
-  labs(title = "Paired Samples: Same People", y = "Score", x = "") +
-  scale_y_continuous(breaks = seq(60,80,5))
-
-p2 <- ggplot(independent, aes(x = group, y = score, fill = group)) +
-  geom_boxplot(alpha = 0.6) +
-  theme_minimal() +
-  labs(title = "Independent Samples: Different People", y = "Score", x = "")
+p2 <- ggplot(independent, aes(group, score, fill = group)) +
+  geom_boxplot(alpha = .6, outlier.shape = NA) +
+  geom_jitter(width = .1, color = ink, alpha = .6) +
+  scale_fill_manual(values = grp_cols) +
+  labs(title = "Independent: different people", y = "Score", x = NULL) +
+  theme_deck(20)
 
 p1 + p2
 ```
 
 ## Sampling Theory (Recap)
 
-- Sampling theory allows us to test two unrelated group
+### Comparing two unrelated groups
 
-- We can compare the group means
+- Sampling theory lets us test two unrelated groups.
+
+- Under $H_0$ the **difference** between group means is centered on 0. Under $H_A$ it is centered somewhere else.
 
 ```{r}
-library(ggplot2)
-library(dplyr,warn.conflicts = FALSE)
-library(tidyr)
-
-# Generate data for two normal distributions
-x <- seq(-6, 6, length=100)
-null_dist <- dnorm(x, mean = 0, sd = 1)
-alt_dist <- dnorm(x, mean = 2, sd = 1)
-
-data <- data.frame(
-  x = rep(x, 2),
-  y = c(null_dist, alt_dist),
-  hypothesis = factor(rep(c("Null Hypothesis", "Alternative Hypothesis"), each=length(x)))
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3.8
+rec_dat <- tibble(
+  x = rep(seq(-5, 6, length.out = 400), 2),
+  y = c(dnorm(seq(-5, 6, length.out = 400), 0, 1),
+        dnorm(seq(-5, 6, length.out = 400), 2, 1)),
+  hypothesis = factor(rep(c("Null hypothesis", "Alternative hypothesis"), each = 400),
+                      levels = c("Null hypothesis", "Alternative hypothesis"))
 )
-
-# Create the plot
-
-plt <- 
-  ggplot(data, aes(x = x, y = y, 
-                 lty = rev(hypothesis))) +
-    geom_line(aes(color = "purple")) +
-  theme_linedraw() + 
-  labs(
-    x = "",
-    y = "",
-    lty = "Hypotheses"
-  ) + 
-  theme(
-    panel.grid = element_blank(),
-    legend.position = "inside",
-    legend.position.inside = c(.2,.5),
-    legend.background = element_rect(color = "black")
-  ) + 
-  scale_color_identity()
-
-plt 
-
+rec_plot <- ggplot(rec_dat, aes(x, y, color = hypothesis, linetype = hypothesis)) +
+  geom_line(linewidth = 1.4) +
+  scale_color_manual(values = c(sage, ink)) +
+  labs(x = "Difference between the group means (in standard errors)", y = NULL,
+       color = NULL, linetype = NULL) +
+  theme_deck(20) +
+  theme(axis.text.y = element_blank(), legend.position = "top")
+rec_plot
 ```
 
 ## Sampling Theory (Recap)
 
-- Sampling theory allows us to test two unrelated group
-
-- We can compare the group means
+### A difference near 0 looks like the null
 
 ```{r}
 #| echo: false
-
-plt + 
-  geom_vline(xintercept = -.8,color = "darkblue") + 
-  scale_x_continuous(breaks = c(-6,-4,-2,0,2,4,6))
+#| fig-width: 11
+#| fig-height: 3.8
+rec_plot + geom_vline(xintercept = -.8, color = hot, linewidth = 1.3) +
+  annotate("text", x = -.8, y = .42, label = "observed", color = hot, hjust = 1.1, size = 6)
 ```
+
+- An observed difference like this is easy to produce when $H_0$ is true.
 
 ## Sampling Theory (Recap)
 
-- Sampling theory allows us to test two unrelated group
-
-- We can compare the group means
+### A difference beyond the critical value does not
 
 ```{r}
 #| echo: false
-
-plt + 
-  geom_vline(xintercept = 1.6,color = "darkblue") + 
-  scale_x_continuous(breaks = c(-6,-4,-2,0,2,4,6))
-
+#| fig-width: 11
+#| fig-height: 3.8
+rec_plot +
+  geom_vline(xintercept = qnorm(.95), color = ink, linetype = "dotted", linewidth = 1.1) +
+  annotate("text", x = qnorm(.95), y = .42, label = "critical value",
+           color = ink, hjust = -.1, size = 6) +
+  geom_vline(xintercept = 2.2, color = hot, linewidth = 1.3) +
+  annotate("text", x = 2.2, y = .3, label = "observed", color = hot, hjust = -.15, size = 6)
 ```
 
-## Sampling Theory (Recap)
-
-- Sampling theory allows us to test two unrelated group
-
-- We can compare the group means
-
-```{r}
-#| echo: false
-
-plt + 
-  geom_vline(
-    xintercept = 1.6,
-    color = "darkblue"
-    ) + 
-  geom_vline(
-    xintercept = 1, 
-    color = "red"
-    ) + 
-  geom_text(
-    x = 1, 
-    y = .05, 
-    label = "Critical Value",
-    color = "red",
-    angle = 90,
-    size = 3,
-    vjust = -.4
-    ) +
-  scale_x_continuous(
-    breaks = c(-6,-4,-2,0,2,4,6)
-    )
-
-```
-
-## Sampling Theory (Recap)
-
-- Sampling theory allows us to test two unrelated group
-
-- We can compare the group means
-
-```{r}
-#| echo: false
-
-plt + 
-  geom_vline(
-    xintercept = 1.6,
-    color = "darkblue"
-    ) + 
-  geom_vline(
-    xintercept = 1, 
-    color = "red"
-    ) + 
-  geom_text(
-    x = 1, 
-    y = .05, 
-    label = "Critical Value",
-    color = "red",
-    angle = 90,
-    size = 3,
-    vjust = -.4
-    ) +
-  scale_x_continuous(
-    breaks = c(-6,-4,-2,0,2,4,6)
-    )
-```
+- Beyond the critical value, the observed difference would be very unusual under $H_0$, so we **reject** it.
 
 ## Inferential Statistics
 
-### **Applied to Independent Groups**
+### Applied to independent groups
 
-- Our goal is still to test whether a difference is likely due to chance
+- Our goal is still to test whether a difference is likely due to chance.
 
 - With independent samples, chance variation now includes **differences between individuals** in *both* groups.
 
 ## Group Variance
 
-### Within and Between
+### Within and between
 
 ::::: columns
 ::: {.column width="50%"}
 To compare the means we need to know:
 
-- Between group variance: how much the answers from the **experimental** group differ from the **control** group.
+- **Between-group variance:** how much the answers from the **experimental** group differ from the **control** group.
 
-- Within group variance: how much the **answers of all participants** differ from one another.
+- **Within-group variance:** how much the **answers of all participants** differ from one another.
 :::
 
 ::: {.column width="50%"}
 ```{r}
-df <- tibble(
-  treatment = rep(c("Experimental", "Control"), each = 30),
-  score = c(rnorm(30, 30, 2), rnorm(30, 40, 5))
+#| echo: false
+#| fig-width: 7
+#| fig-height: 5.4
+set.seed(3)
+gv <- tibble(
+  treatment = factor(rep(c("Experimental", "Control"), each = 30),
+                     levels = c("Experimental", "Control")),
+  score = c(rnorm(30, 30, 4), rnorm(30, 38, 4))
 )
-
-means <- df %>%
-  group_by(treatment) %>%
-  summarise(mean_score = mean(score))
-
-df %>%
-  ggplot(aes(treatment, score, fill = treatment)) +
-  geom_violin(alpha = 0.3, width = 0.8, color = NA) +
-  geom_jitter(width = 0.1, alpha = 0.5, size = 2) +
-  stat_summary(fun = mean, geom = "point", size = 4, color = "black") +
-  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), geom = "errorbar", width = 0.2, color = "black") + 
-  theme_minimal()
+ggplot(gv, aes(treatment, score, fill = treatment)) +
+  geom_violin(alpha = .35, width = .8, color = NA) +
+  geom_jitter(width = .1, alpha = .5, size = 2, color = ink) +
+  stat_summary(fun = mean, geom = "point", size = 5, color = hot) +
+  scale_fill_manual(values = grp_cols) +
+  labs(x = NULL, y = "Score", subtitle = "red dot = group mean") +
+  theme_deck(20)
 ```
 :::
 :::::
 
-## Independent Samples t-test Overview
+## Independent-Samples t-Test Overview
 
 Used when we compare **two different groups** on a continuous outcome.
 
-- **Examples:**
+:::::: badge-row
+::: content-badge
+[local_cafe]{.material-icons}
 
-  - Coffee drinkers vs. decaf drinkers on happiness
+#### Coffee vs. decaf
 
-  - Students with music vs. silence during study
+Happiness scores
+:::
 
-  - Phone use vs. no phone use before bed
+::: content-badge
+[headphones]{.material-icons}
 
-- **Goal:**
+#### Music vs. silence
 
-  - Is the mean difference between groups larger than what we’d expect by chance?
+Study performance
+:::
 
-## Independent Samples t-test
+::: content-badge
+[smartphone]{.material-icons}
+
+#### Phone vs. no phone
+
+Sleep quality before bed
+:::
+::::::
+
+- **Goal:** is the mean difference between groups larger than what we'd expect by chance?
+
+## Independent-Samples t-Test
 
 ### Example
 
 > The experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of `1` to `10`.
 
-- The experimental group has a mean happiness score of `8`
+- The experimental group has a mean happiness score of `8`.
 
-- The control group mean happiness score of `6`
+- The control group has a mean happiness score of `6`.
 
 ::: fragment
 Is the group that drank coffee significantly happier than the control group?
 :::
 
-## Independent samples t-test
-
-```{r}
-#| echo: false
-
-plt + 
-  geom_vline(
-    xintercept = 2,
-    color = "darkblue"
-    ) + 
-  geom_vline(
-    xintercept = 0, 
-    color = "red"
-    ) + 
-  theme(
-    axis.text.x = element_blank()
-  ) + 
-  geom_text(
-    x = -4,
-    y = .1,
-    label = "x̄_Control = 6"
-  ) +
-    geom_text(
-    x = -4.3,
-    y = .05,
-    label = "x̄_Exp = 8"
-  )
-```
-
-## Independent samples t-test
-
-To compare the means we need to know:
-
-- **Between group variance**: how much the answers from the experimental group differ from the control group.
-
-- **Within group variance**: how much the answers of all participants differ from one another.
-
 ## Formulas
+
+### Theoretical and computational
 
 Inferential statistics have both **theoretical** and **computational** formulas:
 
-- Theoretical
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## Theoretical
 
-  - Formula for if we actually knew the population parameters
+The formula if we actually knew the population parameters ($\sigma$).
+:::
+:::
 
-- Computational
+::: {.column width="50%"}
+::: callout-important
+## Computational
 
-  - Formula for estimating the test statistics based solely on sample data
+The formula for estimating the test statistic based solely on sample data.
+:::
+:::
+:::::
 
-## Theoretical Formula:
+## Theoretical Formula
 
-$$\color{blue}{t} = \frac{\color{red}{\bar{x}_1} -\color{orange}{\bar{x}_2}}{\sqrt{\color{grey}{\sigma^{2}_{pooled}}}}$$
+### If we knew the population standard deviation
 
-- [t]{style="color:blue"} = T Statistic
+$$z = \frac{\color{red}{\bar{x}_1} - \color{orange}{\bar{x}_2}}{\color{grey}{\sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}$$
 
-- [Sample Mean, Group 1]{style="color:red"}
+- [Sample mean, group 1]{style="color:red"}
 
-- [Sample Mean, Group 2]{style="color:orange"}
+- [Sample mean, group 2]{style="color:orange"}
 
-- [Population Pooled Variance]{style="color:grey"}
+- [Standard error of the difference]{style="color:grey"}, using the population $\sigma$ (assumed equal in both groups)
 
-## Independent samples t-test
+## Computational Formula
 
-Theoretical Formula:
+### Estimating from the samples (pooled t-test)
 
-$$t = \frac{\bar{x}_1 - \color{green}{\bar{x}_2}}{\sqrt{\sigma^{2}_{pooled}}}$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{darkblue}{s_p^2}\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}} \qquad s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$$
 
-## Independent samples t-test
+- [$s_p^2$ = pooled variance]{style="color: darkblue"}, a weighted average of the two group variances.
 
-### Theoretical Formula:
+- $df = n_1 + n_2 - 2$
 
-$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{orange}{\sigma^{2}_{pooled}}}}$$
+## Computational Formula
 
-## Independent samples t-test
+### When the variances are not equal (Welch's t-test)
 
-### Theoretical Formula:
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
 
-$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\sigma^{2}_{pooled}}}$$
+- No pooling: each group's variance keeps its own weight, and df is adjusted (it is usually not a whole number).
 
-## Independent samples t-test
+- This is what `t.test()` does **by default** in R. Adding `var.equal = TRUE` gives the pooled version above.
 
-### Theoretical Formula:
+## Coffee Example
 
-$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\sigma^{2}_{pooled}}}$$
+### Manual
 
-## Independent samples t-test
+::: callout-tip
+## Pooled variance and standard error
 
-### Computational Formula:
+$s_p^2 = \dfrac{(10-1)(1)^2 + (10-1)(1)^2}{10 + 10 - 2} = `r f2(cf$sp^2)`$ and $SE = \sqrt{`r f2(cf$sp^2)`\left(\frac{1}{10} + \frac{1}{10}\right)} = `r f2(sqrt(cf$sp^2 * (1/cf$n1 + 1/cf$n2)))`$
+:::
 
-$$\frac{\bar{x}_{Experimental}-\bar{x}_{Control}}{\sqrt{\color{darkblue}{\frac{s_1^2}{n_1}+ \frac{s_2^2}{n_2}}}}$$
+::: callout-tip
+## Compute t
 
-- [Pooled Variance]{style="color: darkblue"}
+$t = \dfrac{8 - 6}{`r f2(sqrt(cf$sp^2 * (1/cf$n1 + 1/cf$n2)))`} = `r f2(cf$t)`$
+:::
 
-## Independent samples t-test
+::: callout-tip
+## Decide
 
-### Computational Formula:
+$df = 10 + 10 - 2 = `r cf$df`$. At $\alpha = .05$ (two-tailed), $t_{critical} = \pm `r f3(qt(.975, cf$df))`$. Since $`r f2(cf$t)` > `r f3(qt(.975, cf$df))`$, we **reject** $H_0$.
+:::
 
-$$\frac{\bar{x}_{Experimental}-\bar{x}_{Control}}{\sqrt{\frac{s_1^2}{n_1}+ \frac{s_2^2}{n_2}}}$$
+## Coffee Example
 
-## Data Overview
+### Data overview
 
 ```{r}
-dat <- 
-  tibble(
-  grp = rep(c("Experimental","Control"),
-            each = 10),
-  happy = c(rnorm(10,8,1),rnorm(10,6,1)) |> round(0)
-  ) 
-
-t.test(dat$happy ~ dat$grp, var.equal = TRUE) |> 
-  broom::tidy() |> 
-  rename(
-    mdiff = estimate,
-    t = statistic,
-    Experimental = estimate2,
-    Control = estimate1,
-    p = p.value,
-    df = parameter) |> 
-  mutate(
-    `CI[ll,uu]` = paste0("[",conf.low |> round(2),", ",conf.high |> round(2),"]"),
-    p = ifelse(p <.01, "<.001",p)) |> 
-  select(-conf.low, -conf.high,-method) |> 
-  relocate(alternative,.after = last_col()) |> 
-  gt() |> 
-  fmt_auto() |> 
-  opt_row_striping() |> 
-  tab_options(
-    table.font.size = 32,
-    table.width = pct(70)
-  ) |> 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_column_labels()
-  )
+#| echo: false
+t.test(happy ~ grp, data = coffee, var.equal = TRUE) |>
+  tidy() |>
+  rename(mdiff = estimate, t = statistic, Experimental = estimate1,
+         Control = estimate2, df = parameter) |>
+  mutate(`CI[ll,uu]` = paste0("[", round(conf.low, 2), ", ", round(conf.high, 2), "]"),
+         p = ifelse(p.value < .001, "<.001", sprintf("%.3f", p.value))) |>
+  select(mdiff, t, df, p, Experimental, Control, `CI[ll,uu]`) |>
+  gt() |>
+  fmt_number(columns = c(mdiff, t, Experimental, Control), decimals = 2) |>
+  fmt_number(columns = df, decimals = 0) |>
+  opt_row_striping() |>
+  tab_options(table.font.size = 30, table.width = pct(80)) |>
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_column_labels())
 ```
 
-## Independent samples t-test:
+- `mdiff` is the experimental mean minus the control mean ($8 - 6 = 2$). The factor levels set the order, so put the group you want **first** to get a positive difference.
 
-### Assumptions of Independent Samples t-test
+## Independent-Samples t-Test
 
-1.  **DV is continuous**\
-2.  **Observations are independent**\
-3.  **Normality:** each group’s distribution is approximately normal\
-4.  **Homogeneity of variance:** variances are similar across groups
+### Assumptions
 
-## Independent samples t-test:
+::: callout-important
+## Assumptions
 
-### Assumptions of Independent Samples t-test
+1.  **DV is continuous** (interval or ratio scale).
+2.  **Observations are independent**, and the data are randomly sampled. Each person appears in only one group.
+3.  **Normality:** each group's distribution is approximately normal (or the groups are large enough for the CLT).
+4.  **Homogeneity of variance:** variances are similar across groups (tested with **Levene's Test**).
+:::
 
-- **Random sampling**:
+## Interpreting Levene's Test
 
-  - The data is randomly sampled from a population 
+- Levene's Test tells us whether the assumption of equal variances holds.
 
-- **Independence**:
+  - If $p > .05$ → use the **top row** ("Equal variances assumed")
 
-  - Each group must be made up of independent observations.
+  - If $p < .05$ → use the **bottom row** ("Equal variances not assumed")
 
-- **Homogeneity of variance**:
+- Normality: each group's distribution should be approximately normal.
 
-  - Variance should be equal across groups (tested with Levene's Test)
+## Independent-Samples t-Test
 
-## Interpreting Levene’s Test
+### Homogeneity of variance
 
-- Levene’s Test tells us whether the assumption of equal variances holds.
-
-  - If p \> .05 → use the **top row** ("Equal variances assumed")
-
-  - If p \< .05 → use the **bottom row** ("Equal variances not assumed")
-
-- Normality
-
-  - Each group's distribution should be approximately normal
-
-## Independent samples t-test
-
-### Homogeneity of Variance
-
-### ![](images/spiderman.png){style="border-radius: 20px;"}
+![](images/spiderman.png){style="border-radius: 20px;" width="300"}
 
 ::: fragment
-If the **Levene's Test** is significant, use the t value from the second row and its corresponding significance.
+If **Levene's Test** is significant, use the t value from the second row and its corresponding significance.
 :::
 
 - t is the test statistic.
 
-- Sig (2-tailed) is the p-value.
+- Sig. (2-tailed) is the p-value.
 
 ## Why Do We Care?
 
-We need the **Levene's Test**, because if the variance from the experimental group is not equal to the variance of the control group, we have to use a different formula for the pooled standard deviation.
+We need **Levene's Test** because if the variance of the experimental group is not equal to the variance of the control group, pooling the two variances is not appropriate. We switch to the unpooled (**Welch**) version of the test, which does not assume equal variances.
 
 - A significant Levene's Test means a significant difference in the variances.
 
-## Independent samples t-test: SPSS
+## Let's Apply It
 
-### Interpreting Results
+### Three independent designs
 
-If the **Levene's Test** is significant, use the t value from the second row and its corresponding significance
+We'll test three common between-subjects designs:
 
-## Let’s Apply It: Three Independent Designs
+:::::: badge-row
+::: content-badge
+[cookie]{.material-icons}
 
-We’ll test three common between-subjects designs:
+#### Chocolate and Concentration
 
-1\. **Chocolate and Concentration** – Experimental vs. Control\
-2. **Music and Studying** – Environmental manipulation\
-3. **Phone Use and Sleep** – Behavioral difference
+Experimental vs. control
+:::
+
+::: content-badge
+[headphones]{.material-icons}
+
+#### Music and Studying
+
+Environmental manipulation
+:::
+
+::: content-badge
+[smartphone]{.material-icons}
+
+#### Phone Use and Sleep
+
+Behavioral difference
+:::
+::::::
 
 ## Does chocolate improve concentration?
 
-**Design Summary**
+### Design
 
-> 50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0–20 scale.
+> 50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0-20 scale.
 
-- **IV**: Chocolate (Yes vs. No)\
-- **DV**: Concentration task score\
-- **Design**: Between-subjects, randomized
+- **IV:** chocolate (yes vs. no)
+
+- **DV:** concentration task score
+
+- **Design:** between-subjects, randomized
 
 ## Does chocolate improve concentration?
+
+### Hypotheses
 
 ::::: columns
 ::: {.column width="50%"}
-> 50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0–20 scale.
+::: callout-tip
+## Null hypothesis $H_0$
+
+Concentration is the same with and without chocolate.
+
+$\mu_\text{chocolate} = \mu_\text{no chocolate}$
+:::
+:::
+
+::: {.column width="50%"}
+::: callout-important
+## Alternative hypothesis $H_A$
+
+Concentration differs between the groups.
+
+$\mu_\text{chocolate} \neq \mu_\text{no chocolate}$
+:::
+:::
+:::::
+
+## Does chocolate improve concentration?
+
+### Data and results
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5.2
+group_plot(choco, "group", "concentration", "Concentration score",
+           "Chocolate and concentration")
+```
 :::
 
 ::: {.column width="50%"}
 ```{r}
-#| echo: true
-library(ggplot2)
-library(gtsummary)
-library(dplyr)
-library(gt)
-library(broom)
-
-set.seed(42)
-choco <- data.frame(
-  concentration = c(rnorm(25, 15, 2), rnorm(25, 13.5, 2)),
-  group = rep(c("chocolate", "no_chocolate"), each = 25)
-)
-
-
-# Plot
-ggplot(choco, aes(x = group, y = concentration, fill = group)) +
-  geom_boxplot(alpha = .5) +
-  geom_jitter(alpha = .4) +
-  theme_minimal() +
-  labs(title = "Chocolate and Concentration",
-       y = "Concentration Score", x = "")
-
-# Summary Table
-t.test(concentration ~ group, 
-       data = choco,
-       var.equal = TRUE) %>%
-  tidy() %>%
-  select(-method) |> 
-  rename(
-    Difference = estimate,
-    t = statistic,
-    p = p.value,
-    df = parameter,
-    `95% CI Low` = conf.low,
-    `95% CI High` = conf.high
-  ) |> 
-  mutate(p = ifelse(p<.05,"<.05",p)) |> 
-  gt() |> 
-  fmt_auto()
+#| echo: false
+results_tbl(ch)
 ```
+
+Chocolate: $M = `r f2(ch$m1)`$, $SD = `r f2(ch$s1)`$. No chocolate: $M = `r f2(ch$m2)`$, $SD = `r f2(ch$s2)`$.
 :::
 :::::
 
-## Example 2: Music and Study Efficiency
+## Does chocolate improve concentration?
+
+### Check the assumptions, then run the test
+
+::: {.codewindow .r .codewindow-dark}
+chocolate.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+library(car)
+
+# Equal variances? (H0: the variances are equal)
+leveneTest(concentration ~ group, data = choco)
+
+# Pooled (equal variances) t-test
+t.test(concentration ~ group, data = choco, var.equal = TRUE)
+```
+:::
+
+- Levene's $p > .05$, so equal variances are reasonable and the pooled test is appropriate.
+
+## Does chocolate improve concentration?
+
+### Decision, effect size, and report
+
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## Decide
+
+$t(`r ch$df`) = `r f2(ch$t)`$, $p$ `r fp(ch$p)`. Since $p < .05$, we **reject** $H_0$.
+:::
+
+::: callout-tip
+## Effect size
+
+$d = \dfrac{\bar{x}_1 - \bar{x}_2}{s_p} = \dfrac{`r f2(ch$diff)`}{`r f2(ch$sp)`} = `r f2(ch$d)`$ (a **large** effect)
+:::
+:::
+
+::: {.column width="50%"}
+> An independent-samples t-test showed that students who ate chocolate (*M* = `r f2(ch$m1)`, *SD* = `r f2(ch$s1)`) scored significantly higher on the concentration task than students who did not (*M* = `r f2(ch$m2)`, *SD* = `r f2(ch$s2)`), [*`r apa_t(ch)`*]{.hl}, 95% CI [`r f2(ch$ci[1])`, `r f2(ch$ci[2])`], *d* = `r f2(ch$d)`.
+:::
+:::::
 
 ## Does instrumental music improve studying?
 
+### Design
+
 > **Design Summary**\
 > 40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.
 
-- **IV**: Study condition (Instrumental music vs. Silence)\
-- **DV**: Quiz performance (number of correct answers)\
-- **Design**: Between-subjects, randomized
+- **IV:** study condition (instrumental music vs. silence)
 
-## Example 2: Music and Study Efficiency
+- **DV:** quiz performance (number of correct answers out of 10)
 
-### Does instrumental music improve studying?
+- **Design:** between-subjects, randomized
+
+## Does instrumental music improve studying?
+
+### Hypotheses
 
 ::::: columns
 ::: {.column width="50%"}
-> **Design Summary**\
-> 40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.
+::: callout-tip
+## Null hypothesis $H_0$
+
+Quiz performance is the same with music and in silence.
+
+$\mu_\text{music} = \mu_\text{silence}$
+:::
+:::
+
+::: {.column width="50%"}
+::: callout-important
+## Alternative hypothesis $H_A$
+
+Quiz performance differs between the conditions.
+
+$\mu_\text{music} \neq \mu_\text{silence}$
+:::
+:::
+:::::
+
+## Does instrumental music improve studying?
+
+### Data and results
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5.2
+group_plot(music, "group", "quiz_score", "Quiz score (out of 10)",
+           "Music and study performance", kind = "violin")
+```
 :::
 
 ::: {.column width="50%"}
 ```{r}
+#| echo: false
+results_tbl(mu_)
+```
+
+Music: $M = `r f2(mu_$m1)`$, $SD = `r f2(mu_$s1)`$. Silence: $M = `r f2(mu_$m2)`$, $SD = `r f2(mu_$s2)`$.
+:::
+:::::
+
+## Does instrumental music improve studying?
+
+### Run the test
+
+::: {.codewindow .r .codewindow-dark}
+music.R
+
+```{r}
 #| echo: true
-set.seed(99)
-music <- 
-  data.frame(
-    quiz_score = c(rnorm(20, 18, 1), 
-                   rnorm(20, 16.5, 1.2)),
-    group = rep(c("music", "silence"), each = 20)
+#| code-fold: false
+t.test(quiz_score ~ group, data = music, var.equal = TRUE)
+```
+:::
+
+## Does instrumental music improve studying?
+
+### Decision, effect size, and report
+
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## Decide
+
+$t(`r mu_$df`) = `r f2(mu_$t)`$, $p$ `r fp(mu_$p)`. Since $p > .05$, we **fail to reject** $H_0$.
+:::
+
+::: callout-tip
+## Effect size
+
+$d = \dfrac{`r f2(mu_$diff)`}{`r f2(mu_$sp)`} = `r f2(mu_$d)`$ (a **medium** effect)
+:::
+:::
+
+::: {.column width="50%"}
+> An independent-samples t-test showed that students who studied with music (*M* = `r f2(mu_$m1)`, *SD* = `r f2(mu_$s1)`) did not differ significantly on the quiz from students who studied in silence (*M* = `r f2(mu_$m2)`, *SD* = `r f2(mu_$s2)`), [*`r apa_t(mu_)`*]{.hl}, 95% CI [`r f2(mu_$ci[1])`, `r f2(mu_$ci[2])`], *d* = `r f2(mu_$d)`.
+:::
+:::::
+
+::: {.callout-tip appearance="minimal"}
+A medium effect that is *not* significant is a hint that the study may have been too small to detect it. (If we had predicted a *direction* before collecting data, the one-tailed $p$ would be about `r f3(mu_$p / 2)`. But the direction has to be chosen **before** you see the result.)
+:::
+
+## Does bedtime phone use affect sleep?
+
+### Design
+
+> **Design Summary**\
+> 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.
+
+- **IV:** phone use before bed (yes vs. no)
+
+- **DV:** sleep quality rating (1 = poor, 10 = excellent)
+
+- **Design:** between-subjects, randomized
+
+## Does bedtime phone use affect sleep?
+
+### Hypotheses
+
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## Null hypothesis $H_0$
+
+Sleep quality is the same with and without bedtime phone use.
+
+$\mu_\text{no phone} = \mu_\text{phone}$
+:::
+:::
+
+::: {.column width="50%"}
+::: callout-important
+## Alternative hypothesis $H_A$
+
+Sleep quality differs between the conditions.
+
+$\mu_\text{no phone} \neq \mu_\text{phone}$
+:::
+:::
+:::::
+
+## Does bedtime phone use affect sleep?
+
+### Data and results
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5.2
+group_plot(sleep, "group", "sleep_quality", "Sleep quality (1-10)",
+           "Phone use and sleep quality", kind = "bar")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+results_tbl(sl)
+```
+
+No phone: $M = `r f2(sl$m1)`$, $SD = `r f2(sl$s1)`$. Phone: $M = `r f2(sl$m2)`$, $SD = `r f2(sl$s2)`$.
+:::
+:::::
+
+## Does bedtime phone use affect sleep?
+
+### Run the test
+
+::: {.codewindow .r .codewindow-dark}
+sleep.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+t.test(sleep_quality ~ group, data = sleep, var.equal = TRUE)
+```
+:::
+
+## Does bedtime phone use affect sleep?
+
+### Decision, effect size, and report
+
+::::: columns
+::: {.column width="50%"}
+::: callout-tip
+## Decide
+
+$t(`r sl$df`) = `r f2(sl$t)`$, $p$ `r fp(sl$p)`. Since $p > .05$, we **fail to reject** $H_0$. The result is close, but not significant.
+:::
+
+::: callout-tip
+## Effect size
+
+$d = \dfrac{`r f2(sl$diff)`}{`r f2(sl$sp)`} = `r f2(sl$d)`$ (a **small-to-medium** effect)
+:::
+:::
+
+::: {.column width="50%"}
+> An independent-samples t-test showed that students who avoided their phones before bed (*M* = `r f2(sl$m1)`, *SD* = `r f2(sl$s1)`) did not differ significantly in sleep quality from students who used their phones (*M* = `r f2(sl$m2)`, *SD* = `r f2(sl$s2)`), [*`r apa_t(sl)`*]{.hl}, 95% CI [`r f2(sl$ci[1])`, `r f2(sl$ci[2])`], *d* = `r f2(sl$d)`.
+:::
+:::::
+
+## Practice
+
+### Caffeine and alertness
+
+> Does caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (`ex_3`: `Group`, `Alertness`; 20 per group). Alertness was scored on a 0-100 scale.
+
+1.  State $H_0$ and $H_A$.
+2.  Check the equal-variance assumption (Levene's Test).
+3.  Run the independent-samples t-test, compute $d$, and write an APA sentence.
+
+::: {.codewindow .r .codewindow-dark}
+practice_3.R
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| eval: false
+set.seed(103)
+ex_3 <- tibble(
+  Group = factor(rep(c("Caffeine", "Placebo"), each = 20),
+                 levels = c("Caffeine", "Placebo")),
+  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))
 )
-
-# Plot
-ggplot(music, 
-       aes(x = group, 
-           y = quiz_score, 
-           fill = group)
-       ) +
-  geom_violin(trim = FALSE,alpha = .4) +
-  geom_jitter(
-    width = 0.1, 
-    alpha = 0.4
-    ) +
-  stat_summary(
-    fun.data = "mean_se",
-    geom = "errorbar",
-    width = .2
-  ) +
-  theme_minimal() +
-  labs(
-    title = "Music and Study Performance",
-    y = "Quiz Score", 
-    x = "")
-
-# Summary Table
-  t.test(quiz_score ~ group,
-         data = music,
-         var.equal = TRUE) %>%
-  tidy() |> 
-  select(-method) |> 
-  rename(
-    Estimate = estimate,
-    t  = statistic,
-    p = p.value,
-    df = parameter,
-    `95% CI Low` = conf.low,
-    `95% CI High` = conf.high
-  ) |> 
-  mutate(p = ifelse(p<.05,"<.05",p)) |> 
-  gt() |> 
-  fmt_auto()
 ```
 :::
-:::::
 
-## Example 3: Phone Use and Sleep
+<details>
 
-### Does bedtime phone use affect sleep?
+<summary>Reveal answer</summary>
 
-> **Design Summary**\
-> 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.
+$H_0: \mu_\text{caffeine} = \mu_\text{placebo}$; $H_A: \mu_\text{caffeine} \neq \mu_\text{placebo}$. Caffeine $M = `r f2(e3$m1)`$ vs. placebo $M = `r f2(e3$m2)`$: *`r apa_t(e3)`*, 95% CI [`r f2(e3$ci[1])`, `r f2(e3$ci[2])`], $d = `r f2(e3$d)`$.
 
-- **IV**: Phone use before bed (Yes vs. No)\
-- **DV**: Sleep quality rating (1 = poor, 10 = excellent)\
-- **Design**: Between-subjects, randomized
+</details>
 
-## Example 3: Phone Use and Sleep
+## Practice
 
-### Does bedtime phone use affect sleep?
+### Online vs. in-person exams
 
-::::: columns
-::: {.column width="50%"}
-> **Design Summary**\
-> 80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.
-:::
+> Do exam scores differ between online and in-person sections? 25 students in each format took the same exam (`ex_4`: `Format`, `Exam_Score`).
 
-::: {.column width="50%"}
+1.  State $H_0$ and $H_A$.
+2.  Check the equal-variance assumption (Levene's Test).
+3.  Run the independent-samples t-test, compute $d$, and decide.
+
+::: {.codewindow .r .codewindow-dark}
+practice_4.R
+
 ```{r}
-
 #| echo: true
-set.seed(77)
-
-sleep <- 
-  data.frame(
-    sleep_quality = 
-      c(rnorm(40, 6.8, 1), rnorm(40, 7.4, 0.9)),
-    group = rep(c("phone", "no_phone"), each = 40)
-    )
-
-# Plot
-ggplot(sleep, 
-       aes(x = group,
-           y = sleep_quality, 
-           fill = group)) +
-  stat_summary(
-    fun = "mean",
-    geom = "col",
-    width = .5,
-    alpha = .8
-    ) +
-  geom_jitter(alpha = .4) +
-  geom_errorbar(
-    stat = "summary", 
-    fun.data = mean_se, 
-    width = 0.2) +
-  theme_minimal() +
-  labs(
-    title = "Phone Use and Sleep Quality",
-    y = "Sleep Quality (1–10)", 
-    x = "")
-
-# Summary Table
-t.test(sleep_quality ~ group, 
-       data = sleep,
-       var.equal = TRUE) %>%
-  tidy() |> 
-  select(-method) |> 
-  rename(
-    Estimate = estimate,
-    t = statistic,
-    p = p.value,
-    df = parameter,
-    `95% CI Low` = conf.low,
-    `95% CI High` = conf.high
-  ) |> 
-  gt() |> 
-  fmt_auto()
+#| code-fold: false
+#| eval: false
+set.seed(104)
+ex_4 <- tibble(
+  Format = factor(rep(c("Online", "InPerson"), each = 25),
+                  levels = c("Online", "InPerson")),
+  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))
+)
 ```
 :::
-:::::
 
-## Summary: Independent Samples t-test
+<details>
 
-- Compares **two independent groups**
-- Tests whether the difference in means is significant
-- Uses **pooled variance** as the denominator
-- Check assumptions: independence, normality, equal variance
-- Commonly used in **experimental** designs
+<summary>Reveal answer</summary>
+
+$H_0: \mu_\text{online} = \mu_\text{in-person}$; $H_A: \mu_\text{online} \neq \mu_\text{in-person}$. Online $M = `r f2(e4$m1)`$ vs. in-person $M = `r f2(e4$m2)`$: *`r apa_t(e4)`*, $d = `r f2(e4$d)`$. Compare $p$ to $\alpha = .05$ and interpret both the decision and the effect size.
+
+</details>
+
+## Summary: Independent-Samples t-Test
+
+- Compares **two independent groups**.
+
+- Tests whether the difference in means is significant.
+
+- Uses **pooled variance** as the denominator when variances are equal (**Welch** when they are not).
+
+- Check assumptions: independence, normality, equal variance (Levene's Test).
+
+- Report the test, the means and SDs, the confidence interval, and an **effect size** ($d$).

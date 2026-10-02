@@ -1,0 +1,3443 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Dave Brocker">
+  <title>PSY 348: Statistics for Psychology – Independent-Samples T-Test</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Independent-Samples T-Test</h1>
+  <p class="subtitle">PSY 348: Lecture 11</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dave Brocker
+</div>
+        <p class="quarto-title-affiliation">
+            Farmingdale State College
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="from-paired-to-independent-samples" class="slide level2">
+<h2>From Paired to Independent Samples</h2>
+<p>Last time, we compared <strong>two related means</strong>: the <em>same participants</em> measured twice (e.g., stress before vs.&nbsp;after a mindfulness program).</p>
+<p>Now, we’ll compare <strong>two unrelated means</strong>: <em>different participants</em> in each group.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 55%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paired t-test</th>
+<th>Independent t-test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Same people</td>
+<td>Different people</td>
+</tr>
+<tr class="even">
+<td>Within-subjects</td>
+<td>Between-subjects</td>
+</tr>
+<tr class="odd">
+<td>Reduces error (individual differences)</td>
+<td>Must estimate error separately</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="from-paired-to-independent-samples-1" class="slide level2">
+<h2>From Paired to Independent Samples</h2>
+<h3 id="visual-comparison">Visual comparison</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-2-1.png" width="1152"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-theory-recap" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<h3 id="comparing-two-unrelated-groups">Comparing two unrelated groups</h3>
+<ul>
+<li class="fragment"><p>Sampling theory lets us test two unrelated groups.</p></li>
+<li class="fragment"><p>Under <span class="math inline">\(H_0\)</span> the <strong>difference</strong> between group means is centered on 0. Under <span class="math inline">\(H_A\)</span> it is centered somewhere else.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-theory-recap-1" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<h3 id="a-difference-near-0-looks-like-the-null">A difference near 0 looks like the null</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">An observed difference like this is easy to produce when <span class="math inline">\(H_0\)</span> is true.</li>
+</ul>
+</section>
+<section id="sampling-theory-recap-2" class="slide level2">
+<h2>Sampling Theory (Recap)</h2>
+<h3 id="a-difference-beyond-the-critical-value-does-not">A difference beyond the critical value does not</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-5-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Beyond the critical value, the observed difference would be very unusual under <span class="math inline">\(H_0\)</span>, so we <strong>reject</strong> it.</li>
+</ul>
+</section>
+<section id="inferential-statistics" class="slide level2">
+<h2>Inferential Statistics</h2>
+<h3 id="applied-to-independent-groups">Applied to independent groups</h3>
+<ul>
+<li class="fragment"><p>Our goal is still to test whether a difference is likely due to chance.</p></li>
+<li class="fragment"><p>With independent samples, chance variation now includes <strong>differences between individuals</strong> in <em>both</em> groups.</p></li>
+</ul>
+</section>
+<section id="group-variance" class="slide level2">
+<h2>Group Variance</h2>
+<h3 id="within-and-between">Within and between</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>To compare the means we need to know:</p>
+<ul>
+<li class="fragment"><p><strong>Between-group variance:</strong> how much the answers from the <strong>experimental</strong> group differ from the <strong>control</strong> group.</p></li>
+<li class="fragment"><p><strong>Within-group variance:</strong> how much the <strong>answers of all participants</strong> differ from one another.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-6-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="independent-samples-t-test-overview" class="slide level2">
+<h2>Independent-Samples t-Test Overview</h2>
+<p>Used when we compare <strong>two different groups</strong> on a continuous outcome.</p>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">local_cafe</span></p>
+<h4 id="coffee-vs.-decaf">Coffee vs.&nbsp;decaf</h4>
+<p>Happiness scores</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">headphones</span></p>
+<h4 id="music-vs.-silence">Music vs.&nbsp;silence</h4>
+<p>Study performance</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">smartphone</span></p>
+<h4 id="phone-vs.-no-phone">Phone vs.&nbsp;no phone</h4>
+<p>Sleep quality before bed</p>
+</div>
+</div>
+<ul>
+<li class="fragment"><strong>Goal:</strong> is the mean difference between groups larger than what we’d expect by chance?</li>
+</ul>
+</section>
+<section id="independent-samples-t-test" class="slide level2">
+<h2>Independent-Samples t-Test</h2>
+<h3 id="example">Example</h3>
+<blockquote>
+<p>The experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p>The experimental group has a mean happiness score of <code>8</code>.</p></li>
+<li class="fragment"><p>The control group has a mean happiness score of <code>6</code>.</p></li>
+</ul>
+<div class="fragment">
+<p>Is the group that drank coffee significantly happier than the control group?</p>
+</div>
+</section>
+<section id="formulas" class="slide level2">
+<h2>Formulas</h2>
+<h3 id="theoretical-and-computational">Theoretical and computational</h3>
+<p>Inferential statistics have both <strong>theoretical</strong> and <strong>computational</strong> formulas:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Theoretical</strong></p>
+</div>
+<div class="callout-content">
+<p>The formula if we actually knew the population parameters (<span class="math inline">\(\sigma\)</span>).</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Computational</strong></p>
+</div>
+<div class="callout-content">
+<p>The formula for estimating the test statistic based solely on sample data.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="theoretical-formula" class="slide level2">
+<h2>Theoretical Formula</h2>
+<h3 id="if-we-knew-the-population-standard-deviation">If we knew the population standard deviation</h3>
+<p><span class="math display">\[z = \frac{\color{red}{\bar{x}_1} - \color{orange}{\bar{x}_2}}{\color{grey}{\sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}\]</span></p>
+<ul>
+<li class="fragment"><p><span style="color:red">Sample mean, group 1</span></p></li>
+<li class="fragment"><p><span style="color:orange">Sample mean, group 2</span></p></li>
+<li class="fragment"><p><span style="color:grey">Standard error of the difference</span>, using the population <span class="math inline">\(\sigma\)</span> (assumed equal in both groups)</p></li>
+</ul>
+</section>
+<section id="computational-formula" class="slide level2">
+<h2>Computational Formula</h2>
+<h3 id="estimating-from-the-samples-pooled-t-test">Estimating from the samples (pooled t-test)</h3>
+<p><span class="math display">\[t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{darkblue}{s_p^2}\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}} \qquad s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\]</span></p>
+<ul>
+<li class="fragment"><p><span style="color: darkblue"><span class="math inline">\(s_p^2\)</span> = pooled variance</span>, a weighted average of the two group variances.</p></li>
+<li class="fragment"><p><span class="math inline">\(df = n_1 + n_2 - 2\)</span></p></li>
+</ul>
+</section>
+<section id="computational-formula-1" class="slide level2">
+<h2>Computational Formula</h2>
+<h3 id="when-the-variances-are-not-equal-welchs-t-test">When the variances are not equal (Welch’s t-test)</h3>
+<p><span class="math display">\[t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]</span></p>
+<ul>
+<li class="fragment"><p>No pooling: each group’s variance keeps its own weight, and df is adjusted (it is usually not a whole number).</p></li>
+<li class="fragment"><p>This is what <code>t.test()</code> does <strong>by default</strong> in R. Adding <code>var.equal = TRUE</code> gives the pooled version above.</p></li>
+</ul>
+</section>
+<section id="coffee-example" class="slide level2">
+<h2>Coffee Example</h2>
+<h3 id="manual">Manual</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pooled variance and standard error</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(s_p^2 = \dfrac{(10-1)(1)^2 + (10-1)(1)^2}{10 + 10 - 2} = 1.00\)</span> and <span class="math inline">\(SE = \sqrt{1.00\left(\frac{1}{10} + \frac{1}{10}\right)} = 0.45\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Compute t</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{8 - 6}{0.45} = 4.47\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(df = 10 + 10 - 2 = 18\)</span>. At <span class="math inline">\(\alpha = .05\)</span> (two-tailed), <span class="math inline">\(t_{critical} = \pm 2.101\)</span>. Since <span class="math inline">\(4.47 &gt; 2.101\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="coffee-example-1" class="slide level2">
+<h2>Coffee Example</h2>
+<h3 id="data-overview">Data overview</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="pejxgyrike" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pejxgyrike table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pejxgyrike thead, #pejxgyrike tbody, #pejxgyrike tfoot, #pejxgyrike tr, #pejxgyrike td, #pejxgyrike th {
+  border-style: none;
+}
+
+#pejxgyrike p {
+  margin: 0;
+  padding: 0;
+}
+
+#pejxgyrike .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 80%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pejxgyrike .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pejxgyrike .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pejxgyrike .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pejxgyrike .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pejxgyrike .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pejxgyrike .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pejxgyrike .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pejxgyrike .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pejxgyrike .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pejxgyrike .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pejxgyrike .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pejxgyrike .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pejxgyrike .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pejxgyrike .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pejxgyrike .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pejxgyrike .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pejxgyrike .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pejxgyrike .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pejxgyrike .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pejxgyrike .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pejxgyrike .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pejxgyrike .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pejxgyrike .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pejxgyrike .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pejxgyrike .gt_left {
+  text-align: left;
+}
+
+#pejxgyrike .gt_center {
+  text-align: center;
+}
+
+#pejxgyrike .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pejxgyrike .gt_font_normal {
+  font-weight: normal;
+}
+
+#pejxgyrike .gt_font_bold {
+  font-weight: bold;
+}
+
+#pejxgyrike .gt_font_italic {
+  font-style: italic;
+}
+
+#pejxgyrike .gt_super {
+  font-size: 65%;
+}
+
+#pejxgyrike .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pejxgyrike .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pejxgyrike .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pejxgyrike .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pejxgyrike .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pejxgyrike .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pejxgyrike .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pejxgyrike .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pejxgyrike div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="mdiff" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">mdiff</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">t</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+<th id="Experimental" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Experimental</th>
+<th id="Control" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Control</th>
+<th id="CI[ll,uu]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">CI[ll,uu]</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="mdiff">2.00</td>
+<td class="gt_row gt_right" headers="t">4.47</td>
+<td class="gt_row gt_right" headers="df">18</td>
+<td class="gt_row gt_left" headers="p">&lt;.001</td>
+<td class="gt_row gt_right" headers="Experimental">8.00</td>
+<td class="gt_row gt_right" headers="Control">6.00</td>
+<td class="gt_row gt_left" headers="CI[ll,uu]">[1.06, 2.94]</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><code>mdiff</code> is the experimental mean minus the control mean (<span class="math inline">\(8 - 6 = 2\)</span>). The factor levels set the order, so put the group you want <strong>first</strong> to get a positive difference.</li>
+</ul>
+</section>
+<section id="independent-samples-t-test-1" class="slide level2 scrollable">
+<h2>Independent-Samples t-Test</h2>
+<h3 id="assumptions">Assumptions</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Assumptions</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment"><strong>DV is continuous</strong> (interval or ratio scale).</li>
+<li class="fragment"><strong>Observations are independent</strong>, and the data are randomly sampled. Each person appears in only one group.</li>
+<li class="fragment"><strong>Normality:</strong> each group’s distribution is approximately normal (or the groups are large enough for the CLT).</li>
+<li class="fragment"><strong>Homogeneity of variance:</strong> variances are similar across groups (tested with <strong>Levene’s Test</strong>).</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-levenes-test" class="slide level2">
+<h2>Interpreting Levene’s Test</h2>
+<ul>
+<li class="fragment"><p>Levene’s Test tells us whether the assumption of equal variances holds.</p>
+<ul>
+<li class="fragment"><p>If <span class="math inline">\(p &gt; .05\)</span> → use the <strong>top row</strong> (“Equal variances assumed”)</p></li>
+<li class="fragment"><p>If <span class="math inline">\(p &lt; .05\)</span> → use the <strong>bottom row</strong> (“Equal variances not assumed”)</p></li>
+</ul></li>
+<li class="fragment"><p>Normality: each group’s distribution should be approximately normal.</p></li>
+</ul>
+</section>
+<section id="independent-samples-t-test-2" class="slide level2">
+<h2>Independent-Samples t-Test</h2>
+<h3 id="homogeneity-of-variance">Homogeneity of variance</h3>
+<p><a href="images/spiderman.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/spiderman.png" style="border-radius: 20px;" width="300"></a></p>
+<div class="fragment">
+<p>If <strong>Levene’s Test</strong> is significant, use the t value from the second row and its corresponding significance.</p>
+</div>
+<ul>
+<li class="fragment"><p>t is the test statistic.</p></li>
+<li class="fragment"><p>Sig. (2-tailed) is the p-value.</p></li>
+</ul>
+</section>
+<section id="why-do-we-care" class="slide level2">
+<h2>Why Do We Care?</h2>
+<p>We need <strong>Levene’s Test</strong> because if the variance of the experimental group is not equal to the variance of the control group, pooling the two variances is not appropriate. We switch to the unpooled (<strong>Welch</strong>) version of the test, which does not assume equal variances.</p>
+<ul>
+<li class="fragment">A significant Levene’s Test means a significant difference in the variances.</li>
+</ul>
+</section>
+<section id="lets-apply-it" class="slide level2">
+<h2>Let’s Apply It</h2>
+<h3 id="three-independent-designs">Three independent designs</h3>
+<p>We’ll test three common between-subjects designs:</p>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">cookie</span></p>
+<h4 id="chocolate-and-concentration">Chocolate and Concentration</h4>
+<p>Experimental vs.&nbsp;control</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">headphones</span></p>
+<h4 id="music-and-studying">Music and Studying</h4>
+<p>Environmental manipulation</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">smartphone</span></p>
+<h4 id="phone-use-and-sleep">Phone Use and Sleep</h4>
+<p>Behavioral difference</p>
+</div>
+</div>
+</section>
+<section id="does-chocolate-improve-concentration" class="slide level2">
+<h2>Does chocolate improve concentration?</h2>
+<h3 id="design">Design</h3>
+<blockquote>
+<p>50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0-20 scale.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><strong>IV:</strong> chocolate (yes vs.&nbsp;no)</p></li>
+<li class="fragment"><p><strong>DV:</strong> concentration task score</p></li>
+<li class="fragment"><p><strong>Design:</strong> between-subjects, randomized</p></li>
+</ul>
+</section>
+<section id="does-chocolate-improve-concentration-1" class="slide level2">
+<h2>Does chocolate improve concentration?</h2>
+<h3 id="hypotheses">Hypotheses</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null hypothesis <span class="math inline">\(H_0\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Concentration is the same with and without chocolate.</p>
+<p><span class="math inline">\(\mu_\text{chocolate} = \mu_\text{no chocolate}\)</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Alternative hypothesis <span class="math inline">\(H_A\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Concentration differs between the groups.</p>
+<p><span class="math inline">\(\mu_\text{chocolate} \neq \mu_\text{no chocolate}\)</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="does-chocolate-improve-concentration-2" class="slide level2">
+<h2>Does chocolate improve concentration?</h2>
+<h3 id="data-and-results">Data and results</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-8-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="znzgqmzxhm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#znzgqmzxhm table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#znzgqmzxhm thead, #znzgqmzxhm tbody, #znzgqmzxhm tfoot, #znzgqmzxhm tr, #znzgqmzxhm td, #znzgqmzxhm th {
+  border-style: none;
+}
+
+#znzgqmzxhm p {
+  margin: 0;
+  padding: 0;
+}
+
+#znzgqmzxhm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#znzgqmzxhm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#znzgqmzxhm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#znzgqmzxhm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#znzgqmzxhm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#znzgqmzxhm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#znzgqmzxhm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#znzgqmzxhm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#znzgqmzxhm .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#znzgqmzxhm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#znzgqmzxhm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#znzgqmzxhm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#znzgqmzxhm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#znzgqmzxhm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#znzgqmzxhm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#znzgqmzxhm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#znzgqmzxhm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#znzgqmzxhm .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#znzgqmzxhm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#znzgqmzxhm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#znzgqmzxhm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#znzgqmzxhm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#znzgqmzxhm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#znzgqmzxhm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#znzgqmzxhm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#znzgqmzxhm .gt_left {
+  text-align: left;
+}
+
+#znzgqmzxhm .gt_center {
+  text-align: center;
+}
+
+#znzgqmzxhm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#znzgqmzxhm .gt_font_normal {
+  font-weight: normal;
+}
+
+#znzgqmzxhm .gt_font_bold {
+  font-weight: bold;
+}
+
+#znzgqmzxhm .gt_font_italic {
+  font-style: italic;
+}
+
+#znzgqmzxhm .gt_super {
+  font-size: 65%;
+}
+
+#znzgqmzxhm .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#znzgqmzxhm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#znzgqmzxhm .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#znzgqmzxhm .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#znzgqmzxhm .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#znzgqmzxhm .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#znzgqmzxhm .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#znzgqmzxhm .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#znzgqmzxhm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Difference" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Difference</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">t</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+<th id="CI[ll,uu]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">CI[ll,uu]</th>
+<th id="d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">d</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Difference">2.39</td>
+<td class="gt_row gt_right" headers="t">3.71</td>
+<td class="gt_row gt_right" headers="df">48</td>
+<td class="gt_row gt_left" headers="p">&lt;.001</td>
+<td class="gt_row gt_left" headers="CI[ll,uu]">[1.10, 3.69]</td>
+<td class="gt_row gt_right" headers="d">1.05</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Chocolate: <span class="math inline">\(M = 15.38\)</span>, <span class="math inline">\(SD = 2.61\)</span>. No chocolate: <span class="math inline">\(M = 12.98\)</span>, <span class="math inline">\(SD = 1.89\)</span>.</p>
+</div></div>
+</section>
+<section id="does-chocolate-improve-concentration-3" class="slide level2">
+<h2>Does chocolate improve concentration?</h2>
+<h3 id="check-the-assumptions-then-run-the-test">Check the assumptions, then run the test</h3>
+<div class="codewindow r codewindow-dark">
+<p>chocolate.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(car)</span>
+<span id="cb1-2"><a aria-label="2"></a></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="co"># Equal variances? (H0: the variances are equal)</span></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">leveneTest</span>(concentration <span class="sc">~</span> group, <span class="at">data =</span> choco)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1  1.4945 0.2275
+      48               </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Pooled (equal variances) t-test</span></span>
+<span id="cb3-2"><a aria-label="2"></a><span class="fu">t.test</span>(concentration <span class="sc">~</span> group, <span class="at">data =</span> choco, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  concentration by group
+t = 3.7076, df = 48, p-value = 0.000542
+alternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0
+95 percent confidence interval:
+ 1.095202 3.690462
+sample estimates:
+   mean in group chocolate mean in group no_chocolate 
+                  15.37507                   12.98224 </code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Levene’s <span class="math inline">\(p &gt; .05\)</span>, so equal variances are reasonable and the pooled test is appropriate.</li>
+</ul>
+</section>
+<section id="does-chocolate-improve-concentration-4" class="slide level2">
+<h2>Does chocolate improve concentration?</h2>
+<h3 id="decision-effect-size-and-report">Decision, effect size, and report</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t(48) = 3.71\)</span>, <span class="math inline">\(p\)</span> &lt; .001. Since <span class="math inline">\(p &lt; .05\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Effect size</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(d = \dfrac{\bar{x}_1 - \bar{x}_2}{s_p} = \dfrac{2.39}{2.28} = 1.05\)</span> (a <strong>large</strong> effect)</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<blockquote>
+<p>An independent-samples t-test showed that students who ate chocolate (<em>M</em> = 15.38, <em>SD</em> = 2.61) scored significantly higher on the concentration task than students who did not (<em>M</em> = 12.98, <em>SD</em> = 1.89), <span class="hl"><em>t(48) = 3.71, p &lt; .001</em></span>, 95% CI [1.10, 3.69], <em>d</em> = 1.05.</p>
+</blockquote>
+</div></div>
+</section>
+<section id="does-instrumental-music-improve-studying" class="slide level2">
+<h2>Does instrumental music improve studying?</h2>
+<h3 id="design-1">Design</h3>
+<blockquote>
+<p><strong>Design Summary</strong><br>
+40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><strong>IV:</strong> study condition (instrumental music vs.&nbsp;silence)</p></li>
+<li class="fragment"><p><strong>DV:</strong> quiz performance (number of correct answers out of 10)</p></li>
+<li class="fragment"><p><strong>Design:</strong> between-subjects, randomized</p></li>
+</ul>
+</section>
+<section id="does-instrumental-music-improve-studying-1" class="slide level2">
+<h2>Does instrumental music improve studying?</h2>
+<h3 id="hypotheses-1">Hypotheses</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null hypothesis <span class="math inline">\(H_0\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Quiz performance is the same with music and in silence.</p>
+<p><span class="math inline">\(\mu_\text{music} = \mu_\text{silence}\)</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Alternative hypothesis <span class="math inline">\(H_A\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Quiz performance differs between the conditions.</p>
+<p><span class="math inline">\(\mu_\text{music} \neq \mu_\text{silence}\)</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="does-instrumental-music-improve-studying-2" class="slide level2">
+<h2>Does instrumental music improve studying?</h2>
+<h3 id="data-and-results-1">Data and results</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-11-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="rwmcllaffp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rwmcllaffp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rwmcllaffp thead, #rwmcllaffp tbody, #rwmcllaffp tfoot, #rwmcllaffp tr, #rwmcllaffp td, #rwmcllaffp th {
+  border-style: none;
+}
+
+#rwmcllaffp p {
+  margin: 0;
+  padding: 0;
+}
+
+#rwmcllaffp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rwmcllaffp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rwmcllaffp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rwmcllaffp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rwmcllaffp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rwmcllaffp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rwmcllaffp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rwmcllaffp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rwmcllaffp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rwmcllaffp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rwmcllaffp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rwmcllaffp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rwmcllaffp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rwmcllaffp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rwmcllaffp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwmcllaffp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rwmcllaffp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rwmcllaffp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rwmcllaffp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwmcllaffp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rwmcllaffp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwmcllaffp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rwmcllaffp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwmcllaffp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rwmcllaffp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwmcllaffp .gt_left {
+  text-align: left;
+}
+
+#rwmcllaffp .gt_center {
+  text-align: center;
+}
+
+#rwmcllaffp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rwmcllaffp .gt_font_normal {
+  font-weight: normal;
+}
+
+#rwmcllaffp .gt_font_bold {
+  font-weight: bold;
+}
+
+#rwmcllaffp .gt_font_italic {
+  font-style: italic;
+}
+
+#rwmcllaffp .gt_super {
+  font-size: 65%;
+}
+
+#rwmcllaffp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rwmcllaffp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rwmcllaffp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rwmcllaffp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rwmcllaffp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rwmcllaffp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rwmcllaffp .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rwmcllaffp .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rwmcllaffp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Difference" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Difference</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">t</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+<th id="CI[ll,uu]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">CI[ll,uu]</th>
+<th id="d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">d</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Difference">0.60</td>
+<td class="gt_row gt_right" headers="t">1.73</td>
+<td class="gt_row gt_right" headers="df">38</td>
+<td class="gt_row gt_right" headers="p">0.091</td>
+<td class="gt_row gt_left" headers="CI[ll,uu]">[-0.10, 1.30]</td>
+<td class="gt_row gt_right" headers="d">0.55</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Music: <span class="math inline">\(M = 7.65\)</span>, <span class="math inline">\(SD = 1.08\)</span>. Silence: <span class="math inline">\(M = 7.05\)</span>, <span class="math inline">\(SD = 1.11\)</span>.</p>
+</div></div>
+</section>
+<section id="does-instrumental-music-improve-studying-3" class="slide level2">
+<h2>Does instrumental music improve studying?</h2>
+<h3 id="run-the-test">Run the test</h3>
+<div class="codewindow r codewindow-dark">
+<p>music.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">t.test</span>(quiz_score <span class="sc">~</span> group, <span class="at">data =</span> music, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  quiz_score by group
+t = 1.7335, df = 38, p-value = 0.09112
+alternative hypothesis: true difference in means between group music and group silence is not equal to 0
+95 percent confidence interval:
+ -0.1004822  1.2980566
+sample estimates:
+  mean in group music mean in group silence 
+             7.647986              7.049199 </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="does-instrumental-music-improve-studying-4" class="slide level2">
+<h2>Does instrumental music improve studying?</h2>
+<h3 id="decision-effect-size-and-report-1">Decision, effect size, and report</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t(38) = 1.73\)</span>, <span class="math inline">\(p\)</span> = .091. Since <span class="math inline">\(p &gt; .05\)</span>, we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Effect size</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(d = \dfrac{0.60}{1.09} = 0.55\)</span> (a <strong>medium</strong> effect)</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<blockquote>
+<p>An independent-samples t-test showed that students who studied with music (<em>M</em> = 7.65, <em>SD</em> = 1.08) did not differ significantly on the quiz from students who studied in silence (<em>M</em> = 7.05, <em>SD</em> = 1.11), <span class="hl"><em>t(38) = 1.73, p = .091</em></span>, 95% CI [-0.10, 1.30], <em>d</em> = 0.55.</p>
+</blockquote>
+</div></div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>A medium effect that is <em>not</em> significant is a hint that the study may have been too small to detect it. (If we had predicted a <em>direction</em> before collecting data, the one-tailed <span class="math inline">\(p\)</span> would be about 0.046. But the direction has to be chosen <strong>before</strong> you see the result.)</p>
+</div>
+</div>
+</div>
+</section>
+<section id="does-bedtime-phone-use-affect-sleep" class="slide level2">
+<h2>Does bedtime phone use affect sleep?</h2>
+<h3 id="design-2">Design</h3>
+<blockquote>
+<p><strong>Design Summary</strong><br>
+80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.</p>
+</blockquote>
+<ul>
+<li class="fragment"><p><strong>IV:</strong> phone use before bed (yes vs.&nbsp;no)</p></li>
+<li class="fragment"><p><strong>DV:</strong> sleep quality rating (1 = poor, 10 = excellent)</p></li>
+<li class="fragment"><p><strong>Design:</strong> between-subjects, randomized</p></li>
+</ul>
+</section>
+<section id="does-bedtime-phone-use-affect-sleep-1" class="slide level2">
+<h2>Does bedtime phone use affect sleep?</h2>
+<h3 id="hypotheses-2">Hypotheses</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null hypothesis <span class="math inline">\(H_0\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Sleep quality is the same with and without bedtime phone use.</p>
+<p><span class="math inline">\(\mu_\text{no phone} = \mu_\text{phone}\)</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Alternative hypothesis <span class="math inline">\(H_A\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Sleep quality differs between the conditions.</p>
+<p><span class="math inline">\(\mu_\text{no phone} \neq \mu_\text{phone}\)</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="does-bedtime-phone-use-affect-sleep-2" class="slide level2">
+<h2>Does bedtime phone use affect sleep?</h2>
+<h3 id="data-and-results-2">Data and results</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec11_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lec11_files/figure-revealjs/unnamed-chunk-14-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="xayzuwmmbn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xayzuwmmbn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xayzuwmmbn thead, #xayzuwmmbn tbody, #xayzuwmmbn tfoot, #xayzuwmmbn tr, #xayzuwmmbn td, #xayzuwmmbn th {
+  border-style: none;
+}
+
+#xayzuwmmbn p {
+  margin: 0;
+  padding: 0;
+}
+
+#xayzuwmmbn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xayzuwmmbn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xayzuwmmbn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xayzuwmmbn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xayzuwmmbn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xayzuwmmbn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xayzuwmmbn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xayzuwmmbn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xayzuwmmbn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xayzuwmmbn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xayzuwmmbn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xayzuwmmbn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xayzuwmmbn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xayzuwmmbn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xayzuwmmbn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xayzuwmmbn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xayzuwmmbn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xayzuwmmbn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xayzuwmmbn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xayzuwmmbn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xayzuwmmbn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xayzuwmmbn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xayzuwmmbn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xayzuwmmbn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xayzuwmmbn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xayzuwmmbn .gt_left {
+  text-align: left;
+}
+
+#xayzuwmmbn .gt_center {
+  text-align: center;
+}
+
+#xayzuwmmbn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xayzuwmmbn .gt_font_normal {
+  font-weight: normal;
+}
+
+#xayzuwmmbn .gt_font_bold {
+  font-weight: bold;
+}
+
+#xayzuwmmbn .gt_font_italic {
+  font-style: italic;
+}
+
+#xayzuwmmbn .gt_super {
+  font-size: 65%;
+}
+
+#xayzuwmmbn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xayzuwmmbn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xayzuwmmbn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xayzuwmmbn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xayzuwmmbn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xayzuwmmbn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xayzuwmmbn .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xayzuwmmbn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xayzuwmmbn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Difference" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Difference</th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">t</th>
+<th id="df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">df</th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">p</th>
+<th id="CI[ll,uu]" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">CI[ll,uu]</th>
+<th id="d" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">d</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Difference">0.44</td>
+<td class="gt_row gt_right" headers="t">1.89</td>
+<td class="gt_row gt_right" headers="df">78</td>
+<td class="gt_row gt_right" headers="p">0.062</td>
+<td class="gt_row gt_left" headers="CI[ll,uu]">[-0.02, 0.90]</td>
+<td class="gt_row gt_right" headers="d">0.42</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>No phone: <span class="math inline">\(M = 7.34\)</span>, <span class="math inline">\(SD = 0.97\)</span>. Phone: <span class="math inline">\(M = 6.90\)</span>, <span class="math inline">\(SD = 1.09\)</span>.</p>
+</div></div>
+</section>
+<section id="does-bedtime-phone-use-affect-sleep-3" class="slide level2">
+<h2>Does bedtime phone use affect sleep?</h2>
+<h3 id="run-the-test-1">Run the test</h3>
+<div class="codewindow r codewindow-dark">
+<p>sleep.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="fu">t.test</span>(sleep_quality <span class="sc">~</span> group, <span class="at">data =</span> sleep, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  sleep_quality by group
+t = 1.89, df = 78, p-value = 0.06248
+alternative hypothesis: true difference in means between group no_phone and group phone is not equal to 0
+95 percent confidence interval:
+ -0.02330214  0.89639501
+sample estimates:
+mean in group no_phone    mean in group phone 
+              7.341146               6.904599 </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="does-bedtime-phone-use-affect-sleep-4" class="slide level2">
+<h2>Does bedtime phone use affect sleep?</h2>
+<h3 id="decision-effect-size-and-report-2">Decision, effect size, and report</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Decide</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t(78) = 1.89\)</span>, <span class="math inline">\(p\)</span> = .062. Since <span class="math inline">\(p &gt; .05\)</span>, we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span>. The result is close, but not significant.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Effect size</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(d = \dfrac{0.44}{1.03} = 0.42\)</span> (a <strong>small-to-medium</strong> effect)</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<blockquote>
+<p>An independent-samples t-test showed that students who avoided their phones before bed (<em>M</em> = 7.34, <em>SD</em> = 0.97) did not differ significantly in sleep quality from students who used their phones (<em>M</em> = 6.90, <em>SD</em> = 1.09), <span class="hl"><em>t(78) = 1.89, p = .062</em></span>, 95% CI [-0.02, 0.90], <em>d</em> = 0.42.</p>
+</blockquote>
+</div></div>
+</section>
+<section id="practice" class="slide level2 scrollable">
+<h2>Practice</h2>
+<h3 id="caffeine-and-alertness">Caffeine and alertness</h3>
+<blockquote>
+<p>Does caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (<code>ex_3</code>: <code>Group</code>, <code>Alertness</code>; 20 per group). Alertness was scored on a 0-100 scale.</p>
+</blockquote>
+<ol type="1">
+<li class="fragment">State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
+<li class="fragment">Check the equal-variance assumption (Levene’s Test).</li>
+<li class="fragment">Run the independent-samples t-test, compute <span class="math inline">\(d\)</span>, and write an APA sentence.</li>
+</ol>
+<div class="codewindow r codewindow-dark">
+<p>practice_3.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">103</span>)</span>
+<span id="cb9-2"><a aria-label="2"></a>ex_3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-3"><a aria-label="3"></a>  <span class="at">Group =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Caffeine"</span>, <span class="st">"Placebo"</span>), <span class="at">each =</span> <span class="dv">20</span>),</span>
+<span id="cb9-4"><a aria-label="4"></a>                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Caffeine"</span>, <span class="st">"Placebo"</span>)),</span>
+<span id="cb9-5"><a aria-label="5"></a>  <span class="at">Alertness =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">75</span>, <span class="at">sd =</span> <span class="dv">8</span>), <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">68</span>, <span class="at">sd =</span> <span class="dv">8</span>))</span>
+<span id="cb9-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p><span class="math inline">\(H_0: \mu_\text{caffeine} = \mu_\text{placebo}\)</span>; <span class="math inline">\(H_A: \mu_\text{caffeine} \neq \mu_\text{placebo}\)</span>. Caffeine <span class="math inline">\(M = 74.31\)</span> vs.&nbsp;placebo <span class="math inline">\(M = 68.23\)</span>: <em>t(38) = 2.52, p = .016</em>, 95% CI [1.19, 10.98], <span class="math inline">\(d = 0.80\)</span>.</p>
+</details>
+</section>
+<section id="practice-1" class="slide level2 scrollable">
+<h2>Practice</h2>
+<h3 id="online-vs.-in-person-exams">Online vs.&nbsp;in-person exams</h3>
+<blockquote>
+<p>Do exam scores differ between online and in-person sections? 25 students in each format took the same exam (<code>ex_4</code>: <code>Format</code>, <code>Exam_Score</code>).</p>
+</blockquote>
+<ol type="1">
+<li class="fragment">State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>.</li>
+<li class="fragment">Check the equal-variance assumption (Levene’s Test).</li>
+<li class="fragment">Run the independent-samples t-test, compute <span class="math inline">\(d\)</span>, and decide.</li>
+</ol>
+<div class="codewindow r codewindow-dark">
+<p>practice_4.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">104</span>)</span>
+<span id="cb10-2"><a aria-label="2"></a>ex_4 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb10-3"><a aria-label="3"></a>  <span class="at">Format =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Online"</span>, <span class="st">"InPerson"</span>), <span class="at">each =</span> <span class="dv">25</span>),</span>
+<span id="cb10-4"><a aria-label="4"></a>                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Online"</span>, <span class="st">"InPerson"</span>)),</span>
+<span id="cb10-5"><a aria-label="5"></a>  <span class="at">Exam_Score =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">82</span>, <span class="at">sd =</span> <span class="dv">5</span>), <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">79</span>, <span class="at">sd =</span> <span class="dv">6</span>))</span>
+<span id="cb10-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p><span class="math inline">\(H_0: \mu_\text{online} = \mu_\text{in-person}\)</span>; <span class="math inline">\(H_A: \mu_\text{online} \neq \mu_\text{in-person}\)</span>. Online <span class="math inline">\(M = 81.99\)</span> vs.&nbsp;in-person <span class="math inline">\(M = 78.52\)</span>: <em>t(48) = 2.70, p = .009</em>, <span class="math inline">\(d = 0.76\)</span>. Compare <span class="math inline">\(p\)</span> to <span class="math inline">\(\alpha = .05\)</span> and interpret both the decision and the effect size.</p>
+</details>
+</section>
+<section id="summary-independent-samples-t-test" class="slide level2">
+<h2>Summary: Independent-Samples t-Test</h2>
+<ul>
+<li class="fragment"><p>Compares <strong>two independent groups</strong>.</p></li>
+<li class="fragment"><p>Tests whether the difference in means is significant.</p></li>
+<li class="fragment"><p>Uses <strong>pooled variance</strong> as the denominator when variances are equal (<strong>Welch</strong> when they are not).</p></li>
+<li class="fragment"><p>Check assumptions: independence, normality, equal variance (Levene’s Test).</p></li>
+<li class="fragment"><p>Report the test, the means and SDs, the confidence interval, and an <strong>effect size</strong> (<span class="math inline">\(d\)</span>).</p></li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Independent-Samples T-Test | ⬡⬢⬡⬢⬡⬢</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":[]},"pyodide":{"packages":[]}},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, RevealCodewindow, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script>
+    // Adds lec2-style drifting icons + ghost nodes behind a YAML-generated
+    // #title-slide (which can't hold raw HTML). Styles: custom.scss ("Title-slide
+    // ambience"). Icons: pass via <body data-title-icons="functions percent ...">
+    // or edit the default list below.
+    document.addEventListener("DOMContentLoaded", function () {
+      var slide = document.getElementById("title-slide");
+      if (!slide) return;
+      var icons = (document.body.dataset.titleIcons ||
+        "functions percent show_chart calculate query_stats bar_chart").split(/\s+/);
+      var layer = document.createElement("div");
+      layer.className = "title-bg-icons";
+      icons.slice(0, 6).forEach(function (name, i) {
+        var s = document.createElement("span");
+        s.className = "material-icons title-bg-icon-" + (i + 1);
+        s.textContent = name;
+        layer.appendChild(s);
+      });
+      var nodes = document.createElement("div");
+      nodes.className = "ghost-nodes";
+      for (var i = 0; i < 5; i++) nodes.appendChild(document.createElement("div")).className = "ghost-node";
+      slide.insertBefore(nodes, slide.firstChild);
+      slide.insertBefore(layer, slide.firstChild);
+    });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

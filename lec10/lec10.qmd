@@ -88,6 +88,7 @@ apa_main <- sprintf("t(%d) = %s, p %s", df_, f2(tstat), fp(pval))
 ### What is a paired-samples t-test?
 
 ::: hero-def
+
 [Paired-Samples t-Test]{.term-pill}
 
 : A statistical method for comparing the means of **two related** sets of scores, such as the same people measured twice.
@@ -137,8 +138,8 @@ The same group under different conditions
 A **paired-samples t-test** is a **one-sample t-test on the difference scores**.
 :::
 
-::::: columns
-::: {.column width="50%"}
+::::::: columns
+:::: {.column width="50%"}
 ::: callout-tip
 ## One-sample
 
@@ -146,9 +147,9 @@ $t = \dfrac{\bar{x} - \mu_0}{s / \sqrt{n}}$
 
 Is the sample mean different from a known value?
 :::
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: callout-tip
 ## Paired
 
@@ -156,8 +157,8 @@ $t = \dfrac{\bar{D} - 0}{s_D / \sqrt{n}}$
 
 Is the **mean difference** $\bar{D}$ different from 0?
 :::
-:::
-:::::
+::::
+:::::::
 
 ## Formula for Paired-Samples t-Test
 
@@ -181,25 +182,28 @@ $\large{t = \dfrac{\color{blue}{\bar{D}}}{\color{orange}{s_D}/\sqrt{n}}}$
 
 ### Understanding each component
 
-::::: term-list
+:::::: term-list
 ::: fragment
+
 [Mean difference $\bar{D}$]{.term-pill}
 
 : The average of the differences between paired scores.
 :::
 
 ::: fragment
+
 [SD of differences $s_D$]{.term-pill}
 
 : How much individual differences vary around the mean difference.
 :::
 
 ::: fragment
+
 [Number of pairs $n$]{.term-pill}
 
 : A larger $n$ shrinks the standard error $s_D/\sqrt{n}$, so smaller differences can reach significance.
 :::
-:::::
+::::::
 
 ## Paired-Samples t-Test
 
@@ -220,8 +224,8 @@ $\large{t = \dfrac{\color{blue}{\bar{D}}}{\color{orange}{s_D}/\sqrt{n}}}$
 
 ### Step 1: hypotheses
 
-::::: columns
-::: {.column width="50%"}
+::::::: columns
+:::: {.column width="50%"}
 ::: callout-tip
 ## Null hypothesis $H_0$
 
@@ -229,9 +233,9 @@ There will be **no difference** in stress before and after the mindfulness exerc
 
 $\mu_\text{post} = \mu_\text{pre}$, or equivalently $\mu_D = 0$
 :::
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: callout-important
 ## Alternative hypothesis $H_A$
 
@@ -239,8 +243,8 @@ There will be a **decrease** in stress after the mindfulness exercise.
 
 $\mu_\text{post} < \mu_\text{pre}$, or equivalently $\mu_D < 0$
 :::
-:::
-:::::
+::::
+:::::::
 
 ## Paired-Samples t-Test
 
@@ -400,7 +404,7 @@ t.test(stress$Post, stress$Pre, paired = TRUE, alternative = "less")
 
 ### The same data, analyzed two ways
 
-:::::::: side-by-cols
+::::::::: side-by-cols
 ::::: stat-card
 ::: stat-num
 `r f2(tstat)`
@@ -420,7 +424,7 @@ t.test(stress$Post, stress$Pre, paired = TRUE, alternative = "less")
 **Independent** t-test (ignores the pairing)
 :::
 :::::
-::::::::
+:::::::::
 
 - People differ a lot from each other (some start stressed, some start calm). That **between-person** variability swamps the average change in an independent-samples test.
 
@@ -457,8 +461,8 @@ tibble(
 
 ### Mindfulness example
 
-::::: columns
-::: {.column width="50%"}
+::::::: columns
+:::: {.column width="50%"}
 ::: callout-tip
 ## By hand
 
@@ -466,9 +470,9 @@ $d_z = \dfrac{\bar{D}}{s_D} = \dfrac{`r f2(dbar)`}{`r f2(sd_D)`} = `r f2(dz)`$
 :::
 
 The size is $|d_z| = `r f2(abs(dz))`$, a **large** effect. The negative sign just means scores went **down**.
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: {.codewindow .r .codewindow-dark}
 cohens_d.R
 
@@ -485,8 +489,8 @@ stress |>
 :::
 
 `rstatix` reports the same value: $d_z = `r f2(dz)`$.
-:::
-:::::
+::::
+:::::::
 
 ## Paired T-Tests
 
@@ -525,7 +529,7 @@ patchwork::wrap_plots(p1, p2, nrow = 1)
 
 ### APA-style
 
-> A [paired-samples t-test]{.hl} was conducted to [compare stress before and after a mindfulness program]{.hl}. Results showed a [significant decrease]{.hl} in stress after the program, [*`r apa_main`*]{.hl}, 95% CI [`r f2(ci[1])`, `r f2(ci[2])`], $d_z$ = `r f2(dz)`.
+> A [paired-samples t-test]{.hl} was conducted to [compare stress before and after a mindfulness program]{.hl}. Results showed a [significant decrease]{.hl} in stress after the program, [*`r apa_main`*]{.hl}, 95% CI \[`r f2(ci[1])`, `r f2(ci[2])`\], $d_z$ = `r f2(dz)`.
 
 - **What kind of test?** paired-samples t-test
 - **What is being compared?** stress before and after the program

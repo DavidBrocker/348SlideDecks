@@ -1342,5 +1342,404 @@
     "title": "Paired-Samples T-Test",
     "section": "Practice",
     "text": "Practice\nReaction time and music\n\nDo people respond faster with music playing? 25 participants complete a reaction-time task with no music and with music (ex_2: RT_NoMusic, RT_Music). The prediction is that reaction times will be faster (lower) with music.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCompute the difference scores (music minus no music).\nRun a one-tailed paired-samples t-test (alternative = \"less\") and decide.\n\n\npractice_2.R\n\nset.seed(102)\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60)\n) |&gt; mutate(RT_Music = RT_NoMusic - 20 + rnorm(25, 0, 25))\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(24) = -1.49, p = .075 (one-tailed), \\(d_z\\) = -0.30. The decision depends on the result: compare p to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+  },
+  {
+    "objectID": "lec11/lec11.html#from-paired-to-independent-samples",
+    "href": "lec11/lec11.html#from-paired-to-independent-samples",
+    "title": "Independent-Samples T-Test",
+    "section": "From Paired to Independent Samples",
+    "text": "From Paired to Independent Samples\nLast time, we compared two related means: the same participants measured twice (e.g., stress before vs. after a mindfulness program).\nNow, we’ll compare two unrelated means: different participants in each group.\n\n\n\n\n\n\n\nPaired t-test\nIndependent t-test\n\n\n\n\nSame people\nDifferent people\n\n\nWithin-subjects\nBetween-subjects\n\n\nReduces error (individual differences)\nMust estimate error separately"
+  },
+  {
+    "objectID": "lec11/lec11.html#from-paired-to-independent-samples-1",
+    "href": "lec11/lec11.html#from-paired-to-independent-samples-1",
+    "title": "Independent-Samples T-Test",
+    "section": "From Paired to Independent Samples",
+    "text": "From Paired to Independent Samples\nVisual comparison"
+  },
+  {
+    "objectID": "lec11/lec11.html#sampling-theory-recap",
+    "href": "lec11/lec11.html#sampling-theory-recap",
+    "title": "Independent-Samples T-Test",
+    "section": "Sampling Theory (Recap)",
+    "text": "Sampling Theory (Recap)\nComparing two unrelated groups\n\nSampling theory lets us test two unrelated groups.\nUnder \\(H_0\\) the difference between group means is centered on 0. Under \\(H_A\\) it is centered somewhere else."
+  },
+  {
+    "objectID": "lec11/lec11.html#sampling-theory-recap-1",
+    "href": "lec11/lec11.html#sampling-theory-recap-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Sampling Theory (Recap)",
+    "text": "Sampling Theory (Recap)\nA difference near 0 looks like the null\n\n\n\n\n\n\n\n\n\n\nAn observed difference like this is easy to produce when \\(H_0\\) is true."
+  },
+  {
+    "objectID": "lec11/lec11.html#sampling-theory-recap-2",
+    "href": "lec11/lec11.html#sampling-theory-recap-2",
+    "title": "Independent-Samples T-Test",
+    "section": "Sampling Theory (Recap)",
+    "text": "Sampling Theory (Recap)\nA difference beyond the critical value does not\n\n\n\n\n\n\n\n\n\n\nBeyond the critical value, the observed difference would be very unusual under \\(H_0\\), so we reject it."
+  },
+  {
+    "objectID": "lec11/lec11.html#sampling-theory-recap-3",
+    "href": "lec11/lec11.html#sampling-theory-recap-3",
+    "title": "Independent Samples T-Test",
+    "section": "Sampling Theory (Recap)",
+    "text": "Sampling Theory (Recap)\n\nSampling theory allows us to test two unrelated groups\nWe can compare the group means"
+  },
+  {
+    "objectID": "lec11/lec11.html#sampling-theory-recap-4",
+    "href": "lec11/lec11.html#sampling-theory-recap-4",
+    "title": "Independent Samples T-Test",
+    "section": "Sampling Theory (Recap)",
+    "text": "Sampling Theory (Recap)\n\nSampling theory allows us to test two unrelated group\nWe can compare the group means"
+  },
+  {
+    "objectID": "lec11/lec11.html#inferential-statistics",
+    "href": "lec11/lec11.html#inferential-statistics",
+    "title": "Independent-Samples T-Test",
+    "section": "Inferential Statistics",
+    "text": "Inferential Statistics\nApplied to independent groups\n\nOur goal is still to test whether a difference is likely due to chance.\nWith independent samples, chance variation now includes differences between individuals in both groups."
+  },
+  {
+    "objectID": "lec11/lec11.html#group-variance",
+    "href": "lec11/lec11.html#group-variance",
+    "title": "Independent-Samples T-Test",
+    "section": "Group Variance",
+    "text": "Group Variance\nWithin and between\n\n\nTo compare the means we need to know:\n\nBetween-group variance: how much the answers from the experimental group differ from the control group.\nWithin-group variance: how much the answers of all participants differ from one another."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-overview",
+    "href": "lec11/lec11.html#independent-samples-t-test-overview",
+    "title": "Independent-Samples T-Test",
+    "section": "Independent-Samples t-Test Overview",
+    "text": "Independent-Samples t-Test Overview\nUsed when we compare two different groups on a continuous outcome.\n\n\nlocal_cafe\nCoffee vs. decaf\nHappiness scores\n\n\nheadphones\nMusic vs. silence\nStudy performance\n\n\nsmartphone\nPhone vs. no phone\nSleep quality before bed\n\n\n\nGoal: is the mean difference between groups larger than what we’d expect by chance?"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test",
+    "href": "lec11/lec11.html#independent-samples-t-test",
+    "title": "Independent-Samples T-Test",
+    "section": "Independent-Samples t-Test",
+    "text": "Independent-Samples t-Test\nExample\n\nThe experimental group drinks caffeinated coffee. The control group drinks decaf. I ask both groups to complete a survey to measure their happiness on a scale of 1 to 10.\n\n\nThe experimental group has a mean happiness score of 8.\nThe control group has a mean happiness score of 6.\n\n\nIs the group that drank coffee significantly happier than the control group?"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-1",
+    "href": "lec11/lec11.html#independent-samples-t-test-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Independent-Samples t-Test",
+    "text": "Independent-Samples t-Test\nAssumptions\n\n\n\n\n\n\nAssumptions\n\n\n\nDV is continuous (interval or ratio scale).\nObservations are independent, and the data are randomly sampled. Each person appears in only one group.\nNormality: each group’s distribution is approximately normal (or the groups are large enough for the CLT).\nHomogeneity of variance: variances are similar across groups (tested with Levene’s Test)."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-2",
+    "href": "lec11/lec11.html#independent-samples-t-test-2",
+    "title": "Independent-Samples T-Test",
+    "section": "Independent-Samples t-Test",
+    "text": "Independent-Samples t-Test\nHomogeneity of variance\n\n\nIf Levene’s Test is significant, use the t value from the second row and its corresponding significance.\n\n\nt is the test statistic.\nSig. (2-tailed) is the p-value."
+  },
+  {
+    "objectID": "lec11/lec11.html#formulas",
+    "href": "lec11/lec11.html#formulas",
+    "title": "Independent-Samples T-Test",
+    "section": "Formulas",
+    "text": "Formulas\nTheoretical and computational\nInferential statistics have both theoretical and computational formulas:\n\n\n\n\n\n\n\n\nTheoretical\n\n\nThe formula if we actually knew the population parameters (\\(\\sigma\\)).\n\n\n\n\n\n\n\n\n\n\nComputational\n\n\nThe formula for estimating the test statistic based solely on sample data."
+  },
+  {
+    "objectID": "lec11/lec11.html#theoretical-formula",
+    "href": "lec11/lec11.html#theoretical-formula",
+    "title": "Independent-Samples T-Test",
+    "section": "Theoretical Formula",
+    "text": "Theoretical Formula\nIf we knew the population standard deviation\n\\[z = \\frac{\\color{red}{\\bar{x}_1} - \\color{orange}{\\bar{x}_2}}{\\color{grey}{\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}}\\]\n\nSample mean, group 1\nSample mean, group 2\nStandard error of the difference, using the population \\(\\sigma\\) (assumed equal in both groups)"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-3",
+    "href": "lec11/lec11.html#independent-samples-t-test-3",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nAssumptions\n\nDV is continuous (interval or ratio scale).\nObservations are independent, and the data are randomly sampled. Each person appears in only one group.\nNormality: each group’s distribution is approximately normal (or the groups are large enough for the CLT).\nHomogeneity of variance: variances are similar across groups (tested with Levene’s Test)."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-4",
+    "href": "lec11/lec11.html#independent-samples-t-test-4",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nHomogeneity of Variance\n\n\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance.\n\n\nt is the test statistic.\nSig (2-tailed) is the p-value."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-5",
+    "href": "lec11/lec11.html#independent-samples-t-test-5",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\sigma^{2}_{pooled}}}\\]"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-6",
+    "href": "lec11/lec11.html#independent-samples-t-test-6",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nTheoretical Formula:\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\sigma^{2}_{pooled}}}\\]"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-7",
+    "href": "lec11/lec11.html#independent-samples-t-test-7",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nComputational Formula:\n\\[\\frac{\\bar{x}_{Experimental}-\\bar{x}_{Control}}{\\sqrt{\\color{darkblue}{\\frac{s_1^2}{n_1}+ \\frac{s_2^2}{n_2}}}}\\]\n\nPooled Variance"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-8",
+    "href": "lec11/lec11.html#independent-samples-t-test-8",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nComputational Formula:\n\\[\\frac{\\bar{x}_{Experimental}-\\bar{x}_{Control}}{\\sqrt{\\frac{s_1^2}{n_1}+ \\frac{s_2^2}{n_2}}}\\]"
+  },
+  {
+    "objectID": "lec11/lec11.html#data-overview",
+    "href": "lec11/lec11.html#data-overview",
+    "title": "Independent Samples T-Test",
+    "section": "Data Overview",
+    "text": "Data Overview\n\n\n\n\n\n\n\n\nmdiff\nt\ndf\np\nExperimental\nControl\nCI[ll,uu]\n\n\n\n\n2.00\n4.47\n18\n&lt;.001\n8.00\n6.00\n[1.06, 2.94]\n\n\n\n\n\n\n\n\nmdiff is the experimental mean minus the control mean (\\(8 - 6 = 2\\)). The factor levels set the order, so put the group you want first to get a positive difference."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-9",
+    "href": "lec11/lec11.html#independent-samples-t-test-9",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test:",
+    "text": "Independent samples t-test:\nAssumptions of Independent Samples t-test\n\nDV is continuous\n\nObservations are independent\n\nNormality: each group’s distribution is approximately normal\n\nHomogeneity of variance: variances are similar across groups"
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-10",
+    "href": "lec11/lec11.html#independent-samples-t-test-10",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test:",
+    "text": "Independent samples t-test:\nAssumptions of Independent Samples t-test\n\nRandom sampling:\n\nThe data is randomly sampled from a population \n\nIndependence:\n\nEach group must be made up of independent observations.\n\nHomogeneity of variance:\n\nVariance should be equal across groups (tested with Levene’s Test)"
+  },
+  {
+    "objectID": "lec11/lec11.html#interpreting-levenes-test",
+    "href": "lec11/lec11.html#interpreting-levenes-test",
+    "title": "Independent-Samples T-Test",
+    "section": "Interpreting Levene’s Test",
+    "text": "Interpreting Levene’s Test\n\nLevene’s Test tells us whether the assumption of equal variances holds.\n\nIf \\(p &gt; .05\\) → use the top row (“Equal variances assumed”)\nIf \\(p &lt; .05\\) → use the bottom row (“Equal variances not assumed”)\n\nNormality: each group’s distribution should be approximately normal."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-11",
+    "href": "lec11/lec11.html#independent-samples-t-test-11",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test",
+    "text": "Independent samples t-test\nHomogeneity of Variance\n\n\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance.\n\n\nt is the test statistic.\nSig (2-tailed) is the p-value."
+  },
+  {
+    "objectID": "lec11/lec11.html#why-do-we-care",
+    "href": "lec11/lec11.html#why-do-we-care",
+    "title": "Independent-Samples T-Test",
+    "section": "Why Do We Care?",
+    "text": "Why Do We Care?\nWe need Levene’s Test because if the variance of the experimental group is not equal to the variance of the control group, pooling the two variances is not appropriate. We switch to the unpooled (Welch) version of the test, which does not assume equal variances.\n\nA significant Levene’s Test means a significant difference in the variances."
+  },
+  {
+    "objectID": "lec11/lec11.html#independent-samples-t-test-spss",
+    "href": "lec11/lec11.html#independent-samples-t-test-spss",
+    "title": "Independent Samples T-Test",
+    "section": "Independent samples t-test: SPSS",
+    "text": "Independent samples t-test: SPSS\nInterpreting Results\nIf the Levene’s Test is significant, use the t value from the second row and its corresponding significance"
+  },
+  {
+    "objectID": "lec11/lec11.html#lets-apply-it-three-independent-designs",
+    "href": "lec11/lec11.html#lets-apply-it-three-independent-designs",
+    "title": "Independent Samples T-Test",
+    "section": "Let’s Apply It: Three Independent Designs",
+    "text": "Let’s Apply It: Three Independent Designs\nWe’ll test three common between-subjects designs:\n1. Chocolate and Concentration – Experimental vs. Control\n2. Music and Studying – Environmental manipulation\n3. Phone Use and Sleep – Behavioral difference"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-chocolate-improve-concentration",
+    "href": "lec11/lec11.html#does-chocolate-improve-concentration",
+    "title": "Independent-Samples T-Test",
+    "section": "Does chocolate improve concentration?",
+    "text": "Does chocolate improve concentration?\nDesign\n\n50 undergraduate students from XYZ University were randomly assigned to one of two groups. One group received a small piece of chocolate (70% dark cocoa) to consume before completing a 10-minute concentration task. The other group received no chocolate. The task measured sustained attention and was scored on a 0-20 scale.\n\n\nIV: chocolate (yes vs. no)\nDV: concentration task score\nDesign: between-subjects, randomized"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-1",
+    "href": "lec11/lec11.html#does-chocolate-improve-concentration-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Does chocolate improve concentration?",
+    "text": "Does chocolate improve concentration?\nHypotheses\n\n\n\n\n\n\n\n\nNull hypothesis \\(H_0\\)\n\n\nConcentration is the same with and without chocolate.\n\\(\\mu_\\text{chocolate} = \\mu_\\text{no chocolate}\\)\n\n\n\n\n\n\n\n\n\n\nAlternative hypothesis \\(H_A\\)\n\n\nConcentration differs between the groups.\n\\(\\mu_\\text{chocolate} \\neq \\mu_\\text{no chocolate}\\)"
+  },
+  {
+    "objectID": "lec11/lec11.html#example-2-music-and-study-efficiency",
+    "href": "lec11/lec11.html#example-2-music-and-study-efficiency",
+    "title": "Independent Samples T-Test",
+    "section": "Example 2: Music and Study Efficiency",
+    "text": "Example 2: Music and Study Efficiency\nDoes instrumental music improve studying?\n\n\n\nDesign Summary\n40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.\n\n\n\n\nCode\nset.seed(99)\nmusic &lt;- \n  data.frame(\n    quiz_score = c(rnorm(20, 8, 1), \n                   rnorm(20, 7, 1.2)) |&gt; pmin(10),\n    group = factor(rep(c(\"music\", \"silence\"), each = 20),\n                   levels = c(\"music\", \"silence\"))\n)\n\n# Plot\nggplot(music, \n       aes(x = group, \n           y = quiz_score, \n           fill = group)\n       ) +\n  geom_violin(trim = FALSE,alpha = .4) +\n  geom_jitter(\n    width = 0.1, \n    alpha = 0.4\n    ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) +\n  theme_minimal() +\n  labs(\n    title = \"Music and Study Performance\",\n    y = \"Quiz Score\", \n    x = \"\")\n\n\n\n\n\n\n\n\n\nCode\n# Summary Table\n  t.test(quiz_score ~ group,\n         data = music,\n         var.equal = TRUE) %&gt;%\n  tidy() |&gt; \n  select(-method) |&gt; \n  rename(\n    Estimate = estimate,\n    t  = statistic,\n    p = p.value,\n    df = parameter,\n    `95% CI Low` = conf.low,\n    `95% CI High` = conf.high\n  ) |&gt; \n  mutate(p = ifelse(p &lt; .001, \"&lt;.001\", sprintf(\"%.3f\", p))) |&gt; \n  gt() |&gt; \n  fmt_auto()\n\n\n\n\n\n\n\n\nEstimate\nestimate1\nestimate2\nt\np\ndf\n95% CI Low\n95% CI High\nalternative\n\n\n\n\n0.599\n7.648\n7.049\n1.733\n0.091\n38 \n−0.1\n1.298\ntwo.sided"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying",
+    "href": "lec11/lec11.html#does-instrumental-music-improve-studying",
+    "title": "Independent-Samples T-Test",
+    "section": "Does instrumental music improve studying?",
+    "text": "Does instrumental music improve studying?\nDesign\n\nDesign Summary\n40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.\n\n\nIV: study condition (instrumental music vs. silence)\nDV: quiz performance (number of correct answers out of 10)\nDesign: between-subjects, randomized"
+  },
+  {
+    "objectID": "lec11/lec11.html#example-2-music-and-study-efficiency-1",
+    "href": "lec11/lec11.html#example-2-music-and-study-efficiency-1",
+    "title": "Independent Samples T-Test",
+    "section": "Example 2: Music and Study Efficiency",
+    "text": "Example 2: Music and Study Efficiency\nDoes instrumental music improve studying?\n\n\n\nDesign Summary\n40 students participated in a study examining how background music affects studying. Participants were randomly assigned to study a short academic text under one of two conditions: instrumental music or silence. After 15 minutes of study time, they completed a 10-item multiple-choice quiz.\n\n\n\n\nCode\nset.seed(99)\nmusic &lt;- \n  data.frame(\n    quiz_score = c(rnorm(20, 18, 1), \n                   rnorm(20, 16.5, 1.2)),\n    group = rep(c(\"music\", \"silence\"), each = 20)\n)\n\n# Plot\nggplot(music, \n       aes(x = group, \n           y = quiz_score, \n           fill = group)\n       ) +\n  geom_violin(trim = FALSE,alpha = .4) +\n  geom_jitter(\n    width = 0.1, \n    alpha = 0.4\n    ) +\n  stat_summary(\n    fun.data = \"mean_se\",\n    geom = \"errorbar\",\n    width = .2\n  ) +\n  theme_minimal() +\n  labs(\n    title = \"Music and Study Performance\",\n    y = \"Quiz Score\", \n    x = \"\")\n\n\n\n\n\n\n\n\n\nCode\n# Summary Table\n  t.test(quiz_score ~ group,\n         data = music,\n         var.equal = TRUE) %&gt;%\n  tidy() |&gt; \n  select(-method) |&gt; \n  rename(\n    Estimate = estimate,\n    t  = statistic,\n    p = p.value,\n    df = parameter,\n    `95% CI Low` = conf.low,\n    `95% CI High` = conf.high\n  ) |&gt; \n  mutate(p = ifelse(p&lt;.05,\"&lt;.05\",p)) |&gt; \n  gt() |&gt; \n  fmt_auto()\n\n\n\n\n\n\n\n\nEstimate\nestimate1\nestimate2\nt\np\ndf\n95% CI Low\n95% CI High\nalternative\n\n\n\n\n1.099\n17.648\n16.549\n3.181\n&lt;.05\n38 \n0.4\n1.798\ntwo.sided"
+  },
+  {
+    "objectID": "lec11/lec11.html#example-3-phone-use-and-sleep",
+    "href": "lec11/lec11.html#example-3-phone-use-and-sleep",
+    "title": "Independent Samples T-Test",
+    "section": "Example 3: Phone Use and Sleep",
+    "text": "Example 3: Phone Use and Sleep\nDoes bedtime phone use affect sleep?\n\nDesign Summary\n80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.\n\n\nIV: Phone use before bed (Yes vs. No)\n\nDV: Sleep quality rating (1 = poor, 10 = excellent)\n\nDesign: Between-subjects, randomized"
+  },
+  {
+    "objectID": "lec11/lec11.html#example-3-phone-use-and-sleep-1",
+    "href": "lec11/lec11.html#example-3-phone-use-and-sleep-1",
+    "title": "Independent Samples T-Test",
+    "section": "Example 3: Phone Use and Sleep",
+    "text": "Example 3: Phone Use and Sleep\nDoes bedtime phone use affect sleep?\n\n\n\nDesign Summary\n80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1–10 scale.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nestimate1\nestimate2\nt\np\ndf\n95% CI Low\n95% CI High\nalternative\n\n\n\n\n0.437\n7.341\n6.905\n1.89\n0.062\n78 \n−0.023\n0.896\ntwo.sided"
+  },
+  {
+    "objectID": "lec11/lec11.html#summary-independent-samples-t-test",
+    "href": "lec11/lec11.html#summary-independent-samples-t-test",
+    "title": "Independent-Samples T-Test",
+    "section": "Summary: Independent-Samples t-Test",
+    "text": "Summary: Independent-Samples t-Test\n\nCompares two independent groups.\nTests whether the difference in means is significant.\nUses pooled variance as the denominator when variances are equal (Welch when they are not).\nCheck assumptions: independence, normality, equal variance (Levene’s Test).\nReport the test, the means and SDs, the confidence interval, and an effect size (\\(d\\))."
+  },
+  {
+    "objectID": "lec11/lec11.html#computational-formula",
+    "href": "lec11/lec11.html#computational-formula",
+    "title": "Independent-Samples T-Test",
+    "section": "Computational Formula",
+    "text": "Computational Formula\nEstimating from the samples (pooled t-test)\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\color{darkblue}{s_p^2}\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}} \\qquad s_p^2 = \\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\]\n\n\\(s_p^2\\) = pooled variance, a weighted average of the two group variances.\n\\(df = n_1 + n_2 - 2\\)"
+  },
+  {
+    "objectID": "lec11/lec11.html#computational-formula-1",
+    "href": "lec11/lec11.html#computational-formula-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Computational Formula",
+    "text": "Computational Formula\nWhen the variances are not equal (Welch’s t-test)\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\]\n\nNo pooling: each group’s variance keeps its own weight, and df is adjusted (it is usually not a whole number).\nThis is what t.test() does by default in R. Adding var.equal = TRUE gives the pooled version above."
+  },
+  {
+    "objectID": "lec11/lec11.html#levenes-test-in-r",
+    "href": "lec11/lec11.html#levenes-test-in-r",
+    "title": "Independent Samples T-Test",
+    "section": "Levene’s Test in R",
+    "text": "Levene’s Test in R\n\n\nCode\nlibrary(car)\n\n# Levene's test of equal variances (H0: the variances are equal)\nleveneTest(happy ~ grp, data = dat)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  0.1739 0.6816\n      18               \n\n\nCode\n# Welch (var.equal = FALSE) is the default; pooled needs var.equal = TRUE\nt.test(happy ~ grp, data = dat, var.equal = TRUE)\n\n\n\n    Two Sample t-test\n\ndata:  happy by grp\nt = 4.4721, df = 18, p-value = 0.0002946\nalternative hypothesis: true difference in means between group Experimental and group Control is not equal to 0\n95 percent confidence interval:\n 1.060439 2.939561\nsample estimates:\nmean in group Experimental      mean in group Control \n                         8                          6 \n\n\n\nIf Levene’s \\(p &gt; .05\\), equal variances are reasonable: the pooled test is fine.\nIf \\(p &lt; .05\\), use the Welch test (leave out var.equal = TRUE)."
+  },
+  {
+    "objectID": "lec11/lec11.html#coffee-example",
+    "href": "lec11/lec11.html#coffee-example",
+    "title": "Independent-Samples T-Test",
+    "section": "Coffee Example",
+    "text": "Coffee Example\nManual\n\n\n\n\n\n\nPooled variance and standard error\n\n\n\\(s_p^2 = \\dfrac{(10-1)(1)^2 + (10-1)(1)^2}{10 + 10 - 2} = 1.00\\) and \\(SE = \\sqrt{1.00\\left(\\frac{1}{10} + \\frac{1}{10}\\right)} = 0.45\\)\n\n\n\n\n\n\n\n\n\nCompute t\n\n\n\\(t = \\dfrac{8 - 6}{0.45} = 4.47\\)\n\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(df = 10 + 10 - 2 = 18\\). At \\(\\alpha = .05\\) (two-tailed), \\(t_{critical} = \\pm 2.101\\). Since \\(4.47 &gt; 2.101\\), we reject \\(H_0\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#coffee-example-1",
+    "href": "lec11/lec11.html#coffee-example-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Coffee Example",
+    "text": "Coffee Example\nData overview\n\n\n\n\n\n\n\n\nmdiff\nt\ndf\np\nExperimental\nControl\nCI[ll,uu]\n\n\n\n\n2.00\n4.47\n18\n&lt;.001\n8.00\n6.00\n[1.06, 2.94]\n\n\n\n\n\n\n\n\nmdiff is the experimental mean minus the control mean (\\(8 - 6 = 2\\)). The factor levels set the order, so put the group you want first to get a positive difference."
+  },
+  {
+    "objectID": "lec11/lec11.html#lets-apply-it",
+    "href": "lec11/lec11.html#lets-apply-it",
+    "title": "Independent-Samples T-Test",
+    "section": "Let’s Apply It",
+    "text": "Let’s Apply It\nThree independent designs\nWe’ll test three common between-subjects designs:\n\n\ncookie\nChocolate and Concentration\nExperimental vs. control\n\n\nheadphones\nMusic and Studying\nEnvironmental manipulation\n\n\nsmartphone\nPhone Use and Sleep\nBehavioral difference"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-2",
+    "href": "lec11/lec11.html#does-chocolate-improve-concentration-2",
+    "title": "Independent-Samples T-Test",
+    "section": "Does chocolate improve concentration?",
+    "text": "Does chocolate improve concentration?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n2.39\n3.71\n48\n&lt;.001\n[1.10, 3.69]\n1.05\n\n\n\n\n\n\n\nChocolate: \\(M = 15.38\\), \\(SD = 2.61\\). No chocolate: \\(M = 12.98\\), \\(SD = 1.89\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-3",
+    "href": "lec11/lec11.html#does-chocolate-improve-concentration-3",
+    "title": "Independent-Samples T-Test",
+    "section": "Does chocolate improve concentration?",
+    "text": "Does chocolate improve concentration?\nCheck the assumptions, then run the test\n\nchocolate.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n# Pooled (equal variances) t-test\nt.test(concentration ~ group, data = choco, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 48, p-value = 0.000542\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.095202 3.690462\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224 \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and the pooled test is appropriate."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-4",
+    "href": "lec11/lec11.html#does-chocolate-improve-concentration-4",
+    "title": "Independent-Samples T-Test",
+    "section": "Does chocolate improve concentration?",
+    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(48) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(48) = 3.71, p &lt; .001, 95% CI [1.10, 3.69], d = 1.05."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-1",
+    "href": "lec11/lec11.html#does-instrumental-music-improve-studying-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Does instrumental music improve studying?",
+    "text": "Does instrumental music improve studying?\nHypotheses\n\n\n\n\n\n\n\n\nNull hypothesis \\(H_0\\)\n\n\nQuiz performance is the same with music and in silence.\n\\(\\mu_\\text{music} = \\mu_\\text{silence}\\)\n\n\n\n\n\n\n\n\n\n\nAlternative hypothesis \\(H_A\\)\n\n\nQuiz performance differs between the conditions.\n\\(\\mu_\\text{music} \\neq \\mu_\\text{silence}\\)"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-2",
+    "href": "lec11/lec11.html#does-instrumental-music-improve-studying-2",
+    "title": "Independent-Samples T-Test",
+    "section": "Does instrumental music improve studying?",
+    "text": "Does instrumental music improve studying?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n0.60\n1.73\n38\n0.091\n[-0.10, 1.30]\n0.55\n\n\n\n\n\n\n\nMusic: \\(M = 7.65\\), \\(SD = 1.08\\). Silence: \\(M = 7.05\\), \\(SD = 1.11\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-3",
+    "href": "lec11/lec11.html#does-instrumental-music-improve-studying-3",
+    "title": "Independent-Samples T-Test",
+    "section": "Does instrumental music improve studying?",
+    "text": "Does instrumental music improve studying?\nRun the test\n\nmusic.R\n\nt.test(quiz_score ~ group, data = music, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  quiz_score by group\nt = 1.7335, df = 38, p-value = 0.09112\nalternative hypothesis: true difference in means between group music and group silence is not equal to 0\n95 percent confidence interval:\n -0.1004822  1.2980566\nsample estimates:\n  mean in group music mean in group silence \n             7.647986              7.049199"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-4",
+    "href": "lec11/lec11.html#does-instrumental-music-improve-studying-4",
+    "title": "Independent-Samples T-Test",
+    "section": "Does instrumental music improve studying?",
+    "text": "Does instrumental music improve studying?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(38) = 1.73\\), \\(p\\) = .091. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.60}{1.09} = 0.55\\) (a medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who studied with music (M = 7.65, SD = 1.08) did not differ significantly on the quiz from students who studied in silence (M = 7.05, SD = 1.11), t(38) = 1.73, p = .091, 95% CI [-0.10, 1.30], d = 0.55.\n\n\n\n\n\nA medium effect that is not significant is a hint that the study may have been too small to detect it. (If we had predicted a direction before collecting data, the one-tailed \\(p\\) would be about 0.046. But the direction has to be chosen before you see the result.)"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep",
+    "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep",
+    "title": "Independent-Samples T-Test",
+    "section": "Does bedtime phone use affect sleep?",
+    "text": "Does bedtime phone use affect sleep?\nDesign\n\nDesign Summary\n80 students from XYZ University took part in a study on sleep and cell phone use. Participants were randomly assigned to one of two conditions. One group was instructed to avoid phone use for 30 minutes before bed, while the other used their phones as normal. The next morning, all students rated their sleep quality on a 1-10 scale.\n\n\nIV: phone use before bed (yes vs. no)\nDV: sleep quality rating (1 = poor, 10 = excellent)\nDesign: between-subjects, randomized"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-1",
+    "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Does bedtime phone use affect sleep?",
+    "text": "Does bedtime phone use affect sleep?\nHypotheses\n\n\n\n\n\n\n\n\nNull hypothesis \\(H_0\\)\n\n\nSleep quality is the same with and without bedtime phone use.\n\\(\\mu_\\text{no phone} = \\mu_\\text{phone}\\)\n\n\n\n\n\n\n\n\n\n\nAlternative hypothesis \\(H_A\\)\n\n\nSleep quality differs between the conditions.\n\\(\\mu_\\text{no phone} \\neq \\mu_\\text{phone}\\)"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-2",
+    "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-2",
+    "title": "Independent-Samples T-Test",
+    "section": "Does bedtime phone use affect sleep?",
+    "text": "Does bedtime phone use affect sleep?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n0.44\n1.89\n78\n0.062\n[-0.02, 0.90]\n0.42\n\n\n\n\n\n\n\nNo phone: \\(M = 7.34\\), \\(SD = 0.97\\). Phone: \\(M = 6.90\\), \\(SD = 1.09\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-3",
+    "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-3",
+    "title": "Independent-Samples T-Test",
+    "section": "Does bedtime phone use affect sleep?",
+    "text": "Does bedtime phone use affect sleep?\nRun the test\n\nsleep.R\n\nt.test(sleep_quality ~ group, data = sleep, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  sleep_quality by group\nt = 1.89, df = 78, p-value = 0.06248\nalternative hypothesis: true difference in means between group no_phone and group phone is not equal to 0\n95 percent confidence interval:\n -0.02330214  0.89639501\nsample estimates:\nmean in group no_phone    mean in group phone \n              7.341146               6.904599"
+  },
+  {
+    "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-4",
+    "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-4",
+    "title": "Independent-Samples T-Test",
+    "section": "Does bedtime phone use affect sleep?",
+    "text": "Does bedtime phone use affect sleep?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(78) = 1.89\\), \\(p\\) = .062. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\). The result is close, but not significant.\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.44}{1.03} = 0.42\\) (a small-to-medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who avoided their phones before bed (M = 7.34, SD = 0.97) did not differ significantly in sleep quality from students who used their phones (M = 6.90, SD = 1.09), t(78) = 1.89, p = .062, 95% CI [-0.02, 0.90], d = 0.42."
+  },
+  {
+    "objectID": "lec11/lec11.html#practice",
+    "href": "lec11/lec11.html#practice",
+    "title": "Independent-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nCaffeine and alertness\n\nDoes caffeine increase alertness? 40 participants were randomly assigned to caffeine or a placebo (ex_3: Group, Alertness; 20 per group). Alertness was scored on a 0-100 scale.\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and write an APA sentence.\n\n\npractice_3.R\n\nset.seed(103)\nex_3 &lt;- tibble(\n  Group = factor(rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n                 levels = c(\"Caffeine\", \"Placebo\")),\n  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))\n)\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_\\text{caffeine} = \\mu_\\text{placebo}\\); \\(H_A: \\mu_\\text{caffeine} \\neq \\mu_\\text{placebo}\\). Caffeine \\(M = 74.31\\) vs. placebo \\(M = 68.23\\): t(38) = 2.52, p = .016, 95% CI [1.19, 10.98], \\(d = 0.80\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#practice-1",
+    "href": "lec11/lec11.html#practice-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Practice",
+    "text": "Practice\nOnline vs. in-person exams\n\nDo exam scores differ between online and in-person sections? 25 students in each format took the same exam (ex_4: Format, Exam_Score).\n\n\nState \\(H_0\\) and \\(H_A\\).\nCheck the equal-variance assumption (Levene’s Test).\nRun the independent-samples t-test, compute \\(d\\), and decide.\n\n\npractice_4.R\n\nset.seed(104)\nex_4 &lt;- tibble(\n  Format = factor(rep(c(\"Online\", \"InPerson\"), each = 25),\n                  levels = c(\"Online\", \"InPerson\")),\n  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))\n)\n\n\n\n\nReveal answer\n\n\\(H_0: \\mu_\\text{online} = \\mu_\\text{in-person}\\); \\(H_A: \\mu_\\text{online} \\neq \\mu_\\text{in-person}\\). Online \\(M = 81.99\\) vs. in-person \\(M = 78.52\\): t(48) = 2.70, p = .009, \\(d = 0.76\\). Compare \\(p\\) to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
   }
 ]
