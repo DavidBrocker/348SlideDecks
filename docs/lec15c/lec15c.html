@@ -6,7 +6,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dave Brocker">
@@ -34,13 +37,81 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ad50ef2cc1218545dc26c06d81bbd2d0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -53,6 +124,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -136,7 +208,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Covariance &amp; Correlation</h1>
-  <p class="subtitle">Lecture 15</p>
+  <p class="subtitle">PSY 348: Lecture 15</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -153,23 +225,34 @@ Dave Brocker
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
 <h3 id="what-do-you-know-about-correlations">What do you know about correlations?</h3>
-<div class="highlight-last">
+<div class="columns">
+<div class="column" style="width:55%;">
 <ul>
 <li class="fragment"><p>Correlation ≠ Causation</p></li>
-<li class="fragment"><p>r</p></li>
-<li class="fragment"><p>Positive correlation: variables move together</p>
+<li class="fragment"><p><span class="math inline">\(r\)</span></p></li>
+<li class="fragment"><p><strong>Positive correlation:</strong> variables move together</p>
 <ul>
 <li class="fragment"><p>As one goes up, the other goes up.</p></li>
 <li class="fragment"><p>As one goes down, the other goes down.</p></li>
 </ul></li>
 </ul>
-</div>
+</div><div class="column" style="width:45%;">
+<p><a href="images/clipboard-592522789.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/clipboard-592522789.png" width="400"></a></p>
+</div></div>
 </section>
 <section id="correlation-1" class="slide level2">
 <h2>Correlation</h2>
-<p>Assesses how two variables move in relation to one another.</p>
-
-<img data-src="lec15c_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<h3 id="assesses-how-two-variables-move-in-relation-to-one-another">Assesses how two variables move in relation to one another</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec15c_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec15c_files/figure-revealjs/unnamed-chunk-2-1.png" width="1152"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section>
 <section id="ok-but-how" class="title-slide slide level1 center">
 <h1>Ok, but how?!</h1>
@@ -177,490 +260,1551 @@ Dave Brocker
 </section>
 <section id="measures-of-dispersion" class="slide level2">
 <h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What are measures of dispersion?</p></li>
-<li class="fragment"><p>Measures of how spread out the data are, how much participants differ.</p></li>
-</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<p><strong>What are measures of dispersion?</strong></p>
+</div>
+<div class="callout-content">
+<p>How spread out the data are: how much participants differ.</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>How did we measure dispersion when we were looking at <strong>one</strong> variable?</p>
+<ul>
+<li class="fragment"><strong>Standard deviation</strong> and <strong>variance</strong>.</li>
+</ul></li>
+</ul>
 </section>
 <section id="measures-of-dispersion-1" class="slide level2">
 <h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>How do we measure dispersion when we were looking at one variable?</p></li>
-<li class="fragment"><p>Standard deviation</p></li>
-<li class="fragment"><p>Variance</p></li>
-</ul>
+<h3 id="how-many-variables">How many variables?</h3>
+<div class="badge-row">
+<div class="content-badge">
+<p><span class="material-icons">looks_one</span></p>
+<h4 id="univariate">Univariate</h4>
+<p><strong>Uni</strong> = one variable</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">looks_two</span></p>
+<h4 id="bivariate">Bivariate</h4>
+<p><strong>Bi</strong> = two variables</p>
+</div>
+<div class="content-badge">
+<p><span class="material-icons">looks_3</span></p>
+<h4 id="multivariate">Multivariate</h4>
+<p><strong>Multi</strong> = more than two variables</p>
+</div>
 </div>
 </section>
 <section id="measures-of-dispersion-2" class="slide level2">
 <h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Univariate = one variable</p></li>
-<li class="fragment"><p>Bivariate = two variables</p></li>
-<li class="fragment"><p>Multivariate = more than two variables</p></li>
-</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</section>
-<section id="measures-of-dispersion-3" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p><strong>Uni</strong>variate = one variable</p></li>
-<li class="fragment"><p><strong>Bi</strong>variate = two variables</p></li>
-<li class="fragment"><p><strong>Multi</strong>variate = more than two variables</p></li>
-</ul>
+<p><strong>Univariate</strong></p>
 </div>
-</section>
-<section id="measures-of-dispersion-4" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Univariate measures of dispersion?</p>
-<ul>
-<li class="fragment">Standard deviation: How different are participants from the average?</li>
-</ul></li>
-<li class="fragment"><p>Bivariate measures of dispersion:</p>
-<ul>
-<li class="fragment"><p>Covariance</p></li>
-<li class="fragment"><p>How much variation in one variable is the same in another variable?</p></li>
-<li class="fragment"><p>Do the variables vary in the same way?</p></li>
-</ul></li>
-</ul>
+<div class="callout-content">
+<p><strong>Standard deviation:</strong> how different are participants from the average?</p>
+<p><em>Height:</em> <span class="math inline">\(M = 5'6"\)</span>, <span class="math inline">\(s = 2\)</span> inches</p>
 </div>
-</section>
-<section id="measures-of-dispersion-5" class="slide level2">
-<h2>Measures of Dispersion</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Univariate measures of dispersion?</p></li>
-<li class="fragment"><p>Standard deviation: <strong>Height</strong> <code>M = 5'6"</code>, <code>s = 2 inches</code></p></li>
-<li class="fragment"><p>Bivariate measures of dispersion:</p>
-<ul>
-<li class="fragment">Covariance: Does the spread-out-ness of height overlap with the spread-out-ness of weight?</li>
-</ul></li>
-</ul>
 </div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Bivariate</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Covariance:</strong> do the variables vary in the same way?</p>
+<p><em>Does the spread-out-ness of height overlap with the spread-out-ness of weight?</em></p>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="covariance" class="slide level2">
 <h2>Covariance</h2>
 <blockquote>
 <p>Professor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. He asks <code>50</code> professors how many cups they have in a typical day and then has them rate their happiness on a scale of <code>1 to 10</code>.</p>
 </blockquote>
-<div class="highlight-last">
 <ul>
-<li class="fragment"><p>Variable 1: Number of Cups of Coffee = continuous</p></li>
-<li class="fragment"><p>Variable 2: Happiness = continuous</p></li>
+<li class="fragment"><p>Variable 1: number of cups of coffee (continuous)</p></li>
+<li class="fragment"><p>Variable 2: happiness (continuous)</p></li>
 </ul>
-</div>
 </section>
 <section id="covariance-1" class="slide level2">
 <h2>Covariance</h2>
-<p>We could:</p>
-<div class="highlight-last">
+<h3 id="two-things-we-could-find">Two things we could find</h3>
 <ul>
-<li class="fragment"><p>Find the variance of each variable</p></li>
-<li class="fragment"><p>Find the covariance of the two variables together</p></li>
+<li class="fragment"><p>The <strong>variance of each variable</strong> on its own.</p></li>
+<li class="fragment"><p>The <strong>covariance of the two variables</strong> together.</p></li>
 </ul>
-</div>
-</section>
-<section id="covariance-2" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance refers to how two continuous variables vary in tandem.</p>
-<div class="fragment">
-<p><img data-src="images/clipboard-3437818122.png" width="498"></p>
-</div>
-</section>
-<section id="covariance-3" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance refers to how two variables vary together:</p>
-<div class="highlight-last">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Covariance refers to how two continuous variables vary <strong>in tandem</strong>.</p>
 <ul>
 <li class="fragment"><p>Generally, if cups of coffee goes up, what does happiness tend to do?</p></li>
 <li class="fragment"><p>Generally, if happiness goes up, what does cups of coffee tend to do?</p></li>
 </ul>
-</div>
+</div><div class="column" style="width:50%;">
+<p><a href="images/clipboard-3437818122.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/clipboard-3437818122.png" width="520"></a></p>
+</div></div>
 </section>
-<section id="covariance-4" class="slide level2">
+<section id="covariance-2" class="slide level2">
 <h2>Covariance</h2>
-<blockquote>
-<p>Professor Brocker wants to know if how many cups of coffee a professor drinks daily impacts their happiness. He asks <code>50</code> professors how many cups they have in a typical day and then has them rate their happiness on a scale of <code>1 to 10</code>.</p>
-</blockquote>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Variable 1: Number of Cups of Coffee</p></li>
-<li class="fragment"><p>Variable 2: Happiness</p></li>
-</ul>
+<h3 id="the-formula">The formula</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
+<p><strong>Covariance</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(COV_{XY} = \dfrac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Well, well, well… we meet again</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(s^2 = \dfrac{\Sigma(X-\bar{X})^2}{N-1} = \dfrac{\Sigma(X-\bar{X})(X-\bar{X})}{N-1}\)</span></p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">The variance of a variable is the covariance of that variable <strong>with itself</strong>.</li>
+</ul>
+</section>
+<section id="covariance-4" class="slide level2 scrollable">
+<h2>Covariance</h2>
+<h3 id="lets-break-it-down">Let’s break it down</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Steps</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment">Find the mean of each variable: <span class="math inline">\(\bar{X} = \dfrac{\Sigma X}{n}\)</span> and <span class="math inline">\(\bar{Y} = \dfrac{\Sigma Y}{n}\)</span>.</li>
+<li class="fragment">Subtract the mean of <span class="math inline">\(X\)</span> from each <span class="math inline">\(X\)</span> value, and the mean of <span class="math inline">\(Y\)</span> from each <span class="math inline">\(Y\)</span> value: <span class="math inline">\((X-\bar{X})\)</span> and <span class="math inline">\((Y-\bar{Y})\)</span>.</li>
+<li class="fragment"><strong>Multiply</strong> the deviation scores of <span class="math inline">\(X\)</span> with the deviation scores of <span class="math inline">\(Y\)</span>: <span class="math inline">\((X-\bar{X})(Y-\bar{Y})\)</span>.</li>
+<li class="fragment"><strong>Sum</strong> the products: <span class="math inline">\(\Sigma(X-\bar{X})(Y-\bar{Y})\)</span>.</li>
+<li class="fragment">Divide by <span class="math inline">\(N-1\)</span>: <span class="math inline">\(\dfrac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}\)</span>.</li>
+</ol>
+</div>
+</div>
 </div>
 </section>
 <section id="covariance-5" class="slide level2">
 <h2>Covariance</h2>
-<h3 id="well-well-wellwe-meet-again">Well, well, well–We Meet Again</h3>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
+<h3 id="a-worked-example">A worked example</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="ewgugcscvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ewgugcscvl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ewgugcscvl thead, #ewgugcscvl tbody, #ewgugcscvl tfoot, #ewgugcscvl tr, #ewgugcscvl td, #ewgugcscvl th {
+  border-style: none;
+}
+
+#ewgugcscvl p {
+  margin: 0;
+  padding: 0;
+}
+
+#ewgugcscvl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 80%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ewgugcscvl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ewgugcscvl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ewgugcscvl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ewgugcscvl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ewgugcscvl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ewgugcscvl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ewgugcscvl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ewgugcscvl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ewgugcscvl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ewgugcscvl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ewgugcscvl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ewgugcscvl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ewgugcscvl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ewgugcscvl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewgugcscvl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ewgugcscvl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ewgugcscvl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ewgugcscvl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewgugcscvl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ewgugcscvl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewgugcscvl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ewgugcscvl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewgugcscvl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ewgugcscvl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewgugcscvl .gt_left {
+  text-align: left;
+}
+
+#ewgugcscvl .gt_center {
+  text-align: center;
+}
+
+#ewgugcscvl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ewgugcscvl .gt_font_normal {
+  font-weight: normal;
+}
+
+#ewgugcscvl .gt_font_bold {
+  font-weight: bold;
+}
+
+#ewgugcscvl .gt_font_italic {
+  font-style: italic;
+}
+
+#ewgugcscvl .gt_super {
+  font-size: 65%;
+}
+
+#ewgugcscvl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ewgugcscvl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ewgugcscvl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ewgugcscvl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ewgugcscvl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ewgugcscvl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ewgugcscvl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ewgugcscvl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ewgugcscvl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Professor" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Professor</th>
+<th id="X-(cups)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">X (cups)</th>
+<th id="Y-(happiness)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Y (happiness)</th>
+<th id="X---mean(X)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">X - mean(X)</th>
+<th id="Y---mean(Y)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Y - mean(Y)</th>
+<th id="Product" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Product</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_right" headers="stub_1_1 Professor">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 X (cups)">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 Y (happiness)">4</td>
+<td class="gt_row gt_right" headers="stub_1_1 X - mean(X)">−2.00</td>
+<td class="gt_row gt_right" headers="stub_1_1 Y - mean(Y)">−2.33</td>
+<td class="gt_row gt_right" headers="stub_1_1 Product">4.67</td>
+</tr>
+<tr class="even">
+<th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_right gt_striped" headers="stub_1_2 Professor">2</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_2 X (cups)">2</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_2 Y (happiness)">5</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_2 X - mean(X)">−1.00</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_2 Y - mean(Y)">−1.33</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_2 Product">1.33</td>
+</tr>
+<tr class="odd">
+<th id="stub_1_3" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_right" headers="stub_1_3 Professor">3</td>
+<td class="gt_row gt_right" headers="stub_1_3 X (cups)">2</td>
+<td class="gt_row gt_right" headers="stub_1_3 Y (happiness)">6</td>
+<td class="gt_row gt_right" headers="stub_1_3 X - mean(X)">−1.00</td>
+<td class="gt_row gt_right" headers="stub_1_3 Y - mean(Y)">−0.33</td>
+<td class="gt_row gt_right" headers="stub_1_3 Product">0.33</td>
+</tr>
+<tr class="even">
+<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_right gt_striped" headers="stub_1_4 Professor">4</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_4 X (cups)">3</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_4 Y (happiness)">6</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_4 X - mean(X)">0.00</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_4 Y - mean(Y)">−0.33</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_4 Product">0.00</td>
+</tr>
+<tr class="odd">
+<th id="stub_1_5" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_right" headers="stub_1_5 Professor">5</td>
+<td class="gt_row gt_right" headers="stub_1_5 X (cups)">4</td>
+<td class="gt_row gt_right" headers="stub_1_5 Y (happiness)">8</td>
+<td class="gt_row gt_right" headers="stub_1_5 X - mean(X)">1.00</td>
+<td class="gt_row gt_right" headers="stub_1_5 Y - mean(Y)">1.67</td>
+<td class="gt_row gt_right" headers="stub_1_5 Product">1.67</td>
+</tr>
+<tr class="even">
+<th id="stub_1_6" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row"></th>
+<td class="gt_row gt_right gt_striped" headers="stub_1_6 Professor">6</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_6 X (cups)">6</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_6 Y (happiness)">9</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_6 X - mean(X)">3.00</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_6 Y - mean(Y)">2.67</td>
+<td class="gt_row gt_right gt_striped" headers="stub_1_6 Product">8.00</td>
+</tr>
+<tr class="odd">
+<th id="grand_summary_stub_1" class="gt_row gt_left gt_stub gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" data-quarto-table-cell-role="th" scope="row">Sum</th>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_1 Professor">—</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_1 X (cups)">—</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_1 Y (happiness)">—</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_1 X - mean(X)">—</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_1 Y - mean(Y)">—</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" headers="grand_summary_stub_1 Product">16.00</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="fragment">
-<p><span class="math display">\[
-s^2 = \frac{\Sigma(X-\bar{X})^2}{N-1}
-\]</span></p>
 </div>
+</div>
+<ul>
+<li class="fragment"><span class="math inline">\(\bar{X} = 3.00\)</span>, <span class="math inline">\(\bar{Y} = 6.33\)</span>, so <span class="math inline">\(COV_{XY} = \dfrac{16.00}{6 - 1} = 3.20\)</span>.</li>
+</ul>
 </section>
 <section id="covariance-6" class="slide level2">
 <h2>Covariance</h2>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
+<h3 id="in-r">In R</h3>
+<div class="codewindow r codewindow-dark">
+<p>covariance.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">cov</span>(ex<span class="sc">$</span>Cups, ex<span class="sc">$</span>Happiness)   <span class="co"># covariance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.2</code></pre>
 </div>
-<div class="fragment">
-<p><span class="math display">\[
-s^2 = \frac{\Sigma(X-\bar{X})^2}{N-1} = \frac{\Sigma(X-\bar{X})(X-\bar{X})}{N-1}
-\]</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">var</span>(ex<span class="sc">$</span>Cups)                 <span class="co"># the variance is a covariance with itself</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">cov</span>(ex<span class="sc">$</span>Cups, ex<span class="sc">$</span>Cups)        <span class="co"># same number</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.2</code></pre>
+</div>
+</div>
 </div>
 </section>
 <section id="covariance-7" class="slide level2">
 <h2>Covariance</h2>
-<p>The variance of a variable is the covariance of that variable with itself.</p>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X}(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-8" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance is the variance of two variables together… how they move together.</p>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
-</section>
-<section id="covariance-9" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
+<h3 id="what-does-it-tell-us">What does it tell us?</h3>
+<p>Covariance is the <strong>bivariate</strong> equivalent of <strong>variance</strong>.</p>
 <ul>
-<li class="fragment">Find the mean of each variable.</li>
+<li class="fragment"><p>The sign tells us the direction: positive means the variables tend to rise together.</p></li>
+<li class="fragment"><p>But the size is hard to interpret. It is in odd units (<strong>cups × happiness points</strong>) and changes if we change the scale.</p></li>
+<li class="fragment"><p>Variance had the same problem (squared units), so we took the square root to get the standard deviation. For covariance, we <strong>standardize</strong> it.</p></li>
 </ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\bar{X} = \frac{\Sigma(x)}{n}\]</span> <span class="math display">\[\bar{Y} = \frac{\Sigma(Y)}{n}\]</span></p>
-</div>
-</section>
-<section id="covariance-10" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[(X-\bar{X})\]</span> <span class="math display">\[(Y-\bar{Y})\]</span></p>
-</div>
-</section>
-<section id="covariance-11" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-<li class="fragment"><p>Multiple the deviation scores of x with the deviation scores of y.</p></li>
-</ul>
-</div>
-<p><span class="math display">\[(X-\bar{X})(Y-\bar{Y})\]</span></p>
-</section>
-<section id="covariance-12" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-<li class="fragment"><p>Multiple the deviation scores of x with the deviation scores of y.</p></li>
-<li class="fragment"><p>Sum the products of the deviation scores.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\sum(X-\bar{X})(Y-\bar{Y})\]</span></p>
-</div>
-</section>
-<section id="covariance-13" class="slide level2">
-<h2>Covariance</h2>
-<p>Let’s break it down.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Find the mean of each variable.</p></li>
-<li class="fragment"><p>Subtract the mean of x from each x value.</p></li>
-<li class="fragment"><p>Subtract the mean of y from each y value.</p></li>
-<li class="fragment"><p>Multiple the deviation scores of x with the deviation scores of y.</p></li>
-<li class="fragment"><p>Sum the products of the deviation scores.</p></li>
-<li class="fragment"><p>Divide by N-1.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\frac{\sum(X-\bar{X})(Y-\bar{Y})}{N-1}\]</span></p>
-</div>
-</section>
-<section id="covariance-14" class="slide level2">
-<h2>Covariance</h2>
-<p>Covariance is the <u><strong>bivariate</strong></u> equivalent of variance.</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>What does the covariance tell us?</p></li>
-<li class="fragment"><p>What did the variance tell us?</p>
-<ul>
-<li class="fragment">Not much because it was inflated.</li>
-</ul></li>
-<li class="fragment"><p>For it to be useful, we had to <strong><em>standardize</em></strong> it.</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span></p>
-</div>
 </section>
 <section id="correlation-2" class="slide level2">
 <h2>Correlation</h2>
-<div class="highlight-last">
+<h3 id="standardized-covariance">Standardized covariance</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pearson correlation</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(r = \dfrac{cov_{xy}}{(SD_x)(SD_y)} = \dfrac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}\)</span></p>
+</div>
+</div>
+</div>
 <ul>
-<li class="fragment"><p>Correlation is the standardized covariance.</p></li>
-<li class="fragment"><p>Correlation is the bivariate version of the standard deviation.</p></li>
-<li class="fragment"><p>To calculate the correlation, we divide the covariance by the standard deviation of x multipled by the standard deviation of y.</p></li>
+<li class="fragment"><p>Correlation is the <strong>standardized covariance</strong>: we divide the covariance by the standard deviation of <span class="math inline">\(x\)</span> times the standard deviation of <span class="math inline">\(y\)</span>.</p></li>
+<li class="fragment"><p>Just as a z-score puts a score on a unit-free scale, <span class="math inline">\(r\)</span> puts the relationship on a unit-free scale.</p></li>
 </ul>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\frac{cov_{xy}}{(SD_x)(SD_y)}\]</span></p>
-</div>
-</section></section>
-<section>
-<section id="calculating-correlation" class="title-slide slide level1 center">
-<h1>Calculating Correlation:</h1>
-
 </section>
 <section id="correlation-3" class="slide level2">
 <h2>Correlation</h2>
-<div class="fragment">
-<p><span class="math display">\[
-COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
-\]</span> <span class="math display">\[\frac{cov_{xy}}{(SD_x)(SD_y)}\]</span></p>
+<h3 id="back-to-the-worked-example">Back to the worked example</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<p><strong>Compute r</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(r = \dfrac{cov_{xy}}{(SD_x)(SD_y)} = \dfrac{3.20}{(1.79)(1.86)} = 0.96\)</span></p>
+</div>
+</div>
+</div>
+<div class="codewindow r codewindow-dark">
+<p>correlation.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="fu">cor</span>(ex<span class="sc">$</span>Cups, ex<span class="sc">$</span>Happiness)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9607689</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">A strong positive correlation: professors who drink more coffee tend to report higher happiness.</li>
+</ul>
 </section>
 <section id="correlation-4" class="slide level2">
 <h2>Correlation</h2>
-<h3 id="calculating-correlation-1">Calculating Correlation:</h3>
-<div class="fragment">
-<p><span class="math display">\[
-\frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}
-\]</span></p>
+<h3 id="bounded-between--1-and-1">Bounded between -1 and +1</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec15c_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lec15c_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152"></a></p>
+</figure>
 </div>
+</div>
+</div>
+<ul>
+<li class="fragment">Closer to <strong>-1</strong> is a negative correlation, closer to <strong>+1</strong> is a positive correlation, and closer to <strong>0</strong> means no correlation.</li>
+</ul>
 </section>
 <section id="correlation-5" class="slide level2">
 <h2>Correlation</h2>
-<p>Correlation is the bivariate version of the standard deviation.</p>
-<div class="fragment">
-<p><span class="math display">\[
-\frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{(SD_x)(SD_y)(N-1)}
-\]</span></p>
-</div>
-</section>
-<section id="correlation-6" class="slide level2">
-<h2>Correlation</h2>
-<div class="highlight-last">
+<h3 id="the-pearson-product-moment-correlation-pearson-1895">The Pearson Product-Moment Correlation (Pearson, 1895)</h3>
 <ul>
-<li class="fragment"><p>Correlation is bounded between -1 and +1.</p></li>
-<li class="fragment"><p>Closer to -1 is a negative correlation.</p></li>
-<li class="fragment"><p>Closer to +1 is a positive correlation.</p></li>
-<li class="fragment"><p>Closer to 0 means no correlation.</p></li>
+<li class="fragment"><p>The <strong>sign</strong> indicates the <strong>direction</strong>.</p></li>
+<li class="fragment"><p>The <strong>number</strong> indicates the <strong>magnitude</strong> (strength) of the relationship:</p></li>
 </ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</section>
-<section id="correlation-7" class="slide level2">
-<h2>Correlation</h2>
-
-<img data-src="lec15c_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="correlation-8" class="slide level2">
-<h2>Correlation</h2>
-<p>This is the Pearson Product-Moment Correlation (Pearson, 1895).</p>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>The sign indicates the <strong>direction</strong>.</p></li>
-<li class="fragment"><p>The number indicates the <strong>magnitude/strength</strong> of the relationship.</p>
+<p><strong>Rules of thumb</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li class="fragment"><p>0.1 is a small correlation</p></li>
 <li class="fragment"><p>0.3 is a moderate correlation</p></li>
 <li class="fragment"><p>0.5 or higher is a large correlation</p></li>
-</ul></li>
 </ul>
 </div>
-</section>
-<section id="correlation-9" class="slide level2">
-<h2>Correlation</h2>
-<div class="highlight-last">
-<ul>
-<li class="fragment"><p>Correlation is written as r</p></li>
-<li class="fragment"><p>If we square r, we get <span class="math inline">\(R^2\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(R^2\)</span> is always positive</p></li>
-<li class="fragment"><p><span class="math inline">\(R^2\)</span> refers to:</p>
-<ul>
-<li class="fragment"><p>The amount of x accounted for by y.</p></li>
-<li class="fragment"><p>The amount of y accounted for by x.</p></li>
-</ul></li>
-</ul>
+</div>
 </div>
 </section>
 <section id="correlation-and-r2" class="slide level2">
 <h2>Correlation and <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li class="fragment"><p>Correlation is written <span class="math inline">\(r\)</span>.</p></li>
+<li class="fragment"><p>If we square <span class="math inline">\(r\)</span>, we get <span class="math inline">\(R^2\)</span>, which is always positive.</p></li>
+<li class="fragment"><p><span class="math inline">\(R^2\)</span> is the proportion of variance the two variables <strong>share</strong>:</p>
+<ul>
+<li class="fragment"><p>the amount of <span class="math inline">\(y\)</span> accounted for by <span class="math inline">\(x\)</span>,</p></li>
+<li class="fragment"><p>and the amount of <span class="math inline">\(x\)</span> accounted for by <span class="math inline">\(y\)</span>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="correlation-and-r2-1" class="slide level2">
+<h2>Correlation and <span class="math inline">\(R^2\)</span></h2>
 <h3 id="example">Example</h3>
 <blockquote>
-<p>Students grades in MTH 110 and their grades in correlation at r = 0.3</p>
+<p>Students’ grades in MTH 110 and their grades in this course correlate at <span class="math inline">\(r = 0.3\)</span>.</p>
 </blockquote>
-<div class="highlight-last">
 <ul>
-<li class="fragment"><p>Moderate correlation</p></li>
-<li class="fragment"><p>How much of your grade is accounted for by your MTH 110 grade?</p></li>
-<li class="fragment"><p>0.3 x 0.3 = 0.09</p></li>
-<li class="fragment"><p><span class="math inline">\(R^2\)</span> = 9% of your grade is explained by your MTH 110 grade.</p></li>
+<li class="fragment"><p>A moderate correlation.</p></li>
+<li class="fragment"><p>How much of your grade in this course is accounted for by your MTH 110 grade?</p></li>
 </ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Compute <span class="math inline">\(R^2\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(R^2 = r^2 = 0.3 \times 0.3 = 0.09\)</span>, so <strong>9%</strong> of the variance in your grade is accounted for by your MTH 110 grade.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="is-the-correlation-significant" class="slide level2">
+<h2>Is the Correlation Significant?</h2>
+<h3 id="testing-h_0-rho-0">Testing <span class="math inline">\(H_0: \rho = 0\)</span></h3>
+<ul>
+<li class="fragment">Our sample <span class="math inline">\(r\)</span> estimates the population correlation <span class="math inline">\(\rho\)</span>. Is it different from 0?</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The test</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(t = \dfrac{r\sqrt{n-2}}{\sqrt{1-r^2}} \qquad df = n - 2\)</span></p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Example: <span class="math inline">\(r = 0.35\)</span> with <span class="math inline">\(n = 50\)</span> gives <span class="math inline">\(t(48) = 2.59\)</span>, <span class="math inline">\(p\)</span> = .013: a significant (moderate) positive correlation.</li>
+</ul>
+</section>
+<section id="is-the-correlation-significant-1" class="slide level2">
+<h2>Is the Correlation Significant?</h2>
+<h3 id="in-r-1">In R</h3>
+<div class="codewindow r codewindow-dark">
+<p>cor_test.R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a><span class="co"># cor.test() gives r, t, df, p, and a 95% confidence interval</span></span>
+<span id="cb9-2"><a aria-label="2"></a><span class="fu">cor.test</span>(ex1<span class="sc">$</span>X, ex1<span class="sc">$</span>Y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  ex1$X and ex1$Y
+t = 11.179, df = 48, p-value = 5.817e-15
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.7488197 0.9124630
+sample estimates:
+ cor 
+0.85 </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="pitfalls" class="slide level2">
+<h2>Pitfalls</h2>
+<h3 id="what-can-go-wrong-with-r">What can go wrong with <span class="math inline">\(r\)</span>?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lec15c_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lec15c_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math inline">\(r\)</span> measures <strong>linear</strong> relationships only, is pulled around by <strong>outliers</strong>, and shrinks when the range of one variable is <strong>restricted</strong>. <strong>Always plot your data.</strong></p>
+</div>
+</div>
 </div>
 </section>
 <section id="interpreting-correlation" class="slide level2">
 <h2>Interpreting Correlation</h2>
-
-<img data-src="images/clipboard-592522789.png" width="464" class="r-stretch"></section>
-<section id="interpreting-correlation-1" class="slide level2">
-<h2>Interpreting Correlation</h2>
-<div class="highlight-last">
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><a href="images/clipboard-592522789.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/clipboard-592522789.png" width="400"></a></p>
+</div><div class="column" style="width:55%;">
 <ul>
-<li class="fragment"><p>We don’t use the words <em>caused/resulting from</em>.</p></li>
-<li class="fragment"><p>When reporting r: <em>“As x goes up, y tends to go up.”</em></p></li>
-<li class="fragment"><p>When reporting <span class="math inline">\(R^2\)</span>: <em>“z% of x is accounted for by y.”</em></p></li>
+<li class="fragment"><p>We don’t use the words <em>caused</em> or <em>resulting from</em>.</p></li>
+<li class="fragment"><p>When reporting <span class="math inline">\(r\)</span>: <em>“As x goes up, y tends to go up.”</em></p></li>
+<li class="fragment"><p>When reporting <span class="math inline">\(R^2\)</span>: <em>“z% of the variance in y is accounted for by x.”</em></p></li>
+<li class="fragment"><p>A third variable could explain both, and the direction could run either way.</p></li>
 </ul>
-</div>
+</div></div>
 </section>
 <section id="reporting-correlation" class="slide level2">
-<h2>Reporting correlation</h2>
-<h3 id="correlation-matrix">Correlation Matrix</h3>
-<div class="highlight-last">
+<h2>Reporting Correlation</h2>
+<h3 id="correlation-matrix">Correlation matrix</h3>
 <ul>
-<li class="fragment"><p>In the Method, we report descriptive statistics about our variables (M, s).</p></li>
+<li class="fragment"><p>In the Method, we report descriptive statistics about our variables (<span class="math inline">\(M\)</span>, <span class="math inline">\(s\)</span>).</p></li>
 <li class="fragment"><p>It is common to refer readers to a table where they can look at correlations between the variables.</p></li>
 <li class="fragment"><p>Why might this be important?</p></li>
 </ul>
-</div>
 </section>
 <section id="correlation-matrix-1" class="slide level2">
 <h2>Correlation Matrix</h2>
-<p>Table 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:</p>
-<div class="fragment">
+<p>Table 1 in a paper is typically a combination of descriptive stats <strong>and</strong> a correlation matrix:</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col><col><col><col><col></colgroup><thead>
-<tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">M</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">s</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">1</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">2</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt;">3</th></tr>
+<div id="njzudnowdl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#njzudnowdl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#njzudnowdl thead, #njzudnowdl tbody, #njzudnowdl tfoot, #njzudnowdl tr, #njzudnowdl td, #njzudnowdl th {
+  border-style: none;
+}
+
+#njzudnowdl p {
+  margin: 0;
+  padding: 0;
+}
+
+#njzudnowdl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 28px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 75%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#njzudnowdl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#njzudnowdl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#njzudnowdl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#njzudnowdl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#njzudnowdl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#njzudnowdl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#njzudnowdl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#njzudnowdl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#njzudnowdl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#njzudnowdl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#njzudnowdl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#njzudnowdl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#njzudnowdl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#njzudnowdl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#njzudnowdl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#njzudnowdl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#njzudnowdl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#njzudnowdl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#njzudnowdl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#njzudnowdl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#njzudnowdl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#njzudnowdl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#njzudnowdl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#njzudnowdl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#njzudnowdl .gt_left {
+  text-align: left;
+}
+
+#njzudnowdl .gt_center {
+  text-align: center;
+}
+
+#njzudnowdl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#njzudnowdl .gt_font_normal {
+  font-weight: normal;
+}
+
+#njzudnowdl .gt_font_bold {
+  font-weight: bold;
+}
+
+#njzudnowdl .gt_font_italic {
+  font-style: italic;
+}
+
+#njzudnowdl .gt_super {
+  font-size: 65%;
+}
+
+#njzudnowdl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#njzudnowdl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#njzudnowdl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#njzudnowdl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#njzudnowdl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#njzudnowdl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#njzudnowdl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#njzudnowdl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#njzudnowdl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Variable" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable</th>
+<th id="M" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">M</th>
+<th id="s" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">s</th>
+<th id="a1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">1</th>
+<th id="a2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">2</th>
+<th id="a3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">3</th>
+</tr>
 </thead>
-<tbody>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt;">Age</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">20.9</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">1.76</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">1</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">--</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt;">--</td></tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt;">Song 1</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">4.21</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">1.2</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">.03</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">1</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt;">--</td></tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt;">Song 2</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">6.42</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">2.18</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">.65**</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">-.34*</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt;">1</td></tr>
-</tbody>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable">1. Age</td>
+<td class="gt_row gt_center" headers="M">20.91</td>
+<td class="gt_row gt_center" headers="s">1.76</td>
+<td class="gt_row gt_center" headers="1">--</td>
+<td class="gt_row gt_center" headers="2">-.03</td>
+<td class="gt_row gt_center" headers="3">.65**</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Variable">2. Song 1</td>
+<td class="gt_row gt_center gt_striped" headers="M">4.21</td>
+<td class="gt_row gt_center gt_striped" headers="s">1.20</td>
+<td class="gt_row gt_center gt_striped" headers="1"></td>
+<td class="gt_row gt_center gt_striped" headers="2">--</td>
+<td class="gt_row gt_center gt_striped" headers="3">-.34*</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable">3. Song 2</td>
+<td class="gt_row gt_center" headers="M">6.42</td>
+<td class="gt_row gt_center" headers="s">2.18</td>
+<td class="gt_row gt_center" headers="1"></td>
+<td class="gt_row gt_center" headers="2"></td>
+<td class="gt_row gt_center" headers="3">--</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_footnotes odd">
+<td colspan="6" class="gt_footnote">* p &lt; .05. ** p &lt; .01.</td>
+</tr>
+</tfoot>
+
 </table>
+
 </div>
 </div>
 </div>
 </section>
-<section id="correlation-matrix-2" class="slide level2">
-<h2>Correlation Matrix</h2>
-<p>Table 1 in a paper is typically a combination of descriptive stats AND correlation matrix, like this:</p>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col><col><col><col><col></colgroup><thead>
-<tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">M</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">s</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">1</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;">2</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt;">3</th></tr>
-</thead>
-<tbody>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt;">Age</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">20.9</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">1.76</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">1</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">-.03</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt;">.65**</td></tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt;">Song 1</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">4.21</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">1.2</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-.03</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">1</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt;">-.34*</td></tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt;">Song 2</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">6.42</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">2.18</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">.65**</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">-.34*</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt;">1</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="reporting-calculation" class="slide level2">
-<h2>Reporting Calculation</h2>
+<section id="reporting-correlation-1" class="slide level2">
+<h2>Reporting Correlation</h2>
 <h3 id="example-1">Example 1</h3>
 <blockquote>
-<p>In a psychology experiment, researchers collected data on the number of hours spent studying and the scores on a final exam for <code>50</code> students. Below is a scatterplot showing the relationship between the two variables.</p>
+<p>Researchers collected the hours spent studying and the final exam score for <code>50</code> students (scatterplot below).</p>
 </blockquote>
-<div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec15c_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><a href="lec15c_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="lec15c_files/figure-revealjs/unnamed-chunk-10-1.png" width="768"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
 <ul>
-<li class="fragment">Based on the scatterplot, describe the strength and direction of the relationship between hours spent studying and exam scores. Would you say the correlation is weak, moderate, or strong? Is it positive or negative?</li>
+<li class="fragment">Describe the strength and direction of the relationship. Is the correlation weak, moderate, or strong? Positive or negative?</li>
 </ul>
 </section>
-<section id="reporting-calculation-1" class="slide level2">
-<h2>Reporting Calculation</h2>
-<h3 id="example-1-1">Example 1</h3>
+<section id="reporting-correlation-2" class="slide level2">
+<h2>Reporting Correlation</h2>
+<h3 id="example-1-the-correlation">Example 1: the correlation</h3>
+<ul>
+<li class="fragment">Suppose the computed Pearson correlation coefficient is <span class="math inline">\(r = 0.85\)</span>. Explain what this value indicates about the relationship between the two variables.</li>
+</ul>
 <div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec15c_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
-</figure>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
+<p>A <strong>strong, positive</strong> linear relationship: students who studied more hours tended to earn higher exam scores. In APA style: hours studying and exam scores were strongly positively correlated, <em>r</em>(48) = .85, <em>p</em> &lt; .001.</p>
 </div>
 </div>
 </div>
 </div>
-<ul>
-<li class="fragment">Suppose the computed Pearson correlation coefficient is r = 0.85 . Explain what this value indicates about the relationship between the two variables.</li>
-</ul>
 </section>
-<section id="reporting-calculation-2" class="slide level2">
-<h2>Reporting Calculation</h2>
+<section id="reporting-correlation-3" class="slide level2 scrollable">
+<h2>Reporting Correlation</h2>
 <h3 id="example-2">Example 2</h3>
 <blockquote>
-<p>Using the same data from the previous question, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The <span class="math inline">\(R^2\)</span> value for the model is <code>0.72</code>.</p>
+<p>Using the same data, the researchers fit a linear regression model to predict exam scores from the number of hours spent studying. The <span class="math inline">\(R^2\)</span> value for the model is <code>0.72</code>.</p>
 </blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your questions</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li>What does <span class="math inline">\(R^2 = 0.72\)</span> tell you? What percentage of the variance is explained, and what percentage remains unexplained?</li>
+<li>Would you consider study time a good predictor of exam performance? Why or why not?</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="reporting-correlation-4" class="slide level2 scrollable">
+<h2>Reporting Correlation</h2>
+<h3 id="example-2-answers">Example 2: answers</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answers</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li><strong>72%</strong> of the variance in exam scores is explained by study time, and <strong>28%</strong> remains unexplained. (<span class="math inline">\(R^2 = r^2 = .85^2 \approx .72\)</span>)</li>
+<li>Study time is a <strong>strong predictor</strong>. Still, other factors matter, and a strong correlation does not by itself show that studying <em>causes</em> the higher scores.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-covariance-correlation" class="slide level2">
+<h2>Summary: Covariance &amp; Correlation</h2>
 <ul>
-<li class="fragment"><p>What does an <span class="math inline">\(R^2\)</span> value of <code>0.72</code> tell you about how well hours spent studying explain the variance in exam scores? What percentage of the variance is explained by the model, and what percentage remains unexplained?</p></li>
-<li class="fragment"><p>Imagine you are the researcher. Based on the <span class="math inline">\(R^2\)</span> value of <code>0.72</code>, would you consider study time to be a good predictor of exam performance? Why or why not?</p></li>
+<li class="fragment"><p><strong>Covariance</strong> is how two variables vary together: the bivariate equivalent of variance.</p></li>
+<li class="fragment"><p><strong>Correlation</strong> (<span class="math inline">\(r\)</span>) is the <strong>standardized covariance</strong>: unit-free, bounded between -1 and +1.</p></li>
+<li class="fragment"><p>The sign gives the direction and the size gives the strength; <span class="math inline">\(r^2\)</span> is the shared variance.</p></li>
+<li class="fragment"><p>Test <span class="math inline">\(H_0: \rho = 0\)</span> with <span class="math inline">\(t = r\sqrt{n-2}/\sqrt{1-r^2}\)</span>, <span class="math inline">\(df = n - 2\)</span>.</p></li>
+<li class="fragment"><p>Plot your data: outliers, curves and restricted ranges can fool <span class="math inline">\(r\)</span>.</p></li>
+<li class="fragment"><p>Correlation does <strong>not</strong> imply causation.</p></li>
 </ul>
 
 
@@ -668,7 +1812,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>Covariance &amp; Correlation | ⬡⬢⬡⬢⬡⬢</p>
 </div>
 </div></div>
 
@@ -680,6 +1824,8 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-drop/drop-runtime.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-codewindow/codewindow.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -703,6 +1849,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'drop': {"button":true,"shortcut":"`","engine":"webr","webr":{"packages":[]},"pyodide":{"packages":[]}},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -723,7 +1870,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -873,7 +2020,7 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealDrop, RevealCodewindow, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -881,6 +2028,31 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
           RevealZoom
         ]
       });
+    </script>
+    <script>
+    // Adds lec2-style drifting icons + ghost nodes behind a YAML-generated
+    // #title-slide (which can't hold raw HTML). Styles: custom.scss ("Title-slide
+    // ambience"). Icons: pass via <body data-title-icons="functions percent ...">
+    // or edit the default list below.
+    document.addEventListener("DOMContentLoaded", function () {
+      var slide = document.getElementById("title-slide");
+      if (!slide) return;
+      var icons = (document.body.dataset.titleIcons ||
+        "functions percent show_chart calculate query_stats bar_chart").split(/\s+/);
+      var layer = document.createElement("div");
+      layer.className = "title-bg-icons";
+      icons.slice(0, 6).forEach(function (name, i) {
+        var s = document.createElement("span");
+        s.className = "material-icons title-bg-icon-" + (i + 1);
+        s.textContent = name;
+        layer.appendChild(s);
+      });
+      var nodes = document.createElement("div");
+      nodes.className = "ghost-nodes";
+      for (var i = 0; i < 5; i++) nodes.appendChild(document.createElement("div")).className = "ghost-node";
+      slide.insertBefore(nodes, slide.firstChild);
+      slide.insertBefore(layer, slide.firstChild);
+    });
     </script>
     
     <script>
@@ -1088,6 +2260,38 @@ COV_{XY} = \frac{\Sigma(X-\bar{X})(Y-\bar{Y})}{N-1}
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
