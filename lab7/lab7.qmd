@@ -59,28 +59,31 @@ model <-
 # Plot the data and regression line
 p <- 
   coffee_data |> 
-  ggplot(aes(Energy_Level, 
-             Cups_of_Coffee)) + 
+  ggplot(aes(Cups_of_Coffee, 
+             Energy_Level)) + 
   geom_point_interactive(aes(
     data_id = Student,
     tooltip = Energy_Level)) + 
   theme_minimal() + 
   geom_smooth(method = "lm") +
   labs(
-    x = "\nEnergy Level",
-    y = "Cups of Coffee\n"
+    x = "\nCups of Coffee",
+    y = "Energy Level\n"
   )
 
 pp <- girafe(ggobj = p)
 
 htmlwidgets::saveWidget(pp,'test.html')
+
+b0 <- coef(model)[1]; b1 <- coef(model)[2]
+f2 <- function(x) formatC(x, format = "f", digits = 2)
 ```
 
 ```{=html}
 <style>
   .p_iframe iframe {
     width:90%;
-    height:576px;
+    height:350px;
 }
 </style>
 ```
@@ -93,40 +96,27 @@ htmlwidgets::saveWidget(pp,'test.html')
 
 ## **Finding the Regression Line**
 
--   Does the relationship look positive or negative?
+-   Does the relationship look positive or negative? **More coffee is generally linked to higher energy**, but there may be a limit.
 
--   It seems like **more coffee is generally linked to higher energy** but may have a limit.
+::: callout-tip
+## Simple regression equation
 
--   Introduce the simple regression equation:
+$\text{Energy Level} = \text{Intercept} + (\text{Slope} \times \text{Cups of Coffee}) = `r f2(b0)` + `r f2(b1)`(\text{Cups})$
+:::
 
-    - $$\text{Energy Level} = \text{Intercept} + (\text{Slope} \times \text{Cups of Coffee})$$
+-   **Slope (`r f2(b1)`):** for each additional cup of coffee, the predicted energy level increases by about `r f2(b1)` points.
 
-    - $$ \text{Energy Level} = 1.24(X) + 2.80$$
-
-**Example Interpretation:**
-
-> *"For each extra cup, energy increases by \~1.2 points."*
-
--   y = 1.24x + 2.80
-
--   y = represents **Energy Level**,
-
--   x = represents **Cups of Coffee**,
-
--   **1.24** is the slope, meaning for each additional cup of coffee, the energy level increases by approximately 1.24 points,
-
--   **2.80** is the intercept, meaning when no coffee is consumed ( x = 0 ), the predicted energy level is 2.80.
+-   **Intercept (`r f2(b0)`):** the predicted energy level when no coffee is consumed (cups = 0).
 
 ## **Activity: The Limits of Prediction**  
 
 ### **Step 1: Make Predictions**  
 **Question:**  
 *"Based on our regression equation:*  
-$$ Energy Level = 1.24(\text{Cups of Coffee}) + 2.80 $$  
+$$ \text{Energy Level} = `r f2(b0)` + `r f2(b1)`(\text{Cups of Coffee}) $$  
 *what do you predict the energy level will be for a student who drinks 10 cups? 20 cups?"*  
 
-- Calculate and share your predictions.  
-- Write answers on the board.  
+- Calculate and share your predictions, and write them on the board.
 
 ## **Step 2: Visualizing the Problem**  
 
@@ -159,7 +149,9 @@ $$ Energy Level = 1.24(\text{Cups of Coffee}) + 2.80 $$
 
 - **Linear models have limits**—extrapolating beyond observed data can lead to unrealistic predictions.  
 - Real-world relationships often have **thresholds** where effects change.  
-- Always **consider context** before making predictions!  
+- Always **consider context** before making predictions!
+
+## **Adding More Predictors**
 
 ```{r}
 # Set seed for reproducibility
@@ -191,11 +183,13 @@ df <- data.frame(Student = students,
                  Study_Time = study_time, 
                  Energy_Level = round(energy_level, 2))
 
-lm(energy_level ~ cups_of_coffee + sleep_quality_num + study_time, data = df) |> tbl_regression()
+mod2 <- lm(Energy_Level ~ Cups_of_Coffee + sleep_quality_num + Study_Time, data = df |> dplyr::mutate(sleep_quality_num = ifelse(Sleep_Quality == "Good", 1, 0)))
+coef2 <- coef(mod2)
+mod2 |> tbl_regression()
 
 
 df |> 
-  ggplot(aes(Energy_Level, Cups_of_Coffee,
+  ggplot(aes(Cups_of_Coffee, Energy_Level,
              color = Sleep_Quality)) + 
   geom_point() + 
   theme_minimal()
@@ -203,20 +197,14 @@ df |>
 
 ## Multiple Regression Equation
 
-$\hat{Y} = 2.97 + 1.27(A) + 3.66(B) + .44(C)$
+$\hat{Y} = `r f2(coef2[1])` + `r f2(coef2[2])`(A) + `r f2(coef2[3])`(B) + `r f2(coef2[4])`(C)$
 
-- X  = Cups_of_Coffee (continuous variable)
+-   $A$ = Cups_of_Coffee (continuous)
 
-- A  = Sleep_Quality (categorical, likely coded as 0 = “Poor”, 1 = “Good”)
+-   $B$ = Sleep_Quality (categorical: 0 = "Poor", 1 = "Good")
 
-- B  = Study_Time (continuous variable)
+-   $C$ = Study_Time (continuous)
 
-- This way, you’re indicating that:
-
-    - Each cup of coffee increases energy by 1.27.
-    
-    - Having good sleep (A = 1) adds 3.66 to energy, while poor sleep (A = 0) means no added effect.
-    
-    - Every additional unit of study time increases energy by 0.44.
+-   Each cup of coffee adds `r f2(coef2[2])` to predicted energy; good sleep adds `r f2(coef2[3])` (poor sleep adds nothing); each extra unit of study time adds `r f2(coef2[4])`, each holding the others constant.
 
 $\hat{Y} = \beta_0 + \beta_1 A + \beta_2 B + \beta_3 C$

@@ -38,7 +38,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ad50ef2cc1218545dc26c06d81bbd2d0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a77f1c163464465289b6dc541fd5273.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -164,7 +164,7 @@ Dave Brocker
 <style>
   .p_iframe iframe {
     width:90%;
-    height:576px;
+    height:350px;
 }
 </style>
 <div class="p_iframe">
@@ -175,24 +175,24 @@ Dave Brocker
 <section id="finding-the-regression-line" class="slide level2">
 <h2><strong>Finding the Regression Line</strong></h2>
 <ul>
-<li class="fragment"><p>Does the relationship look positive or negative?</p></li>
-<li class="fragment"><p>It seems like <strong>more coffee is generally linked to higher energy</strong> but may have a limit.</p></li>
-<li class="fragment"><p>Introduce the simple regression equation:</p>
-<ul>
-<li class="fragment"><p><span class="math display">\[\text{Energy Level} = \text{Intercept} + (\text{Slope} \times \text{Cups of Coffee})\]</span></p></li>
-<li class="fragment"><p><span class="math display">\[ \text{Energy Level} = 1.24(X) + 2.80\]</span></p></li>
-</ul></li>
+<li class="fragment">Does the relationship look positive or negative? <strong>More coffee is generally linked to higher energy</strong>, but there may be a limit.</li>
 </ul>
-<p><strong>Example Interpretation:</strong></p>
-<blockquote>
-<p><em>“For each extra cup, energy increases by ~1.2 points.”</em></p>
-</blockquote>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Simple regression equation</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\text{Energy Level} = \text{Intercept} + (\text{Slope} \times \text{Cups of Coffee}) = 2.62 + 1.25(\text{Cups})\)</span></p>
+</div>
+</div>
+</div>
 <ul>
-<li class="fragment"><p>y = 1.24x + 2.80</p></li>
-<li class="fragment"><p>y = represents <strong>Energy Level</strong>,</p></li>
-<li class="fragment"><p>x = represents <strong>Cups of Coffee</strong>,</p></li>
-<li class="fragment"><p><strong>1.24</strong> is the slope, meaning for each additional cup of coffee, the energy level increases by approximately 1.24 points,</p></li>
-<li class="fragment"><p><strong>2.80</strong> is the intercept, meaning when no coffee is consumed ( x = 0 ), the predicted energy level is 2.80.</p></li>
+<li class="fragment"><p><strong>Slope (1.25):</strong> for each additional cup of coffee, the predicted energy level increases by about 1.25 points.</p></li>
+<li class="fragment"><p><strong>Intercept (2.62):</strong> the predicted energy level when no coffee is consumed (cups = 0).</p></li>
 </ul>
 </section>
 <section id="activity-the-limits-of-prediction" class="slide level2">
@@ -200,12 +200,10 @@ Dave Brocker
 <h3 id="step-1-make-predictions"><strong>Step 1: Make Predictions</strong></h3>
 <p><strong>Question:</strong><br>
 <em>“Based on our regression equation:</em><br>
-<span class="math display">\[ Energy Level = 1.24(\text{Cups of Coffee}) + 2.80 \]</span><br>
+<span class="math display">\[ \text{Energy Level} = 2.62 + 1.25(\text{Cups of Coffee}) \]</span><br>
 <em>what do you predict the energy level will be for a student who drinks 10 cups? 20 cups?“</em></p>
 <ul>
-<li class="fragment">Calculate and share your predictions.<br>
-</li>
-<li class="fragment">Write answers on the board.</li>
+<li class="fragment">Calculate and share your predictions, and write them on the board.</li>
 </ul>
 </section>
 <section id="step-2-visualizing-the-problem" class="slide level2">
@@ -256,6 +254,9 @@ Dave Brocker
 </li>
 <li class="fragment">Always <strong>consider context</strong> before making predictions!</li>
 </ul>
+</section>
+<section id="adding-more-predictors" class="slide level2">
+<h2><strong>Adding More Predictors</strong></h2>
 <div class="cell">
 <div class="cell-output-display">
 <div id="qnvchnsoxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -719,7 +720,7 @@ Dave Brocker
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">cups_of_coffee</td>
+<td class="gt_row gt_left" headers="label">Cups_of_Coffee</td>
 <td class="gt_row gt_center" headers="estimate">1.2</td>
 <td class="gt_row gt_center" headers="conf.low">1.0, 1.4</td>
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
@@ -731,8 +732,8 @@ Dave Brocker
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">study_time</td>
-<td class="gt_row gt_center" headers="estimate">0.48</td>
+<td class="gt_row gt_left" headers="label">Study_Time</td>
+<td class="gt_row gt_center" headers="estimate">0.47</td>
 <td class="gt_row gt_center" headers="conf.low">0.39, 0.56</td>
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
@@ -757,17 +758,12 @@ Dave Brocker
 </section>
 <section id="multiple-regression-equation" class="slide level2">
 <h2>Multiple Regression Equation</h2>
-<p><span class="math inline">\(\hat{Y} = 2.97 + 1.27(A) + 3.66(B) + .44(C)\)</span></p>
+<p><span class="math inline">\(\hat{Y} = 3.63 + 1.20(A) + 3.26(B) + 0.47(C)\)</span></p>
 <ul>
-<li class="fragment"><p>X = Cups_of_Coffee (continuous variable)</p></li>
-<li class="fragment"><p>A = Sleep_Quality (categorical, likely coded as 0 = “Poor”, 1 = “Good”)</p></li>
-<li class="fragment"><p>B = Study_Time (continuous variable)</p></li>
-<li class="fragment"><p>This way, you’re indicating that:</p>
-<ul>
-<li class="fragment"><p>Each cup of coffee increases energy by 1.27.</p></li>
-<li class="fragment"><p>Having good sleep (A = 1) adds 3.66 to energy, while poor sleep (A = 0) means no added effect.</p></li>
-<li class="fragment"><p>Every additional unit of study time increases energy by 0.44.</p></li>
-</ul></li>
+<li class="fragment"><p><span class="math inline">\(A\)</span> = Cups_of_Coffee (continuous)</p></li>
+<li class="fragment"><p><span class="math inline">\(B\)</span> = Sleep_Quality (categorical: 0 = “Poor”, 1 = “Good”)</p></li>
+<li class="fragment"><p><span class="math inline">\(C\)</span> = Study_Time (continuous)</p></li>
+<li class="fragment"><p>Each cup of coffee adds 1.20 to predicted energy; good sleep adds 3.26 (poor sleep adds nothing); each extra unit of study time adds 0.47, each holding the others constant.</p></li>
 </ul>
 <p><span class="math inline">\(\hat{Y} = \beta_0 + \beta_1 A + \beta_2 B + \beta_3 C\)</span></p>
 

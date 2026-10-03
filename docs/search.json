@@ -3434,7 +3434,7 @@
     "href": "lab3/lab3.html#lab-3",
     "title": "Measures of Central Tendency",
     "section": "Lab 3",
-    "text": "Lab 3\nTop 100 Billboard Hits\n\n\n\nThis week we are exploring the Billboard Hot 100 Number Ones Database. This workbook contains substantial data about every song to ever top the Billboard Hot 100 between August 4, 1958 and January 11, 2025. It was compiled by Chris Dalla Riva as he wrote the book Uncharted Territory: What Numbers Tell Us about the Biggest Hit Songs and Ourselves.\n\n\n\nlibrary(gt)\nlibrary(dplyr)\n\n# Read data file from CSV\nbillboard &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv')\n\nbillboard |&gt; \n  names() |&gt; \n  data.frame(column_names = _) |&gt; \n  gt() |&gt; \n  cols_width(everything() ~ px(130)) |&gt; \n  opt_row_striping() |&gt; \n  opt_interactive()"
+    "text": "Lab 3\nTop 100 Billboard Hits\n\n\n\nThis week we are exploring the Billboard Hot 100 Number Ones Database. This workbook contains substantial data about every song to ever top the Billboard Hot 100 between August 4, 1958 and January 11, 2025. It was compiled by Chris Dalla Riva as he wrote the book Uncharted Territory: What Numbers Tell Us about the Biggest Hit Songs and Ourselves.\n\n\n\nlibrary(gt)\nlibrary(dplyr)\n\n# Read data file from CSV\nbillboard &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv')\n\nbillboard |&gt; \n  names() |&gt; \n  data.frame(column_names = _) |&gt; \n  gt() |&gt; \n  cols_width(everything() ~ px(130)) |&gt; \n  opt_row_striping() |&gt; \n  opt_interactive(page_size_default = 6)"
   },
   {
     "objectID": "lab3/lab3.html#data-tip-1",
@@ -3662,14 +3662,14 @@
     "href": "lec1/lec1.html#what-is-statistics",
     "title": "Welcome to Statistics for Psychology!",
     "section": "What is Statistics?",
-    "text": "What is Statistics?\nDefinition and Terminology\n\nStatistics\n\nThe field of describing, analyzing, and making inferences based on data either from a sample or a population\n\nDescribing\n\nWhat does the data ‘look’ like?\n\nAnalyzing\n\nA mathematical approach to extracting information about the data\n\nInferences\n\nApplying logical reasoning to predict what might happen in subsequent measurements. Typically, inferences are made from samples and extrapolated into what the population might be ‘expected’ to look like.\n\nData\n\nQualitative or Quantitative information that consists of measured or manipulated variables\n\nSample\n\nA subset of the population of interest\n\nPopulation\n\nThe entire set of interest."
+    "text": "What is Statistics?\nDefinition and Terminology\n\n\n\nStatistics\n\nDescribing, analyzing, and making inferences from data (a sample or a population)\n\n\n\n\n\nDescribing\n\nWhat does the data ‘look’ like?\n\n\n\n\n\nAnalyzing\n\nA mathematical approach to extracting information from data\n\n\n\n\n\nInferences\n\nPredicting what might happen next, typically extrapolating from a sample to the population\n\n\n\n\n\nData\n\nQualitative or quantitative information that consists of measured or manipulated variables\n\n\n\n\n\nSample\n\nA subset of the population of interest\n\n\n\n\n\nPopulation\n\nThe entire set of interest"
   },
   {
     "objectID": "lec1/lec1.html#why-is-it-important",
     "href": "lec1/lec1.html#why-is-it-important",
     "title": "Welcome to Statistics for Psychology!",
     "section": "Why is it Important?",
-    "text": "Why is it Important?\nWhen Do I Use It?\nEverywhere!\nStatistics makes appearances anywhere you see information being summarized or being used to make decisions.\n\ndirections_car Purchasing a car\n\nYou look at reviews and infer the overall takeaway of how ‘good’ or ‘bad’ a car might be.\n\nrestaurant Going to a restaurant\n\nYou base your selection on prior experiences or on reviews/opinions from people you trust\n\nhow_to_vote Voting for a candidate\n\nYou look for increases in wages and decreases in taxes\nYou look for promises of pollution reduction and energy increases\n\nlocal_movies Going to the Movies\n\nYou pick a movie based on genre, past experiences, and reviews"
+    "text": "Why is it Important?\nWhen Do I Use It?\nEverywhere!\nStatistics makes appearances anywhere you see information being summarized or being used to make decisions.\n\ndirections_car Purchasing a car\n\nYou look at reviews and infer the overall takeaway of how ‘good’ or ‘bad’ a car might be.\n\nrestaurant Going to a restaurant\n\nYou base your selection on prior experiences or on reviews/opinions from people you trust\n\nhow_to_vote Voting for a candidate\n\nYou look for increases in wages and decreases in taxes\n\nlocal_movies Going to the Movies\n\nYou pick a movie based on genre, past experiences, and reviews"
   },
   {
     "objectID": "lec1/lec1.html#data-literacy",
@@ -4888,5 +4888,243 @@
     "title": "Z-scores",
     "section": "Z-Scores",
     "text": "Z-Scores\n\nThe mean score for Exam 1 was a 92 with a standard deviation of 3.\n\n\n\n\nJonas scored a 95.\nWhat percent of the class scored better than Jonas?\n\\(z = \\frac{95-92}{3} = 1\\)\n16% scored higher than Jonas."
+  },
+  {
+    "objectID": "lab7/lab7.html#warm-up-question",
+    "href": "lab7/lab7.html#warm-up-question",
+    "title": "Lab 7: Regression",
+    "section": "Warm-Up Question",
+    "text": "Warm-Up Question\nHow many cups of coffee do you drink per day? Do you feel more awake when you drink more?"
+  },
+  {
+    "objectID": "lab7/lab7.html#example-data-from-a-fictional-class",
+    "href": "lab7/lab7.html#example-data-from-a-fictional-class",
+    "title": "Lab 7: Regression",
+    "section": "Example data from a fictional class:",
+    "text": "Example data from a fictional class:"
+  },
+  {
+    "objectID": "lab7/lab7.html#finding-the-regression-line",
+    "href": "lab7/lab7.html#finding-the-regression-line",
+    "title": "Lab 7: Regression",
+    "section": "Finding the Regression Line",
+    "text": "Finding the Regression Line\n\nDoes the relationship look positive or negative? More coffee is generally linked to higher energy, but there may be a limit.\n\n\n\n\n\n\n\nSimple regression equation\n\n\n\\(\\text{Energy Level} = \\text{Intercept} + (\\text{Slope} \\times \\text{Cups of Coffee}) = 2.62 + 1.25(\\text{Cups})\\)\n\n\n\n\nSlope (1.25): for each additional cup of coffee, the predicted energy level increases by about 1.25 points.\nIntercept (2.62): the predicted energy level when no coffee is consumed (cups = 0)."
+  },
+  {
+    "objectID": "lab7/lab7.html#activity-the-limits-of-prediction",
+    "href": "lab7/lab7.html#activity-the-limits-of-prediction",
+    "title": "Lab 7: Regression",
+    "section": "Activity: The Limits of Prediction",
+    "text": "Activity: The Limits of Prediction\nStep 1: Make Predictions\nQuestion:\n“Based on our regression equation:\n\\[ \\text{Energy Level} = 2.62 + 1.25(\\text{Cups of Coffee}) \\]\nwhat do you predict the energy level will be for a student who drinks 10 cups? 20 cups?“\n\nCalculate and share your predictions, and write them on the board."
+  },
+  {
+    "objectID": "lab7/lab7.html#step-2-visualizing-the-problem",
+    "href": "lab7/lab7.html#step-2-visualizing-the-problem",
+    "title": "Lab 7: Regression",
+    "section": "Step 2: Visualizing the Problem",
+    "text": "Step 2: Visualizing the Problem\n\nLook at the scatterplot with the regression line.\n\nLet’s extend the line beyond our observed data (e.g., past 10 cups).\n\n\n\n\n\n\nDoes this seem realistic? Why or why not?"
+  },
+  {
+    "objectID": "lab7/lab7.html#step-3-critical-thinking-discussion",
+    "href": "lab7/lab7.html#step-3-critical-thinking-discussion",
+    "title": "Lab 7: Regression",
+    "section": "Step 3: Critical Thinking Discussion",
+    "text": "Step 3: Critical Thinking Discussion\nDiscuss with a partner or in groups:\n\nAt what point do you think this model stops making sense?\n\nWhat real-world factors might cause the energy level to level off or decrease?\n\nCaffeine crashes?\n\nHealth risks?\n\nIndividual differences in tolerance?\n\n\nWhy is it risky to make predictions outside of the observed range?"
+  },
+  {
+    "objectID": "lab7/lab7.html#step-4-alternative-models",
+    "href": "lab7/lab7.html#step-4-alternative-models",
+    "title": "Lab 7: Regression",
+    "section": "Step 4: Alternative Models",
+    "text": "Step 4: Alternative Models\n\nSome relationships are nonlinear (e.g., caffeine effects might follow a curve)."
+  },
+  {
+    "objectID": "lab7/lab7.html#conclusion-key-takeaways",
+    "href": "lab7/lab7.html#conclusion-key-takeaways",
+    "title": "Lab 7: Regression",
+    "section": "Conclusion: Key Takeaways",
+    "text": "Conclusion: Key Takeaways\n\nLinear models have limits—extrapolating beyond observed data can lead to unrealistic predictions.\n\nReal-world relationships often have thresholds where effects change.\n\nAlways consider context before making predictions!"
+  },
+  {
+    "objectID": "lab7/lab7.html#adding-more-predictors",
+    "href": "lab7/lab7.html#adding-more-predictors",
+    "title": "Lab 7: Regression",
+    "section": "Adding More Predictors",
+    "text": "Adding More Predictors\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\np-value\n\n\n\n\nCups_of_Coffee\n1.2\n1.0, 1.4\n&lt;0.001\n\n\nsleep_quality_num\n3.3\n2.4, 4.1\n&lt;0.001\n\n\nStudy_Time\n0.47\n0.39, 0.56\n&lt;0.001\n\n\n\nAbbreviation: CI = Confidence Interval"
+  },
+  {
+    "objectID": "lab7/lab7.html#multiple-regression-equation",
+    "href": "lab7/lab7.html#multiple-regression-equation",
+    "title": "Lab 7: Regression",
+    "section": "Multiple Regression Equation",
+    "text": "Multiple Regression Equation\n\\(\\hat{Y} = 3.63 + 1.20(A) + 3.26(B) + 0.47(C)\\)\n\n\\(A\\) = Cups_of_Coffee (continuous)\n\\(B\\) = Sleep_Quality (categorical: 0 = “Poor”, 1 = “Good”)\n\\(C\\) = Study_Time (continuous)\nEach cup of coffee adds 1.20 to predicted energy; good sleep adds 3.26 (poor sleep adds nothing); each extra unit of study time adds 0.47, each holding the others constant.\n\n\\(\\hat{Y} = \\beta_0 + \\beta_1 A + \\beta_2 B + \\beta_3 C\\)"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-1",
+    "href": "exam2/exam2_review.html#question-1",
+    "title": "Exam 2 Review",
+    "section": "Question 1",
+    "text": "Question 1\n\nWhich of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?\n\n\n\n-0.87\n-0.12\n0.55\n0.94"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-1-1",
+    "href": "exam2/exam2_review.html#question-1-1",
+    "title": "Exam 2 Review",
+    "section": "Question 1",
+    "text": "Question 1\nAnswer\nWhich of the following values for Pearson’s correlation coefficient (r) represents the strongest relationship?\n\n-0.87\n-0.12\n0.55\n0.94"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-2",
+    "href": "exam2/exam2_review.html#question-2",
+    "title": "Exam 2 Review",
+    "section": "Question 2",
+    "text": "Question 2\nIf two variables have a correlation coefficient of r = 0, what does this indicate?\n\nA perfect positive relationship\nA perfect negative relationship\nNo linear relationship\nThe variables are unrelated"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-2-1",
+    "href": "exam2/exam2_review.html#question-2-1",
+    "title": "Exam 2 Review",
+    "section": "Question 2",
+    "text": "Question 2\nAnswer\nIf two variables have a correlation coefficient of r = 0, what does this indicate?\n\nA perfect positive relationship\nA perfect negative relationship\nNo linear relationship\nThe variables are unrelated"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-3",
+    "href": "exam2/exam2_review.html#question-3",
+    "title": "Exam 2 Review",
+    "section": "Question 3",
+    "text": "Question 3\nWhat does the slope of the regression line represent?\n\nThe value of the dependent variable when all predictors are zero\nThe amount of change in the dependent variable for a one-unit change in the independent variable\nThe strength of the correlation\nThe total variance in the dependent variable"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-3-1",
+    "href": "exam2/exam2_review.html#question-3-1",
+    "title": "Exam 2 Review",
+    "section": "Question 3",
+    "text": "Question 3\nAnswer\nWhat does the slope of the regression line represent?\n\nThe value of the dependent variable when all predictors are zero\nThe amount of change in the dependent variable for a one-unit change in the independent variable\nThe strength of the correlation\nThe total variance in the dependent variable"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-4",
+    "href": "exam2/exam2_review.html#question-4",
+    "title": "Exam 2 Review",
+    "section": "Question 4",
+    "text": "Question 4\nWhich of the following best describes the meaning of an R-squared value of 0.85?\n\n85% of the variation in the dependent variable is explained by the independent variables\nThe correlation between the variables is 0.85\nThe model’s predictions are 85% accurate\nThe independent variables account for 15% of the error in predictions"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-4-1",
+    "href": "exam2/exam2_review.html#question-4-1",
+    "title": "Exam 2 Review",
+    "section": "Question 4",
+    "text": "Question 4\nAnswer\nWhich of the following best describes the meaning of an R-squared value of 0.85?\na) 85% of the variation in the dependent variable is explained by the independent variables\nb) The correlation between the variables is 0.85\nc) The model’s predictions are 85% accurate\nd) The independent variables account for 15% of the error in predictions"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-5",
+    "href": "exam2/exam2_review.html#question-5",
+    "title": "Exam 2 Review",
+    "section": "Question 5",
+    "text": "Question 5\nTrue or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-5-1",
+    "href": "exam2/exam2_review.html#question-5-1",
+    "title": "Exam 2 Review",
+    "section": "Question 5",
+    "text": "Question 5\nAnswer\nTrue or False: A correlation coefficient of -0.85 indicates a weaker relationship than a correlation of 0.50.\nFalse"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-6",
+    "href": "exam2/exam2_review.html#question-6",
+    "title": "Exam 2 Review",
+    "section": "Question 6",
+    "text": "Question 6\nTrue or False: Linear regression is appropriate only when the relationship between the variables is nonlinear."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-6-1",
+    "href": "exam2/exam2_review.html#question-6-1",
+    "title": "Exam 2 Review",
+    "section": "Question 6",
+    "text": "Question 6\nAnswer\nTrue or False: Linear regression is appropriate only when the relationship between the variables is nonlinear.\nFalse"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-7",
+    "href": "exam2/exam2_review.html#question-7",
+    "title": "Exam 2 Review",
+    "section": "Question 7",
+    "text": "Question 7\nTrue or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-7-1",
+    "href": "exam2/exam2_review.html#question-7-1",
+    "title": "Exam 2 Review",
+    "section": "Question 7",
+    "text": "Question 7\nAnswer\nTrue or False: An outlier can have a significant impact on both the correlation coefficient and the slope of the regression line.\nTrue"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-9",
+    "href": "exam2/exam2_review.html#question-9",
+    "title": "Exam 2 Review",
+    "section": "Question 9",
+    "text": "Question 9\nWhat is the difference between simple linear regression and multiple linear regression?"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-9-1",
+    "href": "exam2/exam2_review.html#question-9-1",
+    "title": "Exam 2 Review",
+    "section": "Question 9",
+    "text": "Question 9\nWhat is the difference between simple linear regression and multiple linear regression?\n\nAnswer: Simple linear regression uses one independent variable to predict the dependent variable, while multiple linear regression uses two or more independent variables."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-10",
+    "href": "exam2/exam2_review.html#question-10",
+    "title": "Exam 2 Review",
+    "section": "Question 10",
+    "text": "Question 10\nDescribe the difference between correlation and causation. Why is it important not to infer causation directly from correlation?\n\n\nAnswer: Correlation refers to a relationship or association between two variables, while causation indicates that one variable directly affects another. It is important not to infer causation from correlation because there may be confounding variables or the relationship may be coincidental."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-11",
+    "href": "exam2/exam2_review.html#question-11",
+    "title": "Exam 2 Review",
+    "section": "Question 11",
+    "text": "Question 11\nSuppose you perform a regression analysis and the p-value of one of your predictors is 0.15. How would you interpret this result? Should you include this predictor in your model?\n\n\nAnswer: A p-value of 0.15 suggests that the predictor is not statistically significant at conventional levels (e.g., 0.05). You may consider removing this predictor, though you might keep it if there is theoretical justification"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-12",
+    "href": "exam2/exam2_review.html#question-12",
+    "title": "Exam 2 Review",
+    "section": "Question 12",
+    "text": "Question 12\nA researcher collects data on study hours and exam scores and finds a correlation coefficient of r = 0.65.\n\nWhat does this tell you about the relationship between study hours and exam scores?\nWould you expect the relationship to be strong, moderate, or weak? Why?"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-12-1",
+    "href": "exam2/exam2_review.html#question-12-1",
+    "title": "Exam 2 Review",
+    "section": "Question 12",
+    "text": "Question 12\nAnswer\n\nWhat does r = 0.65 tell you? A positive relationship: as study hours increase, exam scores tend to increase, but the relationship is not perfect.\nStrong, moderate, or weak? By the benchmarks from lecture (0.1 small, 0.3 moderate, 0.5 or higher large), r = 0.65 is a large (strong) correlation. About \\(r^2 = 0.42\\) of the variance in exam scores is shared with study hours."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-13",
+    "href": "exam2/exam2_review.html#question-13",
+    "title": "Exam 2 Review",
+    "section": "Question 13",
+    "text": "Question 13\nYou run a simple linear regression analysis and get the following equation:\n\\(\\hat{Y} = 2.5 + 1.8X\\)\n\nWhat is the predicted value of Y if X is 4?\nWhat does the coefficient 1.8 represent in this context?"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-13-1",
+    "href": "exam2/exam2_review.html#question-13-1",
+    "title": "Exam 2 Review",
+    "section": "Question 13",
+    "text": "Question 13\nAnswer\n\\(\\hat{Y} = 2.5 + 1.8X\\)\n\nWhat is the predicted value of Y if X is 4?\n\n\\(\\hat{Y} = 2.5 + 1.8(4) = 2.5 + 7.2 = 9.7\\)\n\nWhat does the coefficient 1.8 represent in this context?\n\nThe coefficient 1.8 represents the predicted change in Y for each additional unit of X. In this context, it means that for each additional unit of X, Y is expected to increase by 1.8 units."
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-14",
+    "href": "exam2/exam2_review.html#question-14",
+    "title": "Exam 2 Review",
+    "section": "Question 14",
+    "text": "Question 14\nConsider the output of a regression analysis where the R-squared value is 0.70 and the coefficient of the independent variable is 3.2 with a p-value of 0.02.\n\nInterpret the R-squared value in terms of the model’s explanatory power.\nBased on the coefficient and p-value, would you consider this predictor variable significant? Why or why not?"
+  },
+  {
+    "objectID": "exam2/exam2_review.html#question-14-1",
+    "href": "exam2/exam2_review.html#question-14-1",
+    "title": "Exam 2 Review",
+    "section": "Question 14",
+    "text": "Question 14\nAnswer\n\nR-squared = 0.70: 70% of the variance in the dependent variable is explained by the independent variable(s) in the model.\nSignificant predictor? Yes. The p-value of 0.02 is less than 0.05, so the predictor is statistically significant at the 5% level. (The coefficient of 3.2 is the predicted change in Y for each one-unit increase in the predictor.)"
   }
 ]

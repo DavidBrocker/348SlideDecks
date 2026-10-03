@@ -248,25 +248,25 @@ Dave Brocker
 <span id="cb1-10"><a aria-label="10"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb1-11"><a aria-label="11"></a>  <span class="fu">cols_width</span>(<span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">px</span>(<span class="dv">130</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb1-12"><a aria-label="12"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb1-13"><a aria-label="13"></a>  <span class="fu">opt_interactive</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a aria-label="13"></a>  <span class="fu">opt_interactive</span>(<span class="at">page_size_default =</span> <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="bvnjfyvxkq" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bvnjfyvxkq table {
+<div id="plrkftrrbf" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#plrkftrrbf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bvnjfyvxkq thead, #bvnjfyvxkq tbody, #bvnjfyvxkq tfoot, #bvnjfyvxkq tr, #bvnjfyvxkq td, #bvnjfyvxkq th {
+#plrkftrrbf thead, #plrkftrrbf tbody, #plrkftrrbf tfoot, #plrkftrrbf tr, #plrkftrrbf td, #plrkftrrbf th {
   border-style: none;
 }
 
-#bvnjfyvxkq p {
+#plrkftrrbf p {
   margin: 0;
   padding: 0;
 }
 
-#bvnjfyvxkq .gt_table {
+#plrkftrrbf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -292,12 +292,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_caption {
+#plrkftrrbf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bvnjfyvxkq .gt_title {
+#plrkftrrbf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -309,7 +309,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#bvnjfyvxkq .gt_subtitle {
+#plrkftrrbf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -321,7 +321,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#bvnjfyvxkq .gt_heading {
+#plrkftrrbf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -333,13 +333,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_bottom_border {
+#plrkftrrbf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_col_headings {
+#plrkftrrbf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -354,7 +354,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_col_heading {
+#plrkftrrbf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -374,7 +374,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#bvnjfyvxkq .gt_column_spanner_outer {
+#plrkftrrbf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -386,15 +386,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#bvnjfyvxkq .gt_column_spanner_outer:first-child {
+#plrkftrrbf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bvnjfyvxkq .gt_column_spanner_outer:last-child {
+#plrkftrrbf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bvnjfyvxkq .gt_column_spanner {
+#plrkftrrbf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -406,11 +406,11 @@ Dave Brocker
   width: 100%;
 }
 
-#bvnjfyvxkq .gt_spanner_row {
+#plrkftrrbf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bvnjfyvxkq .gt_group_heading {
+#plrkftrrbf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -436,7 +436,7 @@ Dave Brocker
   text-align: left;
 }
 
-#bvnjfyvxkq .gt_empty_group_heading {
+#plrkftrrbf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -451,15 +451,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#bvnjfyvxkq .gt_from_md > :first-child {
+#plrkftrrbf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bvnjfyvxkq .gt_from_md > :last-child {
+#plrkftrrbf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bvnjfyvxkq .gt_row {
+#plrkftrrbf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -478,7 +478,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#bvnjfyvxkq .gt_stub {
+#plrkftrrbf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -491,7 +491,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#bvnjfyvxkq .gt_stub_row_group {
+#plrkftrrbf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -505,15 +505,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#bvnjfyvxkq .gt_row_group_first td {
+#plrkftrrbf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bvnjfyvxkq .gt_row_group_first th {
+#plrkftrrbf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bvnjfyvxkq .gt_summary_row {
+#plrkftrrbf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -523,16 +523,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#bvnjfyvxkq .gt_first_summary_row {
+#plrkftrrbf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_first_summary_row.thick {
+#plrkftrrbf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bvnjfyvxkq .gt_last_summary_row {
+#plrkftrrbf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -542,7 +542,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_grand_summary_row {
+#plrkftrrbf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -552,7 +552,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#bvnjfyvxkq .gt_first_grand_summary_row {
+#plrkftrrbf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -562,7 +562,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_last_grand_summary_row_top {
+#plrkftrrbf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -572,11 +572,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_striped {
+#plrkftrrbf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bvnjfyvxkq .gt_table_body {
+#plrkftrrbf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -585,7 +585,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_footnotes {
+#plrkftrrbf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -599,7 +599,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_footnote {
+#plrkftrrbf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -608,7 +608,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#bvnjfyvxkq .gt_sourcenotes {
+#plrkftrrbf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -622,7 +622,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#bvnjfyvxkq .gt_sourcenote {
+#plrkftrrbf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -630,77 +630,77 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#bvnjfyvxkq .gt_left {
+#plrkftrrbf .gt_left {
   text-align: left;
 }
 
-#bvnjfyvxkq .gt_center {
+#plrkftrrbf .gt_center {
   text-align: center;
 }
 
-#bvnjfyvxkq .gt_right {
+#plrkftrrbf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bvnjfyvxkq .gt_font_normal {
+#plrkftrrbf .gt_font_normal {
   font-weight: normal;
 }
 
-#bvnjfyvxkq .gt_font_bold {
+#plrkftrrbf .gt_font_bold {
   font-weight: bold;
 }
 
-#bvnjfyvxkq .gt_font_italic {
+#plrkftrrbf .gt_font_italic {
   font-style: italic;
 }
 
-#bvnjfyvxkq .gt_super {
+#plrkftrrbf .gt_super {
   font-size: 65%;
 }
 
-#bvnjfyvxkq .gt_footnote_marks {
+#plrkftrrbf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bvnjfyvxkq .gt_asterisk {
+#plrkftrrbf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bvnjfyvxkq .gt_indent_1 {
+#plrkftrrbf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bvnjfyvxkq .gt_indent_2 {
+#plrkftrrbf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bvnjfyvxkq .gt_indent_3 {
+#plrkftrrbf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bvnjfyvxkq .gt_indent_4 {
+#plrkftrrbf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bvnjfyvxkq .gt_indent_5 {
+#plrkftrrbf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bvnjfyvxkq .katex-display {
+#plrkftrrbf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bvnjfyvxkq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#plrkftrrbf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-<div id="bvnjfyvxkq" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="bvnjfyvxkq">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"column_names":["song","artist","date","weeks_at_number_one","non_consecutive","rating_1","rating_2","rating_3","overall_rating","divisiveness","label","parent_label","cdr_genre","cdr_style","discogs_genre","discogs_style","artist_structure","featured_artists","multiple_lead_vocalists","group_named_after_non_lead_singer","talent_contestant","posthumous","artist_place_of_origin","front_person_age","artist_male","artist_white","artist_black","songwriters","songwriters_w_o_interpolation_sample_credits","songwriter_male","songwriter_white","artist_is_a_songwriter","artist_is_only_songwriter","producers","producer_male","producer_white","artist_is_a_producer","artist_is_only_producer","songwriter_is_a_producer","time_signature","keys","simplified_key","bpm","energy","danceability","happiness","loudness_d_b","acousticness","vocally_based","bass_based","guitar_based","piano_keyboard_based","orchestral_strings","horns_winds","accordion","banjo","bongos","clarinet","cowbell","falsetto_vocal","flute_piccolo","handclaps_snaps","harmonica","human_whistling","kazoo","mandolin","pedal_lap_steel","ocarina","saxophone","sitar","trumpet","ukulele","violin","sound_effects","song_structure","rap_verse_in_a_non_rap_song","length_sec","instrumental","instrumental_length_sec","intro_length_sec","vocal_introduction","free_time_vocal_introduction","fade_out","live","cover","sample","interpolation","inspired_by_a_different_song","lyrics","lyrical_topic","lyrical_narrative","spoken_word","explicit","foreign_language","written_for_a_play","featured_in_a_then_contemporary_play","written_for_a_film","featured_in_a_then_contemporary_film","written_for_a_t_v_show","featured_in_a_then_contemporary_t_v_show","associated_with_dance","topped_the_charts_by_multiple_artist","double_a_side","eurovision_entry","u_s_artwork"]},"columns":[{"id":"column_names","name":"column_names","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"width":130,"align":"left"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"bvnjfyvxkq","dataKey":"3081ef4c277fdb7faeb021f0ac187344"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style"],"jsHooks":[]}</script>
+<div id="plrkftrrbf" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="plrkftrrbf">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"column_names":["song","artist","date","weeks_at_number_one","non_consecutive","rating_1","rating_2","rating_3","overall_rating","divisiveness","label","parent_label","cdr_genre","cdr_style","discogs_genre","discogs_style","artist_structure","featured_artists","multiple_lead_vocalists","group_named_after_non_lead_singer","talent_contestant","posthumous","artist_place_of_origin","front_person_age","artist_male","artist_white","artist_black","songwriters","songwriters_w_o_interpolation_sample_credits","songwriter_male","songwriter_white","artist_is_a_songwriter","artist_is_only_songwriter","producers","producer_male","producer_white","artist_is_a_producer","artist_is_only_producer","songwriter_is_a_producer","time_signature","keys","simplified_key","bpm","energy","danceability","happiness","loudness_d_b","acousticness","vocally_based","bass_based","guitar_based","piano_keyboard_based","orchestral_strings","horns_winds","accordion","banjo","bongos","clarinet","cowbell","falsetto_vocal","flute_piccolo","handclaps_snaps","harmonica","human_whistling","kazoo","mandolin","pedal_lap_steel","ocarina","saxophone","sitar","trumpet","ukulele","violin","sound_effects","song_structure","rap_verse_in_a_non_rap_song","length_sec","instrumental","instrumental_length_sec","intro_length_sec","vocal_introduction","free_time_vocal_introduction","fade_out","live","cover","sample","interpolation","inspired_by_a_different_song","lyrics","lyrical_topic","lyrical_narrative","spoken_word","explicit","foreign_language","written_for_a_play","featured_in_a_then_contemporary_play","written_for_a_film","featured_in_a_then_contemporary_film","written_for_a_t_v_show","featured_in_a_then_contemporary_t_v_show","associated_with_dance","topped_the_charts_by_multiple_artist","double_a_side","eurovision_entry","u_s_artwork"]},"columns":[{"id":"column_names","name":"column_names","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"width":130,"align":"left"}],"defaultPageSize":6,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"plrkftrrbf","dataKey":"3081ef4c277fdb7faeb021f0ac187344"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -712,23 +712,23 @@ Dave Brocker
 <p>This dataset has 105 columns (wow!) and they might not <em>all</em> be needed. Let’s focus on the ones that can be useful!</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="jzigfoqbhy" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jzigfoqbhy table {
+<div id="dubcrgtjbz" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dubcrgtjbz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jzigfoqbhy thead, #jzigfoqbhy tbody, #jzigfoqbhy tfoot, #jzigfoqbhy tr, #jzigfoqbhy td, #jzigfoqbhy th {
+#dubcrgtjbz thead, #dubcrgtjbz tbody, #dubcrgtjbz tfoot, #dubcrgtjbz tr, #dubcrgtjbz td, #dubcrgtjbz th {
   border-style: none;
 }
 
-#jzigfoqbhy p {
+#dubcrgtjbz p {
   margin: 0;
   padding: 0;
 }
 
-#jzigfoqbhy .gt_table {
+#dubcrgtjbz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -754,12 +754,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_caption {
+#dubcrgtjbz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jzigfoqbhy .gt_title {
+#dubcrgtjbz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -771,7 +771,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#jzigfoqbhy .gt_subtitle {
+#dubcrgtjbz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -783,7 +783,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#jzigfoqbhy .gt_heading {
+#dubcrgtjbz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -795,13 +795,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_bottom_border {
+#dubcrgtjbz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_col_headings {
+#dubcrgtjbz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -816,7 +816,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_col_heading {
+#dubcrgtjbz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -836,7 +836,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#jzigfoqbhy .gt_column_spanner_outer {
+#dubcrgtjbz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -848,15 +848,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#jzigfoqbhy .gt_column_spanner_outer:first-child {
+#dubcrgtjbz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jzigfoqbhy .gt_column_spanner_outer:last-child {
+#dubcrgtjbz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jzigfoqbhy .gt_column_spanner {
+#dubcrgtjbz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -868,11 +868,11 @@ Dave Brocker
   width: 100%;
 }
 
-#jzigfoqbhy .gt_spanner_row {
+#dubcrgtjbz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jzigfoqbhy .gt_group_heading {
+#dubcrgtjbz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -898,7 +898,7 @@ Dave Brocker
   text-align: left;
 }
 
-#jzigfoqbhy .gt_empty_group_heading {
+#dubcrgtjbz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -913,15 +913,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#jzigfoqbhy .gt_from_md > :first-child {
+#dubcrgtjbz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jzigfoqbhy .gt_from_md > :last-child {
+#dubcrgtjbz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jzigfoqbhy .gt_row {
+#dubcrgtjbz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -940,7 +940,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#jzigfoqbhy .gt_stub {
+#dubcrgtjbz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -953,7 +953,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#jzigfoqbhy .gt_stub_row_group {
+#dubcrgtjbz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -967,15 +967,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#jzigfoqbhy .gt_row_group_first td {
+#dubcrgtjbz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jzigfoqbhy .gt_row_group_first th {
+#dubcrgtjbz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jzigfoqbhy .gt_summary_row {
+#dubcrgtjbz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -985,16 +985,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#jzigfoqbhy .gt_first_summary_row {
+#dubcrgtjbz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_first_summary_row.thick {
+#dubcrgtjbz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jzigfoqbhy .gt_last_summary_row {
+#dubcrgtjbz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1004,7 +1004,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_grand_summary_row {
+#dubcrgtjbz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1014,7 +1014,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#jzigfoqbhy .gt_first_grand_summary_row {
+#dubcrgtjbz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1024,7 +1024,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_last_grand_summary_row_top {
+#dubcrgtjbz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1034,11 +1034,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_striped {
+#dubcrgtjbz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jzigfoqbhy .gt_table_body {
+#dubcrgtjbz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1047,7 +1047,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_footnotes {
+#dubcrgtjbz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1061,7 +1061,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_footnote {
+#dubcrgtjbz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1070,7 +1070,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#jzigfoqbhy .gt_sourcenotes {
+#dubcrgtjbz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1084,7 +1084,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#jzigfoqbhy .gt_sourcenote {
+#dubcrgtjbz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1092,72 +1092,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#jzigfoqbhy .gt_left {
+#dubcrgtjbz .gt_left {
   text-align: left;
 }
 
-#jzigfoqbhy .gt_center {
+#dubcrgtjbz .gt_center {
   text-align: center;
 }
 
-#jzigfoqbhy .gt_right {
+#dubcrgtjbz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jzigfoqbhy .gt_font_normal {
+#dubcrgtjbz .gt_font_normal {
   font-weight: normal;
 }
 
-#jzigfoqbhy .gt_font_bold {
+#dubcrgtjbz .gt_font_bold {
   font-weight: bold;
 }
 
-#jzigfoqbhy .gt_font_italic {
+#dubcrgtjbz .gt_font_italic {
   font-style: italic;
 }
 
-#jzigfoqbhy .gt_super {
+#dubcrgtjbz .gt_super {
   font-size: 65%;
 }
 
-#jzigfoqbhy .gt_footnote_marks {
+#dubcrgtjbz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jzigfoqbhy .gt_asterisk {
+#dubcrgtjbz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jzigfoqbhy .gt_indent_1 {
+#dubcrgtjbz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jzigfoqbhy .gt_indent_2 {
+#dubcrgtjbz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jzigfoqbhy .gt_indent_3 {
+#dubcrgtjbz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jzigfoqbhy .gt_indent_4 {
+#dubcrgtjbz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jzigfoqbhy .gt_indent_5 {
+#dubcrgtjbz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jzigfoqbhy .katex-display {
+#dubcrgtjbz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jzigfoqbhy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dubcrgtjbz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1165,8 +1165,8 @@ Dave Brocker
 <div class="gt_heading gt_title gt_font_normal" style="text-size:bigger;">Billboard Dataset (Teaching Subset)</div>
 <div class="gt_heading gt_subtitle ">Columns, descriptions, and likely best measure of central tendency</div>
 </div>
-<div id="jzigfoqbhy" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="jzigfoqbhy">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"column":["song","artist","date","weeks_at_number_one","overall_rating","divisiveness","front_person_age","bpm","length_sec","intro_length_sec","cdr_genre","explicit","artist_male","artist_white","artist_black"],"description":["Title of the song","Performer(s) of the song","Date the song charted (or peaked)","Number of weeks the song was at #1","Aggregated critical or popularity rating","How polarizing the ratings are across sources","Age of the lead performer at release","Tempo of the song (beats per minute)","Total length of the song in seconds","Length of the song’s introduction (seconds)","Categorical genre label","Flag for explicit lyrical content (1 = yes, 0 = no)","Performer identified as male (1 = yes, 0 = no)","Performer identified as White (1 = yes, 0 = no)","Performer identified as Black (1 = yes, 0 = no)"],"best_central_tendency":["Mode (most common category)","Mode (most common category)","Mode (most common category)","Median (resistant to outliers like very long runs)","Mean (assume roughly normal distribution)","Mean or Median (depends on skewness)","Mean (if approx. normal), Median (if skewed)","Mean (usually symmetric, but check for outliers)","Median (long songs can skew the mean)","Median (often skewed by outliers)","Mode (most common genre)","Mode (most common category)","Mode (most common category)","Mode (most common category)","Mode (most common category)"]},"columns":[{"id":"column","name":"column","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"description","name":"description","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"best_central_tendency","name":"best_central_tendency","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"jzigfoqbhy","dataKey":"b3311f4ece68dddb56ef2b0d2c687ebe"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style"],"jsHooks":[]}</script>
+<div id="dubcrgtjbz" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="dubcrgtjbz">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"column":["song","artist","date","weeks_at_number_one","overall_rating","divisiveness","front_person_age","bpm","length_sec","intro_length_sec","cdr_genre","explicit","artist_male","artist_white","artist_black"],"description":["Title of the song","Performer(s) of the song","Date the song charted (or peaked)","Number of weeks the song was at #1","Aggregated critical or popularity rating","How polarizing the ratings are across sources","Age of the lead performer at release","Tempo of the song (beats per minute)","Total length of the song in seconds","Length of the song’s introduction (seconds)","Categorical genre label","Flag for explicit lyrical content (1 = yes, 0 = no)","Performer identified as male (1 = yes, 0 = no)","Performer identified as White (1 = yes, 0 = no)","Performer identified as Black (1 = yes, 0 = no)"],"best_central_tendency":["Mode (most common category)","Mode (most common category)","Mode (most common category)","Median (resistant to outliers like very long runs)","Mean (assume roughly normal distribution)","Mean or Median (depends on skewness)","Mean (if approx. normal), Median (if skewed)","Mean (usually symmetric, but check for outliers)","Median (long songs can skew the mean)","Median (often skewed by outliers)","Mode (most common genre)","Mode (most common category)","Mode (most common category)","Mode (most common category)","Mode (most common category)"]},"columns":[{"id":"column","name":"column","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"description","name":"description","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"best_central_tendency","name":"best_central_tendency","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"striped":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"dubcrgtjbz","dataKey":"b3311f4ece68dddb56ef2b0d2c687ebe"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1216,23 +1216,23 @@ Dave Brocker
 <h3 id="group-exercise-3">Group Exercise</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qiuwlhexfa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qiuwlhexfa table {
+<div id="tlfzouixwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tlfzouixwz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qiuwlhexfa thead, #qiuwlhexfa tbody, #qiuwlhexfa tfoot, #qiuwlhexfa tr, #qiuwlhexfa td, #qiuwlhexfa th {
+#tlfzouixwz thead, #tlfzouixwz tbody, #tlfzouixwz tfoot, #tlfzouixwz tr, #tlfzouixwz td, #tlfzouixwz th {
   border-style: none;
 }
 
-#qiuwlhexfa p {
+#tlfzouixwz p {
   margin: 0;
   padding: 0;
 }
 
-#qiuwlhexfa .gt_table {
+#tlfzouixwz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1258,12 +1258,12 @@ Dave Brocker
   border-left-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_caption {
+#tlfzouixwz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qiuwlhexfa .gt_title {
+#tlfzouixwz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1275,7 +1275,7 @@ Dave Brocker
   border-bottom-width: 0;
 }
 
-#qiuwlhexfa .gt_subtitle {
+#tlfzouixwz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1287,7 +1287,7 @@ Dave Brocker
   border-top-width: 0;
 }
 
-#qiuwlhexfa .gt_heading {
+#tlfzouixwz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1299,13 +1299,13 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_bottom_border {
+#tlfzouixwz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_col_headings {
+#tlfzouixwz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1320,7 +1320,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_col_heading {
+#tlfzouixwz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1340,7 +1340,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#qiuwlhexfa .gt_column_spanner_outer {
+#tlfzouixwz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1352,15 +1352,15 @@ Dave Brocker
   padding-right: 4px;
 }
 
-#qiuwlhexfa .gt_column_spanner_outer:first-child {
+#tlfzouixwz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qiuwlhexfa .gt_column_spanner_outer:last-child {
+#tlfzouixwz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qiuwlhexfa .gt_column_spanner {
+#tlfzouixwz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1372,11 +1372,11 @@ Dave Brocker
   width: 100%;
 }
 
-#qiuwlhexfa .gt_spanner_row {
+#tlfzouixwz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qiuwlhexfa .gt_group_heading {
+#tlfzouixwz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1402,7 +1402,7 @@ Dave Brocker
   text-align: left;
 }
 
-#qiuwlhexfa .gt_empty_group_heading {
+#tlfzouixwz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1417,15 +1417,15 @@ Dave Brocker
   vertical-align: middle;
 }
 
-#qiuwlhexfa .gt_from_md > :first-child {
+#tlfzouixwz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qiuwlhexfa .gt_from_md > :last-child {
+#tlfzouixwz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qiuwlhexfa .gt_row {
+#tlfzouixwz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1444,7 +1444,7 @@ Dave Brocker
   overflow-x: hidden;
 }
 
-#qiuwlhexfa .gt_stub {
+#tlfzouixwz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1457,7 +1457,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qiuwlhexfa .gt_stub_row_group {
+#tlfzouixwz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1471,15 +1471,15 @@ Dave Brocker
   vertical-align: top;
 }
 
-#qiuwlhexfa .gt_row_group_first td {
+#tlfzouixwz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qiuwlhexfa .gt_row_group_first th {
+#tlfzouixwz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qiuwlhexfa .gt_summary_row {
+#tlfzouixwz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1489,16 +1489,16 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qiuwlhexfa .gt_first_summary_row {
+#tlfzouixwz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_first_summary_row.thick {
+#tlfzouixwz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qiuwlhexfa .gt_last_summary_row {
+#tlfzouixwz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1508,7 +1508,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_grand_summary_row {
+#tlfzouixwz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1518,7 +1518,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qiuwlhexfa .gt_first_grand_summary_row {
+#tlfzouixwz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1528,7 +1528,7 @@ Dave Brocker
   border-top-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_last_grand_summary_row_top {
+#tlfzouixwz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1538,11 +1538,11 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_striped {
+#tlfzouixwz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qiuwlhexfa .gt_table_body {
+#tlfzouixwz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1551,7 +1551,7 @@ Dave Brocker
   border-bottom-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_footnotes {
+#tlfzouixwz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1565,7 +1565,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_footnote {
+#tlfzouixwz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1574,7 +1574,7 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qiuwlhexfa .gt_sourcenotes {
+#tlfzouixwz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1588,7 +1588,7 @@ Dave Brocker
   border-right-color: #D3D3D3;
 }
 
-#qiuwlhexfa .gt_sourcenote {
+#tlfzouixwz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1596,72 +1596,72 @@ Dave Brocker
   padding-right: 5px;
 }
 
-#qiuwlhexfa .gt_left {
+#tlfzouixwz .gt_left {
   text-align: left;
 }
 
-#qiuwlhexfa .gt_center {
+#tlfzouixwz .gt_center {
   text-align: center;
 }
 
-#qiuwlhexfa .gt_right {
+#tlfzouixwz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qiuwlhexfa .gt_font_normal {
+#tlfzouixwz .gt_font_normal {
   font-weight: normal;
 }
 
-#qiuwlhexfa .gt_font_bold {
+#tlfzouixwz .gt_font_bold {
   font-weight: bold;
 }
 
-#qiuwlhexfa .gt_font_italic {
+#tlfzouixwz .gt_font_italic {
   font-style: italic;
 }
 
-#qiuwlhexfa .gt_super {
+#tlfzouixwz .gt_super {
   font-size: 65%;
 }
 
-#qiuwlhexfa .gt_footnote_marks {
+#tlfzouixwz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qiuwlhexfa .gt_asterisk {
+#tlfzouixwz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qiuwlhexfa .gt_indent_1 {
+#tlfzouixwz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qiuwlhexfa .gt_indent_2 {
+#tlfzouixwz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qiuwlhexfa .gt_indent_3 {
+#tlfzouixwz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qiuwlhexfa .gt_indent_4 {
+#tlfzouixwz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qiuwlhexfa .gt_indent_5 {
+#tlfzouixwz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qiuwlhexfa .katex-display {
+#tlfzouixwz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qiuwlhexfa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tlfzouixwz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1870,7 +1870,7 @@ position:relative;">
 <p><span class="math inline">\(\{1,3,5,4,3,2,1,4,5\}\)</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_cf1b4936" minutes="0" seconds="42" update-every="1" tabindex="0" style="bottom:0;left:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_e78bd672" minutes="0" seconds="42" update-every="1" tabindex="0" style="bottom:0;left:0;"></countdown-timer>
 </div>
 </div>
 
