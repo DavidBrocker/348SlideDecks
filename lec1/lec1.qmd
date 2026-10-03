@@ -353,8 +353,37 @@ Our brain is a pattern matching machine
   - Because data is everywhere, even in your **Netflix** recommendations!
 :::
 
-::: {.flowpic .fragment}
-![Flowchart Visual of Netflix Recommendation System](https://mermaid.ink/img/pako:eNpVkl9vgjAUxb9Kc5PtiTlQBORhicL-JkvMdFuy4kMDV2gG7VLKnBq_-wrMTPvU5v7Ovacndw-pzBBCWJdykxZMabKME0HMmdLXGhV5ZzotuMhJJIVGoVfk6uqGzGgkyxJTTd44btpyzDRb9cpZh0R0Kli53SGZK1yjQpFi_UdEHRHTF0xlVaHImOZSkFuRc4F_TNwxt_8MZuRZfnOsrxeF3LStevDigswUE71LLtZl04069XJHjzYfeK2l2p45vaf3KBTW5JIsWV6f1R7ogle8ZIq0afwP7d090qX5V3Yaz2n5ic6NRpoY-M64n_P0s16BBbniGYRaNWhBhapi7RP2rTQBXWCFCYTmmjH1mUAiDkbzxcSHlNVRpmSTF8dH82UCxJizXDFDrFlZt0ibmYpkIzSEIzfoekC4hx8IvYETjDw38B3bdyb20PMs2ELou4PAH3veeDgOfN91RwcLdt1UezBx_KE7tMe249vBJBhZgBk3WT73C9Tt0eEXhcW32g?type=png)
+::: {.fragment}
+```{dot}
+//| fig-align: center
+//| fig-alt: "Flowchart of how Netflix recommendations are made: viewing data feeds an analysis of preferences and a recommendation engine, which produces recommended, trending and personalized content."
+digraph {
+  graph [bgcolor="transparent", nodesep=0.2, ranksep=0.22]
+  node [shape="box", style="rounded,filled", fillcolor="#DCE8E1", color="#5C715E", fontname="Fira Sans", fontcolor="#2F3E46"]
+  edge [color="#5C715E", penwidth=1.4]
+
+  Watch[label="User Watching Content", fillcolor="#8FAF9E", fontcolor="white"]
+  Collect[label="Collect Viewing Data"]
+  Analyze[label="Analyze Preferences"]
+  History[label="Viewing History"]
+  Genres[label="Genres & Tags"]
+  Similar[label="Similar Users"]
+  Engine[label="Recommendation Engine"]
+  Rec[label="Recommended\nMovies/Shows"]
+  Trend[label="Trending Content"]
+  Picks[label="Personalized Picks"]
+
+  Watch -> Collect
+  Collect -> Analyze
+  Collect -> History
+  Collect -> Genres
+  Collect -> Similar
+  Analyze -> Engine
+  Engine -> Rec
+  Engine -> Trend
+  Engine -> Picks
+}
+```
 :::
 
 ## What You'll Learn This Semester
