@@ -5126,5 +5126,75 @@
     "title": "Exam 2 Review",
     "section": "Question 14",
     "text": "Question 14\nAnswer\n\nR-squared = 0.70: 70% of the variance in the dependent variable is explained by the independent variable(s) in the model.\nSignificant predictor? Yes. The p-value of 0.02 is less than 0.05, so the predictor is statistically significant at the 5% level. (The coefficient of 3.2 is the predicted change in Y for each one-unit increase in the predictor.)"
+  },
+  {
+    "objectID": "lab3/lab3_key.html",
+    "href": "lab3/lab3_key.html",
+    "title": "Lab 3 Answer Key",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(gt)\nbillboard &lt;- readr::read_csv(\n  'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-08-26/billboard.csv',\n  show_col_types = FALSE\n)\nf1 &lt;- function(x) formatC(x, format = \"f\", digits = 1)\nThe data have 1177 songs. Every answer below is computed from the data, so it updates if the source file is revised."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#most-weeks-at-number-one",
+    "href": "lab3/lab3_key.html#most-weeks-at-number-one",
+    "title": "Lab 3 Answer Key",
+    "section": "1. Most weeks at number one",
+    "text": "1. Most weeks at number one\nweeks_at_number_one is per song, so add it up for each artist.\n\ntop_weeks &lt;- billboard |&gt;\n  group_by(artist) |&gt;\n  summarise(total_weeks = sum(weeks_at_number_one, na.rm = TRUE), songs = n()) |&gt;\n  arrange(desc(total_weeks))\ntop_weeks |&gt; head(5) |&gt; gt()\n\n\n\n\n\n\n\nartist\ntotal_weeks\nsongs\n\n\n\n\nMariah Carey\n68\n16\n\n\nThe Beatles\n58\n20\n\n\nAdele\n34\n5\n\n\nBoyz II Men\n34\n4\n\n\nJanet Jackson\n33\n10\n\n\n\n\n\n\n\nAnswer: Mariah Carey, with 68 weeks across 16 number-one songs. Students who look at a single song’s weeks will get a different answer, so accept either as long as the reasoning is stated."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#highest-overall-rating",
+    "href": "lab3/lab3_key.html#highest-overall-rating",
+    "title": "Lab 3 Answer Key",
+    "section": "2. Highest overall rating",
+    "text": "2. Highest overall rating\n\nby_artist &lt;- billboard |&gt;\n  group_by(artist) |&gt;\n  summarise(rating = mean(overall_rating, na.rm = TRUE), songs = n()) |&gt;\n  arrange(desc(rating), desc(songs))\nby_artist |&gt; head(8) |&gt; gt()\n\n\n\n\n\n\n\nartist\nrating\nsongs\n\n\n\n\nABBA\n10.000000\n1\n\n\nFleetwood Mac\n10.000000\n1\n\n\nGloria Gaynor\n10.000000\n1\n\n\nJanis Joplin\n10.000000\n1\n\n\nOtis Redding\n10.000000\n1\n\n\nU2\n9.666667\n2\n\n\nAretha Franklin\n9.666667\n1\n\n\nDel Shannon\n9.666667\n1\n\n\n\n\n\n\nn_perfect &lt;- sum(by_artist$rating == max(by_artist$rating))\n\nAnswer: 5 artists tie at a rating of 10. Accept any artist from the tie (for example ABBA, Fleetwood Mac, Gloria Gaynor, Janis Joplin, Otis Redding). If a student works with single songs, The Beatles and The Temptations each have 10-rated songs."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#average-rating",
+    "href": "lab3/lab3_key.html#average-rating",
+    "title": "Lab 3 Answer Key",
+    "section": "3. Average rating",
+    "text": "3. Average rating\n\nmean_song &lt;- mean(billboard$overall_rating, na.rm = TRUE)\nmean_artist &lt;- mean(by_artist$rating)\n\nAnswer: 6.1 (mean of all songs: 6.13). Averaging each artist’s mean first gives 5.94; accept either if the student states which one they used."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#youngest-lead-singer",
+    "href": "lab3/lab3_key.html#youngest-lead-singer",
+    "title": "Lab 3 Answer Key",
+    "section": "4. Youngest lead singer",
+    "text": "4. Youngest lead singer\n\nbillboard |&gt;\n  filter(!is.na(front_person_age)) |&gt;\n  arrange(front_person_age) |&gt;\n  select(song, artist, front_person_age) |&gt;\n  head(4) |&gt; gt()\n\n\n\n\n\n\n\nsong\nartist\nfront_person_age\n\n\n\n\nI Want You Back\nThe Jackson 5\n11\n\n\nABC\nThe Jackson 5\n11\n\n\nThe Love You Save\nThe Jackson 5\n11\n\n\nI'll Be There\nThe Jackson 5\n12\n\n\n\n\n\n\n\nAnswer: 11 years old (The Jackson 5). Students need na.rm = TRUE because 22 songs have no age. Without it, min() returns NA."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#median-bpm",
+    "href": "lab3/lab3_key.html#median-bpm",
+    "title": "Lab 3 Answer Key",
+    "section": "5. Median BPM",
+    "text": "5. Median BPM\nAnswer: 115 BPM. (na.rm = TRUE is needed; 2 songs have no BPM.)"
+  },
+  {
+    "objectID": "lab3/lab3_key.html#explicit-vs.-non-explicit",
+    "href": "lab3/lab3_key.html#explicit-vs.-non-explicit",
+    "title": "Lab 3 Answer Key",
+    "section": "6. Explicit vs. non-explicit",
+    "text": "6. Explicit vs. non-explicit\n\nbillboard |&gt;\n  count(explicit) |&gt;\n  mutate(percent = round(100 * n / sum(n), 1)) |&gt; gt()\n\n\n\n\n\n\n\nexplicit\nn\npercent\n\n\n\n\n0\n940\n79.9\n\n\n1\n237\n20.1\n\n\n\n\n\n\n\nAnswer: 79.9% non-explicit (0) and 20.1% explicit (1)."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#black-vs.-white-artists",
+    "href": "lab3/lab3_key.html#black-vs.-white-artists",
+    "title": "Lab 3 Answer Key",
+    "section": "7. Black vs. white artists",
+    "text": "7. Black vs. white artists\nBoth columns have a third code, 2 = mixed group, so a plain 0/1 split misses part of the data.\n\nbillboard |&gt;\n  count(artist_black) |&gt;\n  mutate(percent = round(100 * n / sum(n), 1)) |&gt; gt()\n\n\n\n\n\n\n\nartist_black\nn\npercent\n\n\n\n\n0\n671\n57.0\n\n\n1\n358\n30.4\n\n\n2\n85\n7.2\n\n\nNA\n63\n5.4\n\n\n\n\n\n\nbillboard |&gt;\n  count(artist_white) |&gt;\n  mutate(percent = round(100 * n / sum(n), 1)) |&gt; gt()\n\n\n\n\n\n\n\nartist_white\nn\npercent\n\n\n\n\n0\n436\n37.0\n\n\n1\n638\n54.2\n\n\n2\n103\n8.8\n\n\n\n\n\n\n\nAnswer: about 30.4% of the songs are by Black artists (artist_black == 1) and 54.2% by white artists (artist_white == 1). The rest are non-Black or non-white artists and mixed groups. artist_black also has 63 missing values (percentages above include them in the denominator). Accept any answer that is consistent with the counts and states its denominator."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#male-vs.-female-artists",
+    "href": "lab3/lab3_key.html#male-vs.-female-artists",
+    "title": "Lab 3 Answer Key",
+    "section": "8. Male vs. female artists",
+    "text": "8. Male vs. female artists\n\nbillboard |&gt;\n  count(artist_male) |&gt;\n  mutate(percent = round(100 * n / sum(n), 1)) |&gt; gt()\n\n\n\n\n\n\n\nartist_male\nn\npercent\n\n\n\n\n0\n285\n24.2\n\n\n1\n720\n61.2\n\n\n2\n167\n14.2\n\n\n3\n5\n0.4\n\n\n\n\n\n\n\nAnswer: 61.2% male (1) vs. 24.2% female (0). Another 14.2% are mixed male/female groups (2) and 0.4% include a non-binary member (3)."
+  },
+  {
+    "objectID": "lab3/lab3_key.html#coding-notes-for-grading",
+    "href": "lab3/lab3_key.html#coding-notes-for-grading",
+    "title": "Lab 3 Answer Key",
+    "section": "Coding notes for grading",
+    "text": "Coding notes for grading\n\nbillboard |&gt; group_by(artist) |&gt; summarise(w = sum(weeks_at_number_one)) |&gt; arrange(desc(w))\nmean(billboard$overall_rating)\nmin(billboard$front_person_age, na.rm = TRUE)\nmedian(billboard$bpm, na.rm = TRUE)\nbillboard |&gt; count(explicit) |&gt; mutate(pct = 100 * n / sum(n))"
   }
 ]
