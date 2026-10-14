@@ -1,0 +1,211 @@
+---
+title: "How to Use webrarian"
+subtitle: "Package R code, data, and packages into a static website that runs R in the browser"
+format:
+  html:
+    toc: true
+    code-copy: true
+execute:
+  eval: false
+---
+
+## What is webrarian?
+
+[webrarian](https://github.com/coatless-wasm/webrarian) packages R libraries, scripts, and data files into a **static website** that runs R in the browser using [webR](https://docs.r-wasm.org/webr/latest/) (R compiled to WebAssembly). Students open a link and get an R workspace with nothing to install, and you can host it on any static host because no server runs R.
+
+The package uses a library metaphor for its verbs: you `catalog()` a collection, `acquire_*()` items, `bind()` it into a site, preview it in the `reading_room()`, and `circulate_*()` it.
+
+::: callout-note
+The details below come from the package README and its [Getting started article](https://coatless-wasm.github.io/webrarian/articles/getting-started.html). Full references: [function reference](https://coatless-wasm.github.io/webrarian/reference/), [Deployment](https://coatless-wasm.github.io/webrarian/articles/deployment.html), and [Configuration reference](https://coatless-wasm.github.io/webrarian/articles/config-reference.html).
+:::
+
+## Requirements
+
+- R 4.4 or later
+- `httpuv`, to preview the site with `reading_room()`
+- Docker, *only* if you need to compile local or GitHub packages (prebuilt CRAN packages don't need it)
+
+## Install
+
+```r
+install.packages(
+  "webrarian",
+  repos = c("https://coatless-wasm.r-universe.dev", "https://cran.r-project.org")
+)
+install.packages("httpuv")
+
+# or the development version from GitHub
+pak::pak("coatless-wasm/webrarian")
+```
+
+## Quick start
+
+```r
+library(webrarian)
+
+catalog("my-site")                           # 1. create the collection
+acquire_package("dplyr", path = "my-site")   # 2. add a package
+bind("my-site")                              # 3. build the site
+reading_room("my-site")                      # 4. preview it locally
+```
+
+## The five steps
+
+### 1. Start a collection
+
+```r
+catalog("my-analysis")
+```
+
+This creates `my-analysis/` with a `_webrarian.yml` settings file. Later functions take a `path` argument (default: the working directory). If the folder already holds R files, `catalog()` scans them for `library()`, `require()`, and `pkg::fun()` calls and adds what it finds (needs the `renv` package; use `detect = FALSE` to skip).
+
+### 2. Add packages
+
+```r
+acquire_package(c("dplyr", "ggplot2"), path = "my-analysis")
+check_inventory(c("dplyr", "ggplot2"), path = "my-analysis")
+```
+
+`acquire_package()` bundles CRAN packages that have prebuilt WebAssembly builds. Run `check_inventory()` first to confirm a package is available in the webR repositories. Remove one later with `withdraw_package()`; list them with `collection_packages()`.
+
+### 3. Add scripts and data
+
+```r
+dir.create("my-analysis/data")
+write.csv(mtcars, "my-analysis/data/mtcars.csv", row.names = FALSE)
+dir.create("my-analysis/scripts")
+writeLines(
+  c('mt <- read.csv("data/mtcars.csv")', "summary(mt)"),
+  "my-analysis/scripts/analysis.R"
+)
+
+acquire_file(c("data/", "scripts/*.R"), path = "my-analysis")
+```
+
+- A pattern ending in `/` takes everything in that folder.
+- A glob such as `scripts/*.R` takes matching files.
+- A pattern that matches nothing is an error.
+- R starts in the folder holding the files, so relative paths like `data/mtcars.csv` work in the browser.
+
+Use `withdraw_file()` to remove and `collection_files()` to list.
+
+### 4. Build
+
+```r
+site <- bind("my-analysis")
+```
+
+`bind()` writes the site to `my-analysis/_site/` and reports a size breakdown. It builds in a staging folder and only replaces `_site/` on success. The first build downloads the webR engine (about 38 MB compressed) into a cache; later builds reuse it. Clear the built output with `clean_shelves()`.
+
+### 5. Preview
+
+```r
+reading_room("my-analysis")
+```
+
+This serves `_site/` locally (for example `http://127.0.0.1:8123`) and opens your browser. Stop it with Ctrl+C (Esc in RStudio). Options:
+
+```r
+# keep your R prompt
+room <- reading_room("my-analysis", block = FALSE)
+room$url
+reading_room_close(room)
+
+# rebuild and reload when _webrarian.yml or a bundled file changes
+reading_room("my-analysis", watch = TRUE)
+```
+
+`watch = TRUE` blocks the prompt, so it can't be combined with `block = FALSE`.
+
+## Publish
+
+```r
+circulate_via_github("my-analysis")    # GitHub Pages via GitHub Actions
+circulate_via_netlify("my-analysis")   # Netlify
+```
+
+Any static host works. See the [Deployment article](https://coatless-wasm.github.io/webrarian/articles/deployment.html) for the arguments and setup each function expects.
+
+## Configuration: `_webrarian.yml`
+
+```yaml
+project:
+  name: "my-analysis"
+
+webr:
+  version: "0.6.0"
+
+packages:
+  prebuilt:
+    - dplyr
+    - ggplot2
+
+files:
+  include:
+    - "data/"
+    - "scripts/*.R"
+  mount-point: "/home/web_user"
+
+repl:
+  auto-open:
+    - "scripts/analysis.R"
+
+build:
+  output-dir: "_site"
+  bundle-engine: true
+```
+
+| Key | Meaning |
+|---|---|
+| `packages.prebuilt` | Packages to bundle |
+| `files.include` | Patterns for files to bundle |
+| `files.mount-point` | Where files appear in the browser's file system |
+| `repl.auto-open` | Files opened in the editor on load |
+| `build.output-dir` | Output folder (default `_site`) |
+| `build.bundle-engine` | `true` (default) copies the engine and packages into the site; `false` loads them from webR's CDN and repo.r-wasm.org |
+| `build.offline` | `true` makes the page contact no other server (default `false`) |
+
+Change settings from R:
+
+```r
+settings_set("my-analysis", "build.bundle-engine" = FALSE)
+settings_get(collection_settings("my-analysis"), "build.bundle-engine")
+```
+
+::: callout-warning
+`settings_set()`, `acquire_*()`, and `withdraw_*()` rewrite the whole YAML file, so any comments you added are lost.
+:::
+
+## Start from an example
+
+```r
+bind(collection_example("data-analysis", dest = "data-analysis-example"))
+```
+
+Available examples: `"basic"`, `"branded"`, `"data-analysis"`, `"local-package"`, and `"mirror"`.
+
+## Troubleshooting and housekeeping
+
+```r
+diagnose_collection("my-analysis")   # check a collection for problems
+webr_cache_info()                    # see the download cache
+webr_cache_clear()                   # empty it
+collection_mirror("my-analysis")     # self-hosted / air-gapped webR mirror
+```
+
+## Function cheat sheet
+
+| Task | Functions |
+|---|---|
+| Collections | `catalog()`, `is_collection()`, `collection_root()`, `collection_example()` |
+| Build and preview | `bind()`, `reading_room()`, `reading_room_close()`, `clean_shelves()` |
+| Packages | `acquire_package()`, `withdraw_package()`, `collection_packages()`, `check_inventory()` |
+| Files | `acquire_file()`, `withdraw_file()`, `collection_files()` |
+| Settings | `collection_settings()`, `settings_get()`, `settings_set()` |
+| Deployment | `circulate_via_github()`, `circulate_via_netlify()` |
+| Mirrors | `collection_mirror()` |
+| Diagnostics | `diagnose_collection()`, `webr_cache_info()`, `webr_cache_clear()` |
+
+## License
+
+webrarian is AGPL-3, but the sites and mirrors it generates belong to you to license as you choose.
