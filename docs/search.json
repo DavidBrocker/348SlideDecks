@@ -4877,5 +4877,149 @@
     "title": "Introduction to Statistical Software",
     "section": "SPSS: Example",
     "text": "SPSS: Example\nYour Turn\n\n\n\n\n\n\nDescriptive and Frequency Statistics\n\n\nIn our dataset, we want to investigate the categorical composition of our data as well as the statistical makeup of our data.\nFor the dataset provided, find the descriptive statistics and frequency statistics for each variable of the appropriate data type."
+  },
+  {
+    "objectID": "how-to.html",
+    "href": "how-to.html",
+    "title": "How to Use webrarian",
+    "section": "",
+    "text": "webrarian packages R libraries, scripts, and data files into a static website that runs R in the browser using webR (R compiled to WebAssembly). Students open a link and get an R workspace with nothing to install, and you can host it on any static host because no server runs R.\nThe package uses a library metaphor for its verbs: you catalog() a collection, acquire_*() items, bind() it into a site, preview it in the reading_room(), and circulate_*() it.\n\n\n\n\n\n\nNote\n\n\n\nThe details below come from the package README and its Getting started article. Full references: function reference, Deployment, and Configuration reference.",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#what-is-webrarian",
+    "href": "how-to.html#what-is-webrarian",
+    "title": "How to Use webrarian",
+    "section": "",
+    "text": "webrarian packages R libraries, scripts, and data files into a static website that runs R in the browser using webR (R compiled to WebAssembly). Students open a link and get an R workspace with nothing to install, and you can host it on any static host because no server runs R.\nThe package uses a library metaphor for its verbs: you catalog() a collection, acquire_*() items, bind() it into a site, preview it in the reading_room(), and circulate_*() it.\n\n\n\n\n\n\nNote\n\n\n\nThe details below come from the package README and its Getting started article. Full references: function reference, Deployment, and Configuration reference.",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#requirements",
+    "href": "how-to.html#requirements",
+    "title": "How to Use webrarian",
+    "section": "Requirements",
+    "text": "Requirements\n\nR 4.4 or later\nhttpuv, to preview the site with reading_room()\nDocker, only if you need to compile local or GitHub packages (prebuilt CRAN packages don’t need it)",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#install",
+    "href": "how-to.html#install",
+    "title": "How to Use webrarian",
+    "section": "Install",
+    "text": "Install\ninstall.packages(\n  \"webrarian\",\n  repos = c(\"https://coatless-wasm.r-universe.dev\", \"https://cran.r-project.org\")\n)\ninstall.packages(\"httpuv\")\n\n# or the development version from GitHub\npak::pak(\"coatless-wasm/webrarian\")",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#quick-start",
+    "href": "how-to.html#quick-start",
+    "title": "How to Use webrarian",
+    "section": "Quick start",
+    "text": "Quick start\nlibrary(webrarian)\n\ncatalog(\"my-site\")                           # 1. create the collection\nacquire_package(\"dplyr\", path = \"my-site\")   # 2. add a package\nbind(\"my-site\")                              # 3. build the site\nreading_room(\"my-site\")                      # 4. preview it locally",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#the-five-steps",
+    "href": "how-to.html#the-five-steps",
+    "title": "How to Use webrarian",
+    "section": "The five steps",
+    "text": "The five steps\n\n1. Start a collection\ncatalog(\"my-analysis\")\nThis creates my-analysis/ with a _webrarian.yml settings file. Later functions take a path argument (default: the working directory). If the folder already holds R files, catalog() scans them for library(), require(), and pkg::fun() calls and adds what it finds (needs the renv package; use detect = FALSE to skip).\n\n\n2. Add packages\nacquire_package(c(\"dplyr\", \"ggplot2\"), path = \"my-analysis\")\ncheck_inventory(c(\"dplyr\", \"ggplot2\"), path = \"my-analysis\")\nacquire_package() bundles CRAN packages that have prebuilt WebAssembly builds. Run check_inventory() first to confirm a package is available in the webR repositories. Remove one later with withdraw_package(); list them with collection_packages().\n\n\n3. Add scripts and data\ndir.create(\"my-analysis/data\")\nwrite.csv(mtcars, \"my-analysis/data/mtcars.csv\", row.names = FALSE)\ndir.create(\"my-analysis/scripts\")\nwriteLines(\n  c('mt &lt;- read.csv(\"data/mtcars.csv\")', \"summary(mt)\"),\n  \"my-analysis/scripts/analysis.R\"\n)\n\nacquire_file(c(\"data/\", \"scripts/*.R\"), path = \"my-analysis\")\n\nA pattern ending in / takes everything in that folder.\nA glob such as scripts/*.R takes matching files.\nA pattern that matches nothing is an error.\nR starts in the folder holding the files, so relative paths like data/mtcars.csv work in the browser.\n\nUse withdraw_file() to remove and collection_files() to list.\n\n\n4. Build\nsite &lt;- bind(\"my-analysis\")\nbind() writes the site to my-analysis/_site/ and reports a size breakdown. It builds in a staging folder and only replaces _site/ on success. The first build downloads the webR engine (about 38 MB compressed) into a cache; later builds reuse it. Clear the built output with clean_shelves().\n\n\n5. Preview\nreading_room(\"my-analysis\")\nThis serves _site/ locally (for example http://127.0.0.1:8123) and opens your browser. Stop it with Ctrl+C (Esc in RStudio). Options:\n# keep your R prompt\nroom &lt;- reading_room(\"my-analysis\", block = FALSE)\nroom$url\nreading_room_close(room)\n\n# rebuild and reload when _webrarian.yml or a bundled file changes\nreading_room(\"my-analysis\", watch = TRUE)\nwatch = TRUE blocks the prompt, so it can’t be combined with block = FALSE.",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#publish",
+    "href": "how-to.html#publish",
+    "title": "How to Use webrarian",
+    "section": "Publish",
+    "text": "Publish\ncirculate_via_github(\"my-analysis\")    # GitHub Pages via GitHub Actions\ncirculate_via_netlify(\"my-analysis\")   # Netlify\nAny static host works. See the Deployment article for the arguments and setup each function expects.",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#configuration-_webrarian.yml",
+    "href": "how-to.html#configuration-_webrarian.yml",
+    "title": "How to Use webrarian",
+    "section": "Configuration: _webrarian.yml",
+    "text": "Configuration: _webrarian.yml\nproject:\n  name: \"my-analysis\"\n\nwebr:\n  version: \"0.6.0\"\n\npackages:\n  prebuilt:\n    - dplyr\n    - ggplot2\n\nfiles:\n  include:\n    - \"data/\"\n    - \"scripts/*.R\"\n  mount-point: \"/home/web_user\"\n\nrepl:\n  auto-open:\n    - \"scripts/analysis.R\"\n\nbuild:\n  output-dir: \"_site\"\n  bundle-engine: true\n\n\n\n\n\n\n\nKey\nMeaning\n\n\n\n\npackages.prebuilt\nPackages to bundle\n\n\nfiles.include\nPatterns for files to bundle\n\n\nfiles.mount-point\nWhere files appear in the browser’s file system\n\n\nrepl.auto-open\nFiles opened in the editor on load\n\n\nbuild.output-dir\nOutput folder (default _site)\n\n\nbuild.bundle-engine\ntrue (default) copies the engine and packages into the site; false loads them from webR’s CDN and repo.r-wasm.org\n\n\nbuild.offline\ntrue makes the page contact no other server (default false)\n\n\n\nChange settings from R:\nsettings_set(\"my-analysis\", \"build.bundle-engine\" = FALSE)\nsettings_get(collection_settings(\"my-analysis\"), \"build.bundle-engine\")\n\n\n\n\n\n\nWarning\n\n\n\nsettings_set(), acquire_*(), and withdraw_*() rewrite the whole YAML file, so any comments you added are lost.",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#start-from-an-example",
+    "href": "how-to.html#start-from-an-example",
+    "title": "How to Use webrarian",
+    "section": "Start from an example",
+    "text": "Start from an example\nbind(collection_example(\"data-analysis\", dest = \"data-analysis-example\"))\nAvailable examples: \"basic\", \"branded\", \"data-analysis\", \"local-package\", and \"mirror\".",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#troubleshooting-and-housekeeping",
+    "href": "how-to.html#troubleshooting-and-housekeeping",
+    "title": "How to Use webrarian",
+    "section": "Troubleshooting and housekeeping",
+    "text": "Troubleshooting and housekeeping\ndiagnose_collection(\"my-analysis\")   # check a collection for problems\nwebr_cache_info()                    # see the download cache\nwebr_cache_clear()                   # empty it\ncollection_mirror(\"my-analysis\")     # self-hosted / air-gapped webR mirror",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#function-cheat-sheet",
+    "href": "how-to.html#function-cheat-sheet",
+    "title": "How to Use webrarian",
+    "section": "Function cheat sheet",
+    "text": "Function cheat sheet\n\n\n\n\n\n\n\nTask\nFunctions\n\n\n\n\nCollections\ncatalog(), is_collection(), collection_root(), collection_example()\n\n\nBuild and preview\nbind(), reading_room(), reading_room_close(), clean_shelves()\n\n\nPackages\nacquire_package(), withdraw_package(), collection_packages(), check_inventory()\n\n\nFiles\nacquire_file(), withdraw_file(), collection_files()\n\n\nSettings\ncollection_settings(), settings_get(), settings_set()\n\n\nDeployment\ncirculate_via_github(), circulate_via_netlify()\n\n\nMirrors\ncollection_mirror()\n\n\nDiagnostics\ndiagnose_collection(), webr_cache_info(), webr_cache_clear()",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
+  },
+  {
+    "objectID": "how-to.html#license",
+    "href": "how-to.html#license",
+    "title": "How to Use webrarian",
+    "section": "License",
+    "text": "License\nwebrarian is AGPL-3, but the sites and mirrors it generates belong to you to license as you choose.",
+    "crumbs": [
+      "Course Overview",
+      "Using R",
+      "How to Use webrarian"
+    ]
   }
 ]
