@@ -5021,5 +5021,159 @@
       "Using R",
       "How to Use webrarian"
     ]
+  },
+  {
+    "objectID": "lab4/lab4.html#quick-recap",
+    "href": "lab4/lab4.html#quick-recap",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Quick Recap",
+    "text": "Quick Recap\n\\[z = \\frac{x - \\mu}{\\sigma}\\]\n\n\nA z-score tells you how many standard deviations a value is from the mean\nOnce we have a z-score, we can find probabilities: what proportion of scores fall above, below, or between values\nToday’s habit: we will write out every argument by name (mean =, sd =, lower.tail =). It is more typing, but you never have to guess what a number is doing."
+  },
+  {
+    "objectID": "lab4/lab4.html#scenario",
+    "href": "lab4/lab4.html#scenario",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Scenario",
+    "text": "Scenario\n\nProfessor Brocker’s PSY 348 midterm had 40 students. The exam scores were approximately normally distributed with a mean of 76 and a standard deviation of 8.\n\n\n\nNadia scored an 88.\nBefore we calculate anything: is that a good score relative to the class? Great? Just okay?"
+  },
+  {
+    "objectID": "lab4/lab4.html#by-hand-first",
+    "href": "lab4/lab4.html#by-hand-first",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "By Hand First",
+    "text": "By Hand First\n\\[z = \\frac{x - \\mu}{\\sigma} = \\frac{88 - 76}{8} = 1.5\\]\n\n\nNadia’s score is 1.5 standard deviations above the mean\nUsing the 68/95/99.7 rule: roughly 93% of students scored below Nadia"
+  },
+  {
+    "objectID": "lab4/lab4.html#now-in-r",
+    "href": "lab4/lab4.html#now-in-r",
+    "title": "Lab 4: Z-Scores & Probability in Practice",
+    "section": "Now in R",
+    "text": "Now in R\n\nlibrary(dplyr)\n\n# Simulate a class of 40 exam scores\nset.seed(348)\nexam_scores &lt;- rnorm(40, mean = 76, sd = 8) |&gt; round(1)\n\n# Nadia's score\nnadia &lt;- 88\n\n# Z-score by hand vs. by function\nz_hand &lt;- (nadia - mean(exam_scores)) / sd(exam_scores)\nz_hand\n\n[1] 1.624532\n\n\n\n\nNotice: this won’t be exactly 1.5 — why not? (Hint: think about what set.seed() and rnorm() are actually doing.)"
+  },
+  {
+    "objectID": "lab4/lab4.html#standardizing-an-entire-dataset",
+    "href": "lab4/lab4.html#standardizing-an-entire-dataset",
+    "title": "Lab 4: Z-Scores & Probability in Practice",
+    "section": "Standardizing an Entire Dataset",
+    "text": "Standardizing an Entire Dataset\nR can convert every score to a z-score at once with scale():\n\nz_scores &lt;- scale(exam_scores)[,1] |&gt; round(2)\n\ndata.frame(\n  score = exam_scores,\n  z = z_scores\n) |&gt;\n  head(8)\n\n  score     z\n1  76.6  0.14\n2  83.9  1.09\n3  82.3  0.88\n4  59.2 -2.11\n5  69.8 -0.74\n6  82.6  0.92\n7  70.8 -0.61\n8  69.5 -0.78\n\n\n\nWhat do you notice about the mean of z_scores? The standard deviation?"
+  },
+  {
+    "objectID": "lab4/lab4.html#from-z-score-to-probability",
+    "href": "lab4/lab4.html#from-z-score-to-probability",
+    "title": "Lab 4: Z-Scores & Probability in Practice",
+    "section": "From Z-Score to Probability",
+    "text": "From Z-Score to Probability\nR’s pnorm() gives the probability of scoring at or below a given z-score, using the theoretical normal curve (not just our 40 students).\n\n# Probability of scoring 88 or LOWER\npnorm(88, mean = 76, sd = 8)\n\n[1] 0.9331928\n\n\n\n\nAbout pnorm(1.5) = 93.3% of the theoretical distribution falls at or below a z of 1.5\nSo only about 6.7% of students would be expected to outscore Nadia"
+  },
+  {
+    "objectID": "lab4/lab4.html#visualizing-it",
+    "href": "lab4/lab4.html#visualizing-it",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Visualizing It",
+    "text": "Visualizing It\nClick Code to see how the plot is built.\n\n\nCode\nlibrary(ggplot2)\n\ndat &lt;- data.frame(x = seq(from = 50, to = 102, by = 0.1))\ndat$y &lt;- dnorm(x = dat$x, mean = 76, sd = 8)\n\nggplot(data = dat, mapping = aes(x = x, y = y)) +\n  geom_line(linewidth = 1.1) +\n  geom_area(\n    data = subset(dat, x &gt;= 88),\n    fill = \"orange\", alpha = 0.6\n  ) +\n  geom_vline(xintercept = 88, linetype = \"dashed\") +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Probability of Scoring 88 or Higher\",\n    x = \"\\nExam Score\",\n    y = \"Density\\n\"\n  ) +\n  theme(panel.grid = element_blank())"
+  },
+  {
+    "objectID": "lab4/lab4.html#going-the-other-direction",
+    "href": "lab4/lab4.html#going-the-other-direction",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Going the Other Direction",
+    "text": "Going the Other Direction\nqnorm() does the reverse: give it a probability, get back a score.\n\nqnorm_top10.R\n\n# What score marks the top 10% of the class?\n# Top 10% means 90% are at or below it.\nqnorm(p = 0.90, mean = 76, sd = 8, lower.tail = TRUE)\n\n[1] 86.25241\n\n\n\n\n\nA student would need roughly an 86 to be in the top 10% of this class"
+  },
+  {
+    "objectID": "lab4/lab4.html#your-turn",
+    "href": "lab4/lab4.html#your-turn",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Your Turn",
+    "text": "Your Turn\nUse the exam setting: \\(\\mu = 76\\), \\(\\sigma = 8\\). Write every argument by name.\n\nCalculate the z-score for a student who scored a 70. Is that above or below average?\nUsing pnorm(), what proportion of the population scored below a 70?\nUsing qnorm(), what raw score marks the bottom 25%?\nWhat is the standard error when n = 25? When n = 100? By what factor did it shrink?\nA different class of n = 25 averaged 79. Run a two-tailed z-test against \\(\\mu = 76\\). Report the standard error, z, and p-value.\nIn your own words: why can a class mean of 79 be “unusual” when an individual score of 79 is not?"
+  },
+  {
+    "objectID": "lab4/lab4.html#submit-on-brightspace",
+    "href": "lab4/lab4.html#submit-on-brightspace",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Submit on Brightspace",
+    "text": "Submit on Brightspace\n\nYour answers to the six questions above (show your R code and output)\nOne sentence: is a z-score of 0 a “good” or “bad” score? Explain."
+  },
+  {
+    "objectID": "lab4/lab4.html#now-in-r-one-score",
+    "href": "lab4/lab4.html#now-in-r-one-score",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Now in R: One Score",
+    "text": "Now in R: One Score\nWe store the facts first, so every later line says what each number is.\n\nz_one_score.R\n\nmu    &lt;- 76    # population mean of the exam\nsigma &lt;- 8     # population standard deviation\nnadia &lt;- 88    # Nadia's raw score\n\nz_nadia &lt;- (nadia - mu) / sigma\nz_nadia\n\n[1] 1.5"
+  },
+  {
+    "objectID": "lab4/lab4.html#two-roads-to-the-same-probability",
+    "href": "lab4/lab4.html#two-roads-to-the-same-probability",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Two Roads to the Same Probability",
+    "text": "Two Roads to the Same Probability\npnorm() returns the probability of scoring at or below a value.\n\npnorm_two_ways.R\n\n# Road 1: give pnorm() the RAW score, plus the mean and sd\npnorm(q = 88, mean = 76, sd = 8, lower.tail = TRUE)\n\n[1] 0.9331928\n\n# Road 2: standardize first, then use the STANDARD normal\npnorm(q = 1.5, mean = 0, sd = 1, lower.tail = TRUE)\n\n[1] 0.9331928\n\n\n\n\n\nSame answer: 93.3% score at or below Nadia, so about 6.7% outscore her\nRaw score + the real mean and sd = z-score + mean = 0, sd = 1\nMixing them (a raw score with mean = 0, sd = 1) is the most common mistake in this lab"
+  },
+  {
+    "objectID": "lab4/lab4.html#standardizing-a-whole-class",
+    "href": "lab4/lab4.html#standardizing-a-whole-class",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Standardizing a Whole Class",
+    "text": "Standardizing a Whole Class\nNow we simulate 40 students. scale() converts every score to a z-score at once.\n\nscale_class.R\n\nset.seed(seed = 348)\nexam_scores &lt;- round(rnorm(n = 40, mean = 76, sd = 8), digits = 1)\n\nz_scores &lt;- round(scale(x = exam_scores, center = TRUE, scale = TRUE)[, 1], digits = 2)\n\nhead(data.frame(score = exam_scores, z = z_scores), n = 8)\n\n  score     z\n1  76.6  0.14\n2  83.9  1.09\n3  82.3  0.88\n4  59.2 -2.11\n5  69.8 -0.74\n6  82.6  0.92\n7  70.8 -0.61\n8  69.5 -0.78\n\n\n\n\nWhat do you notice about the mean of z_scores? The standard deviation?"
+  },
+  {
+    "objectID": "lab4/lab4.html#population-vs.-this-class",
+    "href": "lab4/lab4.html#population-vs.-this-class",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Population vs. This Class",
+    "text": "Population vs. This Class\nOur 40 simulated scores are a sample, so their mean and sd are close to, but not exactly, 76 and 8.\n\nclass_vs_population.R\n\nmean(x = exam_scores)   # this class\n\n[1] 75.4875\n\nsd(x = exam_scores)     # this class\n\n[1] 7.70222\n\n(88 - mean(x = exam_scores)) / sd(x = exam_scores)   # Nadia vs. THIS class\n\n[1] 1.624532\n\n(88 - 76) / 8                                        # Nadia vs. the POPULATION\n\n[1] 1.5\n\n\n\n\n\nThe two z-scores differ slightly. Neither is wrong: they answer different questions (how does she compare to these 40 vs. to every possible student)"
+  },
+  {
+    "objectID": "lab4/lab4.html#from-one-score-to-a-sample-mean",
+    "href": "lab4/lab4.html#from-one-score-to-a-sample-mean",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "From One Score to a Sample Mean",
+    "text": "From One Score to a Sample Mean\nNadia is one student. What if we care about the average of a whole class?\n\n\nA single score varies a lot from student to student\nAn average of many scores varies much less\nSo a sample mean needs a different yardstick than a single score"
+  },
+  {
+    "objectID": "lab4/lab4.html#simulating-a-sampling-distribution",
+    "href": "lab4/lab4.html#simulating-a-sampling-distribution",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Simulating a Sampling Distribution",
+    "text": "Simulating a Sampling Distribution\nDraw many samples of size n, record each sample’s mean, then look at how those means are spread out.\n\nsampling_sim.R\n\nset.seed(seed = 348)\n\nsim_means &lt;- function(n) {\n  replicate(n = 5000, expr = mean(x = rnorm(n = n, mean = 76, sd = 8)))\n}\n\nmeans_10  &lt;- sim_means(n = 10)\nmeans_40  &lt;- sim_means(n = 40)\nmeans_160 &lt;- sim_means(n = 160)\n\nsd(x = means_10)    # spread of the sample means when n = 10\n\n[1] 2.571714\n\nsd(x = means_40)    # n = 40\n\n[1] 1.273569\n\nsd(x = means_160)   # n = 160\n\n[1] 0.6340208"
+  },
+  {
+    "objectID": "lab4/lab4.html#bigger-samples-narrower-distribution",
+    "href": "lab4/lab4.html#bigger-samples-narrower-distribution",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Bigger Samples, Narrower Distribution",
+    "text": "Bigger Samples, Narrower Distribution\n\n\nCode\nlibrary(dplyr)\n\nsims &lt;- bind_rows(\n  data.frame(mean = means_10,  n = \"n = 10\"),\n  data.frame(mean = means_40,  n = \"n = 40\"),\n  data.frame(mean = means_160, n = \"n = 160\")\n) |&gt;\n  mutate(n = factor(x = n, levels = c(\"n = 10\", \"n = 40\", \"n = 160\")))\n\nggplot(data = sims, mapping = aes(x = mean)) +\n  geom_histogram(bins = 40, fill = \"#5C715E\", color = \"white\") +\n  facet_wrap(facets = ~ n) +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"5,000 Sample Means at Each Sample Size\",\n    x = \"\\nSample Mean\", y = \"Count\\n\"\n  ) +\n  theme(panel.grid = element_blank())"
+  },
+  {
+    "objectID": "lab4/lab4.html#standard-error",
+    "href": "lab4/lab4.html#standard-error",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Standard Error",
+    "text": "Standard Error\nThe spread of the sample means has a name: the standard error.\n\\[SE = \\frac{\\sigma}{\\sqrt{n}}\\]\n\nstandard_error.R\n\nsigma &lt;- 8\n\nsigma / sqrt(x = 10)    # n = 10\n\n[1] 2.529822\n\nsigma / sqrt(x = 40)    # n = 40\n\n[1] 1.264911\n\nsigma / sqrt(x = 160)   # n = 160\n\n[1] 0.6324555\n\n\n\n\n\nCompare to the simulated spreads on the previous slide: they match\nQuadruple n and the standard error is cut in half"
+  },
+  {
+    "objectID": "lab4/lab4.html#individual-z-vs.-sample-mean-z",
+    "href": "lab4/lab4.html#individual-z-vs.-sample-mean-z",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Individual z vs. Sample-Mean z",
+    "text": "Individual z vs. Sample-Mean z\nSame population: \\(\\mu = 76\\), \\(\\sigma = 8\\).\n\n\n\n\n\n\n\n\nQuestion\nFormula\nResult\n\n\n\n\nNadia scored 88. How unusual is she?\n\\(z = \\dfrac{88 - 76}{8}\\)\n\\(z = 1.5\\)\n\n\nA class of 40 averaged 80. How unusual is that class?\n\\(z = \\dfrac{80 - 76}{8/\\sqrt{40}}\\)\n\\(z \\approx 3.16\\)\n\n\n\n\n\nA score of 88 is uncommon. A class mean of 80 is far rarer, because means vary much less than single scores\nThe only change in the formula: divide by the standard error, not by \\(\\sigma\\)"
+  },
+  {
+    "objectID": "lab4/lab4.html#the-one-sample-z-test-in-r",
+    "href": "lab4/lab4.html#the-one-sample-z-test-in-r",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "The One-Sample Z-Test in R",
+    "text": "The One-Sample Z-Test in R\nQuestion: a class of n = 40 averaged 80. If the population mean really is 76 (with \\(\\sigma = 8\\)), how likely is a class mean this high?\n\nz_test.R\n\nmu     &lt;- 76    # population mean\nsigma  &lt;- 8     # population standard deviation\nn      &lt;- 40    # sample size\nm      &lt;- 80    # observed sample mean\n\nse &lt;- sigma / sqrt(x = n)\nz  &lt;- (m - mu) / se\n\n# One-tailed: P(sample mean &gt;= 80)\np_one &lt;- pnorm(q = z, mean = 0, sd = 1, lower.tail = FALSE)\n\n# Two-tailed: the extreme could have been in either direction\np_two &lt;- 2 * p_one\n\nc(se = se, z = z, p_one = p_one, p_two = p_two)\n\n          se            z        p_one        p_two \n1.2649110641 3.1622776602 0.0007827011 0.0015654023 \n\n\n\n\n\nThe p-value is tiny (far below .05): a mean of 80 would be very surprising if \\(\\mu\\) were really 76\nNote lower.tail = FALSE: we want the area above z"
+  },
+  {
+    "objectID": "lab4/lab4.html#seeing-the-test",
+    "href": "lab4/lab4.html#seeing-the-test",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Seeing the Test",
+    "text": "Seeing the Test\n\n\nCode\nse &lt;- 8 / sqrt(x = 40)\n\ndat2 &lt;- data.frame(x = seq(from = 76 - 4 * se, to = 76 + 4 * se, length.out = 400))\ndat2$y &lt;- dnorm(x = dat2$x, mean = 76, sd = se)\n\nggplot(data = dat2, mapping = aes(x = x, y = y)) +\n  geom_line(linewidth = 1.1) +\n  geom_area(data = subset(dat2, x &gt;= 80), fill = \"orange\", alpha = 0.6) +\n  geom_vline(xintercept = 80, linetype = \"dashed\") +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Sampling Distribution of the Mean (n = 40, if mu = 76)\",\n    x = \"\\nSample Mean\", y = \"Density\\n\"\n  ) +\n  theme(panel.grid = element_blank())"
+  },
+  {
+    "objectID": "lab4/ttest.html#a",
+    "href": "lab4/ttest.html#a",
+    "title": "t",
+    "section": "A",
+    "text": "A\n\nz.R\n\nx &lt;- 76\npnorm(q = 88, mean = x, sd = 8)\n\n[1] 0.9331928"
   }
 ]
