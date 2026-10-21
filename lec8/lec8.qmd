@@ -991,11 +991,22 @@ tibble(correct = c(0, 2, 4, 6, 8),
 
 - **Reject $H_0$ only if she gets all 8 correct.**
 
-- Under $H_0$ there are ${8 \choose 4} = \dfrac{8!}{4!\,(8-4)!} = 70$ equally likely ways to guess which 4 cups are milk-first.
+- Under $H_0$ there are ${8 \choose 4} = 70$ equally likely ways to guess which 4 cups are milk-first.
 
 - So the probability of guessing all 8 correctly by chance is $\dfrac{1}{70} \approx 1.4\%$.
 
 Since $1.4\%$ is less than $5\%$, it is rare enough to count as evidence against $H_0$.
+
+## Where the 70 Comes From
+
+### Choosing $k$ items out of $n$
+
+$${n \choose k} = \dfrac{n!}{k!\,(n-k)!}$$
+
+- $n!$ ("n factorial") means $n \times (n-1) \times \dots \times 1$
+- The **numerator**, $n!$, counts every ordering of all $n$ items
+- The **denominator** removes the orderings that do not matter: the order within the $k$ chosen items, $k!$, and within the $n-k$ left out, $(n-k)!$
+- Here $n = 8$ cups and $k = 4$ milk-first: $\dfrac{8!}{4!\,4!} = \dfrac{40{,}320}{24 \times 24} = 70$
 
 ## Decision & Interpretation
 

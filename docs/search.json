@@ -550,7 +550,7 @@
     "href": "lec8/lec8.html#the-test",
     "title": "Sampling Theory",
     "section": "The Test",
-    "text": "The Test\nFisher’s rule\n\nReject \\(H_0\\) only if she gets all 8 correct.\nUnder \\(H_0\\) there are \\({8 \\choose 4} = \\dfrac{8!}{4!\\,(8-4)!} = 70\\) equally likely ways to guess which 4 cups are milk-first.\nSo the probability of guessing all 8 correctly by chance is \\(\\dfrac{1}{70} \\approx 1.4\\%\\).\n\nSince \\(1.4\\%\\) is less than \\(5\\%\\), it is rare enough to count as evidence against \\(H_0\\)."
+    "text": "The Test\nFisher’s rule\n\nReject \\(H_0\\) only if she gets all 8 correct.\nUnder \\(H_0\\) there are \\({8 \\choose 4} = 70\\) equally likely ways to guess which 4 cups are milk-first.\nSo the probability of guessing all 8 correctly by chance is \\(\\dfrac{1}{70} \\approx 1.4\\%\\).\n\nSince \\(1.4\\%\\) is less than \\(5\\%\\), it is rare enough to count as evidence against \\(H_0\\)."
   },
   {
     "objectID": "lec8/lec8.html#decision-interpretation",
@@ -5231,5 +5231,12 @@
     "title": "Lab 4: Instructions and Walkthrough",
     "section": "Submit question",
     "text": "Submit question\n\nOne sentence: is a z-score of 0 a “good” or “bad” score? Explain.\n\nA z-score of 0 is neither good nor bad: it describes a data point or a sample mean that is exactly equal to the average. “Good” or “bad” can only be decided with context."
+  },
+  {
+    "objectID": "lec8/lec8.html#where-the-70-comes-from",
+    "href": "lec8/lec8.html#where-the-70-comes-from",
+    "title": "Sampling Theory",
+    "section": "Where the 70 Comes From",
+    "text": "Where the 70 Comes From\nChoosing \\(k\\) items out of \\(n\\)\n\\[{n \\choose k} = \\dfrac{n!}{k!\\,(n-k)!}\\]\n\n\\(n!\\) (“n factorial”) means \\(n \\times (n-1) \\times \\dots \\times 1\\)\nThe numerator, \\(n!\\), counts every ordering of all \\(n\\) items\nThe denominator removes the orderings that do not matter: the order within the \\(k\\) chosen items, \\(k!\\), and within the \\(n-k\\) left out, \\((n-k)!\\)\nHere \\(n = 8\\) cups and \\(k = 4\\) milk-first: \\(\\dfrac{8!}{4!\\,4!} = \\dfrac{40{,}320}{24 \\times 24} = 70\\)"
   }
 ]

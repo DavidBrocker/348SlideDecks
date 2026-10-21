@@ -2490,10 +2490,21 @@ Reveal Answer
 <h3 id="fishers-rule">Fisher’s rule</h3>
 <ul>
 <li class="fragment"><p><strong>Reject <span class="math inline">\(H_0\)</span> only if she gets all 8 correct.</strong></p></li>
-<li class="fragment"><p>Under <span class="math inline">\(H_0\)</span> there are <span class="math inline">\({8 \choose 4} = \dfrac{8!}{4!\,(8-4)!} = 70\)</span> equally likely ways to guess which 4 cups are milk-first.</p></li>
+<li class="fragment"><p>Under <span class="math inline">\(H_0\)</span> there are <span class="math inline">\({8 \choose 4} = 70\)</span> equally likely ways to guess which 4 cups are milk-first.</p></li>
 <li class="fragment"><p>So the probability of guessing all 8 correctly by chance is <span class="math inline">\(\dfrac{1}{70} \approx 1.4\%\)</span>.</p></li>
 </ul>
 <p>Since <span class="math inline">\(1.4\%\)</span> is less than <span class="math inline">\(5\%\)</span>, it is rare enough to count as evidence against <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="where-the-70-comes-from" class="slide level2">
+<h2>Where the 70 Comes From</h2>
+<h3 id="choosing-k-items-out-of-n">Choosing <span class="math inline">\(k\)</span> items out of <span class="math inline">\(n\)</span></h3>
+<p><span class="math display">\[{n \choose k} = \dfrac{n!}{k!\,(n-k)!}\]</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(n!\)</span> (“n factorial”) means <span class="math inline">\(n \times (n-1) \times \dots \times 1\)</span></li>
+<li class="fragment">The <strong>numerator</strong>, <span class="math inline">\(n!\)</span>, counts every ordering of all <span class="math inline">\(n\)</span> items</li>
+<li class="fragment">The <strong>denominator</strong> removes the orderings that do not matter: the order within the <span class="math inline">\(k\)</span> chosen items, <span class="math inline">\(k!\)</span>, and within the <span class="math inline">\(n-k\)</span> left out, <span class="math inline">\((n-k)!\)</span></li>
+<li class="fragment">Here <span class="math inline">\(n = 8\)</span> cups and <span class="math inline">\(k = 4\)</span> milk-first: <span class="math inline">\(\dfrac{8!}{4!\,4!} = \dfrac{40{,}320}{24 \times 24} = 70\)</span></li>
+</ul>
 </section>
 <section id="decision-interpretation" class="slide level2">
 <h2>Decision &amp; Interpretation</h2>
