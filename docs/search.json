@@ -5175,5 +5175,61 @@
     "title": "t",
     "section": "A",
     "text": "A\n\nz.R\n\nx &lt;- 76\npnorm(q = 88, mean = x, sd = 8)\n\n[1] 0.9331928"
+  },
+  {
+    "objectID": "lab4/lab4_instr.html",
+    "href": "lab4/lab4_instr.html",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "",
+    "text": "Use the following information about exam scores in a hypothetical section of this class.\nmu    &lt;- 76   # population mean\nsigma &lt;- 8    # population standard deviation\nn     &lt;- 40   # class size"
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#question-1",
+    "href": "lab4/lab4_instr.html#question-1",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Question 1",
+    "text": "Question 1\n\nCalculate the z-score for a student who scored a 70. Is that above or below average?\n\n\nx &lt;- 70\n\nz &lt;- (x - mu) / sigma\nz\n\n[1] -0.75\n\n\n\\[z = \\frac{x-\\mu}{\\sigma} = \\frac{70-76}{8} = -0.75\\]\nThe score is below average because 70 is less than 76 (z is negative)."
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#question-2",
+    "href": "lab4/lab4_instr.html#question-2",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Question 2",
+    "text": "Question 2\n\nUsing pnorm(), what proportion of the population scored below a 70?\n\n\n# Road 1: raw score with the real mean and sd\npnorm(q = 70, mean = 76, sd = 8, lower.tail = TRUE)\n\n[1] 0.2266274\n\n# Road 2: z-score with the standard normal\npnorm(q = z, mean = 0, sd = 1, lower.tail = TRUE)\n\n[1] 0.2266274\n\n\nAbout 22.7% of the population scored below a 70."
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#question-3",
+    "href": "lab4/lab4_instr.html#question-3",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Question 3",
+    "text": "Question 3\n\nUsing qnorm(), what raw score marks the bottom 25%?\n\n\nqnorm(p = 0.25, mean = 76, sd = 8, lower.tail = TRUE)\n\n[1] 70.60408\n\n\nA score of about 70.6 marks the bottom 25%."
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#question-4",
+    "href": "lab4/lab4_instr.html#question-4",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Question 4",
+    "text": "Question 4\n\nWhat is the standard error when n = 25? When n = 100? By what factor did it shrink?\n\n\nse_25  &lt;- sigma / sqrt(x = 25)\nse_100 &lt;- sigma / sqrt(x = 100)\n\nc(se_25 = se_25, se_100 = se_100)\n\n se_25 se_100 \n   1.6    0.8 \n\nse_100 / se_25\n\n[1] 0.5\n\n\nThe standard error shrank by half (1.6 to 0.8) because n was multiplied by 4."
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#question-5",
+    "href": "lab4/lab4_instr.html#question-5",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Question 5",
+    "text": "Question 5\n\nA different class of n = 25 averaged 79. Run a two-tailed z-test against \\(\\mu = 76\\). Report the standard error, z, and p-value.\n\nUse only the new class’s n = 25. The original n = 40 belongs to a different class and plays no part in this test.\n\nn_new &lt;- 25   # size of the new class\nm_new &lt;- 79   # observed mean of the new class\n\nse &lt;- sigma / sqrt(x = n_new)\nz  &lt;- (m_new - mu) / se\n\n# Standard normal (mean = 0, sd = 1) because z is already standardized\np_one &lt;- pnorm(q = abs(z), mean = 0, sd = 1, lower.tail = FALSE)\np_two &lt;- 2 * p_one\n\nc(se = se, z = z, p_two = p_two)\n\n        se          z      p_two \n1.60000000 1.87500000 0.06079272 \n\n# Two-tailed decision at alpha = .05\nabs(z) &gt; 1.96\n\n[1] FALSE\n\np_two &lt; 0.05\n\n[1] FALSE\n\n\n\\[z = \\frac{M-\\mu}{\\sigma/\\sqrt{n}} = \\frac{79-76}{8/\\sqrt{25}} = \\frac{3}{1.6} = 1.875\\]\nSE = 1.6, z = 1.875, two-tailed p = .061. Because |z| = 1.875 is less than the critical value of 1.96 (and p &gt; .05), we fail to reject the null hypothesis: this class mean is not significantly different from 76."
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#question-6",
+    "href": "lab4/lab4_instr.html#question-6",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Question 6",
+    "text": "Question 6\n\nIn your own words: why can a class mean of 79 be “unusual” when an individual score of 79 is not?\n\nSample means vary less than individual scores. The distribution of sample means is centered on 76 but is much narrower (its standard deviation is the standard error, 1.6 for n = 25, instead of 8). A single score of 79 is only z = 0.375 from the mean, but a class mean of 79 is z = 1.875, far out in the tail of that narrower distribution."
+  },
+  {
+    "objectID": "lab4/lab4_instr.html#submit-question",
+    "href": "lab4/lab4_instr.html#submit-question",
+    "title": "Lab 4: Instructions and Walkthrough",
+    "section": "Submit question",
+    "text": "Submit question\n\nOne sentence: is a z-score of 0 a “good” or “bad” score? Explain.\n\nA z-score of 0 is neither good nor bad: it describes a data point or a sample mean that is exactly equal to the average. “Good” or “bad” can only be decided with context."
   }
 ]

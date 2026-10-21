@@ -1,0 +1,108 @@
+---
+title: "Lab 4: Instructions and Walkthrough"
+format: html
+editor: visual
+---
+
+Use the following information about exam scores in a hypothetical section of this class.
+
+> Professor Brocker's PSY 348 midterm had 40 students. The exam scores were approximately normally distributed with a mean of 76 and a standard deviation of 8.
+
+```{r}
+mu    <- 76   # population mean
+sigma <- 8    # population standard deviation
+n     <- 40   # class size
+```
+
+## Question 1
+
+> Calculate the z-score for a student who scored a `70`. Is that above or below average?
+
+```{r}
+x <- 70
+
+z <- (x - mu) / sigma
+z
+```
+
+$$z = \frac{x-\mu}{\sigma} = \frac{70-76}{8} = -0.75$$
+
+The score is below average because 70 is less than 76 (z is negative).
+
+## Question 2
+
+> Using `pnorm()`, what proportion of the population scored below a 70?
+
+```{r}
+# Road 1: raw score with the real mean and sd
+pnorm(q = 70, mean = 76, sd = 8, lower.tail = TRUE)
+
+# Road 2: z-score with the standard normal
+pnorm(q = z, mean = 0, sd = 1, lower.tail = TRUE)
+```
+
+About 22.7% of the population scored below a 70.
+
+## Question 3
+
+> Using `qnorm()`, what raw score marks the bottom 25%?
+
+```{r}
+qnorm(p = 0.25, mean = 76, sd = 8, lower.tail = TRUE)
+```
+
+A score of about 70.6 marks the bottom 25%.
+
+## Question 4
+
+> What is the standard error when n = 25? When n = 100? By what factor did it shrink?
+
+```{r}
+se_25  <- sigma / sqrt(x = 25)
+se_100 <- sigma / sqrt(x = 100)
+
+c(se_25 = se_25, se_100 = se_100)
+se_100 / se_25
+```
+
+The standard error shrank by half (1.6 to 0.8) because *n* was multiplied by 4.
+
+## Question 5
+
+> A different class of n = 25 averaged 79. Run a two-tailed z-test against $\mu = 76$. Report the standard error, z, and p-value.
+
+Use only the new class's *n* = 25. The original *n* = 40 belongs to a different class and plays no part in this test.
+
+```{r}
+n_new <- 25   # size of the new class
+m_new <- 79   # observed mean of the new class
+
+se <- sigma / sqrt(x = n_new)
+z  <- (m_new - mu) / se
+
+# Standard normal (mean = 0, sd = 1) because z is already standardized
+p_one <- pnorm(q = abs(z), mean = 0, sd = 1, lower.tail = FALSE)
+p_two <- 2 * p_one
+
+c(se = se, z = z, p_two = p_two)
+
+# Two-tailed decision at alpha = .05
+abs(z) > 1.96
+p_two < 0.05
+```
+
+$$z = \frac{M-\mu}{\sigma/\sqrt{n}} = \frac{79-76}{8/\sqrt{25}} = \frac{3}{1.6} = 1.875$$
+
+SE = 1.6, z = 1.875, two-tailed p = .061. Because |z| = 1.875 is less than the critical value of 1.96 (and p > .05), we **fail to reject** the null hypothesis: this class mean is not significantly different from 76.
+
+## Question 6
+
+> In your own words: why can a class mean of 79 be "unusual" when an individual score of 79 is not?
+
+Sample means vary *less* than individual scores. The distribution of sample means is centered on 76 but is much narrower (its standard deviation is the standard error, 1.6 for *n* = 25, instead of 8). A single score of 79 is only z = 0.375 from the mean, but a class mean of 79 is z = 1.875, far out in the tail of that narrower distribution.
+
+## Submit question
+
+> One sentence: is a z-score of 0 a "good" or "bad" score? Explain.
+
+A z-score of 0 is neither good nor bad: it describes a data point or a sample mean that is exactly equal to the average. "Good" or "bad" can only be decided with context.
