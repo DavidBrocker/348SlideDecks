@@ -303,7 +303,7 @@ t, $df = 4$ ($n = 5$)
 ::: callout-tip
 ## One-Sample
 
-$t=\dfrac{\bar{x}-\mu}{\sigma/\sqrt{n}} \;|\; \dfrac{\bar{x}-\mu}{s/\sqrt{n}}$
+$t=\dfrac{\bar{x}-\mu}{s/\sqrt{n}}$
 :::
 :::
 
@@ -311,7 +311,7 @@ $t=\dfrac{\bar{x}-\mu}{\sigma/\sqrt{n}} \;|\; \dfrac{\bar{x}-\mu}{s/\sqrt{n}}$
 ::: callout-tip
 ## Paired-Samples
 
-$t=\dfrac{\bar{D}}{\sigma_D/\sqrt{n}} \;|\; \dfrac{\bar{D}}{s_D/\sqrt{n}}$
+$t=\dfrac{\bar{D}}{s_D/\sqrt{n}}$
 :::
 :::
 
@@ -326,7 +326,7 @@ $s_p^2 = \dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$
 :::
 :::::
 
-- We use the sample SD ($s$) to estimate the standard error ($s/\sqrt{n}$), since $\sigma$ is usually unknown. $s_D$ is the SD of the **difference scores** and $s_p^2$ is the **pooled variance**.
+- We use the sample SD ($s$) to estimate the standard error ($s/\sqrt{n}$), since $\sigma$ is usually unknown (if $\sigma$ *were* known, we would use $\sigma/\sqrt{n}$ and a **z**-test instead). $s_D$ is the SD of the **difference scores** and $s_p^2$ is the **pooled variance**.
 
 - The critical value depends on the **degrees of freedom**: $df = n - 1$ (one-sample, paired) or $n_1 + n_2 - 2$ (independent).
 
@@ -622,7 +622,7 @@ $t = \dfrac{\color{blue}{\bar{x}} - \mu}{\frac{\color{orange}{s}}{\sqrt{n}}} = \
 ::: callout-tip
 ## Decide
 
-For $df = 24$ ($25 - 1$), the critical value at $\alpha = .05$ (two-tailed) is $\pm 2.064$. Since $1.5 < 2.064$, we **fail to reject** $H_0$.
+For $df = 24$ ($25 - 1$), the critical value at $\alpha = .05$ (two-tailed) is $\pm 2.064$. Since $|t| = 1.5 < 2.064$, we **fail to reject** $H_0$.
 :::
 
 ## Exam Scores vs. National Average
