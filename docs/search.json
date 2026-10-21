@@ -67,7 +67,7 @@
     "href": "lec9/lec9.html#the-t-test",
     "title": "One-Sample T-Test",
     "section": "The t-test",
-    "text": "The t-test\nThree types, three cases\n\n\n\n\n\n\n\n\nOne-Sample\n\n\n\\(t=\\dfrac{\\bar{x}-\\mu}{s/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nPaired-Samples\n\n\n\\(t=\\dfrac{\\bar{D}}{s_D/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nIndependent-Samples\n\n\n\\(t = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{s_p^2\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}}\\)\n\\(s_p^2 = \\dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\)\n\n\n\n\n\nWe use the sample SD (\\(s\\)) to estimate the standard error (\\(s/\\sqrt{n}\\)), since \\(\\sigma\\) is usually unknown (if \\(\\sigma\\) were known, we would use \\(\\sigma/\\sqrt{n}\\) and a z-test instead). \\(s_D\\) is the SD of the difference scores and \\(s_p^2\\) is the pooled variance.\nThe critical value depends on the degrees of freedom: \\(df = n - 1\\) (one-sample, paired) or \\(n_1 + n_2 - 2\\) (independent)."
+    "text": "The t-test\nThree types, three cases\n\n\n\n\n\n\n\n\nOne-Sample\n\n\n\\(t=\\dfrac{\\bar{x}-\\mu}{s/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nPaired-Samples\n\n\n\\(t=\\dfrac{\\bar{D}}{s_D/\\sqrt{n}}\\)\n\n\n\n\n\n\n\n\n\n\nIndependent-Samples\n\n\n\\(t = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{s_p^2\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}}\\)\n\\(s_p^2 = \\dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\)\n\n\n\n\n\nWe use the sample SD (\\(s\\)) to estimate the standard error (\\(s/\\sqrt{n}\\)), since \\(\\sigma\\) is usually unknown. \\(s_D\\) is the SD of the difference scores and \\(s_p^2\\) is the pooled variance.\nThe critical value depends on the degrees of freedom: \\(df = n - 1\\) (one-sample, paired) or \\(n_1 + n_2 - 2\\) (independent)."
   },
   {
     "objectID": "lec9/lec9.html#the-t-distribution",
@@ -88,7 +88,7 @@
     "href": "lec9/lec9.html#the-one-sample-t-test-formula",
     "title": "One-Sample T-Test",
     "section": "The One-Sample t-Test Formula",
-    "text": "The One-Sample t-Test Formula\n\n\n\n\n\n\nOne-Sample t-Test\n\n\n\\(\\large{t = \\dfrac{\\color{blue}{\\bar{x}} - \\mu}{\\color{orange}{s}/\\sqrt{n}}}\\)\n\n\n\n\n\\(\\color{blue}{\\bar{x}}\\) = sample mean\n\\(\\mu\\) = population mean (null hypothesis value)\n\\(\\color{orange}{s}/\\sqrt{n}\\) = the standard error (SE), estimated from the sample: \\(s\\) is the sample SD and \\(n\\) the sample size"
+    "text": "The One-Sample t-Test Formula\n\n\n\n\n\n\nOne-Sample t-Test\n\n\n\\(\\large{t = \\dfrac{\\color{blue}{\\bar{x}} - \\mu}{\\color{orange}{s}/\\sqrt{n}}}\\)\n\n\n\n\n\\(\\color{blue}{\\bar{x}}\\) = sample mean\n\\(\\mu\\) = population mean (null hypothesis value)\n\\(\\color{orange}{s}/\\sqrt{n}\\) = the standard error (SE), estimated from the sample: \\(s\\) is the sample SD and \\(n\\) the sample size\n\\(s = \\sqrt{\\dfrac{\\sum (x_i - \\bar{x})^2}{n-1}}\\) = sum of squared deviations from the mean, divided by \\(n-1\\), then square-rooted"
   },
   {
     "objectID": "lec9/lec9.html#hypothesis-testing-steps",
@@ -102,7 +102,7 @@
     "href": "lec9/lec9.html#reading-the-t-table",
     "title": "One-Sample T-Test",
     "section": "Reading the t-Table",
-    "text": "Reading the t-Table\nCritical values by degrees of freedom\n\n\nExcerpt of the t-table (critical values)\n\n\n\n\n\n\n\n\ndf\nOne-tailed .05(two-tailed .10)\nOne-tailed .025(two-tailed .05)\nOne-tailed .005(two-tailed .01)\n\n\n\n\n15\n1.753\n2.131\n2.947\n\n\n19\n1.729\n2.093\n2.861\n\n\n24\n1.711\n2.064\n2.797\n\n\n29\n1.699\n2.045\n2.756\n\n\n∞ (z)\n1.645\n1.960\n2.576\n\n\n\n\n\nFind your df (\\(n - 1\\) for a one-sample test), then the column for your \\(\\alpha\\) and tails. If \\(|t|\\) is beyond the critical value, reject \\(H_0\\) (here \\(2.68 &gt; 2.093\\)).\nIn R: qt(.975, df = 19) returns 2.093."
+    "text": "Reading the t-Table\nCritical values by degrees of freedom\n\n\nExcerpt of the t-table (critical values)\n\n\n\n\n\n\n\n\ndf\nOne-tailed .05(two-tailed .10)\nOne-tailed .025(two-tailed .05)\nOne-tailed .005(two-tailed .01)\n\n\n\n\n15\n1.753\n2.131\n2.947\n\n\n19\n1.729\n2.093\n2.861\n\n\n24\n1.711\n2.064\n2.797\n\n\n29\n1.699\n2.045\n2.756\n\n\n∞ (z)\n1.645\n1.960\n2.576\n\n\n\n\n\nFind your df (\\(n - 1\\) for a one-sample test), then the column for your \\(\\alpha\\) and tails. If \\(|t|\\) is beyond the critical value, reject \\(H_0\\) (here \\(2.68 &gt; 2.093\\)).\nIn R: qt(.975, df = 19) returns 2.093 (the upper 2.5% cutoff)."
   },
   {
     "objectID": "lec9/lec9.html#hypothesis-testing-steps-1",
@@ -389,7 +389,7 @@
     "href": "lec8/lec8.html#z-test-1",
     "title": "Sampling Theory",
     "section": "Z-Test",
-    "text": "Z-Test\n\\(P(M \\geq 6.75)\\): more than (\\(z = 2.24\\))\n\n\nExcerpt of the z-table (area to the left of z)\n\n\nz\n.03\n.04\n.05\n\n\n\n\n2.1\n0.9834\n0.9838\n0.9842\n\n\n2.2\n0.9871\n0.9875\n0.9878\n\n\n2.3\n0.9901\n0.9904\n0.9906\n\n\n\n\n\nBy HandIn R\n\n\n\nFind 2.2 on the left side of the table and the .04 column.\nThe table gives the area to the left: \\(.9875\\).\nWe want 6.75 or more, so subtract from 1.\n\n\n\nReveal Answer\n\n\n\\(1 - .9875 = .0125\\)\nAbout 1.3% of samples of 500 would have a mean this high if \\(\\mu = 6.6\\).\n\n\n\n\n\npnorm.R\n1 - pnorm(2.24)                                          # .0125 (z-table)\npnorm(6.75, mean = 6.6, sd = 1.5 / sqrt(500),\n      lower.tail = FALSE)                                # .0127 (unrounded z)"
+    "text": "Z-Test\n\\(P(M \\geq 6.75)\\): more than (\\(z = 2.24\\))\n\n\nExcerpt of the z-table (area to the left of z)\n\n\nz\n.03\n.04\n.05\n\n\n\n\n2.1\n0.9834\n0.9838\n0.9842\n\n\n2.2\n0.9871\n0.9875\n0.9878\n\n\n2.3\n0.9901\n0.9904\n0.9906\n\n\n\n\n\nBy HandIn R\n\n\n\nFind 2.2 on the left side of the table and the .04 column.\nThe table gives the area to the left: \\(.9875\\).\nWe want 6.75 or more, so subtract from 1.\n\n\n\nReveal Answer\n\n\n\\(1 - .9875 = .0125\\)\nAbout 1.3% of samples of 500 would have a mean this high if \\(\\mu = 6.6\\).\n\n\n\n\n\npnorm.R\n# pnorm(q) = area to the LEFT of q; lower.tail = FALSE = area to the RIGHT (p-value)\n# sd here is the standard error: sigma / sqrt(n)\n1 - pnorm(2.24)                                          # .0125 (z-table)\npnorm(6.75, mean = 6.6, sd = 1.5 / sqrt(500),\n      lower.tail = FALSE)                                # .0127 (unrounded z)"
   },
   {
     "objectID": "lec8/lec8.html#example",
@@ -1243,7 +1243,7 @@
     "href": "lec10/lec10.html#practice-1",
     "title": "Paired-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nPre/post stress: data and answer\n\npractice_1.R\n\nset.seed(101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z\\) = -1.44: a significant, large decrease in stress."
+    "text": "Practice\nPre/post stress: data and answer\n\npractice_1.R\n\nset.seed(101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z = \\bar{D}/s_D\\) = -1.44: a significant, large decrease in stress."
   },
   {
     "objectID": "lec10/lec10.html#practice-2",
@@ -1691,7 +1691,7 @@
     "href": "lec13fct/lec13fct.html#understanding-main-effects",
     "title": "Factorial ANOVA",
     "section": "Understanding Main Effects",
-    "text": "Understanding Main Effects\n\n\n\nThe main effect of Coffee asks:\n\nOn average, does drinking coffee make people happier than not drinking coffee?\n(Regardless of whether they watched TV or not.)\n\nThe main effect of Watching TV asks:\n\nOn average, does watching TV make people happier than not watching it?\n(Regardless of whether they had coffee or not.)\n\n\n\n\n\n\n\n\n\n\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\n\nC1\n\nCoffee\n\n\n\nC2\n\nNo Coffee\n\n\n\nH1\n\nHappiness\n\n\n\nH1-&gt;C1\n\n\n\n\n\nH2\n\nHappiness\n\n\n\nH2-&gt;C2\n\n\n\n\n\nTV\n\nTV\n\n\n\nNTV\n\nNo TV\n\n\n\nH3\n\nHappiness\n\n\n\nH3-&gt;TV\n\n\n\n\n\nH4\n\nHappiness\n\n\n\nH4-&gt;NTV"
+    "text": "Understanding Main Effects\n\n\n\nThe main effect of Coffee asks:\n\nOn average, does drinking coffee make people happier than not drinking coffee?\n(Regardless of whether they watched TV or not.)\n\nThe main effect of Watching TV asks:\n\nOn average, does watching TV make people happier than not watching it?\n(Regardless of whether they had coffee or not.)\n\n\n\n\n\n\n\n\n\n\n\n\ncluster_tv\n\nIndependent Variable 2: TV Show\n\n\ncluster_coffee\n\nIndependent Variable 1: Coffee\n\n\n\nC1\n\nCoffee\n\n\n\nC2\n\nNo Coffee\n\n\n\nH1\n\nHappiness\n\n\n\nH1-&gt;C1\n\n\n\n\n\nH2\n\nHappiness\n\n\n\nH2-&gt;C2\n\n\n\n\n\nTV\n\nTV\n\n\n\nNTV\n\nNo TV\n\n\n\nH3\n\nHappiness\n\n\n\nH3-&gt;TV\n\n\n\n\n\nH4\n\nHappiness\n\n\n\nH4-&gt;NTV"
   },
   {
     "objectID": "lec13fct/lec13fct.html#understanding-main-effects-1",
@@ -1733,7 +1733,7 @@
     "href": "lec13fct/lec13fct.html#calculating-ms",
     "title": "Factorial ANOVA",
     "section": "Calculating MS",
-    "text": "Calculating MS\n\n\n\n\n\n\nEach MS is an SS divided by its df\n\n\n\\(MS_{B_1} = \\dfrac{SS_{B_1}}{k_1-1} \\qquad MS_{B_2} = \\dfrac{SS_{B_2}}{k_2-1}\\)\n\\(MS_{Interaction} = \\dfrac{SS_{Interaction}}{(k_1-1)(k_2-1)} \\qquad MS_{Error} = \\dfrac{SS_{Error}}{N-(k_1 k_2)}\\)"
+    "text": "Calculating MS\n\n\n\n\n\n\nEach MS is an SS divided by its df\n\n\n\\(MS_{B_1} = \\dfrac{SS_{B_1}}{k_1-1} \\qquad MS_{B_2} = \\dfrac{SS_{B_2}}{k_2-1}\\)\n\\(MS_{Interaction} = \\dfrac{SS_{Interaction}}{(k_1-1)(k_2-1)} \\qquad MS_{Error} = \\dfrac{SS_{Error}}{N-(k_1 k_2)}\\)\n\n\n\n\nEach SS is a sum of squared distances from a mean: \\(SS_{B_1} = \\sum n_j(\\bar{x}_j - \\bar{x}_G)^2\\) (each level mean from the grand mean, weighted by group size; same form for \\(SS_{B_2}\\)) and \\(SS_{Error} = \\sum (x - \\bar{x}_{cell})^2\\) (each score from its own cell mean). \\(SS_{Interaction}\\) is what remains of the between-cell variation after \\(SS_{B_1}\\) and \\(SS_{B_2}\\)."
   },
   {
     "objectID": "lec13fct/lec13fct.html#calculating-f",
@@ -1789,7 +1789,7 @@
     "href": "lec13fct/lec13fct.html#effect-size-partial-eta-squared",
     "title": "Factorial ANOVA",
     "section": "Effect Size: Partial Eta Squared",
-    "text": "Effect Size: Partial Eta Squared\n\n\n\n\n\n\n\\(\\eta_p^2\\)\n\n\n\\(\\eta_p^2 = \\dfrac{SS_{effect}}{SS_{effect} + SS_{error}}\\) (one value for each F)\n\n\n\n\n\n\n\n\n\n\n\nEffect\nPartial η²\n\n\n\n\nDiet type\n0.304\n\n\nExercise regimen\n0.330\n\n\nDiet × Exercise\n0.038\n\n\n\n\n\n\n\n\nBenchmarks are the same as one-way ANOVA: about .01 small, .06 medium, .14 large."
+    "text": "Effect Size: Partial Eta Squared\n\n\n\n\n\n\n\\(\\eta_p^2\\)\n\n\n\\(\\eta_p^2 = \\dfrac{SS_{effect}}{SS_{effect} + SS_{error}}\\) (one value for each F)\n\n\n\n\nNumerator: the SS for this effect. Denominator: that same SS plus the error SS.\n\n\n\n\n\n\n\n\n\nEffect\nPartial η²\n\n\n\n\nDiet type\n0.304\n\n\nExercise regimen\n0.330\n\n\nDiet × Exercise\n0.038\n\n\n\n\n\n\n\n\nBenchmarks are the same as one-way ANOVA: about .01 small, .06 medium, .14 large."
   },
   {
     "objectID": "lec13fct/lec13fct.html#following-up-an-interaction",
@@ -2556,7 +2556,7 @@
     "href": "lab10/lab10.html#running-the-anova",
     "title": "Lab 10: One-Way ANOVA",
     "section": "Running the ANOVA",
-    "text": "Running the ANOVA\n\nanova_result &lt;- aov(score ~ method, data = study_data)\nsummary(anova_result)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nmethod       2  32.84  16.420    16.9 4.12e-06 ***\nResiduals   42  40.80   0.972                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nLook at the F value and p-value\nIf \\(p &lt; .05\\), reject the null hypothesis"
+    "text": "Running the ANOVA\n\nanova_result &lt;- aov(score ~ method, data = study_data)\nsummary(anova_result)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nmethod       2  32.84  16.420    16.9 4.12e-06 ***\nResiduals   42  40.80   0.972                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\\[F = \\frac{MS_B}{MS_E} = \\frac{SS_B / (k - 1)}{SS_E / (N - k)}\\]\n\n\nF is the variance between group means (numerator) divided by the variance within groups (denominator); \\(k\\) = number of groups, \\(N\\) = total sample size\nLook at the F value and p-value\nIf \\(p &lt; .05\\), reject the null hypothesis"
   },
   {
     "objectID": "lab10/lab10.html#post-hoc-tukey-hsd",
@@ -2906,7 +2906,7 @@
     "href": "lec14/lec14.html#calculating-repeated-measures-anova",
     "title": "Within-Subjects ANOVA",
     "section": "Calculating Repeated-Measures ANOVA",
-    "text": "Calculating Repeated-Measures ANOVA\n\n\n\n\n\n\nThe F ratio\n\n\n\\(F = \\dfrac{MS_{Time}}{MS_{Error}}\\)\n\\(MS_{Time} = \\dfrac{SS_{Time}}{df_{Time}} = \\dfrac{SS_{Time}}{k - 1}\\)\n\\(MS_{Error} = \\dfrac{SS_{W} - SS_{Subjects}}{df_{Error}} = \\dfrac{SS_{W} - SS_{Subjects}}{(n-1)(k-1)}\\)\n\n\n\n\n\\(k\\) is the number of time points (or conditions) and \\(n\\) is the number of participants."
+    "text": "Calculating Repeated-Measures ANOVA\n\n\n\n\n\n\nThe F ratio\n\n\n\\(F = \\dfrac{MS_{Time}}{MS_{Error}}\\)\n\\(MS_{Time} = \\dfrac{SS_{Time}}{df_{Time}} = \\dfrac{SS_{Time}}{k - 1}\\)\n\\(MS_{Error} = \\dfrac{SS_{W} - SS_{Subjects}}{df_{Error}} = \\dfrac{SS_{W} - SS_{Subjects}}{(n-1)(k-1)}\\)\n\n\n\n\n\\(k\\) is the number of time points (or conditions) and \\(n\\) is the number of participants.\nEach SS is a sum of squared distances from a mean (\\(\\bar{x}_t\\) = a time mean, \\(\\bar{x}_p\\) = a person’s mean, \\(\\bar{x}_G\\) = the grand mean): \\(SS_{Time} = \\sum n(\\bar{x}_t - \\bar{x}_G)^2 \\quad SS_{Subjects} = \\sum k(\\bar{x}_p - \\bar{x}_G)^2 \\quad SS_{W} = \\sum (x - \\bar{x}_t)^2\\)"
   },
   {
     "objectID": "lec14/lec14.html#degrees-of-freedom",
@@ -3011,7 +3011,7 @@
     "href": "lec14/lec14.html#repeated-measures-anova-5",
     "title": "Within-Subjects ANOVA",
     "section": "Repeated-Measures ANOVA",
-    "text": "Repeated-Measures ANOVA\nEngagement intervention: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n111.72\n55.86\n343.60\n&lt;.001\n\n\nSubjects\n99\n769.76\n7.78\n–\n–\n\n\nError\n198\n32.19\n0.16\n–\n–\n\n\n\n\n\n\n\nF(2, 198) = 343.60, p &lt; .001"
+    "text": "Repeated-Measures ANOVA\nEngagement intervention: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n111.72\n55.86\n343.60\n&lt;.001\n\n\nSubjects\n99\n769.76\n7.78\n–\n–\n\n\nError\n198\n32.19\n0.16\n–\n–\n\n\n\n\n\n\n\nF(2, 198) = 343.60, p &lt; .001\n\n\n\n\n\n\n\n\n\n\nError bars: mean \\(\\pm\\) SE, where \\(SE = \\dfrac{s}{\\sqrt{n}}\\) and \\(s\\) is the SD of the scores."
   },
   {
     "objectID": "lec14/lec14.html#repeated-measures-anova-6",
@@ -3032,7 +3032,7 @@
     "href": "lec14/lec14.html#repeated-measures-anova-8",
     "title": "Within-Subjects ANOVA",
     "section": "Repeated-Measures ANOVA",
-    "text": "Repeated-Measures ANOVA\nActive-learning practices: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n116.75\n58.38\n281.96\n&lt;.001\n\n\nSubjects\n79\n552.90\n7.00\n–\n–\n\n\nError\n158\n32.71\n0.21\n–\n–\n\n\n\n\n\n\n\nF(2, 158) = 281.96, p &lt; .001"
+    "text": "Repeated-Measures ANOVA\nActive-learning practices: results\n\n\n\n\n\n\n\n\n\n\nSource\ndf\nSS\nMS\nF\np\n\n\n\n\nTime (condition)\n2\n116.75\n58.38\n281.96\n&lt;.001\n\n\nSubjects\n79\n552.90\n7.00\n–\n–\n\n\nError\n158\n32.71\n0.21\n–\n–\n\n\n\n\n\n\n\nF(2, 158) = 281.96, p &lt; .001\n\n\n\n\n\n\n\n\n\n\nError bars: mean \\(\\pm\\) SE, where \\(SE = \\dfrac{s}{\\sqrt{n}}\\) and \\(s\\) is the SD of the scores."
   },
   {
     "objectID": "lec14/lec14.html#interpreting-f",
@@ -4036,14 +4036,14 @@
     "href": "lec11/lec11.html#computational-formula-1",
     "title": "Independent-Samples T-Test",
     "section": "Computational Formula",
-    "text": "Computational Formula\nWhen the variances are not equal (Welch’s t-test)\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\]\n\nNo pooling: each group’s variance keeps its own weight, and df is adjusted (it is usually not a whole number).\nThis is what t.test() does by default in R. Adding var.equal = TRUE gives the pooled version above."
+    "text": "Computational Formula\nWhen the variances are not equal (Welch’s t-test)\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\]\n\nNo pooling: each group’s variance keeps its own weight, and df is adjusted (it is usually not a whole number). Each \\(s_j^2 = \\dfrac{\\sum (x_{ij} - \\bar{x}_j)^2}{n_j - 1}\\) is that group’s own variance: squared distances from its own mean, divided by \\(n_j - 1\\).\nThis is what t.test() does by default in R. Adding var.equal = TRUE gives the pooled version above."
   },
   {
     "objectID": "lec11/lec11.html#coffee-example",
     "href": "lec11/lec11.html#coffee-example",
     "title": "Independent-Samples T-Test",
     "section": "Coffee Example",
-    "text": "Coffee Example\nManual\n\n\n\n\n\n\nPooled variance and standard error\n\n\n\\(s_p^2 = \\dfrac{(10-1)(1)^2 + (10-1)(1)^2}{10 + 10 - 2} = 1.00\\) and \\(SE = \\sqrt{1.00\\left(\\frac{1}{10} + \\frac{1}{10}\\right)} = 0.45\\)\n\n\n\n\n\n\n\n\n\nCompute t\n\n\n\\(t = \\dfrac{8 - 6}{0.45} = 4.47\\)\n\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(df = 10 + 10 - 2 = 18\\). At \\(\\alpha = .05\\) (two-tailed), \\(t_{critical} = \\pm 2.101\\). Since \\(4.47 &gt; 2.101\\), we reject \\(H_0\\)."
+    "text": "Coffee Example\nManual\n\n\n\n\n\n\nPooled variance and standard error\n\n\n\\(s_p^2 = \\dfrac{(10-1)(1)^2 + (10-1)(1)^2}{10 + 10 - 2} = 1.00\\) and \\(SE = \\sqrt{1.00\\left(\\frac{1}{10} + \\frac{1}{10}\\right)} = 0.45\\)\n\n\n\n\n\n\n\n\n\nCompute t\n\n\n\\(t = \\dfrac{8 - 6}{0.45} = 4.47\\)\nThe denominator is \\(SE = \\sqrt{s_p^2\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}\\), the standard error of the difference between the two means.\n\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(df = 10 + 10 - 2 = 18\\). At \\(\\alpha = .05\\) (two-tailed), \\(t_{critical} = \\pm 2.101\\). Since \\(4.47 &gt; 2.101\\), we reject \\(H_0\\)."
   },
   {
     "objectID": "lec11/lec11.html#coffee-example-1",
@@ -4127,7 +4127,7 @@
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-5",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(48) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(48) = 3.71, p &lt; .001, 95% CI [1.10, 3.69], d = 1.05."
+    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(48) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect), where \\(s_p = \\sqrt{s_p^2}\\) is the square root of the pooled variance\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(48) = 3.71, p &lt; .001, 95% CI [1.10, 3.69], d = 1.05."
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying",
@@ -5083,7 +5083,7 @@
     "href": "lab4/lab4.html#your-turn",
     "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
     "section": "Your Turn",
-    "text": "Your Turn\nUse the exam setting: \\(\\mu = 76\\), \\(\\sigma = 8\\). Write every argument by name.\n\nCalculate the z-score for a student who scored a 70. Is that above or below average?\nUsing pnorm(), what proportion of the population scored below a 70?\nUsing qnorm(), what raw score marks the bottom 25%?\nWhat is the standard error when n = 25? When n = 100? By what factor did it shrink?\nA different class of n = 25 averaged 79. Run a two-tailed z-test against \\(\\mu = 76\\). Report the standard error, z, and p-value.\nIn your own words: why can a class mean of 79 be “unusual” when an individual score of 79 is not?"
+    "text": "Your Turn\nUse the exam setting: \\(\\mu = 76\\), \\(\\sigma = 8\\). Write every argument by name.\n\nCalculate the z-score for a student who scored a 70. Is that above or below average?\nUsing pnorm(), what proportion of the population scored below a 70?\nUsing qnorm(), what raw score marks the bottom 25%?"
   },
   {
     "objectID": "lab4/lab4.html#submit-on-brightspace",
@@ -5104,7 +5104,7 @@
     "href": "lab4/lab4.html#two-roads-to-the-same-probability",
     "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
     "section": "Two Roads to the Same Probability",
-    "text": "Two Roads to the Same Probability\npnorm() returns the probability of scoring at or below a value.\n\npnorm_two_ways.R\n\n# Road 1: give pnorm() the RAW score, plus the mean and sd\npnorm(q = 88, mean = 76, sd = 8, lower.tail = TRUE)\n\n[1] 0.9331928\n\n# Road 2: standardize first, then use the STANDARD normal\npnorm(q = 1.5, mean = 0, sd = 1, lower.tail = TRUE)\n\n[1] 0.9331928\n\n\n\n\n\nSame answer: 93.3% score at or below Nadia, so about 6.7% outscore her\nRaw score + the real mean and sd = z-score + mean = 0, sd = 1\nMixing them (a raw score with mean = 0, sd = 1) is the most common mistake in this lab"
+    "text": "Two Roads to the Same Probability\npnorm() returns the probability of scoring at or below a value: \\(P(X \\le x) = P\\!\\left(Z \\le \\dfrac{x - \\mu}{\\sigma}\\right)\\), the area to the left of the z-score.\n\npnorm_two_ways.R\n\n# Road 1: give pnorm() the RAW score, plus the mean and sd\npnorm(q = 88, mean = 76, sd = 8, lower.tail = TRUE)\n\n[1] 0.9331928\n\n# Road 2: standardize first, then use the STANDARD normal\npnorm(q = 1.5, mean = 0, sd = 1, lower.tail = TRUE)\n\n[1] 0.9331928\n\n\n\n\n\nSame answer: 93.3% score at or below Nadia, so about 6.7% outscore her\nRaw score + the real mean and sd = z-score + mean = 0, sd = 1\nMixing them (a raw score with mean = 0, sd = 1) is the most common mistake in this lab"
   },
   {
     "objectID": "lab4/lab4.html#standardizing-a-whole-class",
@@ -5132,7 +5132,7 @@
     "href": "lab4/lab4.html#simulating-a-sampling-distribution",
     "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
     "section": "Simulating a Sampling Distribution",
-    "text": "Simulating a Sampling Distribution\nDraw many samples of size n, record each sample’s mean, then look at how those means are spread out.\n\nsampling_sim.R\n\nset.seed(seed = 348)\n\nsim_means &lt;- function(n) {\n  replicate(n = 5000, expr = mean(x = rnorm(n = n, mean = 76, sd = 8)))\n}\n\nmeans_10  &lt;- sim_means(n = 10)\nmeans_40  &lt;- sim_means(n = 40)\nmeans_160 &lt;- sim_means(n = 160)\n\nsd(x = means_10)    # spread of the sample means when n = 10\n\n[1] 2.571714\n\nsd(x = means_40)    # n = 40\n\n[1] 1.273569\n\nsd(x = means_160)   # n = 160\n\n[1] 0.6340208"
+    "text": "Simulating a Sampling Distribution\nDraw many samples of size n, record each sample’s mean, then look at how those means are spread out. The sd() of these simulated means is the standard error, \\(SE = \\dfrac{\\sigma}{\\sqrt{n}}\\) (next slides).\n\nsampling_sim.R\n\nset.seed(seed = 348)\n\nsim_means &lt;- function(n) {\n  replicate(n = 5000, expr = mean(x = rnorm(n = n, mean = 76, sd = 8)))\n}\n\nmeans_10  &lt;- sim_means(n = 10)\nmeans_40  &lt;- sim_means(n = 40)\nmeans_160 &lt;- sim_means(n = 160)\n\nsd(x = means_10)    # spread of the sample means when n = 10\n\n[1] 2.571714\n\nsd(x = means_40)    # n = 40\n\n[1] 1.273569\n\nsd(x = means_160)   # n = 160\n\n[1] 0.6340208"
   },
   {
     "objectID": "lab4/lab4.html#bigger-samples-narrower-distribution",
@@ -5160,7 +5160,7 @@
     "href": "lab4/lab4.html#the-one-sample-z-test-in-r",
     "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
     "section": "The One-Sample Z-Test in R",
-    "text": "The One-Sample Z-Test in R\nQuestion: a class of n = 40 averaged 80. If the population mean really is 76 (with \\(\\sigma = 8\\)), how likely is a class mean this high?\n\nz_test.R\n\nmu     &lt;- 76    # population mean\nsigma  &lt;- 8     # population standard deviation\nn      &lt;- 40    # sample size\nm      &lt;- 80    # observed sample mean\n\nse &lt;- sigma / sqrt(x = n)\nz  &lt;- (m - mu) / se\n\n# One-tailed: P(sample mean &gt;= 80)\np_one &lt;- pnorm(q = z, mean = 0, sd = 1, lower.tail = FALSE)\n\n# Two-tailed: the extreme could have been in either direction\np_two &lt;- 2 * p_one\n\nc(se = se, z = z, p_one = p_one, p_two = p_two)\n\n          se            z        p_one        p_two \n1.2649110641 3.1622776602 0.0007827011 0.0015654023 \n\n\n\n\n\nThe p-value is tiny (far below .05): a mean of 80 would be very surprising if \\(\\mu\\) were really 76\nNote lower.tail = FALSE: we want the area above z"
+    "text": "The One-Sample Z-Test in R\n\nz_test.R\n\nmu     &lt;- 76    # population mean\nsigma  &lt;- 8     # population standard deviation\nn      &lt;- 40    # sample size\nm      &lt;- 80    # observed sample mean\n\nse &lt;- sigma / sqrt(x = n)\nz  &lt;- (m - mu) / se\n\n# One-tailed: P(sample mean &gt;= 80)\np_one &lt;- pnorm(q = z, mean = 0, sd = 1, lower.tail = FALSE)\n\n# Two-tailed: the extreme could have been in either direction\np_two &lt;- 2 * p_one\n\nc(se = se, z = z, p_one = p_one, p_two = p_two)\n\n          se            z        p_one        p_two \n1.2649110641 3.1622776602 0.0007827011 0.0015654023 \n\n\n\n\n\nThe p-value is tiny (far below .05): a mean of 80 would be very surprising if \\(\\mu\\) were really 76\nNote lower.tail = FALSE: we want the area above z"
   },
   {
     "objectID": "lab4/lab4.html#seeing-the-test",
@@ -5238,5 +5238,54 @@
     "title": "Sampling Theory",
     "section": "Where the 70 Comes From",
     "text": "Where the 70 Comes From\nChoosing \\(k\\) items out of \\(n\\)\n\\[{n \\choose k} = \\dfrac{n!}{k!\\,(n-k)!}\\]\n\n\\(n!\\) (“n factorial”) means \\(n \\times (n-1) \\times \\dots \\times 1\\)\nThe numerator, \\(n!\\), counts every ordering of all \\(n\\) items\nThe denominator removes the orderings that do not matter: the order within the \\(k\\) chosen items, \\(k!\\), and within the \\(n-k\\) left out, \\((n-k)!\\)\nHere \\(n = 8\\) cups and \\(k = 4\\) milk-first: \\(\\dfrac{8!}{4!\\,4!} = \\dfrac{40{,}320}{24 \\times 24} = 70\\)"
+  },
+  {
+    "objectID": "lab4/lab4.html#what-mean-and-sd-compute",
+    "href": "lab4/lab4.html#what-mean-and-sd-compute",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "What mean() and sd() Compute",
+    "text": "What mean() and sd() Compute\n\\[\\bar{x} = \\frac{\\sum x}{n} \\qquad s = \\sqrt{\\frac{\\sum (x - \\bar{x})^2}{n - 1}}\\]\nThe numerator of \\(s\\) adds up each score’s squared distance from the mean. Dividing by \\(n - 1\\) and taking the square root gives the typical distance of a score from the mean."
+  },
+  {
+    "objectID": "lab4/lab4.html#setting-up-the-z-test",
+    "href": "lab4/lab4.html#setting-up-the-z-test",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Setting Up the Z-Test",
+    "text": "Setting Up the Z-Test\nQuestion: a class of n = 40 averaged 80. If the population mean really is 76 (with \\(\\sigma = 8\\)), how likely is a class mean this high?\n\\[z = \\frac{\\bar{x} - \\mu}{\\sigma / \\sqrt{n}}\\]\nThe numerator is how far the sample mean sits from the population mean. The denominator is the standard error, so z counts standard errors."
+  },
+  {
+    "objectID": "lec8/lec8.html#reading-the-symbols",
+    "href": "lec8/lec8.html#reading-the-symbols",
+    "title": "Sampling Theory",
+    "section": "Reading the Symbols",
+    "text": "Reading the Symbols\n\n\\(\\sum\\) means “add up all the scores”\n\\(n\\) is the sample size and \\(N\\) is the population size\nWe divide by \\(n-1\\) (not \\(n\\)) when computing \\(s\\) because the sample mean was estimated from the same data"
+  },
+  {
+    "objectID": "lec9/lec9.html#the-sample-sd-s",
+    "href": "lec9/lec9.html#the-sample-sd-s",
+    "title": "One-Sample T-Test",
+    "section": "The Sample SD, \\(s\\)",
+    "text": "The Sample SD, \\(s\\)\n\\[s = \\sqrt{\\dfrac{\\sum (x_i - \\bar{x})^2}{n-1}}\\]\n\nNumerator: each score’s squared distance from the mean, added up\nDenominator: \\(n-1\\), then take the square root\nFor \\(s_D\\), use each person’s difference score \\(D\\) in place of \\(x\\)\nWe use \\(s\\) because \\(\\sigma\\) is usually unknown (if \\(\\sigma\\) were known, we would use \\(\\sigma/\\sqrt{n}\\) and a z-test instead)"
+  },
+  {
+    "objectID": "lec10/lec10.html#difference-scores",
+    "href": "lec10/lec10.html#difference-scores",
+    "title": "Paired-Samples T-Test",
+    "section": "Difference Scores",
+    "text": "Difference Scores\nWhere \\(\\color{blue}{\\bar{D}}\\) and \\(\\color{orange}{s_D}\\) come from\n\\[D_i = x_{i,\\text{post}} - x_{i,\\text{pre}} \\qquad \\color{blue}{\\bar{D}} = \\dfrac{\\sum D_i}{n} \\qquad \\color{orange}{s_D} = \\sqrt{\\dfrac{\\sum (D_i - \\bar{D})^2}{n-1}}\\]\n\n\\(D_i\\) is each person’s own change (post minus pre)\n\\(\\bar{D}\\) is the average of those changes\n\\(s_D\\) is how much the changes vary from one person to the next"
+  },
+  {
+    "objectID": "lec16/lec16.html#the-formulas-behind-these",
+    "href": "lec16/lec16.html#the-formulas-behind-these",
+    "title": "Linear Regression",
+    "section": "The Formulas Behind These",
+    "text": "The Formulas Behind These\n\\[R^2 = 1 - \\dfrac{SS_{residual}}{SS_{total}} = \\dfrac{SS_{model}}{SS_{total}}\\]\n\\[R^2_{adj} = 1 - (1 - R^2)\\dfrac{n-1}{n-p-1} \\qquad F = \\dfrac{R^2 / p}{(1 - R^2)/(n - p - 1)}\\]\n\n\\(SS_{residual}\\) is the variation in \\(y\\) the model leaves unexplained; \\(SS_{total}\\) is all the variation in \\(y\\)\n\\(n\\) is the sample size and \\(p\\) is the number of predictors\n\\(F\\) is variance explained per predictor, divided by variance left unexplained per remaining df"
+  },
+  {
+    "objectID": "lab4/lab4.html#your-turn-continued",
+    "href": "lab4/lab4.html#your-turn-continued",
+    "title": "Lab 4: Z-Scores, Sampling & the Z-Test",
+    "section": "Your Turn (continued)",
+    "text": "Your Turn (continued)\nSame setting: \\(\\mu = 76\\), \\(\\sigma = 8\\).\n\nWhat is the standard error when n = 25? When n = 100? By what factor did it shrink?\nA different class of n = 25 averaged 79. Run a two-tailed z-test against \\(\\mu = 76\\). Report the standard error, z, and p-value.\nIn your own words: why can a class mean of 79 be “unusual” when an individual score of 79 is not?"
   }
 ]
