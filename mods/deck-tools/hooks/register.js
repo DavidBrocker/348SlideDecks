@@ -53,12 +53,135 @@ async function renderOne($, arg) {
   return lines.join('\n')
 }
 
+// ---- /commit-decks ----
+// /commit-decks <dir> [<dir> ...] [--go] [--push] [-m <message>]
+//   dir = a lecture/lab folder name, e.g. lec9 or lab4.
+// Default is a PREVIEW: lists what would be staged and what is left alone.
+//   --go    stage the named dirs (plus their _freeze/ and docs/ output) and commit; needs -m
+//   --push  with --go, also push
+// Each path is staged on its own, so one missing path can never abort the rest.
+// Nothing outside the named dirs (and docs/search.json) is ever staged.
+
+const DIR_PATTERN = /^[A-Za-z0-9_\-]+$/
+
+async function git($, args) {
+  return $.process.run(['git'].concat(args), { timeoutMs: 120000 })
+}
+
+// The paths a deck dir owns: source, frozen output, rendered site output
+async function pathsFor($, dir) {
+  const candidates = [dir, '_freeze/' + dir, 'docs/' + dir]
+  const found = []
+  for (const p of candidates) {
+    if (await $.fs.exists(p)) found.push(p)
+  }
+  return found
+}
+
+function parse(argText) {
+  const tokens = argText.trim().split(/\s+/).filter(Boolean)
+  const dirs = []
+  let go = false
+  let push = false
+  let message = ''
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i]
+    if (t === '--go') go = true
+    else if (t === '--push') push = true
+    else if (t === '-m') {
+      message = tokens.slice(i + 1).join(' ')
+      break
+    } else dirs.push(t)
+  }
+  return { dirs, go, push, message }
+}
+
+async function runCommit($, argText) {
+  const { dirs, go, push, message } = parse(argText)
+  if (dirs.length === 0) {
+    return 'Usage: /commit-decks lec9 lab4 [--go] [--push] [-m message]\nWithout --go this is a preview only.'
+  }
+  const bad = dirs.filter((d) => !DIR_PATTERN.test(d))
+  if (bad.length) return 'Not a folder name: ' + bad.join(', ') + ' (use e.g. lec9 or lab4)'
+
+  const paths = []
+  const missing = []
+  for (const d of dirs) {
+    const found = await pathsFor($, d)
+    if (found.length === 0) missing.push(d)
+    for (const p of found) paths.push(p)
+  }
+  if (missing.length) return 'No such folder: ' + missing.join(', ')
+  if (await $.fs.exists('docs/search.json')) paths.push('docs/search.json')
+
+  const lines = []
+
+  // What the named paths would add
+  const mine = await git($, ['status', '--short', '--'].concat(paths))
+  const changed = mine.stdout.split('\n').filter(Boolean)
+  lines.push('Changes in ' + dirs.join(', ') + ' (' + changed.length + ' files):')
+  lines.push(changed.length ? changed.slice(0, 40).map((l) => '  ' + l).join('\n') : '  (nothing to commit)')
+  if (changed.length > 40) lines.push('  ... and ' + (changed.length - 40) + ' more')
+
+  // What stays untouched
+  const all = await git($, ['status', '--short'])
+  const mineSet = new Set(changed)
+  const others = all.stdout.split('\n').filter((l) => l && !mineSet.has(l))
+  if (others.length) {
+    lines.push('Left alone (' + others.length + '):')
+    for (const l of others.slice(0, 12)) lines.push('  ' + l)
+    if (others.length > 12) lines.push('  ... and ' + (others.length - 12) + ' more')
+  }
+
+  if (!go) {
+    lines.push('')
+    lines.push('Preview only. To commit: /commit-decks ' + dirs.join(' ') + ' --go -m your message  (add --push to push)')
+    return lines.join('\n')
+  }
+
+  if (!message) return lines.join('\n') + '\n\nNeed a message: add -m your message at the end.'
+  if (changed.length === 0) return lines.join('\n') + '\n\nNothing to commit.'
+
+  // Refuse if something else is already staged, so it can't ride along
+  const pre = await git($, ['diff', '--cached', '--name-only'])
+  if (pre.stdout.trim()) {
+    return lines.join('\n') + '\n\nStopped: other files are already staged:\n' + pre.stdout.trim() + '\nUnstage them (git restore --staged <file>) and run again.'
+  }
+
+  // Stage each path on its own (-A so deletions of renumbered figures are included)
+  for (const p of paths) {
+    const r = await git($, ['add', '-A', '--', p])
+    if (r.exitCode !== 0) return lines.join('\n') + '\n\ngit add failed for ' + p + ': ' + r.stderr.trim()
+  }
+
+  const commit = await git($, ['commit', '-m', message])
+  if (commit.exitCode !== 0) {
+    return lines.join('\n') + '\n\nCommit failed: ' + (commit.stderr.trim() || commit.stdout.trim())
+  }
+  const first = commit.stdout.split('\n')[0]
+  lines.push('')
+  lines.push('Committed: ' + first)
+
+  if (push) {
+    const pushed = await git($, ['push'])
+    const out = (pushed.stderr + '\n' + pushed.stdout).trim().split('\n').slice(-1)[0]
+    lines.push(pushed.exitCode === 0 ? 'Pushed: ' + out : 'Push failed: ' + out)
+  }
+  return lines.join('\n')
+}
+
+// ---- registration ----
 export function register(on) {
   on('session.start', async ($, e, next) => {
     await $.command.register({
       name: 'render-deck',
       description: 'Render a deck and report errors and slides over 900px',
       argumentHint: '<lec9 | lab4/lab4_instr> [more decks]',
+    })
+    await $.command.register({
+      name: 'commit-decks',
+      description: 'Preview, commit, and push only the named deck folders',
+      argumentHint: '<lec9 lab4 ...> [--go] [--push] [-m message]',
     })
     return next(e)
   })
@@ -78,5 +201,13 @@ export function register(on) {
       }
     }
     return { text: reports.join('\n\n') }
+  })
+
+  on('command.run', { command: 'commit-decks' }, async ($, e) => {
+    try {
+      return { text: await runCommit($, e.args) }
+    } catch (err) {
+      return { text: 'commit-decks failed: ' + String(err && err.message ? err.message : err) }
+    }
   })
 }

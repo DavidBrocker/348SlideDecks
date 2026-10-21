@@ -1,5 +1,9 @@
 # deck-tools (Claude Code mod)
 
+Two commands: `/render-deck` and `/commit-decks`.
+
+## /render-deck
+
 `/render-deck <deck> [<deck> ...]` renders a Quarto deck, then runs `scripts/check_slide_overflow.R`
 and prints a short report: render errors/warnings and any slide over 900px. It runs with no Claude
 turn, so it uses no tokens.
@@ -10,6 +14,24 @@ turn, so it uses no tokens.
 ```
 
 `lec9` is shorthand for `lec9/lec9`. Run it from the repo root (it uses the session's working directory).
+
+## /commit-decks
+
+`/commit-decks <folder> [<folder> ...] [--go] [--push] [-m message]` stages only the named lecture/lab
+folders (plus their `_freeze/` and `docs/` output and `docs/search.json`) so unrelated work such as
+`lab7` or `lec12` is never swept in.
+
+```
+/commit-decks lec9 lab4                          # preview: what would be committed, what is left alone
+/commit-decks lec9 lab4 --go -m Fix formulas     # commit
+/commit-decks lec9 lab4 --go --push -m Fix formulas
+```
+
+- Preview is the default. Nothing is staged until `--go`.
+- Each path is staged separately (`git add -A -- <path>`), so a missing path cannot abort the rest.
+- Stops if anything else is already staged, and asks for `-m` before committing.
+- It does not add a Co-Authored-By trailer: commits made this way are yours.
+- Tested in a scratch clone with a local remote (preview, missing message, pre-staged file, commit+push).
 
 ## Load it
 
@@ -28,4 +50,6 @@ Tested with Claude Code 2.1.300. Needs `quarto`, `Rscript`, and the `chromote` R
   `CLAUDE_CODE_PLUGIN_DIRS` works from the environment or `env` in `~/.claude/settings.json`.
 - Quarto colors errors with ANSI codes; the mod strips them before filtering.
 - The overflow checker takes ~10s per deck plus render time; the command shows nothing until it finishes.
-- It does not yet label-check chunks, check for formulas without an explicit form, or commit.
+- `$` can't be passed to functions imported from another file and two `session.start` hooks without
+  a matcher are rejected, so the whole mod lives in `hooks/register.js`.
+- It does not yet label-check chunks or check for formulas without an explicit form.
