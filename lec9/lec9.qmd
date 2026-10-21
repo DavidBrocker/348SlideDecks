@@ -326,9 +326,18 @@ $s_p^2 = \dfrac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$
 :::
 :::::
 
-- We use the sample SD ($s$) to estimate the standard error ($s/\sqrt{n}$), since $\sigma$ is usually unknown (if $\sigma$ *were* known, we would use $\sigma/\sqrt{n}$ and a **z**-test instead). $s_D$ is the SD of the **difference scores** and $s_p^2$ is the **pooled variance**.
+- We use the sample SD ($s$) to estimate the standard error ($s/\sqrt{n}$), since $\sigma$ is usually unknown. $s_D$ is the SD of the **difference scores** and $s_p^2$ is the **pooled variance**.
 
 - The critical value depends on the **degrees of freedom**: $df = n - 1$ (one-sample, paired) or $n_1 + n_2 - 2$ (independent).
+
+## The Sample SD, $s$
+
+$$s = \sqrt{\dfrac{\sum (x_i - \bar{x})^2}{n-1}}$$
+
+- Numerator: each score's squared distance from the mean, added up
+- Denominator: $n-1$, then take the square root
+- For $s_D$, use each person's difference score $D$ in place of $x$
+- We use $s$ because $\sigma$ is usually unknown (if $\sigma$ were known, we would use $\sigma/\sqrt{n}$ and a **z**-test instead)
 
 ## The t-distribution
 
@@ -388,6 +397,8 @@ $\large{t = \dfrac{\color{blue}{\bar{x}} - \mu}{\color{orange}{s}/\sqrt{n}}}$
 
 - $\color{orange}{s}/\sqrt{n}$ = the standard error (SE), estimated from the sample: $s$ is the sample SD and $n$ the sample size
 
+- $s = \sqrt{\dfrac{\sum (x_i - \bar{x})^2}{n-1}}$ = sum of squared deviations from the mean, divided by $n-1$, then square-rooted
+
 ## Hypothesis Testing Steps
 
 ::: callout-tip
@@ -417,7 +428,7 @@ $\large{t = \dfrac{\color{blue}{\bar{x}} - \mu}{\color{orange}{s}/\sqrt{n}}}$
 
 - Find your **df** ($n - 1$ for a one-sample test), then the column for your $\alpha$ and **tails**. If $|t|$ is **beyond** the critical value, reject $H_0$ (here $2.68 > 2.093$).
 
-- In R: `qt(.975, df = 19)` returns `2.093`.
+- In R: `qt(.975, df = 19)` returns `2.093` (the upper 2.5% cutoff).
 
 ## Hypothesis Testing Steps
 

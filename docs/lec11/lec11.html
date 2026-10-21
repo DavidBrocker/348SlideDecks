@@ -442,7 +442,7 @@ Dave Brocker
 <h3 id="when-the-variances-are-not-equal-welchs-t-test">When the variances are not equal (Welch’s t-test)</h3>
 <p><span class="math display">\[t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]</span></p>
 <ul>
-<li class="fragment"><p>No pooling: each group’s variance keeps its own weight, and df is adjusted (it is usually not a whole number).</p></li>
+<li class="fragment"><p>No pooling: each group’s variance keeps its own weight, and df is adjusted (it is usually not a whole number). Each <span class="math inline">\(s_j^2 = \dfrac{\sum (x_{ij} - \bar{x}_j)^2}{n_j - 1}\)</span> is that group’s own variance: squared distances from its own mean, divided by <span class="math inline">\(n_j - 1\)</span>.</p></li>
 <li class="fragment"><p>This is what <code>t.test()</code> does <strong>by default</strong> in R. Adding <code>var.equal = TRUE</code> gives the pooled version above.</p></li>
 </ul>
 </section>
@@ -472,6 +472,7 @@ Dave Brocker
 </div>
 <div class="callout-content">
 <p><span class="math inline">\(t = \dfrac{8 - 6}{0.45} = 4.47\)</span></p>
+<p>The denominator is <span class="math inline">\(SE = \sqrt{s_p^2\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}\)</span>, the standard error of the difference between the two means.</p>
 </div>
 </div>
 </div>
@@ -1667,7 +1668,7 @@ sample estimates:
 <p><strong>Effect size</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(d = \dfrac{\bar{x}_1 - \bar{x}_2}{s_p} = \dfrac{2.39}{2.28} = 1.05\)</span> (a <strong>large</strong> effect)</p>
+<p><span class="math inline">\(d = \dfrac{\bar{x}_1 - \bar{x}_2}{s_p} = \dfrac{2.39}{2.28} = 1.05\)</span> (a <strong>large</strong> effect), where <span class="math inline">\(s_p = \sqrt{s_p^2}\)</span> is the square root of the pooled variance</p>
 </div>
 </div>
 </div>

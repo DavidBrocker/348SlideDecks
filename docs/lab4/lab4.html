@@ -278,7 +278,7 @@ Dave Brocker
 </section>
 <section id="two-roads-to-the-same-probability" class="slide level2">
 <h2>Two Roads to the Same Probability</h2>
-<p><code>pnorm()</code> returns the probability of scoring <strong>at or below</strong> a value.</p>
+<p><code>pnorm()</code> returns the probability of scoring <strong>at or below</strong> a value: <span class="math inline">\(P(X \le x) = P\!\left(Z \le \dfrac{x - \mu}{\sigma}\right)\)</span>, the area to the left of the z-score.</p>
 <div class="codewindow r codewindow-dark">
 <p>pnorm_two_ways.R</p>
 <div class="cell">
@@ -331,7 +331,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lab4_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lab4_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
+<p><a href="lab4_files/figure-revealjs/plot-prob-above-88-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lab4_files/figure-revealjs/plot-prob-above-88-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -386,6 +386,11 @@ Dave Brocker
 <li class="fragment">What do you notice about the <em>mean</em> of <code>z_scores</code>? The <em>standard deviation</em>?</li>
 </ul>
 </section>
+<section id="what-mean-and-sd-compute" class="slide level2">
+<h2>What <code>mean()</code> and <code>sd()</code> Compute</h2>
+<p><span class="math display">\[\bar{x} = \frac{\sum x}{n} \qquad s = \sqrt{\frac{\sum (x - \bar{x})^2}{n - 1}}\]</span></p>
+<p>The numerator of <span class="math inline">\(s\)</span> adds up each score’s squared distance from the mean. Dividing by <span class="math inline">\(n - 1\)</span> and taking the square root gives the typical distance of a score from the mean.</p>
+</section>
 <section id="population-vs.-this-class" class="slide level2">
 <h2>Population vs.&nbsp;This Class</h2>
 <p>Our 40 simulated scores are a <em>sample</em>, so their mean and sd are close to, but not exactly, <code>76</code> and <code>8</code>.</p>
@@ -434,7 +439,7 @@ Dave Brocker
 </section>
 <section id="simulating-a-sampling-distribution" class="slide level2">
 <h2>Simulating a Sampling Distribution</h2>
-<p>Draw many samples of size <code>n</code>, record each sample’s mean, then look at how those means are spread out.</p>
+<p>Draw many samples of size <code>n</code>, record each sample’s mean, then look at how those means are spread out. The <code>sd()</code> of these simulated means is the <strong>standard error</strong>, <span class="math inline">\(SE = \dfrac{\sigma}{\sqrt{n}}\)</span> (next slides).</p>
 <div class="codewindow r codewindow-dark">
 <p>sampling_sim.R</p>
 <div class="cell">
@@ -490,7 +495,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lab4_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lab4_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152"></a></p>
+<p><a href="lab4_files/figure-revealjs/plot-sampling-histograms-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lab4_files/figure-revealjs/plot-sampling-histograms-1.png" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -562,9 +567,14 @@ Dave Brocker
 </ul>
 </div>
 </section>
+<section id="setting-up-the-z-test" class="slide level2">
+<h2>Setting Up the Z-Test</h2>
+<p><strong>Question:</strong> a class of <code>n = 40</code> averaged <code>80</code>. If the population mean really is <code>76</code> (with <span class="math inline">\(\sigma = 8\)</span>), how likely is a class mean this high?</p>
+<p><span class="math display">\[z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}\]</span></p>
+<p>The numerator is how far the sample mean sits from the population mean. The denominator is the standard error, so z counts standard errors.</p>
+</section>
 <section id="the-one-sample-z-test-in-r" class="slide level2">
 <h2>The One-Sample Z-Test in R</h2>
-<p><strong>Question:</strong> a class of <code>n = 40</code> averaged <code>80</code>. If the population mean really is <code>76</code> (with <span class="math inline">\(\sigma = 8\)</span>), how likely is a class mean this high?</p>
 <div class="codewindow r codewindow-dark">
 <p>z_test.R</p>
 <div class="cell">
@@ -620,7 +630,7 @@ Dave Brocker
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lab4_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lab4_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056"></a></p>
+<p><a href="lab4_files/figure-revealjs/plot-z-test-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lab4_files/figure-revealjs/plot-z-test-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -633,6 +643,12 @@ Dave Brocker
 <li class="fragment"><p>Calculate the z-score for a student who scored a <code>70</code>. Is that above or below average?</p></li>
 <li class="fragment"><p>Using <code>pnorm()</code>, what proportion of the population scored below a <code>70</code>?</p></li>
 <li class="fragment"><p>Using <code>qnorm()</code>, what raw score marks the bottom 25%?</p></li>
+</ol>
+</section>
+<section id="your-turn-continued" class="slide level2">
+<h2>Your Turn (continued)</h2>
+<p>Same setting: <span class="math inline">\(\mu = 76\)</span>, <span class="math inline">\(\sigma = 8\)</span>.</p>
+<ol start="4" type="1">
 <li class="fragment"><p>What is the standard error when <code>n = 25</code>? When <code>n = 100</code>? By what factor did it shrink?</p></li>
 <li class="fragment"><p>A different class of <code>n = 25</code> averaged <code>79</code>. Run a <strong>two-tailed</strong> z-test against <span class="math inline">\(\mu = 76\)</span>. Report the standard error, z, and p-value.</p></li>
 <li class="fragment"><p>In your own words: why can a class mean of <code>79</code> be “unusual” when an individual score of <code>79</code> is not?</p></li>

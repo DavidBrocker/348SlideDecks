@@ -39,6 +39,7 @@ format:
 ## Simulated Data in R
 
 ```{r}
+#| label: setup-data
 library(dplyr)
 library(ggplot2)
 
@@ -59,6 +60,7 @@ head(study_data)
 ## Visualizing Scores
 
 ```{r}
+#| label: boxplot-scores
 ggplot(study_data, aes(x = method, y = score, fill = method)) +
   geom_boxplot() +
   labs(
@@ -73,12 +75,17 @@ ggplot(study_data, aes(x = method, y = score, fill = method)) +
 ## Running the ANOVA
 
 ```{r}
+#| label: anova-result
 #| echo: true
 anova_result <- aov(score ~ method, data = study_data)
 summary(anova_result)
 ```
 
+$$F = \frac{MS_B}{MS_E} = \frac{SS_B / (k - 1)}{SS_E / (N - k)}$$
+
 ::: highlight-last
+-   **F** is the variance *between* group means (numerator) divided by the variance *within* groups (denominator); $k$ = number of groups, $N$ = total sample size
+
 -   Look at the **F value** and **p-value**
 
 -   If $p < .05$, reject the null hypothesis
@@ -87,6 +94,7 @@ summary(anova_result)
 ## Post Hoc: Tukey HSD
 
 ```{r}
+#| label: tukey-hsd
 #| echo: true
 TukeyHSD(anova_result)
 ```

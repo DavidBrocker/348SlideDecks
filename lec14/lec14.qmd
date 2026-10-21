@@ -331,6 +331,9 @@ $MS_{Error} = \dfrac{SS_{W} - SS_{Subjects}}{df_{Error}} = \dfrac{SS_{W} - SS_{S
 
 - $k$ is the number of time points (or conditions) and $n$ is the number of participants.
 
+- Each **SS** is a sum of squared distances from a mean ($\bar{x}_t$ = a time mean, $\bar{x}_p$ = a person's mean, $\bar{x}_G$ = the grand mean):
+  $SS_{Time} = \sum n(\bar{x}_t - \bar{x}_G)^2 \quad SS_{Subjects} = \sum k(\bar{x}_p - \bar{x}_G)^2 \quad SS_{W} = \sum (x - \bar{x}_t)^2$
+
 ## Degrees of Freedom
 
 ::: callout-tip
@@ -588,6 +591,8 @@ eng |>
   labs(title = "Enjoyment of statistics", x = NULL, y = "Mean enjoyment (1-10)") +
   theme_deck(20)
 ```
+
+*Error bars: mean $\pm$ SE, where $SE = \dfrac{s}{\sqrt{n}}$ and $s$ is the SD of the scores.*
 :::
 :::::
 
@@ -646,6 +651,8 @@ act |>
   labs(title = "Attitudes across the semester", x = NULL, y = "Mean attitude (1-10)") +
   theme_deck(20)
 ```
+
+*Error bars: mean $\pm$ SE, where $SE = \dfrac{s}{\sqrt{n}}$ and $s$ is the SD of the scores.*
 :::
 :::::
 

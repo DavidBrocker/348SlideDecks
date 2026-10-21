@@ -65,6 +65,7 @@ We store the facts first, so every later line says *what* each number is.
 z_one_score.R
 
 ```{r}
+#| label: z-one-score
 #| code-fold: false
 mu    <- 76    # population mean of the exam
 sigma <- 8     # population standard deviation
@@ -77,12 +78,13 @@ z_nadia
 
 ## Two Roads to the Same Probability
 
-`pnorm()` returns the probability of scoring **at or below** a value.
+`pnorm()` returns the probability of scoring **at or below** a value: $P(X \le x) = P\!\left(Z \le \dfrac{x - \mu}{\sigma}\right)$, the area to the left of the z-score.
 
 ::: {.codewindow .r .codewindow-dark}
 pnorm_two_ways.R
 
 ```{r}
+#| label: pnorm-two-ways
 #| code-fold: false
 # Road 1: give pnorm() the RAW score, plus the mean and sd
 pnorm(q = 88, mean = 76, sd = 8, lower.tail = TRUE)
@@ -105,6 +107,7 @@ pnorm(q = 1.5, mean = 0, sd = 1, lower.tail = TRUE)
 Click **Code** to see how the plot is built.
 
 ```{r}
+#| label: plot-prob-above-88
 #| fig-width: 11
 #| fig-height: 4.5
 library(ggplot2)
@@ -136,6 +139,7 @@ ggplot(data = dat, mapping = aes(x = x, y = y)) +
 qnorm_top10.R
 
 ```{r}
+#| label: qnorm-top10
 #| code-fold: false
 # What score marks the top 10% of the class?
 # Top 10% means 90% are at or below it.
@@ -155,6 +159,7 @@ Now we simulate 40 students. `scale()` converts every score to a z-score at once
 scale_class.R
 
 ```{r}
+#| label: scale-class
 #| code-fold: false
 set.seed(seed = 348)
 exam_scores <- round(rnorm(n = 40, mean = 76, sd = 8), digits = 1)
@@ -167,6 +172,12 @@ head(data.frame(score = exam_scores, z = z_scores), n = 8)
 
 -   What do you notice about the *mean* of `z_scores`? The *standard deviation*?
 
+## What `mean()` and `sd()` Compute
+
+$$\bar{x} = \frac{\sum x}{n} \qquad s = \sqrt{\frac{\sum (x - \bar{x})^2}{n - 1}}$$
+
+The numerator of $s$ adds up each score's squared distance from the mean. Dividing by $n - 1$ and taking the square root gives the typical distance of a score from the mean.
+
 ## Population vs. This Class
 
 Our 40 simulated scores are a *sample*, so their mean and sd are close to, but not exactly, `76` and `8`.
@@ -175,6 +186,7 @@ Our 40 simulated scores are a *sample*, so their mean and sd are close to, but n
 class_vs_population.R
 
 ```{r}
+#| label: class-vs-population
 #| code-fold: false
 mean(x = exam_scores)   # this class
 sd(x = exam_scores)     # this class
@@ -204,12 +216,13 @@ Nadia is **one** student. What if we care about the **average of a whole class**
 
 ## Simulating a Sampling Distribution
 
-Draw many samples of size `n`, record each sample's mean, then look at how those means are spread out.
+Draw many samples of size `n`, record each sample's mean, then look at how those means are spread out. The `sd()` of these simulated means is the **standard error**, $SE = \dfrac{\sigma}{\sqrt{n}}$ (next slides).
 
 ::: {.codewindow .r .codewindow-dark}
 sampling_sim.R
 
 ```{r}
+#| label: sampling-sim
 #| code-fold: false
 set.seed(seed = 348)
 
@@ -230,6 +243,7 @@ sd(x = means_160)   # n = 160
 ## Bigger Samples, Narrower Distribution
 
 ```{r}
+#| label: plot-sampling-histograms
 #| fig-width: 12
 #| fig-height: 4.5
 library(dplyr)
@@ -262,6 +276,7 @@ $$SE = \frac{\sigma}{\sqrt{n}}$$
 standard_error.R
 
 ```{r}
+#| label: standard-error
 #| code-fold: false
 sigma <- 8
 
@@ -290,14 +305,21 @@ Same population: $\mu = 76$, $\sigma = 8$.
 -   The only change in the formula: divide by the **standard error**, not by $\sigma$
 :::
 
-## The One-Sample Z-Test in R
+## Setting Up the Z-Test
 
 **Question:** a class of `n = 40` averaged `80`. If the population mean really is `76` (with $\sigma = 8$), how likely is a class mean this high?
+
+$$z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}$$
+
+The numerator is how far the sample mean sits from the population mean. The denominator is the standard error, so z counts standard errors.
+
+## The One-Sample Z-Test in R
 
 ::: {.codewindow .r .codewindow-dark}
 z_test.R
 
 ```{r}
+#| label: z-test
 #| code-fold: false
 mu     <- 76    # population mean
 sigma  <- 8     # population standard deviation
@@ -325,6 +347,7 @@ c(se = se, z = z, p_one = p_one, p_two = p_two)
 ## Seeing the Test
 
 ```{r}
+#| label: plot-z-test
 #| fig-width: 11
 #| fig-height: 4.5
 se <- 8 / sqrt(x = 40)
@@ -353,6 +376,10 @@ Use the exam setting: $\mu = 76$, $\sigma = 8$. **Write every argument by name.*
 2.  Using `pnorm()`, what proportion of the population scored below a `70`?
 
 3.  Using `qnorm()`, what raw score marks the bottom 25%?
+
+## Your Turn (continued)
+
+Same setting: $\mu = 76$, $\sigma = 8$.
 
 4.  What is the standard error when `n = 25`? When `n = 100`? By what factor did it shrink?
 

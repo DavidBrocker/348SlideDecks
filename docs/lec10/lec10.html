@@ -328,6 +328,16 @@ A statistical method for comparing the means of <strong>two related</strong> set
 <li class="fragment"><p>Degrees of freedom: <span class="math inline">\(df = n - 1\)</span>.</p></li>
 </ul>
 </section>
+<section id="difference-scores" class="slide level2">
+<h2>Difference Scores</h2>
+<h3 id="where-colorbluebard-and-colororanges_d-come-from">Where <span class="math inline">\(\color{blue}{\bar{D}}\)</span> and <span class="math inline">\(\color{orange}{s_D}\)</span> come from</h3>
+<p><span class="math display">\[D_i = x_{i,\text{post}} - x_{i,\text{pre}} \qquad \color{blue}{\bar{D}} = \dfrac{\sum D_i}{n} \qquad \color{orange}{s_D} = \sqrt{\dfrac{\sum (D_i - \bar{D})^2}{n-1}}\]</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(D_i\)</span> is each person’s own change (post minus pre)</li>
+<li class="fragment"><span class="math inline">\(\bar{D}\)</span> is the average of those changes</li>
+<li class="fragment"><span class="math inline">\(s_D\)</span> is how much the changes vary from one person to the next</li>
+</ul>
+</section>
 <section id="theoretical-formula-explanation" class="slide level2">
 <h2>Theoretical Formula Explanation</h2>
 <h3 id="understanding-each-component">Understanding each component</h3>
@@ -2732,7 +2742,7 @@ mean difference
 <p><strong>Answer</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(H_0: \mu_D = 0\)</span>; <span class="math inline">\(H_A: \mu_D &lt; 0\)</span>. <em>t(29) = -7.87, p &lt; .001</em>, <span class="math inline">\(d_z\)</span> = -1.44: a significant, large decrease in stress.</p>
+<p><span class="math inline">\(H_0: \mu_D = 0\)</span>; <span class="math inline">\(H_A: \mu_D &lt; 0\)</span>. <em>t(29) = -7.87, p &lt; .001</em>, <span class="math inline">\(d_z = \bar{D}/s_D\)</span> = -1.44: a significant, large decrease in stress.</p>
 </div>
 </div>
 </div>

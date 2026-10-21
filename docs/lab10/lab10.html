@@ -257,7 +257,7 @@ Dave Brocker
 <section id="visualizing-scores" class="slide level2">
 <h2>Visualizing Scores</h2>
 
-<img data-src="lab10_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="lab10_files/figure-revealjs/boxplot-scores-1.png" width="960" class="r-stretch"></section>
 <section id="running-the-anova" class="slide level2">
 <h2>Running the ANOVA</h2>
 <div class="cell">
@@ -271,8 +271,10 @@ Residuals   42  40.80   0.972
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<p><span class="math display">\[F = \frac{MS_B}{MS_E} = \frac{SS_B / (k - 1)}{SS_E / (N - k)}\]</span></p>
 <div class="highlight-last">
 <ul>
+<li class="fragment"><p><strong>F</strong> is the variance <em>between</em> group means (numerator) divided by the variance <em>within</em> groups (denominator); <span class="math inline">\(k\)</span> = number of groups, <span class="math inline">\(N\)</span> = total sample size</p></li>
 <li class="fragment"><p>Look at the <strong>F value</strong> and <strong>p-value</strong></p></li>
 <li class="fragment"><p>If <span class="math inline">\(p &lt; .05\)</span>, reject the null hypothesis</p></li>
 </ul>

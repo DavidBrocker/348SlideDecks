@@ -1447,6 +1447,14 @@ The standard deviation of the sampling distribution of the mean: <span class="ma
 </div>
 </div></div>
 </section>
+<section id="reading-the-symbols" class="slide level2">
+<h2>Reading the Symbols</h2>
+<ul>
+<li class="fragment"><span class="math inline">\(\sum\)</span> means “add up all the scores”</li>
+<li class="fragment"><span class="math inline">\(n\)</span> is the <strong>sample</strong> size and <span class="math inline">\(N\)</span> is the <strong>population</strong> size</li>
+<li class="fragment">We divide by <span class="math inline">\(n-1\)</span> (not <span class="math inline">\(n\)</span>) when computing <span class="math inline">\(s\)</span> because the sample mean was estimated from the same data</li>
+</ul>
+</section>
 <section id="probability" class="slide level2">
 <h2>Probability</h2>
 <h3 id="individuals-first">Individuals first</h3>
@@ -1593,9 +1601,11 @@ Reveal Answer
 <div id="tabset-1-2">
 <div class="codewindow r codewindow-dark">
 <p>pnorm.R</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">2.24</span>)                                          <span class="co"># .0125 (z-table)</span></span>
-<span id="cb2-2"><a aria-label="2"></a><span class="fu">pnorm</span>(<span class="fl">6.75</span>, <span class="at">mean =</span> <span class="fl">6.6</span>, <span class="at">sd =</span> <span class="fl">1.5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">500</span>),</span>
-<span id="cb2-3"><a aria-label="3"></a>      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)                                <span class="co"># .0127 (unrounded z)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="co"># pnorm(q) = area to the LEFT of q; lower.tail = FALSE = area to the RIGHT (p-value)</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="co"># sd here is the standard error: sigma / sqrt(n)</span></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">2.24</span>)                                          <span class="co"># .0125 (z-table)</span></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="fu">pnorm</span>(<span class="fl">6.75</span>, <span class="at">mean =</span> <span class="fl">6.6</span>, <span class="at">sd =</span> <span class="fl">1.5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">500</span>),</span>
+<span id="cb2-5"><a aria-label="5"></a>      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)                                <span class="co"># .0127 (unrounded z)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>

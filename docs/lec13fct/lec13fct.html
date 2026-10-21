@@ -699,15 +699,15 @@ Variance <strong>within</strong> each cell, around that cell’s own mean.
 <svg width="960" height="480" viewbox="0.00 0.00 225.02 294.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 290)">
 <polygon fill="#e9f1ec" stroke="transparent" points="-4,4 -4,-290 221.02,-290 221.02,4 -4,4"></polygon>
-<g id="clust1" class="cluster">
-<title>cluster_coffee</title>
-<path fill="white" stroke="#8faf9e" d="M20,-8C20,-8 197.02,-8 197.02,-8 203.02,-8 209.02,-14 209.02,-20 209.02,-20 209.02,-127 209.02,-127 209.02,-133 203.02,-139 197.02,-139 197.02,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
-<text text-anchor="middle" x="108.51" y="-122.4" font-family="Times,serif" font-size="14.00">Independent Variable 1: Coffee</text>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_tv</title>
 <path fill="white" stroke="#8faf9e" d="M20.71,-147C20.71,-147 205.02,-147 205.02,-147 211.02,-147 217.02,-153 217.02,-159 217.02,-159 217.02,-266 217.02,-266 217.02,-272 211.02,-278 205.02,-278 205.02,-278 20.71,-278 20.71,-278 14.71,-278 8.71,-272 8.71,-266 8.71,-266 8.71,-159 8.71,-159 8.71,-153 14.71,-147 20.71,-147"></path>
 <text text-anchor="middle" x="112.87" y="-261.4" font-family="Times,serif" font-size="14.00">Independent Variable 2: TV Show</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_coffee</title>
+<path fill="white" stroke="#8faf9e" d="M20,-8C20,-8 197.02,-8 197.02,-8 203.02,-8 209.02,-14 209.02,-20 209.02,-20 209.02,-127 209.02,-127 209.02,-133 203.02,-139 197.02,-139 197.02,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="108.51" y="-122.4" font-family="Times,serif" font-size="14.00">Independent Variable 1: Coffee</text>
 </g>
 <!-- C1 -->
 <g id="node1" class="node">
@@ -1867,6 +1867,9 @@ Variance <strong>within</strong> each cell, around that cell’s own mean.
 </div>
 </div>
 </div>
+<ul>
+<li class="fragment">Each <strong>SS</strong> is a sum of squared distances from a mean: <span class="math inline">\(SS_{B_1} = \sum n_j(\bar{x}_j - \bar{x}_G)^2\)</span> (each level mean from the grand mean, weighted by group size; same form for <span class="math inline">\(SS_{B_2}\)</span>) and <span class="math inline">\(SS_{Error} = \sum (x - \bar{x}_{cell})^2\)</span> (each score from its own cell mean). <span class="math inline">\(SS_{Interaction}\)</span> is what remains of the between-cell variation after <span class="math inline">\(SS_{B_1}\)</span> and <span class="math inline">\(SS_{B_2}\)</span>.</li>
+</ul>
 </section>
 <section id="calculating-f" class="slide level2">
 <h2>Calculating F</h2>
@@ -3102,6 +3105,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
+<ul>
+<li class="fragment">Numerator: the SS for this effect. Denominator: that same SS plus the error SS.</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div id="vtwvzmekou" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">

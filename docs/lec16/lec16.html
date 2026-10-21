@@ -1030,6 +1030,16 @@ Is the model <strong>as a whole</strong> a significant predictor of <span class=
 </div>
 </div>
 </section>
+<section id="the-formulas-behind-these" class="slide level2">
+<h2>The Formulas Behind These</h2>
+<p><span class="math display">\[R^2 = 1 - \dfrac{SS_{residual}}{SS_{total}} = \dfrac{SS_{model}}{SS_{total}}\]</span></p>
+<p><span class="math display">\[R^2_{adj} = 1 - (1 - R^2)\dfrac{n-1}{n-p-1} \qquad F = \dfrac{R^2 / p}{(1 - R^2)/(n - p - 1)}\]</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(SS_{residual}\)</span> is the variation in <span class="math inline">\(y\)</span> the model leaves <strong>unexplained</strong>; <span class="math inline">\(SS_{total}\)</span> is <strong>all</strong> the variation in <span class="math inline">\(y\)</span></li>
+<li class="fragment"><span class="math inline">\(n\)</span> is the sample size and <span class="math inline">\(p\)</span> is the number of predictors</li>
+<li class="fragment"><span class="math inline">\(F\)</span> is variance explained per predictor, divided by variance left unexplained per remaining df</li>
+</ul>
+</section>
 <section id="assumptions-of-linear-regression" class="slide level2 scrollable">
 <h2>Assumptions of Linear Regression</h2>
 <div class="callout callout-important callout-titled callout-style-default">

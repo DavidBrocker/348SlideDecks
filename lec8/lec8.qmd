@@ -403,6 +403,12 @@ tibble(
 :::
 :::::
 
+## Reading the Symbols
+
+- $\sum$ means "add up all the scores"
+- $n$ is the **sample** size and $N$ is the **population** size
+- We divide by $n-1$ (not $n$) when computing $s$ because the sample mean was estimated from the same data
+
 ## Probability
 
 ### Individuals first
@@ -522,6 +528,8 @@ One student's sample of $n = 500$ has $M = 6.75$. If $\mu = 6.6$ and $\sigma = 1
 pnorm.R
 
 ``` r
+# pnorm(q) = area to the LEFT of q; lower.tail = FALSE = area to the RIGHT (p-value)
+# sd here is the standard error: sigma / sqrt(n)
 1 - pnorm(2.24)                                          # .0125 (z-table)
 pnorm(6.75, mean = 6.6, sd = 1.5 / sqrt(500),
       lower.tail = FALSE)                                # .0127 (unrounded z)

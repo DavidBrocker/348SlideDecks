@@ -178,6 +178,16 @@ $\large{t = \dfrac{\color{blue}{\bar{D}}}{\color{orange}{s_D}/\sqrt{n}}}$
 
 - Degrees of freedom: $df = n - 1$.
 
+## Difference Scores
+
+### Where $\color{blue}{\bar{D}}$ and $\color{orange}{s_D}$ come from
+
+$$D_i = x_{i,\text{post}} - x_{i,\text{pre}} \qquad \color{blue}{\bar{D}} = \dfrac{\sum D_i}{n} \qquad \color{orange}{s_D} = \sqrt{\dfrac{\sum (D_i - \bar{D})^2}{n-1}}$$
+
+- $D_i$ is each person's own change (post minus pre)
+- $\bar{D}$ is the average of those changes
+- $s_D$ is how much the changes vary from one person to the next
+
 ## Theoretical Formula Explanation
 
 ### Understanding each component
@@ -623,7 +633,7 @@ ex_1 <- tibble(
 ::: {.callout-important .nonincremental}
 ## Answer
 
-$H_0: \mu_D = 0$; $H_A: \mu_D < 0$. *`r apa_1`*, $d_z$ = `r f2(dz1)`: a significant, large decrease in stress.
+$H_0: \mu_D = 0$; $H_A: \mu_D < 0$. *`r apa_1`*, $d_z = \bar{D}/s_D$ = `r f2(dz1)`: a significant, large decrease in stress.
 :::
 :::
 

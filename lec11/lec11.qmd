@@ -410,7 +410,7 @@ $$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{darkblue}{s_p^2}\left(\frac{1}{n
 
 $$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
 
-- No pooling: each group's variance keeps its own weight, and df is adjusted (it is usually not a whole number).
+- No pooling: each group's variance keeps its own weight, and df is adjusted (it is usually not a whole number). Each $s_j^2 = \dfrac{\sum (x_{ij} - \bar{x}_j)^2}{n_j - 1}$ is that group's own variance: squared distances from its own mean, divided by $n_j - 1$.
 
 - This is what `t.test()` does **by default** in R. Adding `var.equal = TRUE` gives the pooled version above.
 
@@ -428,6 +428,8 @@ $s_p^2 = \dfrac{(10-1)(1)^2 + (10-1)(1)^2}{10 + 10 - 2} = `r f2(cf$sp^2)`$ and $
 ## Compute t
 
 $t = \dfrac{8 - 6}{`r f2(sqrt(cf$sp^2 * (1/cf$n1 + 1/cf$n2)))`} = `r f2(cf$t)`$
+
+The denominator is $SE = \sqrt{s_p^2\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}$, the standard error of the difference between the two means.
 :::
 
 ::: callout-tip
@@ -647,7 +649,7 @@ $t(`r ch$df`) = `r f2(ch$t)`$, $p$ `r fp(ch$p)`. Since $p < .05$, we **reject** 
 ::: callout-tip
 ## Effect size
 
-$d = \dfrac{\bar{x}_1 - \bar{x}_2}{s_p} = \dfrac{`r f2(ch$diff)`}{`r f2(ch$sp)`} = `r f2(ch$d)`$ (a **large** effect)
+$d = \dfrac{\bar{x}_1 - \bar{x}_2}{s_p} = \dfrac{`r f2(ch$diff)`}{`r f2(ch$sp)`} = `r f2(ch$d)`$ (a **large** effect), where $s_p = \sqrt{s_p^2}$ is the square root of the pooled variance
 :::
 :::
 

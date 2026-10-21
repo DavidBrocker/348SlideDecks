@@ -572,6 +572,11 @@ $MS_{B_1} = \dfrac{SS_{B_1}}{k_1-1} \qquad MS_{B_2} = \dfrac{SS_{B_2}}{k_2-1}$
 $MS_{Interaction} = \dfrac{SS_{Interaction}}{(k_1-1)(k_2-1)} \qquad MS_{Error} = \dfrac{SS_{Error}}{N-(k_1 k_2)}$
 :::
 
+- Each **SS** is a sum of squared distances from a mean:
+  $SS_{B_1} = \sum n_j(\bar{x}_j - \bar{x}_G)^2$ (each level mean from the grand mean, weighted by group size; same form for $SS_{B_2}$) and
+  $SS_{Error} = \sum (x - \bar{x}_{cell})^2$ (each score from its own cell mean).
+  $SS_{Interaction}$ is what remains of the between-cell variation after $SS_{B_1}$ and $SS_{B_2}$.
+
 ## Calculating F
 
 ::: callout-tip
@@ -713,6 +718,8 @@ twoway |>
 $\eta_p^2 = \dfrac{SS_{effect}}{SS_{effect} + SS_{error}}$ (one value
 for each F)
 :::
+
+- Numerator: the SS for this effect. Denominator: that same SS plus the error SS.
 
 ```{r}
 #| echo: false

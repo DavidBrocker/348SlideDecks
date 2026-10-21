@@ -397,6 +397,16 @@ To compare which predictor matters more, use **standardized** betas. Unstandardi
 :::
 :::::
 
+## The Formulas Behind These
+
+$$R^2 = 1 - \dfrac{SS_{residual}}{SS_{total}} = \dfrac{SS_{model}}{SS_{total}}$$
+
+$$R^2_{adj} = 1 - (1 - R^2)\dfrac{n-1}{n-p-1} \qquad F = \dfrac{R^2 / p}{(1 - R^2)/(n - p - 1)}$$
+
+- $SS_{residual}$ is the variation in $y$ the model leaves **unexplained**; $SS_{total}$ is **all** the variation in $y$
+- $n$ is the sample size and $p$ is the number of predictors
+- $F$ is variance explained per predictor, divided by variance left unexplained per remaining df
+
 ## Assumptions of Linear Regression
 
 ::: callout-important
