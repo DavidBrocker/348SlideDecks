@@ -179,6 +179,11 @@ export function register(on) {
       argumentHint: '<lec9 | lab4/lab4_instr> [more decks]',
     })
     await $.command.register({
+      name: 'check-deck',
+      description: 'Check a deck for missing chunk labels, unnamed R arguments, and formula gaps',
+      argumentHint: '<lec9 | lab4/lab4_instr> [more decks]',
+    })
+    await $.command.register({
       name: 'commit-decks',
       description: 'Preview, commit, and push only the named deck folders',
       argumentHint: '<lec9 lab4 ...> [--go] [--push] [-m message]',
@@ -208,6 +213,24 @@ export function register(on) {
       return { text: await runCommit($, e.args) }
     } catch (err) {
       return { text: 'commit-decks failed: ' + String(err && err.message ? err.message : err) }
+    }
+  })
+
+  // Static checks only: no render, no Claude turn
+  on('command.run', { command: 'check-deck' }, async ($, e) => {
+    const args = e.args.trim().split(/\s+/).filter(Boolean)
+    if (args.length === 0) return { text: 'Usage: /check-deck lec9 [lab4/lab4 ...]' }
+    const bad = args.filter((a) => !DECK_PATTERN.test(a))
+    if (bad.length) return { text: 'Not a deck name: ' + bad.join(', ') + ' (use e.g. lec9 or lab4/lab4_instr)' }
+    try {
+      const run = await $.process.run(
+        ['Rscript', 'scripts/check_deck.R'].concat(args.map(deckPath)),
+        { timeoutMs: 120000 },
+      )
+      if (run.exitCode !== 0) return { text: 'check-deck failed: ' + run.stderr.trim().split('\n').slice(-3).join(' ') }
+      return { text: run.stdout.trim() }
+    } catch (err) {
+      return { text: 'check-deck failed: ' + String(err && err.message ? err.message : err) }
     }
   })
 }

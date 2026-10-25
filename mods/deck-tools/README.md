@@ -1,6 +1,6 @@
 # deck-tools (Claude Code mod)
 
-Two commands: `/render-deck` and `/commit-decks`.
+Three commands: `/render-deck`, `/check-deck`, and `/commit-decks`.
 
 ## /render-deck
 
@@ -14,6 +14,21 @@ turn, so it uses no tokens.
 ```
 
 `lec9` is shorthand for `lec9/lec9`. Run it from the repo root (it uses the session's working directory).
+
+## /check-deck
+
+`/check-deck lec9 [lab4/lab4 ...]` runs `scripts/check_deck.R` (base R only) on the `.qmd` and reports, with
+line numbers, against the CLAUDE.md standards. It does not render.
+
+- **labels:** executed chunks with no `#| label:`, duplicate labels, labels that are not lowercase-hyphen
+- **args:** R calls with unnamed arguments, found by parsing the code (advisory; `c`, `list`, `library`, `print`,
+  `cat`, `paste` are allowed positional)
+- **math:** a binomial coefficient with no factorial formula in the deck; stats functions (`pnorm`, `qt`, `sd`,
+  `t.test`, ...) on a slide with no formula on it or the slide before (advisory)
+- **paths:** relative images and `../` files that do not exist
+
+The advisory checks point at places to look. They will have false positives (a `pnorm` slide whose formula is two
+slides back) and cannot judge whether a formula is the *right* one.
 
 ## /commit-decks
 
@@ -52,4 +67,4 @@ Tested with Claude Code 2.1.300. Needs `quarto`, `Rscript`, and the `chromote` R
 - The overflow checker takes ~10s per deck plus render time; the command shows nothing until it finishes.
 - `$` can't be passed to functions imported from another file and two `session.start` hooks without
   a matcher are rejected, so the whole mod lives in `hooks/register.js`.
-- It does not yet label-check chunks or check for formulas without an explicit form.
+- The plugin validator also notes a missing LICENSE and icon; those only matter for submitting to Anthropic's directory.
