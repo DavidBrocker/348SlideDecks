@@ -1,0 +1,109 @@
+---
+title: "Lab 5: Instructions and Walkthrough"
+format: html
+editor: visual
+---
+
+Sleep researchers recommend at least 7 hours a night. We asked 10 students how many hours they slept last night, and we expect they sleep **less** than 7. Use $\mu = 7$ and $\alpha = .05$.
+
+```{r}
+#| label: sleep-data
+set.seed(seed = 133)
+sleep_hours <- round(x = rnorm(n = 10, mean = 6.5, sd = 0.9), digits = 1)
+
+sleep_hours
+
+mu_0 <- 7
+n    <- length(x = sleep_hours)
+```
+
+## Question 1
+
+> By hand (use R only for `mean()` and `sd()`): find the mean, $s$, the standard error, and $t$.
+
+```{r}
+#| label: q1-by-hand
+m  <- mean(x = sleep_hours)
+s  <- sd(x = sleep_hours)
+se <- s / sqrt(x = n)
+t  <- (m - mu_0) / se
+
+c(mean = m, s = s, se = se, t = t)
+```
+
+$$s = \sqrt{\frac{\sum (x - \bar{x})^2}{n - 1}} = \sqrt{\frac{4.165}{9}} = 0.680$$
+
+$$SE = \frac{s}{\sqrt{n}} = \frac{0.680}{\sqrt{10}} = 0.215 \qquad t = \frac{\bar{x} - \mu}{SE} = \frac{6.55 - 7}{0.215} = -2.09$$
+
+The sample mean (6.55) is about 2.09 standard errors **below** 7.
+
+## Question 2
+
+> What are the degrees of freedom? Use `qt()` to find the two-tailed critical value, and the one-tailed critical value for $H_A: \mu < 7$.
+
+```{r}
+#| label: q2-critical-values
+df <- n - 1
+
+# Two-tailed: 2.5% in each tail, so look up .975 (the positive cutoff)
+t_crit_two <- qt(p = 0.975, df = df, lower.tail = TRUE)
+
+# One-tailed (less than): 5% in the lower tail
+t_crit_one <- qt(p = 0.05, df = df, lower.tail = TRUE)
+
+c(df = df, t_crit_two = t_crit_two, t_crit_one = t_crit_one)
+```
+
+$df = n - 1 = 10 - 1 = 9$. The two-tailed critical values are $\pm 2.262$. The one-tailed critical value is $-1.833$.
+
+## Question 3
+
+> Run `t.test()` with a two-tailed alternative. Report t, df, p, and the 95% confidence interval. Do you reject $H_0$?
+
+```{r}
+#| label: q3-two-tailed
+t.test(x = sleep_hours, mu = 7, alternative = "two.sided", conf.level = 0.95)
+
+# The same p by hand: area beyond |t| in one tail, doubled
+2 * pt(q = abs(x = t), df = df, lower.tail = FALSE)
+```
+
+$t(9) = -2.09$, $p = .066$, 95% CI $[6.06, 7.04]$. Because $|t| = 2.09 < 2.262$ (and $p > .05$, and the interval contains 7), we **fail to reject** $H_0$ with a two-tailed test.
+
+## Question 4
+
+> Now run `t.test()` with `alternative = "less"`. How does the p-value change, and does your decision change? Why must you choose one-tailed or two-tailed before looking at the data?
+
+```{r}
+#| label: q4-one-tailed
+t.test(x = sleep_hours, mu = 7, alternative = "less", conf.level = 0.95)
+
+# By hand: the area below t (one tail only)
+pt(q = t, df = df, lower.tail = TRUE)
+```
+
+The one-tailed p is $.033$, exactly **half** of the two-tailed $.066$. Because $-2.09 < -1.833$ (and $.033 < .05$), we now **reject** $H_0$. The decision changed only because all of $\alpha$ sits in one tail.
+
+The direction must be chosen **before** seeing the data, based on the research question. Picking the tail after peeking at which way the mean fell makes the true false-positive rate larger than the .05 we claim.
+
+## Question 5
+
+> Write an APA-style sentence reporting the one-tailed result, and compute Cohen's $d$. Is the effect small, medium, or large?
+
+```{r}
+#| label: q5-effect-size
+d <- (m - mu_0) / s
+round(x = d, digits = 2)
+```
+
+$$d = \frac{\bar{x} - \mu}{s} = \frac{6.55 - 7}{0.680} = -0.66$$
+
+*Students slept significantly less than the recommended 7 hours, M = 6.55, SD = 0.68, t(9) = -2.09, p = .033 (one-tailed), d = -0.66.*
+
+$|d| = 0.66$ is a **medium-to-large** effect (about 0.5 is medium and 0.8 is large).
+
+## Submit question
+
+> One sentence: why do we use t instead of z when we do not know $\sigma$?
+
+Because $s$ is only an *estimate* of $\sigma$ and changes from sample to sample, the t distribution has fatter tails than z to account for that extra uncertainty (especially when $n$ is small), and it becomes nearly identical to z as $n$ grows.
