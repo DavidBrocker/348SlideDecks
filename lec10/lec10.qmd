@@ -25,6 +25,7 @@ revealjs-plugins:
 ---
 
 ```{r}
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -263,6 +264,7 @@ $\mu_\text{post} < \mu_\text{pre}$, or equivalently $\mu_D < 0$
 ::::: columns
 ::: {.column width="40%"}
 ```{r}
+#| label: paired-samples-t-test
 #| echo: false
 stress |>
   select(Participant = id, Pre, Post) |>
@@ -276,6 +278,7 @@ stress |>
 
 ::: {.column width="60%"}
 ```{r}
+#| label: paired-samples-t-test-2
 #| echo: false
 #| fig-width: 7
 #| fig-height: 5
@@ -298,6 +301,7 @@ ggplot(stress, aes(Pre, Post)) +
 ::::: columns
 ::: {.column width="55%"}
 ```{r}
+#| label: paired-samples-t-test-3
 #| echo: false
 stress |>
   select(Participant = id, Pre, Post, `D = Post - Pre` = D) |>
@@ -348,6 +352,7 @@ At $\alpha = .05$ (two-tailed) and $df = 29$, $t_{critical} = \pm `r f3(tcrit)`$
 paired_t.R
 
 ```{r}
+#| label: paired-t
 #| echo: true
 #| code-fold: false
 # post - pre, so a decrease in stress is a negative difference
@@ -360,6 +365,7 @@ t.test(stress$Post, stress$Pre, paired = TRUE)
 ### Reading the output
 
 ```{r}
+#| label: paired-samples-t-test-4
 #| echo: false
 tt |>
   tidy() |>
@@ -398,6 +404,7 @@ tt |>
 one_tailed.R
 
 ```{r}
+#| label: one-tailed
 #| echo: true
 #| code-fold: false
 #| eval: false
@@ -457,6 +464,7 @@ $d_z = \dfrac{\bar{D}}{s_D}$: the mean difference in units of the standard devia
 :::
 
 ```{r}
+#| label: chunk
 #| echo: false
 tibble(
   `|d|` = c("0.20", "0.50", "0.80"),
@@ -487,6 +495,7 @@ The size is $|d_z| = `r f2(abs(dz))`$, a **large** effect. The negative sign jus
 cohens_d.R
 
 ```{r}
+#| label: cohens-d
 #| echo: true
 #| code-fold: false
 #| eval: false
@@ -507,6 +516,7 @@ stress |>
 ### Visualizing results
 
 ```{r}
+#| label: paired-t-tests
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5.4
@@ -575,6 +585,7 @@ patchwork::wrap_plots(p1, p2, nrow = 1)
 :::
 
 ```{r}
+#| label: assumptions
 #| include: false
 set.seed(101)
 ex_1 <- tibble(
@@ -618,6 +629,7 @@ apa_2 <- sprintf("t(%d) = %s, p %s (one-tailed)", unname(t2$parameter), f2(unnam
 practice_1.R
 
 ```{r}
+#| label: practice-1
 #| echo: true
 #| code-fold: false
 #| eval: false
@@ -659,6 +671,7 @@ $H_0: \mu_D = 0$; $H_A: \mu_D < 0$. *`r apa_1`*, $d_z = \bar{D}/s_D$ = `r f2(dz1
 practice_2.R
 
 ```{r}
+#| label: practice-2
 #| echo: true
 #| code-fold: false
 #| eval: false

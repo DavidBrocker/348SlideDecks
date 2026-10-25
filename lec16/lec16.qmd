@@ -25,6 +25,7 @@ revealjs-plugins:
 ---
 
 ```{r}
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -233,6 +234,7 @@ $$Y = a + bX$$
 ## Scatterplot
 
 ```{r}
+#| label: scatterplot
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4.2
@@ -245,6 +247,7 @@ ggplot(bf, aes(X, Y)) +
 ## Linear regression
 
 ```{r}
+#| label: linear-regression
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4.2
@@ -258,6 +261,7 @@ ggplot(bf, aes(X, Y)) +
 ## Residuals
 
 ```{r}
+#| label: residuals
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4.2
@@ -316,6 +320,7 @@ $\large{\hat{Y}_i = \beta_0 + \beta_1(A) + \beta_2(B) + \cdots}$
 regression.R
 
 ```{r}
+#| label: regression
 #| echo: true
 #| code-fold: false
 # lm(outcome ~ predictor1 + predictor2, data)
@@ -332,6 +337,7 @@ summary(fit)
 ### Two predictor variables
 
 ```{r}
+#| label: regression-model-table
 #| echo: false
 sm_fit |> tbl_regression(intercept = TRUE) |> as_gt() |>
   tab_options(table.font.size = 26)
@@ -423,6 +429,7 @@ $$R^2_{adj} = 1 - (1 - R^2)\dfrac{n-1}{n-p-1} \qquad F = \dfrac{R^2 / p}{(1 - R^
 diagnostics.R
 
 ```{r}
+#| label: diagnostics
 #| echo: true
 #| code-fold: false
 #| eval: false
@@ -470,6 +477,7 @@ $$\large{\color{red}{Y_i} = \color{green}{\beta_0} + \color{orange}{\beta_1}\col
 ### Model coefficients
 
 ```{r}
+#| label: example
 #| echo: false
 sm_fit |>
   tbl_regression(intercept = TRUE) |>
@@ -483,6 +491,7 @@ sm_fit |>
 ### Model summary
 
 ```{r}
+#| label: example-2
 #| echo: false
 tibble(
   Metric = c("Residual Standard Error", "Multiple R-squared", "Adjusted R-squared", "F-statistic", "p"),
@@ -559,6 +568,7 @@ A variable with $k$ categories becomes $k - 1$ **dummy variables** (0/1). One ca
 ## Fit the Model
 
 ```{r}
+#| label: fit-the-model
 #| echo: false
 tbl_regression(model_3, intercept = TRUE) |>
   as_gt() |>
@@ -586,6 +596,7 @@ tbl_regression(model_3, intercept = TRUE) |>
 > Does a film's "scare score" predict its Rotten Tomatoes score, once we account for the year it was made and whether it is a sequel?
 
 ```{r}
+#| label: horror-movies
 #| echo: false
 hm_fit |>
   tbl_regression(label = list(scare_score ~ "Scare score", year ~ "Year",

@@ -9,6 +9,7 @@ Use the following information about exam scores in a hypothetical section of thi
 > Professor Brocker's PSY 348 midterm had 40 students. The exam scores were approximately normally distributed with a mean of 76 and a standard deviation of 8.
 
 ```{r}
+#| label: setup
 mu    <- 76   # population mean
 sigma <- 8    # population standard deviation
 n     <- 40   # class size
@@ -19,6 +20,7 @@ n     <- 40   # class size
 > Calculate the z-score for a student who scored a `70`. Is that above or below average?
 
 ```{r}
+#| label: question-1
 x <- 70
 
 z <- (x - mu) / sigma
@@ -34,6 +36,7 @@ The score is below average because 70 is less than 76 (z is negative).
 > Using `pnorm()`, what proportion of the population scored below a 70?
 
 ```{r}
+#| label: question-2
 # Road 1: raw score with the real mean and sd
 pnorm(q = 70, mean = 76, sd = 8, lower.tail = TRUE)
 
@@ -48,6 +51,7 @@ About 22.7% of the population scored below a 70.
 > Using `qnorm()`, what raw score marks the bottom 25%?
 
 ```{r}
+#| label: question-3
 qnorm(p = 0.25, mean = 76, sd = 8, lower.tail = TRUE)
 ```
 
@@ -58,6 +62,7 @@ A score of about 70.6 marks the bottom 25%.
 > What is the standard error when n = 25? When n = 100? By what factor did it shrink?
 
 ```{r}
+#| label: question-4
 se_25  <- sigma / sqrt(x = 25)
 se_100 <- sigma / sqrt(x = 100)
 
@@ -74,6 +79,7 @@ The standard error shrank by half (1.6 to 0.8) because *n* was multiplied by 4.
 Use only the new class's *n* = 25. The original *n* = 40 belongs to a different class and plays no part in this test.
 
 ```{r}
+#| label: question-5
 n_new <- 25   # size of the new class
 m_new <- 79   # observed mean of the new class
 

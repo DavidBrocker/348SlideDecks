@@ -33,6 +33,7 @@ revealjs-plugins:
 
 ::: {.column width="50%"}
 ```{r}
+#| label: lab-3
 #| echo: true
 library(gt)
 library(dplyr)
@@ -58,6 +59,7 @@ billboard |>
 This dataset has 105 columns (wow!) and they might not *all* be needed. Let's focus on the ones that can be useful!
 
 ```{r}
+#| label: data-tip-1
 
 library(dplyr)
 library(gt)
@@ -97,6 +99,7 @@ col_info %>%
 ```
 
 ```{r}
+#| label: data-tip-1-2
 library(dplyr)
 
 billboard_clean <-
@@ -160,6 +163,7 @@ billboard |>
 ### Group Exercise
 
 ```{r}
+#| label: which-artist-has-the-most-number-1-s
 billboard |> 
   # Step 3: Count, ungroup, and select top 10
   group_by(artist) |> 

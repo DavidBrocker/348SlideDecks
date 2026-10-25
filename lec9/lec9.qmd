@@ -25,6 +25,7 @@ revealjs-plugins:
 ---
 
 ```{r}
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -147,6 +148,7 @@ A true difference or effect exists.
 ## The Truth Table
 
 ```{r}
+#| label: the-truth-table
 #| echo: false
 error_table <- data.frame(
   "Decision" = c("$$\\text{Reject }H_0$$", "$$\\text{Fail to Reject } H_0$$"),
@@ -180,6 +182,7 @@ error_table |>
 ### Seeing the two errors
 
 ```{r}
+#| label: alpha-and-beta
 #| echo: false
 #| fig-width: 11
 #| fig-height: 3.3
@@ -342,6 +345,7 @@ $$s = \sqrt{\dfrac{\sum (x_i - \bar{x})^2}{n-1}}$$
 ## The t-distribution
 
 ```{r}
+#| label: the-t-distribution
 #| echo: false
 #| fig-width: 11
 #| fig-height: 4.6
@@ -474,6 +478,7 @@ $t = \dfrac{78 - 75}{\frac{5}{\sqrt{20}}} = \dfrac{3}{1.118} = 2.68$
 one_sample.R
 
 ```{r}
+#| label: one-sample
 #| echo: true
 #| code-fold: false
 
@@ -501,6 +506,7 @@ t.test(dat, mu = mu)
 check.R
 
 ```{r}
+#| label: check
 #| echo: true
 #| code-fold: false
 
@@ -543,6 +549,7 @@ qt(.975, df = n - 1)
 - A non-significant result ($p > .05$) means we fail to reject $H_0$ (insufficient evidence of a difference).
 
 ```{r}
+#| label: interpreting-results
 #| echo: false
 t.test(dat,mu = mu) |>
   tidy() |>
@@ -565,6 +572,7 @@ t.test(dat,mu = mu) |>
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: visualizing-data
 #| echo: false
 #| fig-width: 7
 #| fig-height: 5.6
@@ -593,6 +601,7 @@ ggplot(data, aes(y = Scores)) +
 
 ::: {.column width="50%"}
 ```{r}
+#| label: visualizing-data-2
 #| echo: false
 #| fig-width: 7
 #| fig-height: 5.6
@@ -644,6 +653,7 @@ For $df = 24$ ($25 - 1$), the critical value at $\alpha = .05$ (two-tailed) is $
 exam_scores.R
 
 ```{r}
+#| label: exam-scores
 #| echo: true
 #| code-fold: false
 
@@ -700,6 +710,7 @@ For $df = 15$ ($16 - 1$), the critical t-value for a one-tailed test at $\alpha 
 coffee.R
 
 ```{r}
+#| label: coffee
 #| echo: true
 #| code-fold: false
 
@@ -758,6 +769,7 @@ For $df = 29$, the critical t-value for a one-tailed test at $\alpha = .05$ is $
 sleep.R
 
 ```{r}
+#| label: sleep
 #| echo: true
 #| code-fold: false
 

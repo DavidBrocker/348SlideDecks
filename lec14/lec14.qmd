@@ -25,6 +25,7 @@ revealjs-plugins:
 ---
 
 ```{r}
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -214,6 +215,7 @@ Use Repeated Measures ANOVA when:
 
 ::: {.column width="50%"}
 ```{r}
+#| label: design
 #| echo: false
 #| fig-width: 6.5
 #| fig-height: 5.2
@@ -226,6 +228,7 @@ rm_plot(pizza, "Emails written (10 min)", "Each line is one person") +
 ## Visualizing the Data
 
 ```{r}
+#| label: visualizing-the-data
 #| echo: false
 #| fig-width: 11
 #| fig-height: 4.6
@@ -371,6 +374,7 @@ What are the df's for a one-way repeated-measures ANOVA on Time?
 ### The ANOVA table
 
 ```{r}
+#| label: pizza-study-results
 #| echo: false
 rm_gt(pz_tab)
 ```
@@ -387,6 +391,7 @@ $F(`r pz_tab$df[1]`, `r pz_tab$df[3]`) = `r f2(pz_tab$F[1])`$, $p$ `r fp(pz_tab$
 repeated_measures.R
 
 ```{r}
+#| label: repeated-measures
 #| echo: true
 #| code-fold: false
 library(afex)
@@ -485,6 +490,7 @@ $\eta_p^2 = \dfrac{SS_{Time}}{SS_{Time} + SS_{Error}} = \dfrac{`r f2(pz_tab$SS[1
 posthoc.R
 
 ```{r}
+#| label: posthoc
 #| echo: true
 #| code-fold: false
 pairwise.t.test(pizza$y, pizza$cond,
@@ -497,6 +503,7 @@ pairwise.t.test(pizza$y, pizza$cond,
 ### Reading the comparisons
 
 ```{r}
+#| label: follow-up
 #| echo: false
 pz_pw <- as.data.frame(as.table(pz_post$p.value)) |>
   filter(!is.na(Freq)) |>
@@ -569,6 +576,7 @@ If asked to report findings in terms of the Null Hypothesis (H~0~), you should r
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: repeated-measures-anova
 #| echo: false
 rm_gt(eng_tab)
 ```
@@ -578,6 +586,7 @@ rm_gt(eng_tab)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: repeated-measures-anova-2
 #| echo: false
 #| fig-width: 6
 #| fig-height: 4.6
@@ -629,6 +638,7 @@ eng |>
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: repeated-measures-anova-3
 #| echo: false
 rm_gt(act_tab)
 ```
@@ -638,6 +648,7 @@ rm_gt(act_tab)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: repeated-measures-anova-4
 #| echo: false
 #| fig-width: 6
 #| fig-height: 4.6
@@ -697,6 +708,7 @@ $MS_{Time}$ is made up of $MS_{Error}$ + the theoretical change over time:
 - Below are the same five participants in both formats.
 
 ```{r}
+#| label: data-manipulation
 #| echo: false
 set.seed(7)
 wide <- tibble(Participant = factor(1:5),
@@ -719,6 +731,7 @@ wide |>
 :::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: data-manipulation-2
 #| echo: false
 long |>
   gt() |>
@@ -734,6 +747,7 @@ long |>
 pivot.R
 
 ```{r}
+#| label: pivot
 #| echo: true
 #| code-fold: false
 #| eval: false
@@ -760,6 +774,7 @@ long <- wide |>
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: practice
 #| echo: false
 rm_gt(mem_t, size = 20)
 ```
@@ -775,6 +790,7 @@ rm_gt(mem_t, size = 20)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-2
 #| echo: false
 #| fig-width: 6
 #| fig-height: 2.5
@@ -793,6 +809,7 @@ rm_plot(mem, "Words recalled", "Memory recall")
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-3
 #| echo: false
 rm_gt(clin_t, size = 20)
 ```
@@ -808,6 +825,7 @@ rm_gt(clin_t, size = 20)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-4
 #| echo: false
 #| fig-width: 6
 #| fig-height: 2.5
@@ -826,6 +844,7 @@ rm_plot(clin, "Symptom improvement", "Clinical trial")
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-5
 #| echo: false
 rm_gt(ther_t, size = 20)
 ```
@@ -841,6 +860,7 @@ rm_gt(ther_t, size = 20)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-6
 #| echo: false
 #| fig-width: 6
 #| fig-height: 2.5
@@ -859,6 +879,7 @@ rm_plot(ther, "Anxiety", "Behavioral therapy")
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-7
 #| echo: false
 rm_gt(prod_t, size = 20)
 ```
@@ -874,6 +895,7 @@ rm_gt(prod_t, size = 20)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-8
 #| echo: false
 #| fig-width: 6
 #| fig-height: 2.5
@@ -892,6 +914,7 @@ rm_plot(prod, "Rating", "Product ratings")
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-9
 #| echo: false
 rm_gt(strs_t, size = 20)
 ```
@@ -907,6 +930,7 @@ rm_gt(strs_t, size = 20)
 
 ::: {.column width="50%"}
 ```{r}
+#| label: practice-10
 #| echo: false
 #| fig-width: 6
 #| fig-height: 2.5

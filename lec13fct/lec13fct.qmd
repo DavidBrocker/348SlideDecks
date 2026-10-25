@@ -28,6 +28,7 @@ editor:
 ---
 
 ```{r}
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -448,6 +449,7 @@ digraph {
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: understanding-main-effects
 #| echo: false
 means |>
   pivot_wider(names_from = Coffee, values_from = Happiness) |>
@@ -464,6 +466,7 @@ means |>
 
 ::: {.column width="50%"}
 ```{r}
+#| label: understanding-main-effects-2
 #| echo: false
 means |>
   pivot_wider(names_from = Coffee, values_from = Happiness) |>
@@ -496,6 +499,7 @@ means |>
 ::::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: visualizing-interactions
 #| echo: false
 #| fig-width: 6.5
 #| fig-height: 4.4
@@ -523,6 +527,7 @@ ggplot(means, aes(TV, Happiness, color = Coffee, group = Coffee)) +
 ### A main effect hides the story
 
 ```{r}
+#| label: visualizing-interactions-2
 #| echo: false
 #| fig-width: 8
 #| fig-height: 3.0
@@ -615,6 +620,7 @@ digraph F_Tests {
 factorial_anova.R
 
 ```{r}
+#| label: factorial-anova
 #| echo: true
 #| code-fold: false
 # A * B means: main effect of A + main effect of B + the A:B interaction
@@ -638,6 +644,7 @@ summary(fit)
 ## Table
 
 ```{r}
+#| label: table
 #| echo: false
 anova_gt(tab_wl, "*Dependent Variable: Weight Loss*<br>*Diet Type: Low Carb, Low Fat*<br>*Exercise Regimen: Cardio, Strength*")
 ```
@@ -645,6 +652,7 @@ anova_gt(tab_wl, "*Dependent Variable: Weight Loss*<br>*Diet Type: Low Carb, Low
 ## Plot
 
 ```{r}
+#| label: plot
 #| echo: false
 #| fig-width: 9
 #| fig-height: 4.6
@@ -679,6 +687,7 @@ versa): the lines in the plot are close to parallel.
 ### Example 2: political interest, gender × education
 
 ```{r}
+#| label: interpreting-results
 #| echo: false
 anova_gt(tab_pol, "*Dependent Variable: Political Interest*<br>*Gender: Male, Female*<br>*Education: High School, Bachelor's, Master's, PhD*")
 ```
@@ -694,6 +703,7 @@ anova_gt(tab_pol, "*Dependent Variable: Political Interest*<br>*Gender: Male, Fe
 ### Visually
 
 ```{r}
+#| label: interpreting-f-s
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4.6
@@ -722,6 +732,7 @@ for each F)
 - Numerator: the SS for this effect. Denominator: that same SS plus the error SS.
 
 ```{r}
+#| label: chunk
 #| echo: false
 tibble(
   Effect = c("Diet type", "Exercise regimen", "Diet × Exercise"),
@@ -751,6 +762,7 @@ tibble(
 follow_up.R
 
 ```{r}
+#| label: follow-up
 #| echo: true
 #| code-fold: false
 #| eval: false
@@ -779,6 +791,7 @@ TukeyHSD(fit, "diet_type:exercise_regimen")
 assumptions.R
 
 ```{r}
+#| label: assumptions
 #| echo: true
 #| code-fold: false
 #| eval: false
