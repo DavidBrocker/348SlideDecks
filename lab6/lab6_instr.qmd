@@ -1,0 +1,128 @@
+---
+title: "Lab 6: Instructions and Walkthrough"
+format: html
+editor: visual
+---
+
+Ten students studied word lists twice, once with their phone **near** and once **away**. We expect more words recalled with the phone away. Define $D = \text{away} - \text{near}$ and use $\alpha = .05$.
+
+```{r}
+#| label: recall-data
+set.seed(seed = 133)
+near <- round(x = rnorm(n = 10, mean = 14, sd = 3), digits = 0)
+away <- round(x = near + 1.5 + rnorm(n = 10, mean = 0, sd = 2.2), digits = 0)
+
+data.frame(student = 1:10, near = near, away = away)
+```
+
+## Question 1
+
+> State $H_0$ and $H_A$ in terms of $\mu_D$. Then compute the difference scores and find $\bar{D}$, $s_D$, the standard error, and $t$ by hand.
+
+$H_0: \mu_D = 0$ (a phone nearby makes no difference to recall). $H_A: \mu_D > 0$ (more words are recalled with the phone away).
+
+```{r}
+#| label: q1-by-hand
+D <- away - near          # away minus near: a positive D means MORE words with the phone away
+D
+
+n     <- length(x = D)
+d_bar <- mean(x = D)
+s_d   <- sd(x = D)
+se    <- s_d / sqrt(x = n)
+t     <- d_bar / se
+
+c(n = n, d_bar = d_bar, s_d = s_d, se = se, t = t)
+```
+
+$$\bar{D} = \frac{\sum D_i}{n} = \frac{19}{10} = 1.9 \qquad s_D = \sqrt{\frac{\sum (D_i - \bar{D})^2}{n - 1}} = \sqrt{\frac{42.9}{9}} = 2.183$$
+
+$$SE = \frac{s_D}{\sqrt{n}} = \frac{2.183}{\sqrt{10}} = 0.690 \qquad t = \frac{\bar{D}}{SE} = \frac{1.9}{0.690} = 2.75$$
+
+On average students recalled 1.9 more words with the phone away: about 2.75 standard errors above 0.
+
+## Question 2
+
+> What are the degrees of freedom? Use `qt()` to find the two-tailed critical value, and the one-tailed critical value for $H_A: \mu_D > 0$.
+
+```{r}
+#| label: q2-critical-values
+df <- n - 1
+
+# Two-tailed: 2.5% in each tail, so look up .975 (the positive cutoff)
+t_crit_two <- qt(p = 0.975, df = df, lower.tail = TRUE)
+
+# One-tailed (greater than): 5% in the upper tail
+t_crit_one <- qt(p = 0.95, df = df, lower.tail = TRUE)
+
+c(df = df, t_crit_two = t_crit_two, t_crit_one = t_crit_one)
+```
+
+$df = n - 1 = 10 - 1 = 9$ (nine pairs of free information, not 18). The two-tailed critical values are $\pm 2.262$. The one-tailed critical value is $+1.833$.
+
+## Question 3
+
+> Run `t.test()` with `paired = TRUE` and a two-tailed alternative. Report t, df, p, and the 95% confidence interval. Do you reject $H_0$?
+
+```{r}
+#| label: q3-two-tailed
+t.test(x = away, y = near, paired = TRUE, alternative = "two.sided", conf.level = 0.95)
+
+# The same p by hand: area beyond |t| in one tail, doubled
+2 * pt(q = abs(x = t), df = df, lower.tail = FALSE)
+```
+
+$t(9) = 2.75$, $p = .022$, 95% CI $[0.34, 3.46]$ for the mean difference. Because $|t| = 2.75 > 2.262$ (and $p < .05$, and the interval excludes 0), we **reject** $H_0$ even with a two-tailed test.
+
+## Question 4
+
+> Now run `t.test()` with `alternative = "greater"`. How does the p-value change, and does your decision change?
+
+```{r}
+#| label: q4-one-tailed
+t.test(x = away, y = near, paired = TRUE, alternative = "greater", conf.level = 0.95)
+
+# By hand: the area above t (one tail only)
+pt(q = t, df = df, lower.tail = FALSE)
+```
+
+The one-tailed p is $.011$, exactly **half** of the two-tailed $.022$. The decision does not change: $2.75 > 1.833$, so we reject $H_0$ either way.
+
+`alternative = "greater"` is correct here because `x - y` is **away minus near**, and we predicted that to be positive. Had we typed `x = near, y = away`, the difference would flip sign and the right alternative would be `"less"`.
+
+## Question 5
+
+> Run the test again ignoring the pairing. Compare the p-values. Why does pairing help here?
+
+```{r}
+#| label: q5-paired-vs-independent
+t.test(x = away, y = near, paired = FALSE, var.equal = TRUE, alternative = "two.sided")
+
+c(r_between_conditions = cor(x = near, y = away))
+```
+
+Ignoring the pairing gives $t(18) = 1.48$, $p = .156$: **not** significant. The paired test gives $p = .022$.
+
+Students differ a lot from each other (some remember about 10 words, others about 18), and the independent test treats that as noise. Because each student's two scores are strongly related ($r = .76$), comparing each student with **themselves** removes the between-person variability, so the standard error of the difference is much smaller.
+
+## Question 6
+
+> Compute $d_z$ and write an APA-style sentence for the one-tailed test.
+
+```{r}
+#| label: q6-effect-size
+d_z <- d_bar / s_d
+round(x = d_z, digits = 2)
+```
+
+$$d_z = \frac{\bar{D}}{s_D} = \frac{1.9}{2.183} = 0.87$$
+
+*Students recalled significantly more words with their phone away (M = 16.10, SD = 3.35) than near (M = 14.20, SD = 2.30), M_D = 1.90, SD_D = 2.18, t(9) = 2.75, p = .011 (one-tailed), d_z = 0.87.*
+
+$d_z = 0.87$ is a **large** effect (about 0.5 is medium and 0.8 is large).
+
+## Submit question
+
+> One sentence: why is a paired-samples t-test the same as a one-sample t-test?
+
+Because once we subtract each person's two scores we have a single column of difference scores, and the paired test simply asks whether the mean of that column differs from 0, which is a one-sample t-test with $\mu_0 = 0$ and $df = n - 1$ (the number of pairs minus one).

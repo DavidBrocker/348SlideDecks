@@ -1,0 +1,290 @@
+---
+title: "Lab 6: The Paired-Samples t-Test"
+subtitle: "Testing Whether the Same People Changed Between Two Measurements"
+author: "Dave Brocker"
+institute: "Farmingdale State College"
+footer: "PSY 348 - Statistics for Psychology"
+execute:
+  echo: true
+  warning: false
+  message: false
+format:
+  revealjs:
+    theme: ../custom.scss
+    width: 1600
+    height: 900
+    incremental: true
+    touch: true
+    chalkboard: true
+    lightbox: true
+    code-fold: true
+    slide-number: c/t
+revealjs-plugins:
+  - codewindow
+---
+
+## Quick Recap
+
+$$t = \frac{\bar{x} - \mu}{s / \sqrt{n}} \qquad\qquad t = \frac{\bar{D}}{s_D / \sqrt{n}}$$
+
+::: highlight-last
+-   Last lab: a **one-sample** t-test compared one sample mean to a known value
+
+-   Today: the same people are measured **twice** (before and after, or under two conditions)
+
+-   A **paired-samples t-test is a one-sample t-test on the difference scores**: is the mean difference $\bar{D}$ different from 0?
+
+-   **Same habit as before:** write *every argument by name*
+:::
+
+## Where $\bar{D}$ and $s_D$ Come From
+
+$$D_i = x_{i,\text{after}} - x_{i,\text{before}} \qquad \bar{D} = \frac{\sum D_i}{n} \qquad s_D = \sqrt{\frac{\sum (D_i - \bar{D})^2}{n - 1}}$$
+
+::: highlight-last
+-   $D_i$ is each person's own change (after minus before)
+
+-   $\bar{D}$ is the average change; $s_D$ is how much the changes vary from person to person
+
+-   $\dfrac{s_D}{\sqrt{n}}$ is the estimated standard error of the mean difference, and $df = n - 1$ counts **pairs**
+:::
+
+## Scenario
+
+> `12` PSY 348 students rated their anxiety (0 to 30) right before a quiz. They then did a 5-minute breathing exercise and rated their anxiety again.
+
+::: highlight-last
+-   $H_0: \mu_D = 0$ (the exercise does not change anxiety)
+
+-   $H_A: \mu_D \neq 0$ (anxiety changes: a **two-tailed** test)
+
+-   $\alpha = .05$
+
+-   Each student has **two** scores, so this is a **paired-samples t-test**
+:::
+
+## Our Data
+
+::: {.codewindow .r .codewindow-dark}
+anxiety_data.R
+
+```{r}
+#| label: anxiety-data
+#| code-fold: false
+set.seed(seed = 6)
+before <- round(x = rnorm(n = 12, mean = 20, sd = 4), digits = 0)
+after  <- round(x = before - 3 + rnorm(n = 12, mean = 0, sd = 2.5), digits = 0)
+
+data.frame(student = 1:12, before = before, after = after)
+```
+:::
+
+## Step 1: Difference Scores
+
+::: {.codewindow .r .codewindow-dark}
+difference_scores.R
+
+```{r}
+#| label: difference-scores
+#| code-fold: false
+D <- after - before     # after minus before: a negative D means anxiety went DOWN
+
+D
+
+c(n = length(x = D),
+  mean_D = mean(x = D),
+  sd_D = sd(x = D))
+```
+:::
+
+## By Hand First
+
+$$t = \frac{\bar{D}}{s_D/\sqrt{n}} = \frac{-2.58}{3.26/\sqrt{12}} = \frac{-2.58}{0.94} = -2.74$$
+
+::: highlight-last
+-   $df = n - 1 = 12 - 1 = 11$
+
+-   The two-tailed critical value for $df = 11$ is $\pm 2.20$
+
+-   $|-2.74| > 2.20$, so we expect to **reject** $H_0$
+:::
+
+## Now in R: Step by Step
+
+::: {.codewindow .r .codewindow-dark}
+paired_by_hand.R
+
+```{r}
+#| label: paired-by-hand
+#| code-fold: false
+n      <- length(x = D)
+d_bar  <- mean(x = D)
+s_d    <- sd(x = D)
+
+se     <- s_d / sqrt(x = n)                # estimated standard error
+t      <- d_bar / se                       # compared with 0, so nothing to subtract
+df     <- n - 1
+
+# Two-tailed p: area beyond |t| in one tail, doubled
+p      <- 2 * pt(q = abs(x = t), df = df, lower.tail = FALSE)
+
+# Critical value: the t that leaves 2.5% in each tail
+t_crit <- qt(p = 0.975, df = df, lower.tail = TRUE)
+
+c(se = se, t = t, df = df, p = p, t_crit = t_crit)
+```
+:::
+
+## One Function: `t.test()`
+
+::: {.codewindow .r .codewindow-dark}
+paired_t_test.R
+
+```{r}
+#| label: paired-t-test
+#| code-fold: false
+t.test(x = after, y = before, paired = TRUE, alternative = "two.sided", conf.level = 0.95)
+```
+:::
+
+::: highlight-last
+-   Same t, df, and p as our step-by-step version. `x - y` is **after minus before**: the order sets the sign
+
+-   The interval (about -4.65 to -0.51) is for the mean **difference** and excludes `0`
+
+-   `paired = TRUE` tells R the two columns are the same people
+:::
+
+## Paired Is a One-Sample Test on $D$
+
+::: {.codewindow .r .codewindow-dark}
+one_sample_on_d.R
+
+```{r}
+#| label: one-sample-on-d
+#| code-fold: false
+t.test(x = D, mu = 0, alternative = "two.sided", conf.level = 0.95)
+```
+:::
+
+::: highlight-last
+-   Identical t, df, p, and interval: the pairing only matters for **making** the difference scores
+
+-   After that, it is Lab 5 again, with $\mu_0 = 0$
+:::
+
+## Why Pairing Helps
+
+::: {.codewindow .r .codewindow-dark}
+paired_vs_independent.R
+
+```{r}
+#| label: paired-vs-independent
+#| code-fold: false
+# Ignoring the pairing (wrong for these data)
+t.test(x = after, y = before, paired = FALSE, var.equal = TRUE)$p.value
+
+# Using the pairing
+t.test(x = after, y = before, paired = TRUE)$p.value
+```
+:::
+
+::: highlight-last
+-   Students differ a lot from **each other** (some start at 15, some at 27). The independent test treats that as noise
+
+-   Pairing compares each person with **themselves**, so the between-person differences drop out and the real change shows
+:::
+
+## Seeing the Test
+
+Click **Code** to see how the plot is built.
+
+```{r}
+#| label: plot-paired-lines
+#| fig-width: 11
+#| fig-height: 4.5
+library(ggplot2)
+
+long <- data.frame(
+  student = rep(x = 1:12, times = 2),
+  time    = factor(x = rep(x = c("Before", "After"), each = 12), levels = c("Before", "After")),
+  anxiety = c(before, after)
+)
+
+ggplot(data = long, mapping = aes(x = time, y = anxiety, group = student)) +
+  geom_line(color = "grey60") +
+  geom_point(size = 3) +
+  stat_summary(mapping = aes(group = 1), fun = mean, geom = "line",
+               color = "orange", linewidth = 1.8) +
+  theme_minimal(base_size = 18) +
+  labs(
+    title = "Each Grey Line Is One Student; Orange Is the Group Mean",
+    x = NULL, y = "Anxiety (0 to 30)"
+  ) +
+  theme(panel.grid.minor = element_blank())
+```
+
+## Effect Size and APA Write-Up
+
+$$d_z = \frac{\bar{D}}{s_D} = \frac{-2.58}{3.26} = -0.79$$
+
+::: {.codewindow .r .codewindow-dark}
+cohens_dz.R
+
+```{r}
+#| label: cohens-dz
+#| code-fold: false
+d_z <- d_bar / s_d
+round(x = d_z, digits = 2)
+```
+:::
+
+::: highlight-last
+-   *Anxiety decreased after the breathing exercise, M_D = -2.58, SD_D = 3.26, t(11) = -2.74, p = .019, d_z = -0.79.*
+
+-   The negative sign only says anxiety went **down**. $|d_z| = 0.79$ sits right at the medium/large boundary (0.8): a substantial effect
+:::
+
+# Your Turn
+
+## The Data
+
+Does a phone in the room cost you memory? `10` students studied word lists in two sessions, once with their phone **near** them and once with it **away** in a bag. We expect they recall **more** words with the phone away.
+
+::: {.codewindow .r .codewindow-dark}
+recall_data.R
+
+```{r}
+#| label: recall-data
+#| code-fold: false
+set.seed(seed = 133)
+near <- round(x = rnorm(n = 10, mean = 14, sd = 3), digits = 0)
+away <- round(x = near + 1.5 + rnorm(n = 10, mean = 0, sd = 2.2), digits = 0)
+
+data.frame(student = 1:10, near = near, away = away)
+```
+:::
+
+## Questions 1 to 3
+
+**Write every argument by name.** Use $\alpha = .05$ and define $D = \text{away} - \text{near}$.
+
+1.  State $H_0$ and $H_A$ in terms of $\mu_D$. Then compute the difference scores $D$ and find $\bar{D}$, $s_D$, the standard error, and $t$ **by hand** (use R only for `mean()` and `sd()`).
+
+2.  What are the degrees of freedom? Use `qt()` to find the **two-tailed** critical value, and the **one-tailed** critical value for $H_A: \mu_D > 0$.
+
+3.  Run `t.test()` with `paired = TRUE` and a **two-tailed** alternative. Report t, df, p, and the 95% confidence interval. Do you reject $H_0$?
+
+## Questions 4 to 6
+
+4.  Now run `t.test()` with `alternative = "greater"`. How does the p-value change, and does your decision change? (Check which direction `x - y` points first.)
+
+5.  Run the test again **ignoring the pairing** (`paired = FALSE, var.equal = TRUE`). Compare the p-values. Why does pairing help here?
+
+6.  Compute $d_z = \dfrac{\bar{D}}{s_D}$ and write an APA-style sentence for the one-tailed test.
+
+## Submit on Brightspace
+
+-   Your answers to the six questions above (show your R code and output)
+
+-   One sentence: why is a paired-samples t-test the same as a one-sample t-test?

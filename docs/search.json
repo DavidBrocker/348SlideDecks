@@ -1166,7 +1166,7 @@
     "href": "lec10/lec10.html#paired-samples-t-test-6",
     "title": "Paired-Samples T-Test",
     "section": "Paired-Samples t-Test",
-    "text": "Paired-Samples t-Test\nConstruct the formula (computationally)\n\npaired_t.R\n\n# post - pre, so a decrease in stress is a negative difference\nt.test(stress$Post, stress$Pre, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  stress$Post and stress$Pre\nt = -7.526, df = 29, p-value = 2.696e-08\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.119592 -1.213741\nsample estimates:\nmean difference \n      -1.666667"
+    "text": "Paired-Samples t-Test\nConstruct the formula (computationally)\n\npaired_t.R\n\n# post - pre, so a decrease in stress is a negative difference\nt.test(x = stress$Post, y = stress$Pre, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  stress$Post and stress$Pre\nt = -7.526, df = 29, p-value = 2.696e-08\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.119592 -1.213741\nsample estimates:\nmean difference \n      -1.666667"
   },
   {
     "objectID": "lec10/lec10.html#paired-samples-t-test-7",
@@ -1180,7 +1180,7 @@
     "href": "lec10/lec10.html#one-tailed-or-two-tailed",
     "title": "Paired-Samples T-Test",
     "section": "One-Tailed or Two-Tailed?",
-    "text": "One-Tailed or Two-Tailed?\nMatching the test to the hypothesis\n\nOur alternative is directional: \\(H_A: \\mu_\\text{post} &lt; \\mu_\\text{pre}\\).\nt.test() is two-tailed by default. A directional test uses alternative:\n\n\none_tailed.R\n\n# post - pre, testing for a DEcrease\nt.test(stress$Post, stress$Pre, paired = TRUE, alternative = \"less\")\n\n\n\nThe t-statistic is the same, but the one-tailed p-value is half the two-tailed p-value (for an effect in the predicted direction) and the CI becomes one-sided.\nChoose the direction before you see the data. Here the conclusion is the same either way: p &lt; .001."
+    "text": "One-Tailed or Two-Tailed?\nMatching the test to the hypothesis\n\nOur alternative is directional: \\(H_A: \\mu_\\text{post} &lt; \\mu_\\text{pre}\\).\nt.test() is two-tailed by default. A directional test uses alternative:\n\n\none_tailed.R\n\n# post - pre, testing for a DEcrease\nt.test(x = stress$Post, y = stress$Pre, paired = TRUE, alternative = \"less\")\n\n\n\nThe t-statistic is the same, but the one-tailed p-value is half the two-tailed p-value (for an effect in the predicted direction) and the CI becomes one-sided.\nChoose the direction before you see the data. Here the conclusion is the same either way: p &lt; .001."
   },
   {
     "objectID": "lec10/lec10.html#why-pairing-helps",
@@ -1201,7 +1201,7 @@
     "href": "lec10/lec10.html#cohens-d",
     "title": "Paired-Samples T-Test",
     "section": "Cohen’s d",
-    "text": "Cohen’s d\nMindfulness example\n\n\n\n\n\n\n\n\nBy hand\n\n\n\\(d_z = \\dfrac{\\bar{D}}{s_D} = \\dfrac{-1.67}{1.21} = -1.37\\)\n\n\n\nThe size is \\(|d_z| = 1.37\\), a large effect. The negative sign just means scores went down.\n\n\ncohens_d.R\n\nlibrary(rstatix)\nstress |&gt;\n  pivot_longer(c(Post, Pre),\n               names_to = \"time\", values_to = \"score\") |&gt;\n  cohens_d(score ~ time, paired = TRUE)\n\n\nrstatix reports the same value: \\(d_z = -1.37\\)."
+    "text": "Cohen’s d\nMindfulness example\n\n\n\n\n\n\n\n\nBy hand\n\n\n\\(d_z = \\dfrac{\\bar{D}}{s_D} = \\dfrac{-1.67}{1.21} = -1.37\\)\n\n\n\nThe size is \\(|d_z| = 1.37\\), a large effect. The negative sign just means scores went down.\n\n\ncohens_d.R\n\nlibrary(rstatix)\nstress |&gt;\n  pivot_longer(cols = c(Post, Pre),\n               names_to = \"time\", values_to = \"score\") |&gt;\n  cohens_d(formula = score ~ time, paired = TRUE)\n\n\nrstatix reports the same value: \\(d_z = -1.37\\)."
   },
   {
     "objectID": "lec10/lec10.html#paired-t-tests",
@@ -1243,7 +1243,7 @@
     "href": "lec10/lec10.html#practice-1",
     "title": "Paired-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nPre/post stress: data and answer\n\npractice_1.R\n\nset.seed(101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z = \\bar{D}/s_D\\) = -1.44: a significant, large decrease in stress."
+    "text": "Practice\nPre/post stress: data and answer\n\npractice_1.R\n\nset.seed(seed = 101)\nex_1 &lt;- tibble(\n  ID = 1:30,\n  Stress_Pre  = rnorm(n = 30, mean = 20, sd = 4)\n) |&gt; mutate(Stress_Post = Stress_Pre - 4 + rnorm(n = 30, mean = 0, sd = 3))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(29) = -7.87, p &lt; .001, \\(d_z = \\bar{D}/s_D\\) = -1.44: a significant, large decrease in stress."
   },
   {
     "objectID": "lec10/lec10.html#practice-2",
@@ -1257,7 +1257,7 @@
     "href": "lec10/lec10.html#practice-3",
     "title": "Paired-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nReaction time and music: data and answer\n\npractice_2.R\n\nset.seed(102)\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(25, mean = 520, sd = 60)\n) |&gt; mutate(RT_Music = RT_NoMusic - 20 + rnorm(25, 0, 25))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(24) = -1.49, p = .075 (one-tailed), \\(d_z\\) = -0.30. The decision depends on the result: compare p to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+    "text": "Practice\nReaction time and music: data and answer\n\npractice_2.R\n\nset.seed(seed = 102)\nex_2 &lt;- tibble(\n  ID = 1:25,\n  RT_NoMusic = rnorm(n = 25, mean = 520, sd = 60)\n) |&gt; mutate(RT_Music = RT_NoMusic - 20 + rnorm(n = 25, mean = 0, sd = 25))\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_D = 0\\); \\(H_A: \\mu_D &lt; 0\\). t(24) = -1.49, p = .075 (one-tailed), \\(d_z\\) = -0.30. The decision depends on the result: compare p to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
   },
   {
     "objectID": "DESIGN_SYSTEM.html",
@@ -5427,5 +5427,173 @@
     "title": "Lab 5: Instructions and Walkthrough",
     "section": "Submit question",
     "text": "Submit question\n\nOne sentence: why do we use t instead of z when we do not know \\(\\sigma\\)?\n\nBecause \\(s\\) is only an estimate of \\(\\sigma\\) and changes from sample to sample, the t distribution has fatter tails than z to account for that extra uncertainty (especially when \\(n\\) is small), and it becomes nearly identical to z as \\(n\\) grows."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html",
+    "href": "lab6/lab6_instr.html",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "",
+    "text": "Ten students studied word lists twice, once with their phone near and once away. We expect more words recalled with the phone away. Define \\(D = \\text{away} - \\text{near}\\) and use \\(\\alpha = .05\\).\nset.seed(seed = 133)\nnear &lt;- round(x = rnorm(n = 10, mean = 14, sd = 3), digits = 0)\naway &lt;- round(x = near + 1.5 + rnorm(n = 10, mean = 0, sd = 2.2), digits = 0)\n\ndata.frame(student = 1:10, near = near, away = away)\n\n   student near away\n1        1   14   19\n2        2   15   19\n3        3   12   11\n4        4   15   18\n5        5   18   18\n6        6   14   18\n7        7   17   18\n8        8   14   17\n9        9   13   12\n10      10   10   11"
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#question-1",
+    "href": "lab6/lab6_instr.html#question-1",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Question 1",
+    "text": "Question 1\n\nState \\(H_0\\) and \\(H_A\\) in terms of \\(\\mu_D\\). Then compute the difference scores and find \\(\\bar{D}\\), \\(s_D\\), the standard error, and \\(t\\) by hand.\n\n\\(H_0: \\mu_D = 0\\) (a phone nearby makes no difference to recall). \\(H_A: \\mu_D &gt; 0\\) (more words are recalled with the phone away).\n\nD &lt;- away - near          # away minus near: a positive D means MORE words with the phone away\nD\n\n [1]  5  4 -1  3  0  4  1  3 -1  1\n\nn     &lt;- length(x = D)\nd_bar &lt;- mean(x = D)\ns_d   &lt;- sd(x = D)\nse    &lt;- s_d / sqrt(x = n)\nt     &lt;- d_bar / se\n\nc(n = n, d_bar = d_bar, s_d = s_d, se = se, t = t)\n\n         n      d_bar        s_d         se          t \n10.0000000  1.9000000  2.1832697  0.6904105  2.7519859 \n\n\n\\[\\bar{D} = \\frac{\\sum D_i}{n} = \\frac{19}{10} = 1.9 \\qquad s_D = \\sqrt{\\frac{\\sum (D_i - \\bar{D})^2}{n - 1}} = \\sqrt{\\frac{42.9}{9}} = 2.183\\]\n\\[SE = \\frac{s_D}{\\sqrt{n}} = \\frac{2.183}{\\sqrt{10}} = 0.690 \\qquad t = \\frac{\\bar{D}}{SE} = \\frac{1.9}{0.690} = 2.75\\]\nOn average students recalled 1.9 more words with the phone away: about 2.75 standard errors above 0."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#question-2",
+    "href": "lab6/lab6_instr.html#question-2",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Question 2",
+    "text": "Question 2\n\nWhat are the degrees of freedom? Use qt() to find the two-tailed critical value, and the one-tailed critical value for \\(H_A: \\mu_D &gt; 0\\).\n\n\ndf &lt;- n - 1\n\n# Two-tailed: 2.5% in each tail, so look up .975 (the positive cutoff)\nt_crit_two &lt;- qt(p = 0.975, df = df, lower.tail = TRUE)\n\n# One-tailed (greater than): 5% in the upper tail\nt_crit_one &lt;- qt(p = 0.95, df = df, lower.tail = TRUE)\n\nc(df = df, t_crit_two = t_crit_two, t_crit_one = t_crit_one)\n\n        df t_crit_two t_crit_one \n  9.000000   2.262157   1.833113 \n\n\n\\(df = n - 1 = 10 - 1 = 9\\) (nine pairs of free information, not 18). The two-tailed critical values are \\(\\pm 2.262\\). The one-tailed critical value is \\(+1.833\\)."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#question-3",
+    "href": "lab6/lab6_instr.html#question-3",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Question 3",
+    "text": "Question 3\n\nRun t.test() with paired = TRUE and a two-tailed alternative. Report t, df, p, and the 95% confidence interval. Do you reject \\(H_0\\)?\n\n\nt.test(x = away, y = near, paired = TRUE, alternative = \"two.sided\", conf.level = 0.95)\n\n\n    Paired t-test\n\ndata:  away and near\nt = 2.752, df = 9, p-value = 0.0224\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 0.3381829 3.4618171\nsample estimates:\nmean difference \n            1.9 \n\n# The same p by hand: area beyond |t| in one tail, doubled\n2 * pt(q = abs(x = t), df = df, lower.tail = FALSE)\n\n[1] 0.02240391\n\n\n\\(t(9) = 2.75\\), \\(p = .022\\), 95% CI \\([0.34, 3.46]\\) for the mean difference. Because \\(|t| = 2.75 &gt; 2.262\\) (and \\(p &lt; .05\\), and the interval excludes 0), we reject \\(H_0\\) even with a two-tailed test."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#question-4",
+    "href": "lab6/lab6_instr.html#question-4",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Question 4",
+    "text": "Question 4\n\nNow run t.test() with alternative = \"greater\". How does the p-value change, and does your decision change?\n\n\nt.test(x = away, y = near, paired = TRUE, alternative = \"greater\", conf.level = 0.95)\n\n\n    Paired t-test\n\ndata:  away and near\nt = 2.752, df = 9, p-value = 0.0112\nalternative hypothesis: true mean difference is greater than 0\n95 percent confidence interval:\n 0.6343996       Inf\nsample estimates:\nmean difference \n            1.9 \n\n# By hand: the area above t (one tail only)\npt(q = t, df = df, lower.tail = FALSE)\n\n[1] 0.01120196\n\n\nThe one-tailed p is \\(.011\\), exactly half of the two-tailed \\(.022\\). The decision does not change: \\(2.75 &gt; 1.833\\), so we reject \\(H_0\\) either way.\nalternative = \"greater\" is correct here because x - y is away minus near, and we predicted that to be positive. Had we typed x = near, y = away, the difference would flip sign and the right alternative would be \"less\"."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#question-5",
+    "href": "lab6/lab6_instr.html#question-5",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Question 5",
+    "text": "Question 5\n\nRun the test again ignoring the pairing. Compare the p-values. Why does pairing help here?\n\n\nt.test(x = away, y = near, paired = FALSE, var.equal = TRUE, alternative = \"two.sided\")\n\n\n    Two Sample t-test\n\ndata:  away and near\nt = 1.4791, df = 18, p-value = 0.1564\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.7986832  4.5986832\nsample estimates:\nmean of x mean of y \n     16.1      14.2 \n\nc(r_between_conditions = cor(x = near, y = away))\n\nr_between_conditions \n            0.761877 \n\n\nIgnoring the pairing gives \\(t(18) = 1.48\\), \\(p = .156\\): not significant. The paired test gives \\(p = .022\\).\nStudents differ a lot from each other (some remember about 10 words, others about 18), and the independent test treats that as noise. Because each student’s two scores are strongly related (\\(r = .76\\)), comparing each student with themselves removes the between-person variability, so the standard error of the difference is much smaller."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#question-6",
+    "href": "lab6/lab6_instr.html#question-6",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Question 6",
+    "text": "Question 6\n\nCompute \\(d_z\\) and write an APA-style sentence for the one-tailed test.\n\n\nd_z &lt;- d_bar / s_d\nround(x = d_z, digits = 2)\n\n[1] 0.87\n\n\n\\[d_z = \\frac{\\bar{D}}{s_D} = \\frac{1.9}{2.183} = 0.87\\]\nStudents recalled significantly more words with their phone away (M = 16.10, SD = 3.35) than near (M = 14.20, SD = 2.30), M_D = 1.90, SD_D = 2.18, t(9) = 2.75, p = .011 (one-tailed), d_z = 0.87.\n\\(d_z = 0.87\\) is a large effect (about 0.5 is medium and 0.8 is large)."
+  },
+  {
+    "objectID": "lab6/lab6_instr.html#submit-question",
+    "href": "lab6/lab6_instr.html#submit-question",
+    "title": "Lab 6: Instructions and Walkthrough",
+    "section": "Submit question",
+    "text": "Submit question\n\nOne sentence: why is a paired-samples t-test the same as a one-sample t-test?\n\nBecause once we subtract each person’s two scores we have a single column of difference scores, and the paired test simply asks whether the mean of that column differs from 0, which is a one-sample t-test with \\(\\mu_0 = 0\\) and \\(df = n - 1\\) (the number of pairs minus one)."
+  },
+  {
+    "objectID": "lab6/lab6.html#quick-recap",
+    "href": "lab6/lab6.html#quick-recap",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Quick Recap",
+    "text": "Quick Recap\n\\[t = \\frac{\\bar{x} - \\mu}{s / \\sqrt{n}} \\qquad\\qquad t = \\frac{\\bar{D}}{s_D / \\sqrt{n}}\\]\n\n\nLast lab: a one-sample t-test compared one sample mean to a known value\nToday: the same people are measured twice (before and after, or under two conditions)\nA paired-samples t-test is a one-sample t-test on the difference scores: is the mean difference \\(\\bar{D}\\) different from 0?\nSame habit as before: write every argument by name"
+  },
+  {
+    "objectID": "lab6/lab6.html#where-bard-and-s_d-come-from",
+    "href": "lab6/lab6.html#where-bard-and-s_d-come-from",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Where \\(\\bar{D}\\) and \\(s_D\\) Come From",
+    "text": "Where \\(\\bar{D}\\) and \\(s_D\\) Come From\n\\[D_i = x_{i,\\text{after}} - x_{i,\\text{before}} \\qquad \\bar{D} = \\frac{\\sum D_i}{n} \\qquad s_D = \\sqrt{\\frac{\\sum (D_i - \\bar{D})^2}{n - 1}}\\]\n\n\n\\(D_i\\) is each person’s own change (after minus before)\n\\(\\bar{D}\\) is the average change; \\(s_D\\) is how much the changes vary from person to person\n\\(\\dfrac{s_D}{\\sqrt{n}}\\) is the estimated standard error of the mean difference, and \\(df = n - 1\\) counts pairs"
+  },
+  {
+    "objectID": "lab6/lab6.html#scenario",
+    "href": "lab6/lab6.html#scenario",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Scenario",
+    "text": "Scenario\n\n12 PSY 348 students rated their anxiety (0 to 30) right before a quiz. They then did a 5-minute breathing exercise and rated their anxiety again.\n\n\n\n\\(H_0: \\mu_D = 0\\) (the exercise does not change anxiety)\n\\(H_A: \\mu_D \\neq 0\\) (anxiety changes: a two-tailed test)\n\\(\\alpha = .05\\)\nEach student has two scores, so this is a paired-samples t-test"
+  },
+  {
+    "objectID": "lab6/lab6.html#our-data",
+    "href": "lab6/lab6.html#our-data",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Our Data",
+    "text": "Our Data\n\nanxiety_data.R\n\nset.seed(seed = 6)\nbefore &lt;- round(x = rnorm(n = 12, mean = 20, sd = 4), digits = 0)\nafter  &lt;- round(x = before - 3 + rnorm(n = 12, mean = 0, sd = 2.5), digits = 0)\n\ndata.frame(student = 1:12, before = before, after = after)\n\n   student before after\n1        1     21    20\n2        2     17    13\n3        3     23    19\n4        4     27    24\n5        5     20    21\n6        6     21    15\n7        7     15    11\n8        8     23    26\n9        9     20    18\n10      10     16     9\n11      11     27    29\n12      12     15     9"
+  },
+  {
+    "objectID": "lab6/lab6.html#step-1-difference-scores",
+    "href": "lab6/lab6.html#step-1-difference-scores",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Step 1: Difference Scores",
+    "text": "Step 1: Difference Scores\n\ndifference_scores.R\n\nD &lt;- after - before     # after minus before: a negative D means anxiety went DOWN\n\nD\n\n [1] -1 -4 -4 -3  1 -6 -4  3 -2 -7  2 -6\n\nc(n = length(x = D),\n  mean_D = mean(x = D),\n  sd_D = sd(x = D))\n\n        n    mean_D      sd_D \n12.000000 -2.583333  3.260182"
+  },
+  {
+    "objectID": "lab6/lab6.html#by-hand-first",
+    "href": "lab6/lab6.html#by-hand-first",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "By Hand First",
+    "text": "By Hand First\n\\[t = \\frac{\\bar{D}}{s_D/\\sqrt{n}} = \\frac{-2.58}{3.26/\\sqrt{12}} = \\frac{-2.58}{0.94} = -2.74\\]\n\n\n\\(df = n - 1 = 12 - 1 = 11\\)\nThe two-tailed critical value for \\(df = 11\\) is \\(\\pm 2.20\\)\n\\(|-2.74| &gt; 2.20\\), so we expect to reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lab6/lab6.html#now-in-r-step-by-step",
+    "href": "lab6/lab6.html#now-in-r-step-by-step",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Now in R: Step by Step",
+    "text": "Now in R: Step by Step\n\npaired_by_hand.R\n\nn      &lt;- length(x = D)\nd_bar  &lt;- mean(x = D)\ns_d    &lt;- sd(x = D)\n\nse     &lt;- s_d / sqrt(x = n)                # estimated standard error\nt      &lt;- d_bar / se                       # compared with 0, so nothing to subtract\ndf     &lt;- n - 1\n\n# Two-tailed p: area beyond |t| in one tail, doubled\np      &lt;- 2 * pt(q = abs(x = t), df = df, lower.tail = FALSE)\n\n# Critical value: the t that leaves 2.5% in each tail\nt_crit &lt;- qt(p = 0.975, df = df, lower.tail = TRUE)\n\nc(se = se, t = t, df = df, p = p, t_crit = t_crit)\n\n         se           t          df           p      t_crit \n 0.94113353 -2.74491690 11.00000000  0.01906313  2.20098516"
+  },
+  {
+    "objectID": "lab6/lab6.html#one-function-t.test",
+    "href": "lab6/lab6.html#one-function-t.test",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "One Function: t.test()",
+    "text": "One Function: t.test()\n\npaired_t_test.R\n\nt.test(x = after, y = before, paired = TRUE, alternative = \"two.sided\", conf.level = 0.95)\n\n\n    Paired t-test\n\ndata:  after and before\nt = -2.7449, df = 11, p-value = 0.01906\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -4.6547543 -0.5119124\nsample estimates:\nmean difference \n      -2.583333 \n\n\n\n\n\nSame t, df, and p as our step-by-step version. x - y is after minus before: the order sets the sign\nThe interval (about -4.65 to -0.51) is for the mean difference and excludes 0\npaired = TRUE tells R the two columns are the same people"
+  },
+  {
+    "objectID": "lab6/lab6.html#paired-is-a-one-sample-test-on-d",
+    "href": "lab6/lab6.html#paired-is-a-one-sample-test-on-d",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Paired Is a One-Sample Test on \\(D\\)",
+    "text": "Paired Is a One-Sample Test on \\(D\\)\n\none_sample_on_d.R\n\nt.test(x = D, mu = 0, alternative = \"two.sided\", conf.level = 0.95)\n\n\n    One Sample t-test\n\ndata:  D\nt = -2.7449, df = 11, p-value = 0.01906\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -4.6547543 -0.5119124\nsample estimates:\nmean of x \n-2.583333 \n\n\n\n\n\nIdentical t, df, p, and interval: the pairing only matters for making the difference scores\nAfter that, it is Lab 5 again, with \\(\\mu_0 = 0\\)"
+  },
+  {
+    "objectID": "lab6/lab6.html#why-pairing-helps",
+    "href": "lab6/lab6.html#why-pairing-helps",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Why Pairing Helps",
+    "text": "Why Pairing Helps\n\npaired_vs_independent.R\n\n# Ignoring the pairing (wrong for these data)\nt.test(x = after, y = before, paired = FALSE, var.equal = TRUE)$p.value\n\n[1] 0.2640478\n\n# Using the pairing\nt.test(x = after, y = before, paired = TRUE)$p.value\n\n[1] 0.01906313\n\n\n\n\n\nStudents differ a lot from each other (some start at 15, some at 27). The independent test treats that as noise\nPairing compares each person with themselves, so the between-person differences drop out and the real change shows"
+  },
+  {
+    "objectID": "lab6/lab6.html#seeing-the-test",
+    "href": "lab6/lab6.html#seeing-the-test",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Seeing the Test",
+    "text": "Seeing the Test\nClick Code to see how the plot is built.\n\n\nCode\nlibrary(ggplot2)\n\nlong &lt;- data.frame(\n  student = rep(x = 1:12, times = 2),\n  time    = factor(x = rep(x = c(\"Before\", \"After\"), each = 12), levels = c(\"Before\", \"After\")),\n  anxiety = c(before, after)\n)\n\nggplot(data = long, mapping = aes(x = time, y = anxiety, group = student)) +\n  geom_line(color = \"grey60\") +\n  geom_point(size = 3) +\n  stat_summary(mapping = aes(group = 1), fun = mean, geom = \"line\",\n               color = \"orange\", linewidth = 1.8) +\n  theme_minimal(base_size = 18) +\n  labs(\n    title = \"Each Grey Line Is One Student; Orange Is the Group Mean\",\n    x = NULL, y = \"Anxiety (0 to 30)\"\n  ) +\n  theme(panel.grid.minor = element_blank())"
+  },
+  {
+    "objectID": "lab6/lab6.html#effect-size-and-apa-write-up",
+    "href": "lab6/lab6.html#effect-size-and-apa-write-up",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Effect Size and APA Write-Up",
+    "text": "Effect Size and APA Write-Up\n\\[d_z = \\frac{\\bar{D}}{s_D} = \\frac{-2.58}{3.26} = -0.79\\]\n\ncohens_dz.R\n\nd_z &lt;- d_bar / s_d\nround(x = d_z, digits = 2)\n\n[1] -0.79\n\n\n\n\n\nAnxiety decreased after the breathing exercise, M_D = -2.58, SD_D = 3.26, t(11) = -2.74, p = .019, d_z = -0.79.\nThe negative sign only says anxiety went down. \\(|d_z| = 0.79\\) sits right at the medium/large boundary (0.8): a substantial effect"
+  },
+  {
+    "objectID": "lab6/lab6.html#the-data",
+    "href": "lab6/lab6.html#the-data",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "The Data",
+    "text": "The Data\nDoes a phone in the room cost you memory? 10 students studied word lists in two sessions, once with their phone near them and once with it away in a bag. We expect they recall more words with the phone away.\n\nrecall_data.R\n\nset.seed(seed = 133)\nnear &lt;- round(x = rnorm(n = 10, mean = 14, sd = 3), digits = 0)\naway &lt;- round(x = near + 1.5 + rnorm(n = 10, mean = 0, sd = 2.2), digits = 0)\n\ndata.frame(student = 1:10, near = near, away = away)\n\n   student near away\n1        1   14   19\n2        2   15   19\n3        3   12   11\n4        4   15   18\n5        5   18   18\n6        6   14   18\n7        7   17   18\n8        8   14   17\n9        9   13   12\n10      10   10   11"
+  },
+  {
+    "objectID": "lab6/lab6.html#questions-1-to-3",
+    "href": "lab6/lab6.html#questions-1-to-3",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Questions 1 to 3",
+    "text": "Questions 1 to 3\nWrite every argument by name. Use \\(\\alpha = .05\\) and define \\(D = \\text{away} - \\text{near}\\).\n\nState \\(H_0\\) and \\(H_A\\) in terms of \\(\\mu_D\\). Then compute the difference scores \\(D\\) and find \\(\\bar{D}\\), \\(s_D\\), the standard error, and \\(t\\) by hand (use R only for mean() and sd()).\nWhat are the degrees of freedom? Use qt() to find the two-tailed critical value, and the one-tailed critical value for \\(H_A: \\mu_D &gt; 0\\).\nRun t.test() with paired = TRUE and a two-tailed alternative. Report t, df, p, and the 95% confidence interval. Do you reject \\(H_0\\)?"
+  },
+  {
+    "objectID": "lab6/lab6.html#questions-4-to-6",
+    "href": "lab6/lab6.html#questions-4-to-6",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Questions 4 to 6",
+    "text": "Questions 4 to 6\n\nNow run t.test() with alternative = \"greater\". How does the p-value change, and does your decision change? (Check which direction x - y points first.)\nRun the test again ignoring the pairing (paired = FALSE, var.equal = TRUE). Compare the p-values. Why does pairing help here?\nCompute \\(d_z = \\dfrac{\\bar{D}}{s_D}\\) and write an APA-style sentence for the one-tailed test."
+  },
+  {
+    "objectID": "lab6/lab6.html#submit-on-brightspace",
+    "href": "lab6/lab6.html#submit-on-brightspace",
+    "title": "Lab 6: The Paired-Samples t-Test",
+    "section": "Submit on Brightspace",
+    "text": "Submit on Brightspace\n\nYour answers to the six questions above (show your R code and output)\nOne sentence: why is a paired-samples t-test the same as a one-sample t-test?"
   }
 ]
