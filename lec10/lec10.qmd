@@ -264,7 +264,7 @@ $\mu_\text{post} < \mu_\text{pre}$, or equivalently $\mu_D < 0$
 ::::: columns
 ::: {.column width="40%"}
 ```{r}
-#| label: paired-samples-t-test
+#| label: stress-data-preview
 #| echo: false
 stress |>
   select(Participant = id, Pre, Post) |>
@@ -278,7 +278,7 @@ stress |>
 
 ::: {.column width="60%"}
 ```{r}
-#| label: paired-samples-t-test-2
+#| label: plot-pre-post-scatter
 #| echo: false
 #| fig-width: 7
 #| fig-height: 5
@@ -301,7 +301,7 @@ ggplot(stress, aes(Pre, Post)) +
 ::::: columns
 ::: {.column width="55%"}
 ```{r}
-#| label: paired-samples-t-test-3
+#| label: difference-scores-preview
 #| echo: false
 stress |>
   select(Participant = id, Pre, Post, `D = Post - Pre` = D) |>
@@ -356,7 +356,7 @@ paired_t.R
 #| echo: true
 #| code-fold: false
 # post - pre, so a decrease in stress is a negative difference
-t.test(stress$Post, stress$Pre, paired = TRUE)
+t.test(x = stress$Post, y = stress$Pre, paired = TRUE)
 ```
 :::
 
@@ -365,7 +365,7 @@ t.test(stress$Post, stress$Pre, paired = TRUE)
 ### Reading the output
 
 ```{r}
-#| label: paired-samples-t-test-4
+#| label: paired-t-output-table
 #| echo: false
 tt |>
   tidy() |>
@@ -409,7 +409,7 @@ one_tailed.R
 #| code-fold: false
 #| eval: false
 # post - pre, testing for a DEcrease
-t.test(stress$Post, stress$Pre, paired = TRUE, alternative = "less")
+t.test(x = stress$Post, y = stress$Pre, paired = TRUE, alternative = "less")
 ```
 :::
 
@@ -464,7 +464,7 @@ $d_z = \dfrac{\bar{D}}{s_D}$: the mean difference in units of the standard devia
 :::
 
 ```{r}
-#| label: chunk
+#| label: effect-size-guide
 #| echo: false
 tibble(
   `|d|` = c("0.20", "0.50", "0.80"),
@@ -501,9 +501,9 @@ cohens_d.R
 #| eval: false
 library(rstatix)
 stress |>
-  pivot_longer(c(Post, Pre),
+  pivot_longer(cols = c(Post, Pre),
                names_to = "time", values_to = "score") |>
-  cohens_d(score ~ time, paired = TRUE)
+  cohens_d(formula = score ~ time, paired = TRUE)
 ```
 :::
 
@@ -516,7 +516,7 @@ stress |>
 ### Visualizing results
 
 ```{r}
-#| label: paired-t-tests
+#| label: plot-pre-post-lines-and-differences
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5.4
@@ -633,11 +633,11 @@ practice_1.R
 #| echo: true
 #| code-fold: false
 #| eval: false
-set.seed(101)
+set.seed(seed = 101)
 ex_1 <- tibble(
   ID = 1:30,
-  Stress_Pre  = rnorm(30, mean = 20, sd = 4)
-) |> mutate(Stress_Post = Stress_Pre - 4 + rnorm(30, 0, 3))
+  Stress_Pre  = rnorm(n = 30, mean = 20, sd = 4)
+) |> mutate(Stress_Post = Stress_Pre - 4 + rnorm(n = 30, mean = 0, sd = 3))
 ```
 :::
 
@@ -675,11 +675,11 @@ practice_2.R
 #| echo: true
 #| code-fold: false
 #| eval: false
-set.seed(102)
+set.seed(seed = 102)
 ex_2 <- tibble(
   ID = 1:25,
-  RT_NoMusic = rnorm(25, mean = 520, sd = 60)
-) |> mutate(RT_Music = RT_NoMusic - 20 + rnorm(25, 0, 25))
+  RT_NoMusic = rnorm(n = 25, mean = 520, sd = 60)
+) |> mutate(RT_Music = RT_NoMusic - 20 + rnorm(n = 25, mean = 0, sd = 25))
 ```
 :::
 

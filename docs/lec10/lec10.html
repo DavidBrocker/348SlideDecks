@@ -955,7 +955,7 @@ A larger <span class="math inline">\(n\)</span> shrinks the standard error <span
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/paired-samples-t-test-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec10_files/figure-revealjs/paired-samples-t-test-2-1.png" width="672"></a></p>
+<p><a href="lec10_files/figure-revealjs/plot-pre-post-scatter-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="lec10_files/figure-revealjs/plot-pre-post-scatter-1.png" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1550,7 +1550,7 @@ A larger <span class="math inline">\(n\)</span> shrinks the standard error <span
 <p>paired_t.R</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="co"># post - pre, so a decrease in stress is a negative difference</span></span>
-<span id="cb1-2"><a aria-label="2"></a><span class="fu">t.test</span>(stress<span class="sc">$</span>Post, stress<span class="sc">$</span>Pre, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">t.test</span>(<span class="at">x =</span> stress<span class="sc">$</span>Post, <span class="at">y =</span> stress<span class="sc">$</span>Pre, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -2065,7 +2065,7 @@ mean difference
 <p>one_tailed.R</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="co"># post - pre, testing for a DEcrease</span></span>
-<span id="cb3-2"><a aria-label="2"></a><span class="fu">t.test</span>(stress<span class="sc">$</span>Post, stress<span class="sc">$</span>Pre, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"less"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a aria-label="2"></a><span class="fu">t.test</span>(<span class="at">x =</span> stress<span class="sc">$</span>Post, <span class="at">y =</span> stress<span class="sc">$</span>Pre, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"less"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ul>
@@ -2624,9 +2624,9 @@ mean difference
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">library</span>(rstatix)</span>
 <span id="cb4-2"><a aria-label="2"></a>stress <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a aria-label="3"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(Post, Pre),</span>
+<span id="cb4-3"><a aria-label="3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(Post, Pre),</span>
 <span id="cb4-4"><a aria-label="4"></a>               <span class="at">names_to =</span> <span class="st">"time"</span>, <span class="at">values_to =</span> <span class="st">"score"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-5"><a aria-label="5"></a>  <span class="fu">cohens_d</span>(score <span class="sc">~</span> time, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-5"><a aria-label="5"></a>  <span class="fu">cohens_d</span>(<span class="at">formula =</span> score <span class="sc">~</span> time, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <p><code>rstatix</code> reports the same value: <span class="math inline">\(d_z = -1.37\)</span>.</p>
@@ -2639,7 +2639,7 @@ mean difference
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lec10_files/figure-revealjs/paired-t-tests-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec10_files/figure-revealjs/paired-t-tests-1.png" width="1152"></a></p>
+<p><a href="lec10_files/figure-revealjs/plot-pre-post-lines-and-differences-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lec10_files/figure-revealjs/plot-pre-post-lines-and-differences-1.png" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -2725,11 +2725,11 @@ mean difference
 <div class="codewindow r codewindow-dark">
 <p>practice_1.R</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">101</span>)</span>
 <span id="cb5-2"><a aria-label="2"></a>ex_1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb5-3"><a aria-label="3"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
-<span id="cb5-4"><a aria-label="4"></a>  <span class="at">Stress_Pre  =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
-<span id="cb5-5"><a aria-label="5"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Stress_Post =</span> Stress_Pre <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-4"><a aria-label="4"></a>  <span class="at">Stress_Pre  =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb5-5"><a aria-label="5"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Stress_Post =</span> Stress_Pre <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="fragment">
@@ -2778,11 +2778,11 @@ mean difference
 <div class="codewindow r codewindow-dark">
 <p>practice_2.R</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">102</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">102</span>)</span>
 <span id="cb6-2"><a aria-label="2"></a>ex_2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb6-3"><a aria-label="3"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>,</span>
-<span id="cb6-4"><a aria-label="4"></a>  <span class="at">RT_NoMusic =</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">520</span>, <span class="at">sd =</span> <span class="dv">60</span>)</span>
-<span id="cb6-5"><a aria-label="5"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">RT_Music =</span> RT_NoMusic <span class="sc">-</span> <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">25</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-4"><a aria-label="4"></a>  <span class="at">RT_NoMusic =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">520</span>, <span class="at">sd =</span> <span class="dv">60</span>)</span>
+<span id="cb6-5"><a aria-label="5"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">RT_Music =</span> RT_NoMusic <span class="sc">-</span> <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">25</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="fragment">
