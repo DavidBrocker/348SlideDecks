@@ -96,7 +96,7 @@ f2 <- function(x) formatC(x, format = "f", digits = 2)
 
 ## **Finding the Regression Line**
 
--   Does the relationship look positive or negative? **More coffee is generally linked to higher energy**, but there may be a limit.
+- Does the relationship look positive or negative? **More coffee is generally linked to higher energy**, but there may be a limit.
 
 ::: callout-tip
 ## Simple regression equation
@@ -104,24 +104,25 @@ f2 <- function(x) formatC(x, format = "f", digits = 2)
 $\text{Energy Level} = \text{Intercept} + (\text{Slope} \times \text{Cups of Coffee}) = `r f2(b0)` + `r f2(b1)`(\text{Cups})$
 :::
 
--   **Slope (`r f2(b1)`):** for each additional cup of coffee, the predicted energy level increases by about `r f2(b1)` points.
+- **Slope (`r f2(b1)`):** for each additional cup of coffee, the predicted energy level increases by about `r f2(b1)` points.
 
--   **Intercept (`r f2(b0)`):** the predicted energy level when no coffee is consumed (cups = 0).
+- **Intercept (`r f2(b0)`):** the predicted energy level when no coffee is consumed (cups = 0).
 
-## **Activity: The Limits of Prediction**  
+## **Activity: The Limits of Prediction**
 
-### **Step 1: Make Predictions**  
-**Question:**  
-*"Based on our regression equation:*  
-$$ \text{Energy Level} = `r f2(b0)` + `r f2(b1)`(\text{Cups of Coffee}) $$  
-*what do you predict the energy level will be for a student who drinks 10 cups? 20 cups?"*  
+### **Step 1: Make Predictions**
+
+**Question:**\
+*"Based on our regression equation:*\
+$$ \text{Energy Level} = `r f2(b0)` + `r f2(b1)`(\text{Cups of Coffee}) $$\
+*what do you predict the energy level will be for a student who drinks 10 cups? 20 cups?"*
 
 - Calculate and share your predictions, and write them on the board.
 
-## **Step 2: Visualizing the Problem**  
+## **Step 2: Visualizing the Problem**
 
-- Look at the scatterplot with the regression line.  
-- Let’s extend the line beyond our observed data (e.g., past 10 cups).  
+- Look at the scatterplot with the regression line.\
+- Let’s extend the line beyond our observed data (e.g., past 10 cups).
 
 ::: p_iframe
 <iframe frameborder="0" seamless="seamless" scrolling="no" src="test.html">
@@ -129,26 +130,27 @@ $$ \text{Energy Level} = `r f2(b0)` + `r f2(b1)`(\text{Cups of Coffee}) $$
 </iframe>
 :::
 
-- **Does this seem realistic? Why or why not?**  
+- **Does this seem realistic? Why or why not?**
 
-## **Step 3: Critical Thinking Discussion**  
+## **Step 3: Critical Thinking Discussion**
 
-### **Discuss with a partner or in groups:**  
-1. *At what point do you think this model stops making sense?*  
-2. *What real-world factors might cause the energy level to level off or decrease?*  
-   - Caffeine crashes?  
-   - Health risks?  
-   - Individual differences in tolerance?  
-3. *Why is it risky to make predictions outside of the observed range?*  
+### **Discuss with a partner or in groups:**
 
-## **Step 4: Alternative Models**  
+1.  *At what point do you think this model stops making sense?*\
+2.  *What real-world factors might cause the energy level to level off or decrease?*
+    - Caffeine crashes?\
+    - Health risks?\
+    - Individual differences in tolerance?\
+3.  *Why is it risky to make predictions outside of the observed range?*
 
-- Some relationships are **nonlinear** (e.g., caffeine effects might follow a curve).  
+## **Step 4: Alternative Models**
 
-## **Conclusion: Key Takeaways**  
+- Some relationships are **nonlinear** (e.g., caffeine effects might follow a curve).
 
-- **Linear models have limits**—extrapolating beyond observed data can lead to unrealistic predictions.  
-- Real-world relationships often have **thresholds** where effects change.  
+## **Conclusion: Key Takeaways**
+
+- **Linear models have limits**—extrapolating beyond observed data can lead to unrealistic predictions.\
+- Real-world relationships often have **thresholds** where effects change.\
 - Always **consider context** before making predictions!
 
 ## **Adding More Predictors**
@@ -199,12 +201,12 @@ df |>
 
 $\hat{Y} = `r f2(coef2[1])` + `r f2(coef2[2])`(A) + `r f2(coef2[3])`(B) + `r f2(coef2[4])`(C)$
 
--   $A$ = Cups_of_Coffee (continuous)
+- $A$ = Cups_of_Coffee (continuous)
 
--   $B$ = Sleep_Quality (categorical: 0 = "Poor", 1 = "Good")
+- $B$ = Sleep_Quality (categorical: 0 = "Poor", 1 = "Good")
 
--   $C$ = Study_Time (continuous)
+- $C$ = Study_Time (continuous)
 
--   Each cup of coffee adds `r f2(coef2[2])` to predicted energy; good sleep adds `r f2(coef2[3])` (poor sleep adds nothing); each extra unit of study time adds `r f2(coef2[4])`, each holding the others constant.
+- Each cup of coffee adds `r f2(coef2[2])` to predicted energy; good sleep adds `r f2(coef2[3])` (poor sleep adds nothing); each extra unit of study time adds `r f2(coef2[4])`, each holding the others constant.
 
 $\hat{Y} = \beta_0 + \beta_1 A + \beta_2 B + \beta_3 C$
