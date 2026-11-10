@@ -762,6 +762,11 @@ Dave Brocker
 <blockquote>
 <p>A researcher wants to see whether it is the taste of coffee that is causing higher levels of happiness. He assigns 30 people to each condition. The experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. All <code>3</code> groups complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
 </blockquote>
+</section>
+<section id="between-subjects-anova-1" class="slide level2">
+<h2>Between subjects ANOVA</h2>
+<h3 id="coffee-example-vol.-2-hypotheses">Coffee Example Vol. 2: Hypotheses</h3>
+<p>Three groups (coffee, decaf, water), 30 people each, happiness rated 1 to 10.</p>
 <ul>
 <li class="fragment"><p>What is <span class="math inline">\(H_0\)</span>?</p>
 <ul>
@@ -773,12 +778,10 @@ Dave Brocker
 </ul></li>
 </ul>
 </section>
-<section id="between-subjects-anova-1" class="slide level2">
+<section id="between-subjects-anova-2" class="slide level2">
 <h2>Between subjects ANOVA</h2>
-<h3 id="coffee-example-vol.-2-1">Coffee Example Vol. 2</h3>
-<blockquote>
-<p>A researcher wants to see whether it is the taste of coffee that is causing higher levels of happiness. He assigns 30 people to each condition. The experimental group drinks caffeinated coffee. The placebo group drinks decaf. The control group drinks water. All <code>3</code> groups complete a survey to measure their happiness on a scale of <code>1</code> to <code>10</code>.</p>
-</blockquote>
+<h3 id="coffee-example-vol.-2-group-means">Coffee Example Vol. 2: Group Means</h3>
+<p>Three groups (coffee, decaf, water), 30 people each, happiness rated 1 to 10.</p>
 <ul>
 <li class="fragment"><p>The experimental group has a mean happiness score <code>8</code></p></li>
 <li class="fragment"><p>The placebo group mean happiness score <code>6</code></p></li>
@@ -788,7 +791,7 @@ Dave Brocker
 </ul></li>
 </ul>
 </section>
-<section id="coffee-example-vol.-2-2" class="slide level2">
+<section id="coffee-example-vol.-2-1" class="slide level2">
 <h2>Coffee Example Vol. 2</h2>
 <h3 id="visualize">Visualize</h3>
 <div class="cell">
@@ -801,7 +804,7 @@ Dave Brocker
 </div>
 </div>
 </section>
-<section id="coffee-example-vol.-2-3" class="slide level2">
+<section id="coffee-example-vol.-2-2" class="slide level2">
 <h2>Coffee Example Vol. 2</h2>
 <h3 id="why-not-do-more-t-tests">Why Not Do More T-Tests?</h3>
 <ul>
@@ -847,23 +850,23 @@ and <em>within-group variance</em> (random variation).</p></li>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
-<div id="xvtqvesiwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xvtqvesiwz table {
+<div id="qbhtcboszu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qbhtcboszu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xvtqvesiwz thead, #xvtqvesiwz tbody, #xvtqvesiwz tfoot, #xvtqvesiwz tr, #xvtqvesiwz td, #xvtqvesiwz th {
+#qbhtcboszu thead, #qbhtcboszu tbody, #qbhtcboszu tfoot, #qbhtcboszu tr, #qbhtcboszu td, #qbhtcboszu th {
   border-style: none;
 }
 
-#xvtqvesiwz p {
+#qbhtcboszu p {
   margin: 0;
   padding: 0;
 }
 
-#xvtqvesiwz .gt_table {
+#qbhtcboszu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -889,12 +892,12 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-left-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_caption {
+#qbhtcboszu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xvtqvesiwz .gt_title {
+#qbhtcboszu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -906,7 +909,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-width: 0;
 }
 
-#xvtqvesiwz .gt_subtitle {
+#qbhtcboszu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -918,7 +921,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-width: 0;
 }
 
-#xvtqvesiwz .gt_heading {
+#qbhtcboszu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -930,13 +933,13 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_bottom_border {
+#qbhtcboszu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_col_headings {
+#qbhtcboszu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -951,7 +954,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_col_heading {
+#qbhtcboszu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -971,7 +974,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#xvtqvesiwz .gt_column_spanner_outer {
+#qbhtcboszu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -983,15 +986,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 4px;
 }
 
-#xvtqvesiwz .gt_column_spanner_outer:first-child {
+#qbhtcboszu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xvtqvesiwz .gt_column_spanner_outer:last-child {
+#qbhtcboszu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xvtqvesiwz .gt_column_spanner {
+#qbhtcboszu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1003,11 +1006,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   width: 100%;
 }
 
-#xvtqvesiwz .gt_spanner_row {
+#qbhtcboszu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xvtqvesiwz .gt_group_heading {
+#qbhtcboszu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1033,7 +1036,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   text-align: left;
 }
 
-#xvtqvesiwz .gt_empty_group_heading {
+#qbhtcboszu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1048,15 +1051,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: middle;
 }
 
-#xvtqvesiwz .gt_from_md > :first-child {
+#qbhtcboszu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xvtqvesiwz .gt_from_md > :last-child {
+#qbhtcboszu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xvtqvesiwz .gt_row {
+#qbhtcboszu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1075,7 +1078,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#xvtqvesiwz .gt_stub {
+#qbhtcboszu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1088,7 +1091,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#xvtqvesiwz .gt_stub_row_group {
+#qbhtcboszu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1102,15 +1105,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: top;
 }
 
-#xvtqvesiwz .gt_row_group_first td {
+#qbhtcboszu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xvtqvesiwz .gt_row_group_first th {
+#qbhtcboszu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xvtqvesiwz .gt_summary_row {
+#qbhtcboszu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1120,16 +1123,16 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#xvtqvesiwz .gt_first_summary_row {
+#qbhtcboszu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_first_summary_row.thick {
+#qbhtcboszu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xvtqvesiwz .gt_last_summary_row {
+#qbhtcboszu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1139,7 +1142,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_grand_summary_row {
+#qbhtcboszu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1149,7 +1152,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#xvtqvesiwz .gt_first_grand_summary_row {
+#qbhtcboszu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1159,7 +1162,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_last_grand_summary_row_top {
+#qbhtcboszu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1169,11 +1172,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_striped {
+#qbhtcboszu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xvtqvesiwz .gt_table_body {
+#qbhtcboszu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1182,7 +1185,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_footnotes {
+#qbhtcboszu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1196,7 +1199,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_footnote {
+#qbhtcboszu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1205,7 +1208,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#xvtqvesiwz .gt_sourcenotes {
+#qbhtcboszu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1219,7 +1222,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#xvtqvesiwz .gt_sourcenote {
+#qbhtcboszu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1227,72 +1230,72 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#xvtqvesiwz .gt_left {
+#qbhtcboszu .gt_left {
   text-align: left;
 }
 
-#xvtqvesiwz .gt_center {
+#qbhtcboszu .gt_center {
   text-align: center;
 }
 
-#xvtqvesiwz .gt_right {
+#qbhtcboszu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xvtqvesiwz .gt_font_normal {
+#qbhtcboszu .gt_font_normal {
   font-weight: normal;
 }
 
-#xvtqvesiwz .gt_font_bold {
+#qbhtcboszu .gt_font_bold {
   font-weight: bold;
 }
 
-#xvtqvesiwz .gt_font_italic {
+#qbhtcboszu .gt_font_italic {
   font-style: italic;
 }
 
-#xvtqvesiwz .gt_super {
+#qbhtcboszu .gt_super {
   font-size: 65%;
 }
 
-#xvtqvesiwz .gt_footnote_marks {
+#qbhtcboszu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xvtqvesiwz .gt_asterisk {
+#qbhtcboszu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xvtqvesiwz .gt_indent_1 {
+#qbhtcboszu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xvtqvesiwz .gt_indent_2 {
+#qbhtcboszu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xvtqvesiwz .gt_indent_3 {
+#qbhtcboszu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xvtqvesiwz .gt_indent_4 {
+#qbhtcboszu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xvtqvesiwz .gt_indent_5 {
+#qbhtcboszu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xvtqvesiwz .katex-display {
+#qbhtcboszu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xvtqvesiwz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qbhtcboszu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1312,34 +1315,34 @@ and <em>within-group variance</em> (random variation).</p></li>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="D"> 2.133</td>
-<td class="gt_row gt_center" headers="Mean1">8.233</td>
-<td class="gt_row gt_center" headers="Mean2">6.1  </td>
-<td class="gt_row gt_center" headers="t"> 8.893</td>
+<td class="gt_row gt_center" headers="D"> 2.467</td>
+<td class="gt_row gt_center" headers="Mean1">8.333</td>
+<td class="gt_row gt_center" headers="Mean2">5.867</td>
+<td class="gt_row gt_center" headers="t"> 9.542</td>
 <td class="gt_row gt_center" headers="p">&lt;.01</td>
 <td class="gt_row gt_center" headers="df">58&nbsp;</td>
-<td class="gt_row gt_center" headers="conf.low"> 1.653</td>
-<td class="gt_row gt_center" headers="conf.high"> 2.614</td>
+<td class="gt_row gt_center" headers="conf.low"> 1.949</td>
+<td class="gt_row gt_center" headers="conf.high"> 2.984</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center gt_striped" headers="D"> 3.367</td>
-<td class="gt_row gt_center gt_striped" headers="Mean1">8.233</td>
-<td class="gt_row gt_center gt_striped" headers="Mean2">4.867</td>
-<td class="gt_row gt_center gt_striped" headers="t">12.946</td>
+<td class="gt_row gt_center gt_striped" headers="D"> 3.4  </td>
+<td class="gt_row gt_center gt_striped" headers="Mean1">8.333</td>
+<td class="gt_row gt_center gt_striped" headers="Mean2">4.933</td>
+<td class="gt_row gt_center gt_striped" headers="t">15.028</td>
 <td class="gt_row gt_center gt_striped" headers="p">&lt;.01</td>
 <td class="gt_row gt_center gt_striped" headers="df">58&nbsp;</td>
-<td class="gt_row gt_center gt_striped" headers="conf.low"> 2.846</td>
-<td class="gt_row gt_center gt_striped" headers="conf.high"> 3.887</td>
+<td class="gt_row gt_center gt_striped" headers="conf.low"> 2.947</td>
+<td class="gt_row gt_center gt_striped" headers="conf.high"> 3.853</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="D">−1.233</td>
-<td class="gt_row gt_center" headers="Mean1">4.867</td>
-<td class="gt_row gt_center" headers="Mean2">6.1  </td>
-<td class="gt_row gt_center" headers="t">−4.943</td>
+<td class="gt_row gt_center" headers="D">−0.933</td>
+<td class="gt_row gt_center" headers="Mean1">4.933</td>
+<td class="gt_row gt_center" headers="Mean2">5.867</td>
+<td class="gt_row gt_center" headers="t">−3.636</td>
 <td class="gt_row gt_center" headers="p">&lt;.01</td>
 <td class="gt_row gt_center" headers="df">58&nbsp;</td>
-<td class="gt_row gt_center" headers="conf.low">−1.733</td>
-<td class="gt_row gt_center" headers="conf.high">−0.734</td>
+<td class="gt_row gt_center" headers="conf.low">−1.447</td>
+<td class="gt_row gt_center" headers="conf.high">−0.419</td>
 </tr>
 </tbody>
 </table>
@@ -1348,7 +1351,7 @@ and <em>within-group variance</em> (random variation).</p></li>
 </div>
 </div>
 </section>
-<section id="between-subjects-anova-2" class="slide level2">
+<section id="between-subjects-anova-3" class="slide level2">
 <h2>Between subjects ANOVA</h2>
 <ul>
 <li class="fragment"><p>Is the variance between the green, red, and blue dots greater than the variance across all of the dots?</p></li>
@@ -1364,28 +1367,28 @@ and <em>within-group variance</em> (random variation).</p></li>
 </div>
 </div>
 </section>
-<section id="between-subjects-anova-3" class="slide level2">
+<section id="between-subjects-anova-4" class="slide level2">
 <h2>Between subjects ANOVA</h2>
 <p>Is the variance between the green, red, and blue dots greater than the variance across all of the dots?</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="aarxrjosna" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aarxrjosna table {
+<div id="palhgmwnis" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#palhgmwnis table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aarxrjosna thead, #aarxrjosna tbody, #aarxrjosna tfoot, #aarxrjosna tr, #aarxrjosna td, #aarxrjosna th {
+#palhgmwnis thead, #palhgmwnis tbody, #palhgmwnis tfoot, #palhgmwnis tr, #palhgmwnis td, #palhgmwnis th {
   border-style: none;
 }
 
-#aarxrjosna p {
+#palhgmwnis p {
   margin: 0;
   padding: 0;
 }
 
-#aarxrjosna .gt_table {
+#palhgmwnis .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1411,12 +1414,12 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-left-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_caption {
+#palhgmwnis .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aarxrjosna .gt_title {
+#palhgmwnis .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1428,7 +1431,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-width: 0;
 }
 
-#aarxrjosna .gt_subtitle {
+#palhgmwnis .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1440,7 +1443,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-width: 0;
 }
 
-#aarxrjosna .gt_heading {
+#palhgmwnis .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1452,13 +1455,13 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_bottom_border {
+#palhgmwnis .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_col_headings {
+#palhgmwnis .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1473,7 +1476,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_col_heading {
+#palhgmwnis .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1493,7 +1496,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#aarxrjosna .gt_column_spanner_outer {
+#palhgmwnis .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1505,15 +1508,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 4px;
 }
 
-#aarxrjosna .gt_column_spanner_outer:first-child {
+#palhgmwnis .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aarxrjosna .gt_column_spanner_outer:last-child {
+#palhgmwnis .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aarxrjosna .gt_column_spanner {
+#palhgmwnis .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1525,11 +1528,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   width: 100%;
 }
 
-#aarxrjosna .gt_spanner_row {
+#palhgmwnis .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aarxrjosna .gt_group_heading {
+#palhgmwnis .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1555,7 +1558,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   text-align: left;
 }
 
-#aarxrjosna .gt_empty_group_heading {
+#palhgmwnis .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1570,15 +1573,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: middle;
 }
 
-#aarxrjosna .gt_from_md > :first-child {
+#palhgmwnis .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aarxrjosna .gt_from_md > :last-child {
+#palhgmwnis .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aarxrjosna .gt_row {
+#palhgmwnis .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1597,7 +1600,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   overflow-x: hidden;
 }
 
-#aarxrjosna .gt_stub {
+#palhgmwnis .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1610,7 +1613,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#aarxrjosna .gt_stub_row_group {
+#palhgmwnis .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1624,15 +1627,15 @@ and <em>within-group variance</em> (random variation).</p></li>
   vertical-align: top;
 }
 
-#aarxrjosna .gt_row_group_first td {
+#palhgmwnis .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aarxrjosna .gt_row_group_first th {
+#palhgmwnis .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aarxrjosna .gt_summary_row {
+#palhgmwnis .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1642,16 +1645,16 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#aarxrjosna .gt_first_summary_row {
+#palhgmwnis .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_first_summary_row.thick {
+#palhgmwnis .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aarxrjosna .gt_last_summary_row {
+#palhgmwnis .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1661,7 +1664,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_grand_summary_row {
+#palhgmwnis .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1671,7 +1674,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#aarxrjosna .gt_first_grand_summary_row {
+#palhgmwnis .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1681,7 +1684,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-top-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_last_grand_summary_row_top {
+#palhgmwnis .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1691,11 +1694,11 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_striped {
+#palhgmwnis .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aarxrjosna .gt_table_body {
+#palhgmwnis .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1704,7 +1707,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-bottom-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_footnotes {
+#palhgmwnis .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1718,7 +1721,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_footnote {
+#palhgmwnis .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1727,7 +1730,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#aarxrjosna .gt_sourcenotes {
+#palhgmwnis .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1741,7 +1744,7 @@ and <em>within-group variance</em> (random variation).</p></li>
   border-right-color: #D3D3D3;
 }
 
-#aarxrjosna .gt_sourcenote {
+#palhgmwnis .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1749,72 +1752,72 @@ and <em>within-group variance</em> (random variation).</p></li>
   padding-right: 5px;
 }
 
-#aarxrjosna .gt_left {
+#palhgmwnis .gt_left {
   text-align: left;
 }
 
-#aarxrjosna .gt_center {
+#palhgmwnis .gt_center {
   text-align: center;
 }
 
-#aarxrjosna .gt_right {
+#palhgmwnis .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aarxrjosna .gt_font_normal {
+#palhgmwnis .gt_font_normal {
   font-weight: normal;
 }
 
-#aarxrjosna .gt_font_bold {
+#palhgmwnis .gt_font_bold {
   font-weight: bold;
 }
 
-#aarxrjosna .gt_font_italic {
+#palhgmwnis .gt_font_italic {
   font-style: italic;
 }
 
-#aarxrjosna .gt_super {
+#palhgmwnis .gt_super {
   font-size: 65%;
 }
 
-#aarxrjosna .gt_footnote_marks {
+#palhgmwnis .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aarxrjosna .gt_asterisk {
+#palhgmwnis .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aarxrjosna .gt_indent_1 {
+#palhgmwnis .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aarxrjosna .gt_indent_2 {
+#palhgmwnis .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aarxrjosna .gt_indent_3 {
+#palhgmwnis .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aarxrjosna .gt_indent_4 {
+#palhgmwnis .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aarxrjosna .gt_indent_5 {
+#palhgmwnis .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aarxrjosna .katex-display {
+#palhgmwnis .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aarxrjosna div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#palhgmwnis div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1840,9 +1843,9 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">score</td>
-<td class="gt_row gt_center" headers="stat_1">7.55(0.78, 0.88)</td>
-<td class="gt_row gt_center" headers="stat_2">5.01(3.85, 1.96)</td>
-<td class="gt_row gt_center" headers="stat_3">4.68(0.63, 0.79)</td>
+<td class="gt_row gt_center" headers="stat_1">7.50(1.22, 1.11)</td>
+<td class="gt_row gt_center" headers="stat_2">4.47(7.08, 2.66)</td>
+<td class="gt_row gt_center" headers="stat_3">4.94(0.76, 0.87)</td>
 </tr>
 </tbody><tfoot>
 <tr class="gt_footnotes odd">
@@ -1856,7 +1859,7 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </div>
 </div>
 </section>
-<section id="between-subjects-anova-4" class="slide level2">
+<section id="between-subjects-anova-5" class="slide level2">
 <h2>Between subjects ANOVA</h2>
 <ul>
 <li class="fragment">If it’s all about the means, why is it called Analysis of Variance?</li>
@@ -1891,12 +1894,9 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </div>
 </div>
 <ul>
-<li class="fragment"><p>Where MS - Means Square</p></li>
-<li class="fragment"><p><span class="math inline">\(_B\)</span> = Between Group Variance</p></li>
-<li class="fragment"><p><span class="math inline">\(_E\)</span> = Within Group Variance (Error)</p></li>
-<li class="fragment"><p><span class="math inline">\(SS\)</span> = Sum of Squares</p></li>
-<li class="fragment"><p><span class="math inline">\(k\)</span> = Number of groups</p></li>
-<li class="fragment"><p><span class="math inline">\(N\)</span> = Number of participants</p></li>
+<li class="fragment"><p><span class="math inline">\(MS\)</span> = Mean Square, <span class="math inline">\(SS\)</span> = Sum of Squares</p></li>
+<li class="fragment"><p><span class="math inline">\(_B\)</span> = Between Group Variance, <span class="math inline">\(_E\)</span> = Within Group Variance (Error)</p></li>
+<li class="fragment"><p><span class="math inline">\(k\)</span> = Number of groups, <span class="math inline">\(N\)</span> = Number of participants</p></li>
 </ul>
 </section>
 <section id="calculating-f-1" class="slide level2">
@@ -1944,7 +1944,7 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </ul></li>
 </ul>
 </section>
-<section id="between-subjects-anova-5" class="slide level2">
+<section id="between-subjects-anova-6" class="slide level2">
 <h2>Between subjects ANOVA</h2>
 <ul>
 <li class="fragment"><p><span class="math inline">\(SS_{BG}\)</span> = How much variance comes comes from the group differences?</p></li>
@@ -2007,9 +2007,8 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </section>
 <section id="between-subjects-anova-example-1" class="slide level2">
 <h2>Between subjects ANOVA Example</h2>
-<blockquote>
-<p>Prof Brocker gives one group of <code>100</code> participants the <code>Super Secret Limitless Drug</code>. He gives another group of <code>100</code> participants a <code>placebo</code>. He gives the third group of <code>100</code> participants <code>nothing</code>. All participants then complete an IQ test. He wants to know if those who took the <code>SSLD</code> have significantly higher IQ than the placebo and the control groups.</p>
-</blockquote>
+<h3 id="answers">Answers</h3>
+<p>Prof Brocker’s SSLD study: three groups of <code>100</code> (SSLD, placebo, nothing), then an IQ test.</p>
 <ul>
 <li class="fragment"><p>What is the IV?</p>
 <ul>
@@ -2104,35 +2103,34 @@ N = 30<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <ul>
 <li class="fragment"><p>What is <span class="math inline">\(df_B\)</span>?</p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(15 \times 3 = 45\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(k-1 = 3-1 = 2\)</span></p></li>
+<li class="fragment"><span class="math inline">\(k-1 = 3-1 = 2\)</span></li>
 </ul></li>
 <li class="fragment"><p>What is <span class="math inline">\(df_E\)</span>?</p>
 <ul>
-<li class="fragment"><span class="math inline">\(df_E = N-k = 45-3 = 42\)</span></li>
+<li class="fragment"><p><span class="math inline">\(N = 15 \times 3 = 45\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(df_E = N-k = 45-3 = 42\)</span></p></li>
 </ul></li>
 </ul>
 </section>
-<section id="identifying-degrees-of-freedom-1" class="slide level2">
+<section id="identifying-degrees-of-freedom-1" class="slide level2 scrollable">
 <h2>Identifying Degrees of Freedom</h2>
-<h3 id="one-way-anova-unequal-groups">One-Way ANOVA Unequal Groups</h3>
+<h3 id="one-way-anova-unequal-groups">One-Way ANOVA, Unequal Groups</h3>
 <blockquote>
 <p>A psychologist compares four types of therapy for anxiety. Group sizes are <code>10</code>, <code>12</code>, <code>14</code>, and <code>9</code> participants.</p>
 </blockquote>
+<ol type="1">
+<li class="fragment"><p>What is <span class="math inline">\(df_B\)</span>?</p></li>
+<li class="fragment"><p>What is <span class="math inline">\(df_E\)</span>?</p></li>
+</ol>
+</section>
+<section id="identifying-degrees-of-freedom-2" class="slide level2">
+<h2>Identifying Degrees of Freedom</h2>
+<h3 id="unequal-groups-answer-key">Unequal Groups: Answer Key</h3>
 <ul>
-<li class="fragment"><p>What is <span class="math inline">\(df_B\)</span>?</p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(k = 4\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(k-1 = 4-1 = 3\)</span></p></li>
-</ul></li>
-<li class="fragment"><p>What is <span class="math inline">\(df_E\)</span>?</p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(n=10+12+14+9 = 45\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(k = 4\)</span> groups, so <span class="math inline">\(df_B = k-1 = 4-1 = 3\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(N = 10+12+14+9 = 45\)</span> participants</p></li>
 <li class="fragment"><p><span class="math inline">\(df_E = N-k = 45-4 = 41\)</span></p></li>
-</ul></li>
 </ul>
-<p>Question: 1. What is df₍between₎? 2. What is df₍within₎?</p>
-<p>Answer Key: • k = 4 groups • N = 10 + 12 + 14 + 9 = 45 participants • df₍between₎ = 4 - 1 = 3 • df₍within₎ = 45 - 4 = 41</p>
 
 
 </section>

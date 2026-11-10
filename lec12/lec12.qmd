@@ -303,6 +303,12 @@ graph {
 > groups complete a survey to measure their happiness on a scale of `1`
 > to `10`.
 
+## Between subjects ANOVA
+
+### Coffee Example Vol. 2: Hypotheses
+
+Three groups (coffee, decaf, water), 30 people each, happiness rated 1 to 10.
+
 - What is $H_0$?
 
   - $H_0: \mu_\text{Coffee} = \mu_\text{Placebo} = \mu_\text{Control}$
@@ -313,14 +319,9 @@ graph {
 
 ## Between subjects ANOVA
 
-### Coffee Example Vol. 2
+### Coffee Example Vol. 2: Group Means
 
-> A researcher wants to see whether it is the taste of coffee that is
-> causing higher levels of happiness. He assigns 30 people to each
-> condition. The experimental group drinks caffeinated coffee. The
-> placebo group drinks decaf. The control group drinks water. All `3`
-> groups complete a survey to measure their happiness on a scale of `1`
-> to `10`.
+Three groups (coffee, decaf, water), 30 people each, happiness rated 1 to 10.
 
 - The experimental group has a mean happiness score `8`
 
@@ -485,6 +486,7 @@ t1 |>
 
 ```{r}
 #| label: between-subjects-anova
+#| fig-height: 4
 library(dplyr)
 library(gt)
 library(gtsummary)
@@ -558,17 +560,11 @@ cof |>
 $F = \frac{MS_B}{MS_E} \\ MS_B = \frac{SS_B}{df_B} \quad MS_E = \frac{SS_E}{df_E} \\ df_B = k-1 \quad df_E = N - k$
 :::
 
-- Where MS - Means Square
+- $MS$ = Mean Square, $SS$ = Sum of Squares
 
-- $_B$ = Between Group Variance
+- $_B$ = Between Group Variance, $_E$ = Within Group Variance (Error)
 
-- $_E$ = Within Group Variance (Error)
-
-- $SS$ = Sum of Squares
-
-- $k$ = Number of groups
-
-- $N$ = Number of participants
+- $k$ = Number of groups, $N$ = Number of participants
 
 ## Calculating F
 
@@ -671,12 +667,9 @@ $MS_B = \frac{SS_B}{df_B} \\ MS_E = \frac{SS_E}{df_E}$
 
 ## Between subjects ANOVA Example
 
-> Prof Brocker gives one group of `100` participants the
-> `Super Secret Limitless Drug`. He gives another group of `100`
-> participants a `placebo`. He gives the third group of `100`
-> participants `nothing`. All participants then complete an IQ test. He
-> wants to know if those who took the `SSLD` have significantly higher
-> IQ than the placebo and the control groups.
+### Answers
+
+Prof Brocker's SSLD study: three groups of `100` (SSLD, placebo, nothing), then an IQ test.
 
 - What is the IV?
 
@@ -780,34 +773,31 @@ group (`M=116.12`, `s=0.98`), and the placebo group (`M=114.2. s =.91`),
 
 - What is $df_B$?
 
-  - $15 \times 3 = 45$
-
   - $k-1 = 3-1 = 2$
 
 - What is $df_E$?
+
+  - $N = 15 \times 3 = 45$
 
   - $df_E = N-k = 45-3 = 42$
 
 ## Identifying Degrees of Freedom
 
-### One-Way ANOVA Unequal Groups
+### One-Way ANOVA, Unequal Groups
 
 > A psychologist compares four types of therapy for anxiety. Group sizes
 > are `10`, `12`, `14`, and `9` participants.
 
-- What is $df_B$?
+1.  What is $df_B$?
 
-  - $k = 4$
+2.  What is $df_E$?
 
-  - $k-1 = 4-1 = 3$
+## Identifying Degrees of Freedom
 
-- What is $df_E$?
+### Unequal Groups: Answer Key
 
-  - $n=10+12+14+9 = 45$
+- $k = 4$ groups, so $df_B = k-1 = 4-1 = 3$
 
-  - $df_E = N-k = 45-4 = 41$
+- $N = 10+12+14+9 = 45$ participants
 
-Question: 1. What is df₍between₎? 2. What is df₍within₎?
-
-Answer Key: • k = 4 groups • N = 10 + 12 + 14 + 9 = 45 participants •
-df₍between₎ = 4 - 1 = 3 • df₍within₎ = 45 - 4 = 41
+- $df_E = N-k = 45-4 = 41$
