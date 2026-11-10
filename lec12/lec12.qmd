@@ -336,6 +336,7 @@ graph {
 ### Visualize
 
 ```{r}
+#| label: coffee-example-vol-2
 library(dplyr)
 library(ggplot2)
 
@@ -409,6 +410,7 @@ tibble(
 > intended 5%.
 
 ```{r}
+#| label: why-not-do-more-t-tests
 library(dplyr)
 library(broom)
 library(gt)
@@ -482,6 +484,7 @@ t1 |>
   variability within groups, to suggest that group means truly differ?
 
 ```{r}
+#| label: between-subjects-anova
 library(dplyr)
 library(gt)
 library(gtsummary)
@@ -518,6 +521,7 @@ Is the variance between the green, red, and blue dots greater than the
 variance across all of the dots?
 
 ```{r}
+#| label: between-subjects-anova-2
 cof |> 
     tbl_summary(
       by = "condition",
