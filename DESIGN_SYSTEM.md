@@ -169,7 +169,7 @@ Rule of thumb: tip = *what we do*, important = *what to watch for or what the an
 
 ## Open items
 
-- Replace named CSS colors in formulas with palette hex tokens in the older decks (raw `red`/`orange`/`blue` counts: lec4 38, lec6 9, lec3/5/9/10/16 a few each). lec11 is done; add a check to `scripts/check_deck.R`.
+- Replace named CSS colors in formulas with palette hex tokens in the older decks (raw `red`/`orange`/`blue` counts: lec4 38, lec6 9, lec3/5/9/10/16 a few each). lec11 is done. `scripts/check_deck.R` now flags them (`[colors]`; lec4 42 lines, lec6 9, lec10 5).
 - Retrofit `lec1.qmd`'s 7-term slide into `.term-list` (with per-pair `::: fragment :::`).
 - Missing images still unresolved on lec3/5/7/8/11/15c (lec6's `z-table.png` refs replaced by `.z-excerpt` tables, 9/28) (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).
 - Extract the glossary: once several decks use `.term-pill`/`dl`/`dd`, a script can walk every deck and build a site-wide glossary page from the markup alone.

@@ -10,7 +10,9 @@
 #   3. binomial coefficient shown without the factorial formula
 #   4. stats functions (pnorm, qt, sd, ...) on a slide with no formula on it or the slide before
 #   5. relative image / ../file paths that do not exist
-# 2-4 are advisory: they flag places to look, not certain errors.
+#   6. named CSS colors (red, orange, blue, ...) in slide text or formulas instead of
+#      the palette hex tokens (see DESIGN_SYSTEM.md); R chunk code is not checked
+# 2-4 and 6 are advisory: they flag places to look, not certain errors.
 
 # Functions where positional arguments are natural and not flagged
 ALLOWED_POSITIONAL <- c("c", "list", "library", "require", "requireNamespace",
@@ -191,6 +193,18 @@ check_deck <- function(deck, root = getwd()) {
   refs <- unique(refs[!grepl("^(https?:|data:|#|mailto:)", refs) & nzchar(refs)])
   missing <- refs[!file.exists(file.path(base_dir, sub("[?#].*$", "", refs)))]
   if (length(missing)) add("  [paths] not found: ", paste(missing, collapse = ", ")) else add("  [paths] ok")
+
+  # 6. named CSS colors in prose / formulas ------------------------------------
+  css_names <- c("red", "orange", "blue", "green", "grey", "gray", "darkblue", "darkgreen",
+                 "purple", "yellow", "pink", "brown", "black", "white", "navy", "teal", "gold")
+  alt <- paste(css_names, collapse = "|")
+  pat <- paste0("(\\\\color\\{(", alt, ")\\}|color:\\s*(", alt, ")\\b)")
+  prose_idx <- which(!in_chunk)
+  hit <- prose_idx[grepl(pat, lines[prose_idx], ignore.case = TRUE)]
+  if (length(hit)) {
+    add("  [colors] named CSS colors on ", length(hit), " line(s), use palette hex tokens (advisory): line ",
+        paste(utils::head(hit, 8), collapse = ", "), if (length(hit) > 8) " ..." else "")
+  } else add("  [colors] ok: no named CSS colors")
 
   report
 }
