@@ -3994,7 +3994,7 @@
     "href": "lec11/lec11.html#group-variance",
     "title": "Independent-Samples T-Test",
     "section": "Group Variance",
-    "text": "Group Variance\nWithin and between\n\n\nTo compare the means we need to know:\n\nBetween-group variance: how much the answers from the experimental group differ from the control group.\nWithin-group variance: how much the answers of all participants differ from one another."
+    "text": "Group Variance\nWithin and between\n\n\nTo compare the means we need to know:\n\nBetween-group variance: how much the answers from the experimental group differ from the control group.\nWithin-group variance: how much scores differ from one another inside each group, around that group’s own mean."
   },
   {
     "objectID": "lec11/lec11.html#independent-samples-t-test-overview",
@@ -4022,7 +4022,7 @@
     "href": "lec11/lec11.html#theoretical-formula",
     "title": "Independent-Samples T-Test",
     "section": "Theoretical Formula",
-    "text": "Theoretical Formula\nIf we knew the population standard deviation\n\\[z = \\frac{\\color{red}{\\bar{x}_1} - \\color{orange}{\\bar{x}_2}}{\\color{grey}{\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}}\\]\n\nSample mean, group 1\nSample mean, group 2\nStandard error of the difference, using the population \\(\\sigma\\) (assumed equal in both groups)"
+    "text": "Theoretical Formula\nIf we knew the population standard deviation\n\\[z = \\frac{\\color{red}{\\bar{x}_1} - \\color{orange}{\\bar{x}_2}}{\\color{grey}{\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}}\\]\n\nThe numerator is really \\((\\bar{x}_1 - \\bar{x}_2) - (\\mu_1 - \\mu_2)\\). Under \\(H_0\\) the second part is \\(0\\), so it drops out.\nSample mean, group 1\nSample mean, group 2\nStandard error of the difference, using the population \\(\\sigma\\) (assumed equal in both groups)"
   },
   {
     "objectID": "lec11/lec11.html#computational-formula",
@@ -4057,7 +4057,7 @@
     "href": "lec11/lec11.html#independent-samples-t-test-1",
     "title": "Independent-Samples T-Test",
     "section": "Independent-Samples t-Test",
-    "text": "Independent-Samples t-Test\nAssumptions\n\n\n\n\n\n\nAssumptions\n\n\n\nDV is continuous (interval or ratio scale).\nObservations are independent, and the data are randomly sampled. Each person appears in only one group.\nNormality: each group’s distribution is approximately normal (or the groups are large enough for the CLT).\nHomogeneity of variance: variances are similar across groups (tested with Levene’s Test)."
+    "text": "Independent-Samples t-Test\nAssumptions\n\n\n\n\n\n\nAssumptions\n\n\n\nDV is continuous (interval or ratio scale).\nObservations are independent, and the data are randomly sampled. Each person appears in only one group.\nNormality: each group’s distribution is approximately normal (or the groups are large enough for the CLT).\nEqual variances (homogeneity of variance): the two groups have similar spread. Only the pooled test needs this."
   },
   {
     "objectID": "lec11/lec11.html#interpreting-levenes-test",
@@ -4113,14 +4113,14 @@
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-3",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nCheck the assumption\n\nlevene.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and the pooled test is appropriate."
+    "text": "Does chocolate improve concentration?\nCheck the assumption\n\nlevene.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(y = concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and the pooled test is appropriate."
   },
   {
     "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-4",
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-4",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nRun the test\n\nchocolate.R\n\n# Pooled (equal variances) t-test\nt.test(concentration ~ group, data = choco, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 48, p-value = 0.000542\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.095202 3.690462\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224"
+    "text": "Does chocolate improve concentration?\nRun the test\n\nchocolate.R\n\n# Pooled (equal variances) t-test\nt.test(formula = concentration ~ group, data = choco, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 48, p-value = 0.000542\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.095202 3.690462\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224"
   },
   {
     "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-5",
@@ -4155,7 +4155,7 @@
     "href": "lec11/lec11.html#does-instrumental-music-improve-studying-3",
     "title": "Independent-Samples T-Test",
     "section": "Does instrumental music improve studying?",
-    "text": "Does instrumental music improve studying?\nRun the test\n\nmusic.R\n\nt.test(quiz_score ~ group, data = music, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  quiz_score by group\nt = 1.7335, df = 38, p-value = 0.09112\nalternative hypothesis: true difference in means between group music and group silence is not equal to 0\n95 percent confidence interval:\n -0.1004822  1.2980566\nsample estimates:\n  mean in group music mean in group silence \n             7.647986              7.049199"
+    "text": "Does instrumental music improve studying?\nRun the test\n\nmusic.R\n\nt.test(formula = quiz_score ~ group, data = music, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  quiz_score by group\nt = 1.7335, df = 38, p-value = 0.09112\nalternative hypothesis: true difference in means between group music and group silence is not equal to 0\n95 percent confidence interval:\n -0.1004822  1.2980566\nsample estimates:\n  mean in group music mean in group silence \n             7.647986              7.049199"
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-4",
@@ -4197,7 +4197,7 @@
     "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-3",
     "title": "Independent-Samples T-Test",
     "section": "Does bedtime phone use affect sleep?",
-    "text": "Does bedtime phone use affect sleep?\nRun the test\n\nsleep.R\n\nt.test(sleep_quality ~ group, data = sleep, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  sleep_quality by group\nt = 1.89, df = 78, p-value = 0.06248\nalternative hypothesis: true difference in means between group no_phone and group phone is not equal to 0\n95 percent confidence interval:\n -0.02330214  0.89639501\nsample estimates:\nmean in group no_phone    mean in group phone \n              7.341146               6.904599"
+    "text": "Does bedtime phone use affect sleep?\nRun the test\n\nsleep.R\n\nt.test(formula = sleep_quality ~ group, data = sleep, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  sleep_quality by group\nt = 1.89, df = 78, p-value = 0.06248\nalternative hypothesis: true difference in means between group no_phone and group phone is not equal to 0\n95 percent confidence interval:\n -0.02330214  0.89639501\nsample estimates:\nmean in group no_phone    mean in group phone \n              7.341146               6.904599"
   },
   {
     "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-4",
@@ -4239,7 +4239,7 @@
     "href": "lec11/lec11.html#summary-independent-samples-t-test",
     "title": "Independent-Samples T-Test",
     "section": "Summary: Independent-Samples t-Test",
-    "text": "Summary: Independent-Samples t-Test\n\nCompares two independent groups.\nTests whether the difference in means is significant.\nUses pooled variance as the denominator when variances are equal (Welch when they are not).\nCheck assumptions: independence, normality, equal variance (Levene’s Test).\nReport the test, the means and SDs, the confidence interval, and an effect size (\\(d\\))."
+    "text": "Summary: Independent-Samples t-Test\n\nCompares two independent groups.\nTests whether the difference in means is significant.\nUses pooled variance as the denominator when variances are equal (Welch when they are not).\nCheck assumptions: independence, normality, equal variance (look at the SDs, then Levene’s Test, or just use Welch).\nReport the test, the means and SDs, the confidence interval, and an effect size (\\(d\\))."
   },
   {
     "objectID": "lec16/lec16.html#types-of-analysis",
@@ -5679,5 +5679,124 @@
     "title": "Analysis of Variance",
     "section": "Identifying Degrees of Freedom",
     "text": "Identifying Degrees of Freedom\nUnequal Groups: Answer Key\n\n\\(k = 4\\) groups, so \\(df_B = k-1 = 4-1 = 3\\)\n\\(N = 10+12+14+9 = 45\\) participants\n\\(df_E = N-k = 45-4 = 41\\)"
+  },
+  {
+    "objectID": "lec11/lec11.html#signal-and-noise",
+    "href": "lec11/lec11.html#signal-and-noise",
+    "title": "Independent-Samples T-Test",
+    "section": "Signal and Noise",
+    "text": "Signal and Noise\nSame difference, different spread"
+  },
+  {
+    "objectID": "lec11/lec11.html#a-new-sampling-distribution",
+    "href": "lec11/lec11.html#a-new-sampling-distribution",
+    "title": "Independent-Samples T-Test",
+    "section": "A New Sampling Distribution",
+    "text": "A New Sampling Distribution\nThe difference between two sample means\n\nIn the one-sample test we asked how far a sample mean falls from \\(\\mu\\).\nNow there are two sample means, so the thing that bounces around from study to study is their difference, \\(\\bar{x}_1 - \\bar{x}_2\\).\nIf \\(H_0\\) is true (both groups come from populations with the same mean), those differences pile up around 0. The test asks how far from 0 ours landed, in standard-error units."
+  },
+  {
+    "objectID": "lec11/lec11.html#lets-watch-it-happen",
+    "href": "lec11/lec11.html#lets-watch-it-happen",
+    "title": "Independent-Samples T-Test",
+    "section": "Let’s Watch It Happen",
+    "text": "Let’s Watch It Happen\n\nsampling_difference.R\n\nset.seed(seed = 11)\nsigma &lt;- 1      # both populations have the same SD\nn     &lt;- 10     # people per group\n\n# Run the \"study\" 5000 times with H0 true (same mean, 7, in both groups)\ndiffs &lt;- replicate(n = 5000, expr = {\n  group_1 &lt;- rnorm(n = n, mean = 7, sd = sigma)\n  group_2 &lt;- rnorm(n = n, mean = 7, sd = sigma)\n  mean(x = group_1) - mean(x = group_2)\n})\n\nc(simulated_sd = sd(x = diffs),\n  formula = sigma * sqrt(x = 1 / n + 1 / n))\n\nsimulated_sd      formula \n   0.4321172    0.4472136 \n\n\n\n\nThe spread of the simulated differences is the standard error of the difference, and the formula \\(\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}\\) predicts it."
+  },
+  {
+    "objectID": "lec11/lec11.html#a-new-sampling-distribution-1",
+    "href": "lec11/lec11.html#a-new-sampling-distribution-1",
+    "title": "Independent-Samples T-Test",
+    "section": "A New Sampling Distribution",
+    "text": "A New Sampling Distribution\nWhat the 5000 differences look like"
+  },
+  {
+    "objectID": "lec11/lec11.html#why-the-standard-errors-add",
+    "href": "lec11/lec11.html#why-the-standard-errors-add",
+    "title": "Independent-Samples T-Test",
+    "section": "Why the Standard Errors Add",
+    "text": "Why the Standard Errors Add\nFrom one mean to a difference of two\n\\[SE_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}} \\qquad\\Longrightarrow\\qquad SE_{\\bar{x}_1 - \\bar{x}_2} = \\sqrt{\\frac{\\sigma^2}{n_1} + \\frac{\\sigma^2}{n_2}} = \\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}\\]\n\nEach sample mean has its own wobble, \\(\\sigma^2/n_j\\) (the squared standard error).\nA difference inherits the wobble of both means, and variances add (even when you subtract), so the two squared standard errors add. Then we take the square root.\nTwo noisy means make a noisier difference than either one alone. That is why this denominator is bigger than the one-sample \\(\\sigma/\\sqrt{n}\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#pooled-or-welch-same-idea",
+    "href": "lec11/lec11.html#pooled-or-welch-same-idea",
+    "title": "Independent-Samples T-Test",
+    "section": "Pooled or Welch: Same Idea",
+    "text": "Pooled or Welch: Same Idea\nBoth add the two squared standard errors\n\\[\\text{Welch: } \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}} \\qquad\\qquad \\text{Pooled: } \\sqrt{\\frac{s_p^2}{n_1} + \\frac{s_p^2}{n_2}}, \\quad s_p^2 = \\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\]\n\nWelch lets each group keep its own variance. Pooling uses one shared \\(s_p^2\\), a weighted average (bigger groups count more).\nWith equal \\(n\\) and similar variances the two agree (coffee: identical \\(t\\)).\nWhen variances differ a lot, \\(s_p^2\\) stops describing either group. Next: what goes wrong."
+  },
+  {
+    "objectID": "lec11/lec11.html#where-df-comes-from",
+    "href": "lec11/lec11.html#where-df-comes-from",
+    "title": "Independent-Samples T-Test",
+    "section": "Where df Comes From",
+    "text": "Where df Comes From\n\nThe pooled \\(s_p^2\\) uses two sample means (one per group) to measure spread.\nEach estimated mean costs one degree of freedom: \\((n_1 - 1) + (n_2 - 1) = n_1 + n_2 - 2\\).\nCoffee: \\(10 + 10 - 2 = 18\\). Welch adjusts df to account for unequal variances, so it is usually not a whole number."
+  },
+  {
+    "objectID": "lec11/lec11.html#reading-the-t.test-output",
+    "href": "lec11/lec11.html#reading-the-t.test-output",
+    "title": "Independent-Samples T-Test",
+    "section": "Reading the t.test() Output",
+    "text": "Reading the t.test() Output\nEvery piece comes from the formula\n\ncoffee_t_test.R\n\nt.test(formula = happy ~ grp, data = coffee, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  happy by grp\nt = 4.4721, df = 18, p-value = 0.0002946\nalternative hypothesis: true difference in means between group Experimental and group Control is not equal to 0\n95 percent confidence interval:\n 1.060439 2.939561\nsample estimates:\nmean in group Experimental      mean in group Control \n                         8                          6"
+  },
+  {
+    "objectID": "lec11/lec11.html#why-equal-variances",
+    "href": "lec11/lec11.html#why-equal-variances",
+    "title": "Independent-Samples T-Test",
+    "section": "Why Equal Variances?",
+    "text": "Why Equal Variances?\nThe pooled test uses one shared variance\n\nPooling says: “both groups are estimating the same \\(\\sigma^2\\), so combine them into one \\(s_p^2\\).”\nThat is only a fair summary when the groups really do have similar spread.\nSay a small group is very noisy (\\(n = 10\\), \\(s = 4\\)) and a large group is steady (\\(n = 40\\), \\(s = 1\\)):\n\n\\[SE_{pooled} = 0.69 \\qquad SE_{Welch} = \\sqrt{\\tfrac{4^2}{10} + \\tfrac{1^2}{40}} = 1.27\\]\n\nThe pooled version leans on the big, quiet group and understates the noise. A standard error that is too small makes \\(t\\) too big."
+  },
+  {
+    "objectID": "lec11/lec11.html#what-goes-wrong",
+    "href": "lec11/lec11.html#what-goes-wrong",
+    "title": "Independent-Samples T-Test",
+    "section": "What Goes Wrong",
+    "text": "What Goes Wrong\nSimulating false alarms\n\nfalse_alarms.R\n\nset.seed(seed = 348)\n\n# Two groups with the SAME true mean (H0 is true). How often is p &lt; .05?\none_study &lt;- function(n1, sd1, n2, sd2) {\n  x &lt;- rnorm(n = n1, mean = 0, sd = sd1)\n  y &lt;- rnorm(n = n2, mean = 0, sd = sd2)\n  c(pooled = t.test(x = x, y = y, var.equal = TRUE)$p.value,\n    welch  = t.test(x = x, y = y, var.equal = FALSE)$p.value)\n}\n\nunequal &lt;- replicate(n = 4000, expr = one_study(n1 = 10, sd1 = 4, n2 = 40, sd2 = 1))\nequal   &lt;- replicate(n = 4000, expr = one_study(n1 = 25, sd1 = 2, n2 = 25, sd2 = 2))\n\nrbind(unequal_groups = rowMeans(x = unequal &lt; .05),\n      equal_groups   = rowMeans(x = equal &lt; .05))\n\n                pooled   welch\nunequal_groups 0.30275 0.05275\nequal_groups   0.05050 0.05025"
+  },
+  {
+    "objectID": "lec11/lec11.html#checking-equal-variances",
+    "href": "lec11/lec11.html#checking-equal-variances",
+    "title": "Independent-Samples T-Test",
+    "section": "Checking Equal Variances",
+    "text": "Checking Equal Variances\nLook first, then test\n\ncompare_spread.R\n\naggregate(x = concentration ~ group, data = choco, FUN = sd)\n\n         group concentration\n1    chocolate      2.612729\n2 no_chocolate      1.893840\n\n\n\n\nLook: are the group SDs in the same ballpark? A rough rule is that the largest SD is no more than about twice the smallest.\nTest: Levene’s Test asks the same question formally. \\(H_0\\): the group variances are equal."
+  },
+  {
+    "objectID": "lec11/lec11.html#levenes-test-in-r",
+    "href": "lec11/lec11.html#levenes-test-in-r",
+    "title": "Independent-Samples T-Test",
+    "section": "Levene’s Test in R",
+    "text": "Levene’s Test in R\n\nlevene_intro.R\n\nlibrary(car)\nleveneTest(y = score ~ group, data = noisy)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value    Pr(&gt;F)    \ngroup  1  18.262 9.075e-05 ***\n      48                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nR prints one row of results. There are no “top row / bottom row” versions to choose from. Read the Pr(&gt;F) column: that is the \\(p\\)-value.\n\\(p &lt; .05\\): the variances differ, so do not trust the pooled test. \\(p &gt; .05\\): no evidence they differ."
+  },
+  {
+    "objectID": "lec11/lec11.html#what-r-does-instead-of-two-rows",
+    "href": "lec11/lec11.html#what-r-does-instead-of-two-rows",
+    "title": "Independent-Samples T-Test",
+    "section": "What R Does Instead of Two Rows",
+    "text": "What R Does Instead of Two Rows\n\nSPSS prints a “pooled” row and a “Welch” row and asks you to pick. In R you choose with one argument:\n\nvar.equal = FALSE (the default): Welch, no equal-variance assumption\nvar.equal = TRUE: pooled, needs equal variances\n\nTraditional route: run Levene’s Test, then pick. If \\(p &gt; .05\\) pooled is fine, if \\(p &lt; .05\\) use Welch.\nMany statisticians now simply always use Welch. When variances are equal it gives nearly the same answer, and when they are not it protects you.\nIn this lecture the examples check Levene’s Test first, then run the pooled test, so you see both steps."
+  },
+  {
+    "objectID": "lec11/lec11.html#looking-ahead-sphericity",
+    "href": "lec11/lec11.html#looking-ahead-sphericity",
+    "title": "Independent-Samples T-Test",
+    "section": "Looking Ahead: Sphericity",
+    "text": "Looking Ahead: Sphericity\n\n\n\n\n\n\nThe same idea comes back\n\n\nHere the assumption is equal variances across groups. In a repeated-measures design with three or more conditions, the matching assumption is sphericity: the difference scores between every pair of conditions have similar variance.\nThe paired \\(t\\)-test never needed it, because two conditions give only one set of differences."
+  },
+  {
+    "objectID": "lec11/lec11.html#signal-and-noise-1",
+    "href": "lec11/lec11.html#signal-and-noise-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Signal and Noise",
+    "text": "Signal and Noise\nt is signal divided by noise\n\\[t = \\frac{\\text{signal}}{\\text{noise}} = \\frac{\\bar{x}_1 - \\bar{x}_2}{SE}\\]\n\nIn the previous slide, both panels have the same mean difference (\\(8 - 6 = 2\\)), so the same signal.\nLittle spread: \\(t = 4.47\\). Lots of spread: \\(t = 1.49\\). More noise means a smaller \\(t\\), so a difference is harder to trust."
+  },
+  {
+    "objectID": "lec11/lec11.html#reading-the-t.test-output-1",
+    "href": "lec11/lec11.html#reading-the-t.test-output-1",
+    "title": "Independent-Samples T-Test",
+    "section": "Reading the t.test() Output",
+    "text": "Reading the t.test() Output\nWhere each number comes from\n\nt \\(= \\dfrac{\\text{mean difference}}{SE} = \\dfrac{8 - 6}{0.45} = 4.47\\). The two means are listed at the bottom, the standard error is never printed.\ndf \\(= n_1 + n_2 - 2 = 18\\). p-value is the area beyond \\(\\pm t\\) in both tails of that \\(t\\) distribution.\n95% CI is the mean difference \\(\\pm\\ t_{critical} \\times SE\\), an interval for \\(\\mu_1 - \\mu_2\\)."
+  },
+  {
+    "objectID": "lec11/lec11.html#what-goes-wrong-1",
+    "href": "lec11/lec11.html#what-goes-wrong-1",
+    "title": "Independent-Samples T-Test",
+    "section": "What Goes Wrong",
+    "text": "What Goes Wrong\nThe false-alarm rate\n\nWe want about .05. With unequal spread and unequal \\(n\\), the pooled test cries wolf 30% of the time. Welch stays near 5%.\nThat is why we check: the pooled test is only trustworthy when the spreads are similar."
   }
 ]
