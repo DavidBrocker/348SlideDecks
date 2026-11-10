@@ -4022,14 +4022,14 @@
     "href": "lec11/lec11.html#theoretical-formula",
     "title": "Independent-Samples T-Test",
     "section": "Theoretical Formula",
-    "text": "Theoretical Formula\nIf we knew the population standard deviation\n\\[z = \\frac{\\color{red}{\\bar{x}_1} - \\color{orange}{\\bar{x}_2}}{\\color{grey}{\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}}\\]\n\nThe numerator is really \\((\\bar{x}_1 - \\bar{x}_2) - (\\mu_1 - \\mu_2)\\). Under \\(H_0\\) the second part is \\(0\\), so it drops out.\nSample mean, group 1\nSample mean, group 2\nStandard error of the difference, using the population \\(\\sigma\\) (assumed equal in both groups)"
+    "text": "Theoretical Formula\nIf we knew the population standard deviation\n\\[z = \\frac{\\color{#B5483B}{\\bar{x}_1} - \\color{#5C715E}{\\bar{x}_2}}{\\color{#2F3E46}{\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}}\\]\n\nThe numerator is really \\((\\bar{x}_1 - \\bar{x}_2) - (\\mu_1 - \\mu_2)\\). Under \\(H_0\\) the second part is \\(0\\), so it drops out.\nSample mean, group 1\nSample mean, group 2\nStandard error of the difference, using the population \\(\\sigma\\) (assumed equal in both groups)"
   },
   {
     "objectID": "lec11/lec11.html#computational-formula",
     "href": "lec11/lec11.html#computational-formula",
     "title": "Independent-Samples T-Test",
     "section": "Computational Formula",
-    "text": "Computational Formula\nEstimating from the samples (pooled t-test)\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\color{darkblue}{s_p^2}\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}} \\qquad s_p^2 = \\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\]\n\n\\(s_p^2\\) = pooled variance, a weighted average of the two group variances.\n\\(df = n_1 + n_2 - 2\\)"
+    "text": "Computational Formula\nEstimating from the samples (pooled t-test)\n\\[t = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\color{#5C715E}{s_p^2}\\left(\\frac{1}{n_1} + \\frac{1}{n_2}\\right)}} \\qquad s_p^2 = \\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\\]\n\n\\(s_p^2\\) = pooled variance, a weighted average of the two group variances.\n\\(df = n_1 + n_2 - 2\\)"
   },
   {
     "objectID": "lec11/lec11.html#computational-formula-1",
@@ -5699,7 +5699,7 @@
     "href": "lec11/lec11.html#lets-watch-it-happen",
     "title": "Independent-Samples T-Test",
     "section": "Let’s Watch It Happen",
-    "text": "Let’s Watch It Happen\n\nsampling_difference.R\n\nset.seed(seed = 11)\nsigma &lt;- 1      # both populations have the same SD\nn     &lt;- 10     # people per group\n\n# Run the \"study\" 5000 times with H0 true (same mean, 7, in both groups)\ndiffs &lt;- replicate(n = 5000, expr = {\n  group_1 &lt;- rnorm(n = n, mean = 7, sd = sigma)\n  group_2 &lt;- rnorm(n = n, mean = 7, sd = sigma)\n  mean(x = group_1) - mean(x = group_2)\n})\n\nc(simulated_sd = sd(x = diffs),\n  formula = sigma * sqrt(x = 1 / n + 1 / n))\n\nsimulated_sd      formula \n   0.4321172    0.4472136 \n\n\n\n\nThe spread of the simulated differences is the standard error of the difference, and the formula \\(\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}\\) predicts it."
+    "text": "Let’s Watch It Happen\nSimulating 5000 studies\n\nsampling_difference.R\n\nset.seed(seed = 11)\nsigma &lt;- 1      # both populations have the same SD\nn     &lt;- 10     # people per group\n\n# Run the \"study\" 5000 times with H0 true (same mean, 7, in both groups)\ndiffs &lt;- replicate(n = 5000, expr = {\n  group_1 &lt;- rnorm(n = n, mean = 7, sd = sigma)\n  group_2 &lt;- rnorm(n = n, mean = 7, sd = sigma)\n  mean(x = group_1) - mean(x = group_2)\n})\n\nc(simulated_sd = sd(x = diffs),\n  formula = sigma * sqrt(x = 1 / n + 1 / n))\n\nsimulated_sd      formula \n   0.4321172    0.4472136 \n\n\n\n\nThe spread of the simulated differences is the standard error of the difference, and the formula \\(\\sigma\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}\\) predicts it."
   },
   {
     "objectID": "lec11/lec11.html#a-new-sampling-distribution-1",
@@ -5727,7 +5727,7 @@
     "href": "lec11/lec11.html#where-df-comes-from",
     "title": "Independent-Samples T-Test",
     "section": "Where df Comes From",
-    "text": "Where df Comes From\n\nThe pooled \\(s_p^2\\) uses two sample means (one per group) to measure spread.\nEach estimated mean costs one degree of freedom: \\((n_1 - 1) + (n_2 - 1) = n_1 + n_2 - 2\\).\nCoffee: \\(10 + 10 - 2 = 18\\). Welch adjusts df to account for unequal variances, so it is usually not a whole number."
+    "text": "Where df Comes From\nTwo means estimated, two degrees lost\n\nThe pooled \\(s_p^2\\) uses two sample means (one per group) to measure spread.\nEach estimated mean costs one degree of freedom: \\((n_1 - 1) + (n_2 - 1) = n_1 + n_2 - 2\\).\nCoffee: \\(10 + 10 - 2 = 18\\). Welch adjusts df to account for unequal variances, so it is usually not a whole number."
   },
   {
     "objectID": "lec11/lec11.html#reading-the-t.test-output",
@@ -5762,21 +5762,21 @@
     "href": "lec11/lec11.html#levenes-test-in-r",
     "title": "Independent-Samples T-Test",
     "section": "Levene’s Test in R",
-    "text": "Levene’s Test in R\n\nlevene_intro.R\n\nlibrary(car)\nleveneTest(y = score ~ group, data = noisy)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value    Pr(&gt;F)    \ngroup  1  18.262 9.075e-05 ***\n      48                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nR prints one row of results. There are no “top row / bottom row” versions to choose from. Read the Pr(&gt;F) column: that is the \\(p\\)-value.\n\\(p &lt; .05\\): the variances differ, so do not trust the pooled test. \\(p &gt; .05\\): no evidence they differ."
+    "text": "Levene’s Test in R\nOne row of results, not two\n\nlevene_intro.R\n\nlibrary(car)\nleveneTest(y = score ~ group, data = noisy)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value    Pr(&gt;F)    \ngroup  1  18.262 9.075e-05 ***\n      48                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nR prints one row of results. There are no “top row / bottom row” versions to choose from. Read the Pr(&gt;F) column: that is the \\(p\\)-value.\n\\(p &lt; .05\\): the variances differ, so do not trust the pooled test. \\(p &gt; .05\\): no evidence they differ."
   },
   {
     "objectID": "lec11/lec11.html#what-r-does-instead-of-two-rows",
     "href": "lec11/lec11.html#what-r-does-instead-of-two-rows",
     "title": "Independent-Samples T-Test",
     "section": "What R Does Instead of Two Rows",
-    "text": "What R Does Instead of Two Rows\n\nSPSS prints a “pooled” row and a “Welch” row and asks you to pick. In R you choose with one argument:\n\nvar.equal = FALSE (the default): Welch, no equal-variance assumption\nvar.equal = TRUE: pooled, needs equal variances\n\nTraditional route: run Levene’s Test, then pick. If \\(p &gt; .05\\) pooled is fine, if \\(p &lt; .05\\) use Welch.\nMany statisticians now simply always use Welch. When variances are equal it gives nearly the same answer, and when they are not it protects you.\nIn this lecture’s examples we check Levene’s Test to see whether pooling would have been safe, then run Welch (R’s default) anyway."
+    "text": "What R Does Instead of Two Rows\nChoosing with var.equal\n\nSPSS prints a “pooled” row and a “Welch” row. In R you choose with one argument:\n\nvar.equal = FALSE (the default): Welch, no equal-variance assumption\nvar.equal = TRUE: pooled, needs equal variances\n\nTraditional route: run Levene’s Test, then pick (pooled if \\(p &gt; .05\\), Welch if \\(p &lt; .05\\)).\nMany statisticians now always use Welch: nearly identical when variances are equal, protective when they are not.\nHere, we check Levene’s Test to see whether pooling was safe, then run Welch anyway."
   },
   {
     "objectID": "lec11/lec11.html#looking-ahead-sphericity",
     "href": "lec11/lec11.html#looking-ahead-sphericity",
     "title": "Independent-Samples T-Test",
     "section": "Looking Ahead: Sphericity",
-    "text": "Looking Ahead: Sphericity\n\n\n\n\n\n\nThe same idea comes back\n\n\nHere the assumption is equal variances across groups. In a repeated-measures design with three or more conditions, the matching assumption is sphericity: the difference scores between every pair of conditions have similar variance.\nThe paired \\(t\\)-test never needed it, because two conditions give only one set of differences."
+    "text": "Looking Ahead: Sphericity\nThe same idea in repeated measures\n\n\n\n\n\n\nThe same idea comes back\n\n\nHere the assumption is equal variances across groups. In a repeated-measures design with three or more conditions, the matching assumption is sphericity: the difference scores between every pair of conditions have similar variance.\nThe paired \\(t\\)-test never needed it, because two conditions give only one set of differences."
   },
   {
     "objectID": "lec11/lec11.html#signal-and-noise-1",
@@ -5798,5 +5798,19 @@
     "title": "Independent-Samples T-Test",
     "section": "What Goes Wrong",
     "text": "What Goes Wrong\nThe false-alarm rate\n\nWe want about .05. With unequal spread and unequal \\(n\\), the pooled test cries wolf 30% of the time. Welch stays near 5%.\nThat is why we check: the pooled test is only trustworthy when the spreads are similar."
+  },
+  {
+    "objectID": "lec11/lec11.html#introduction-to-independent-samples-t-test",
+    "href": "lec11/lec11.html#introduction-to-independent-samples-t-test",
+    "title": "Independent-Samples T-Test",
+    "section": "Introduction to Independent-Samples t-Test",
+    "text": "Introduction to Independent-Samples t-Test\nWhat is an independent-samples t-test?\n\n\nIndependent-Samples t-Test\n\nA statistical method for comparing the means of two unrelated groups, such as different people randomly assigned to two conditions."
+  },
+  {
+    "objectID": "lec11/lec11.html#terms-to-know",
+    "href": "lec11/lec11.html#terms-to-know",
+    "title": "Independent-Samples T-Test",
+    "section": "Terms to Know",
+    "text": "Terms to Know\nThe vocabulary for this test\n\n\n\nStandard error of the difference\n\nHow much the difference between two sample means bounces around from study to study. It is the denominator of \\(t\\).\n\n\n\n\n\nPooled variance \\(s_p^2\\)\n\nA weighted average of the two group variances, used when the groups are assumed to share one population variance.\n\n\n\n\n\nWelch’s t-test\n\nAn independent-samples \\(t\\)-test that lets each group keep its own variance. It is the default in t.test().\n\n\n\n\n\nLevene’s test\n\nA test of \\(H_0\\) that the group variances are equal."
   }
 ]

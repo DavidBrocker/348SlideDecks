@@ -367,6 +367,18 @@ Dave Brocker
 <li class="fragment"><p>Little spread: <span class="math inline">\(t = 4.47\)</span>. Lots of spread: <span class="math inline">\(t = 1.49\)</span>. More noise means a smaller <span class="math inline">\(t\)</span>, so a difference is harder to trust.</p></li>
 </ul>
 </section>
+<section id="introduction-to-independent-samples-t-test" class="slide level2">
+<h2>Introduction to Independent-Samples t-Test</h2>
+<h3 id="what-is-an-independent-samples-t-test">What is an independent-samples t-test?</h3>
+<div class="hero-def">
+<dl>
+<dt class="fragment"><span class="term-pill">Independent-Samples t-Test</span></dt>
+<dd class="fragment">
+A statistical method for comparing the means of <strong>two unrelated</strong> groups, such as different people randomly assigned to two conditions.
+</dd>
+</dl>
+</div>
+</section>
 <section id="independent-samples-t-test-overview" class="slide level2">
 <h2>Independent-Samples t-Test Overview</h2>
 <p>Used when we compare <strong>two different groups</strong> on a continuous outcome.</p>
@@ -416,6 +428,7 @@ Dave Brocker
 </section>
 <section id="lets-watch-it-happen" class="slide level2">
 <h2>Let’s Watch It Happen</h2>
+<h3 id="simulating-5000-studies">Simulating 5000 studies</h3>
 <div class="codewindow r codewindow-dark">
 <p>sampling_difference.R</p>
 <div class="cell">
@@ -503,20 +516,20 @@ Dave Brocker
 <section id="theoretical-formula" class="slide level2">
 <h2>Theoretical Formula</h2>
 <h3 id="if-we-knew-the-population-standard-deviation">If we knew the population standard deviation</h3>
-<p><span class="math display">\[z = \frac{\color{red}{\bar{x}_1} - \color{orange}{\bar{x}_2}}{\color{grey}{\sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}\]</span></p>
+<p><span class="math display">\[z = \frac{\color{#B5483B}{\bar{x}_1} - \color{#5C715E}{\bar{x}_2}}{\color{#2F3E46}{\sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}\]</span></p>
 <ul>
 <li class="fragment"><p>The numerator is really <span class="math inline">\((\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)\)</span>. Under <span class="math inline">\(H_0\)</span> the second part is <span class="math inline">\(0\)</span>, so it drops out.</p></li>
-<li class="fragment"><p><span style="color:red">Sample mean, group 1</span></p></li>
-<li class="fragment"><p><span style="color:orange">Sample mean, group 2</span></p></li>
-<li class="fragment"><p><span style="color:grey">Standard error of the difference</span>, using the population <span class="math inline">\(\sigma\)</span> (assumed equal in both groups)</p></li>
+<li class="fragment"><p><span style="color:#B5483B">Sample mean, group 1</span></p></li>
+<li class="fragment"><p><span style="color:#5C715E">Sample mean, group 2</span></p></li>
+<li class="fragment"><p><span style="color:#2F3E46">Standard error of the difference</span>, using the population <span class="math inline">\(\sigma\)</span> (assumed equal in both groups)</p></li>
 </ul>
 </section>
 <section id="computational-formula" class="slide level2">
 <h2>Computational Formula</h2>
 <h3 id="estimating-from-the-samples-pooled-t-test">Estimating from the samples (pooled t-test)</h3>
-<p><span class="math display">\[t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{darkblue}{s_p^2}\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}} \qquad s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\]</span></p>
+<p><span class="math display">\[t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{#5C715E}{s_p^2}\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}} \qquad s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\]</span></p>
 <ul>
-<li class="fragment"><p><span style="color: darkblue"><span class="math inline">\(s_p^2\)</span> = pooled variance</span>, a weighted average of the two group variances.</p></li>
+<li class="fragment"><p><span style="color:#5C715E"><span class="math inline">\(s_p^2\)</span> = pooled variance</span>, a weighted average of the two group variances.</p></li>
 <li class="fragment"><p><span class="math inline">\(df = n_1 + n_2 - 2\)</span></p></li>
 </ul>
 </section>
@@ -541,6 +554,7 @@ Dave Brocker
 </section>
 <section id="where-df-comes-from" class="slide level2">
 <h2>Where df Comes From</h2>
+<h3 id="two-means-estimated-two-degrees-lost">Two means estimated, two degrees lost</h3>
 <ul>
 <li class="fragment"><p>The pooled <span class="math inline">\(s_p^2\)</span> uses <strong>two</strong> sample means (one per group) to measure spread.</p></li>
 <li class="fragment"><p>Each estimated mean costs one degree of freedom: <span class="math inline">\((n_1 - 1) + (n_2 - 1) = n_1 + n_2 - 2\)</span>.</p></li>
@@ -1203,6 +1217,7 @@ equal_groups   0.05050 0.05025</code></pre>
 </section>
 <section id="levenes-test-in-r" class="slide level2">
 <h2>Levene’s Test in R</h2>
+<h3 id="one-row-of-results-not-two">One row of results, not two</h3>
 <div class="codewindow r codewindow-dark">
 <p>levene_intro.R</p>
 <div class="cell">
@@ -1225,19 +1240,21 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="what-r-does-instead-of-two-rows" class="slide level2">
 <h2>What R Does Instead of Two Rows</h2>
+<h3 id="choosing-with-var.equal">Choosing with <code>var.equal</code></h3>
 <ul>
-<li class="fragment"><p>SPSS prints a “pooled” row and a “Welch” row and asks you to pick. In R you <strong>choose with one argument</strong>:</p>
+<li class="fragment"><p>SPSS prints a “pooled” row and a “Welch” row. In R you <strong>choose with one argument</strong>:</p>
 <ul>
 <li class="fragment"><p><code>var.equal = FALSE</code> (the <strong>default</strong>): Welch, no equal-variance assumption</p></li>
 <li class="fragment"><p><code>var.equal = TRUE</code>: pooled, needs equal variances</p></li>
 </ul></li>
-<li class="fragment"><p>Traditional route: run Levene’s Test, then pick. If <span class="math inline">\(p &gt; .05\)</span> pooled is fine, if <span class="math inline">\(p &lt; .05\)</span> use Welch.</p></li>
-<li class="fragment"><p>Many statisticians now simply <strong>always use Welch</strong>. When variances are equal it gives nearly the same answer, and when they are not it protects you.</p></li>
-<li class="fragment"><p>In this lecture’s examples we check Levene’s Test to see whether pooling would have been safe, then run <strong>Welch</strong> (R’s default) anyway.</p></li>
+<li class="fragment"><p>Traditional route: run Levene’s Test, then pick (pooled if <span class="math inline">\(p &gt; .05\)</span>, Welch if <span class="math inline">\(p &lt; .05\)</span>).</p></li>
+<li class="fragment"><p>Many statisticians now <strong>always use Welch</strong>: nearly identical when variances are equal, protective when they are not.</p></li>
+<li class="fragment"><p>Here, we check Levene’s Test to see whether pooling was safe, then run <strong>Welch</strong> anyway.</p></li>
 </ul>
 </section>
 <section id="looking-ahead-sphericity" class="slide level2">
 <h2>Looking Ahead: Sphericity</h2>
+<h3 id="the-same-idea-in-repeated-measures">The same idea in repeated measures</h3>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -3230,6 +3247,44 @@ mean in group no_phone    mean in group phone
 <p><span class="math inline">\(H_0: \mu_\text{online} = \mu_\text{in-person}\)</span>; <span class="math inline">\(H_A: \mu_\text{online} \neq \mu_\text{in-person}\)</span>. Online <span class="math inline">\(M = 81.99\)</span> vs.&nbsp;in-person <span class="math inline">\(M = 78.52\)</span>: <em>t(46.29) = 2.70, p = .010</em>, <span class="math inline">\(d = 0.76\)</span>. Compare <span class="math inline">\(p\)</span> to <span class="math inline">\(\alpha = .05\)</span> and interpret both the decision and the effect size.</p>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="terms-to-know" class="slide level2">
+<h2>Terms to Know</h2>
+<h3 id="the-vocabulary-for-this-test">The vocabulary for this test</h3>
+<div class="term-list">
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Standard error of the difference</span></dt>
+<dd class="fragment">
+How much the difference between two sample means bounces around from study to study. It is the denominator of <span class="math inline">\(t\)</span>.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Pooled variance <span class="math inline">\(s_p^2\)</span></span></dt>
+<dd class="fragment">
+A weighted average of the two group variances, used when the groups are assumed to share one population variance.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Welch’s t-test</span></dt>
+<dd class="fragment">
+An independent-samples <span class="math inline">\(t\)</span>-test that lets each group keep its own variance. It is the default in <code>t.test()</code>.
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt class="fragment"><span class="term-pill">Levene’s test</span></dt>
+<dd class="fragment">
+A test of <span class="math inline">\(H_0\)</span> that the group variances are equal.
+</dd>
+</dl>
 </div>
 </div>
 </section>

@@ -357,6 +357,16 @@ $$t = \frac{\text{signal}}{\text{noise}} = \frac{\bar{x}_1 - \bar{x}_2}{SE}$$
 
 - Little spread: $t = `r f2(lo$r$t)`$. Lots of spread: $t = `r f2(hi$r$t)`$. More noise means a smaller $t$, so a difference is harder to trust.
 
+## Introduction to Independent-Samples t-Test
+
+### What is an independent-samples t-test?
+
+::: hero-def
+[Independent-Samples t-Test]{.term-pill}
+
+: A statistical method for comparing the means of **two unrelated** groups, such as different people randomly assigned to two conditions.
+:::
+
 ## Independent-Samples t-Test Overview
 
 Used when we compare **two different groups** on a continuous outcome.
@@ -414,6 +424,8 @@ Is the group that drank coffee significantly happier than the control group?
 - If $H_0$ is true (both groups come from populations with the same mean), those differences pile up around **0**. The test asks how far from 0 ours landed, in standard-error units.
 
 ## Let's Watch It Happen
+
+### Simulating 5000 studies
 
 ::: {.codewindow .r .codewindow-dark}
 sampling_difference.R
@@ -500,23 +512,23 @@ The formula for estimating the test statistic based solely on sample data.
 
 ### If we knew the population standard deviation
 
-$$z = \frac{\color{red}{\bar{x}_1} - \color{orange}{\bar{x}_2}}{\color{grey}{\sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}$$
+$$z = \frac{\color{#B5483B}{\bar{x}_1} - \color{#5C715E}{\bar{x}_2}}{\color{#2F3E46}{\sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}$$
 
 - The numerator is really $(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)$. Under $H_0$ the second part is $0$, so it drops out.
 
-- [Sample mean, group 1]{style="color:red"}
+- [Sample mean, group 1]{style="color:#B5483B"}
 
-- [Sample mean, group 2]{style="color:orange"}
+- [Sample mean, group 2]{style="color:#5C715E"}
 
-- [Standard error of the difference]{style="color:grey"}, using the population $\sigma$ (assumed equal in both groups)
+- [Standard error of the difference]{style="color:#2F3E46"}, using the population $\sigma$ (assumed equal in both groups)
 
 ## Computational Formula
 
 ### Estimating from the samples (pooled t-test)
 
-$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{darkblue}{s_p^2}\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}} \qquad s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\color{#5C715E}{s_p^2}\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}} \qquad s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$$
 
-- [$s_p^2$ = pooled variance]{style="color: darkblue"}, a weighted average of the two group variances.
+- [$s_p^2$ = pooled variance]{style="color:#5C715E"}, a weighted average of the two group variances.
 
 - $df = n_1 + n_2 - 2$
 
@@ -543,6 +555,8 @@ $$\text{Welch: } \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} \qquad\qquad \text
 - When variances differ a lot, $s_p^2$ stops describing either group. Next: what goes wrong.
 
 ## Where df Comes From
+
+### Two means estimated, two degrees lost
 
 - The pooled $s_p^2$ uses **two** sample means (one per group) to measure spread.
 
@@ -718,6 +732,8 @@ aggregate(x = concentration ~ group, data = choco, FUN = sd)
 
 ## Levene's Test in R
 
+### One row of results, not two
+
 ```{r}
 #| label: levene-intro-data
 #| echo: false
@@ -746,19 +762,23 @@ leveneTest(y = score ~ group, data = noisy)
 
 ## What R Does Instead of Two Rows
 
-- SPSS prints a "pooled" row and a "Welch" row and asks you to pick. In R you **choose with one argument**:
+### Choosing with `var.equal`
+
+- SPSS prints a "pooled" row and a "Welch" row. In R you **choose with one argument**:
 
   - `var.equal = FALSE` (the **default**): Welch, no equal-variance assumption
 
   - `var.equal = TRUE`: pooled, needs equal variances
 
-- Traditional route: run Levene's Test, then pick. If $p > .05$ pooled is fine, if $p < .05$ use Welch.
+- Traditional route: run Levene's Test, then pick (pooled if $p > .05$, Welch if $p < .05$).
 
-- Many statisticians now simply **always use Welch**. When variances are equal it gives nearly the same answer, and when they are not it protects you.
+- Many statisticians now **always use Welch**: nearly identical when variances are equal, protective when they are not.
 
-- In this lecture's examples we check Levene's Test to see whether pooling would have been safe, then run **Welch** (R's default) anyway.
+- Here, we check Levene's Test to see whether pooling was safe, then run **Welch** anyway.
 
 ## Looking Ahead: Sphericity
+
+### The same idea in repeated measures
 
 ::: callout-tip
 ## The same idea comes back
@@ -1230,6 +1250,36 @@ ex_4 <- tibble(
 $H_0: \mu_\text{online} = \mu_\text{in-person}$; $H_A: \mu_\text{online} \neq \mu_\text{in-person}$. Online $M = `r f2(e4$m1)`$ vs. in-person $M = `r f2(e4$m2)`$: *`r apa_t(e4)`*, $d = `r f2(e4$d)`$. Compare $p$ to $\alpha = .05$ and interpret both the decision and the effect size.
 :::
 :::
+
+## Terms to Know
+
+### The vocabulary for this test
+
+:::::: term-list
+::: fragment
+[Standard error of the difference]{.term-pill}
+
+: How much the difference between two sample means bounces around from study to study. It is the denominator of $t$.
+:::
+
+::: fragment
+[Pooled variance $s_p^2$]{.term-pill}
+
+: A weighted average of the two group variances, used when the groups are assumed to share one population variance.
+:::
+
+::: fragment
+[Welch's t-test]{.term-pill}
+
+: An independent-samples $t$-test that lets each group keep its own variance. It is the default in `t.test()`.
+:::
+
+::: fragment
+[Levene's test]{.term-pill}
+
+: A test of $H_0$ that the group variances are equal.
+:::
+::::::
 
 ## Summary: Independent-Samples t-Test
 
