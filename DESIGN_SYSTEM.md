@@ -136,6 +136,27 @@ move their chair away from it.
 
 Styling is scoped to `.hero-def .hero-example` specifically (restyled nav-tabs: muted uppercase labels, active tab gets the accent color + underline) so it never touches the plain default Bootstrap tabset styling already used elsewhere on the site (`lec2`'s Anscombe plots) — those keep rendering with their untouched default look.
 
+## Slide structure conventions
+
+Observed across the stats decks (lec8 to lec16) and now the standard for new slides.
+
+**Heading pattern: `##` title plus `###` subtitle.** Each slide is a level-2 heading (the topic, reused across a run of slides, e.g. "Coffee Example") followed by a level-3 heading that says what *this* slide does ("Manual", "Data overview"). The subtitle is what lets a topic span several slides without repeating itself. Slides that are a single callout or carry the topic in their own title (a Recap, a Summary, a "Your tasks" callout) may skip the `###`. Never use `###` as a bullet label inside a slide.
+
+**Callout colors have jobs.**
+
+| Callout | Use it for | Examples |
+|---|---|---|
+| `.callout-tip` | The working: formulas, steps, $H_0$, "Compute t", "Decide", "Effect size", "Your tasks" | the three-step manual calculation on lec11's Coffee Example |
+| `.callout-important` | Things to stop and notice: $H_A$, **assumptions**, **answers**, definitions that matter | "Assumptions" on lec9/10/11, the "Answer" box on practice slides |
+
+Rule of thumb: tip = *what we do*, important = *what to watch for or what the answer is*. Side-by-side $H_0$ / $H_A$ slides pair a tip (left) with an important (right). Use `.nonincremental` on a callout that should appear all at once rather than line by line. `.callout-note`, `-warning` and `-caution` are not used on this site.
+
+**Formula colors use the deck palette, not named CSS colors.** When coloring parts of a formula to match a bullet below it, use hex tokens from the table above (`\color{#B5483B}{...}` and `[text]{style="color:#B5483B"}`), never `red`, `orange`, `blue`. Good pairings on the pale sage background: `#B5483B` ("look here" red), `#5C715E` (accent), `#2F3E46` (body text). Avoid amber/orange text: it is hard to read against the background.
+
+**Define pivotal terms with the term components.** Open a method's deck with a `.hero-def` ("What is a ...?"), and close with a `.term-list` of the vocabulary for that lecture (each pair in its own `::: fragment :::`). The glossary extraction depends on the `.term-pill` markup.
+
+**Fit check.** Slides must fit at 1600x900 with every fragment revealed. Run `scripts/check_slide_overflow.R <deck>` after rendering (the title slide always reports ~980px; ignore it). Fix by splitting the slide or moving the plain-English line to the next slide, not by shrinking fonts.
+
 ## Known gotchas
 
 **CSS specificity beats source order, every time.** `.reveal .slide p { color: $body-color; }` sits near the top of the file and directly targets any `<p>` on a slide — including the `<p>` pandoc wraps fenced-div content in. A new component that puts colored text in a plain `<p>` inside a div (e.g. `.my-thing p { color: #fff; }`) will silently lose to that rule if its own selector has *lower or equal specificity* (class + tag vs. two classes + tag), no matter where in the file it's written or how late it's added. This bit `.blank-tag` and `.you-callout` once already (fixed by matching specificity: `.reveal .slide .blank-tag p`). **Before shipping any new pill/badge/tag component with its own text color, check what specificity the existing global text rules have and match or exceed it** — don't assume one extra class is enough.
@@ -148,6 +169,7 @@ Styling is scoped to `.hero-def .hero-example` specifically (restyled nav-tabs: 
 
 ## Open items
 
+- Replace named CSS colors in formulas with palette hex tokens in the older decks (raw `red`/`orange`/`blue` counts: lec4 38, lec6 9, lec3/5/9/10/16 a few each). lec11 is done; add a check to `scripts/check_deck.R`.
 - Retrofit `lec1.qmd`'s 7-term slide into `.term-list` (with per-pair `::: fragment :::`).
 - Missing images still unresolved on lec3/5/7/8/11/15c (lec6's `z-table.png` refs replaced by `.z-excerpt` tables, 9/28) (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).
 - Extract the glossary: once several decks use `.term-pill`/`dl`/`dd`, a script can walk every deck and build a site-wide glossary page from the markup alone.
