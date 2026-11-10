@@ -4106,28 +4106,28 @@
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-2",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n2.39\n3.71\n48\n&lt;.001\n[1.10, 3.69]\n1.05\n\n\n\n\n\n\n\nChocolate: \\(M = 15.38\\), \\(SD = 2.61\\). No chocolate: \\(M = 12.98\\), \\(SD = 1.89\\)."
+    "text": "Does chocolate improve concentration?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n2.39\n3.71\n43.76\n&lt;.001\n[1.09, 3.69]\n1.05\n\n\n\n\n\n\n\nChocolate: \\(M = 15.38\\), \\(SD = 2.61\\). No chocolate: \\(M = 12.98\\), \\(SD = 1.89\\)."
   },
   {
     "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-3",
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-3",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nCheck the assumption\n\nlevene.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(y = concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and the pooled test is appropriate."
+    "text": "Does chocolate improve concentration?\nCheck the assumption\n\nlevene.R\n\nlibrary(car)\n\n# Equal variances? (H0: the variances are equal)\nleveneTest(y = concentration ~ group, data = choco)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.4945 0.2275\n      48               \n\n\n\n\nLevene’s \\(p &gt; .05\\), so equal variances are reasonable and pooling would have been fine. We run Welch anyway: it is safe either way."
   },
   {
     "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-4",
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-4",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nRun the test\n\nchocolate.R\n\n# Pooled (equal variances) t-test\nt.test(formula = concentration ~ group, data = choco, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 48, p-value = 0.000542\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.095202 3.690462\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224"
+    "text": "Does chocolate improve concentration?\nRun the test\n\nchocolate.R\n\n# Welch (R's default): no equal-variance assumption\nt.test(formula = concentration ~ group, data = choco)\n\n\n    Welch Two Sample t-test\n\ndata:  concentration by group\nt = 3.7076, df = 43.764, p-value = 0.0005855\nalternative hypothesis: true difference in means between group chocolate and group no_chocolate is not equal to 0\n95 percent confidence interval:\n 1.091949 3.693714\nsample estimates:\n   mean in group chocolate mean in group no_chocolate \n                  15.37507                   12.98224"
   },
   {
     "objectID": "lec11/lec11.html#does-chocolate-improve-concentration-5",
     "href": "lec11/lec11.html#does-chocolate-improve-concentration-5",
     "title": "Independent-Samples T-Test",
     "section": "Does chocolate improve concentration?",
-    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(48) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect), where \\(s_p = \\sqrt{s_p^2}\\) is the square root of the pooled variance\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(48) = 3.71, p &lt; .001, 95% CI [1.10, 3.69], d = 1.05."
+    "text": "Does chocolate improve concentration?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(43.76) = 3.71\\), \\(p\\) &lt; .001. Since \\(p &lt; .05\\), we reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{\\bar{x}_1 - \\bar{x}_2}{s_p} = \\dfrac{2.39}{2.28} = 1.05\\) (a large effect), where \\(s_p = \\sqrt{s_p^2}\\) is the square root of the pooled variance\n\n\n\n\n\nAn independent-samples t-test showed that students who ate chocolate (M = 15.38, SD = 2.61) scored significantly higher on the concentration task than students who did not (M = 12.98, SD = 1.89), t(43.76) = 3.71, p &lt; .001, 95% CI [1.09, 3.69], d = 1.05."
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying",
@@ -4148,21 +4148,21 @@
     "href": "lec11/lec11.html#does-instrumental-music-improve-studying-2",
     "title": "Independent-Samples T-Test",
     "section": "Does instrumental music improve studying?",
-    "text": "Does instrumental music improve studying?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n0.60\n1.73\n38\n0.091\n[-0.10, 1.30]\n0.55\n\n\n\n\n\n\n\nMusic: \\(M = 7.65\\), \\(SD = 1.08\\). Silence: \\(M = 7.05\\), \\(SD = 1.11\\)."
+    "text": "Does instrumental music improve studying?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n0.60\n1.73\n37.96\n0.091\n[-0.10, 1.30]\n0.55\n\n\n\n\n\n\n\nMusic: \\(M = 7.65\\), \\(SD = 1.08\\). Silence: \\(M = 7.05\\), \\(SD = 1.11\\)."
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-3",
     "href": "lec11/lec11.html#does-instrumental-music-improve-studying-3",
     "title": "Independent-Samples T-Test",
     "section": "Does instrumental music improve studying?",
-    "text": "Does instrumental music improve studying?\nRun the test\n\nmusic.R\n\nt.test(formula = quiz_score ~ group, data = music, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  quiz_score by group\nt = 1.7335, df = 38, p-value = 0.09112\nalternative hypothesis: true difference in means between group music and group silence is not equal to 0\n95 percent confidence interval:\n -0.1004822  1.2980566\nsample estimates:\n  mean in group music mean in group silence \n             7.647986              7.049199"
+    "text": "Does instrumental music improve studying?\nRun the test\n\nmusic.R\n\n# Welch (R's default)\nt.test(formula = quiz_score ~ group, data = music)\n\n\n    Welch Two Sample t-test\n\ndata:  quiz_score by group\nt = 1.7335, df = 37.964, p-value = 0.09112\nalternative hypothesis: true difference in means between group music and group silence is not equal to 0\n95 percent confidence interval:\n -0.1005039  1.2980783\nsample estimates:\n  mean in group music mean in group silence \n             7.647986              7.049199"
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-4",
     "href": "lec11/lec11.html#does-instrumental-music-improve-studying-4",
     "title": "Independent-Samples T-Test",
     "section": "Does instrumental music improve studying?",
-    "text": "Does instrumental music improve studying?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(38) = 1.73\\), \\(p\\) = .091. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.60}{1.09} = 0.55\\) (a medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who studied with music (M = 7.65, SD = 1.08) did not differ significantly on the quiz from students who studied in silence (M = 7.05, SD = 1.11), t(38) = 1.73, p = .091, 95% CI [-0.10, 1.30], d = 0.55."
+    "text": "Does instrumental music improve studying?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(37.96) = 1.73\\), \\(p\\) = .091. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.60}{1.09} = 0.55\\) (a medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who studied with music (M = 7.65, SD = 1.08) did not differ significantly on the quiz from students who studied in silence (M = 7.05, SD = 1.11), t(37.96) = 1.73, p = .091, 95% CI [-0.10, 1.30], d = 0.55."
   },
   {
     "objectID": "lec11/lec11.html#does-instrumental-music-improve-studying-5",
@@ -4190,21 +4190,21 @@
     "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-2",
     "title": "Independent-Samples T-Test",
     "section": "Does bedtime phone use affect sleep?",
-    "text": "Does bedtime phone use affect sleep?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n0.44\n1.89\n78\n0.062\n[-0.02, 0.90]\n0.42\n\n\n\n\n\n\n\nNo phone: \\(M = 7.34\\), \\(SD = 0.97\\). Phone: \\(M = 6.90\\), \\(SD = 1.09\\)."
+    "text": "Does bedtime phone use affect sleep?\nData and results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifference\nt\ndf\np\nCI[ll,uu]\nd\n\n\n\n\n0.44\n1.89\n77.01\n0.063\n[-0.02, 0.90]\n0.42\n\n\n\n\n\n\n\nNo phone: \\(M = 7.34\\), \\(SD = 0.97\\). Phone: \\(M = 6.90\\), \\(SD = 1.09\\)."
   },
   {
     "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-3",
     "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-3",
     "title": "Independent-Samples T-Test",
     "section": "Does bedtime phone use affect sleep?",
-    "text": "Does bedtime phone use affect sleep?\nRun the test\n\nsleep.R\n\nt.test(formula = sleep_quality ~ group, data = sleep, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  sleep_quality by group\nt = 1.89, df = 78, p-value = 0.06248\nalternative hypothesis: true difference in means between group no_phone and group phone is not equal to 0\n95 percent confidence interval:\n -0.02330214  0.89639501\nsample estimates:\nmean in group no_phone    mean in group phone \n              7.341146               6.904599"
+    "text": "Does bedtime phone use affect sleep?\nRun the test\n\nsleep.R\n\n# Welch (R's default)\nt.test(formula = sleep_quality ~ group, data = sleep)\n\n\n    Welch Two Sample t-test\n\ndata:  sleep_quality by group\nt = 1.89, df = 77.011, p-value = 0.06253\nalternative hypothesis: true difference in means between group no_phone and group phone is not equal to 0\n95 percent confidence interval:\n -0.02339518  0.89648805\nsample estimates:\nmean in group no_phone    mean in group phone \n              7.341146               6.904599"
   },
   {
     "objectID": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-4",
     "href": "lec11/lec11.html#does-bedtime-phone-use-affect-sleep-4",
     "title": "Independent-Samples T-Test",
     "section": "Does bedtime phone use affect sleep?",
-    "text": "Does bedtime phone use affect sleep?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(78) = 1.89\\), \\(p\\) = .062. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\). The result is close, but not significant.\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.44}{1.03} = 0.42\\) (a small-to-medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who avoided their phones before bed (M = 7.34, SD = 0.97) did not differ significantly in sleep quality from students who used their phones (M = 6.90, SD = 1.09), t(78) = 1.89, p = .062, 95% CI [-0.02, 0.90], d = 0.42."
+    "text": "Does bedtime phone use affect sleep?\nDecision, effect size, and report\n\n\n\n\n\n\n\n\nDecide\n\n\n\\(t(77.01) = 1.89\\), \\(p\\) = .063. Since \\(p &gt; .05\\), we fail to reject \\(H_0\\). The result is close, but not significant.\n\n\n\n\n\n\n\n\n\nEffect size\n\n\n\\(d = \\dfrac{0.44}{1.03} = 0.42\\) (a small-to-medium effect)\n\n\n\n\n\nAn independent-samples t-test showed that students who avoided their phones before bed (M = 7.34, SD = 0.97) did not differ significantly in sleep quality from students who used their phones (M = 6.90, SD = 1.09), t(77.01) = 1.89, p = .063, 95% CI [-0.02, 0.90], d = 0.42."
   },
   {
     "objectID": "lec11/lec11.html#practice",
@@ -4218,7 +4218,7 @@
     "href": "lec11/lec11.html#practice-1",
     "title": "Independent-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nCaffeine and alertness: data and answer\n\npractice_3.R\n\nset.seed(103)\nex_3 &lt;- tibble(\n  Group = factor(rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n                 levels = c(\"Caffeine\", \"Placebo\")),\n  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))\n)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_\\text{caffeine} = \\mu_\\text{placebo}\\); \\(H_A: \\mu_\\text{caffeine} \\neq \\mu_\\text{placebo}\\). Caffeine \\(M = 74.31\\) vs. placebo \\(M = 68.23\\): t(38) = 2.52, p = .016, 95% CI [1.19, 10.98], \\(d = 0.80\\)."
+    "text": "Practice\nCaffeine and alertness: data and answer\n\npractice_3.R\n\nset.seed(103)\nex_3 &lt;- tibble(\n  Group = factor(rep(c(\"Caffeine\", \"Placebo\"), each = 20),\n                 levels = c(\"Caffeine\", \"Placebo\")),\n  Alertness = c(rnorm(20, mean = 75, sd = 8), rnorm(20, mean = 68, sd = 8))\n)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_\\text{caffeine} = \\mu_\\text{placebo}\\); \\(H_A: \\mu_\\text{caffeine} \\neq \\mu_\\text{placebo}\\). Caffeine \\(M = 74.31\\) vs. placebo \\(M = 68.23\\): t(37.93) = 2.52, p = .016, 95% CI [1.19, 10.98], \\(d = 0.80\\)."
   },
   {
     "objectID": "lec11/lec11.html#practice-2",
@@ -4232,14 +4232,14 @@
     "href": "lec11/lec11.html#practice-3",
     "title": "Independent-Samples T-Test",
     "section": "Practice",
-    "text": "Practice\nOnline vs. in-person exams: data and answer\n\npractice_4.R\n\nset.seed(104)\nex_4 &lt;- tibble(\n  Format = factor(rep(c(\"Online\", \"InPerson\"), each = 25),\n                  levels = c(\"Online\", \"InPerson\")),\n  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))\n)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_\\text{online} = \\mu_\\text{in-person}\\); \\(H_A: \\mu_\\text{online} \\neq \\mu_\\text{in-person}\\). Online \\(M = 81.99\\) vs. in-person \\(M = 78.52\\): t(48) = 2.70, p = .009, \\(d = 0.76\\). Compare \\(p\\) to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
+    "text": "Practice\nOnline vs. in-person exams: data and answer\n\npractice_4.R\n\nset.seed(104)\nex_4 &lt;- tibble(\n  Format = factor(rep(c(\"Online\", \"InPerson\"), each = 25),\n                  levels = c(\"Online\", \"InPerson\")),\n  Exam_Score = c(rnorm(25, mean = 82, sd = 5), rnorm(25, mean = 79, sd = 6))\n)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\\(H_0: \\mu_\\text{online} = \\mu_\\text{in-person}\\); \\(H_A: \\mu_\\text{online} \\neq \\mu_\\text{in-person}\\). Online \\(M = 81.99\\) vs. in-person \\(M = 78.52\\): t(46.29) = 2.70, p = .010, \\(d = 0.76\\). Compare \\(p\\) to \\(\\alpha = .05\\) and interpret both the decision and the effect size."
   },
   {
     "objectID": "lec11/lec11.html#summary-independent-samples-t-test",
     "href": "lec11/lec11.html#summary-independent-samples-t-test",
     "title": "Independent-Samples T-Test",
     "section": "Summary: Independent-Samples t-Test",
-    "text": "Summary: Independent-Samples t-Test\n\nCompares two independent groups.\nTests whether the difference in means is significant.\nUses pooled variance as the denominator when variances are equal (Welch when they are not).\nCheck assumptions: independence, normality, equal variance (look at the SDs, then Levene’s Test, or just use Welch).\nReport the test, the means and SDs, the confidence interval, and an effect size (\\(d\\))."
+    "text": "Summary: Independent-Samples t-Test\n\nCompares two independent groups.\nTests whether the difference in means is significant.\nWelch’s t-test (R’s default) does not assume equal variances. The pooled version needs them.\nCheck assumptions: independence, normality, equal variance (look at the SDs, then Levene’s Test, or just use Welch).\nReport the test, the means and SDs, the confidence interval, and an effect size (\\(d\\))."
   },
   {
     "objectID": "lec16/lec16.html#types-of-analysis",
@@ -5734,7 +5734,7 @@
     "href": "lec11/lec11.html#reading-the-t.test-output",
     "title": "Independent-Samples T-Test",
     "section": "Reading the t.test() Output",
-    "text": "Reading the t.test() Output\nEvery piece comes from the formula\n\ncoffee_t_test.R\n\nt.test(formula = happy ~ grp, data = coffee, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  happy by grp\nt = 4.4721, df = 18, p-value = 0.0002946\nalternative hypothesis: true difference in means between group Experimental and group Control is not equal to 0\n95 percent confidence interval:\n 1.060439 2.939561\nsample estimates:\nmean in group Experimental      mean in group Control \n                         8                          6"
+    "text": "Reading the t.test() Output\nEvery piece comes from the formula\n\ncoffee_t_test.R\n\nt.test(formula = happy ~ grp, data = coffee)   # Welch by default\n\n\n    Welch Two Sample t-test\n\ndata:  happy by grp\nt = 4.4721, df = 18, p-value = 0.0002946\nalternative hypothesis: true difference in means between group Experimental and group Control is not equal to 0\n95 percent confidence interval:\n 1.060439 2.939561\nsample estimates:\nmean in group Experimental      mean in group Control \n                         8                          6"
   },
   {
     "objectID": "lec11/lec11.html#why-equal-variances",
@@ -5769,7 +5769,7 @@
     "href": "lec11/lec11.html#what-r-does-instead-of-two-rows",
     "title": "Independent-Samples T-Test",
     "section": "What R Does Instead of Two Rows",
-    "text": "What R Does Instead of Two Rows\n\nSPSS prints a “pooled” row and a “Welch” row and asks you to pick. In R you choose with one argument:\n\nvar.equal = FALSE (the default): Welch, no equal-variance assumption\nvar.equal = TRUE: pooled, needs equal variances\n\nTraditional route: run Levene’s Test, then pick. If \\(p &gt; .05\\) pooled is fine, if \\(p &lt; .05\\) use Welch.\nMany statisticians now simply always use Welch. When variances are equal it gives nearly the same answer, and when they are not it protects you.\nIn this lecture the examples check Levene’s Test first, then run the pooled test, so you see both steps."
+    "text": "What R Does Instead of Two Rows\n\nSPSS prints a “pooled” row and a “Welch” row and asks you to pick. In R you choose with one argument:\n\nvar.equal = FALSE (the default): Welch, no equal-variance assumption\nvar.equal = TRUE: pooled, needs equal variances\n\nTraditional route: run Levene’s Test, then pick. If \\(p &gt; .05\\) pooled is fine, if \\(p &lt; .05\\) use Welch.\nMany statisticians now simply always use Welch. When variances are equal it gives nearly the same answer, and when they are not it protects you.\nIn this lecture’s examples we check Levene’s Test to see whether pooling would have been safe, then run Welch (R’s default) anyway."
   },
   {
     "objectID": "lec11/lec11.html#looking-ahead-sphericity",
@@ -5790,7 +5790,7 @@
     "href": "lec11/lec11.html#reading-the-t.test-output-1",
     "title": "Independent-Samples T-Test",
     "section": "Reading the t.test() Output",
-    "text": "Reading the t.test() Output\nWhere each number comes from\n\nt \\(= \\dfrac{\\text{mean difference}}{SE} = \\dfrac{8 - 6}{0.45} = 4.47\\). The two means are listed at the bottom, the standard error is never printed.\ndf \\(= n_1 + n_2 - 2 = 18\\). p-value is the area beyond \\(\\pm t\\) in both tails of that \\(t\\) distribution.\n95% CI is the mean difference \\(\\pm\\ t_{critical} \\times SE\\), an interval for \\(\\mu_1 - \\mu_2\\)."
+    "text": "Reading the t.test() Output\nWhere each number comes from\n\nt \\(= \\dfrac{\\text{mean difference}}{SE} = \\dfrac{8 - 6}{0.45} = 4.47\\). The two means are listed at the bottom, the standard error is never printed.\ndf is computed from the two variances (Welch). Here it equals \\(n_1 + n_2 - 2 = 18\\) because the groups match in size and spread. p-value is the area beyond \\(\\pm t\\) in both tails of that \\(t\\) distribution.\n95% CI is the mean difference \\(\\pm\\ t_{critical} \\times SE\\), an interval for \\(\\mu_1 - \\mu_2\\)."
   },
   {
     "objectID": "lec11/lec11.html#what-goes-wrong-1",

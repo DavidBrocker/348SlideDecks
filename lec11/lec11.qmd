@@ -61,11 +61,12 @@ f2 <- function(x) formatC(x, format = "f", digits = 2)
 f3 <- function(x) formatC(x, format = "f", digits = 3)
 fp <- function(p) ifelse(p < .001, "< .001", paste("=", sub("^0", "", sprintf("%.3f", p))))
 
-# Pooled independent-samples t-test summary (first factor level minus second).
+# Welch independent-samples t-test summary (first factor level minus second);
+# d uses the pooled SD.
 ind_stats <- function(y, g) {
   g <- factor(g); lv <- levels(g)
   a <- y[g == lv[1]]; b <- y[g == lv[2]]
-  tt <- t.test(a, b, var.equal = TRUE)
+  tt <- t.test(x = a, y = b, var.equal = FALSE)
   sp <- sqrt(((length(a) - 1) * var(a) + (length(b) - 1) * var(b)) /
                (length(a) + length(b) - 2))
   list(lv = lv, n1 = length(a), n2 = length(b), m1 = mean(a), m2 = mean(b),
@@ -73,7 +74,8 @@ ind_stats <- function(y, g) {
        t = unname(tt$statistic), df = unname(tt$parameter), p = tt$p.value,
        ci = tt$conf.int, d = (mean(a) - mean(b)) / sp)
 }
-apa_t <- function(r) sprintf("t(%d) = %s, p %s", r$df, f2(r$t), fp(r$p))
+fdf <- function(df) ifelse(abs(df - round(df)) < 1e-6, as.character(round(df)), f2(df))
+apa_t <- function(r) sprintf("t(%s) = %s, p %s", fdf(r$df), f2(r$t), fp(r$p))
 
 # ---- Example datasets -------------------------------------------------
 # Coffee vs. decaf happiness (built to have exactly these means and SDs)
@@ -147,14 +149,13 @@ group_plot <- function(d, x, y, ylab, title, kind = "box") {
 # Results table for a worked example
 results_tbl <- function(r) {
   tibble(
-    Difference = r$diff, t = r$t, df = r$df,
+    Difference = r$diff, t = r$t, df = fdf(r$df),
     p = ifelse(r$p < .001, "<.001", sprintf("%.3f", r$p)),
     `CI[ll,uu]` = paste0("[", f2(r$ci[1]), ", ", f2(r$ci[2]), "]"),
     d = r$d
   ) |>
     gt() |>
     fmt_number(columns = c(Difference, t, d), decimals = 2) |>
-    fmt_number(columns = df, decimals = 0) |>
     opt_row_striping() |>
     tab_options(table.font.size = 22, table.width = pct(100)) |>
     tab_style(style = cell_text(weight = "bold"),
@@ -580,7 +581,7 @@ $df = 10 + 10 - 2 = `r cf$df`$. At $\alpha = .05$ (two-tailed), $t_{critical} = 
 ```{r}
 #| label: coffee-example
 #| echo: false
-t.test(happy ~ grp, data = coffee, var.equal = TRUE) |>
+t.test(formula = happy ~ grp, data = coffee) |>
   tidy() |>
   rename(mdiff = estimate, t = statistic, Experimental = estimate1,
          Control = estimate2, df = parameter) |>
@@ -589,7 +590,7 @@ t.test(happy ~ grp, data = coffee, var.equal = TRUE) |>
   select(mdiff, t, df, p, Experimental, Control, `CI[ll,uu]`) |>
   gt() |>
   fmt_number(columns = c(mdiff, t, Experimental, Control), decimals = 2) |>
-  fmt_number(columns = df, decimals = 0) |>
+  fmt_number(columns = df, decimals = 2, drop_trailing_zeros = TRUE) |>
   opt_row_striping() |>
   tab_options(table.font.size = 30, table.width = pct(80)) |>
   tab_style(style = cell_text(weight = "bold"),
@@ -609,7 +610,7 @@ coffee_t_test.R
 #| label: coffee-t-test-output
 #| echo: true
 #| code-fold: false
-t.test(formula = happy ~ grp, data = coffee, var.equal = TRUE)
+t.test(formula = happy ~ grp, data = coffee)   # Welch by default
 ```
 :::
 
@@ -619,7 +620,7 @@ t.test(formula = happy ~ grp, data = coffee, var.equal = TRUE)
 
 - **`t`** $= \dfrac{\text{mean difference}}{SE} = \dfrac{8 - 6}{`r f2(sqrt(cf$sp^2 * (1/cf$n1 + 1/cf$n2)))`} = `r f2(cf$t)`$. The two **means** are listed at the bottom, the standard error is never printed.
 
-- **`df`** $= n_1 + n_2 - 2 = 18$. **`p-value`** is the area beyond $\pm t$ in both tails of that $t$ distribution.
+- **`df`** is computed from the two variances (Welch). Here it equals $n_1 + n_2 - 2 = 18$ because the groups match in size and spread. **`p-value`** is the area beyond $\pm t$ in both tails of that $t$ distribution.
 
 - **95% CI** is the mean difference $\pm\ t_{critical} \times SE$, an interval for $\mu_1 - \mu_2$.
 
@@ -755,7 +756,7 @@ leveneTest(y = score ~ group, data = noisy)
 
 - Many statisticians now simply **always use Welch**. When variances are equal it gives nearly the same answer, and when they are not it protects you.
 
-- In this lecture the examples check Levene's Test first, then run the pooled test, so you see both steps.
+- In this lecture's examples we check Levene's Test to see whether pooling would have been safe, then run **Welch** (R's default) anyway.
 
 ## Looking Ahead: Sphericity
 
@@ -882,7 +883,7 @@ leveneTest(y = concentration ~ group, data = choco)
 ```
 :::
 
-- Levene's $p > .05$, so equal variances are reasonable and the pooled test is appropriate.
+- Levene's $p > .05$, so equal variances are reasonable and pooling would have been fine. We run Welch anyway: it is safe either way.
 
 ## Does chocolate improve concentration?
 
@@ -895,8 +896,8 @@ chocolate.R
 #| label: chocolate
 #| echo: true
 #| code-fold: false
-# Pooled (equal variances) t-test
-t.test(formula = concentration ~ group, data = choco, var.equal = TRUE)
+# Welch (R's default): no equal-variance assumption
+t.test(formula = concentration ~ group, data = choco)
 ```
 :::
 
@@ -909,7 +910,7 @@ t.test(formula = concentration ~ group, data = choco, var.equal = TRUE)
 ::: callout-tip
 ## Decide
 
-$t(`r ch$df`) = `r f2(ch$t)`$, $p$ `r fp(ch$p)`. Since $p < .05$, we **reject** $H_0$.
+$t(`r fdf(ch$df)`) = `r f2(ch$t)`$, $p$ `r fp(ch$p)`. Since $p < .05$, we **reject** $H_0$.
 :::
 
 ::: callout-tip
@@ -1001,7 +1002,8 @@ music.R
 #| label: music
 #| echo: true
 #| code-fold: false
-t.test(formula = quiz_score ~ group, data = music, var.equal = TRUE)
+# Welch (R's default)
+t.test(formula = quiz_score ~ group, data = music)
 ```
 :::
 
@@ -1014,7 +1016,7 @@ t.test(formula = quiz_score ~ group, data = music, var.equal = TRUE)
 ::: callout-tip
 ## Decide
 
-$t(`r mu_$df`) = `r f2(mu_$t)`$, $p$ `r fp(mu_$p)`. Since $p > .05$, we **fail to reject** $H_0$.
+$t(`r fdf(mu_$df)`) = `r f2(mu_$t)`$, $p$ `r fp(mu_$p)`. Since $p > .05$, we **fail to reject** $H_0$.
 :::
 
 ::: callout-tip
@@ -1114,7 +1116,8 @@ sleep.R
 #| label: sleep
 #| echo: true
 #| code-fold: false
-t.test(formula = sleep_quality ~ group, data = sleep, var.equal = TRUE)
+# Welch (R's default)
+t.test(formula = sleep_quality ~ group, data = sleep)
 ```
 :::
 
@@ -1127,7 +1130,7 @@ t.test(formula = sleep_quality ~ group, data = sleep, var.equal = TRUE)
 ::: callout-tip
 ## Decide
 
-$t(`r sl$df`) = `r f2(sl$t)`$, $p$ `r fp(sl$p)`. Since $p > .05$, we **fail to reject** $H_0$. The result is close, but not significant.
+$t(`r fdf(sl$df)`) = `r f2(sl$t)`$, $p$ `r fp(sl$p)`. Since $p > .05$, we **fail to reject** $H_0$. The result is close, but not significant.
 :::
 
 ::: callout-tip
@@ -1234,7 +1237,7 @@ $H_0: \mu_\text{online} = \mu_\text{in-person}$; $H_A: \mu_\text{online} \neq \m
 
 - Tests whether the difference in means is significant.
 
-- Uses **pooled variance** as the denominator when variances are equal (**Welch** when they are not).
+- **Welch's** t-test (R's default) does not assume equal variances. The **pooled** version needs them.
 
 - Check assumptions: independence, normality, equal variance (look at the SDs, then Levene's Test, or just use Welch).
 
