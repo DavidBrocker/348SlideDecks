@@ -1237,3 +1237,15 @@ $dingbat-vine: "❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ ❦ ❧ 
   font-style: normal;
   font-weight: 600;
 }
+
+// Sidebar section headings (Lectures / Labs / Exam Review / ...) as dark
+// green pills, echoing .term-pill on the slides. Scoped to the site sidebar.
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > .sidebar-item-text.sidebar-link {
+  display: inline-block;
+  background: $accent;
+  color: #fff;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
