@@ -200,12 +200,12 @@ z1 |>
 
 ## Z-scores
 
-### Going backwards: Imagine that $\color{orange}{s} = 2$ and $\color{blue}{\bar{x}} = 25$
+### Going backwards: Imagine that $\color{#5C715E}{s} = 2$ and $\color{#B5483B}{\bar{x}} = 25$
 
 ::: callout-tip
 ## Formula
 
-$$x = \color{blue}{\bar{x}} + z\,\color{orange}{s}$$
+$$x = \color{#B5483B}{\bar{x}} + z\,\color{#5C715E}{s}$$
 :::
 
 - $z = 1 \Rightarrow x = 25 + (1)(2) = 27$
@@ -219,8 +219,8 @@ $$x = \color{blue}{\bar{x}} + z\,\color{orange}{s}$$
 ::: callout-tip
 ## Two steps
 
-1.  **Mean-center** the $x$ values: $x - \color{blue}{\bar{x}}$ — this makes the mean $= 0$.
-2.  **Divide** by the standard deviation: $\dfrac{x - \color{blue}{\bar{x}}}{\color{orange}{s}}$ — this makes the SD $= 1$.
+1.  **Mean-center** the $x$ values: $x - \color{#B5483B}{\bar{x}}$ — this makes the mean $= 0$.
+2.  **Divide** by the standard deviation: $\dfrac{x - \color{#B5483B}{\bar{x}}}{\color{#5C715E}{s}}$ — this makes the SD $= 1$.
 :::
 
 ## Calculating Probability
@@ -254,7 +254,7 @@ curve_plot(86, 4, shade = c(94, Inf), marks = 94)
 ::: callout-tip
 ## Solution
 
-- $z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{94-86}{4} = \dfrac{8}{4} = 2$
+- $z = \dfrac{x-\color{#B5483B}{\bar{x}}}{\color{#5C715E}{s}} = \dfrac{94-86}{4} = \dfrac{8}{4} = 2$
 - Beyond $z = 2$ is the `2.1%` + `0.1%` slivers of the curve ≈ **`2.3%`** chance.
 :::
 
@@ -320,7 +320,7 @@ curve_plot(72, 6, shade = c(-Inf, 60), marks = 60)
 
 ## Example 3
 
-### Esmeralda's Second Test: $\color{blue}{\bar{x}} = 72 \mid \color{orange}{s} = 6$
+### Esmeralda's Second Test: $\color{#B5483B}{\bar{x}} = 72 \mid \color{#5C715E}{s} = 6$
 
 ::: callout-tip
 ## Solution
@@ -381,7 +381,7 @@ The z-table gives you the probability of that z-score **or less** (the area to t
 
 ## Z-scores and Probability
 
-### Life Satisfaction: $\color{blue}{\bar{x}} = 5.4 \mid \color{orange}{s} = 2.2$
+### Life Satisfaction: $\color{#B5483B}{\bar{x}} = 5.4 \mid \color{#5C715E}{s} = 2.2$
 
 ::: callout-tip
 ## Convert to z first
@@ -498,11 +498,11 @@ pnorm(8, mean = 5.4, sd = 2.2, lower.tail = FALSE)           # .1186 (unrounded 
 
 - What percent of adults would qualify for membership?
   - Find the probability of scoring `130` or higher.
-  - $z = \dfrac{x-\color{blue}{\bar{x}}}{\color{orange}{s}} = \dfrac{130-100}{15} = \dfrac{30}{15} = 2$
+  - $z = \dfrac{x-\color{#B5483B}{\bar{x}}}{\color{#5C715E}{s}} = \dfrac{130-100}{15} = \dfrac{30}{15} = 2$
 
 ## MENSA {.z-slide}
 
-### $\color{blue}{\bar{x}} = 100 \mid \color{orange}{s} = 15$ — `130` or higher ($z = 2.00$)
+### $\color{#B5483B}{\bar{x}} = 100 \mid \color{#5C715E}{s} = 15$ — `130` or higher ($z = 2.00$)
 
 ::: z-excerpt
 |    z    |       .00        |  .01   |  .02   |
