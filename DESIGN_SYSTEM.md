@@ -1,4 +1,4 @@
-# 348SlideDecks Design System
+## About this document
 
 Reference for the shared `custom.scss` theme used across PSY 348/360/442 revealjs decks. This is the source of truth for design tokens and component conventions — it lives in this repo so it can never drift from the code it describes (a change to `custom.scss` and a change to this doc belong in the same commit).
 
@@ -56,7 +56,7 @@ Some decks (`lab1.qmd`, `lec2.qmd`) have no YAML title and instead hand-build a 
 
 **`.z-cards` / `.z-card`** — 2x2 grid of white bordered cards (same chrome as `.stat-card`), each holding a title, a one-line question (`.z-card-title`, `.z-card-q`) and a small Raw / z-score `panel-tabset` with a histogram. First use: lec6's "Compared to what?" slide (simulated `rnorm()` data, red line at the example score).
 
-**`.keycap` / `.keycap-line`** — keyboard-key icon: shifted symbol small on top (`.keycap-top`), the key you actually press large below (`.keycap-main`). Markup: `<span class="keycap"><span class="keycap-top">~</span><span class="keycap-main">`</span></span>`. Wrap a sentence in `::: keycap-line` to enlarge it. Used for the drop-console key (backtick) on lec7 and `exam1_scrap`.
+**`.keycap` / `.keycap-line`** — keyboard-key icon: shifted symbol small on top (`.keycap-top`), the key you actually press large below (`.keycap-main`). Markup: `` <span class="keycap"><span class="keycap-top">~</span><span class="keycap-main">`</span></span> ``. Wrap a sentence in ``::: keycap-line`` to enlarge it. Used for the drop-console key (backtick) on lec7 and `exam1_scrap`.
 
 **Drop console (`` ` ``)** — `custom.scss` labels the two panes (`#editor` = SCRIPT, `#terminal` = CONSOLE) so students can tell them apart. The extension's `drop-runtime.js` is also patched (`RArgs:[]` -> `RArgs:["--quiet"]`) to suppress R's startup banner; reinstalling the extension undoes that one-liner.
 
@@ -153,6 +153,19 @@ Rule of thumb: tip = *what we do*, important = *what to watch for or what the an
 
 **Formula colors use the deck palette, not named CSS colors.** When coloring parts of a formula to match a bullet below it, use hex tokens from the table above (`\color{#B5483B}{...}` and `[text]{style="color:#B5483B"}`), never `red`, `orange`, `blue`. Good pairings on the pale sage background: `#B5483B` ("look here" red), `#5C715E` (accent), `#2F3E46` (body text). Avoid amber/orange text: it is hard to read against the background.
 
+**Symbol colors for the statistics lectures.** Each symbol keeps one color everywhere, so students learn "this color = this piece" across decks. Defined in lec4 and reused in lec6 and lec10:
+
+| Symbol | Meaning | Color |
+|---|---|---|
+| $\bar{x}$ | mean | `#B5483B` |
+| $s$ | standard deviation | `#5C715E` |
+| $\sum$ | sum | `#3E6E8E` |
+| $n$ | sample size | `#8A5A3C` |
+| $s^2$ | variance | `#7A5C99` |
+| $x^2$ | squared value | `#A0527A` |
+
+The last four are muted tones chosen to stay distinguishable from the red and sage on the pale background. Reuse these rather than inventing new ones; add a row here when a new symbol needs a color.
+
 **Define pivotal terms with the term components.** Open a method's deck with a `.hero-def` ("What is a ...?"), and close with a `.term-list` of the vocabulary for that lecture (each pair in its own `::: fragment :::`). The glossary extraction depends on the `.term-pill` markup.
 
 **Fit check.** Slides must fit at 1600x900 with every fragment revealed. Run `scripts/check_slide_overflow.R <deck>` after rendering (the title slide always reports ~980px; ignore it). Fix by splitting the slide or moving the plain-English line to the next slide, not by shrinking fonts.
@@ -169,7 +182,7 @@ Rule of thumb: tip = *what we do*, important = *what to watch for or what the an
 
 ## Open items
 
-- Replace named CSS colors in formulas with palette hex tokens in the older decks (raw `red`/`orange`/`blue` counts: lec4 38, lec6 9, lec3/5/9/10/16 a few each). lec11 is done. `scripts/check_deck.R` now flags them (`[colors]`; lec4 42 lines, lec6 9, lec10 5).
+- Replace named CSS colors in formulas with palette hex tokens in the older decks. Done: lec4, lec6, lec10, lec11. Remaining: a few lines each in lec3/5/9/16. `scripts/check_deck.R` flags them (`[colors]`).
 - Retrofit `lec1.qmd`'s 7-term slide into `.term-list` (with per-pair `::: fragment :::`).
 - Missing images still unresolved on lec3/5/7/8/11/15c (lec6's `z-table.png` refs replaced by `.z-excerpt` tables, 9/28) (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).
 - Extract the glossary: once several decks use `.term-pill`/`dl`/`dd`, a script can walk every deck and build a site-wide glossary page from the markup alone.

@@ -5812,5 +5812,125 @@
     "title": "Independent-Samples T-Test",
     "section": "Terms to Know",
     "text": "Terms to Know\nThe vocabulary for this test\n\n\n\nStandard error of the difference\n\nHow much the difference between two sample means bounces around from study to study. It is the denominator of \\(t\\).\n\n\n\n\n\nPooled variance \\(s_p^2\\)\n\nA weighted average of the two group variances, used when the groups are assumed to share one population variance.\n\n\n\n\n\nWelch’s t-test\n\nAn independent-samples \\(t\\)-test that lets each group keep its own variance. It is the default in t.test().\n\n\n\n\n\nLevene’s test\n\nA test of \\(H_0\\) that the group variances are equal."
+  },
+  {
+    "objectID": "design-system.html",
+    "href": "design-system.html",
+    "title": "Design System",
+    "section": "",
+    "text": "Reference for the shared custom.scss theme used across PSY 348/360/442 revealjs decks. This is the source of truth for design tokens and component conventions — it lives in this repo so it can never drift from the code it describes (a change to custom.scss and a change to this doc belong in the same commit).\nFor the narrative of how and why specific decisions were made session-by-session, see the “Teaching” claude.ai project doc (course_site_design_philosophy.md). This file is the settled result; that one is the working log.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#tokens",
+    "href": "design-system.html#tokens",
+    "title": "Design System",
+    "section": "Tokens",
+    "text": "Tokens\nDefined at the top of custom.scss, under scss:defaults.\n\n\n\n\n\n\n\n\nToken\nValue\nUse\n\n\n\n\n$body-color\n#2F3E46\nBody/paragraph/list text (dark desaturated green-gray)\n\n\n$text-muted\nlighten($body-color, 50%)\nCaptions, sub-labels\n\n\n$body-bg\n#E9F1EC\nSlide background (sage pastel)\n\n\n$accent\n#5C715E\nHeadings, links, primary pill/badge fill\n\n\n$accent2\n#8FAF9E\nCard/badge borders, secondary accents\n\n\n$accent3\n#A7C7B5\nLighter borders (e.g. hero-def card)\n\n\n$accent4\n#DCE8E1\nLightest fill (e.g. you-callout background)\n\n\n\nFonts: Fira Sans (body/headings), Fira Code (code), Atkinson Hyperlegible (fallback — chosen for accessibility), Material Icons (icon font, used throughout via .material-icons).\nRule of thumb: don’t hardcode hex values in new components — use the token so a future palette change is a one-line edit.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#title-slides-two-patterns-dont-mix-them",
+    "href": "design-system.html#title-slides-two-patterns-dont-mix-them",
+    "title": "Design System",
+    "section": "Title slides — two patterns, don’t mix them",
+    "text": "Title slides — two patterns, don’t mix them\nMost decks use Quarto’s YAML title: field, which auto-generates #title-slide (styled directly, near the top of the rules section: .title, .subtitle, .quarto-title-authors).\nSome decks (lab1.qmd, lec2.qmd) have no YAML title and instead hand-build a manual ##  {#custom-title} slide, styled via .cust-title / .cust-sub / .cust-pic / .cust-author. This pattern has a known gotcha — see Known Gotchas below. If you’re starting a new deck, prefer the YAML title: approach unless you specifically need the custom layout; it avoids the gotcha entirely.\nlec2.qmd’s custom title also has an optional animated background layer (#custom-title, .title-bg-icons, .ghost-nodes) — six drifting Material Icons + five floating dots, slow and low-opacity by design. Copy this only if a deck wants that same “quiet motion” flourish; it’s not a default every custom-title slide needs.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#core-components",
+    "href": "design-system.html#core-components",
+    "title": "Design System",
+    "section": "Core components",
+    "text": "Core components\n.card — generic white card with hover-lift, used for image+caption groupings. .card-img crops to a fixed 260px height (object-fit: cover) so mixed-aspect-ratio source images stay uniform in a row.\n.callout-important — Quarto’s default callout is restyled from red/orange to the sage accent, since on this site “important” means “definition, pay attention” rather than “warning/error.”\n.blank-tag — small corner pill marking a “fill in the blank” slide for the presenter (axis/title-stripped plot for in-class guessing). White text on accent background.\n.you-callout — inline pill for a short personalized aside (e.g. “…and you scored a 67”), lighter weight than .callout-important.\n.stat-card — bordered card for a single big number + sublabel (.stat-num / .stat-sub).\n.img-placeholder — dashed-border stand-in for “find a real image later,” so a slide’s layout/intent is legible before the asset hunt is done. Once a real photo replaces it, img inside is capped at max-height: 340px so a full-res photo can’t push content off the bottom of the slide.\n.badge-row / .content-badge and .icon-row / .icon-row-item — two weights of “icon + short label” layout. .content-badge has card chrome (border, shadow, optional heading) for a handful of prominent items; .icon-row-item is bare icon + caption for recapping several examples/terms compactly (e.g. under a bullet list).\n.bio-cluster — the “Hi, I’m Dave!” circular-photo-plus-scattered-badges layout (fixed pixel positioning, tuned to one specific slide). Not intended as a general-purpose pattern — treat as a one-off unless another bio slide needs the exact same shape.\n.marquee-wrap / .marquee-track — continuous horizontal scroll (e.g. course-eval pull quotes), pauses on hover so a quote can be read.\n.book-anim — small CSS crossfade flourish for a closing/Q&A slide.\n.z-excerpt / .z-hit — wraps a small pandoc pipe table (a few rows/columns of the z-table) in a white rounded card with a sage header; the looked-up value is marked inline as [0.2611]{.z-hit} (sage pill). Used on lec6’s worked z-table examples so the slide shows exactly which row/column intersect instead of a full-page table image.\n.z-cards / .z-card — 2x2 grid of white bordered cards (same chrome as .stat-card), each holding a title, a one-line question (.z-card-title, .z-card-q) and a small Raw / z-score panel-tabset with a histogram. First use: lec6’s “Compared to what?” slide (simulated rnorm() data, red line at the example score).\n.keycap / .keycap-line — keyboard-key icon: shifted symbol small on top (.keycap-top), the key you actually press large below (.keycap-main). Markup: &lt;span class=\"keycap\"&gt;&lt;span class=\"keycap-top\"&gt;~&lt;/span&gt;&lt;span class=\"keycap-main\"&gt;`&lt;/span&gt;&lt;/span&gt;. Wrap a sentence in ::: keycap-line to enlarge it. Used for the drop-console key (backtick) on lec7 and exam1_scrap.\nDrop console (`) — custom.scss labels the two panes (#editor = SCRIPT, #terminal = CONSOLE) so students can tell them apart. The extension’s drop-runtime.js is also patched (RArgs:[] -&gt; RArgs:[\"--quiet\"]) to suppress R’s startup banner; reinstalling the extension undoes that one-liner.\n.hl — inline highlight (accent3 pill) for picking parts of a sentence out of a blockquote, e.g. the pieces of an APA results sentence: [one-sample t-test]{.hl}. Used on lec9’s “Reporting Results” slide.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#term-definition-hero-def-term-list",
+    "href": "design-system.html#term-definition-hero-def-term-list",
+    "title": "Design System",
+    "section": "Term + definition (hero-def / term-list)",
+    "text": "Term + definition (hero-def / term-list)\nThe newest component (added 9/4, applied first on lec3.qmd’s Operationalization slide). Built specifically with a future site-wide glossary in mind.\nMarkup uses pandoc’s native definition-list syntax — already the site’s convention (see lec1.qmd’s “Statistics / Describing / Analyzing…” slide) — rather than a bespoke div structure. Term / : definition compiles to plain &lt;dl&gt;&lt;dt&gt;&lt;span class=\"term-pill\"&gt;Term&lt;/span&gt;&lt;/dt&gt;&lt;dd&gt;Definition text&lt;/dd&gt;&lt;/dl&gt;. That’s the most mechanical possible shape to script-extract later: grep every .term-pill span and its dd sibling, across every deck, no per-slide parsing needed.\n.hero-def — one pivotal term per slide. Pill sits half-overlapping a white bordered card; definition is the card body underneath. The containing section auto-centers the card in the space below the slide heading via :has():\n.reveal .slides section:has(&gt; .hero-def) {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.hero-def { margin: auto; /* ... */ }\nMarkup:\n::: hero-def\n[Operationalization]{.term-pill}\n: The process of defining the measurement of a phenomenon that is not\n  directly measurable (AKA a latent variable) though its existence is\n  implied by other phenomena.\n:::\n.term-list — several terms on one slide. Lighter weight, no card chrome (a repeated hero-def five or six times would be visually loud). Each term/definition pair should be wrapped in its own ::: fragment ::: so they reveal one at a time rather than landing all at once:\n::: term-list\n::: fragment\n[Term One]{.term-pill}\n: Definition one.\n:::\n::: fragment\n[Term Two]{.term-pill}\n: Definition two.\n:::\n:::\nOpen item: lec1.qmd’s existing 7-term slide predates this component and doesn’t use ::: fragment ::: per pair — a good candidate to retrofit into .term-list, not yet done.\nhero-example — an optional worked-example panel-tabset nested inside a hero-def card, for showing how the same construct gets operationalized different ways. First use: lec3.qmd’s Operationalization slide, tabbed Self-Report / Physiological / Behavioral measures of “disgust” (Dave’s go-to running construct across different areas of psych). Markup nests directly inside the hero-def div, after the definition:\n::: hero-def\n[Operationalization]{.term-pill}\n: The process of defining the measurement of a phenomenon that is not\n  directly measurable...\n\n::: hero-example\n::: panel-tabset\n### Self-Report\n\n\"How disgusted do you feel right now?\" -- rated on a 1-7 scale.\n\n### Physiological\n\nSkin conductance or facial EMG response while viewing a disgusting image.\n\n### Behavioral\n\nWillingness to touch a \"contaminated\" object, or how far participants\nmove their chair away from it.\n:::\n:::\n:::\nStyling is scoped to .hero-def .hero-example specifically (restyled nav-tabs: muted uppercase labels, active tab gets the accent color + underline) so it never touches the plain default Bootstrap tabset styling already used elsewhere on the site (lec2’s Anscombe plots) — those keep rendering with their untouched default look.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#slide-structure-conventions",
+    "href": "design-system.html#slide-structure-conventions",
+    "title": "Design System",
+    "section": "Slide structure conventions",
+    "text": "Slide structure conventions\nObserved across the stats decks (lec8 to lec16) and now the standard for new slides.\nHeading pattern: ## title plus ### subtitle. Each slide is a level-2 heading (the topic, reused across a run of slides, e.g. “Coffee Example”) followed by a level-3 heading that says what this slide does (“Manual”, “Data overview”). The subtitle is what lets a topic span several slides without repeating itself. Slides that are a single callout or carry the topic in their own title (a Recap, a Summary, a “Your tasks” callout) may skip the ###. Never use ### as a bullet label inside a slide.\nCallout colors have jobs.\n\n\n\n\n\n\n\n\nCallout\nUse it for\nExamples\n\n\n\n\n.callout-tip\nThe working: formulas, steps, \\(H_0\\), “Compute t”, “Decide”, “Effect size”, “Your tasks”\nthe three-step manual calculation on lec11’s Coffee Example\n\n\n.callout-important\nThings to stop and notice: \\(H_A\\), assumptions, answers, definitions that matter\n“Assumptions” on lec9/10/11, the “Answer” box on practice slides\n\n\n\nRule of thumb: tip = what we do, important = what to watch for or what the answer is. Side-by-side \\(H_0\\) / \\(H_A\\) slides pair a tip (left) with an important (right). Use .nonincremental on a callout that should appear all at once rather than line by line. .callout-note, -warning and -caution are not used on this site.\nFormula colors use the deck palette, not named CSS colors. When coloring parts of a formula to match a bullet below it, use hex tokens from the table above (\\color{#B5483B}{...} and [text]{style=\"color:#B5483B\"}), never red, orange, blue. Good pairings on the pale sage background: #B5483B (“look here” red), #5C715E (accent), #2F3E46 (body text). Avoid amber/orange text: it is hard to read against the background.\nSymbol colors for the statistics lectures. Each symbol keeps one color everywhere, so students learn “this color = this piece” across decks. Defined in lec4 and reused in lec6 and lec10:\n\n\n\nSymbol\nMeaning\nColor\n\n\n\n\n\\(\\bar{x}\\)\nmean\n#B5483B\n\n\n\\(s\\)\nstandard deviation\n#5C715E\n\n\n\\(\\sum\\)\nsum\n#3E6E8E\n\n\n\\(n\\)\nsample size\n#8A5A3C\n\n\n\\(s^2\\)\nvariance\n#7A5C99\n\n\n\\(x^2\\)\nsquared value\n#A0527A\n\n\n\nThe last four are muted tones chosen to stay distinguishable from the red and sage on the pale background. Reuse these rather than inventing new ones; add a row here when a new symbol needs a color.\nDefine pivotal terms with the term components. Open a method’s deck with a .hero-def (“What is a …?”), and close with a .term-list of the vocabulary for that lecture (each pair in its own ::: fragment :::). The glossary extraction depends on the .term-pill markup.\nFit check. Slides must fit at 1600x900 with every fragment revealed. Run scripts/check_slide_overflow.R &lt;deck&gt; after rendering (the title slide always reports ~980px; ignore it). Fix by splitting the slide or moving the plain-English line to the next slide, not by shrinking fonts.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#known-gotchas",
+    "href": "design-system.html#known-gotchas",
+    "title": "Design System",
+    "section": "Known gotchas",
+    "text": "Known gotchas\nCSS specificity beats source order, every time. .reveal .slide p { color: $body-color; } sits near the top of the file and directly targets any &lt;p&gt; on a slide — including the &lt;p&gt; pandoc wraps fenced-div content in. A new component that puts colored text in a plain &lt;p&gt; inside a div (e.g. .my-thing p { color: #fff; }) will silently lose to that rule if its own selector has lower or equal specificity (class + tag vs. two classes + tag), no matter where in the file it’s written or how late it’s added. This bit .blank-tag and .you-callout once already (fixed by matching specificity: .reveal .slide .blank-tag p). Before shipping any new pill/badge/tag component with its own text color, check what specificity the existing global text rules have and match or exceed it — don’t assume one extra class is enough.\nThe ##  {#custom-title} manual title-slide pattern loses top positioning. Quarto’s reveal.css never sets an explicit top on .reveal .slides &gt; section.present in this site’s config. Normally that’s invisible because the auto-generated #title-slide slide is styled specially — but a manual custom-title slide is just an ordinary .slide.level2 section like any other, which exposes the gap: the browser resolves the unset top as the element’s normal-flow “static position,” landing the present slide below the previous slide’s canvas instead of overlapping it at the top (reads as “content pushed off / cut off”). Fixed globally with .reveal .slides &gt; section.present { top: 0 !important; } — a no-op on already-correct decks, so this fix never needs revisiting per-deck.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#dependency-checking",
+    "href": "design-system.html#dependency-checking",
+    "title": "Design System",
+    "section": "Dependency checking",
+    "text": "Dependency checking\nscripts/check_dependencies.R scans every .qmd/.R file for R package dependencies — explicit (library()/require()), namespace-qualified (pkg::fn()), and a curated list of “invisible” triggers (e.g. gt::gtsave(*.png) silently needs webshot2 + chromote). Run it on a fresh workspace (Rscript scripts/check_dependencies.R) before rendering to catch missing packages up front instead of one broken chunk at a time. If a render fails on a package that was never named directly in a .qmd, add its trigger pattern to the implicit_triggers list in that script so future runs catch it automatically.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#open-items",
+    "href": "design-system.html#open-items",
+    "title": "Design System",
+    "section": "Open items",
+    "text": "Open items\n\nReplace named CSS colors in formulas with palette hex tokens in the older decks. Done: lec4, lec6, lec10, lec11. Remaining: a few lines each in lec3/5/9/16. scripts/check_deck.R flags them ([colors]).\nRetrofit lec1.qmd’s 7-term slide into .term-list (with per-pair ::: fragment :::).\nMissing images still unresolved on lec3/5/7/8/11/15c (lec6’s z-table.png refs replaced by .z-excerpt tables, 9/28) (pre-existing, found during the folder reorg — not a design-system issue but tracked here since it blocks a clean render).\nExtract the glossary: once several decks use .term-pill/dl/dd, a script can walk every deck and build a site-wide glossary page from the markup alone.\nlec3.qmd’s Bobo doll slide still has a dead image and an unverified proposed swap (a moral-disgust “moving a chair” paradigm) — needs Dave to confirm the actual citation before it goes on a slide; not implemented.\nIcon-library matching (future): scan a lecture’s text for key terms/concepts and map each to an icon (Material Icons / Bootstrap Icons, both already loaded in custom.scss) to auto-suggest slide and title-slide icons. title-bg.html currently takes a hand-picked icon list (data-title-icons); this step would generate it.\nDingbat borders: first trial on lec6.qmd’s title slide (#title-slide::before/::after, hex motif matching the footer). Reusable .dingbat-rule divider with .star / .vine variants exists in custom.scss but is unused on section slides — decide which motif(s) become the standard before spreading.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
+  },
+  {
+    "objectID": "design-system.html#about-this-document",
+    "href": "design-system.html#about-this-document",
+    "title": "Design System",
+    "section": "",
+    "text": "Reference for the shared custom.scss theme used across PSY 348/360/442 revealjs decks. This is the source of truth for design tokens and component conventions — it lives in this repo so it can never drift from the code it describes (a change to custom.scss and a change to this doc belong in the same commit).\nFor the narrative of how and why specific decisions were made session-by-session, see the “Teaching” claude.ai project doc (course_site_design_philosophy.md). This file is the settled result; that one is the working log.",
+    "crumbs": [
+      "Course Overview",
+      "Course Design",
+      "Design System"
+    ]
   }
 ]
